@@ -1,5 +1,7 @@
 # Pitch revision v5: selected Solana stock package
 
+> Annual-series addendum: this is the preserved v5 production brief. The next deck uses calendar-year PT/DR, deposits closing at year-start, ex-date-based membership and redemption after the year's journal is finalized, without forfeiture. A historical event illustrates the mechanism, not a full year's return. [Annual accounting](annual-series-accounting.md) controls technical claims. Preserve current narration and versioned decks; synchronize them in the next presentation pass.
+
 Astra brief, 16 September 2026. Refines v4 after the user excluded permissioned products and requested a contained package across three issuers. The previous brief is archived in `planning/archive/broad-solana-scope-2026-09-16/`. Preserve exactly nine editable slides and the approved visual system. Sol owns only `presentation/**`; Astra owns this specification and research.
 
 **Narration update:** The plain-language script in [presentation/narration.md](../presentation/narration.md) supersedes the v5 narration below for the next deck export. It follows the same nine slides, defines dividends, explains the onchain benefits in ordinary language, and keeps the current demo stage explicit. The existing v5 PPTX and its embedded notes remain the archived review version until the next export.

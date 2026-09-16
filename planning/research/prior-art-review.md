@@ -1,5 +1,7 @@
 # Prior-art review: architecture and expected features
 
+> Annual-series update, 16 September 2026: this dated review preserves the earlier single-event decision and its sources. [Annual accounting](../../spec/annual-series-accounting.md) and [annual research](annual-dividend-series.md) supersede its term identity, accrual and settlement design. Token compatibility, source trust, direct burns, custody and AMM lessons still apply.
+
 Decision review by Astra, 16 September 2026, before Solana program implementation. Scope: established yield-tokenization designs, Solana-native yield markets, traditional dividend contracts and directly overlapping equity-strip designs. Primary documentation and selected original code were reviewed; no competitor was transaction-tested, no deployment was certified, and this is not a security audit.
 
 ## Conclusion

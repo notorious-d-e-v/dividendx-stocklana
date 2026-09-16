@@ -21,8 +21,22 @@ Reviewed 16 September 2026. Product preview: http://127.0.0.1:4174/. Preserved r
 - Astra independently completes the Backpack MU flow in Chrome, including sale to Buyer and both redemptions (`node apps/web/qa/astra-review.mjs`). No page errors or overflow at 1440px and 390px. Screenshots: `astra-mu-complete-1440.png`, `astra-mu-complete-390.png`.
 - Astra reviews Market, Split and Positions at desktop/mobile sizes. Illustrated v2 and the user-edited narration retain their pre-phase hashes.
 
-## Execution boundary
+## Legacy rehearsal execution boundary
 
 These checks validate an in-memory rehearsal with sourced historical events. Accounts, cash, offers and receipts are simulated; refresh/reset clears state. No wallet adapter, deployed vault or onchain transaction is present. Ondo has observed token profiles but no verified event fixture. Current fixtures use exact decimal rational arithmetic, not a demonstrated byte-level match to Token-2022 multiplier encoding.
 
 The program phase must settle event trust/finality and recovery, including arbitrary tiny fragmented claims. Current zero-payout burns are blocked; that guard is not a complete production recovery policy. See `spec/series-accounting.md`, `spec/sdk-interface.md` and `planning/phase-work-orders.md` at the repository root.
+
+## Annual-series product note
+
+The root product now presents fixed calendar series such as `PT-KOx-2027` and `DR-KOx-2027`. Deposits occur before 1 January; a controlled in-memory clock then shows collecting dividends, year ended while awaiting finalization, and ready to redeem as distinct states. Maturity freezes event membership without expiring DR. Paired recombination remains available until finalization; afterward PT and DR redeem independently.
+
+The KOx and MU examples reuse their frozen historical factors with synthetic test-term dates. The UI retains the original source effective or activation time and states that neither fixture contains a verified ex-date. It also states: “One sourced dividend example, not a complete annual payout or a 2027 forecast.” The optional second dividend is visibly test-only. No actual 2027 dividend or complete issuer calendar is claimed.
+
+The final combined Chrome suite passes 20/20: 13 annual product checks and seven preserved rehearsal checks. TypeScript and the production build pass. Product coverage includes exact 2027/2028 identities, the pre-year cutoff, replay without early redemption, year-end without finalization, post-event recombination, reuse of returned stock in a later-year deposit without double counting, a paid 40% DR transfer with conserved test USDC, no-forfeiture redemption, explicit consent for zero-value DR closure, series isolation, pending Ondo, keyboard access and desktop/mobile overflow. Independent review repeats the paid transfer through both final redemptions and checks the rehearsal remains empty.
+
+Updated review images are `product-market-1440.png`, `product-market-390.png`, `product-split-1440.png`, `product-split-390.png`, `product-redeem-1440.png` and `product-redeem-390.png`. They preserve the approved visual system and artwork while adding only annual term, lifecycle and evidence labels.
+
+This remains a local reference. The root product imports the annual accounting module directly because the legacy SDK entry point is intentionally unchanged. There is still no wallet, program, issuer finality service, complete annual event journal, live PT/DR mint or venue integration.
+
+Astra acceptance: independently reran the 33-test SDK suite and the annual Chrome review, inspected the final desktop/mobile layouts, and checked a combined transfer → paired exit → replacement cancellation → late finalization → independent-redemption scenario for exact raw conservation. Git preservation checks confirm the original fixture evidence, legacy SDK/rehearsal, design assets, decks and user narration are unchanged.

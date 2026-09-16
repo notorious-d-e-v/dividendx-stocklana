@@ -1,104 +1,63 @@
-# Issuer handling and shared vault architecture
+# Issuer handling and annual dividend vaults
 
-Decision: 16 September 2026, after the user expanded the hackathon to Solana's tokenized-stock issuers. This supersedes the earlier xStocks-only decision, preserved in `archive/xstocks-only-2026-09-16/`. Architecture and integration targets below are not implemented functionality.
+Decision: 16 September 2026. The user replaces one-event DR with fixed calendar-year series and explicitly chooses deposits closing at the start of the year. This is the current architecture; earlier revisions remain in Git and archived research. It describes intended program behavior, not deployed functionality.
 
 ## Decision
 
-Build **one dividend layer for selected stock tokens on Solana**, with xStocks, Backpack/Trek and Ondo in the initial integration scope. The user's latest refinement excludes permissioned holder/approved-vault products, their onboarding and their discovery UI. The wider audit remains research only. Defer other-chain custody and bridging. Ondo's native Solana tokens belong in this phase even though its other deployments do not.
+Build one dividend layer for selected stock tokens on Solana, initially xStocks, Backpack/Trek and Ondo. Use **one shared ScaledReinvestmentAnnualV1 program**, small issuer readers, internal normalization and isolated custody for each exact issuer/mint/year. Issue only ordinary transferable PT and DR; no third circulating wrapper or arbitrary adapter CPI plugin.
 
-A small issuer adapter boundary is now justified by actual differences in event APIs, decimals, provenance and custody rules. The three main families use Token-2022 Scaled UI Amount, so they can share the same raw-collateral allocation algorithm for isolated reinvested dividends. We do not need three vault programs, an arbitrary plugin framework or a third circulating wrapper token.
+A KOx 2027 deposit issues `PT-KOx-2027` and `DR-KOx-2027`. DR accumulates every qualified ordinary reinvested dividend whose official exchange ex-date is in 2027. Its whole unredeemed entitlement follows the token. Maturity closes the eligible date window; finalization waits for a complete resolved journal, then both claims redeem independently without forfeiture. Quarterly terms are later work.
 
-The [pre-build prior-art review](research/prior-art-review.md) confirms this boundary and adds required program lifecycle decisions: transferable whole-event entitlement, authenticated zero outcomes, external-burn accounting, explicit tiny-claim closure and canonical factor encoding. The current fixture SDK remains a rehearsal, not the complete live-series contract.
+The authoritative contract is [annual accounting](../spec/annual-series-accounting.md), with [SDK/reference requirements](../spec/annual-series-sdk.md), [test matrix](../spec/annual-series-tests.md) and [product copy](../spec/annual-product.md). The legacy SDK and `/rehearsal/` are preserved single-event examples and must not become the production contract by accident.
 
-**Admission is per asset.** A mint's presence on Solana does not establish that a vault can hold it, identify its dividend, or deliver its proceeds. Use the [selected asset package](research/initial-asset-package.md), admitting only the ordinary secondary-transfer/reinvestment model. Restricted registered shares, tokens without dividend rights, and discontinued products are outside scope.
+## Admission and access
 
-**Permissionless protocol access:** no DividendX holder allowlist, KYC flow, approved-holder claims, or issuer-specific custody registration. A curated mint/event policy is compatible with this access model. Direct issuance/redemption onboarding remains outside the vault flow; issuer controls and product restrictions still apply. Mint configuration alone does not establish legal eligibility or prove PDA execution. If ordinary vault custody requires issuer approval, exclude that asset instead of building a permissioned integration.
+Admission remains per asset, using the [selected package](research/initial-asset-package.md). An official mint, Scaled UI Amount extension or catalog listing does not prove usable event data, ordinary vault custody or redemption. The product admits ordinary secondary-transfer/reinvestment profiles; permissioned holder/approved-vault integrations, products without dividend rights and discontinued products remain excluded.
+
+Permissionless describes holder access to admitted series: no DividendX holder allowlist or issuer-specific vault onboarding. It does not remove issuer controls or establish legal eligibility. If ordinary custody needs issuer approval, exclude the asset. Direct issuer issuance/redemption onboarding is outside this flow. Cross-chain custody and bridging remain later work; native Solana Ondo is in the selected scope.
 
 ## Layers
 
-```mermaid
-flowchart LR
-    X[xStocks event reader] --> E[Validated event record]
-    B[Backpack event reader] --> E
-    O[Ondo event reader] --> E
-    M[Per-mint identity and capability checks] --> V[Shared series engine]
-    E --> V
-    C[One issuer and mint per vault] --> V
-    V --> P[Stock exposure PT]
-    V --> D[Dividend rights DR]
-```
+| Layer | Responsibility |
+|---|---|
+| Asset policy | Official issuer/mint provenance, token program, decimals, dividend rights, reference market/timezone, extensions/authorities, custody policy and evidence status |
+| Issuer reader | Source-specific corporate actions, ex-date joins, immutable history, revisions, classification and completeness evidence; keyed access stays server-side |
+| Shared token checks | Exact mint, raw custody, effective/pending scale by chain time and per-operation pause/freeze/hook/fee rules |
+| Annual series | Exact issuer/mint/year identity, pre-year deposits, paired claims, cumulative eligible events, recombination, maturity, finalization and independent redemption |
+| SDK/UI | Same annual identity and raw amount model, state-aware quotes and simple Split / Use / Combine / Redeem actions |
 
-The reader and observer run offchain. The program validates the series identity, signer, event scope, chain time and observed mint state. Event classification remains an explicitly trusted input. A common interface does not make an unverified source authoritative.
+Only readers/attestors classify events; a current mint state cannot explain every historical factor change. The program checks authenticated series/event inputs, identity, time and permitted mint state. The attestor is an explicit trust boundary, not a trustless oracle or custody owner. Claims of complete annual event coverage need evidence beyond a list of records already fetched.
 
-| Component | Responsibility | Minimal implementation |
-|---|---|---|
-| Asset manifest | Official issuer/mint provenance, chain, token program, decimals, economic rights, supported extensions and authorities, current eligibility reasons | Versioned data and ordinary typed records; no auto-enrollment from ticker or registry presence |
-| Issuer reader | Fetch and normalize issuer-specific actions, revisions, factor history, timing and evidence | Separate xStocks, Backpack and Ondo modules; keyed access stays server-side |
-| Token capability checks | Validate exact mint, effective Scaled UI Amount, pause/freeze/hook/fee policy and account transfer requirements | Shared Token-2022 helpers plus pinned per-series policy |
-| Series engine | Custody, deposit cutoff, paired issuance, locked raw pools, claim burns, independent redemption and recovery | One program; separate vault and PT/DR mints per issuer/mint/event |
-| SDK/UI | Same amount model, allocation preview, provenance, status and transaction contract across issuers | Shared types and exact arithmetic; issuer/source-specific labels only where useful |
+## Core accounting and lifecycle
 
-No arbitrary external adapter CPI dispatch. Any onchain configuration is fixed within the existing series state, including rules version and allowed attestor. A manifest is an offchain integration catalog, not a new token or an unaudited runtime plugin registry.
+Deposits mint equal raw PT/DR quantities strictly before January 1 UTC. No new issuance after the cutoff, including after zero events or corrections. Let remaining accounted raw collateral be Q and R the product of each accepted eligible event's M0/M1. Cumulative DR allocation is `floor(Q × (1 − R))`; PT gets the remainder. Never sum full-deposit single-event allocations or repeatedly round away small dividends.
 
-## Asset and event contract
+Before finalization, matching PT+DR return the same raw quantity, including after accrual or during a year-end evidence delay. Retire both claims, reduce Q and recompute provisional pools. A seller missing DR cannot withdraw with PT alone. No independent interim payouts in this version.
 
-Each asset descriptor includes `issuerId`, legal/product identity, Solana mint, token program, decimals, metadata/source URL, accounting model, extension/authority fingerprint, custody policy, settlement denomination and dated evidence. Ticker is a display field, never identity. KOx and KOon remain distinct collateral, risks and markets.
+Higher authorized revisions replace previous contributions before finalization. Confirmed zero/cancellation removes that event's contribution; missing data does not. Unsupported splits, spinoffs, mergers, non-cash/special distributions, unexplained maintenance or negative deltas stop finalization without destroying claims. A late December dividend paid in January still belongs to the old year. A next-year ex-date does not.
 
-Store eligibility as separate dimensions: official mint recognized; mint observed; dividend rights documented; ordinary vault custody and claim transfer policy accepted; event source usable; deposit/redemption tested; event allocation tested; live series enabled. Discovery or passing a fixture must never set the final dimension implicitly. Only selected candidate assets appear in the product directory. Broader excluded families stay in research, with no onboarding UI or adapter stub.
+Finalization is separate from maturity. It freezes the accepted journal and raw pools once after all relevant events are resolved. Redeem PT and DR independently with cumulative rounding; neither has a time-based forfeiture. Later corrections cannot retroactively rewrite redeemed pools. A live dispute/finality policy remains a release requirement.
 
-An event record binds chain and mint, issuer, event ID/revision, evidence kind (`issuer_api`, `onchain_reconstruction` or `synthetic_test`), action classification, original issuer effective time, observation time/slot, prior and next effective factors, split factor, net dividend factor, source digest, finality/revision policy and authorized attestor. Keep gross/net cashflow and reinvestment price when provided; missing fields stay missing. Freeze the accepted revision per settled series. Historical replay additionally stores the original provenance and separate test activation time.
+Ordinary SPL external burns do not reduce the original nominal redemption denominator or raise other holders' payout rates. Abandoned backing, donations and AMM-held claims retain their reserves; no admin sweep. Pause/freeze or deficits can block physical custody; source staleness alone must not prevent a healthy settled redemption or paired exit. Zero-output claim closure requires explicit consent.
 
-The shared engine currently admits only `ScaledReinvestmentV1` with isolated supported cash-dividend events. Cash paid to a broker account, a NAV price increase, a restricted shareholder distribution or a price-only synthetic cannot be coerced into that model. Record other models as unsupported; do not implement speculative cash-distribution or NAV settlement engines in this sprint.
+Both allocations are paid in the stock token. They retain stock-price and later embedded-return exposure while unredeemed. PT is not dollar protection; DR is not a cash guarantee. Ex-date membership defines the annual dividend allocation, not perpetual isolation of the resulting stock tokens from later returns.
 
-## Raw allocation and claims
+## Issuer-specific boundaries
 
-Deposits and redemptions use integer raw base units. For the initial model, one deposited base unit mints one unit of each paired claim. Claim units are unscaled. Internal shares normalize custody without circulating as a third redeemable asset.
+The three selected families share Scaled UI Amount, but source semantics and custody profiles differ. Keep their evidence and readers separate:
 
-For deposited raw quantity `Q` and verified isolated dividend factors `M0`, `M1`:
+- [xStocks](research/xstocks-solana.md): corporate-action classification and exact revision remain necessary. KOx's source record is Initial, not automatically final.
+- [Backpack/Trek](research/backpack-solana.md): MU's frozen DividendDistribute ratio differs from later maintenance-adjusted multipliers. The reconstruction does not supply a durable annual event/finality ledger.
+- [Ondo](research/ondo-solana.md): native Solana profiles are in scope, but classified historical dividend and factor binding remain pending.
 
-```
-DR_pool = floor(Q × (M1 - M0) / M1)
-PT_pool = Q - DR_pool
-```
+The preserved KOx/MU fixtures lack explicit verified ex-dates. Use their real factors inside clearly labeled test-term examples until a qualified ex-date join exists; do not relabel activation or payment as ex-date. Annual history completeness is a new requirement beyond the prior one-event evidence. See [annual research](research/annual-dividend-series.md).
 
-Use exact canonical arithmetic with bounded precision and the same conversion rules in SDK/program. Do not use JavaScript floating-point amounts as the balance ledger. A potential generalized dividend factor is `d = (M1/M0)/splitFactor`, but mixed corporate actions require their own reviewed rules and are not enabled by writing that formula down. Pure splits and reverse splits generate no dividend yield and are rejected as dividend settlements in this version.
+Mint checks continue to require ordinary transfers, no active transfer hook, no transfer fee and usable custody accounts. Permanent delegates, pauses/freezes and changed authorities remain explicit issuer risks. Unsupported extension or permission requirements fail according to operation-specific policy rather than a generic assumption of transferability.
 
-Pin the series baseline before the intended event, close deposits before its cutoff/activation exclusion window, and reject any intervening factor change. Do not admit late deposits or combine cohorts with different embedded dividends. Today's deposit cannot capture a dividend already embedded in today's token.
+## Prior art and implementation scope
 
-At settlement, freeze raw PT/DR pools once. Later multiplier changes do not recalculate their shares. Redeemed or unredeemed underlying still carries later stock returns, so this is an event allocation paid in stock tokens, not permanently isolated cash. PT does not protect dollar principal, and DR retains price exposure on its allocated tokens. Donation handling, rounding/dust, partial redemptions and order independence must be explicit in the implementation specification.
+Pendle/Spectra support normalization and paired exits; Exponent provides relevant Solana interfaces and source patterns. Pendle already documents stock-related discrete yield. Calendar annual aggregation follows traditional ex-date conventions but differs from Eurex's December-Friday periods and cash settlement. Our transferable annual DR carries all accumulated rights without holding-time forfeiture. See [prior-art review](research/prior-art-review.md) and [annual update](research/annual-dividend-series.md).
 
-## Custody and issuer controls
+Keep ordinary SPL claims and the selected Raydium CPMM test route. An annual series can share one claim market across its events, but every year/issuer/mint remains distinct. General transferability does not create liquidity or prove lending/staking acceptance. Withdraw LP to recover claims before vault redemption; keep backing for claims left in the venue.
 
-Before issuance and redemption, recheck the required token/account conditions. Recognize paused/frozen collateral, non-null hooks, transfer fees, issuer delegates and authority changes; fail according to a documented policy, not a generic transfer assumption. Current null hooks do not prove future null hooks. A freeze or seizure can prevent the program from honoring otherwise valid claims.
-
-The initial profile requires ordinary nonconfidential transfers, no transfer fees, no active transfer hook and custody accounts able to send and receive. Accepting a permanent delegate is an explicit collateral risk, not a reason to assume the program controls the issuer. A confidential-transfer extension's presence alone is not the same as requiring confidential transfers.
-
-Superstate-style registered shares and other products requiring holder or vault approval are excluded. Do not implement a permissioned custody path or issue claims around their restrictions. No claim of legal compatibility follows from a successful token instruction.
-
-Per-series collateral remains isolated. Shared UI, code and settlement currency do not make different issuer claims fungible or guarantee shared liquidity. The user's 16 September product review extends the hackathon target beyond the seeded sale: actual transferable PT/DR and one verified external AMM liquidity round trip are now in scope. Choose a compatible claim mint standard and pool type explicitly; pool availability and liquidity are not implied by having a mint. LP holders must withdraw their liquidity to recover claims before redeeming them. There is no cross-issuer collateral substitution.
-
-## Event failure and recovery
-
-Missing, stale, contradictory or unclassified events disable new series and block settlement. Existing owners need a defined recovery path. Paired PT+DR recombination can return the corresponding collateral before final allocation under explicit rules; it cannot let an original depositor withdraw after selling DR. If owners separate, neither may unilaterally consume the other's backing. Freeze/failure and expiry resolution need specification before real deposits.
-
-Do not label an issuer record final merely because it is the latest response. xStocks' KOx record remains `Initial`; Ondo history access and event classification must be joined; Backpack's event ledger is unresolved, although MU now has a fully bracketed onchain reconstruction. A prototype attestor can sign a sourced replay fixture, with that trust disclosed. It cannot turn missing source data into a verified historical dividend.
-
-## Backpack event boundary
-
-MU's observed `DividendDistribute` operation sets M0=1 to M1=`1.000106726714702`. Later ordinary mint/redeem operations move the multiplier again. The Backpack reader must distinguish those operations, capture exact transaction/instruction boundaries and preserve the fully covered authority-history bracket. Never use today's multiplier as the historical event factor. The prototype can attest this frozen record as an **onchain reconstruction**, not an issuer-published final event ledger. Program/IDL provenance, revision/correction semantics and future eligibility/cutoff timing still need Backpack confirmation.
-
-An unexpected non-dividend factor change after a series baseline blocks the current settlement path until explicitly resolved; do not silently classify it as income. Supporting recurrent supply-maintenance adjustments requires a reviewed neutral-adjustment rule with conservation tests. The isolated MU replay does not establish that continuous live handling already works. See [Backpack audit](research/backpack-solana.md).
-
-## Day-one proof and scope
-
-Initial coverage is a bounded package across xStocks, Backpack and Ondo, with one execution target per family and a small set of additional stocks reusing those readers. Prove independent deposit/claim/redemption behavior against representative test mints with their real decimal/extension profiles. These tests establish code portability, not actual issuer integration.
-
-For event execution, each named issuer needs a sourced event record and accepted semantics. Preserve the verified KOx historical replay as the complete reference flow. Add MU's sourced `onchain_reconstruction` replay using its frozen transaction/history evidence, and an Ondo real-event replay when the classified event contract is satisfied. Otherwise expose dated observation and the concrete missing capability. Never silently demote the product back to an xStocks-only architecture or inflate an observation page into a completed integration.
-
-A live series additionally requires a future event, tested permitted custody/transfer behavior, finality/correction rules and an operational signer. No production readiness or mainnet transaction has been established. One external AMM path is now a hackathon target after the vault; other networks, an extra wrapper token, a custom AMM, leverage, staking rewards and automatic USDC conversion remain later work.
-
-## Pendle comparison
-
-Pendle's [Standardized Yield](https://docs.pendle.finance/pendle-v2-dev/Contracts/StandardizedYield) is the useful precedent: normalize assets before splitting claims. Here, internal vault shares plus issuer readers provide the needed boundary. Equity-specific work is classifying corporate actions and handling issuer permissions, rather than claiming Pendle cannot handle rebasing assets. A transferable wrapper becomes justified only when another consumer needs it; it must be burned or escrowed when issuing PT/DR to prevent duplicate claims.
-
-Current Pendle [discrete-yield documentation](https://docs.pendle.finance/pendle-v2/ProtocolMechanics/DiscreteYield) explicitly names STRCx. Equity yield is therefore an existing precedent, not an unoccupied category. DividendX chooses a whole-event bearer DR rather than holding-period accrual and retrospective distribution. The official [deployment list](https://docs.pendle.finance/pendle-v2-dev/Deployments) does not list Solana; this is a dated observation, not a claim of permanent exclusivity. See the [detailed comparison](research/prior-art-yield-protocols.md).
+The first program version must support multiple events, revisions, zero/cancellation, quarantined actions and annual finalization, even if the filmed demo uses one sourced historical event. Representative mock mints prove code behavior, not actual issuer custody. Live activation still requires qualified annual data, permitted custody, future-event/finality operations and the bounded numerical/authority specification. No extra wrapper, custom AMM, leverage, reward token, automatic cash conversion or cross-chain bridge is added by this change.

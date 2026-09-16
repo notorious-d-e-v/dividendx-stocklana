@@ -1,5 +1,7 @@
 # Solana yield-market prior art: Exponent and RateX
 
+> Architecture update: this is dated prior-art research. [Annual series](../../spec/annual-series-accounting.md) supersede DividendX's earlier one-event term design. Preserve the researched token, custody and integration constraints.
+
 Checked 16 September 2026 against primary documentation and public source where available. This is a bounded architecture review, not evidence that either protocol supports tokenized stocks, Token-2022 Scaled UI Amount collateral, or DividendX's issuers. Recommendations are advisory; Astra owns the decision.
 
 ## Decision relevance

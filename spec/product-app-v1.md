@@ -1,5 +1,7 @@
 # Product app v1: split and redeem
 
+> Historical approved design and single-event behavior. The [annual product contract](annual-product.md) supersedes term identity, copy, client and lifecycle assumptions while retaining this visual system and navigation.
+
 16 September 2026. User feedback supersedes the main UI in `frontend-rehearsal.md`; preserve that rehearsal as a separate page. The user wants the hackathon to deliver actual vault custody, transferable PT/DR tokens and redemption. A local simulation is a fallback and design foundation, not the final build target.
 
 ## Immediate deliverable

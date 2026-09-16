@@ -1,5 +1,7 @@
 # Equity-dividend prior art and settlement lessons
 
+> Architecture update: this dated research is extended by [annual dividend conventions](annual-dividend-series.md). The current [annual contract](../../spec/annual-series-accounting.md) supersedes earlier one-event DividendX recommendations; calendar-year dates are our design choice, not an exact copy of every exchange contract.
+
 Reviewed by Astra on 16 September 2026. This is a design review, not a legal opinion, deployment audit or claim of competitor adoption. Sources are first-party unless explicitly described otherwise. Existing issuer evidence remains dated; this review does not refresh every mint or enable live deposits.
 
 ## Traditional contracts establish the use case, not identical mechanics

@@ -1,5 +1,7 @@
 # Claim-token AMM feasibility
 
+> Annual-series update: the intended pool asset is a specific issuer/mint/year claim, such as `DR-KOx-2027`. Independent redemption waits for maturity and finalization of the complete annual journal. The venue analysis below still applies to ordinary SPL claim mints; it proves no deployed pool. See [annual accounting](../../spec/annual-series-accounting.md).
+
 Checked 16 September 2026 against official Solana, Raydium and Meteora documentation and repositories. This is a bounded integration decision, not a deployed pool or proof that real stock collateral is admissible.
 
 ## Decision

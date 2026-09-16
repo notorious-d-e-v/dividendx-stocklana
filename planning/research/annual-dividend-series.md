@@ -1,0 +1,34 @@
+# Annual single-stock dividend series: bounded prior art
+
+Checked 16 September 2026. This memo supports the proposed `PT-KOx-2027` / `DR-KOx-2027` calendar series. It is research, not a change to the product specification or proof that any adapter supplies settlement-grade events.
+
+## What the exchange precedent establishes
+
+Eurex Single Stock Dividend Futures are the closest primary-source precedent. The [current contract specifications, effective 7 September 2026](https://www.eurex.com/resource/blob/1637254/795b25b678d0df63660f2d8c5af3c652/data/2026_09_07_eurex_d_kontraktspezifikationen%20_en.pdf) define futures on dividends of a specific share, generally list annual December expiries for five years, and for selected groups also list the next five quarterly expiries. Final settlement is the third Friday of the relevant quarter, or the preceding exchange day.
+
+An annual Eurex dividend period is **not a civil year**. It starts the day after the preceding December's third Friday when that Friday is an exchange day, otherwise on that Friday, and ends on the final-settlement day. Eurex's [dividend-derivatives presentation](https://www.eurex.com/resource/blob/80940/50cc3058781faa415f6d3a2ec75e00ea/data/presentation_dividend_derivatives.pdf) says each dividend is determined as paid on its ex-dividend date and all dividends so determined within the period are summed. Therefore a DividendX interval of 1 January through 31 December 2027 follows the traditional ex-date convention but does not reproduce the Eurex December-Friday cycle.
+
+The ex-date, record date, and payment date are distinct. [Investor.gov](https://www.investor.gov/introduction-investing/investing-basics/glossary/ex-dividend-dates-when-are-you-entitled-stock-and) explains that the issuer sets the record date, exchange rules set the ex-date, and buying on or after the ex-date does not receive that distribution. Payment can follow later. For a calendar DividendX series, a qualified dividend with a 31 December 2027 ex-date belongs to 2027 even if the issuer or tokenized-stock operator pays in 2028. Accrual membership can freeze at maturity while finalization waits for that payout; neither event ends an already issued claim's redemption right.
+
+Eurex uses declared gross cash/cash-equivalent dividends, excludes extraordinary distributions handled through contract adjustments, and allows adjustment or repayment when actual payment differs. This supports a stated dividend taxonomy and correction path; “cash distribution” alone is insufficient.
+
+Eurex handles splits by adjusting contract size and price. DividendX likewise needs separate classification: a split cannot enter the dividend-factor product merely because it changes token scale. Our own design accepts replacement corrections until finalization and computes allocation from the accepted product of event `M0/M1` ratios.
+
+## Corrections and time-series finality
+
+Primary market-data formats treat events as revision streams. Nasdaq's [NFN specification](https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/mfqsregistrationspec.pdf) uses `New`, `Corrected`, and `Cancelled` update types, retains ex-, record-, and payment-date fields separately, and changes the entry date on correction or cancellation. FINRA likewise says its [Daily List](https://www.finra.org/investors/insights/corporate-actions-public-companies-what-you-should-know) identifies ex-dates and marks previously announced actions as updated or cancelled.
+
+For DividendX, the evidence implication is bounded: preserve a stable event identity, ordered revision, status, original source dates, and observation time; replace a superseded revision rather than multiplying both; exclude cancelled events; and freeze the accepted revision set only at finalization. The available xStocks history exposes `Initial`, `Corrected`, and `Cancelled`, but the local scan found no terminal `Final` status. Thus “latest seen” or “Initial” is not independently proven final. The unresolved adapter question is what authoritative signal and waiting rule make the full 2027 set final after a late payout.
+
+## Current KOx and MU fixture completeness
+
+Neither fixture is ex-date complete.
+
+- [KOx evidence](../evidence/real-events-2026-09-16.json) contains five cash-dividend rows with effective timestamps from October 2025 through September 2026. The latest is event `75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e`, revision 2, status `Initial`. The [xStocks history endpoint](https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=KOx&sortBy=createdTimeUtc&sortOrder=asc) does not expose an ex-date field in those rows. Coca-Cola's [15 July 2026 release](https://investors.coca-colacompany.com/news-events/press-releases/detail/1165/board-of-directors-of-the-coca-cola-company-elects-new-officer-and-declares-regular-quarterly-dividend) states a $0.53 regular dividend, 15 September record date, and 1 October payment date, but no ex-date. The feed's effective timestamp, record date, and payment date cannot substitute for it.
+- [MU evidence](../evidence/backpack-scope-mu-event-2026-09-16.json) is explicitly an onchain reconstruction, not an official event ledger. Micron's [official release](https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Results-for-the-Third-Quarter-of-Fiscal-2026/default.aspx) states declaration on 24 June 2026, a 6 July record date, and 21 July payment date, but no ex-date. The observed `DividendDistribute` transaction occurred on 23 July and carries no usable effective timestamp. Neither payment nor activation proves ex-date.
+
+## Concrete implications and unresolved evidence
+
+The proposed series can be described precisely as: deposits close at the start of 2027; qualified events are selected by the reference share's official market ex-date from 1 January through 31 December 2027 inclusive; accepted `M0/M1` factors apply cumulatively to remaining `Q`; paired recombination may operate during the term; no independent DR withdrawal occurs before finalization; membership freezes at maturity; late qualifying payout delays finalization; settled PT and DR remain redeemable without forfeiture.
+
+Before implementation, the authoritative ex-date source, reference market/calendar and timezone, ordinary-versus-special policy, treatment of non-cash and elective distributions, split isolation, revision precedence, cancellation after an applied factor, late-payment waiting limit, and finalization authority remain unresolved. Current KOx/MU fixtures cannot yet populate a trustworthy annual event set. Confidence is high on the cited exchange conventions and high that the fixtures lack explicit ex-dates; it is absent on runtime adapter completeness and 2027 event finality.

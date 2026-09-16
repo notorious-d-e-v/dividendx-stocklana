@@ -7,9 +7,9 @@ Snapshot audited 16 September 2026. This map identifies the current review surfa
 - [README](../README.md) — run the local product preview and its checks; it clearly labels the app as an in-memory simulation.
 - [Current plan](../planning/plan.md) — current scope, completed work and next implementation phase.
 - [Architecture decision](../planning/adapter-decision.md) and [issuer synthesis](../planning/solana-issuer-synthesis.md) — the selected xStocks, Backpack/Trek and Ondo design, its evidence boundary and unresolved dependencies.
-- [Product app specification](../spec/product-app-v1.md) — approved Market / Split / Redeem flow at `/`.
+- [Annual product specification](../spec/annual-product.md) — annual Market / Split / Redeem flow at `/`, extending the approved visual design.
 - [Detailed rehearsal specification](../spec/frontend-rehearsal.md) — preserved two-account accounting walkthrough at `/rehearsal/`.
-- [Series accounting](../spec/series-accounting.md) and [SDK interface](../spec/sdk-interface.md) — source contracts for allocation, settlement and the TypeScript implementation.
+- [Annual accounting](../spec/annual-series-accounting.md), [SDK contract](../spec/annual-series-sdk.md) and [test matrix](../spec/annual-series-tests.md) — current program-facing contract. Older [single-event accounting](../spec/series-accounting.md) and [SDK interface](../spec/sdk-interface.md) describe the preserved rehearsal only.
 
 ## Current product and proof material
 
@@ -17,7 +17,8 @@ Snapshot audited 16 September 2026. This map identifies the current review surfa
 |---|---|---|
 | [`apps/web/src/ProductApp.tsx`](../apps/web/src/ProductApp.tsx) | Main local product flow | In-memory preview; no wallet, vault or network transaction |
 | [`apps/web/src/App.tsx`](../apps/web/src/App.tsx) | Detailed rehearsal | Local accounting demonstration and fallback |
-| [`packages/sdk/src/index.ts`](../packages/sdk/src/index.ts) | Bigint allocation and lifecycle engine | Software implementation, not an onchain program |
+| [`packages/sdk/src/annual-reference.ts`](../packages/sdk/src/annual-reference.ts) | Multi-event annual accounting and lifecycle reference | Local trusted-input model; bounded program arithmetic and attestation remain to implement |
+| [`packages/sdk/src/index.ts`](../packages/sdk/src/index.ts) | Preserved single-event rehearsal SDK | Legacy behavior, not the annual program contract |
 | [`packages/demo-fixtures/`](../packages/demo-fixtures/) | Frozen catalog, events, digests and verifier | Reproducible historical fixtures; not live availability |
 | [`apps/web/qa/README.md`](../apps/web/qa/README.md) | UI review record and reproduction commands | Browser evidence for the preview only |
 | [`design/design-system.md`](../design/design-system.md) | Approved product visual language | Design rules, not operational capability |
@@ -27,7 +28,7 @@ The illustrations show intended concepts such as separated ownership, issuer-iso
 
 ## Pitch and narration
 
-- [Illustrated v2 deck](../presentation/output/DividendX-illustrated-v2.pptx) — current approved pitch artifact.
+- [Illustrated v2 deck](../presentation/output/DividendX-illustrated-v2.pptx) — preserved approved pitch artifact; annual wording awaits the next versioned export.
 - [Illustrated v2 contact sheet](../presentation/output/DividendX-illustrated-contact-sheet-v2.png) — compact visual review surface.
 - [User narration](../presentation/narration.md) — current nine-slide script used by the illustrated v2 deck.
 - [Source ledger](../presentation/source-ledger.md) — claim-by-claim sources and qualification notes.
@@ -49,11 +50,12 @@ The illustrations show intended concepts such as separated ownership, issuer-iso
 The evidence directory is archival source material and should remain tracked even though it is large. The largest files are `xstocks-scope-2026-09-16.json` (about 9 MiB), `backpack-2026-09-16.json` (about 3.3 MiB) and `xstocks-mint-inventory-2026-09-16.json` (about 3 MiB).
 
 - [Selected asset package](../planning/research/initial-asset-package.md) and [parent verification](../planning/evidence/initial-package-parent-verification-2026-09-16.json) — exact 15-mint candidate package.
-- [KOx event snapshot](../planning/evidence/real-events-2026-09-16.json) — source for the complete historical reference fixture.
+- [KOx event snapshot](../planning/evidence/real-events-2026-09-16.json) — historical factor fixture; verified ex-date and complete annual coverage are missing.
 - [Backpack MU event](../planning/evidence/backpack-scope-mu-event-2026-09-16.json), [raw transactions](../planning/evidence/backpack-scope-mu-raw-transactions-2026-09-16.json) and [authority history](../planning/evidence/backpack-scope-mu-authority-history-2026-09-16.json) — sourced onchain reconstruction; not an issuer-published final event ledger.
 - [Ondo report](../planning/research/ondo-solana.md) and [Ondo evidence](../planning/evidence/ondo-solana-2026-09-16.json) — research snapshot; no source-complete Ondo event is claimed.
 - [AMM feasibility](../planning/research/claim-amm-feasibility.md) — devnet integration decision and remaining prerequisites; no pool or deployed DividendX program is claimed.
-- [Prior-art decision review](../planning/research/prior-art-review.md) — architecture, feature scope and mandatory program handoff gates, with companion reports for yield protocols, Solana markets and equity contracts.
+- [Annual dividend research](../planning/research/annual-dividend-series.md) — exchange period/ex-date conventions, revisions and actual fixture gaps.
+- [Prior-art decision review](../planning/research/prior-art-review.md) — dated single-event architecture review with reusable lessons; annual specifications supersede its term design.
 - [Mechanics audit](../planning/mechanics-audit.md) and [market evidence](../planning/market-evidence.md) — accounting and market-claim review.
 
 ## Preserved history

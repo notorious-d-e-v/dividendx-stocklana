@@ -1,5 +1,7 @@
 # Prior art: yield-tokenization protocols
 
+> Architecture update: preserve this prior-art research as a dated source record. DividendX now uses [annual series](../../spec/annual-series-accounting.md), with the whole accumulated annual entitlement following DR transfers and no forfeiture. Earlier one-event comparisons are superseded; competitor findings remain dated observations.
+
 Checked 16 September 2026. This is bounded design research for DividendX, not evidence that any external market is live or suitable for integration. Primary sources were current protocol documentation, public source at pinned commits, and published audit disclosures. No deployment, balance, liquidity, or transaction was independently verified.
 
 ## Decision summary

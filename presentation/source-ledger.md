@@ -1,5 +1,11 @@
 # DividendX source ledger
 
+## Annual-series addendum — 16 September 2026
+
+The next deck export follows [annual accounting](../spec/annual-series-accounting.md) and [annual research](../planning/research/annual-dividend-series.md). Each issuer/mint/calendar-year has its own PT/DR pair; deposits close at year-start. DR carries the entire accumulated allocation from qualified in-year ex-dates, including late-paid dividends. Maturity closes membership; journal finalization opens independent redemption without forfeiture. Quarterly terms remain later work.
+
+Use “Keep the stock exposure. Sell a year of dividends.” The KOx $37.10 illustration below is **one historical event**, never an annual return or a 2027 forecast. KOx and MU fixtures lack verified ex-dates; the annual preview uses historical factors with explicit test term dates. The approved PPTX and user narration are preserved and have not been re-exported for this architecture change. Earlier event-isolated descriptions below record those artifacts, not the new program contract.
+
 Revised 16 September 2026 for the selected Solana stock package. The deck distinguishes established market precedents, current category context, a working historical calculator, selected candidate assets, issuer qualification and planned execution.
 
 | Slide | Claim or asset | Source and date | Treatment |

@@ -1,5 +1,7 @@
 # Series accounting v1: frontend rehearsal
 
+> Preserved legacy single-event contract. The user's annual-series decision supersedes this file for new work: use [annual accounting](annual-series-accounting.md). This document describes `/rehearsal/`, not the upcoming program.
+
 Frozen by Astra on 16 September 2026 for the frontend phase. This defines a deterministic local rehearsal and the contract to carry into the program phase. It is not a deployed program or production attestation policy.
 
 **Program handoff update, 16 September:** preserve this implemented rehearsal. The [prior-art review](../planning/research/prior-art-review.md) adds requirements that a literal port would miss: unknown future outcomes, authenticated zero/cancelled dividends, full-event entitlement following DR transfers, external SPL burns, explicit zero-output closure, and chain factor conformance. Its handoff gates must be resolved in the separate program contract before implementation. In particular, the zero-dividend rejection and known-at-deposit fixture M1 below are rehearsal behavior, not the intended future live lifecycle.

@@ -1,5 +1,7 @@
 # SDK contract for the frontend rehearsal
 
+> Preserved legacy client used by `/rehearsal/`. New implementation follows [annual accounting](annual-series-accounting.md) and the [annual SDK/reference contract](annual-series-sdk.md); an event ID is no longer a series ID.
+
 Frozen 16 September 2026. Framework-independent TypeScript in `packages/sdk/src/index.ts`, with Node tests. The React frontend imports this public entry point and normalized JSON fixtures. All mutation methods return promises so a future transaction-backed client can replace the local client. No Solana program or real wallet adapter is implemented in this phase.
 
 ## Data

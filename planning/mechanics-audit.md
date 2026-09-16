@@ -1,5 +1,7 @@
 # DividendX mechanics audit
 
+> Historical audit: the isolated-event formulas and two-day scope below describe the earlier rehearsal. New program work follows [annual accounting](../spec/annual-series-accounting.md), which compounds accepted event ratios and rounds the annual allocation once. Preserve this file's source evidence and unsupported-action findings.
+
 > Scope update, 16 September 2026: the current multi-issuer plan is [Solana issuer synthesis](solana-issuer-synthesis.md) and [architecture](adapter-decision.md). This file preserves earlier evidence/review; xStocks-only scope or deferral of native Solana Backpack/Ondo is superseded.
 
 **Status:** planning evidence, not implementation. **Access date:** 2026-09-16. The downloaded research note was treated only as a lead. No transactions were made.

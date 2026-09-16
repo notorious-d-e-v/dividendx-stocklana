@@ -4,13 +4,13 @@ Research and architecture review, **16 September 2026**, refined after the user 
 
 ## Recommendation
 
-Build **one permissionless dividend market for selected stock tokens on Solana**, with **xStocks, Backpack/Trek and Ondo in the first integration scope**. Their observed Solana tokens use the same Scaled UI Amount primitive, so supported isolated reinvested dividends can use one allocation engine. Add a small issuer-specific reader/asset-policy boundary, not three vault programs or a third circulating wrapper token.
+Build **one permissionless annual dividend market for selected stock tokens on Solana**, with **xStocks, Backpack/Trek and Ondo in the first integration scope**. Their observed Solana tokens use the same Scaled UI Amount primitive, so one engine can aggregate source-qualified reinvested dividends across an exact issuer/mint/calendar-year term. Add a small issuer-specific reader/asset-policy boundary, not three vault programs or a third circulating wrapper token.
 
 The initial package contains **six companies and 15 candidate tokens**, selected for the same reinvested-dividend model and ordinary secondary transfer path. Permissioned holder/approved-vault products are outside the build, as are products without dividend rights, fee-bearing profiles and discontinued offerings. No onboarding UI, adapter or expanded catalog is planned for those families.
 
 Permissionless describes intended access to DividendX for admitted assets: no holder allowlist or issuer-specific vault registration. The mint list selects collateral rather than users. Issuer freeze/pause controls and product restrictions remain; direct issuer minting/redemption onboarding is outside our flow. For example, Ondo documents [secondary transferability outside the US, subject to restrictions](https://docs.ondo.finance/ondo-stocks/transferability), and separately requires [KYC for issuer redemption](https://docs.ondo.finance/ondo-stocks/secondary-market-restrictions). Technical compatibility alone is not a determination of legal eligibility.
 
-This is a material expansion of the intended product, not a declaration that integrations are already built. Current software remains the approved historical calculator/design prototype. No DividendX PDA transfer, PT/DR issuance or program settlement has run.
+This is a material expansion of the intended product, not a declaration that integrations are already built. Current software consists of a local annual reference/product and the preserved historical rehearsal. No DividendX PDA transfer, PT/DR mint, wallet transaction or program finalization has run.
 
 ## The selected package
 
@@ -25,7 +25,7 @@ This is a material expansion of the intended product, not a declaration that int
 
 These are integration candidates with verified identity and observed compatible mint profiles, not enabled DividendX series. The [asset package and exact mint evidence](research/initial-asset-package.md) define the catalog. For Backpack, `.US` is the asset API identifier, not an assertion that its onchain metadata uses the same ticker.
 
-Prove **one event per issuer first**: Coca-Cola KOx, Backpack Micron MU, and a verified Ondo event. KOon is the first Ondo data request because it allows a same-company comparison with KOx; AAPLon and MSFTon are strong alternatives if their event data is available sooner. Nike and IBM add recognizable choices across all three issuers without adding another accounting model. More catalog entries do not require more vault engines.
+Prove **one annual-series lifecycle across representative issuer profiles first**. KOx and Backpack Micron MU supply sourced single-event factors, but both lack verified ex-dates and complete-period evidence; map them into test terms only with explicit synthetic dates. Ondo has no qualified event fixture yet. KOon remains the first Ondo data request because it allows a same-company comparison with KOx. More catalog entries do not require more vault engines, but each enabled issuer/mint/year needs its own annual evidence and custody gate.
 
 ## Issuer evidence
 
@@ -33,9 +33,9 @@ The wider audit below is retained as the reason for the boundary. Only the first
 
 | Provider/product family | What we verified | DividendX treatment |
 |---|---|---|
-| **xStocks / Backed** | Public registry: 837 Solana deployments. All 837 mint accounts existed with nonzero supply and the same eight-decimal Token-2022 extension profile at audit time. Classified public corporate-action history and a verified KOx event. | Initial scope. Reuse existing allocation math, generalize exact-mint configuration and retain issuer controls/finality checks. Catalog size is not eligible dividend coverage. |
-| **Backpack / Trek receipts** | 48 `.US` Solana token entries with deposits and withdrawals enabled; all 48 have nonzero supply, six decimals and Scaled UI Amount. Real MU dividend-distribution transaction reconstructed. | Initial scope. Separate reader must distinguish dividend operations from ordinary mint/redeem multiplier updates. Official event/revision semantics still needed for live settlement. |
-| **Ondo Stocks** | Native Solana Token-2022 Scaled UI Amount; AAPLon, MSFTon and KOon checked, nine decimals. Official public code lists mints; current API/history requires a key. | Initial scope now, not a later-chain feature. Same pure-dividend allocation math; separate authenticated event reader and retained classification/history join. |
+| **xStocks / Backed** | Public registry: 837 Solana deployments. All 837 mint accounts existed with nonzero supply and the same eight-decimal Token-2022 extension profile at audit time. Classified public corporate-action history and a sourced KOx factor event, but no verified ex-date join or terminal annual completeness signal. | Initial scope. Generalize exact-mint configuration and require official civil ex-date, full-period revisions and finality before annual settlement. Catalog size is not eligible dividend coverage. |
+| **Backpack / Trek receipts** | 48 `.US` Solana token entries with deposits and withdrawals enabled; all 48 have nonzero supply, six decimals and Scaled UI Amount. Real MU dividend-distribution transaction reconstructed. | Initial scope. Separate reader must distinguish dividend operations from ordinary mint/redeem multiplier updates. Official ex-date, complete-period and revision/finality semantics remain missing. |
+| **Ondo Stocks** | Native Solana Token-2022 Scaled UI Amount; AAPLon, MSFTon and KOon checked, nine decimals. Official public code lists mints; current API/history requires a key. | Initial scope now, not a later-chain feature. Use the shared annual math only after an authenticated event/ex-date/factor join and complete-period history are available. |
 | **Superstate Opening Bell** | Actual company shares: GLXY, EXOD and FWDI circulating; HSDT deployed but zero supply. Official registry plus default-frozen mint accounts and holder onboarding. | Excluded: permissioned holders/custody. No onboarding or integration work in this build. |
 | **Securitize direct shares** | Official Solana launches for SECZ and CURR; inspected candidate mints are default-frozen. Exact mint provenance still needs direct registry/issuer confirmation. | Excluded: permissioned and provisional. No integration or access work in this build. |
 | **OTCM/ST22** | Issuer filings establish live microcap tokenization. A separately indexed MSPC candidate has a mutable 7% transfer fee; its exact official provenance is not yet confirmed. Offering rights vary. | Excluded: unconfirmed provenance and unsupported fee/permission/accounting model. No integration work in this build. |
@@ -55,24 +55,25 @@ This distinction affects custody, redemption and data provenance. The same compa
 
 ## Why one engine still works
 
-For the qualified reinvestment model, the vault holds integer raw token units. A verified isolated dividend increases the issuer multiplier from M0 to M1. Allocate `floor(Q × (M1 − M0) / M1)` raw units to DR and the remaining units to PT. That conserves the deposited collateral and works with different decimal precisions.
+For the qualified reinvestment model, the vault holds integer raw token units for one exact issuer/mint/year. Deposits close at January 1 UTC and mint equal raw PT/DR pairs. For every latest accepted qualified event whose official reference-market civil ex-date falls in the year, use its isolated positive factor `M1_i/M0_i`. With accountable raw collateral `Q`, compute `R = product(M0_i/M1_i)`, allocate `floor(Q × (1 − R))` to DR and the remainder to PT. This conserves collateral across multiple dividends and decimal profiles. Summing independently rounded one-event allocations would double-count the shrinking principal base and lose fractional accrual.
 
-The platform needs issuer-specific answers to three separate questions:
+The platform needs issuer-specific answers to four separate questions:
 
 1. **May this vault hold and transfer this exact token?** Check provenance, rights, extensions, accounts and issuer requirements.
-2. **Which change actually represents this dividend?** Bind a classified event to exact factors and time, excluding splits, corrections and supply-maintenance changes.
-3. **What does the holder receive?** This first model returns stock-token units. Broker cash, direct-share distributions and price/NAV appreciation require different contracts.
+2. **Which events belong to this year?** Bind each classified event to exact factors plus the official civil ex-date, replace superseded revisions, and exclude splits and supply-maintenance changes from dividend yield.
+3. **Is the annual journal complete and final?** Prove eligible-period coverage, late-event handling, revision precedence and finality separately from maturity.
+4. **What does the holder receive?** This first model returns stock-token units. Broker cash, direct-share distributions and price/NAV appreciation require different contracts.
 
 xStocks' [multiplier documentation](https://docs.xstocks.fi/developers/multipliers) and Ondo's [corporate-action documentation](https://docs.ondo.finance/ondo-stocks/corporate-actions) establish the shared balance primitive. The conclusion that the formula is reusable is our accounting analysis; it is conditional on the event and token checks above.
 
-The [architecture](adapter-decision.md) specifies an asset manifest, three offchain readers, one onchain series engine and one SDK/UI contract. Each issuer/mint/event gets isolated custody and claim mints. Internal shares provide normalization. Additional wrapper tokens, arbitrary plugin dispatch and cross-chain custody add no necessary value to this sprint.
+The [architecture](adapter-decision.md) specifies an asset manifest, three offchain readers, one annual series engine and one SDK/UI contract. Each issuer/mint/year gets isolated custody and claim mints. Before finalization, matching PT+DR recombine one-for-one; maturity only closes event membership. Journal-complete finalization freezes pools, after which PT and bearer DR redeem independently without forfeiture. Additional wrapper tokens, arbitrary plugin dispatch and cross-chain custody add no necessary value to this sprint.
 
 ## Real events for the demo
 
 | Case | Evidence we have | What it supports |
 |---|---|---|
-| **Coca-Cola KOx** | Public classified event ID/revision; M0 `1.0183317967386898`, M1 `1.0225601246249238`; finalized mint confirmation. | Complete source-backed historical calculator and replay fixture. Current `Initial` event status still needs a live finality policy. |
-| **Micron MU, Backpack** | Finalized `DividendDistribute` transaction on July 23, 2026; complete authority-history bracket gives M0=1 and M1=`1.000106726714702`. Backing receipt units increase in the same transaction. | A second real, reproducible **onchain reconstruction** for a labeled test replay. It is not an issuer-published event ledger or proof of gross/net cash reconciliation. |
+| **Coca-Cola KOx** | Public classified event ID/revision; M0 `1.0183317967386898`, M1 `1.0225601246249238`; finalized mint confirmation. The source row has no official ex-date and remains `Initial`. | Source-backed single-event factor regression. Any annual test mapping needs an explicit synthetic ex-date and cannot claim complete yearly payout or finality. |
+| **Micron MU, Backpack** | Finalized `DividendDistribute` transaction on July 23, 2026; complete authority-history bracket gives M0=1 and M1=`1.000106726714702`. Backing receipt units increase in the same transaction, but no official ex-date or complete ledger is available. | A real, reproducible **onchain reconstruction** for a labeled single-event factor regression. It is not an issuer-published annual event ledger or proof of gross/net cash reconciliation. |
 | **Coca-Cola KOon, Ondo** | Real finalized multiplier update near the documented company dividend; current M1=`1.0238905041551842`. | Observation and a candidate to confirm. No verified issuer event binding yet, so no dividend allocation fixture should be asserted from this change alone. |
 
 The Backpack transaction is [publicly inspectable](https://explorer.solana.com/tx/39vTkahE7rUnFypAkKpaHUxwMyuC1nG4nJ12GEm3y9V1Kqep6ijvcX4isqsNXB63s3vsGNDjfi7uFFgH32Te59R). Its current multiplier, `1.0001068649823912`, differs from the historical event factor because ordinary supply operations recomputed it later. This directly disproves using today's multiplier as a historical dividend amount. Preserve the transaction-level event boundary and provenance. No guessed withholding or reinvestment price belongs in the demo.
@@ -84,22 +85,22 @@ Keep Coca-Cola's existing dollar explanation: 100 pre-event share-equivalents pr
 **Build a complete flow across the three selected issuer families. Enable each selected asset only to the level demonstrated.**
 
 - Directory/observation: the selected 15 candidate tokens across xStocks, Backpack and Ondo. Show company, issuer, actual mint, source date and availability. Excluded product families stay in research, outside the catalog.
-- Shared accounting: test eight-, six- and nine-decimal profiles through the same engine. Unknown transfer conditions or unexplained multiplier changes block issuance/settlement.
-- Event replays: KOx official history and MU's labeled onchain reconstruction are the two evidence-backed candidates. Add Ondo when its event/history join is obtained. Synthetic test cases remain visibly separate.
-- Full flow: deposit before cutoff, issue PT/DR, sell DR to a second wallet using test funds, then redeem independently. No xStocks-only logic or hardcoded ticker in the shared engine.
-- Live enablement: a separate gate for permitted real custody, a future event, data access, corrections/finality and operating controls. No issuer has passed a DividendX live gate today.
+- Shared accounting: test eight-, six- and nine-decimal profiles through the same annual engine, including multiple events and revisions. Unknown transfer conditions or unexplained multiplier changes block safe finalization.
+- Historical regressions: KOx official history and MU's labeled onchain reconstruction supply exact factors only. Their test ex-dates are synthetic until source-qualified. Add Ondo only when its event/ex-date/factor join is obtained.
+- Full flow: deposit before January 1, issue annual PT/DR, process qualified events, allow prefinal paired recombination, reach maturity, attest a complete journal, then redeem each side independently. No xStocks-only logic or hardcoded ticker in the shared engine.
+- Live enablement: a separate gate for permitted real custody, official ex-date sources, complete-period access, corrections/finality and operating controls. No issuer has passed a DividendX live gate today.
 
 This keeps the multi-issuer ambition concrete while avoiding a false launch claim. If Ondo event data remains unavailable, keep that dependency visible. A token requiring provider approval for ordinary vault custody leaves the package; we do not expand into permissioned integration to accommodate it. Writing an adapter interface does not complete an integration.
 
 ## What changed in our artifacts
 
-The [master plan](plan.md), [architecture](adapter-decision.md), [phase work orders](phase-work-orders.md), pitch storyboard/revision, source ledger and narration now use the broader Solana scope. The [v5 deck](../presentation/output/DividendX-phase-two-v5.pptx) preserves nine slides, the approved visual language and the Coca-Cola example. It names the selected six-company package, puts xStocks, Backpack and Ondo in initial scope and keeps other networks later.
+The [master plan](plan.md), [architecture](adapter-decision.md) and [phase work orders](phase-work-orders.md) now use annual issuer/mint/year series. The approved decks, narration and visual language remain preserved historical product material; this synchronization does not regenerate them. They continue to name the selected six-company package, put xStocks, Backpack and Ondo in initial scope and keep other networks later.
 
 Earlier scope decisions are archived; historical evidence remains intact with supersession notices. The design system only gains issuer-selection/eligibility guidance. Its visual tokens, HTML prototype and screenshots remain unchanged.
 
 ## Immediate next work
 
-Review the revised slides and narration next. After that review, freeze the SDK/accounting interface and build the selected-asset frontend and three readers. Data dependencies are recorded in the [issuer data/access answers](issuer-data-requests.md): Backpack's documented program/event and correction contract, Ondo's read-only API access plus a classified historical example, and xStocks' event finality rules. These requests are drafted but have not been sent.
+The annual accounting/reference/product contracts are now the implementation source. Next, freeze the bounded onchain representation and program accounts, then build the annual vault, transaction SDK and three readers. Data dependencies are recorded in [issuer data requests](issuer-data-requests.md): authoritative ex-date joins, complete-period ledgers, revisions and finality/completeness rules. These requests are drafts and have not been sent.
 
 Astra remains responsible for architecture and review. Sol high handles frontend/readers, Sol xhigh handles the vault and accounting tests, and Sol medium handles presentation production. Evidence continues to supersede the plan.
 
