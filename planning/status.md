@@ -1,6 +1,6 @@
 # Current status
 
-Updated 16 September 2026, after the user approved the simpler product flow and requested cleanup and public GitHub backup.
+Updated 16 September 2026, after public GitHub backup and the user's request for a deeper prior-art review before program implementation.
 
 Public repository: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana). The initial checkpoint includes source, design, research, pitch and preserved archives; regenerable caches stay local.
 
@@ -16,12 +16,13 @@ Public repository: [notorious-d-e-v/dividendx-stocklana](https://github.com/noto
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; two sourced historical examples, KOx and Backpack MU |
 | Verification | Fixture checks, 11 SDK tests, 15 browser tests, type checks and two-entry production build; independent Astra flow and layout review |
 | Repository | Public README, operating rules, artifact map, Node 24 configuration, portable browser setup and an inactive GitHub Actions template |
+| Prior art | [Architecture and feature review](research/prior-art-review.md) covering yield protocols, Solana precedents, equity-strip designs and traditional dividend contracts |
 
 The app uses local test balances and simulated receipts. No wallet integration, actual PT/DR mints, deployed vault, live issuer reader or AMM pool exists yet. UI and artwork approval does not imply those capabilities.
 
 ## Next: program and transferable tokens
 
-1. **Astra freezes the program contract.** Carry forward the existing allocation and SDK boundaries. Resolve Token-2022 factor encoding, event trust/finality, authority/extension checks, rounding and tiny-fragment recovery, direct token burns, custody failures and excess collateral. Keep issuer/mint/event series isolated.
+1. **Astra freezes the program contract.** Use the [prior-art handoff gates](research/prior-art-review.md) alongside existing allocation and SDK boundaries. Resolve unknown future outcomes, confirmed zero/cancellation, Token-2022 factor encoding, event trust/finality, authority/extension checks, tiny-fragment closure, direct token burns, custody failures and excess collateral. DR transfers carry the whole unredeemed event entitlement; keep issuer/mint/event series isolated.
 2. **Sol implements the vault and transaction SDK at xhigh effort.** Test actual PDA custody, PT/DR minting, transfers, cutoff, paired recombination, settlement and independent redemption using representative test mints and the two sourced historical cases. Treat those fixtures as test attestations, not live-final issuer events.
 3. **Astra verifies invariants; Sol connects the approved product at high effort.** Add wallet-signed test-network/local-validator transactions and real receipts. Event processing belongs in background readers/attestation; users see split, use and redeem.
 4. **Prove one AMM round trip.** Target Raydium CPMM on devnet with DR and clearly labeled private test money: add liquidity, buy DR, withdraw liquidity, redeem recovered DR and retained PT. Verify deployment/config/funding first. Preserve backing for claims remaining in the AMM. See [feasibility and boundaries](research/claim-amm-feasibility.md).
@@ -37,6 +38,8 @@ Do not spend the next phase redesigning approved screens, broadening issuer scop
 - **Devnet:** program toolchain, RPC/faucet access and enough test SOL for deployment/accounts/pool setup must be checked during the program phase.
 
 These do not block local program implementation against the existing fixtures and representative test collateral. Mainnet funds, mainnet deployment and hackathon submission are not part of this cleanup.
+
+The prior-art review is sufficient to stop broad exploration and write the bounded program specification. Pendle's current docs already describe STRCx discrete yield; our differentiation is native Solana issuer handling and the chosen event-right contract, not a claim that Pendle cannot handle stock dividends. Confirmed-zero and exception paths must be specified before Sol's implementation handoff; a credible live resolution process remains a separate release gate.
 
 ## Operating and backup notes
 

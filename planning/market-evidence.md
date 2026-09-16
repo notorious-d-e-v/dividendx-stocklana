@@ -2,9 +2,11 @@
 
 Verified 2026-09-16. The supplied research brief was treated as an unverified lead list. Figures below deliberately separate annual cash flow, value outstanding/TVL, trading turnover, and open interest (OI).
 
+Updated during the pre-build [prior-art review](research/prior-art-review.md): Pendle's current documentation includes STRCx discrete yield, and EXDATE's architecture page explicitly says its contracts are not deployed. Earlier research suggesting equity-specific integration is simply absent from Pendle is superseded. Historical market figures below were not remeasured during this architecture pass.
+
 ## Slide-safe conclusions
 
-1. **Pendle proves the architecture, not a ready Solana integration.** Pendle wraps heterogeneous yield-bearing tokens in `StandardizedYield` (SY), then splits SY into Principal Token (PT) and Yield Token (YT). Its documentation explicitly covers both rebasing assets, whose token count changes, and exchange-rate/appreciating assets, whose value per token changes. A categorical claim that Pendle “cannot handle equities” is wrong. The accurate claim is: **an xStock would require a custom corporate-action-aware adapter, and Pendle V2 has no current Solana core deployment.** Pendle's listed deployments are EVM chains. [SY docs](https://docs.pendle.finance/pendle-v2-dev/Contracts/StandardizedYield) · [yield-tokenization contracts](https://docs.pendle.finance/pendle-v2-dev/Contracts/YieldTokenization) · [PT docs](https://docs.pendle.finance/pendle-v2/ProtocolMechanics/YieldTokenization/PT) · [deployments](https://docs.pendle.finance/pendle-v2-dev/Deployments)
+1. **Pendle is already relevant to stock dividends.** It normalizes assets through SY and issues PT/YT; current discrete-yield documentation names STRCx and describes time-weighted retrospective distribution. Do not claim Pendle cannot handle equities or that no stock-yield integration exists. DividendX's selected distinction is native Solana issuer/event handling and a transferable whole-event DR. Pendle's official core deployment list currently contains EVM networks and does not list Solana; this does not establish exclusivity among Solana protocols. [Discrete yield](https://docs.pendle.finance/pendle-v2/ProtocolMechanics/DiscreteYield) · [SY docs](https://docs.pendle.finance/pendle-v2-dev/Contracts/StandardizedYield) · [deployments](https://docs.pendle.finance/pendle-v2-dev/Deployments)
 
 2. **The normalization problem is corporate-action attribution, not rebasing itself.** Pendle's SY exposes a common deposit/redemption interface and an `exchangeRate`; its developer docs warn that rebasing assets may not track one-to-one in raw units. xStocks uses one cumulative multiplier for cash dividends, splits, and reverse splits. DividendX must therefore (a) escrow raw xStock units, (b) read current/pending/historical multipliers, and (c) classify each multiplier change before assigning value to the dividend leg. A multiplier delta alone is insufficient because a split is not yield. [Pendle SY docs](https://docs.pendle.finance/pendle-v2-dev/Contracts/StandardizedYield) · [xStocks multiplier docs](https://docs.xstocks.fi/developers/multipliers)
 
@@ -31,20 +33,20 @@ Verified 2026-09-16. The supplied research brief was treated as an unverified le
 
 ## Competitive positioning
 
-Use: **“Solana-native dividend stripping for multiplier-based xStocks”** or **“a corporate-action adapter that turns total-return xStocks into separately tradable principal and dividend claims.”**
+Use: **“A Solana-native dividend layer for selected stock tokens across issuers”** or **“Separate one supported dividend event from stock-token exposure, then trade and redeem either claim.”** Support remains conditional on each asset's custody and event checks.
 
-Avoid: “the first onchain dividend market,” “the only tokenized-equity yield protocol,” or “Pendle for stocks” as the whole differentiation. Competitors already use that framing. The credible wedge is the combination of Solana, xStocks' real Token-2022 multiplier, event classification, fully collateralized vault accounting, and a live replay/settlement demo.
+Avoid: “the first onchain dividend market,” “the only tokenized-equity yield protocol,” or “Pendle for stocks” as the whole differentiation. The intended wedge is native Solana, issuer-aware event classification, isolated collateral and independently redeemable event claims. Current execution is a local rehearsal; the program-backed demo is still to build.
 
 Public competitor evidence:
 
 - **Fletch:** PT/YT dividend futures on Robinhood Chain; site claims three open mainnet markets and says an independent audit is planned before mainnet, wording that is internally inconsistent enough to avoid relying on its production status. [Source](https://www.fletch.finance/)
-- **EXDATE:** corporate-action event vaults; deposit produces transferable principal and event-right tokens. Docs label Robinhood Chain mainnet. [Source](https://www.exdate.tech/docs)
+- **EXDATE:** corporate-action event-vault design with transferable principal and event-right tokens. Its architecture page explicitly says no contracts are deployed and no audits performed; a mainnet footer is not evidence to the contrary. [Architecture](https://www.exdate.tech/docs/contract-architecture)
 - **StockYield:** public “dividend layer” roadmap for routing multiplier-based dividends and perpetual dividend streams. Treat as roadmap, not deployed proof. [Source](https://stockyield.money/docs/dividend-layer.html)
 - **dividends.finance / hdfi:** public principal/dividend and principal/yield strip designs on Robinhood Chain; no independently verified liquidity or audit evidence found in this review. [dividends.finance](https://www.dividends.finance/) · [hdfi](https://hdfi.io/)
 
 ## Rejected claims
 
-- **“Pendle cannot support equities.”** Rejected. SY exists to normalize heterogeneous yield mechanics and explicitly handles rebasing. What is missing is an equity-specific adapter, event attribution, and a Solana deployment.
+- **“Pendle cannot support equities / has no stock-dividend design.”** Rejected by its current STRCx discrete-yield documentation. Our exact multi-issuer Solana event contract still requires its own implementation and evidence.
 - **“Dividends arrive as USDC/cash to an xStock holder.”** Rejected for xStocks. They are reinvested and represented by the multiplier.
 - **“A multiplier increase equals a dividend.”** Rejected. The same multiplier carries splits and reverse splits.
 - **“$1.75T is DividendX TAM.”** Rejected. It is annual global dividend cash flow, most of which is outside the accessible tokenized-stock universe.
@@ -52,11 +54,11 @@ Public competitor evidence:
 - **“No competitor exists / first ever.”** Rejected by current public competitor materials. No independent evidence was found that any one competitor has meaningful volume, so do not claim they do either.
 - **Unverified September 2026 figures from the supplied brief.** Not used unless independently supported above.
 
-## Unresolved build dependencies
+## Current build dependencies
 
-1. **Mechanics evidence:** use [mechanics-audit.md](./mechanics-audit.md) as the implementation source of truth. Its live API/RPC audit confirms the KOx mint, Token-2022 extensions, multiplier selection, and dividend event fields; remaining dependencies include correction/finality policy and API uptime/SLA.
+1. **Mechanics evidence:** the [issuer architecture](adapter-decision.md), [prior-art gates](research/prior-art-review.md) and current program specification govern implementation. The earlier [mechanics audit](mechanics-audit.md) remains dated KOx evidence, not a live feed or the sole source of truth.
 2. **Claim math:** define the accounting asset and invariant in raw units. For a fixed event, snapshot `M0`, escrow raw quantity `q`, and allocate only the dividend-classified accretion; specify how rounding and later corrections work.
-3. **Settlement purity:** decide whether the dividend leg receives an immediately claimable fraction of xStock or USDC after conversion. Holding reinvested shares past the event adds post-dividend equity-price exposure.
+3. **Settlement denomination:** already selected: redeem the deposited stock token. Automatic cash conversion is deferred. Holding allocated tokens after the event retains stock-price and later-return exposure.
 4. **Eligibility and transfer constraints:** issuer instruments are regulated/offshore products. A hackathon demo can show mechanics; a real launch needs jurisdiction, offering, derivatives/securities, KYC/AML, and secondary-transfer analysis.
 5. **Oracle/availability:** preserve the verified KOx historical event as a reproducible fixture and cross-check API event versions against the activated onchain multiplier. Do not present a historical event as a live future dividend.
-6. **Two-day scope:** ship one xStock, one historical or test event, vault deposit, PT/DR mint, event classification display, and deterministic redemption. Treat Ondo and Coinbase as roadmap slides only.
+6. **Hackathon scope:** selected xStocks, Backpack/Trek and native Solana Ondo profiles share one engine. Existing KOx and MU fixtures support test execution; Ondo event binding is pending. Build actual claims, custody, redemption and one test AMM flow. Other networks remain later work.

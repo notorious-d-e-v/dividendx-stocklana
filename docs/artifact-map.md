@@ -53,6 +53,7 @@ The evidence directory is archival source material and should remain tracked eve
 - [Backpack MU event](../planning/evidence/backpack-scope-mu-event-2026-09-16.json), [raw transactions](../planning/evidence/backpack-scope-mu-raw-transactions-2026-09-16.json) and [authority history](../planning/evidence/backpack-scope-mu-authority-history-2026-09-16.json) — sourced onchain reconstruction; not an issuer-published final event ledger.
 - [Ondo report](../planning/research/ondo-solana.md) and [Ondo evidence](../planning/evidence/ondo-solana-2026-09-16.json) — research snapshot; no source-complete Ondo event is claimed.
 - [AMM feasibility](../planning/research/claim-amm-feasibility.md) — devnet integration decision and remaining prerequisites; no pool or deployed DividendX program is claimed.
+- [Prior-art decision review](../planning/research/prior-art-review.md) — architecture, feature scope and mandatory program handoff gates, with companion reports for yield protocols, Solana markets and equity contracts.
 - [Mechanics audit](../planning/mechanics-audit.md) and [market evidence](../planning/market-evidence.md) — accounting and market-claim review.
 
 ## Preserved history

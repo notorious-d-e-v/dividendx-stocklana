@@ -55,4 +55,4 @@ The checked-in presentation outputs are review artifacts. Rebuilding the decks r
 
 ## Next phase
 
-The next implementation phase is the actual Solana program: vault custody, transferable PT/DR tokens, wallet-backed transactions, event trust and finality rules, recovery policy, and a verified external liquidity path. Until those pieces exist and pass their own evidence checks, this repository remains a source-backed interactive preview rather than a live protocol.
+The [prior-art review](planning/research/prior-art-review.md) records the architectural choices and the lifecycle requirements to settle before implementation. The next implementation phase is the actual Solana program: vault custody, transferable PT/DR tokens, wallet-backed transactions, event trust and finality rules, recovery policy, and a verified external liquidity path. Until those pieces exist and pass their own evidence checks, this repository remains a source-backed interactive preview rather than a live protocol.

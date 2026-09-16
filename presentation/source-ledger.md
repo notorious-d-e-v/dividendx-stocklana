@@ -62,3 +62,9 @@ Solana benefit sources, checked 16 September 2026:
 - The existing token/account sources above support divisible units and visible vault/claim records. These records do not certify issuer reserves.
 
 The current v5 PPTX is unchanged by this narration-only revision. Its embedded narration will be synchronized at the next deck export.
+
+## Prior-art review update, 16 September 2026
+
+The current approved deliverable is illustrated v2; the v5 note above records the earlier narration revision. This research pass preserves all decks and the user-edited script.
+
+Pendle's current [discrete-yield documentation](https://docs.pendle.finance/pendle-v2/ProtocolMechanics/DiscreteYield) names STRCx. Do not imply Pendle is unable to handle stock dividends or that DividendX introduces the category. The current narration's general yield-trading comparison and dated volume claim need no wording change. Future competitive material should use native Solana issuer/event handling and transferable whole-event DR as design distinctions, subject to actual implementation. EXDATE is a documented overlapping design; its [architecture page](https://www.exdate.tech/docs/contract-architecture) explicitly disclaims deployed contracts and audits. The [prior-art review](../planning/research/prior-art-review.md) controls these qualifications; competitor liquidity was not verified.

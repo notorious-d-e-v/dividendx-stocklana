@@ -2,6 +2,8 @@
 
 Frozen by Astra on 16 September 2026 for the frontend phase. This defines a deterministic local rehearsal and the contract to carry into the program phase. It is not a deployed program or production attestation policy.
 
+**Program handoff update, 16 September:** preserve this implemented rehearsal. The [prior-art review](../planning/research/prior-art-review.md) adds requirements that a literal port would miss: unknown future outcomes, authenticated zero/cancelled dividends, full-event entitlement following DR transfers, external SPL burns, explicit zero-output closure, and chain factor conformance. Its handoff gates must be resolved in the separate program contract before implementation. In particular, the zero-dividend rejection and known-at-deposit fixture M1 below are rehearsal behavior, not the intended future live lifecycle.
+
 ## Identity and trust
 
 A series holds one issuer, exact mint and classified event. Only paired Stock exposure (PT) and Dividend rights (DR) circulate. Each deposited raw collateral unit creates one raw unit of each claim. Neither claim is a scaled stock balance or a promise of fixed dollars.
