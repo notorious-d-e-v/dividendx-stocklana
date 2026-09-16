@@ -1,0 +1,99 @@
+{
+  "observed_at_utc": "2026-09-16T05:45:04Z",
+  "purpose": "Normalized read-only snapshot of Superstate's public asset and equity registries. This is a research artifact, not an issuer allowlist or an endorsement.",
+  "sources": [
+    "https://api.superstate.com/v1/assets",
+    "https://api.superstate.com/v3/equities?limit=200"
+  ],
+  "chain_id_note": "Superstate v1 uses chain key 900 for Solana. The v3 API identifies it as solana/mainnet_beta.",
+  "solana_equities_in_v1_assets": [
+    {
+      "symbol": "GLXY",
+      "name": "Galaxy Digital Inc. Class A Common Stock",
+      "issuer_entity_name": "Galaxy Digital Inc.",
+      "allowlist_type": "Public",
+      "mint": "2HehXG149TXuVptQhbiWAWDjbbuCsXSAtLTB5wc2aajK",
+      "total_supply": "43534.100000",
+      "circulating_supply": "13399.282876",
+      "has_active_dip_market": false
+    },
+    {
+      "symbol": "EXOD",
+      "name": "Exodus Movement, Inc. Class A Common Stock",
+      "issuer_entity_name": "Exodus Movement, Inc.",
+      "allowlist_type": "Public",
+      "mint": "3DBudkWQNbXGAjzEAtpjMKorb76sjozcHCzc8ZtkHDAQ",
+      "total_supply": "310.000000",
+      "circulating_supply": "60.000000",
+      "has_active_dip_market": false
+    },
+    {
+      "symbol": "FWDI",
+      "name": "Forward Industries, Inc. Common Stock",
+      "issuer_entity_name": "Forward Industries, Inc.",
+      "allowlist_type": "Public",
+      "mint": "7GzQgf6DPo6ZANjnbhe9tNCpkGTv3zqHbsDx74jyQf9",
+      "total_supply": "8732937.100000",
+      "circulating_supply": "7280819.200000",
+      "has_active_dip_market": false
+    },
+    {
+      "symbol": "HSDT",
+      "name": "Solana Company Class A Common Stock",
+      "issuer_entity_name": "Solana Company",
+      "allowlist_type": "Public",
+      "mint": "8UBqBGXM4NF22y5TZs8PhNVwVNqsHw2jBstfcxsSZaQ4",
+      "total_supply": "0.000000",
+      "circulating_supply": "0",
+      "has_active_dip_market": false,
+      "status_note": "A deployed mint with zero reported supply is not treated as a live investable product."
+    }
+  ],
+  "equity_catalog_boundaries_from_v3": [
+    {
+      "symbol": "STKE",
+      "allowlist_type": "Private",
+      "deployments": [],
+      "classification": "catalogued/announced; no deployment returned"
+    },
+    {
+      "symbol": "UPXI",
+      "allowlist_type": "Public",
+      "deployments": [],
+      "classification": "catalogued/announced; no deployment returned"
+    },
+    {
+      "symbol": "SBET",
+      "deployments": ["ethereum", "linea"],
+      "classification": "live on other chains; no Solana deployment returned"
+    },
+    {
+      "symbol": "PLAS",
+      "name": "PLASTIC INC (test)",
+      "solana_mint": "EMFTTUntNWDoGwdWUs4wrycYWRKDfot1J2XMB62Q6z24",
+      "classification": "explicit test record; omitted from production equity scope"
+    }
+  ],
+  "non_equity_solana_assets_excluded": [
+    {
+      "symbol": "USTB",
+      "domain": "Funds",
+      "mint": "CCz3SGVziFeLYk2xfEstkiqJfYkjaSWb2GCABYsVcjo2"
+    },
+    {
+      "symbol": "USCC",
+      "domain": "Funds",
+      "mint": "BTRR3sj1Bn2ZjuemgbeQ6SCtf84iXS81CS7UDTSxUCaK"
+    },
+    {
+      "symbol": "CUSHY",
+      "domain": "Funds",
+      "mint": "HSWt2izBvgNnxG982DcsysGikDnrgSq3EAWMYCSMGziP"
+    }
+  ],
+  "interpretation_limits": [
+    "The API's Public allowlist_type does not mean an arbitrary wallet can receive shares. Superstate's investor documentation separately requires identity onboarding and wallet allowlisting.",
+    "Registry presence alone does not establish liquidity, protocol compatibility, dividend mechanics, or current legal eligibility.",
+    "No v1 asset had has_active_dip_market=true at observation time."
+  ]
+}

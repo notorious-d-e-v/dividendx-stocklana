@@ -1,0 +1,13 @@
+{
+  "design/index.html": "0811d62203ac990a6cf1bc13b733915920fe6e2f5dbc74cb0abc538abf65e74c",
+  "packages/design-tokens/tokens.css": "2d4f0a7465380d0a5420fe98afe41c3f8d584d533c2166e0bcfc3bad56170482",
+  "packages/design-tokens/tokens.json": "e043cd442d218cd0a0d7d39610573289d8e7cb3de814bdd7b5cb9976f9527268",
+  "presentation/narration.md": "cd92045c833e0782d8b75860f8e1ca50e38c9d4d4a74f3434cd802ee42f43262",
+  "presentation/output/DividendX-illustrated-v1.pptx": "bf4d4eaaa753598bb7f4ef6f7ab1d09c9695406a6d2c8a04e42b0d577e546d7d",
+  "presentation/output/DividendX-phase-two-v5.pptx": "d9d0fab5403eb6df61d2a155b2127bca5bd286c486c179fdc6571213322720be",
+  "presentation/assets/illustrated-v1/stock-dividend-coupon.png": "e1601f24d5a7013466ee306bf5e1097eb59dbb1b16987060de5fad23c9cad9ec",
+  "presentation/assets/illustrated-v1/README.md": "bbc81c1354ae6ed277b615acda861b1a3c41303da26d5bcfb94f30a0642c5edc",
+  "presentation/assets/illustrated-v1/manifest.json": "cb1448fff4af549ffa127f4cd8b73241048c5477623b74a539ece312455b2aa2",
+  "presentation/assets/illustrated-v1/prompts.md": "db1776d172a90b0c858bea7677d9f29c19ab1f3ee35dc2e93bcda6832ecfcab8",
+  "presentation/assets/illustrated-v1/claim-composability.png": "8a23d9f942eeb1c25faab8cc6fed6e7daac681d61843ede660c07830c5670731"
+}

@@ -1,0 +1,398 @@
+{
+  "schema": "dividendx.initial-asset-package.v1",
+  "compiledAtUtc": "2026-09-16T07:06:29Z",
+  "scope": {
+    "underlyings": ["KO", "AAPL", "MSFT", "MU", "NKE", "IBM"],
+    "includedMintCount": 15,
+    "catalogStatus": "candidate_integration_catalog_not_launched",
+    "rule": "Include only publicly transferable Solana Token-2022 products observed live with ScaledUiAmount, initialized default state, unpaused mint, null transfer-hook program, and no parsed transfer-fee or default-frozen requirement. Exact-mint admission and issuer-specific event evidence remain mandatory.",
+    "excludes": "Permissioned or allowlisted products and Backpack products whose deposit or withdrawal flags are disabled."
+  },
+  "commonTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+  "allMintRpcCrossCheck": {
+    "observedAtUtc": "2026-09-16T07:12:03.239412+00:00",
+    "finalizedSlot": 447462406,
+    "mintCount": 15,
+    "result": "All 15 exact accounts matched expected Token-2022 ownership and decimals, had nonzero supply, initialized default state, unpaused mint, null transfer-hook program, and no parsed transfer-fee or non-transferable extension.",
+    "rawRequestAndResponse": "planning/evidence/initial-package-parent-verification-2026-09-16.json"
+  },
+  "observations": {
+    "xstocks": {
+      "observedAtUtc": "2026-09-16T05:37:15.186505+00:00",
+      "slots": [447444626, 447444718, 447444737],
+      "profile": {
+        "decimals": 8,
+        "requiredExtensionsObserved": ["metadataPointer", "permanentDelegate", "defaultAccountState", "scaledUiAmountConfig", "pausableConfig", "confidentialTransferMint", "transferHook", "tokenMetadata"],
+        "defaultAccountState": "initialized",
+        "paused": false,
+        "transferHookProgramId": null,
+        "transferFeeConfigObserved": false,
+        "nonTransferableObserved": false,
+        "selectedRegistryTradingHalted": false,
+        "liquidityProven": false,
+        "multiplierInterpretation": "Token-2022 retains both multiplier and newMultiplier fields. effectiveMultiplierAtSnapshot uses newMultiplier when the finalized chain time is at or after newMultiplierEffectiveTimestamp; the field name newMultiplier does not imply it is still pending.",
+        "issuerControlNote": "Freeze, mint, scaled-UI, pause, metadata, hook, and permanent-delegate controls remain."
+      },
+      "assets": [
+        {
+          "company": "The Coca-Cola Company",
+          "underlying": "KO",
+          "symbol": "KOx",
+          "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+          "slot": 447444737,
+          "supplyRaw": "21122347899480",
+          "storedMultiplierFieldAtSnapshot": "1.0183317967386898",
+          "newMultiplierFieldAtSnapshot": "1.0225601246249238",
+          "newMultiplierEffectiveTimestamp": 1789432200,
+          "effectiveMultiplierAtSnapshot": "1.0225601246249238",
+          "historicalEventEvidence": "official_classified_cash_dividend_history",
+          "latestReviewedEvent": {
+            "eventId": "75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e",
+            "version": 2,
+            "status": "Initial",
+            "effectiveTimeUtc": "2026-09-15T00:30:00.000Z",
+            "multiplierOld": "1.0183317967386898",
+            "multiplierNew": "1.0225601246249238",
+            "grossCashflowUsd": "0.53",
+            "netCashflowUsd": "0.371",
+            "withholdingTaxRate": "0.3"
+          }
+        },
+        {
+          "company": "Apple Inc.",
+          "underlying": "AAPL",
+          "symbol": "AAPLx",
+          "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+          "slot": 447444737,
+          "supplyRaw": "15376345384401",
+          "storedMultiplierFieldAtSnapshot": "1.0026642075893797",
+          "newMultiplierFieldAtSnapshot": "1.0032690125398187",
+          "newMultiplierEffectiveTimestamp": 1786149000,
+          "effectiveMultiplierAtSnapshot": "1.0032690125398187",
+          "historicalEventEvidence": "official_classified_cash_dividend_history",
+          "latestReviewedEvent": {
+            "eventId": "3a17440d-6b23-4da7-ad40-fd7f12156b2b",
+            "version": 2,
+            "status": "Initial",
+            "effectiveTimeUtc": "2026-08-08T00:30:00.000Z",
+            "multiplierOld": "1.0026642075893797",
+            "multiplierNew": "1.0032690125398187",
+            "grossCashflowUsd": "0.27",
+            "netCashflowUsd": "0.189",
+            "withholdingTaxRate": "0.3"
+          }
+        },
+        {
+          "company": "Microsoft Corporation",
+          "underlying": "MSFT",
+          "symbol": "MSFTx",
+          "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+          "slot": 447444737,
+          "supplyRaw": "10497102728759",
+          "storedMultiplierFieldAtSnapshot": "1.0045820905025638",
+          "newMultiplierFieldAtSnapshot": "1.0059033904787456",
+          "newMultiplierEffectiveTimestamp": 1787185800,
+          "effectiveMultiplierAtSnapshot": "1.0059033904787456",
+          "historicalEventEvidence": "official_classified_cash_dividend_history",
+          "latestReviewedEvent": {
+            "eventId": "e06d3eca-7b09-40b6-a904-6bb880e3f205",
+            "version": 2,
+            "status": "Initial",
+            "effectiveTimeUtc": "2026-08-20T00:30:00.000Z",
+            "multiplierOld": "1.0045820905025638",
+            "multiplierNew": "1.0059033904787456",
+            "grossCashflowUsd": "0.91",
+            "netCashflowUsd": "0.637",
+            "withholdingTaxRate": "0.3"
+          }
+        },
+        {
+          "company": "Micron Technology, Inc.",
+          "underlying": "MU",
+          "symbol": "MUx",
+          "mint": "XsQLZycSZ7QnBBdBXQaTbQdiUcbRqjNJgyBGAMzhHav",
+          "slot": 447444718,
+          "supplyRaw": "4219794164435",
+          "storedMultiplierFieldAtSnapshot": "1.0002939365097",
+          "newMultiplierFieldAtSnapshot": "1.0004015986353854",
+          "newMultiplierEffectiveTimestamp": 1783295700,
+          "effectiveMultiplierAtSnapshot": "1.0004015986353854",
+          "historicalEventEvidence": "official_classified_cash_dividend_history",
+          "latestReviewedEvent": {
+            "eventId": "91af71a9-3ac8-4c5b-9a1c-b8c4bcc38918",
+            "version": 2,
+            "status": "Initial",
+            "effectiveTimeUtc": "2026-07-05T23:55:00.000Z",
+            "multiplierOld": "1.0002939365097",
+            "multiplierNew": "1.0004015986353854",
+            "grossCashflowUsd": "0.15",
+            "netCashflowUsd": "0.105",
+            "withholdingTaxRate": "0.3"
+          }
+        },
+        {
+          "company": "NIKE, Inc.",
+          "underlying": "NKE",
+          "symbol": "NKEx",
+          "mint": "XsGYpMvKbVt6ViHqRd7cF3s746dAMFBQWcC49hB9VVP",
+          "slot": 447444626,
+          "supplyRaw": "14438695704488",
+          "storedMultiplierFieldAtSnapshot": "1",
+          "newMultiplierFieldAtSnapshot": "1.007347670251",
+          "newMultiplierEffectiveTimestamp": 1788222600,
+          "effectiveMultiplierAtSnapshot": "1.007347670251",
+          "historicalEventEvidence": "official_classified_cash_dividend_history",
+          "latestReviewedEvent": {
+            "eventId": "0a66d63c-4320-44f6-8731-408a3f35f283",
+            "version": 2,
+            "status": "Initial",
+            "effectiveTimeUtc": "2026-09-01T00:30:00.000Z",
+            "multiplierOld": "1",
+            "multiplierNew": "1.007347670251",
+            "grossCashflowUsd": "0.41",
+            "netCashflowUsd": "0.287",
+            "withholdingTaxRate": "0.3"
+          }
+        },
+        {
+          "company": "International Business Machines Corporation",
+          "underlying": "IBM",
+          "symbol": "IBMx",
+          "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+          "slot": 447444718,
+          "supplyRaw": "5442777137539",
+          "storedMultiplierFieldAtSnapshot": "1.015340763856885",
+          "newMultiplierFieldAtSnapshot": "1.0204029187943977",
+          "newMultiplierEffectiveTimestamp": 1786149000,
+          "effectiveMultiplierAtSnapshot": "1.0204029187943977",
+          "historicalEventEvidence": "official_classified_cash_dividend_history",
+          "latestReviewedEvent": {
+            "eventId": "c8bf224b-b8db-4608-bd6d-8d60636c476d",
+            "version": 2,
+            "status": "Initial",
+            "effectiveTimeUtc": "2026-08-08T00:30:00.000Z",
+            "multiplierOld": "1.015340763856885",
+            "multiplierNew": "1.0204029187943977",
+            "grossCashflowUsd": "1.69",
+            "netCashflowUsd": "1.183",
+            "withholdingTaxRate": "0.3"
+          }
+        }
+      ]
+    },
+    "backpackTrek": {
+      "observedAtUtc": "2026-09-16T05:56:09Z",
+      "slot": 447444271,
+      "profile": {
+        "decimals": 6,
+        "requiredExtensionsObserved": ["metadataPointer", "permanentDelegate", "defaultAccountState", "pausableConfig", "confidentialTransferMint", "transferHook", "scaledUiAmountConfig", "tokenMetadata"],
+        "defaultAccountState": "initialized",
+        "paused": false,
+        "transferHookProgramId": null,
+        "transferFeeConfigObserved": false,
+        "nonTransferableObserved": false,
+        "issuerControlNote": "Freeze, mint, scaled-UI, pause, metadata, hook, and permanent-delegate controls remain."
+      },
+      "assets": [
+        {
+          "company": "Micron Technology, Inc.",
+          "underlying": "MU",
+          "symbol": "MU.US",
+          "mint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+          "supplyRaw": "7002303800",
+          "activeMultiplierAtSnapshot": "1.0001068649823912",
+          "pendingMultiplierAtSnapshot": "1.0001068649823912",
+          "depositEnabled": true,
+          "withdrawEnabled": true,
+          "historicalEventEvidence": "fully_bracketed_onchain_reconstruction_not_official_event_schema",
+          "reconstructedDividendTransaction": "39vTkahE7rUnFypAkKpaHUxwMyuC1nG4nJ12GEm3y9V1Kqep6ijvcX4isqsNXB63s3vsGNDjfi7uFFgH32Te59R"
+        },
+        {
+          "company": "NIKE, Inc.",
+          "underlying": "NKE",
+          "symbol": "NKE.US",
+          "mint": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+          "supplyRaw": "9100369806",
+          "activeMultiplierAtSnapshot": "1",
+          "pendingMultiplierAtSnapshot": "1",
+          "depositEnabled": true,
+          "withdrawEnabled": true,
+          "historicalEventEvidence": "none_reviewed"
+        },
+        {
+          "company": "International Business Machines Corporation",
+          "underlying": "IBM",
+          "symbol": "IBM.US",
+          "mint": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+          "supplyRaw": "260906918",
+          "activeMultiplierAtSnapshot": "1",
+          "pendingMultiplierAtSnapshot": "1",
+          "depositEnabled": true,
+          "withdrawEnabled": true,
+          "historicalEventEvidence": "none_reviewed"
+        }
+      ],
+      "excludedPreparedProducts": [
+        {
+          "symbol": "KO.US",
+          "mint": "KkAjEZDUyr8DY7tyWt4bcZDgGa53m9R2zdEh18P7Jb3",
+          "reason": "depositEnabled=false and withdrawEnabled=false"
+        },
+        {
+          "symbol": "AAPL.US",
+          "mint": "AAPLEDt8RpzPgXyhvFzkMBofvFSQw9gpeMCoUdPdLnB8",
+          "reason": "depositEnabled=false and withdrawEnabled=false"
+        },
+        {
+          "symbol": "MSFT.US",
+          "mint": "MSFThX899B1DddH5jkyMpdArWXzP85VXLYDrbGGcRJM",
+          "reason": "depositEnabled=false and withdrawEnabled=false"
+        }
+      ]
+    },
+    "ondo": {
+      "registryCommit": "0688add3c64aadc7006712989e9ec0592b5b10f8",
+      "registryCommitTimeUtc": "2026-09-04T22:44:50Z",
+      "officialRegistryRows": [
+        ["KOon", "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo"],
+        ["AAPLon", "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo"],
+        ["MSFTon", "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo"],
+        ["MUon", "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo"],
+        ["NKEon", "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo"],
+        ["IBMon", "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo"]
+      ],
+      "rpcObservedByUtc": "2026-09-16T07:06:29Z",
+      "slot": 447461422,
+      "rpcApiVersion": "4.3.0-rc.0",
+      "rawSixMintRpcContainedIn": "planning/evidence/initial-package-parent-verification-2026-09-16.json",
+      "profile": {
+        "decimals": 9,
+        "requiredExtensionsObserved": ["scaledUiAmountConfig", "metadataPointer", "pausableConfig", "defaultAccountState", "confidentialTransferMint", "transferHook", "tokenMetadata"],
+        "defaultAccountState": "initialized",
+        "paused": false,
+        "transferHookProgramId": null,
+        "transferFeeConfigObserved": false,
+        "permanentDelegateObserved": false,
+        "nonTransferableObserved": false,
+        "mintScalePauseAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+        "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+        "issuerControlNote": "Mint, scaled-UI, pause, metadata, hook, and freeze controls remain."
+      },
+      "assets": [
+        {
+          "company": "The Coca-Cola Company",
+          "underlying": "KO",
+          "symbol": "KOon",
+          "mint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+          "supplyRaw": "102023318325",
+          "activeMultiplierAtSnapshot": "1.0238905041551842",
+          "historicalEventEvidence": "unclassified_multiplier_update_only"
+        },
+        {
+          "company": "Apple Inc.",
+          "underlying": "AAPL",
+          "symbol": "AAPLon",
+          "mint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+          "supplyRaw": "367008117502",
+          "activeMultiplierAtSnapshot": "1.003376073740221",
+          "historicalEventEvidence": "none_reviewed"
+        },
+        {
+          "company": "Microsoft Corporation",
+          "underlying": "MSFT",
+          "symbol": "MSFTon",
+          "mint": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+          "supplyRaw": "406764885367",
+          "activeMultiplierAtSnapshot": "1.0057308568927839",
+          "historicalEventEvidence": "none_reviewed"
+        },
+        {
+          "company": "Micron Technology, Inc.",
+          "underlying": "MU",
+          "symbol": "MUon",
+          "mint": "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo",
+          "supplyRaw": "7523799220436",
+          "activeMultiplierAtSnapshot": "1.0011212375258447",
+          "historicalEventEvidence": "none_reviewed"
+        },
+        {
+          "company": "NIKE, Inc.",
+          "underlying": "NKE",
+          "symbol": "NKEon",
+          "mint": "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo",
+          "supplyRaw": "762937283479",
+          "activeMultiplierAtSnapshot": "1.0265770663565548",
+          "historicalEventEvidence": "none_reviewed"
+        },
+        {
+          "company": "International Business Machines Corporation",
+          "underlying": "IBM",
+          "symbol": "IBMon",
+          "mint": "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo",
+          "supplyRaw": "145354251778",
+          "activeMultiplierAtSnapshot": "1.0227923764446276",
+          "historicalEventEvidence": "none_reviewed"
+        }
+      ],
+      "eventLimit": "A multiplier above one or a multiplier change does not prove a cash-dividend event. No shortlisted Ondo product has an authenticated eventId/type/revision/finality binding because the documented endpoints require an API key."
+    }
+  },
+  "evidenceGrades": {
+    "recognizedDividendPayer": "yes for all six underlyings, supported by first-party company dividend records",
+    "issuedLiveSecondaryToken": "yes for all 15 included exact mints; xStocks registry rows were not trading-halted and Backpack rows were deposit/withdraw enabled, but usable liquidity was not proven",
+    "observedCompatibleMintConfig": "yes at the recorded slots; mutable controls require recheck at deposit and withdrawal",
+    "classifiedHistoricalEvent": {
+      "xstocks": "yes for all six via official corporate-action API; latest reviewed records remain status=Initial, so finality policy is unresolved",
+      "backpackTrek": "MU only, as a fully bracketed onchain reconstruction; not an issuer-published event schema with durable revision/finality/correction rules. Missing gross-to-net data limits dollar reconciliation, not raw allocation from trusted classified M0/M1.",
+      "ondo": "no; KOon is an observed update adjacent to a company dividend, without authenticated event binding"
+    },
+    "custodyExecution": "No DividendX vault execution. Backpack MU has a separate program-owned account CPI transfer demonstration; Ondo AAPLon has an ordinary transfer and authorized solver redemption demonstration. Neither proves this vault."
+  },
+  "allocationFieldPolicy": {
+    "mandatoryForRawAllocation": ["exact mint", "cash-dividend classification", "event identity", "revision/finality", "event time", "exact M0", "exact M1", "correction handling"],
+    "optionalForRawAllocationButNeededForDollarReconciliation": ["gross cash amount", "withholding", "net cash amount", "currency and FX", "reinvestment execution price/time", "fees and rounding"]
+  },
+  "recommendedOrder": [
+    {
+      "target": "KOx",
+      "reason": "Most complete issuer-classified cash-dividend fixture and existing audit."
+    },
+    {
+      "target": "Backpack MU.US",
+      "reason": "Best non-xStocks chain evidence: bracketed DividendDistribute reconstruction plus a separate program-owned transfer demonstration."
+    },
+    {
+      "target": "Ondo product to be selected after event binding",
+      "reason": "All six fit mechanically; none currently has the authenticated cash-dividend event record needed for settlement."
+    }
+  ],
+  "sources": {
+    "xstocks": {
+      "registry": "https://api.xstocks.fi/api/v2/public/assets?network=Solana&page=0&pageSize=100",
+      "corporateActionTemplate": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol={SYMBOL}&sortBy=createdTimeUtc&sortOrder=asc",
+      "localRegistryEvidence": "planning/evidence/xstocks-scope-2026-09-16.json",
+      "localMintEvidence": "planning/evidence/xstocks-mint-inventory-2026-09-16.json"
+    },
+    "backpackTrek": {
+      "assets": "https://api.backpack.exchange/api/v1/assets",
+      "localEvidence": "planning/evidence/backpack-scope-assets-2026-09-16.json",
+      "localMuEventEvidence": "planning/evidence/backpack-scope-mu-event-2026-09-16.json"
+    },
+    "ondo": {
+      "pinnedOfficialRegistry": "https://raw.githubusercontent.com/ondoprotocol/gm-solana-simulator/0688add3c64aadc7006712989e9ec0592b5b10f8/constants.rs",
+      "registryBlob": "https://github.com/ondoprotocol/gm-solana-simulator/blob/0688add3c64aadc7006712989e9ec0592b5b10f8/constants.rs",
+      "rpc": "https://api.mainnet-beta.solana.com",
+      "localPriorEvidence": "planning/evidence/ondo-solana-2026-09-16.json",
+      "localRawAll15RpcEvidence": "planning/evidence/initial-package-parent-verification-2026-09-16.json"
+    },
+    "underlyingCompanies": {
+      "KO": "https://investors.coca-colacompany.com/news-events/press-releases/detail/1152/board-of-directors-of-the-coca-cola-company-elects-new-officer-and-approves-64th-consecutive-annual-dividend-increase",
+      "AAPL": "https://investor.apple.com/dividend-history/",
+      "MSFT": "https://news.microsoft.com/source/2026/06/10/microsoft-announces-quarterly-dividend-29/",
+      "MU": "https://investors.micron.com/financials/quarterly-results/",
+      "NKE": "https://investors.nike.com/investors/news-events-and-reports/investor-news/investor-news-details/2026/NIKE-Inc--Declares-0-41-Quarterly-Dividend-bbe05eb31/default.aspx",
+      "IBM": "https://www.ibm.com/investor/governance/ibm-cash-dividends"
+    },
+    "accessedDate": "2026-09-16"
+  }
+}

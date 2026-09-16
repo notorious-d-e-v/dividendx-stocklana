@@ -1,0 +1,144 @@
+{
+  "snapshotUtc": "2026-09-16T05:37:14Z",
+  "scope": "Read-only public-source and Solana mainnet audit. No wallet, signature, or submitted transaction.",
+  "registry": {
+    "source": "https://raw.githubusercontent.com/ondoprotocol/gm-solana-simulator/0688add3c64aadc7006712989e9ec0592b5b10f8/constants.rs",
+    "sourceCommit": "0688add3c64aadc7006712989e9ec0592b5b10f8",
+    "sourceCommitTimeUtc": "2026-09-04T22:44:50Z",
+    "declaredMainnetTokenCount": 443,
+    "programId": "XzTT4XB8m7sLD2xi6snefSasaswsKCxx5Tifjondogm",
+    "mints": {
+      "AAPLon": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+      "MSFTon": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+      "KOon": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo"
+    }
+  },
+  "rpcMintObservation": {
+    "observedAtUtc": "2026-09-16T05:33:49Z",
+    "request": {
+      "url": "https://api.mainnet-beta.solana.com",
+      "method": "getMultipleAccounts",
+      "encoding": "jsonParsed",
+      "commitment": "finalized"
+    },
+    "slot": 447443889,
+    "apiVersion": "4.3.0-rc.0",
+    "common": {
+      "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "program": "spl-token-2022",
+      "decimals": 9,
+      "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+      "scaledUiAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "pauseAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "paused": false,
+      "defaultAccountState": "initialized",
+      "transferHookProgramId": null,
+      "confidentialTransferAutoApproveNewAccounts": false,
+      "extensionsPresent": [
+        "scaledUiAmountConfig",
+        "metadataPointer",
+        "pausableConfig",
+        "defaultAccountState",
+        "confidentialTransferMint",
+        "transferHook",
+        "tokenMetadata"
+      ],
+      "extensionsNotPresentInParsedMint": [
+        "transferFeeConfig",
+        "permanentDelegate",
+        "nonTransferable"
+      ]
+    },
+    "assets": [
+      {
+        "symbol": "AAPLon",
+        "mint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+        "rawSupply": "366979368430",
+        "multiplier": "1.003376073740221",
+        "newMultiplier": "1.003376073740221",
+        "newMultiplierEffectiveTimestamp": 1788344044
+      },
+      {
+        "symbol": "MSFTon",
+        "mint": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+        "rawSupply": "406764885367",
+        "multiplier": "1.0057308568927839",
+        "newMultiplier": "1.0057308568927839",
+        "newMultiplierEffectiveTimestamp": 1788344044
+      },
+      {
+        "symbol": "KOon",
+        "mint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+        "rawSupply": "102023318325",
+        "multiplier": "1.0238905041551842",
+        "newMultiplier": "1.0238905041551842",
+        "newMultiplierEffectiveTimestamp": 1789430644
+      }
+    ]
+  },
+  "observedTransfer": {
+    "status": "demonstrated onchain; not performed by this audit",
+    "signature": "4oPvfGDTuaJkWx4MynmioJpYYzM1aHBLYkDDrtbavYZfPifRzFgXCGiDbieQQ35ehpVfLot7TMXWhCJ7bVUVHNkx",
+    "slot": 447421883,
+    "blockTimeUtc": "2026-09-16T03:37:31Z",
+    "mint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+    "instruction": "TransferChecked",
+    "rawAmount": "9979053",
+    "sourceOwner": "GCh8zN9VWKCWAETSe5RauNFJpQkCYwCejqVGJZK18m9o",
+    "destinationOwner": "2Cq2RNFFxxPXL7teNQAji1beA2vFbBDYW5BGPBFvoN9m"
+  },
+  "observedRedemption": {
+    "status": "finalized production settlement observed; this audit did not initiate or independently test eligibility",
+    "signature": "4DCaeeTK5wKFYhbJXGs3GpKwVavWpHTG1g1YzqaYtVqiaEmTAF4tvxizD3FaSFcfbF97BoH3Ug27qDtUt6GXxf5t",
+    "slot": 447421883,
+    "transactionIndex": 1216,
+    "blockTimeUtc": "2026-09-16T03:37:31Z",
+    "programInstruction": "RedeemForUsdc",
+    "attestationLog": "Attestation signature verified",
+    "burn": {
+      "symbol": "AAPLon",
+      "mint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+      "rawAmount": "9979053"
+    },
+    "usdcTransferRawAmount": "3319366",
+    "usdcDecimals": 6,
+    "caveat": "The signer was an address listed by Ondo's official simulator as an authorized solver. This proves the production program path settled, not that a retail wallet or DividendX vault can redeem."
+  },
+  "observedKoonMultiplierUpdate": {
+    "status": "observed onchain; action classification not encoded in the transaction",
+    "signature": "5QT2nfLE4zZcq5HeiQpckHCF5VKFrhhcfXCFDwuEUdnhWQKC6Z6vV1GL9WnbTjEUFQJByfgd3dAYNLMz1CCBewBc",
+    "slot": 447108532,
+    "blockTimeUtc": "2026-09-15T00:04:04Z",
+    "programId": "XzTT4XB8m7sLD2xi6snefSasaswsKCxx5Tifjondogm",
+    "instruction": "UpdateScaledUiMultiplier",
+    "mint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+    "newMultiplier": "1.0238905041551842",
+    "newMultiplierTimestamp": 1789430644,
+    "issuerPageLastDividendAmountUsd": "0.53",
+    "underlyingCompanyRecordDate": "2026-09-15",
+    "underlyingCompanyPaymentDate": "2026-10-01",
+    "classificationWarning": "Timing and economics are consistent with the documented KO dividend, but neither the onchain instruction nor the available keyless API response links this multiplier update to a revisioned cash-dividend event. Do not treat consistency as proof."
+  },
+  "apiAccessChecks": {
+    "checkedAtUtc": "2026-09-16T05:37:14Z",
+    "base": "https://api.gm.ondo.finance",
+    "withoutApiKey": [
+      {
+        "path": "/v1/assets/KOon/shares-multiplier?range=all",
+        "httpStatus": 403,
+        "body": {"message": "Forbidden"}
+      },
+      {
+        "path": "/v1/assets/KOon/dividends",
+        "httpStatus": 403,
+        "body": {"message": "Forbidden"}
+      },
+      {
+        "path": "/v1/status/assets",
+        "httpStatus": 403,
+        "body": {"message": "Forbidden"}
+      }
+    ]
+  }
+}

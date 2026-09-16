@@ -1,0 +1,57 @@
+:root {
+  color-scheme: light;
+  --dx-canvas: #f6f3ec;
+  --dx-surface: #fffefb;
+  --dx-surface-muted: #efebe2;
+  --dx-ink: #101820;
+  --dx-ink-muted: #53606b;
+  --dx-line: #d7d2c8;
+  --dx-line-strong: #9b978f;
+  --dx-stock: #2457f5;
+  --dx-stock-ink: #1639a6;
+  --dx-stock-soft: #e9eeff;
+  --dx-dividend: #c46a00;
+  --dx-dividend-ink: #7a4000;
+  --dx-dividend-soft: #fff0d2;
+  --dx-positive: #087a55;
+  --dx-positive-soft: #dff5ec;
+  --dx-danger: #b42318;
+  --dx-danger-soft: #fde7e5;
+  --dx-warning: #8a4b08;
+  --dx-warning-soft: #fff1d6;
+  --dx-focus: #6b4eff;
+
+  --dx-font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --dx-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --dx-text-xs: 0.75rem;
+  --dx-text-sm: 0.875rem;
+  --dx-text-base: 1rem;
+  --dx-text-lg: 1.25rem;
+  --dx-text-xl: 1.75rem;
+  --dx-text-2xl: 2.5rem;
+  --dx-text-3xl: 4rem;
+
+  --dx-space-1: 0.25rem;
+  --dx-space-2: 0.5rem;
+  --dx-space-3: 0.75rem;
+  --dx-space-4: 1rem;
+  --dx-space-5: 1.5rem;
+  --dx-space-6: 2rem;
+  --dx-space-7: 3rem;
+  --dx-space-8: 4rem;
+
+  --dx-radius-sm: 0.5rem;
+  --dx-radius-md: 0.875rem;
+  --dx-radius-lg: 1.5rem;
+  --dx-radius-pill: 999px;
+  --dx-shadow-lift: 0 24px 60px rgba(16, 24, 32, 0.1);
+  --dx-motion-fast: 120ms;
+  --dx-motion-normal: 220ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dx-motion-fast: 0ms;
+    --dx-motion-normal: 0ms;
+  }
+}

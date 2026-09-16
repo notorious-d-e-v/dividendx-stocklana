@@ -1,0 +1,1451 @@
+{
+  "observedAtUtc": "2026-09-16T07:12:03.239412+00:00",
+  "purpose": "Astra independent profile verification of selected 15 mints, read-only; not custody execution",
+  "endpoint": "https://api.mainnet-beta.solana.com",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getMultipleAccounts",
+    "params": [
+      [
+        "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+        "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+        "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+        "XsQLZycSZ7QnBBdBXQaTbQdiUcbRqjNJgyBGAMzhHav",
+        "XsGYpMvKbVt6ViHqRd7cF3s746dAMFBQWcC49hB9VVP",
+        "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+        "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+        "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+        "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+        "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+        "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+        "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+        "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo",
+        "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo",
+        "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo"
+      ],
+      {
+        "encoding": "jsonParsed",
+        "commitment": "finalized"
+      }
+    ]
+  },
+  "response": {
+    "jsonrpc": "2.0",
+    "result": {
+      "context": {
+        "apiVersion": "4.3.0-rc.0",
+        "slot": 447462406
+      },
+      "value": [
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 8,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "metadataAddress": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+                      "multiplier": "1.0183317967386898",
+                      "newMultiplier": "1.0225601246249238",
+                      "newMultiplierEffectiveTimestamp": 1789432200
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+                      "name": "Coca-Cola xStock",
+                      "symbol": "KOx",
+                      "updateAuthority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "uri": "https://xstocks-metadata.backed.fi/tokens/Solana/KOx/metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                "isInitialized": true,
+                "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+                "supply": "21122347879530"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 678
+          },
+          "executable": false,
+          "lamports": 6321854,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 678
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 8,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "metadataAddress": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+                      "multiplier": "1.0026642075893797",
+                      "newMultiplier": "1.0032690125398187",
+                      "newMultiplierEffectiveTimestamp": 1786149000
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+                      "name": "Apple xStock",
+                      "symbol": "AAPLx",
+                      "updateAuthority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "uri": "https://xstocks-metadata.backed.fi/tokens/Solana/AAPLx/metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                "isInitialized": true,
+                "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+                "supply": "15376345383760"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 678
+          },
+          "executable": false,
+          "lamports": 647086478,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 678
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 8,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "metadataAddress": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+                      "multiplier": "1.0045820905025638",
+                      "newMultiplier": "1.0059033904787456",
+                      "newMultiplierEffectiveTimestamp": 1787185800
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+                      "name": "Microsoft xStock",
+                      "symbol": "MSFTx",
+                      "updateAuthority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "uri": "https://xstocks-metadata.backed.fi/tokens/Solana/MSFTx/metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                "isInitialized": true,
+                "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+                "supply": "10497101872933"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 682
+          },
+          "executable": false,
+          "lamports": 5637601,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 682
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 8,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "metadataAddress": "XsQLZycSZ7QnBBdBXQaTbQdiUcbRqjNJgyBGAMzhHav"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+                      "multiplier": "1.0002939365097",
+                      "newMultiplier": "1.0004015986353854",
+                      "newMultiplierEffectiveTimestamp": 1783295700
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "XsQLZycSZ7QnBBdBXQaTbQdiUcbRqjNJgyBGAMzhHav",
+                      "name": "Micron Technology xStock",
+                      "symbol": "MUx",
+                      "updateAuthority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "uri": "https://xstocks-metadata.backed.fi/tokens/Solana/MUx/metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                "isInitialized": true,
+                "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+                "supply": "4219794164435"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 686
+          },
+          "executable": false,
+          "lamports": 5665440,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 686
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 8,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "metadataAddress": "XsGYpMvKbVt6ViHqRd7cF3s746dAMFBQWcC49hB9VVP"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+                      "multiplier": "1",
+                      "newMultiplier": "1.007347670251",
+                      "newMultiplierEffectiveTimestamp": 1788222600
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "XsGYpMvKbVt6ViHqRd7cF3s746dAMFBQWcC49hB9VVP",
+                      "name": "Nike xStock",
+                      "symbol": "NKEx",
+                      "updateAuthority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "uri": "https://xstocks-metadata.backed.fi/tokens/Solana/NKEx/metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                "isInitialized": true,
+                "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+                "supply": "14438695704488"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 675
+          },
+          "executable": false,
+          "lamports": 5588880,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 675
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 8,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "metadataAddress": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+                      "multiplier": "1.015340763856885",
+                      "newMultiplier": "1.0204029187943977",
+                      "newMultiplierEffectiveTimestamp": 1786149000
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+                      "name": "International Business Machines xStock",
+                      "symbol": "IBMx",
+                      "updateAuthority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                      "uri": "https://xstocks-metadata.backed.fi/tokens/Solana/IBMx/metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                "isInitialized": true,
+                "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+                "supply": "5442777137539"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 702
+          },
+          "executable": false,
+          "lamports": 5776800,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 702
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 6,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "metadataAddress": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "6XPofT3JgdoZAkUxqAbYZLNbsDvBCkDqrEWeaTiQKRBD",
+                      "multiplier": "1.0001068649823912",
+                      "newMultiplier": "1.0001068649823912",
+                      "newMultiplierEffectiveTimestamp": 0
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+                      "name": "Micron Technology - Backpack Securities",
+                      "symbol": "MU",
+                      "updateAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "uri": "https://trek-labs.github.io/heart-metadata/stocks/mu.us.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                "isInitialized": true,
+                "mintAuthority": "6XPofT3JgdoZAkUxqAbYZLNbsDvBCkDqrEWeaTiQKRBD",
+                "supply": "7002303800"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 694
+          },
+          "executable": false,
+          "lamports": 5776800,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 694
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 6,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "metadataAddress": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "5tPguepcKacsBPHrbWXr8Zo8A3osVKzLG65y697SvKTh",
+                      "multiplier": "1",
+                      "newMultiplier": "1",
+                      "newMultiplierEffectiveTimestamp": 0
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+                      "name": "NIKE - Backpack Securities",
+                      "symbol": "NKE",
+                      "updateAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "uri": "https://metadata.backpack.exchange/stocks/nke.us.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                "isInitialized": true,
+                "mintAuthority": "5tPguepcKacsBPHrbWXr8Zo8A3osVKzLG65y697SvKTh",
+                "supply": "9095369806"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 675
+          },
+          "executable": false,
+          "lamports": 15644560,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 675
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 6,
+                "extensions": [
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "metadataAddress": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk"
+                    }
+                  },
+                  {
+                    "extension": "permanentDelegate",
+                    "state": {
+                      "delegate": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a"
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "7D7ZBEbWfCGco23pKqEqb9uySdMe25mbKaeHwh16opfh",
+                      "multiplier": "1",
+                      "newMultiplier": "1",
+                      "newMultiplierEffectiveTimestamp": 0
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+                      "name": "International Business Machines - Backpack Securities",
+                      "symbol": "IBM",
+                      "updateAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                      "uri": "https://metadata.backpack.exchange/stocks/ibm.us.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+                "isInitialized": true,
+                "mintAuthority": "7D7ZBEbWfCGco23pKqEqb9uySdMe25mbKaeHwh16opfh",
+                "supply": "260906918"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 702
+          },
+          "executable": false,
+          "lamports": 5832480,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 702
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 9,
+                "extensions": [
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "multiplier": "1.0238905041551842",
+                      "newMultiplier": "1.0238905041551842",
+                      "newMultiplierEffectiveTimestamp": 1789430644
+                    }
+                  },
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "metadataAddress": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+                      "name": "Coca-Cola (Ondo Tokenized)",
+                      "symbol": "KOon",
+                      "updateAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "uri": "https://app.ondo.finance/api/v2/assets/KOon/sol_metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+                "isInitialized": true,
+                "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                "supply": "102023318325"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 648
+          },
+          "executable": false,
+          "lamports": 5400960,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 648
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 9,
+                "extensions": [
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "multiplier": "1.003376073740221",
+                      "newMultiplier": "1.003376073740221",
+                      "newMultiplierEffectiveTimestamp": 1788344044
+                    }
+                  },
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "metadataAddress": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+                      "name": "Apple (Ondo Tokenized)",
+                      "symbol": "AAPLon",
+                      "updateAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "uri": "https://app.ondo.finance/api/v2/assets/AAPLon/sol_metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+                "isInitialized": true,
+                "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                "supply": "367008117502"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 648
+          },
+          "executable": false,
+          "lamports": 5400960,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 648
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 9,
+                "extensions": [
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "multiplier": "1.0057308568927839",
+                      "newMultiplier": "1.0057308568927839",
+                      "newMultiplierEffectiveTimestamp": 1788344044
+                    }
+                  },
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "metadataAddress": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+                      "name": "Microsoft (Ondo Tokenized)",
+                      "symbol": "MSFTon",
+                      "updateAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "uri": "https://app.ondo.finance/api/v2/assets/MSFTon/sol_metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+                "isInitialized": true,
+                "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                "supply": "406764885367"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 652
+          },
+          "executable": false,
+          "lamports": 5428800,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 652
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 9,
+                "extensions": [
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "multiplier": "1.0011212375258447",
+                      "newMultiplier": "1.0011212375258447",
+                      "newMultiplierEffectiveTimestamp": 1788344044
+                    }
+                  },
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "metadataAddress": "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo",
+                      "name": "Micron Technology (Ondo Tokenized)",
+                      "symbol": "MUon",
+                      "updateAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "uri": "https://app.ondo.finance/api/v2/assets/MUon/sol_metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+                "isInitialized": true,
+                "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                "supply": "7523799220436"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 656
+          },
+          "executable": false,
+          "lamports": 508596640,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 656
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 9,
+                "extensions": [
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "multiplier": "1.0265770663565548",
+                      "newMultiplier": "1.0265770663565548",
+                      "newMultiplierEffectiveTimestamp": 1788344044
+                    }
+                  },
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "metadataAddress": "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo",
+                      "name": "Nike (Ondo Tokenized)",
+                      "symbol": "NKEon",
+                      "updateAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "uri": "https://app.ondo.finance/api/v2/assets/NKEon/sol_metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+                "isInitialized": true,
+                "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                "supply": "762937283479"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 645
+          },
+          "executable": false,
+          "lamports": 5380080,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 645
+        },
+        {
+          "data": {
+            "parsed": {
+              "info": {
+                "decimals": 9,
+                "extensions": [
+                  {
+                    "extension": "scaledUiAmountConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "multiplier": "1.0227923764446276",
+                      "newMultiplier": "1.0227923764446276",
+                      "newMultiplierEffectiveTimestamp": 1788344044
+                    }
+                  },
+                  {
+                    "extension": "metadataPointer",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "metadataAddress": "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo"
+                    }
+                  },
+                  {
+                    "extension": "pausableConfig",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "paused": false
+                    }
+                  },
+                  {
+                    "extension": "defaultAccountState",
+                    "state": {
+                      "accountState": "initialized"
+                    }
+                  },
+                  {
+                    "extension": "confidentialTransferMint",
+                    "state": {
+                      "auditorElgamalPubkey": null,
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "autoApproveNewAccounts": false
+                    }
+                  },
+                  {
+                    "extension": "transferHook",
+                    "state": {
+                      "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "programId": null
+                    }
+                  },
+                  {
+                    "extension": "tokenMetadata",
+                    "state": {
+                      "additionalMetadata": [],
+                      "mint": "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo",
+                      "name": "IBM (Ondo Tokenized)",
+                      "symbol": "IBMon",
+                      "updateAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                      "uri": "https://app.ondo.finance/api/v2/assets/IBMon/sol_metadata.json"
+                    }
+                  }
+                ],
+                "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+                "isInitialized": true,
+                "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+                "supply": "145354251778"
+              },
+              "type": "mint"
+            },
+            "program": "spl-token-2022",
+            "space": 644
+          },
+          "executable": false,
+          "lamports": 5373120,
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "rentEpoch": 18446744073709551615,
+          "space": 644
+        }
+      ]
+    },
+    "id": 1
+  },
+  "records": [
+    {
+      "issuer": "xstocks",
+      "symbol": "KOx",
+      "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+      "decimals": 8,
+      "scaledUiAmountConfig": {
+        "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+        "multiplier": "1.0183317967386898",
+        "newMultiplier": "1.0225601246249238",
+        "newMultiplierEffectiveTimestamp": 1789432200
+      }
+    },
+    {
+      "issuer": "xstocks",
+      "symbol": "AAPLx",
+      "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+      "decimals": 8,
+      "scaledUiAmountConfig": {
+        "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+        "multiplier": "1.0026642075893797",
+        "newMultiplier": "1.0032690125398187",
+        "newMultiplierEffectiveTimestamp": 1786149000
+      }
+    },
+    {
+      "issuer": "xstocks",
+      "symbol": "MSFTx",
+      "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+      "decimals": 8,
+      "scaledUiAmountConfig": {
+        "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+        "multiplier": "1.0045820905025638",
+        "newMultiplier": "1.0059033904787456",
+        "newMultiplierEffectiveTimestamp": 1787185800
+      }
+    },
+    {
+      "issuer": "xstocks",
+      "symbol": "MUx",
+      "mint": "XsQLZycSZ7QnBBdBXQaTbQdiUcbRqjNJgyBGAMzhHav",
+      "decimals": 8,
+      "scaledUiAmountConfig": {
+        "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+        "multiplier": "1.0002939365097",
+        "newMultiplier": "1.0004015986353854",
+        "newMultiplierEffectiveTimestamp": 1783295700
+      }
+    },
+    {
+      "issuer": "xstocks",
+      "symbol": "NKEx",
+      "mint": "XsGYpMvKbVt6ViHqRd7cF3s746dAMFBQWcC49hB9VVP",
+      "decimals": 8,
+      "scaledUiAmountConfig": {
+        "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+        "multiplier": "1",
+        "newMultiplier": "1.007347670251",
+        "newMultiplierEffectiveTimestamp": 1788222600
+      }
+    },
+    {
+      "issuer": "xstocks",
+      "symbol": "IBMx",
+      "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+      "decimals": 8,
+      "scaledUiAmountConfig": {
+        "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+        "multiplier": "1.015340763856885",
+        "newMultiplier": "1.0204029187943977",
+        "newMultiplierEffectiveTimestamp": 1786149000
+      }
+    },
+    {
+      "issuer": "backpackTrek",
+      "symbol": "MU.US",
+      "mint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+      "decimals": 6,
+      "scaledUiAmountConfig": {
+        "authority": "6XPofT3JgdoZAkUxqAbYZLNbsDvBCkDqrEWeaTiQKRBD",
+        "multiplier": "1.0001068649823912",
+        "newMultiplier": "1.0001068649823912",
+        "newMultiplierEffectiveTimestamp": 0
+      }
+    },
+    {
+      "issuer": "backpackTrek",
+      "symbol": "NKE.US",
+      "mint": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+      "decimals": 6,
+      "scaledUiAmountConfig": {
+        "authority": "5tPguepcKacsBPHrbWXr8Zo8A3osVKzLG65y697SvKTh",
+        "multiplier": "1",
+        "newMultiplier": "1",
+        "newMultiplierEffectiveTimestamp": 0
+      }
+    },
+    {
+      "issuer": "backpackTrek",
+      "symbol": "IBM.US",
+      "mint": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+      "decimals": 6,
+      "scaledUiAmountConfig": {
+        "authority": "7D7ZBEbWfCGco23pKqEqb9uySdMe25mbKaeHwh16opfh",
+        "multiplier": "1",
+        "newMultiplier": "1",
+        "newMultiplierEffectiveTimestamp": 0
+      }
+    },
+    {
+      "issuer": "ondo",
+      "symbol": "KOon",
+      "mint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+      "decimals": 9,
+      "scaledUiAmountConfig": {
+        "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+        "multiplier": "1.0238905041551842",
+        "newMultiplier": "1.0238905041551842",
+        "newMultiplierEffectiveTimestamp": 1789430644
+      }
+    },
+    {
+      "issuer": "ondo",
+      "symbol": "AAPLon",
+      "mint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+      "decimals": 9,
+      "scaledUiAmountConfig": {
+        "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+        "multiplier": "1.003376073740221",
+        "newMultiplier": "1.003376073740221",
+        "newMultiplierEffectiveTimestamp": 1788344044
+      }
+    },
+    {
+      "issuer": "ondo",
+      "symbol": "MSFTon",
+      "mint": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+      "decimals": 9,
+      "scaledUiAmountConfig": {
+        "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+        "multiplier": "1.0057308568927839",
+        "newMultiplier": "1.0057308568927839",
+        "newMultiplierEffectiveTimestamp": 1788344044
+      }
+    },
+    {
+      "issuer": "ondo",
+      "symbol": "MUon",
+      "mint": "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo",
+      "decimals": 9,
+      "scaledUiAmountConfig": {
+        "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+        "multiplier": "1.0011212375258447",
+        "newMultiplier": "1.0011212375258447",
+        "newMultiplierEffectiveTimestamp": 1788344044
+      }
+    },
+    {
+      "issuer": "ondo",
+      "symbol": "NKEon",
+      "mint": "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo",
+      "decimals": 9,
+      "scaledUiAmountConfig": {
+        "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+        "multiplier": "1.0265770663565548",
+        "newMultiplier": "1.0265770663565548",
+        "newMultiplierEffectiveTimestamp": 1788344044
+      }
+    },
+    {
+      "issuer": "ondo",
+      "symbol": "IBMon",
+      "mint": "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo",
+      "decimals": 9,
+      "scaledUiAmountConfig": {
+        "authority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+        "multiplier": "1.0227923764446276",
+        "newMultiplier": "1.0227923764446276",
+        "newMultiplierEffectiveTimestamp": 1788344044
+      }
+    }
+  ]
+}

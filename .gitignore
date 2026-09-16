@@ -1,0 +1,22 @@
+node_modules
+dist/
+test-results/
+playwright-report/
+.DS_Store
+*.tsbuildinfo
+*.log
+coverage/
+.env
+.env.*
+!.env.example
+.secrets/
+secrets/
+*-keypair.json
+*.pem
+*.key
+
+# Regenerable presentation working files; keep sources, final decks and archives.
+presentation/build/rendered/
+presentation/build/rendered-v*/
+presentation/build/contact-sheet.png
+presentation/build/**/finalizer/*.inspect.ndjson

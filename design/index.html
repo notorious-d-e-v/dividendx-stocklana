@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="DividendX phase-one visual design prototype" />
+    <title>DividendX — Phase 1 design system</title>
+    <link rel="stylesheet" href="../packages/design-tokens/tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--dx-canvas);
+        color: var(--dx-ink);
+        font-family: var(--dx-font-sans);
+        font-size: 16px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      button, input { font: inherit; }
+      button, a, input, summary { -webkit-tap-highlight-color: transparent; }
+      button { color: inherit; }
+      a { color: var(--dx-stock-ink); text-underline-offset: .18em; }
+      :focus-visible { outline: 3px solid var(--dx-focus); outline-offset: 3px; }
+      ::selection { background: var(--dx-stock); color: white; }
+      .num { font-variant-numeric: tabular-nums lining-nums; letter-spacing: -.02em; }
+      .mono { font-family: var(--dx-font-mono); font-size: .82em; overflow-wrap: anywhere; }
+      .eyebrow {
+        margin: 0 0 .75rem;
+        color: var(--dx-ink-muted);
+        font-size: .72rem;
+        font-weight: 720;
+        letter-spacing: .12em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+      .visually-hidden {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+      }
+      .topbar {
+        align-items: center;
+        border-bottom: 1px solid var(--dx-line);
+        display: flex;
+        justify-content: space-between;
+        min-height: 72px;
+        padding: 0 clamp(1.25rem, 3vw, 3.5rem);
+      }
+      .brand { align-items: center; display: inline-flex; gap: .7rem; color: var(--dx-ink); text-decoration: none; }
+      .brand-mark { position: relative; width: 25px; height: 25px; transform: rotate(45deg); }
+      .brand-mark::before, .brand-mark::after { content: ""; position: absolute; inset: 0; }
+      .brand-mark::before { background: var(--dx-stock); clip-path: polygon(0 0, 48% 0, 48% 100%, 0 100%); }
+      .brand-mark::after { background: var(--dx-dividend); clip-path: polygon(55% 0, 100% 0, 100% 100%, 55% 100%); }
+      .brand-name { font-size: 1.18rem; font-weight: 790; letter-spacing: -.045em; }
+      .prototype-tag { color: var(--dx-ink-muted); font-size: .74rem; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+      .board-nav { display: flex; gap: .35rem; }
+      .board-nav a { border-radius: var(--dx-radius-pill); color: var(--dx-ink-muted); font-size: .83rem; padding: .55rem .8rem; text-decoration: none; }
+      .board-nav a:hover { background: var(--dx-surface); color: var(--dx-ink); }
+
+      .board-intro {
+        display: grid;
+        gap: 3rem;
+        grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr);
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 6.5rem clamp(1.25rem, 4vw, 4rem) 5rem;
+      }
+      .board-intro h1 { font-size: clamp(3.3rem, 7.8vw, 7.2rem); font-weight: 760; letter-spacing: -.075em; line-height: .93; margin: 0; max-width: 900px; }
+      .board-intro h1 span { color: var(--dx-stock); }
+      .board-intro h1 em { color: var(--dx-dividend-ink); font-style: normal; }
+      .board-intro aside { align-self: end; border-left: 1px solid var(--dx-line-strong); padding-left: 1.5rem; }
+      .board-intro aside p { color: var(--dx-ink-muted); margin: 0; max-width: 31ch; }
+
+      .section { max-width: 1280px; margin: 0 auto; padding: 5rem clamp(1.25rem, 4vw, 4rem); }
+      .section-head { align-items: end; display: flex; gap: 2rem; justify-content: space-between; margin-bottom: 2rem; }
+      .section-head h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 720; letter-spacing: -.055em; line-height: 1.04; margin: 0; }
+      .section-head p { color: var(--dx-ink-muted); margin: 0; max-width: 45ch; }
+
+      .palette { border-bottom: 1px solid var(--dx-line); border-top: 1px solid var(--dx-line); display: grid; grid-template-columns: repeat(5, 1fr); }
+      .swatch { min-height: 172px; padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between; }
+      .swatch b { font-size: .85rem; }
+      .swatch code { font-family: var(--dx-font-mono); font-size: .72rem; }
+      .swatch.ink { background: var(--dx-ink); color: white; }
+      .swatch.paper { background: var(--dx-surface); }
+      .swatch.blue { background: var(--dx-stock); color: white; }
+      .swatch.amber { background: var(--dx-dividend); color: #180d00; }
+      .swatch.line { background: var(--dx-surface-muted); }
+      .type-specimen { display: grid; gap: 2rem; grid-template-columns: 1.2fr .8fr; margin-top: 3.5rem; }
+      .type-display { font-size: clamp(3rem, 6vw, 5.7rem); font-weight: 750; letter-spacing: -.07em; line-height: .97; margin: 0; }
+      .type-notes { border-top: 1px solid var(--dx-line-strong); padding-top: 1rem; }
+      .type-notes p { color: var(--dx-ink-muted); max-width: 48ch; }
+
+      .app-shell { background: var(--dx-surface); border: 1px solid var(--dx-line); border-radius: 28px; box-shadow: var(--dx-shadow-lift); overflow: hidden; }
+      .app-header { align-items: center; border-bottom: 1px solid var(--dx-line); display: grid; gap: 1.5rem; grid-template-columns: 1fr auto 1fr; min-height: 78px; padding: 0 1.6rem; }
+      .app-nav { background: var(--dx-surface-muted); border-radius: var(--dx-radius-pill); display: flex; padding: .25rem; }
+      .app-nav button { background: transparent; border: 0; border-radius: var(--dx-radius-pill); cursor: pointer; min-height: 40px; padding: .55rem 1rem; }
+      .app-nav button[aria-selected="true"] { background: var(--dx-ink); color: white; }
+      .app-meta { align-items: center; display: flex; gap: .8rem; justify-content: flex-end; }
+      .network { color: var(--dx-ink-muted); font-size: .78rem; }
+      .status-dot { background: var(--dx-warning); border-radius: 50%; display: inline-block; height: 7px; margin-right: .35rem; width: 7px; }
+      .wallet-button { background: transparent; border: 1px solid var(--dx-line-strong); border-radius: var(--dx-radius-pill); min-height: 40px; padding: .5rem .9rem; }
+      .wallet-button:disabled { color: var(--dx-ink-muted); cursor: not-allowed; opacity: 1; }
+      .app-body { min-height: 780px; padding: 2.4rem; }
+      .app-view[hidden] { display: none; }
+      .snapshot-ribbon { align-items: center; background: #f2efe7; border-left: 3px solid var(--dx-warning); display: flex; font-size: .78rem; gap: .6rem; justify-content: space-between; margin: -2.4rem -2.4rem 2.7rem; padding: .75rem 2.4rem; }
+      .snapshot-ribbon b { color: var(--dx-warning); }
+      .asset-heading { align-items: start; display: flex; gap: 1rem; justify-content: space-between; }
+      .asset-id { align-items: center; display: flex; gap: 1rem; min-width: 0; }
+      .asset-id > div { min-width: 0; }
+      .asset-monogram { align-items: center; background: var(--dx-ink); border-radius: 50%; color: white; display: flex; font-size: .82rem; font-weight: 780; height: 48px; justify-content: center; width: 48px; }
+      .asset-heading h3 { font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 735; letter-spacing: -.065em; line-height: 1; margin: 0; }
+      .asset-heading p { color: var(--dx-ink-muted); margin: .6rem 0 0; }
+      .event-name { text-align: right; }
+      .event-name strong { display: block; font-size: 1rem; }
+      .event-name span { color: var(--dx-ink-muted); font-size: .78rem; }
+      .market-grid { display: grid; gap: clamp(2.5rem, 5vw, 5.5rem); grid-template-columns: minmax(0, 1.12fr) minmax(340px, .88fr); margin-top: 4rem; }
+      .fact-line { align-items: baseline; border-top: 1px solid var(--dx-line); display: grid; gap: 1rem; grid-template-columns: minmax(120px, .5fr) 1fr; padding: 1rem 0; }
+      .fact-line dt { color: var(--dx-ink-muted); font-size: .8rem; }
+      .fact-line dd { margin: 0; }
+      .fact-line strong { font-size: 1.15rem; }
+      .source-note { color: var(--dx-ink-muted); font-size: .76rem; margin-top: 1rem; }
+
+      .calc { border-left: 1px solid var(--dx-line-strong); padding-left: clamp(1.5rem, 3vw, 3rem); }
+      .calc h4 { font-size: 1.4rem; letter-spacing: -.025em; margin: 0; }
+      .calc > p { color: var(--dx-ink-muted); font-size: .86rem; max-width: 44ch; }
+      .amount-field { background: var(--dx-canvas); border: 1px solid var(--dx-line-strong); border-radius: var(--dx-radius-md); margin-top: 1.5rem; padding: .9rem 1rem .65rem; }
+      .amount-field:focus-within { border-color: var(--dx-focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--dx-focus), transparent 75%); }
+      .amount-field label { color: var(--dx-ink-muted); display: block; font-size: .72rem; font-weight: 680; letter-spacing: .05em; text-transform: uppercase; }
+      .amount-field-row { align-items: center; display: flex; gap: .8rem; }
+      .amount-field input { background: transparent; border: 0; color: var(--dx-ink); font-size: 2rem; font-variant-numeric: tabular-nums; font-weight: 670; min-width: 0; outline: none; padding: .25rem 0; width: 100%; }
+      .amount-field span { color: var(--dx-ink-muted); font-size: .85rem; font-weight: 680; }
+      .field-error { color: var(--dx-danger); display: none; font-size: .75rem; margin: .5rem 0 0; }
+      .claim-split { margin-top: 2rem; }
+      .split-bar { display: flex; height: 13px; }
+      .split-bar span:first-child { background: var(--dx-stock); border-radius: 99px 2px 2px 99px; flex: 99.58649592 1 0; }
+      .split-bar span:last-child { background: var(--dx-dividend); border-radius: 2px 99px 99px 2px; flex: .41350408 1 0; }
+      .claim-row { border-bottom: 1px solid var(--dx-line); display: grid; gap: 1rem; grid-template-columns: 1fr auto; padding: 1.25rem 0; }
+      .claim-label { align-items: center; display: flex; gap: .7rem; }
+      .claim-key { border-radius: 4px; display: block; height: 28px; width: 7px; }
+      .claim-key.stock { background: var(--dx-stock); }
+      .claim-key.dividend { background: var(--dx-dividend); }
+      .claim-label b { display: block; line-height: 1.1; }
+      .claim-label small { color: var(--dx-ink-muted); }
+      .claim-amount { text-align: right; }
+      .claim-amount strong { display: block; font-size: 1.22rem; }
+      .claim-amount small { color: var(--dx-ink-muted); }
+      .conservation { align-items: center; color: var(--dx-positive); display: flex; font-size: .75rem; font-weight: 680; gap: .45rem; margin-top: 1rem; }
+      .check { align-items: center; background: var(--dx-positive); border-radius: 50%; color: white; display: inline-flex; font-size: .65rem; height: 18px; justify-content: center; width: 18px; }
+      details.inspector { border-bottom: 1px solid var(--dx-line); margin-top: 1.6rem; }
+      details.inspector summary { cursor: pointer; font-size: .78rem; font-weight: 690; list-style: none; padding: .8rem 0; }
+      details.inspector summary::-webkit-details-marker { display: none; }
+      details.inspector summary::after { content: "+"; float: right; font-size: 1.1rem; font-weight: 400; }
+      details.inspector[open] summary::after { content: "−"; }
+      .inspector-data { background: var(--dx-ink); color: #eef1f3; margin-bottom: 1rem; padding: 1rem; }
+      .inspector-data dl { margin: 0; }
+      .inspector-data div { border-bottom: 1px solid #36404a; display: grid; gap: 1rem; grid-template-columns: 9.5rem 1fr; padding: .55rem 0; }
+      .inspector-data div:last-child { border: 0; }
+      .inspector-data dt { color: #aeb8bf; font-size: .7rem; }
+      .inspector-data dd { font-family: var(--dx-font-mono); font-size: .7rem; margin: 0; overflow-wrap: anywhere; text-align: right; }
+
+      .timeline { border-top: 1px solid var(--dx-line-strong); margin-top: 4rem; padding-top: 1.5rem; }
+      .timeline-head { align-items: baseline; display: flex; justify-content: space-between; margin-bottom: 1.4rem; }
+      .timeline-head h4 { font-size: 1rem; margin: 0; }
+      .timeline-head span { color: var(--dx-ink-muted); font-size: .75rem; }
+      .timeline-track { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; }
+      .timeline-track::before { background: var(--dx-line); content: ""; height: 1px; left: 0; position: absolute; right: 0; top: 6px; }
+      .timeline-item { padding: 1.5rem 2rem 0 0; position: relative; }
+      .timeline-item::before { background: var(--dx-surface); border: 2px solid var(--dx-line-strong); border-radius: 50%; content: ""; height: 9px; left: 0; position: absolute; top: 0; width: 9px; }
+      .timeline-item.active::before { background: var(--dx-dividend); border-color: var(--dx-dividend); box-shadow: 0 0 0 4px var(--dx-dividend-soft); }
+      .timeline-item strong { display: block; font-size: .83rem; }
+      .timeline-item span { color: var(--dx-ink-muted); display: block; font-size: .74rem; margin-top: .3rem; }
+      .timeline-item small { color: var(--dx-warning); display: block; font-size: .68rem; margin-top: .45rem; }
+
+      .split-view, .position-view { max-width: 860px; margin: 4rem auto; }
+      .split-view h3, .position-view h3 { font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -.065em; line-height: 1; margin: 0 0 1rem; }
+      .split-view > p, .position-view > p { color: var(--dx-ink-muted); max-width: 58ch; }
+      .split-diagram { align-items: center; display: grid; gap: 1.5rem; grid-template-columns: 1fr auto 1fr; margin-top: 3rem; }
+      .split-token { border-top: 7px solid var(--dx-stock); padding-top: 1rem; }
+      .split-token.dividend { border-color: var(--dx-dividend); }
+      .split-token strong { display: block; font-size: 2rem; }
+      .split-token span { color: var(--dx-ink-muted); }
+      .split-plus { color: var(--dx-line-strong); font-size: 2rem; }
+      .disabled-action { background: var(--dx-ink); border: 0; border-radius: var(--dx-radius-pill); color: white; cursor: not-allowed; margin-top: 2.5rem; min-height: 48px; opacity: .45; padding: .7rem 1.3rem; }
+      .empty-line { border-left: 6px solid var(--dx-line-strong); margin-top: 3rem; padding: 1rem 0 1rem 1.5rem; }
+      .empty-line strong { display: block; font-size: 1.25rem; }
+      .empty-line span { color: var(--dx-ink-muted); }
+
+      .states-grid { display: grid; gap: 1px; grid-template-columns: repeat(3, 1fr); background: var(--dx-line); border: 1px solid var(--dx-line); }
+      .state { background: var(--dx-surface); min-height: 210px; padding: 1.5rem; position: relative; }
+      .state-code { color: var(--dx-ink-muted); font-family: var(--dx-font-mono); font-size: .68rem; }
+      .state h3 { font-size: 1.05rem; margin: 2.6rem 0 .5rem; }
+      .state p { color: var(--dx-ink-muted); font-size: .8rem; margin: 0; }
+      .state-action { border: 1px solid var(--dx-line-strong); border-radius: var(--dx-radius-pill); display: inline-block; font-size: .72rem; margin-top: 1rem; padding: .45rem .75rem; }
+      .state.loading h3, .state.loading p { background: #e5e2da; border-radius: 4px; color: transparent; }
+      .state.loading h3 { height: 1.1rem; width: 60%; }
+      .state.loading p { height: .7rem; margin-top: .8rem; width: 90%; }
+      .state.stale { box-shadow: inset 0 5px 0 var(--dx-warning); }
+      .state.rejected { box-shadow: inset 0 5px 0 var(--dx-danger); }
+      .state.completed { box-shadow: inset 0 5px 0 var(--dx-positive); }
+
+      .pitch-wrap { padding-bottom: 7rem; }
+      .pitch {
+        aspect-ratio: 16 / 9;
+        background: var(--dx-ink);
+        color: white;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        margin: 0 auto;
+        max-width: 1280px;
+        min-height: 0;
+        overflow: hidden;
+        padding: clamp(2rem, 4.5vw, 4.5rem);
+        position: relative;
+      }
+      .pitch::after { background: var(--dx-dividend); bottom: 0; content: ""; position: absolute; right: 0; top: 0; width: 2.2%; }
+      .pitch-top { align-items: center; display: flex; justify-content: space-between; padding-right: 2rem; }
+      .pitch .brand { color: white; }
+      .pitch .slide-no { color: #aeb8bf; font-size: .8rem; }
+      .pitch-copy { align-self: center; }
+      .pitch h2 { font-size: clamp(3rem, 7vw, 7rem); font-weight: 730; letter-spacing: -.07em; line-height: .93; margin: 0; max-width: 10ch; }
+      .pitch h2 .blue { color: #7292ff; }
+      .pitch h2 .amber { color: #ffb657; }
+      .pitch-bottom { align-items: end; display: flex; gap: 2rem; justify-content: space-between; padding-right: 2rem; }
+      .pitch-bottom p { color: #c5cbd0; font-size: clamp(.85rem, 1.3vw, 1.15rem); margin: 0; max-width: 48ch; }
+      .pitch-legend { align-items: center; display: flex; font-size: .76rem; gap: 1rem; white-space: nowrap; }
+      .pitch-legend i { display: inline-block; height: 8px; margin-right: .4rem; width: 22px; }
+      .pitch-legend i.blue { background: var(--dx-stock); }
+      .pitch-legend i.amber { background: var(--dx-dividend); }
+
+      .foot { border-top: 1px solid var(--dx-line); color: var(--dx-ink-muted); display: flex; font-size: .75rem; gap: 1rem; justify-content: space-between; margin-top: 4rem; padding: 2rem clamp(1.25rem, 4vw, 4rem); }
+
+      html[data-capture="app"] .topbar,
+      html[data-capture="app"] .board-intro,
+      html[data-capture="app"] #foundation,
+      html[data-capture="app"] #states,
+      html[data-capture="app"] #pitch-specimen,
+      html[data-capture="app"] .foot { display: none; }
+      html[data-capture="app"] #prototype { max-width: none; padding: 24px; }
+      html[data-capture="app"] #prototype > .section-head { display: none; }
+      html[data-capture="app"] .app-shell { margin: auto; max-width: 1392px; }
+      html[data-capture="slide"] body { background: var(--dx-ink); }
+      html[data-capture="slide"] .topbar,
+      html[data-capture="slide"] .board-intro,
+      html[data-capture="slide"] #foundation,
+      html[data-capture="slide"] #prototype,
+      html[data-capture="slide"] #states,
+      html[data-capture="slide"] .section-head,
+      html[data-capture="slide"] .foot { display: none; }
+      html[data-capture="slide"] #pitch-specimen { margin: 0; max-width: none; padding: 0; }
+      html[data-capture="slide"] .pitch { height: 100vh; max-width: none; width: 100vw; }
+
+      @media (max-width: 760px) {
+        .topbar { min-height: 64px; padding: 0 1rem; }
+        .board-nav { display: none; }
+        .prototype-tag { font-size: .63rem; }
+        .board-intro { grid-template-columns: 1fr; padding-top: 4rem; }
+        .board-intro aside { max-width: 35ch; }
+        .section { padding-bottom: 3.5rem; padding-top: 3.5rem; }
+        .section-head { align-items: start; flex-direction: column; gap: 1rem; }
+        .palette { grid-template-columns: 1fr 1fr; }
+        .swatch { min-height: 120px; }
+        .swatch.ink { grid-column: span 2; }
+        .type-specimen { grid-template-columns: 1fr; }
+        .app-shell { border-radius: 18px; max-width: 100%; }
+        .app-header { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: space-between; padding: .8rem 1rem; }
+        .app-header > .brand { order: 1; }
+        .app-meta { order: 2; }
+        .app-nav { order: 3; overflow-x: auto; width: 100%; }
+        .app-nav button { flex: 1; min-width: 78px; }
+        .network { display: none; }
+        .wallet-button { font-size: .72rem; min-height: 38px; padding: .4rem .7rem; white-space: nowrap; }
+        .app-body { min-height: 0; padding: 1.25rem; }
+        .snapshot-ribbon { align-items: start; flex-direction: column; gap: .2rem; margin: -1.25rem -1.25rem 2rem; padding: .7rem 1.25rem; }
+        .asset-heading { align-items: start; flex-direction: column; }
+        .asset-heading h3 { font-size: 2.35rem; overflow-wrap: anywhere; }
+        .event-name { border-left: 2px solid var(--dx-dividend); padding-left: .75rem; text-align: left; }
+        .market-grid { gap: 3rem; grid-template-columns: 1fr; margin-top: 2.5rem; }
+        .fact-line { grid-template-columns: 1fr; gap: .25rem; }
+        .calc { border-left: 0; border-top: 1px solid var(--dx-line-strong); padding-left: 0; padding-top: 2rem; }
+        .amount-field input { font-size: 1.7rem; }
+        .claim-row { grid-template-columns: minmax(0, 1fr) auto; }
+        .claim-amount strong { font-size: 1rem; }
+        .inspector-data div { grid-template-columns: 1fr; gap: .25rem; }
+        .inspector-data dd { text-align: left; }
+        .timeline { margin-top: 3rem; }
+        .timeline-track { gap: 1.25rem; grid-template-columns: 1fr; }
+        .timeline-track::before { bottom: 0; height: auto; left: 5px; right: auto; top: 0; width: 1px; }
+        .timeline-item { padding: 0 0 1rem 1.7rem; }
+        .timeline-item::before { top: .25rem; }
+        .split-diagram { grid-template-columns: 1fr; }
+        .split-plus { transform: rotate(90deg); }
+        .states-grid { grid-template-columns: 1fr; }
+        .pitch { min-height: 0; padding: 1.5rem; }
+        .pitch h2 { font-size: 2.6rem; }
+        .pitch-bottom { align-items: start; flex-direction: column; gap: 1rem; }
+        .pitch-legend { font-size: .6rem; }
+        .foot { flex-direction: column; }
+        html[data-capture="app"] #prototype { padding: 0; }
+        html[data-capture="app"] .app-shell { border: 0; border-radius: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="DividendX design system home">
+        <span class="brand-mark" aria-hidden="true"></span><span class="brand-name">DividendX</span>
+      </a>
+      <nav class="board-nav" aria-label="Style board sections">
+        <a href="#foundation">Foundation</a><a href="#prototype">Product</a><a href="#states">States</a><a href="#pitch-specimen">Pitch</a>
+      </nav>
+      <span class="prototype-tag">Visual design prototype · Phase 1</span>
+    </header>
+
+    <main id="top">
+      <section class="board-intro">
+        <h1>One stock.<br /><span>Exposure</span> + <em>rights.</em></h1>
+        <aside>
+          <p class="eyebrow">Design premise</p>
+          <p>DividendX turns a single collateral position into two legible entitlements. The split itself is the interface, the identity, and the explanation.</p>
+        </aside>
+      </section>
+
+      <section class="section" id="foundation">
+        <div class="section-head">
+          <h2>Financial, with a pulse.</h2>
+          <p>Warm surfaces lower the glare. Ink does the reading work. Blue and amber only appear when they communicate who owns which part of the collateral.</p>
+        </div>
+        <div class="palette" aria-label="Core color palette">
+          <div class="swatch ink"><b>Ink</b><code>#101820</code></div>
+          <div class="swatch paper"><b>Warm white</b><code>#FFFEFB</code></div>
+          <div class="swatch blue"><b>Stock exposure</b><code>#2457F5</code></div>
+          <div class="swatch amber"><b>Dividend rights</b><code>#C46A00</code></div>
+          <div class="swatch line"><b>Structure</b><code>#D7D2C8</code></div>
+        </div>
+        <div class="type-specimen">
+          <p class="type-display">Amounts lead.<br />Labels explain.</p>
+          <div class="type-notes">
+            <p class="eyebrow">Typography</p>
+            <p>Use a system sans with tight display tracking and calm body copy. Financial values always use tabular lining figures. Monospace is reserved for source IDs and raw accounting.</p>
+            <p class="num" style="font-size: 2rem; font-weight: 680;">101.8332 <span style="font-size:.85rem; color:var(--dx-ink-muted)">KOx equivalent</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="prototype">
+        <div class="section-head">
+          <h2>The useful first screen.</h2>
+          <p>A visitor can understand a real issuer event and test the allocation without connecting a wallet. Raw mechanics stay one disclosure away.</p>
+        </div>
+        <article class="app-shell" aria-label="DividendX representative application screen">
+          <header class="app-header">
+            <span class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">DividendX</span></span>
+            <nav class="app-nav" aria-label="Product navigation" role="tablist">
+              <button type="button" role="tab" aria-selected="true" aria-controls="market-view" data-view="market">Market</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="split-view" data-view="split">Split</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="position-view" data-view="position">Position</button>
+            </nav>
+            <div class="app-meta"><span class="network"><i class="status-dot"></i>Solana · snapshot</span><button class="wallet-button" type="button" disabled title="Wallet integration arrives in a later phase">Wallet unavailable</button></div>
+          </header>
+
+          <div class="app-body">
+            <section class="app-view" id="market-view" role="tabpanel" data-panel="market">
+              <div class="snapshot-ribbon"><span><b>Source snapshot</b> · observed 16 Sep 2026, not a live API</span><span>Verified historical event · no wallet required</span></div>
+              <div class="asset-heading">
+                <div class="asset-id"><span class="asset-monogram">KOx</span><div><h3>Coca-Cola xStock</h3><p>Dividend history and allocation</p></div></div>
+                <div class="event-name"><strong>Cash dividend allocation</strong><span>Issuer activation · 15 Sep 2026, 00:30 UTC</span></div>
+              </div>
+
+              <div class="market-grid">
+                <div>
+                  <p class="eyebrow">Verified event</p>
+                  <dl style="margin:0">
+                    <div class="fact-line"><dt>Issuer activation</dt><dd><strong>15 Sep 2026 · 00:30 UTC</strong><br /><small>The verified xStocks multiplier-effective time.</small></dd></div>
+                    <div class="fact-line"><dt>Dividend per share</dt><dd><strong class="num">$0.53 gross · $0.371 net</strong><br /><small>xStocks reinvests the net amount; DividendX does not pay fixed cash.</small></dd></div>
+                    <div class="fact-line"><dt>DividendX payout asset</dt><dd><strong>Reinvested KOx units</strong><br /><small>Dividend rights remain exposed to KOx price.</small></dd></div>
+                    <div class="fact-line"><dt>Company payment date</dt><dd><strong>01 Oct 2026</strong><br /><small>Separate from the issuer’s multiplier activation above.</small></dd></div>
+                  </dl>
+                  <p class="source-note">Sources: <a href="https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&amp;pageSize=100&amp;symbol=KOx&amp;sortBy=createdTimeUtc&amp;sortOrder=asc">xStocks corporate-action history</a> · <a href="https://investors.coca-colacompany.com/news-events/press-releases/detail/1165/board-of-directors-of-the-coca-cola-company-elects-new-officer-and-declares-regular-quarterly-dividend">Coca-Cola announcement</a></p>
+                </div>
+
+                <form class="calc" id="calculator" novalidate>
+                  <p class="eyebrow">Historical allocation scenario</p>
+                  <h4>What would this event allocate?</h4>
+                  <p>Choose a KOx balance held before this event. This is a historical scenario, not a record of your holdings.</p>
+                  <div class="amount-field">
+                    <label for="scenario-amount">Stock-equivalent KOx before event</label>
+                    <div class="amount-field-row"><input id="scenario-amount" class="num" inputmode="decimal" value="100" autocomplete="off" aria-describedby="amount-help amount-error" /><span>KOx</span></div>
+                  </div>
+                  <p id="amount-help" class="visually-hidden">Up to eight decimal places.</p>
+                  <p id="amount-error" class="field-error" role="alert">Enter a non-negative amount with up to 8 decimals.</p>
+                  <div class="claim-split" aria-live="polite">
+                    <div class="split-bar" aria-hidden="true"><span></span><span></span></div>
+                    <div class="claim-row">
+                      <div class="claim-label"><i class="claim-key stock"></i><span><b>Stock exposure</b><small>PT redemption allocation</small></span></div>
+                      <div class="claim-amount"><strong class="num" id="pt-display">100.0000</strong><small>KOx after event</small></div>
+                    </div>
+                    <div class="claim-row">
+                      <div class="claim-label"><i class="claim-key dividend"></i><span><b>Dividend rights</b><small>DR redemption allocation</small></span></div>
+                      <div class="claim-amount"><strong class="num" id="dr-display">0.4152</strong><small>KOx after event</small></div>
+                    </div>
+                    <p class="conservation" id="conservation"><span class="check" id="conservation-icon">✓</span><span id="conservation-label">Allocation reconciles exactly</span></p>
+                  </div>
+                  <details class="inspector">
+                    <summary>Accounting inspector</summary>
+                    <div class="inspector-data">
+                      <dl>
+                        <div><dt>Raw scenario Q</dt><dd id="raw-q">9,819,982,084</dd></div>
+                        <div><dt>Raw PT allocation</dt><dd id="raw-pt">9,779,376,057</dd></div>
+                        <div><dt>Raw DR allocation</dt><dd id="raw-dr">40,606,027</dd></div>
+                        <div><dt>Represented before-event amount</dt><dd id="represented-before">100.00000000 KOx</dd></div>
+                        <div><dt>Decimals</dt><dd>8</dd></div>
+                        <div><dt>Multiplier M0</dt><dd>1.0183317967386898</dd></div>
+                        <div><dt>Multiplier M1</dt><dd>1.0225601246249238</dd></div>
+                        <div><dt>Event ID / revision</dt><dd>75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e / v2</dd></div>
+                        <div><dt>Solana mint</dt><dd>XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ</dd></div>
+                      </dl>
+                    </div>
+                  </details>
+                </form>
+              </div>
+
+              <div class="timeline">
+                <div class="timeline-head"><h4>Event timeline</h4><span>Original dates · historical fixture</span></div>
+                <div class="timeline-track">
+                  <div class="timeline-item"><strong>Before snapshot</strong><span>Multiplier 1.0183317967386898</span></div>
+                  <div class="timeline-item active"><strong>xStocks activation</strong><span>15 Sep 2026 · 00:30 UTC</span><small>Allocation event used by this scenario</small></div>
+                  <div class="timeline-item"><strong>Company cash-payment date</strong><span>01 Oct 2026</span><small>Not another issuer activation</small></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="app-view split-view" id="split-view" role="tabpanel" data-panel="split" hidden>
+              <p class="eyebrow">Split</p><h3>Keep the stock exposure.<br />Separate the rights.</h3>
+              <p>One xStock deposit creates two claims backed by the same collateral. This phase illustrates the mechanism; execution and quotes are unavailable.</p>
+              <div class="split-diagram"><div class="split-token"><span>Stock exposure · PT · KOx after event</span><strong class="num" id="split-pt-display">100.0000</strong></div><div class="split-plus">+</div><div class="split-token dividend"><span>Dividend rights · DR · KOx after event</span><strong class="num" id="split-dr-display">0.4152</strong></div></div>
+              <p class="source-note">Historical scenario based on the amount entered in Market. Display rounding is not used for accounting.</p>
+              <button class="disabled-action" type="button" disabled>Execution unavailable in design prototype</button>
+            </section>
+
+            <section class="app-view position-view" id="position-view" role="tabpanel" data-panel="position" hidden>
+              <p class="eyebrow">Position</p><h3>Your claims,<br />when connected.</h3>
+              <p>Position and redemption details appear here after wallet integration. No historical wallet holdings are inferred from the scenario.</p>
+              <div class="empty-line"><strong>No connected position</strong><span>Wallet integration is intentionally unavailable in this visual prototype.</span></div>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="states">
+        <div class="section-head"><h2>States say what happened.</h2><p>The primary view stays focused. These patterns cover the moments that need explanation, recovery, or restraint.</p></div>
+        <div class="states-grid" aria-label="Representative component states">
+          <article class="state"><span class="state-code">WALLET / DISCONNECTED</span><h3>Explore without connecting</h3><p>Event sources and scenarios remain available. Execution waits for a later product phase.</p><span class="state-action">Wallet unavailable in prototype</span></article>
+          <article class="state loading" aria-label="Loading issuer observation"><span class="state-code">DATA / LOADING</span><h3>Loading observation</h3><p>Checking issuer history and onchain multiplier.</p></article>
+          <article class="state stale"><span class="state-code">DATA / STALE</span><h3>Snapshot needs refresh</h3><p>Last observed 16 Sep 2026. Do not use this snapshot to settle a new event.</p><span class="state-action">View source time</span></article>
+          <article class="state"><span class="state-code">QUOTE / EMPTY</span><h3>No executable quote</h3><p>No price, APY, fee, inventory, or liquidity is represented in this prototype.</p><span class="state-action">Unavailable</span></article>
+          <article class="state rejected"><span class="state-code">EVENT / REJECTED</span><h3>Not a dividend event</h3><p>HONx reverse split is rejected by the dividend classifier. DR allocation remains zero.</p><span class="state-action">Inspect reason</span></article>
+          <article class="state completed"><span class="state-code">SCENARIO / COMPLETED</span><h3>Allocation calculated</h3><p>Raw PT and DR allocations conserve the scenario amount exactly. No transaction occurred.</p><span class="state-action">Open accounting</span></article>
+        </div>
+      </section>
+
+      <section class="section pitch-wrap" id="pitch-specimen">
+        <div class="section-head"><h2>One-slide voice.</h2><p>The pitch uses the same split, words, and colors, scaled for a ten-second read. It reports no fabricated market result.</p></div>
+        <article class="pitch" aria-label="Sixteen by nine DividendX pitch specimen">
+          <div class="pitch-top"><span class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">DividendX</span></span><span class="slide-no">01 / PRODUCT</span></div>
+          <div class="pitch-copy"><h2>Keep the <span class="blue">stock exposure.</span><br />Sell the <span class="amber">dividend rights.</span></h2></div>
+          <div class="pitch-bottom"><p>A Solana vault concept that separates an xStock position into two transferable claims backed by the same collateral.</p><div class="pitch-legend"><span><i class="blue"></i>Stock exposure · PT</span><span><i class="amber"></i>Dividend rights · DR</span></div></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="foot"><span>DividendX visual design prototype · Phase 1</span><span>Source snapshot: 16 September 2026 · no live transactions</span></footer>
+
+    <script>
+      (() => {
+        const params = new URLSearchParams(location.search);
+        const capture = params.get('capture');
+        if (capture === 'app' || capture === 'slide') document.documentElement.dataset.capture = capture;
+
+        const tabs = [...document.querySelectorAll('[data-view]')];
+        const panels = [...document.querySelectorAll('[data-panel]')];
+        function selectTab(tab) {
+          tabs.forEach((item) => {
+            const selected = item === tab;
+            item.setAttribute('aria-selected', String(selected));
+            item.tabIndex = selected ? 0 : -1;
+          });
+          panels.forEach((panel) => { panel.hidden = panel.dataset.panel !== tab.dataset.view; });
+        }
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => selectTab(tab));
+          tab.addEventListener('keydown', (event) => {
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const current = tabs.indexOf(tab);
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            selectTab(tabs[next]);
+            tabs[next].focus();
+          });
+        });
+        selectTab(tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0]);
+
+        const DECIMALS = 8n;
+        const RAW_SCALE = 10n ** DECIMALS;
+        const M_SCALE = 10n ** 16n;
+        const M0 = 10183317967386898n;
+        const M1 = 10225601246249238n;
+        const input = document.querySelector('#scenario-amount');
+        const error = document.querySelector('#amount-error');
+        const fmtRaw = new Intl.NumberFormat('en-US');
+
+        function parseUnits(value) {
+          const normalized = value.trim();
+          if (!/^(?:\d+\.?\d{0,8}|\.\d{1,8})$/.test(normalized)) return null;
+          const [whole = '0', fraction = ''] = normalized.split('.');
+          return BigInt(whole || '0') * RAW_SCALE + BigInt((fraction + '00000000').slice(0, 8));
+        }
+
+        function decimalFromFraction(numerator, denominator, places) {
+          const scale = 10n ** BigInt(places);
+          const rounded = (numerator * scale + denominator / 2n) / denominator;
+          const whole = rounded / scale;
+          const fractional = (rounded % scale).toString().padStart(places, '0');
+          return `${whole}.${fractional}`;
+        }
+
+        function update() {
+          const q = parseUnits(input.value);
+          const valid = q !== null;
+          input.setAttribute('aria-invalid', String(!valid));
+          error.style.display = valid ? 'none' : 'block';
+          const outputIds = ['pt-display', 'dr-display', 'split-pt-display', 'split-dr-display', 'raw-q', 'raw-pt', 'raw-dr', 'represented-before'];
+          if (!valid) {
+            outputIds.forEach((id) => { document.querySelector(`#${id}`).textContent = '—'; });
+            document.querySelector('#conservation-label').textContent = 'Enter a valid amount to calculate';
+            document.querySelector('#conservation').style.color = 'var(--dx-danger)';
+            document.querySelector('#conservation-icon').textContent = '!';
+            return;
+          }
+          const scenarioQ = q * M_SCALE / M0;
+          const dr = scenarioQ * (M1 - M0) / M1;
+          const pt = scenarioQ - dr;
+          const ptDisplay = decimalFromFraction(pt * M1, RAW_SCALE * M_SCALE, 4);
+          const drDisplay = decimalFromFraction(dr * M1, RAW_SCALE * M_SCALE, 4);
+          document.querySelector('#pt-display').textContent = ptDisplay;
+          document.querySelector('#dr-display').textContent = drDisplay;
+          document.querySelector('#split-pt-display').textContent = ptDisplay;
+          document.querySelector('#split-dr-display').textContent = drDisplay;
+          document.querySelector('#raw-q').textContent = fmtRaw.format(scenarioQ);
+          document.querySelector('#raw-pt').textContent = fmtRaw.format(pt);
+          document.querySelector('#raw-dr').textContent = fmtRaw.format(dr);
+          document.querySelector('#represented-before').textContent = `${decimalFromFraction(scenarioQ * M0, RAW_SCALE * M_SCALE, 8)} KOx`;
+          document.querySelector('#conservation-label').textContent = 'Allocation reconciles exactly';
+          document.querySelector('#conservation').style.color = 'var(--dx-positive)';
+          document.querySelector('#conservation-icon').textContent = '✓';
+        }
+        input.addEventListener('input', update);
+        update();
+      })();
+    </script>
+  </body>
+</html>

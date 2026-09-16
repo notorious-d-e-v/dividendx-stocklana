@@ -1,0 +1,40 @@
+{
+  "method": "built-in image generation",
+  "prompts": "prompts.md",
+  "assets": {
+    "stock-dividend-coupon": {
+      "path": "/Users/node/workspace/dividendx-stocklana/presentation/assets/illustrated-v1/stock-dividend-coupon.png",
+      "source": "/Users/node/.codex/generated_images/01a0a800-a6b1-7bd0-9726-8b0d12038d7a/exec-f87933a1-c221-4fc5-a3ec-17252d234824.png",
+      "bytes": 1179533,
+      "sha256": "e1601f24d5a7013466ee306bf5e1097eb59dbb1b16987060de5fad23c9cad9ec",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        40,
+        53,
+        1231,
+        1198
+      ]
+    },
+    "claim-composability": {
+      "path": "/Users/node/workspace/dividendx-stocklana/presentation/assets/illustrated-v1/claim-composability.png",
+      "source": "/Users/node/.codex/generated_images/01a0a800-a6b1-7bd0-9726-8b0d12038d7a/exec-85a8790f-a165-4466-a513-e17613d6b4d2.png",
+      "bytes": 1110370,
+      "sha256": "8a23d9f942eeb1c25faab8cc6fed6e7daac681d61843ede660c07830c5670731",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        0,
+        20,
+        1192,
+        1238
+      ]
+    }
+  }
+}

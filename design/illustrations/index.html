@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="DividendX illustration system: Paper instruments, digital ownership" />
+    <title>DividendX — Illustration system</title>
+    <link rel="stylesheet" href="../../packages/design-tokens/tokens.css" />
+    <style>
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--dx-canvas);
+        color: var(--dx-ink);
+        font-family: var(--dx-font-sans);
+        font-size: 16px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      img { display: block; height: auto; max-width: 100%; }
+      button { color: inherit; font: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      a { color: var(--dx-stock-ink); text-underline-offset: .2em; }
+      :focus-visible { outline: 3px solid var(--dx-focus); outline-offset: 3px; }
+      ::selection { background: var(--dx-stock); color: white; }
+      .skip-link { background: var(--dx-ink); color: white; left: 1rem; padding: .7rem 1rem; position: fixed; top: -5rem; z-index: 10; }
+      .skip-link:focus { top: 1rem; }
+      .eyebrow { color: var(--dx-ink-muted); font-size: .72rem; font-weight: 760; letter-spacing: .12em; margin: 0 0 .85rem; text-transform: uppercase; }
+      .lede { color: var(--dx-ink-muted); font-size: clamp(1rem, 1.5vw, 1.17rem); max-width: 55ch; }
+      .num { font-variant-numeric: tabular-nums; }
+      .topbar {
+        align-items: center;
+        background: color-mix(in srgb, var(--dx-canvas) 93%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--dx-line);
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: 1fr auto 1fr;
+        min-height: 72px;
+        padding: 0 clamp(1.1rem, 3vw, 3.5rem);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+      .brand { align-items: center; color: var(--dx-ink); display: inline-flex; gap: .7rem; text-decoration: none; width: max-content; }
+      .brand-mark { height: 25px; position: relative; transform: rotate(45deg); width: 25px; }
+      .brand-mark::before, .brand-mark::after { content: ""; inset: 0; position: absolute; }
+      .brand-mark::before { background: var(--dx-stock); clip-path: polygon(0 0, 48% 0, 48% 100%, 0 100%); }
+      .brand-mark::after { background: var(--dx-dividend); clip-path: polygon(55% 0, 100% 0, 100% 100%, 55% 100%); }
+      .brand-name { font-size: 1.18rem; font-weight: 790; letter-spacing: -.045em; }
+      .nav { display: flex; gap: .15rem; }
+      .nav a { border-radius: 999px; color: var(--dx-ink-muted); font-size: .8rem; padding: .45rem .65rem; text-decoration: none; }
+      .nav a:hover { background: var(--dx-surface); color: var(--dx-ink); }
+      .version { color: var(--dx-ink-muted); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-align: right; text-transform: uppercase; }
+
+      .hero { border-bottom: 1px solid var(--dx-line); overflow: hidden; }
+      .hero-inner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr); margin: auto; max-width: 1360px; min-height: 720px; }
+      .hero-copy { align-self: center; padding: 6.5rem clamp(1.25rem, 4vw, 4.5rem); }
+      .hero h1 { font-size: clamp(3.8rem, 6vw, 6.8rem); font-weight: 760; letter-spacing: -.065em; line-height: 1; margin: 0; max-width: 9ch; }
+      .hero h1 span { color: var(--dx-stock); }
+      .hero h1 em { color: var(--dx-dividend-ink); font-style: normal; }
+      .hero-copy > p:last-child { color: var(--dx-ink-muted); font-size: 1.04rem; margin: 2rem 0 0; max-width: 48ch; }
+      .hero-art { align-items: center; background: var(--dx-surface); border-left: 1px solid var(--dx-line); display: flex; justify-content: center; min-width: 0; overflow: hidden; padding: 4rem 2rem; position: relative; }
+      .hero-art::before { border: 1px solid var(--dx-line); border-radius: 50%; content: ""; height: min(34vw, 470px); position: absolute; width: min(34vw, 470px); }
+      .hero-art img { max-width: 560px; position: relative; transform: rotate(-2deg); width: 100%; }
+      .hero-note { background: var(--dx-canvas); border: 1px solid var(--dx-line-strong); bottom: 2rem; font-size: .72rem; max-width: 22ch; padding: .75rem; position: absolute; right: 2rem; }
+
+      .section { margin: auto; max-width: 1280px; padding: 6.5rem clamp(1.25rem, 4vw, 4rem); }
+      .section-head { display: grid; gap: 2rem; grid-template-columns: minmax(0, .8fr) minmax(280px, .55fr); justify-content: space-between; margin-bottom: 3rem; }
+      .section-head h2 { font-size: clamp(2.4rem, 4.5vw, 4.7rem); font-weight: 735; letter-spacing: -.055em; line-height: 1.04; margin: 0; max-width: 13ch; }
+      .section-head p { align-self: end; color: var(--dx-ink-muted); margin: 0; max-width: 48ch; }
+      .paper-panel { background: var(--dx-surface); border-bottom: 1px solid var(--dx-line); border-top: 1px solid var(--dx-line); }
+      .paper-panel .section { padding-bottom: 5.5rem; padding-top: 5.5rem; }
+
+      .principles { background: var(--dx-line); border: 1px solid var(--dx-line); display: grid; gap: 1px; grid-template-columns: repeat(4, 1fr); }
+      .principle { background: var(--dx-surface); min-height: 270px; padding: 1.5rem; }
+      .principle .index { color: var(--dx-stock); font-size: .75rem; font-weight: 800; }
+      .principle h3 { font-size: 1.35rem; letter-spacing: -.025em; line-height: 1.1; margin: 5.5rem 0 .7rem; }
+      .principle p { color: var(--dx-ink-muted); font-size: .86rem; margin: 0; }
+
+      .decision { display: grid; gap: 1px; grid-template-columns: repeat(3, 1fr); background: var(--dx-line-strong); border: 1px solid var(--dx-line-strong); }
+      .decision article { background: var(--dx-canvas); min-height: 300px; padding: 1.7rem; }
+      .decision-mark { align-items: center; border: 2px solid currentColor; border-radius: 50%; color: var(--dx-stock); display: flex; font-size: 1.4rem; font-weight: 700; height: 46px; justify-content: center; width: 46px; }
+      .decision article:nth-child(2) .decision-mark { color: var(--dx-dividend); }
+      .decision article:nth-child(3) .decision-mark { color: var(--dx-ink); }
+      .decision h3 { font-size: 1.45rem; letter-spacing: -.03em; margin: 4rem 0 .7rem; }
+      .decision p { color: var(--dx-ink-muted); font-size: .88rem; margin: 0; }
+
+      .recipe-grid { display: grid; gap: 4rem; grid-template-columns: minmax(0, 1fr) minmax(300px, .9fr); }
+      .shape-demo { align-items: center; aspect-ratio: 1.2 / 1; background: var(--dx-surface); border: 1px solid var(--dx-line); display: flex; justify-content: center; overflow: hidden; padding: 2rem; }
+      .certificate { background: var(--dx-stock-soft); border: 3px solid var(--dx-ink); height: 56%; position: relative; transform: rotate(-6deg); width: 67%; }
+      .certificate::before { border: 1.5px solid var(--dx-ink); content: ""; inset: 12%; position: absolute; }
+      .certificate::after { background: var(--dx-stock); border: 2px solid var(--dx-ink); border-radius: 50%; bottom: 14%; content: ""; height: 22%; position: absolute; right: 10%; width: 17%; }
+      .coupon { background: var(--dx-dividend-soft); border: 3px solid var(--dx-ink); height: 26%; margin-left: 8%; position: relative; transform: rotate(7deg); width: 23%; }
+      .coupon::after { border-top: 1.5px solid var(--dx-ink); content: ""; left: 15%; position: absolute; right: 15%; top: 50%; }
+      .recipe-list { margin: 0; }
+      .recipe-list div { border-top: 1px solid var(--dx-line); display: grid; gap: 1rem; grid-template-columns: 7rem 1fr; padding: 1rem 0; }
+      .recipe-list dt { color: var(--dx-ink-muted); font-size: .74rem; font-weight: 740; letter-spacing: .08em; text-transform: uppercase; }
+      .recipe-list dd { margin: 0; }
+      .optical-note { background: var(--dx-dividend-soft); border-left: 4px solid var(--dx-dividend); font-size: .82rem; margin-top: 1.5rem; padding: .85rem 1rem; }
+
+      .palette { display: grid; grid-template-columns: repeat(7, 1fr); }
+      .swatch { display: flex; flex-direction: column; justify-content: space-between; min-height: 168px; padding: 1rem; }
+      .swatch b { font-size: .78rem; }
+      .swatch code { font-family: var(--dx-font-mono); font-size: .68rem; }
+      .swatch.canvas { background: var(--dx-canvas); border: 1px solid var(--dx-line); }
+      .swatch.surface { background: var(--dx-surface); border-bottom: 1px solid var(--dx-line); border-top: 1px solid var(--dx-line); }
+      .swatch.ink { background: var(--dx-ink); color: white; }
+      .swatch.stock { background: var(--dx-stock); color: white; }
+      .swatch.stock-soft { background: var(--dx-stock-soft); }
+      .swatch.dividend { background: var(--dx-dividend); color: #1b0d00; }
+      .swatch.dividend-soft { background: var(--dx-dividend-soft); }
+      .legacy-note { color: var(--dx-ink-muted); font-size: .8rem; margin: 1rem 0 0; }
+
+      .library { display: grid; gap: 3rem 2rem; grid-template-columns: 1fr 1fr; }
+      .asset-card { border-top: 1px solid var(--dx-line-strong); min-width: 0; padding-top: 1rem; }
+      .asset-stage { align-items: center; aspect-ratio: 1.23 / 1; background: var(--dx-surface); display: flex; justify-content: center; overflow: hidden; padding: 1.3rem; }
+      .asset-stage img { max-height: 100%; object-fit: contain; width: 100%; }
+      .asset-meta { display: grid; gap: 1rem; grid-template-columns: 1fr auto; padding-top: 1.1rem; }
+      .asset-meta h3 { font-size: 1.25rem; letter-spacing: -.025em; margin: 0; }
+      .asset-meta p { color: var(--dx-ink-muted); font-size: .82rem; margin: .35rem 0 0; max-width: 54ch; }
+      .status { border: 1px solid var(--dx-line-strong); border-radius: 999px; font-size: .66rem; height: max-content; letter-spacing: .07em; padding: .35rem .55rem; text-transform: uppercase; white-space: nowrap; }
+      .status.anchor { border-color: var(--dx-stock); color: var(--dx-stock-ink); }
+      .status.study { border-color: var(--dx-dividend); color: var(--dx-dividend-ink); }
+      .download { display: inline-block; font-size: .76rem; margin-top: .8rem; }
+      .asset-card.featured { display: grid; gap: clamp(1.5rem, 4vw, 4rem); grid-column: 1 / -1; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .7fr); }
+      #both-sides { scroll-margin-top: 96px; }
+      .asset-card.featured .asset-stage { aspect-ratio: 1.8 / 1; min-height: 420px; }
+      .asset-card.featured .asset-meta { align-content: center; grid-template-columns: 1fr; padding: 1rem 0; }
+      .asset-card.featured .asset-meta p { font-size: .9rem; }
+      .asset-card.featured .status { justify-self: start; }
+
+      .contracts { display: grid; gap: 1px; grid-template-columns: repeat(3, 1fr); background: var(--dx-line); border: 1px solid var(--dx-line); }
+      .contract { background: var(--dx-surface); min-height: 220px; padding: 1.4rem; }
+      .contract b { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+      .contract p { color: var(--dx-ink-muted); font-size: .86rem; margin: 4rem 0 0; }
+      .negative-pairs { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; margin-top: 2rem; }
+      .pair { border-top: 1px solid var(--dx-line-strong); padding: 1rem 0; }
+      .pair span { display: block; font-size: .8rem; }
+      .pair .allow { color: var(--dx-stock-ink); font-weight: 730; }
+      .pair .avoid { color: var(--dx-dividend-ink); margin-top: .3rem; }
+
+      .lab-shell { background: var(--dx-ink); color: white; display: grid; grid-template-columns: minmax(290px, .65fr) minmax(0, 1.35fr); min-height: 650px; }
+      .lab-controls { border-right: 1px solid #35414b; padding: clamp(1.5rem, 4vw, 3rem); }
+      .lab-controls h2 { font-size: clamp(2.5rem, 4vw, 4rem); letter-spacing: -.055em; line-height: 1.02; margin: 0 0 1rem; }
+      .lab-controls > p { color: #adb7be; font-size: .86rem; max-width: 38ch; }
+      .control-group { border-top: 1px solid #35414b; margin-top: 2rem; padding-top: 1rem; }
+      .control-group legend { color: #adb7be; font-size: .7rem; font-weight: 760; letter-spacing: .1em; margin-bottom: .7rem; text-transform: uppercase; }
+      fieldset.control-group { border-bottom: 0; border-left: 0; border-right: 0; }
+      .button-row { display: flex; flex-wrap: wrap; gap: .45rem; }
+      [data-control="asset"].button-row .lab-button { flex: 1 1 calc(50% - .45rem); }
+      .lab-button { background: transparent; border: 1px solid #66717a; border-radius: 999px; color: white; cursor: pointer; font-size: .74rem; min-height: 39px; padding: .45rem .7rem; }
+      .lab-button[aria-pressed="true"] { background: white; border-color: white; color: var(--dx-ink); }
+      .lab-button:hover { border-color: white; }
+      .lab-stage-wrap { display: grid; grid-template-rows: 1fr auto; min-width: 0; }
+      .lab-stage { align-items: center; background: var(--dx-canvas); display: flex; justify-content: center; min-height: 540px; overflow: hidden; padding: 3rem 1.5rem; transition: background var(--dx-motion-normal); }
+      .lab-stage.is-white { background: var(--dx-surface); }
+      .lab-stage.is-ink { background: var(--dx-ink); }
+      .lab-stage img { height: auto; max-width: 100%; object-fit: contain; width: 360px; }
+      .lab-stage img.replay { animation: enter-art 280ms ease-out both; }
+      @keyframes enter-art { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+      .lab-caption { background: #17212a; border-top: 1px solid #35414b; color: #d5dadd; font-size: .78rem; min-height: 72px; padding: 1rem 1.5rem; }
+      .lab-caption strong { color: white; }
+      .lab-warning { color: #ffc979; display: block; margin-top: .3rem; }
+
+      .usage-table { border-collapse: collapse; width: 100%; }
+      .usage-table th, .usage-table td { border-top: 1px solid var(--dx-line); padding: 1rem; text-align: left; vertical-align: top; }
+      .usage-table th { color: var(--dx-ink-muted); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+      .usage-table td:first-child { font-weight: 720; width: 18%; }
+      .usage-table td { font-size: .85rem; }
+      .usage-table td:last-child { color: var(--dx-ink-muted); }
+
+      .production-grid { display: grid; gap: 4rem; grid-template-columns: 1fr 1fr; }
+      .production-grid h3 { font-size: 1.4rem; letter-spacing: -.03em; margin: 0 0 1rem; }
+      .production-grid p, .production-grid li { color: var(--dx-ink-muted); font-size: .88rem; }
+      .production-grid ul { padding-left: 1.2rem; }
+      .links { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.5rem; }
+      .doc-link { border: 1px solid var(--dx-line-strong); border-radius: 999px; color: var(--dx-ink); font-size: .78rem; padding: .55rem .8rem; text-decoration: none; }
+      .doc-link:hover { background: var(--dx-surface-muted); }
+
+      .footer { align-items: center; border-top: 1px solid var(--dx-line); color: var(--dx-ink-muted); display: flex; font-size: .74rem; gap: 2rem; justify-content: space-between; padding: 2rem clamp(1.25rem, 4vw, 4rem); }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .lab-stage img.replay { animation: none; }
+      }
+      @media (max-width: 900px) {
+        .topbar { grid-template-columns: 1fr auto; }
+        .nav { display: none; }
+        .hero-inner { grid-template-columns: 1fr; }
+        .hero-copy { padding-bottom: 4rem; }
+        .hero-art { border-left: 0; border-top: 1px solid var(--dx-line); min-height: 530px; }
+        .hero-art::before { height: 390px; width: 390px; }
+        .principles { grid-template-columns: 1fr 1fr; }
+        .decision { grid-template-columns: 1fr; }
+        .decision article { min-height: 230px; }
+        .decision h3 { margin-top: 2.5rem; }
+        .palette { grid-template-columns: repeat(4, 1fr); }
+        .swatch { min-height: 135px; }
+        .contracts { grid-template-columns: 1fr 1fr; }
+        .asset-card.featured { grid-template-columns: 1fr; }
+        .asset-card.featured .asset-stage { min-height: 420px; }
+        .lab-shell { grid-template-columns: 1fr; }
+        .lab-controls { border-bottom: 1px solid #35414b; border-right: 0; }
+        .lab-stage { min-height: 480px; }
+      }
+      @media (max-width: 620px) {
+        .topbar { min-height: 64px; padding: 0 1rem; }
+        .version { font-size: .61rem; }
+        .hero-inner { min-height: 0; }
+        .hero-copy { padding: 4rem 1.25rem 3rem; }
+        .hero h1 { font-size: clamp(3.35rem, 16vw, 5rem); }
+        .hero-art { min-height: 390px; padding: 2.5rem 1rem 5rem; }
+        .hero-art::before { height: 280px; width: 280px; }
+        .hero-note { bottom: 1rem; right: 1rem; }
+        .section { padding-bottom: 4.5rem; padding-top: 4.5rem; }
+        .section-head { grid-template-columns: 1fr; }
+        .section-head h2 { max-width: 10ch; }
+        .principles { grid-template-columns: 1fr; }
+        .principle { min-height: 210px; }
+        .principle h3 { margin-top: 3rem; }
+        .recipe-grid, .production-grid { gap: 2.5rem; grid-template-columns: 1fr; }
+        .recipe-list div { grid-template-columns: 5.5rem 1fr; }
+        .palette { grid-template-columns: 1fr 1fr; }
+        .swatch.ink { grid-column: span 2; }
+        .library { grid-template-columns: 1fr; }
+        .asset-stage { aspect-ratio: 1 / 1; }
+        .asset-card.featured .asset-stage { aspect-ratio: 1 / 1; min-height: 0; }
+        .contracts, .negative-pairs { grid-template-columns: 1fr; }
+        .contract { min-height: 180px; }
+        .contract p { margin-top: 2.5rem; }
+        .lab-stage { min-height: 390px; padding: 2rem 1rem; }
+        .usage-table, .usage-table tbody, .usage-table tr, .usage-table td { display: block; }
+        .usage-table thead { display: none; }
+        .usage-table tr { border-top: 1px solid var(--dx-line-strong); padding: .6rem 0; }
+        .usage-table td { border: 0; padding: .4rem 0; }
+        .usage-table td:first-child { width: auto; }
+        .footer { align-items: start; flex-direction: column; gap: .5rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="DividendX illustration system home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">DividendX</span></a>
+      <nav class="nav" aria-label="Guide sections"><a href="#system">System</a><a href="#library">Library</a><a href="#lab">Asset lab</a><a href="#usage">Usage</a><a href="#production">Production</a></nav>
+      <span class="version">Illustration system · v1</span>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Paper instruments, digital ownership</p>
+            <h1>Paper instruments. <span>Digital</span> <em>ownership.</em></h1>
+            <p>Certificates, coupons, ledgers, wallets and custody trays turn an abstract financial split into a small set of familiar objects. Illustration carries the idea; native labels carry the truth.</p>
+          </div>
+          <div class="hero-art">
+            <img src="../../presentation/assets/illustrated-v1/stock-dividend-coupon.png" width="1254" height="1254" alt="Blue stock certificate with a small amber dividend coupon detached by a narrow gap" />
+            <p class="hero-note"><strong>Existing anchor.</strong><br />The gap expresses separable ownership, not a withdrawal.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="system">
+        <div class="section-head"><div><p class="eyebrow">01 · Idea</p><h2>Financial editorial art with one job.</h2></div><p>Each image makes an ownership concept easier to grasp. The system is warm and tactile, but its visual charm never adds a claim the product cannot support.</p></div>
+        <div class="principles">
+          <article class="principle"><span class="index">01</span><h3>Make the entitlement legible.</h3><p>One idea reads before texture or decoration.</p></article>
+          <article class="principle"><span class="index">02</span><h3>Use tactile objects sparingly.</h3><p>Printed matter gives abstract rights a familiar physical vocabulary.</p></article>
+          <article class="principle"><span class="index">03</span><h3>Let labels carry exact meaning.</h3><p>Color reinforces names. It never replaces values, states or issuer identity.</p></article>
+          <article class="principle"><span class="index">04</span><h3>Leave room to think.</h3><p>Bold silhouettes and negative space keep the art calm beside type.</p></article>
+        </div>
+      </section>
+
+      <div class="paper-panel">
+        <section class="section">
+          <div class="section-head"><div><p class="eyebrow">02 · Decision</p><h2>Choose the visual by its responsibility.</h2></div><p>When a visual must be both evocative and exact, split the work: illustration introduces the concept; native components explain the mechanism.</p></div>
+          <div class="decision">
+            <article><span class="decision-mark" aria-hidden="true">◇</span><h3>Illustration</h3><p>Use for a single conceptual metaphor: separation, custody identity, divisibility, or composability. It can orient and invite, but not prove.</p></article>
+            <article><span class="decision-mark" aria-hidden="true">↗</span><h3>Functional icon</h3><p>Use to identify an action or control at small size. Replace a complex scene with an icon at 64 px; never crush the whole PNG into a glyph.</p></article>
+            <article><span class="decision-mark" aria-hidden="true">≡</span><h3>Editable diagram</h3><p>Use native text and vectors for exact order, values, ratios, labels, accounting or transaction paths. Raster art is not a financial chart.</p></article>
+          </div>
+        </section>
+      </div>
+
+      <section class="section" id="construction">
+        <div class="section-head"><div><p class="eyebrow">03 · Construction</p><h2>Sturdy planes. Quiet ink. A visible gap.</h2></div><p>The recipe is an optical starting point for new work. It does not pretend to measure or retroactively standardize the existing PNGs.</p></div>
+        <div class="recipe-grid">
+          <div class="shape-demo" aria-label="Abstract certificate and coupon construction example"><div class="certificate" aria-hidden="true"></div><div class="coupon" aria-hidden="true"></div></div>
+          <div>
+            <dl class="recipe-list">
+              <div><dt>Shape</dt><dd>Softened paper rectangles, clipped or perforated edges, shallow overlaps.</dd></div>
+              <div><dt>Line</dt><dd>At 320 px optical width: 2–3 px outer ink and 1–1.5 px internal rules.</dd></div>
+              <div><dt>Texture</dt><dd>Low-contrast paper grain inside objects only. Never across the canvas.</dd></div>
+              <div><dt>View</dt><dd>Front or gentle three-quarter view with 5–12° tilt and minimal shadow.</dd></div>
+              <div><dt>Objects</dt><dd>One to three for a concept; no more than four for a scene.</dd></div>
+              <div><dt>Detail</dt><dd>One or two internal cues. No micro-detail required for recognition.</dd></div>
+            </dl>
+            <p class="optical-note">These are nominal optical targets for future artwork, not measurements of current raster files.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="paper-panel">
+        <section class="section">
+          <div class="section-head"><div><p class="eyebrow">04 · Palette</p><h2>One token source. Two named claims.</h2></div><p>Blue supports Stock exposure; amber supports Dividend rights. Always name the concept nearby. Green and red remain interface status colors outside the illustration.</p></div>
+          <div class="palette" aria-label="Canonical illustration palette">
+            <div class="swatch canvas"><b>Canvas</b><code>#F6F3EC</code></div>
+            <div class="swatch surface"><b>Surface</b><code>#FFFEFB</code></div>
+            <div class="swatch ink"><b>Ink</b><code>#101820</code></div>
+            <div class="swatch stock"><b>Stock</b><code>#2457F5</code></div>
+            <div class="swatch stock-soft"><b>Stock soft</b><code>#E9EEFF</code></div>
+            <div class="swatch dividend"><b>Dividend</b><code>#C46A00</code></div>
+            <div class="swatch dividend-soft"><b>Dividend soft</b><code>#FFF0D2</code></div>
+          </div>
+          <p class="legacy-note">The original slide art approximately uses pale blue #EAF0FF and pale amber #F8E8D4. Preserve it as made; new work uses the canonical shared tokens above.</p>
+        </section>
+      </div>
+
+      <section class="section" id="library">
+        <div class="section-head"><div><p class="eyebrow">05 · Library</p><h2>A growing illustration library.</h2></div><p>The original pitch assets establish the family. Custody, fractional and both-sides composability studies explore how it extends; the studies retain their review status until adopted.</p></div>
+        <div class="library">
+          <article class="asset-card"><div class="asset-stage"><img loading="lazy" src="../../presentation/assets/illustrated-v1/stock-dividend-coupon.png" width="1254" height="1254" alt="Blue stock certificate with a small amber dividend coupon detached by a narrow gap" /></div><div class="asset-meta"><div><h3>Stock + dividend coupon</h3><p>Concept · Stock exposure and one event’s Dividend rights separate while remaining visibly related.</p><a class="download" href="../../presentation/assets/illustrated-v1/stock-dividend-coupon.png" download>Download PNG</a></div><span class="status anchor">Existing anchor</span></div></article>
+          <article class="asset-card"><div class="asset-stage"><img loading="lazy" src="../../presentation/assets/illustrated-v1/claim-composability.png" width="1254" height="1254" alt="Amber dividend coupon connected conceptually to a wallet, public ledger and trading app" /></div><div class="asset-meta"><div><h3>Dividend-claim composability</h3><p>Scene · A Dividend rights (DR) coupon relates to three conceptual touchpoints without claiming completed integrations. This narrower study does not describe PT composability.</p><a class="download" href="../../presentation/assets/illustrated-v1/claim-composability.png" download>Download PNG</a></div><span class="status anchor">Existing anchor</span></div></article>
+          <article class="asset-card"><div class="asset-stage"><img loading="lazy" src="assets/issuer-separated-custody-v1.png" width="1916" height="821" alt="Three separate blue custody trays, each holding its own certificate and amber coupon" /></div><div class="asset-meta"><div><h3>Issuer-separated custody</h3><p>Scene study · Distinct trays preserve issuer and mint collateral identity instead of suggesting a shared pool. Simplify the ornamental certificate borders for a compact derivative.</p><a class="download" href="assets/issuer-separated-custody-v1.png" download>Download PNG</a></div><span class="status study">Extension study</span></div></article>
+          <article class="asset-card"><div class="asset-stage"><img loading="lazy" src="assets/fractional-dividend-v1.png" width="1254" height="1254" alt="Amber dividend coupon separated into two unequal paper pieces by a narrow gap" /></div><div class="asset-meta"><div><h3>Fractional dividend</h3><p>Spot study · Two unequal pieces suggest divisibility without encoding a numeric allocation or yield. Use the raster at 128 px or larger; switch to a native icon at 64 px.</p><a class="download" href="assets/fractional-dividend-v1.png" download>Download PNG</a></div><span class="status study">Extension study</span></div></article>
+          <article class="asset-card featured" id="both-sides"><div class="asset-stage"><img loading="lazy" src="assets/stock-and-dividend-composability-v1.png" width="1448" height="1086" alt="Blue stock certificate and amber dividend coupon independently connected to a neutral wallet and trading app" /></div><div class="asset-meta"><div><h3>Both sides are composable</h3><p>Scene study · Stock exposure (PT) and dividend rights (DR) can each connect to compatible wallets and trading apps. Concept only; the backing stays locked in the vault.</p><a class="download" href="assets/stock-and-dividend-composability-v1.png" download>Download PNG</a></div><span class="status study">Extension study</span></div></article>
+        </div>
+      </section>
+
+      <div class="paper-panel">
+        <section class="section">
+          <div class="section-head"><div><p class="eyebrow">06 · Semantics</p><h2>Consistent objects, consistent meanings.</h2></div><p>Metaphors stay useful only when their meaning is stable. Decorative details never upgrade an illustration into evidence, audit, custody or integration.</p></div>
+          <div class="contracts">
+            <article class="contract"><b>Certificate</b><p>The original stock token before deposit, or Stock exposure (PT) after the split; nearby native copy must distinguish them.</p></article>
+            <article class="contract"><b>Coupon</b><p>One event’s Dividend rights entitlement, not guaranteed cash or a recurring stream.</p></article>
+            <article class="contract"><b>Gap</b><p>Separable ownership, not withdrawal, failure or a broken transaction.</p></article>
+            <article class="contract"><b>Custody tray</b><p>Collateral identity. Multiple trays remain distinct with no shared pool.</p></article>
+            <article class="contract"><b>Fractions</b><p>Divisibility only. Their area and count do not represent exact allocation.</p></article>
+            <article class="contract"><b>Wallet / ledger / app</b><p>Conceptual touchpoints, not a claim of completed integration.</p></article>
+          </div>
+          <div class="negative-pairs" aria-label="Allowed and avoided examples">
+            <p class="pair"><span class="allow">Allowed · restrained paper seal</span><span class="avoid">Avoid · checkmark crest that implies audit certification</span></p>
+            <p class="pair"><span class="allow">Allowed · distinct custody trays</span><span class="avoid">Avoid · bank vault, safe or shared collateral pool</span></p>
+            <p class="pair"><span class="allow">Allowed · uneven pieces suggesting divisibility</span><span class="avoid">Avoid · slices that look like exact percentages</span></p>
+            <p class="pair"><span class="allow">Allowed · conceptual app silhouettes</span><span class="avoid">Avoid · fake live UI, transaction arrows or balances</span></p>
+            <p class="pair"><span class="allow">Allowed · ample negative space</span><span class="avoid">Avoid · coins, rockets, money rain, piggy banks or mascots</span></p>
+            <p class="pair"><span class="allow">Allowed · one incidental organic detail in existing art</span><span class="avoid">Avoid · repeating the leaf as a growth promise or brand logo</span></p>
+          </div>
+        </section>
+      </div>
+
+      <section class="section" id="lab">
+        <div class="section-head"><div><p class="eyebrow">07 · Asset lab</p><h2>Test the real art in context.</h2></div><p>Switch asset, background and display width. The ink background is a contrast proof; use a light panel if any object boundary becomes unclear.</p></div>
+        <div class="lab-shell">
+          <div class="lab-controls">
+            <h2>Placement check</h2>
+            <p>The lab changes the actual local asset. It does not simulate compression, crop or a product component.</p>
+            <fieldset class="control-group"><legend>Asset</legend><div class="button-row" data-control="asset"><button class="lab-button" type="button" aria-pressed="true" data-value="coupon">Coupon</button><button class="lab-button" type="button" aria-pressed="false" data-value="composability">Dividend claim</button><button class="lab-button" type="button" aria-pressed="false" data-value="both">Both claims</button><button class="lab-button" type="button" aria-pressed="false" data-value="custody">Custody</button><button class="lab-button" type="button" aria-pressed="false" data-value="fractional">Fractional</button></div></fieldset>
+            <fieldset class="control-group"><legend>Background</legend><div class="button-row" data-control="background"><button class="lab-button" type="button" aria-pressed="true" data-value="warm">Warm</button><button class="lab-button" type="button" aria-pressed="false" data-value="white">White</button><button class="lab-button" type="button" aria-pressed="false" data-value="ink">Ink</button></div></fieldset>
+            <fieldset class="control-group"><legend>Image width</legend><div class="button-row" data-control="width"><button class="lab-button num" type="button" aria-pressed="false" data-value="128">128 px</button><button class="lab-button num" type="button" aria-pressed="false" data-value="240">240 px</button><button class="lab-button num" type="button" aria-pressed="true" data-value="360">360 px</button><button class="lab-button num" type="button" aria-pressed="false" data-value="480">480 px</button></div></fieldset>
+            <div class="control-group"><button class="lab-button" id="replay" type="button">Replay optional entry</button></div>
+          </div>
+          <div class="lab-stage-wrap">
+            <div class="lab-stage" id="lab-stage"><img id="lab-image" src="../../presentation/assets/illustrated-v1/stock-dividend-coupon.png" width="1254" height="1254" alt="Blue stock certificate with a small amber dividend coupon detached by a narrow gap" /></div>
+            <div class="lab-caption" id="lab-caption" aria-live="polite"><strong>Stock + dividend coupon · concept · 360 px · warm canvas.</strong><span id="lab-warning"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="usage">
+        <div class="section-head"><div><p class="eyebrow">08 · Usage</p><h2>Editorial presence, product restraint.</h2></div><p>A pitch may use roughly two illustrations across nine slides as a pacing example, not a fixed law. Product states should remain direct and factual.</p></div>
+        <table class="usage-table">
+          <thead><tr><th>Context</th><th>Use</th><th>Restraint</th></tr></thead>
+          <tbody>
+            <tr><td>Pitch</td><td>Concept or scene beside a short claim.</td><td>Do not let art compete with the key statement.</td></tr>
+            <tr><td>Onboarding</td><td>One concept image followed by native explanation.</td><td>Do not imply unavailable wallet, custody or trading support.</td></tr>
+            <tr><td>Explanation</td><td>Illustration introduces the model; editable diagram handles mechanics.</td><td>Never encode ratios in illustrated object size.</td></tr>
+            <tr><td>Empty state</td><td>Small spot only when it clarifies the absence.</td><td>Pending, error and rejection need status components and text.</td></tr>
+            <tr><td>Motion</td><td>Optional one-shot fade and 4–8 px settle over 200–320 ms.</td><td>No loops, fake transaction progress or increasing balance; respect reduced motion.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="paper-panel" id="production">
+        <section class="section">
+          <div class="section-head"><div><p class="eyebrow">09 · Production</p><h2>Files, prompts and handoff.</h2></div><p>Generated PNGs are canonical raster sources, not editable vectors. Layered motion requires deliberate manual vector artwork.</p></div>
+          <div class="production-grid">
+            <div><h3>Files and delivery</h3><p>Name files by subject and version. Preserve a genuine transparent PNG, then derive WebP or AVIF for product delivery. Proposed budgets are 80–180 KB for a spot and no more than 350 KB for a scene; existing source PNGs may exceed them.</p><p>Do not bake a checkerboard, wrap a bitmap in SVG, auto-trace paper grain, or claim generated elements are editable layers. Record prompt, dimensions, byte size, checksum, status and review notes.</p></div>
+            <div><h3>Prompt and accessibility</h3><p>Start with the reusable style brief, then state audience, metaphor, concepts, forbidden implications, tier, size, background and attached reference assets. Token colors are targets; raster generation may only approximate them.</p><p>Alt text describes the contributed idea. Use an empty alt when adjacent copy already supplies it. Keep exact values, labels and flows native; palette alone does not prove accessible contrast.</p><div class="links"><a class="doc-link" href="illustration-guide.md">Full written guide</a><a class="doc-link" href="agent-brief.md">Agent brief</a><a class="doc-link" href="qa.md">QA checklist</a><a class="doc-link" href="../../presentation/assets/illustrated-v1/prompts.md">Anchor prompts</a><a class="doc-link" href="prompts/final-prompts-v1.md">Final extension prompts</a><a class="doc-link" href="assets/manifest.json">Asset manifest</a></div></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer"><span>DividendX illustration system · 16 September 2026</span><span>Paper instruments, digital ownership</span></footer>
+
+    <script>
+      (() => {
+        const assets = {
+          coupon: { src: '../../presentation/assets/illustrated-v1/stock-dividend-coupon.png', name: 'Stock + dividend coupon', tier: 'concept', minimum: 240, width: 1254, height: 1254, alt: 'Blue stock certificate with a small amber dividend coupon detached by a narrow gap' },
+          composability: { src: '../../presentation/assets/illustrated-v1/claim-composability.png', name: 'Dividend-claim composability', tier: 'scene', minimum: 420, width: 1254, height: 1254, alt: 'Amber dividend coupon connected conceptually to a wallet, public ledger and trading app' },
+          both: { src: 'assets/stock-and-dividend-composability-v1.png', name: 'Both sides are composable', tier: 'scene study', minimum: 420, width: 1448, height: 1086, alt: 'Blue stock certificate and amber dividend coupon independently connected to a neutral wallet and trading app' },
+          custody: { src: 'assets/issuer-separated-custody-v1.png', name: 'Issuer-separated custody', tier: 'scene study', minimum: 420, width: 1916, height: 821, alt: 'Three separate blue custody trays, each holding its own certificate and amber coupon' },
+          fractional: { src: 'assets/fractional-dividend-v1.png', name: 'Fractional dividend', tier: 'spot study', minimum: 128, width: 1254, height: 1254, alt: 'Amber dividend coupon separated into two unequal paper pieces by a narrow gap' }
+        };
+        const state = { asset: 'coupon', background: 'warm', width: '360' };
+        const stage = document.querySelector('#lab-stage');
+        const image = document.querySelector('#lab-image');
+        const caption = document.querySelector('#lab-caption strong');
+        const warning = document.querySelector('#lab-warning');
+
+        function renderCaption() {
+          const asset = assets[state.asset];
+          const bgName = state.background === 'warm' ? 'warm canvas' : state.background === 'white' ? 'white surface' : 'ink proof';
+          const renderedWidth = Math.round(image.getBoundingClientRect().width);
+          const widthLabel = Math.abs(renderedWidth - Number(state.width)) > 1
+            ? `${state.width} px requested, ${renderedWidth} px rendered`
+            : `${renderedWidth} px rendered`;
+          caption.textContent = `${asset.name} · ${asset.tier} · ${widthLabel} · ${bgName}.`;
+          const messages = [];
+          if (renderedWidth < asset.minimum) messages.push(`${asset.tier[0].toUpperCase()}${asset.tier.slice(1)} is undersized; use a simpler asset or wider placement.`);
+          if (state.background === 'ink') messages.push('Inspect real edges; prefer a light panel if any boundary disappears.');
+          warning.textContent = messages.length ? ` ${messages.join(' ')}` : '';
+        }
+
+        function update() {
+          const asset = assets[state.asset];
+          image.src = asset.src;
+          image.alt = asset.alt;
+          image.width = asset.width;
+          image.height = asset.height;
+          image.style.width = `${state.width}px`;
+          stage.className = `lab-stage${state.background === 'white' ? ' is-white' : state.background === 'ink' ? ' is-ink' : ''}`;
+          renderCaption();
+        }
+
+        document.querySelectorAll('[data-control]').forEach((group) => {
+          group.addEventListener('click', (event) => {
+            const button = event.target.closest('button[data-value]');
+            if (!button) return;
+            group.querySelectorAll('button').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+            state[group.dataset.control] = button.dataset.value;
+            update();
+          });
+        });
+
+        document.querySelector('#replay').addEventListener('click', () => {
+          image.classList.remove('replay');
+          void image.offsetWidth;
+          image.classList.add('replay');
+        });
+        image.addEventListener('animationend', () => image.classList.remove('replay'));
+        new ResizeObserver(renderCaption).observe(stage);
+        update();
+      })();
+    </script>
+  </body>
+</html>

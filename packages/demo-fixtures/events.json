@@ -1,0 +1,51 @@
+[
+  {
+    "id": "xstocks-kox-2026-09-15",
+    "assetId": "xstocks:XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+    "issuerEventId": "75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e",
+    "revision": "2",
+    "kind": "cash_dividend",
+    "evidenceKind": "issuer_api",
+    "m0": "1.0183317967386898",
+    "m1": "1.0225601246249238",
+    "actualEventAt": "2026-09-15T00:30:00Z",
+    "snapshotAt": "2026-09-16T03:18:59Z",
+    "issuerRecordStatus": "Initial",
+    "companyPaymentDate": "2026-10-01",
+    "netCashflowUsd": "0.371",
+    "referencePriceUsd": "89.35",
+    "sourceUrls": [
+      "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=KOx&sortBy=createdTimeUtc&sortOrder=asc",
+      "https://api.xstocks.fi/api/v2/public/assets/KOx/multiplier?network=Solana",
+      "https://investors.coca-colacompany.com/news-events/press-releases/detail/1165/board-of-directors-of-the-coca-cola-company-elects-new-officer-and-declares-regular-quarterly-dividend"
+    ],
+    "evidencePaths": ["planning/evidence/real-events-2026-09-16.json", "planning/ko-reference-snapshot.json"],
+    "sourceDigest": "c0234122397a57b85e74f8570e45faec75499e2dcf57eb8b84f11513f7486483",
+    "finality": "trusted_frozen_replay"
+  },
+  {
+    "id": "backpack-mu-2026-07-23",
+    "assetId": "backpack:MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+    "issuerEventId": null,
+    "revision": null,
+    "kind": "cash_dividend",
+    "evidenceKind": "onchain_reconstruction",
+    "m0": "1",
+    "m1": "1.000106726714702",
+    "actualEventAt": "2026-07-23T20:29:52Z",
+    "snapshotAt": "2026-09-16T05:56:09Z",
+    "issuerRecordStatus": "Finalized onchain reconstruction; no official issuer event ID or revision",
+    "companyPaymentDate": "2026-07-21",
+    "netCashflowUsd": null,
+    "referencePriceUsd": null,
+    "sourceUrls": [
+      "https://explorer.solana.com/tx/2dm9fGhwsVKYdsA3HWvALMoipEZY12qNkj6BpMiASvruNNpSFVBrrp2yWskathjf5Zb7nQFpPymjChkFYecJqqqz",
+      "https://explorer.solana.com/tx/39vTkahE7rUnFypAkKpaHUxwMyuC1nG4nJ12GEm3y9V1Kqep6ijvcX4isqsNXB63s3vsGNDjfi7uFFgH32Te59R",
+      "https://learn.backpack.exchange/blog/tokenized-micron-mu",
+      "https://investors.micron.com/financials/quarterly-results/"
+    ],
+    "evidencePaths": ["planning/evidence/backpack-scope-mu-event-2026-09-16.json"],
+    "sourceDigest": "632458919a61aff65c310d23a1e3c2fbf516ad102ad378b8a79adde657189770",
+    "finality": "trusted_frozen_replay"
+  }
+]

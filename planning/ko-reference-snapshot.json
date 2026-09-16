@@ -1,0 +1,551 @@
+{
+  "observed_at": "2026-09-16T02:27:08.797935+00:00",
+  "sources": {
+    "asset": "https://api.xstocks.fi/api/v2/public/assets/KOx",
+    "multiplier": "https://api.xstocks.fi/api/v2/public/assets/KOx/multiplier?network=Solana",
+    "history": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=KOx&sortBy=createdTimeUtc&sortOrder=asc"
+  },
+  "responses": {
+    "asset": {
+      "id": "69e03621-9876-4fec-a3b4-3f8e0025a776",
+      "name": "Coca-Cola xStock",
+      "symbol": "KOx",
+      "isin": "CH1436219419",
+      "underlyingSymbol": "KO",
+      "underlyingIsin": "US1912161007",
+      "underlying": {
+        "symbol": "KO",
+        "isin": "US1912161007",
+        "type": null,
+        "listingCountry": "US"
+      },
+      "description": "Coca-Cola xStock",
+      "logo": "https://xstocks-metadata.backed.fi/logos/tokens/KOx.png",
+      "isTradingHalted": false,
+      "trading": {
+        "currency": "USD",
+        "tradingHoursMode": "TwentyFourFive",
+        "isTradingHalted": false,
+        "currentPeriod": "overnight",
+        "openNow": true,
+        "nextChangeAt": "2026-09-16T08:00:00.000Z",
+        "exchange": {
+          "mic": "XNYS",
+          "abbreviation": "NYSE",
+          "name": "New York Stock Exchange",
+          "timezone": "America/New_York"
+        },
+        "limitsPerPeriod": {
+          "market": {
+            "minOrderFiatValue": 1000,
+            "maxOrderFiatValue": 25000000
+          },
+          "extended": {
+            "minOrderFiatValue": 1000,
+            "maxOrderFiatValue": 25000000
+          },
+          "overnight": {
+            "minOrderFiatValue": 1000,
+            "maxOrderFiatValue": 5000000
+          },
+          "closed": {
+            "minOrderFiatValue": 1000,
+            "maxOrderFiatValue": 0
+          }
+        }
+      },
+      "deployments": [
+        {
+          "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+          "network": "Ethereum",
+          "wrapperAddress": "0x9a2486fbe7bc17c9100be65c31abe7c9bf84c23c",
+          "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+          "supportsAtomicSwaps": true,
+          "stablecoins": [
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "Ethereum",
+              "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            },
+            {
+              "symbol": "USDT",
+              "currency": "USD",
+              "network": "Ethereum",
+              "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            },
+            {
+              "symbol": "PYUSD",
+              "currency": "USD",
+              "network": "Ethereum",
+              "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            },
+            {
+              "symbol": "EURC",
+              "currency": "EUR",
+              "network": "Ethereum",
+              "address": "0x1abaea1f7c830bd89acc67ec4af516284b1bc33c",
+              "decimals": 6,
+              "issuance": false,
+              "redemption": false,
+              "supportsAtomicSwaps": true
+            },
+            {
+              "symbol": "USDG",
+              "currency": "USD",
+              "network": "Ethereum",
+              "address": "0xe343167631d89b6ffc58b88d6b7fb0228795491d",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            }
+          ]
+        },
+        {
+          "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+          "network": "BinanceSmartChain",
+          "wrapperAddress": "0x9a2486fbe7bc17c9100be65c31abe7c9bf84c23c",
+          "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+          "supportsAtomicSwaps": true,
+          "stablecoins": [
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "BinanceSmartChain",
+              "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+              "decimals": 18,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            }
+          ]
+        },
+        {
+          "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+          "network": "Arbitrum",
+          "wrapperAddress": "0x9a2486fbe7bc17c9100be65c31abe7c9bf84c23c",
+          "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+          "supportsAtomicSwaps": true,
+          "stablecoins": [
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "Arbitrum",
+              "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            }
+          ]
+        },
+        {
+          "address": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+          "network": "Solana",
+          "supportsAtomicSwaps": true,
+          "stablecoins": [
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "Solana",
+              "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true,
+              "solanaTokenProgram": "TokenProgram"
+            },
+            {
+              "symbol": "USDG",
+              "currency": "USD",
+              "network": "Solana",
+              "address": "2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            }
+          ]
+        },
+        {
+          "address": "TCDQkeGtGoqfjKvewXuz52CYx9tMXALSYg",
+          "network": "Tron",
+          "supportsAtomicSwaps": false,
+          "stablecoins": [
+            {
+              "symbol": "USDT",
+              "currency": "USD",
+              "network": "Tron",
+              "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": false
+            }
+          ]
+        },
+        {
+          "address": "EQAD-iVmVKW8frDDYPd80N-7dy8m2LfU8nK_85TeHkXWEw-C",
+          "network": "Ton",
+          "supportsAtomicSwaps": false,
+          "stablecoins": [
+            {
+              "symbol": "USDT",
+              "currency": "USD",
+              "network": "Ton",
+              "address": "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": false
+            }
+          ]
+        },
+        {
+          "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+          "network": "Mantle",
+          "wrapperAddress": "0x9a2486fbe7bc17c9100be65c31abe7c9bf84c23c",
+          "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+          "supportsAtomicSwaps": true,
+          "stablecoins": [
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "Mantle",
+              "address": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            }
+          ]
+        },
+        {
+          "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+          "network": "HyperEVM",
+          "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+          "supportsAtomicSwaps": true,
+          "stablecoins": [
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "HyperEVM",
+              "address": "0xb88339cb7199b77e23db6e890353e22632ba630f",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            }
+          ]
+        },
+        {
+          "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+          "network": "Ink",
+          "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+          "supportsAtomicSwaps": true,
+          "stablecoins": [
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "Ink",
+              "address": "0x2d270e6886d130d724215a266106e6832161eaed",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            }
+          ]
+        },
+        {
+          "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+          "network": "XLayer",
+          "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+          "supportsAtomicSwaps": true,
+          "stablecoins": [
+            {
+              "symbol": "USDG",
+              "currency": "USD",
+              "network": "XLayer",
+              "address": "0x4ae46a509f6b1d9056937ba4500cb143933d2dc8",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            },
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "XLayer",
+              "address": "0xb6ceceab302e2e4948951ee7843fc24e92933061",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": true
+            }
+          ]
+        },
+        {
+          "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+          "network": "Optimism",
+          "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+          "supportsAtomicSwaps": false,
+          "stablecoins": [
+            {
+              "symbol": "USDC",
+              "currency": "USD",
+              "network": "Optimism",
+              "address": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85",
+              "decimals": 6,
+              "issuance": true,
+              "redemption": true,
+              "supportsAtomicSwaps": false
+            }
+          ]
+        }
+      ]
+    },
+    "multiplier": {
+      "currentMultiplier": 1.0225601246249238,
+      "newMultiplier": 0,
+      "activationDateTime": 0,
+      "reason": null
+    },
+    "history": {
+      "page": {
+        "currentPage": 1,
+        "pageSize": 100,
+        "totalPages": 1,
+        "totalNodes": 5,
+        "hasNextPage": false,
+        "hasPreviousPage": false
+      },
+      "nodes": [
+        {
+          "eventId": "4aaf36d3-cf66-49f2-bd9b-0a16d21789e1",
+          "version": 1,
+          "xstockSymbol": "KOx",
+          "spvSymbol": "KO",
+          "caType": "CashDividend",
+          "effectiveTimeUtc": "2025-10-01T23:55:00.000Z",
+          "multiplierOld": "1",
+          "multiplierNew": "1.0053372508",
+          "grossCashflowUsd": "0.51",
+          "netCashflowUsd": "0.357",
+          "withholdingTaxRate": "0.3",
+          "fromUnits": null,
+          "toUnits": null,
+          "redemptionPriceUsd": null,
+          "notes": null,
+          "createdTimeUtc": "2025-10-01T21:01:43.479Z",
+          "status": "Initial",
+          "xstockIsin": "CH1436219419",
+          "spvIsin": "US1912161007"
+        },
+        {
+          "eventId": "95731964-1969-434c-b395-fc9c4a73c973",
+          "version": 1,
+          "xstockSymbol": "KOx",
+          "spvSymbol": "KO",
+          "caType": "CashDividend",
+          "effectiveTimeUtc": "2025-12-15T23:55:00.000Z",
+          "multiplierOld": "1.0053372508",
+          "multiplierNew": "1.008956356680335626",
+          "grossCashflowUsd": "0.51",
+          "netCashflowUsd": "0.357",
+          "withholdingTaxRate": "0.3",
+          "fromUnits": null,
+          "toUnits": null,
+          "redemptionPriceUsd": null,
+          "notes": null,
+          "createdTimeUtc": "2025-12-15T21:39:48.741Z",
+          "status": "Initial",
+          "xstockIsin": "CH1436219419",
+          "spvIsin": "US1912161007"
+        },
+        {
+          "eventId": "60820471-a68e-4a08-a0fe-544a5ec2267b",
+          "version": 2,
+          "xstockSymbol": "KOx",
+          "spvSymbol": "KO",
+          "caType": "CashDividend",
+          "effectiveTimeUtc": "2026-03-13T00:15:00.000Z",
+          "multiplierOld": "1.008956356680335626",
+          "multiplierNew": "1.013779482672994",
+          "grossCashflowUsd": "0.53",
+          "netCashflowUsd": "0.371",
+          "withholdingTaxRate": "0.3",
+          "fromUnits": null,
+          "toUnits": null,
+          "redemptionPriceUsd": null,
+          "notes": null,
+          "createdTimeUtc": "2026-03-13T00:08:22.455Z",
+          "status": "Initial",
+          "xstockIsin": "CH1436219419",
+          "spvIsin": "US1912161007"
+        },
+        {
+          "eventId": "a2ea4252-01b1-4876-a4fc-e3eb2673d31a",
+          "version": 2,
+          "xstockSymbol": "KOx",
+          "spvSymbol": "KO",
+          "caType": "CashDividend",
+          "effectiveTimeUtc": "2026-06-14T23:55:00.000Z",
+          "multiplierOld": "1.013779482672994",
+          "multiplierNew": "1.0183317967386898",
+          "grossCashflowUsd": "0.53",
+          "netCashflowUsd": "0.371",
+          "withholdingTaxRate": "0.3",
+          "fromUnits": null,
+          "toUnits": null,
+          "redemptionPriceUsd": null,
+          "notes": null,
+          "createdTimeUtc": "2026-06-13T20:19:42.665Z",
+          "status": "Initial",
+          "xstockIsin": "CH1436219419",
+          "spvIsin": "US1912161007"
+        },
+        {
+          "eventId": "75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e",
+          "version": 2,
+          "xstockSymbol": "KOx",
+          "spvSymbol": "KO",
+          "caType": "CashDividend",
+          "effectiveTimeUtc": "2026-09-15T00:30:00.000Z",
+          "multiplierOld": "1.0183317967386898",
+          "multiplierNew": "1.0225601246249238",
+          "grossCashflowUsd": "0.53",
+          "netCashflowUsd": "0.371",
+          "withholdingTaxRate": "0.3",
+          "fromUnits": null,
+          "toUnits": null,
+          "redemptionPriceUsd": null,
+          "notes": null,
+          "createdTimeUtc": "2026-09-14T20:25:06.091Z",
+          "status": "Initial",
+          "xstockIsin": "CH1436219419",
+          "spvIsin": "US1912161007"
+        }
+      ]
+    }
+  },
+  "rpc_observed_at": "2026-09-16T02:29:11.080939+00:00",
+  "rpc_request": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getAccountInfo",
+    "params": [
+      "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+      {
+        "encoding": "jsonParsed",
+        "commitment": "finalized"
+      }
+    ]
+  },
+  "rpc_response": {
+    "jsonrpc": "2.0",
+    "result": {
+      "context": {
+        "apiVersion": "4.3.0-rc.0",
+        "slot": 447408928
+      },
+      "value": {
+        "data": {
+          "parsed": {
+            "info": {
+              "decimals": 8,
+              "extensions": [
+                {
+                  "extension": "metadataPointer",
+                  "state": {
+                    "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                    "metadataAddress": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ"
+                  }
+                },
+                {
+                  "extension": "permanentDelegate",
+                  "state": {
+                    "delegate": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq"
+                  }
+                },
+                {
+                  "extension": "defaultAccountState",
+                  "state": {
+                    "accountState": "initialized"
+                  }
+                },
+                {
+                  "extension": "scaledUiAmountConfig",
+                  "state": {
+                    "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+                    "multiplier": "1.0183317967386898",
+                    "newMultiplier": "1.0225601246249238",
+                    "newMultiplierEffectiveTimestamp": 1789432200
+                  }
+                },
+                {
+                  "extension": "pausableConfig",
+                  "state": {
+                    "authority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                    "paused": false
+                  }
+                },
+                {
+                  "extension": "confidentialTransferMint",
+                  "state": {
+                    "auditorElgamalPubkey": null,
+                    "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                    "autoApproveNewAccounts": false
+                  }
+                },
+                {
+                  "extension": "transferHook",
+                  "state": {
+                    "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                    "programId": null
+                  }
+                },
+                {
+                  "extension": "tokenMetadata",
+                  "state": {
+                    "additionalMetadata": [],
+                    "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+                    "name": "Coca-Cola xStock",
+                    "symbol": "KOx",
+                    "updateAuthority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                    "uri": "https://xstocks-metadata.backed.fi/tokens/Solana/KOx/metadata.json"
+                  }
+                }
+              ],
+              "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+              "isInitialized": true,
+              "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+              "supply": "21122348724691"
+            },
+            "type": "mint"
+          },
+          "program": "spl-token-2022",
+          "space": 678
+        },
+        "executable": false,
+        "lamports": 6321854,
+        "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "rentEpoch": 18446744073709551615,
+        "space": 678
+      }
+    },
+    "id": 1
+  }
+}

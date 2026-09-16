@@ -1,0 +1,7 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import '@tokens/tokens.css';
+import './product.css';
+import { ProductApp } from './ProductApp';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><ProductApp /></React.StrictMode>);

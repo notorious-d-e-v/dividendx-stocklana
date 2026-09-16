@@ -1,0 +1,51 @@
+{
+  "schema": "dividendx.backpack-scope-mu-authority-history.v1",
+  "observedAt": "2026-09-16T05:56:09Z",
+  "rpcEndpoint": "https://api.mainnet-beta.solana.com",
+  "method": "getSignaturesForAddress",
+  "address": "6XPofT3JgdoZAkUxqAbYZLNbsDvBCkDqrEWeaTiQKRBD",
+  "commitment": "finalized",
+  "page": {
+    "limit": 1000,
+    "before": "5nJ8L6A5UK62BhCMDNXuz1uogu1nK5Ky34w2yrQsiFfJqL58mVigcagAnBeCQkNR34WRkk7knr1BAZr6HPMBzKcH",
+    "returnedCount": 1000,
+    "newest": {
+      "slot": 439831737,
+      "blockTime": 1786962300,
+      "signature": "59hT9iztfwSdBVcL32c8Gj79V8XKEiGNC3d1nCW6PGkaFqHMRFzxJWD4gwPUHnhEXj7wEsmWCkPVnscCDno7bXmj"
+    },
+    "oldest": {
+      "slot": 431811621,
+      "blockTime": 1783604724,
+      "signature": "1j6KSEaN2fVCnkm4pSdWmzjeRWw1zGR32EKXbshAvy2y1h5BQW9ENK7jZyYNreMVXZgcUu9k7aFPPHD2UTSiagH"
+    },
+    "rawResponseSha256": "dcee6360c652b4a39d0bf2367ffbafaaa2d73166725506bf7b79c1731f37b917"
+  },
+  "targetInterval": {
+    "fromSlotInclusive": 434765325,
+    "toSlotInclusive": 434783905,
+    "isStrictlyInsideReturnedPage": true,
+    "matchingRawEntries": [
+      {
+        "blockTime": 1784838592,
+        "confirmationStatus": "finalized",
+        "err": null,
+        "memo": null,
+        "signature": "39vTkahE7rUnFypAkKpaHUxwMyuC1nG4nJ12GEm3y9V1Kqep6ijvcX4isqsNXB63s3vsGNDjfi7uFFgH32Te59R",
+        "slot": 434783905,
+        "transactionIndex": 1331
+      },
+      {
+        "blockTime": 1784830772,
+        "confirmationStatus": "finalized",
+        "err": null,
+        "memo": null,
+        "signature": "2dm9fGhwsVKYdsA3HWvALMoipEZY12qNkj6BpMiASvruNNpSFVBrrp2yWskathjf5Zb7nQFpPymjChkFYecJqqqz",
+        "slot": 434765325,
+        "transactionIndex": 973
+      }
+    ],
+    "matchingEntryCount": 2,
+    "conclusion": "The finalized page spans slots above and below the complete target interval. These are the only signatures in the interval, so no intervening transaction touched the scaled-UI authority. Parsed raw transactions are saved separately."
+  }
+}

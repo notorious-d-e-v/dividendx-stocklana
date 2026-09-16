@@ -1,0 +1,54 @@
+{
+  "schema": "dividendx.demo-fixtures.manifest.v1",
+  "compiledAt": "2026-09-16T10:07:35.804Z",
+  "scope": {
+    "status": "historical_snapshot_for_rehearsal",
+    "assetCount": 15,
+    "eventCount": 2,
+    "issuerAssetCounts": {
+      "xstocks": 6,
+      "backpack": 3,
+      "ondo": 6
+    },
+    "permissionedCatalogIncluded": false,
+    "liveIntegrationClaimed": false
+  },
+  "fixtureFiles": [
+    {
+      "path": "packages/demo-fixtures/catalog.json",
+      "sha256": "cd8c51171fb5d7ebb18b3c113ba30d339a4103c999bde51ebf031ae27ccd27fd"
+    },
+    {
+      "path": "packages/demo-fixtures/events.json",
+      "sha256": "f8c8eb42c0d78a1be1824330f147e95d154103efa961d6212a3ffeaf60b8f3b6"
+    }
+  ],
+  "primaryEventEvidence": [
+    {
+      "eventId": "xstocks-kox-2026-09-15",
+      "path": "planning/evidence/real-events-2026-09-16.json",
+      "observedFrom": "2026-09-16T03:14:35Z",
+      "observedThrough": "2026-09-16T03:18:59Z",
+      "sha256": "c0234122397a57b85e74f8570e45faec75499e2dcf57eb8b84f11513f7486483"
+    },
+    {
+      "eventId": "backpack-mu-2026-07-23",
+      "path": "planning/evidence/backpack-scope-mu-event-2026-09-16.json",
+      "observedAt": "2026-09-16T05:56:09Z",
+      "sha256": "632458919a61aff65c310d23a1e3c2fbf516ad102ad378b8a79adde657189770"
+    }
+  ],
+  "supportingEvidence": [
+    {
+      "path": "planning/evidence/initial-asset-package-2026-09-16.json",
+      "compiledAt": "2026-09-16T07:06:29Z",
+      "sha256": "92e9241a6df833e67d4f810f308093070d09cd6ecd9891bbf958f3dce88ee69e"
+    },
+    {
+      "path": "planning/ko-reference-snapshot.json",
+      "observedAt": "2026-09-16T02:27:08.797935Z",
+      "sha256": "f478f5dd68984e6747ed0d3fb324aed5d5f18b982aa277010a7a46642df9eb33"
+    }
+  ],
+  "sourceSnapshotCompiledAt": "2026-09-16T07:12:03.239412Z"
+}

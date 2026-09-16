@@ -1,0 +1,12 @@
+{
+  "presentation/output/DividendX-phase-two-v5.pptx": "d9d0fab5403eb6df61d2a155b2127bca5bd286c486c179fdc6571213322720be",
+  "presentation/output/DividendX-illustrated-v1.pptx": "bf4d4eaaa753598bb7f4ef6f7ab1d09c9695406a6d2c8a04e42b0d577e546d7d",
+  "presentation/narration.md": "cd92045c833e0782d8b75860f8e1ca50e38c9d4d4a74f3434cd802ee42f43262",
+  "design/index.html": "0811d62203ac990a6cf1bc13b733915920fe6e2f5dbc74cb0abc538abf65e74c",
+  "packages/design-tokens/tokens.css": "2d4f0a7465380d0a5420fe98afe41c3f8d584d533c2166e0bcfc3bad56170482",
+  "packages/design-tokens/tokens.json": "e043cd442d218cd0a0d7d39610573289d8e7cb3de814bdd7b5cb9976f9527268",
+  "presentation/assets/illustrated-v1/stock-dividend-coupon.png": "e1601f24d5a7013466ee306bf5e1097eb59dbb1b16987060de5fad23c9cad9ec",
+  "presentation/assets/illustrated-v1/claim-composability.png": "8a23d9f942eeb1c25faab8cc6fed6e7daac681d61843ede660c07830c5670731",
+  "design/illustrations/assets/issuer-separated-custody-v1.png": "bf8002a4ca863cd94ded88f7ae3cd3b3b5a027b68a836b0c6efbbf220ae849a8",
+  "design/illustrations/assets/fractional-dividend-v1.png": "d07dae422956785c3af7cd1f0f9deb3c8c0b548389f7bd93f35ab2ed557b9a6e"
+}

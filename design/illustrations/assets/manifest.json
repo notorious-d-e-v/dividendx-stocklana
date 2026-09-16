@@ -1,0 +1,71 @@
+{
+  "method": "built-in image generation",
+  "prompts": "../prompts/final-prompts-v1.md",
+  "assets": {
+    "issuer-separated-custody-v1": {
+      "path": "/Users/node/workspace/dividendx-stocklana/design/illustrations/assets/issuer-separated-custody-v1.png",
+      "generated_source": "/Users/node/.codex/generated_images/01a0a800-a6b1-7bd0-9726-8b0d12038d7a/exec-5d978f6d-35b0-49eb-b19b-790bbe2ae524.png",
+      "size": [
+        1916,
+        821
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bytes": 1017870,
+      "sha256": "bf8002a4ca863cd94ded88f7ae3cd3b3b5a027b68a836b0c6efbbf220ae849a8",
+      "role": "extension-study",
+      "format": "raster PNG",
+      "background": "transparent",
+      "review_status": "Astra visual and alpha check passed; user review pending",
+      "notes": "Simplify ornamental certificate borders if producing a small derivative."
+    },
+    "fractional-dividend-v1": {
+      "path": "/Users/node/workspace/dividendx-stocklana/design/illustrations/assets/fractional-dividend-v1.png",
+      "generated_source": "/Users/node/.codex/generated_images/01a0a800-a6b1-7bd0-9726-8b0d12038d7a/exec-d2635381-ee42-4312-b385-19d864060ddc.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bytes": 687242,
+      "sha256": "d07dae422956785c3af7cd1f0f9deb3c8c0b548389f7bd93f35ab2ed557b9a6e",
+      "role": "extension-study",
+      "format": "raster PNG",
+      "background": "transparent",
+      "review_status": "Astra visual and alpha check passed; user review pending",
+      "notes": "Conceptual divisibility only; proportions are not a financial allocation."
+    },
+    "stock-and-dividend-composability-v1": {
+      "path": "/Users/node/workspace/dividendx-stocklana/design/illustrations/assets/stock-and-dividend-composability-v1.png",
+      "generated_source": "/Users/node/.codex/generated_images/01a0a800-a6b1-7bd0-9726-8b0d12038d7a/exec-3a4b3b6e-a852-4556-9ae3-c4f0c7ae10d2.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bytes": 981235,
+      "sha256": "02b9930b146740c1cdeb60921fd1ccfce6bd1809d87fb89b56bec44d8361ad63",
+      "role": "extension-study",
+      "format": "raster PNG",
+      "background": "transparent",
+      "method": "built-in image generation",
+      "prompts": "../prompts/stock-and-dividend-composability-v1.md",
+      "intended_tier": "scene",
+      "suggested_minimum_image_width_px": 420,
+      "alt": "Blue stock-exposure certificate and amber dividend coupon each linked to a wallet and a trading app.",
+      "review_status": "Astra visual and alpha check passed; user review pending",
+      "notes": "Both app-facing claims are composable; locked backing stays in its vault. Four conceptual connections, no transaction arrows or live integration claim. Use a light surface to preserve thin ink connectors."
+    }
+  }
+}

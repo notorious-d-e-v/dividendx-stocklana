@@ -1,0 +1,21 @@
+{
+  "final": "/Users/node/workspace/dividendx-stocklana/presentation/output/DividendX-illustrated-v1.pptx",
+  "sha256": "bf4d4eaaa753598bb7f4ef6f7ab1d09c9695406a6d2c8a04e42b0d577e546d7d",
+  "bytes": 2459944,
+  "slides": 9,
+  "notes": 9,
+  "native_shapes": 174,
+  "narration_matches": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "baseline_files_unchanged": 14,
+  "all_final_slides_visually_reviewed": true
+}

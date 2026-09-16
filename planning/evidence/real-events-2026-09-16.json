@@ -1,0 +1,1662 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Timestamped, read-only planning evidence for a realistic DividendX demo. No transactions, transfers, or funds were used.",
+  "observedDateUtc": "2026-09-16",
+  "fetchTimeSemantics": "Each fetchedAtUtc is the local file completion time recorded immediately after curl completed, converted to UTC to the nearest second.",
+  "documentedApi": {
+    "url": "https://docs.xstocks.fi/apis/openapi/corporate-actions",
+    "versionShown": "v2",
+    "historyOperation": "GET /public/corporate-actions/history",
+    "documentedPageSizeMaximum": 100
+  },
+  "ko": {
+    "asset": {
+      "fetchedAtUtc": "2026-09-16T03:14:35Z",
+      "requestUrl": "https://api.xstocks.fi/api/v2/public/assets/KOx",
+      "responseSha256": "bd65b160ae79c9b8482fd214a6c0c758be51e1a75d1220a315f3a9a31b84fe09",
+      "rawResponse": {
+        "id": "69e03621-9876-4fec-a3b4-3f8e0025a776",
+        "name": "Coca-Cola xStock",
+        "symbol": "KOx",
+        "isin": "CH1436219419",
+        "underlyingSymbol": "KO",
+        "underlyingIsin": "US1912161007",
+        "underlying": {
+          "symbol": "KO",
+          "isin": "US1912161007",
+          "type": null,
+          "listingCountry": "US"
+        },
+        "description": "Coca-Cola xStock",
+        "logo": "https://xstocks-metadata.backed.fi/logos/tokens/KOx.png",
+        "isTradingHalted": false,
+        "trading": {
+          "currency": "USD",
+          "tradingHoursMode": "TwentyFourFive",
+          "isTradingHalted": false,
+          "currentPeriod": "overnight",
+          "openNow": true,
+          "nextChangeAt": "2026-09-16T08:00:00.000Z",
+          "exchange": {
+            "mic": "XNYS",
+            "abbreviation": "NYSE",
+            "name": "New York Stock Exchange",
+            "timezone": "America/New_York"
+          },
+          "limitsPerPeriod": {
+            "market": {
+              "minOrderFiatValue": 1000,
+              "maxOrderFiatValue": 25000000
+            },
+            "extended": {
+              "minOrderFiatValue": 1000,
+              "maxOrderFiatValue": 25000000
+            },
+            "overnight": {
+              "minOrderFiatValue": 1000,
+              "maxOrderFiatValue": 5000000
+            },
+            "closed": {
+              "minOrderFiatValue": 1000,
+              "maxOrderFiatValue": 0
+            }
+          }
+        },
+        "deployments": [
+          {
+            "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+            "network": "Ethereum",
+            "wrapperAddress": "0x9a2486fbe7bc17c9100be65c31abe7c9bf84c23c",
+            "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Ethereum",
+                "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "USDT",
+                "currency": "USD",
+                "network": "Ethereum",
+                "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "PYUSD",
+                "currency": "USD",
+                "network": "Ethereum",
+                "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "EURC",
+                "currency": "EUR",
+                "network": "Ethereum",
+                "address": "0x1abaea1f7c830bd89acc67ec4af516284b1bc33c",
+                "decimals": 6,
+                "issuance": false,
+                "redemption": false,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "USDG",
+                "currency": "USD",
+                "network": "Ethereum",
+                "address": "0xe343167631d89b6ffc58b88d6b7fb0228795491d",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+            "network": "BinanceSmartChain",
+            "wrapperAddress": "0x9a2486fbe7bc17c9100be65c31abe7c9bf84c23c",
+            "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "BinanceSmartChain",
+                "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+                "decimals": 18,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+            "network": "Arbitrum",
+            "wrapperAddress": "0x9a2486fbe7bc17c9100be65c31abe7c9bf84c23c",
+            "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Arbitrum",
+                "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+            "network": "Solana",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Solana",
+                "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true,
+                "solanaTokenProgram": "TokenProgram"
+              },
+              {
+                "symbol": "USDG",
+                "currency": "USD",
+                "network": "Solana",
+                "address": "2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "TCDQkeGtGoqfjKvewXuz52CYx9tMXALSYg",
+            "network": "Tron",
+            "supportsAtomicSwaps": false,
+            "stablecoins": [
+              {
+                "symbol": "USDT",
+                "currency": "USD",
+                "network": "Tron",
+                "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": false
+              }
+            ]
+          },
+          {
+            "address": "EQAD-iVmVKW8frDDYPd80N-7dy8m2LfU8nK_85TeHkXWEw-C",
+            "network": "Ton",
+            "supportsAtomicSwaps": false,
+            "stablecoins": [
+              {
+                "symbol": "USDT",
+                "currency": "USD",
+                "network": "Ton",
+                "address": "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": false
+              }
+            ]
+          },
+          {
+            "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+            "network": "Mantle",
+            "wrapperAddress": "0x9a2486fbe7bc17c9100be65c31abe7c9bf84c23c",
+            "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Mantle",
+                "address": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+            "network": "HyperEVM",
+            "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "HyperEVM",
+                "address": "0xb88339cb7199b77e23db6e890353e22632ba630f",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+            "network": "Ink",
+            "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Ink",
+                "address": "0x2d270e6886d130d724215a266106e6832161eaed",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+            "network": "XLayer",
+            "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDG",
+                "currency": "USD",
+                "network": "XLayer",
+                "address": "0x4ae46a509f6b1d9056937ba4500cb143933d2dc8",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "XLayer",
+                "address": "0xb6ceceab302e2e4948951ee7843fc24e92933061",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0xdcc1a2699441079da889b1f49e12b69cc791129b",
+            "network": "Optimism",
+            "wrapperAddressV2": "0xe4784b45415aac58b289f9373314261c788c91e8",
+            "supportsAtomicSwaps": false,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Optimism",
+                "address": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "multiplier": {
+      "fetchedAtUtc": "2026-09-16T03:14:41Z",
+      "requestUrl": "https://api.xstocks.fi/api/v2/public/assets/KOx/multiplier?network=Solana",
+      "responseSha256": "5ae059fa1c1fd11e893df79e75d970eee0117d28b7f012983f20163cf90e9241",
+      "rawResponse": {
+        "currentMultiplier": 1.0225601246249238,
+        "newMultiplier": 0,
+        "activationDateTime": 0,
+        "reason": null
+      }
+    },
+    "corporateActionHistory": {
+      "fetchedAtUtc": "2026-09-16T03:14:47Z",
+      "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=KOx&sortBy=createdTimeUtc&sortOrder=asc",
+      "responseSha256": "0e15a605daa136fbce8bb368642d95b4a53cec47cd7e88f1c57405157b3b883e",
+      "rawResponse": {
+        "page": {
+          "currentPage": 1,
+          "pageSize": 100,
+          "totalPages": 1,
+          "totalNodes": 5,
+          "hasNextPage": false,
+          "hasPreviousPage": false
+        },
+        "nodes": [
+          {
+            "eventId": "4aaf36d3-cf66-49f2-bd9b-0a16d21789e1",
+            "version": 1,
+            "xstockSymbol": "KOx",
+            "spvSymbol": "KO",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2025-10-01T23:55:00.000Z",
+            "multiplierOld": "1",
+            "multiplierNew": "1.0053372508",
+            "grossCashflowUsd": "0.51",
+            "netCashflowUsd": "0.357",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2025-10-01T21:01:43.479Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219419",
+            "spvIsin": "US1912161007"
+          },
+          {
+            "eventId": "95731964-1969-434c-b395-fc9c4a73c973",
+            "version": 1,
+            "xstockSymbol": "KOx",
+            "spvSymbol": "KO",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2025-12-15T23:55:00.000Z",
+            "multiplierOld": "1.0053372508",
+            "multiplierNew": "1.008956356680335626",
+            "grossCashflowUsd": "0.51",
+            "netCashflowUsd": "0.357",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2025-12-15T21:39:48.741Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219419",
+            "spvIsin": "US1912161007"
+          },
+          {
+            "eventId": "60820471-a68e-4a08-a0fe-544a5ec2267b",
+            "version": 2,
+            "xstockSymbol": "KOx",
+            "spvSymbol": "KO",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-03-13T00:15:00.000Z",
+            "multiplierOld": "1.008956356680335626",
+            "multiplierNew": "1.013779482672994",
+            "grossCashflowUsd": "0.53",
+            "netCashflowUsd": "0.371",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-03-13T00:08:22.455Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219419",
+            "spvIsin": "US1912161007"
+          },
+          {
+            "eventId": "a2ea4252-01b1-4876-a4fc-e3eb2673d31a",
+            "version": 2,
+            "xstockSymbol": "KOx",
+            "spvSymbol": "KO",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-06-14T23:55:00.000Z",
+            "multiplierOld": "1.013779482672994",
+            "multiplierNew": "1.0183317967386898",
+            "grossCashflowUsd": "0.53",
+            "netCashflowUsd": "0.371",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-06-13T20:19:42.665Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219419",
+            "spvIsin": "US1912161007"
+          },
+          {
+            "eventId": "75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e",
+            "version": 2,
+            "xstockSymbol": "KOx",
+            "spvSymbol": "KO",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-09-15T00:30:00.000Z",
+            "multiplierOld": "1.0183317967386898",
+            "multiplierNew": "1.0225601246249238",
+            "grossCashflowUsd": "0.53",
+            "netCashflowUsd": "0.371",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-09-14T20:25:06.091Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219419",
+            "spvIsin": "US1912161007"
+          }
+        ]
+      }
+    },
+    "upcoming": {
+      "fetchedAtUtc": "2026-09-16T03:16:58Z",
+      "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/upcoming?page=1&pageSize=100&symbol=KOx",
+      "responseSha256": "27589a3af6fa82c07bdbefa23e2a8428720dc8b98b3ff04029936223001aa3dd",
+      "rawResponse": {
+        "page": {
+          "currentPage": 1,
+          "pageSize": 100,
+          "totalPages": 1,
+          "totalNodes": 3,
+          "hasNextPage": false,
+          "hasPreviousPage": false
+        },
+        "nodes": [
+          {
+            "eventId": "75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e",
+            "version": 1,
+            "xstockSymbol": "KOx",
+            "spvSymbol": "KO",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-09-15T00:30:00.000Z",
+            "multiplierOld": null,
+            "multiplierNew": null,
+            "grossCashflowUsd": "0.53",
+            "netCashflowUsd": "0.371",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-09-08T00:12:00.768Z",
+            "status": "Scheduled",
+            "xstockIsin": "CH1436219419",
+            "spvIsin": "US1912161007"
+          },
+          {
+            "eventId": "a2ea4252-01b1-4876-a4fc-e3eb2673d31a",
+            "version": 1,
+            "xstockSymbol": "KOx",
+            "spvSymbol": "KO",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-06-15T00:30:00.000Z",
+            "multiplierOld": null,
+            "multiplierNew": null,
+            "grossCashflowUsd": "0.53",
+            "netCashflowUsd": "0.371",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-05-19T01:11:35.929Z",
+            "status": "Scheduled",
+            "xstockIsin": "CH1436219419",
+            "spvIsin": "US1912161007"
+          },
+          {
+            "eventId": "60820471-a68e-4a08-a0fe-544a5ec2267b",
+            "version": 1,
+            "xstockSymbol": "KOx",
+            "spvSymbol": "KO",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-03-13T01:15:00.000Z",
+            "multiplierOld": null,
+            "multiplierNew": null,
+            "grossCashflowUsd": "0.53",
+            "netCashflowUsd": "0.371",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-03-06T17:55:54.492Z",
+            "status": "Scheduled",
+            "xstockIsin": "CH1436219419",
+            "spvIsin": "US1912161007"
+          }
+        ]
+      }
+    },
+    "solanaMint": {
+      "fetchedAtUtc": "2026-09-16T03:17:00Z",
+      "requestUrl": "https://api.mainnet-beta.solana.com",
+      "responseSha256": "c72e99ff1a49146afdf9ffa8f3003c2d5bf833a6de90c42fa982f07a92e80d01",
+      "rawRequest": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "getAccountInfo",
+        "params": [
+          "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+          {
+            "encoding": "jsonParsed",
+            "commitment": "finalized"
+          }
+        ]
+      },
+      "rawResponse": {
+        "jsonrpc": "2.0",
+        "result": {
+          "context": {
+            "apiVersion": "4.3.0-rc.0",
+            "slot": 447417969
+          },
+          "value": {
+            "data": {
+              "parsed": {
+                "info": {
+                  "decimals": 8,
+                  "extensions": [
+                    {
+                      "extension": "metadataPointer",
+                      "state": {
+                        "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                        "metadataAddress": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ"
+                      }
+                    },
+                    {
+                      "extension": "permanentDelegate",
+                      "state": {
+                        "delegate": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq"
+                      }
+                    },
+                    {
+                      "extension": "defaultAccountState",
+                      "state": {
+                        "accountState": "initialized"
+                      }
+                    },
+                    {
+                      "extension": "scaledUiAmountConfig",
+                      "state": {
+                        "authority": "S7vYFFWH6BjJyEsdrPQpqpYTqLTrPRK6KW3VwsJuRaS",
+                        "multiplier": "1.0183317967386898",
+                        "newMultiplier": "1.0225601246249238",
+                        "newMultiplierEffectiveTimestamp": 1789432200
+                      }
+                    },
+                    {
+                      "extension": "pausableConfig",
+                      "state": {
+                        "authority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                        "paused": false
+                      }
+                    },
+                    {
+                      "extension": "confidentialTransferMint",
+                      "state": {
+                        "auditorElgamalPubkey": null,
+                        "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                        "autoApproveNewAccounts": false
+                      }
+                    },
+                    {
+                      "extension": "transferHook",
+                      "state": {
+                        "authority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                        "programId": null
+                      }
+                    },
+                    {
+                      "extension": "tokenMetadata",
+                      "state": {
+                        "additionalMetadata": [],
+                        "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+                        "name": "Coca-Cola xStock",
+                        "symbol": "KOx",
+                        "updateAuthority": "5aMNNLQJwAEeoemTEMkv5NVjqKwvvefRYCQ5Z67HFvEq",
+                        "uri": "https://xstocks-metadata.backed.fi/tokens/Solana/KOx/metadata.json"
+                      }
+                    }
+                  ],
+                  "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+                  "isInitialized": true,
+                  "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+                  "supply": "21122348724691"
+                },
+                "type": "mint"
+              },
+              "program": "spl-token-2022",
+              "space": 678
+            },
+            "executable": false,
+            "lamports": 6321854,
+            "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+            "rentEpoch": 18446744073709551615,
+            "space": 678
+          }
+        },
+        "id": 1
+      }
+    },
+    "underlyingCompanyAnnouncement": {
+      "fetchedAtUtc": "2026-09-16T03:18:59Z",
+      "requestUrl": "https://investors.coca-colacompany.com/news-events/press-releases/detail/1165/board-of-directors-of-the-coca-cola-company-elects-new-officer-and-declares-regular-quarterly-dividend",
+      "responseSha256": "ce849a2c9ba8bc601c3a22fdf94d8e75584ca1f763f27de603d10906a8552011",
+      "releasedAt": "2026-07-15T14:00:00-04:00",
+        "responseParaphrase": "Coca-Cola declared a $0.53 regular quarterly dividend, payable October 1, 2026 to shareholders of record at the September 15, 2026 close.",
+      "facts": {
+        "grossDividendUsdPerCommonShare": "0.53",
+        "recordDate": "2026-09-15",
+        "paymentDate": "2026-10-01",
+        "exDividendDateStated": null
+      }
+    }
+  },
+  "globalCorporateActionScan": {
+    "scanDescription": "All eight pages returned by the documented history endpoint at pageSize=100, ordered newest-first. Counts are rows/versions, not unique event IDs.",
+    "pages": [
+      {
+        "page": 1,
+        "fetchedAtUtc": "2026-09-16T03:14:49Z",
+        "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&sortBy=createdTimeUtc&sortOrder=desc",
+        "responseSha256": "4f0461d9a355a0cbba762fff3881649ca10077a46e80625f925f3610bfc57006"
+      },
+      {
+        "page": 2,
+        "fetchedAtUtc": "2026-09-16T03:15:43Z",
+        "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=2&pageSize=100&sortBy=createdTimeUtc&sortOrder=desc",
+        "responseSha256": "1f15307fff35870a5e116b7def88d9e86c7030974b21aa66c07c4646487b0b03"
+      },
+      {
+        "page": 3,
+        "fetchedAtUtc": "2026-09-16T03:15:50Z",
+        "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=3&pageSize=100&sortBy=createdTimeUtc&sortOrder=desc",
+        "responseSha256": "dd0a6fdbb3ff191927a9415d37fc94b4fcad37fbd8acc96a73e9e4819ae4986e"
+      },
+      {
+        "page": 4,
+        "fetchedAtUtc": "2026-09-16T03:15:54Z",
+        "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=4&pageSize=100&sortBy=createdTimeUtc&sortOrder=desc",
+        "responseSha256": "8b7e9b60c1f5e238d07e872d702c9c4a6e138258a63efb4106011c4c6ba63663"
+      },
+      {
+        "page": 5,
+        "fetchedAtUtc": "2026-09-16T03:15:59Z",
+        "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=5&pageSize=100&sortBy=createdTimeUtc&sortOrder=desc",
+        "responseSha256": "f1c66988ed8d8a6a0aa5c538eab31bb6e6e2d24b0b54a8b225ebbeb6908ce67c"
+      },
+      {
+        "page": 6,
+        "fetchedAtUtc": "2026-09-16T03:16:38Z",
+        "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=6&pageSize=100&sortBy=createdTimeUtc&sortOrder=desc",
+        "responseSha256": "3f7423a0ee5067cd3ed25810c7e03988beb79dc1ad98ed19209eb5df98d1a5b6"
+      },
+      {
+        "page": 7,
+        "fetchedAtUtc": "2026-09-16T03:16:43Z",
+        "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=7&pageSize=100&sortBy=createdTimeUtc&sortOrder=desc",
+        "responseSha256": "e472899fc5829551f149c79d83b3dd1930262693e0ea677eb1651794e855987c"
+      },
+      {
+        "page": 8,
+        "fetchedAtUtc": "2026-09-16T03:16:44Z",
+        "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=8&pageSize=100&sortBy=createdTimeUtc&sortOrder=desc",
+        "responseSha256": "e702d706fc1f321bf5299f4cfed427253130867c962e3c132e293a9d33e6066c"
+      }
+    ],
+    "totalRows": 732,
+    "caTypeCounts": [
+      {
+        "caType": "CashDividend",
+        "count": 710
+      },
+      {
+        "caType": "ForwardSplit",
+        "count": 10
+      },
+      {
+        "caType": "ReverseSplit",
+        "count": 1
+      },
+      {
+        "caType": "SpinOff",
+        "count": 6
+      },
+      {
+        "caType": "StockDividend",
+        "count": 1
+      },
+      {
+        "caType": "StockMerger",
+        "count": 1
+      },
+      {
+        "caType": "UnitSplit",
+        "count": 3
+      }
+    ],
+    "statusCounts": [
+      {
+        "status": "Cancelled",
+        "count": 13
+      },
+      {
+        "status": "Corrected",
+        "count": 16
+      },
+      {
+        "status": "Initial",
+        "count": 703
+      }
+    ],
+    "rawSplitAndUnitSplitRows": [
+      {
+        "eventId": "9f076793-e29e-4d37-a7cb-63493569beef",
+        "version": 2,
+        "xstockSymbol": "APHx",
+        "spvSymbol": "APH",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2026-09-03T08:45:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "2",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "2",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-09-03T08:09:43.581Z",
+        "status": "Initial",
+        "xstockIsin": "CH1564487499",
+        "spvIsin": "US0320951017"
+      },
+      {
+        "eventId": "5383137f-30b8-44f8-ae1a-ca70f3878cda",
+        "version": 3,
+        "xstockSymbol": "MNSTx",
+        "spvSymbol": "MNST",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2026-08-11T00:00:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "2",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "2",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-08-10T22:01:20.538Z",
+        "status": "Corrected",
+        "xstockIsin": "CH1473121353",
+        "spvIsin": "US61174X1090"
+      },
+      {
+        "eventId": "5383137f-30b8-44f8-ae1a-ca70f3878cda",
+        "version": 2,
+        "xstockSymbol": "MNSTx",
+        "spvSymbol": "MNST",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": null,
+        "multiplierOld": null,
+        "multiplierNew": null,
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "2",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-08-10T21:59:57.572Z",
+        "status": "Initial",
+        "xstockIsin": "CH1473121353",
+        "spvIsin": "US61174X1090"
+      },
+      {
+        "eventId": "a8886369-edc6-4ab7-a0a4-170763fb2e63",
+        "version": 2,
+        "xstockSymbol": "CRWDx",
+        "spvSymbol": "CRWD",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2026-07-02T13:30:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "4",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "4",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-07-02T11:56:36.254Z",
+        "status": "Initial",
+        "xstockIsin": "CH1436219674",
+        "spvIsin": "US22788C1053"
+      },
+      {
+        "eventId": "ccb423a2-6045-4d1c-9a94-1f37f0ab8d63",
+        "version": 2,
+        "xstockSymbol": "HONx",
+        "spvSymbol": "HON",
+        "caType": "ReverseSplit",
+        "effectiveTimeUtc": "2026-06-29T15:30:00.000Z",
+        "multiplierOld": "1.024094713306789",
+        "multiplierNew": "0.5120473566533945",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "2",
+        "toUnits": "1",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-06-29T15:09:01.930Z",
+        "status": "Initial",
+        "xstockIsin": "CH1436219583",
+        "spvIsin": "US4385161066"
+      },
+      {
+        "eventId": "0f8bd035-de10-47fe-ac90-e21eb8d11527",
+        "version": 2,
+        "xstockSymbol": "KLACx",
+        "spvSymbol": "KLAC",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2026-06-12T13:30:00.000Z",
+        "multiplierOld": "1.000892302917",
+        "multiplierNew": "10.00892302917",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "10",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-06-12T12:36:50.011Z",
+        "status": "Initial",
+        "xstockIsin": "CH1500008672",
+        "spvIsin": "US4824801009"
+      },
+      {
+        "eventId": "9589212e-f030-4d4c-9bd4-24bb0bc89faa",
+        "version": 2,
+        "xstockSymbol": "PALLx",
+        "spvSymbol": "PALL",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2026-05-17T02:30:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "5",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "5",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-05-17T02:02:46.201Z",
+        "status": "Initial",
+        "xstockIsin": "CH1500008557",
+        "spvIsin": "US0032621023"
+      },
+      {
+        "eventId": "163d1111-0e07-49fe-8760-c0f1fa8431d9",
+        "version": 2,
+        "xstockSymbol": "PPLTx",
+        "spvSymbol": "PPLT",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2026-05-17T02:30:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "10",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "10",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-05-17T01:58:42.810Z",
+        "status": "Initial",
+        "xstockIsin": "CH1500008565",
+        "spvIsin": "US0032601066"
+      },
+      {
+        "eventId": "4194f831-44ac-4f88-979e-d01b627f8f4b",
+        "version": 2,
+        "xstockSymbol": "VUGx",
+        "spvSymbol": "VUG",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2026-04-21T08:00:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "6",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "6",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2026-04-21T00:44:23.059Z",
+        "status": "Initial",
+        "xstockIsin": "CH1500008797",
+        "spvIsin": "US9229087369"
+      },
+      {
+        "eventId": "25ca1d3c-73dc-420c-91c2-b2b2fdb47fd0",
+        "version": 3,
+        "xstockSymbol": "KRAQx",
+        "spvSymbol": "KRAQ",
+        "caType": "UnitSplit",
+        "effectiveTimeUtc": "2026-03-26T23:55:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "1.01375909737",
+        "grossCashflowUsd": "0.1356647",
+        "netCashflowUsd": "0.1356647",
+        "withholdingTaxRate": "0",
+        "fromUnits": "1",
+        "toUnits": "1",
+        "redemptionPriceUsd": null,
+        "notes": "Selling proceeds of 18,606 warrants @ $0.5553321509 - $100 (subscription fee)",
+        "createdTimeUtc": "2026-03-26T21:41:14.007Z",
+        "status": "Corrected",
+        "xstockIsin": "CH1500008524",
+        "spvIsin": "KYG5315G1064"
+      },
+      {
+        "eventId": "25ca1d3c-73dc-420c-91c2-b2b2fdb47fd0",
+        "version": 2,
+        "xstockSymbol": "KRAQx",
+        "spvSymbol": "KRAQ",
+        "caType": "UnitSplit",
+        "effectiveTimeUtc": null,
+        "multiplierOld": "1",
+        "multiplierNew": "1",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "1",
+        "redemptionPriceUsd": null,
+        "notes": "[CANCELLED v1] Misscalculation - $100 fee not included in calculation",
+        "createdTimeUtc": "2026-03-26T21:37:42.699Z",
+        "status": "Cancelled",
+        "xstockIsin": "CH1500008524",
+        "spvIsin": "KYG5315G1064"
+      },
+      {
+        "eventId": "25ca1d3c-73dc-420c-91c2-b2b2fdb47fd0",
+        "version": 1,
+        "xstockSymbol": "KRAQx",
+        "spvSymbol": "KRAQ",
+        "caType": "UnitSplit",
+        "effectiveTimeUtc": "2026-03-26T23:55:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "1.01389356191",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "1",
+        "redemptionPriceUsd": null,
+        "notes": "Sell of 18606 units of KRAQW",
+        "createdTimeUtc": "2026-03-26T21:23:39.283Z",
+        "status": "Initial",
+        "xstockIsin": "CH1500008524",
+        "spvIsin": "KYG5315G1064"
+      },
+      {
+        "eventId": "43ef16c8-192a-4eef-9f49-46362b1dd898",
+        "version": 1,
+        "xstockSymbol": "TQQQx",
+        "spvSymbol": "TQQQ",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2025-11-20T09:00:00.000Z",
+        "multiplierOld": "1.0006038003518",
+        "multiplierNew": "2.0012076007036",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "2",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2025-11-20T00:50:25.792Z",
+        "status": "Initial",
+        "xstockIsin": "CH1436219757",
+        "spvIsin": "US74347X8314"
+      },
+      {
+        "eventId": "4efcfed6-2e00-45f3-9e87-f1b5e0367400",
+        "version": 1,
+        "xstockSymbol": "NFLXx",
+        "spvSymbol": "NFLX",
+        "caType": "ForwardSplit",
+        "effectiveTimeUtc": "2025-11-16T23:55:00.000Z",
+        "multiplierOld": "1",
+        "multiplierNew": "10",
+        "grossCashflowUsd": null,
+        "netCashflowUsd": null,
+        "withholdingTaxRate": null,
+        "fromUnits": "1",
+        "toUnits": "10",
+        "redemptionPriceUsd": null,
+        "notes": null,
+        "createdTimeUtc": "2025-11-16T12:24:50.706Z",
+        "status": "Initial",
+        "xstockIsin": "CH1436219526",
+        "spvIsin": "US64110L1061"
+      }
+    ]
+  },
+  "honReverseSplitControl": {
+    "asset": {
+      "fetchedAtUtc": "2026-09-16T03:16:47Z",
+      "requestUrl": "https://api.xstocks.fi/api/v2/public/assets/HONx",
+      "responseSha256": "64e5bcfe076d1bc7e691b475eae450228c80fa73f7d56a95489c6670347643e7",
+      "rawResponse": {
+        "id": "234772d9-900d-4090-b4dc-c36dd4305de7",
+        "name": "Honeywell xStock",
+        "symbol": "HONx",
+        "isin": "CH1436219583",
+        "underlyingSymbol": "HON",
+        "underlyingIsin": "US4385161066",
+        "underlying": {
+          "symbol": "HON",
+          "isin": "US4385161066",
+          "type": null,
+          "listingCountry": "US"
+        },
+        "description": "Honeywell xStock",
+        "logo": "https://xstocks-metadata.backed.fi/logos/tokens/HONx.png",
+        "isTradingHalted": false,
+        "trading": {
+          "currency": "USD",
+          "tradingHoursMode": "TwentyFourFive",
+          "isTradingHalted": false,
+          "currentPeriod": "overnight",
+          "openNow": true,
+          "nextChangeAt": "2026-09-16T08:00:00.000Z",
+          "exchange": {
+            "mic": "XNAS",
+            "abbreviation": "NASDAQ",
+            "name": "Nasdaq Stock Market",
+            "timezone": "America/New_York"
+          },
+          "limitsPerPeriod": {
+            "market": {
+              "minOrderFiatValue": 1000,
+              "maxOrderFiatValue": 10000000
+            },
+            "extended": {
+              "minOrderFiatValue": 1000,
+              "maxOrderFiatValue": 10000000
+            },
+            "overnight": {
+              "minOrderFiatValue": 1000,
+              "maxOrderFiatValue": 1000000
+            },
+            "closed": {
+              "minOrderFiatValue": 1000,
+              "maxOrderFiatValue": 0
+            }
+          }
+        },
+        "deployments": [
+          {
+            "address": "0x62a48560861b0b451654bfffdb5be6e47aa8ff1b",
+            "network": "Ink",
+            "wrapperAddressV2": "0xd762788960c607109151ef84efccb19c3ad18012",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Ink",
+                "address": "0x2d270e6886d130d724215a266106e6832161eaed",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0x62a48560861b0b451654bfffdb5be6e47aa8ff1b",
+            "network": "HyperEVM",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "HyperEVM",
+                "address": "0xb88339cb7199b77e23db6e890353e22632ba630f",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0x62a48560861b0b451654bfffdb5be6e47aa8ff1b",
+            "network": "BinanceSmartChain",
+            "wrapperAddress": "0xbd1b73b2e89967e83507b500d798998200a53380",
+            "wrapperAddressV2": "0xd762788960c607109151ef84efccb19c3ad18012",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "BinanceSmartChain",
+                "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+                "decimals": 18,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "EQCAdgZJHUFLgtKA3IvJksZ1-IVxprgrdgx3pwl2dd0ZM4_9",
+            "network": "Ton",
+            "supportsAtomicSwaps": false,
+            "stablecoins": [
+              {
+                "symbol": "USDT",
+                "currency": "USD",
+                "network": "Ton",
+                "address": "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": false
+              }
+            ]
+          },
+          {
+            "address": "XsRbLZthfABAPAfumWNEJhPyiKDW6TvDVeAeW7oKqA2",
+            "network": "Solana",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Solana",
+                "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true,
+                "solanaTokenProgram": "TokenProgram"
+              },
+              {
+                "symbol": "USDG",
+                "currency": "USD",
+                "network": "Solana",
+                "address": "2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "TFhZEJ2tEwxN2M9Mjgvm7ATyjs9ARW2ehP",
+            "network": "Tron",
+            "supportsAtomicSwaps": false,
+            "stablecoins": [
+              {
+                "symbol": "USDT",
+                "currency": "USD",
+                "network": "Tron",
+                "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": false
+              }
+            ]
+          },
+          {
+            "address": "0x62a48560861b0b451654bfffdb5be6e47aa8ff1b",
+            "network": "Mantle",
+            "wrapperAddress": "0xbd1b73b2e89967e83507b500d798998200a53380",
+            "wrapperAddressV2": "0xd762788960c607109151ef84efccb19c3ad18012",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Mantle",
+                "address": "0x09bc4e0d864854c6afb6eb9a9cdf58ac190d0df9",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0x62a48560861b0b451654bfffdb5be6e47aa8ff1b",
+            "network": "XLayer",
+            "wrapperAddressV2": "0xd762788960c607109151ef84efccb19c3ad18012",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDG",
+                "currency": "USD",
+                "network": "XLayer",
+                "address": "0x4ae46a509f6b1d9056937ba4500cb143933d2dc8",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "XLayer",
+                "address": "0xb6ceceab302e2e4948951ee7843fc24e92933061",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0x62a48560861b0b451654bfffdb5be6e47aa8ff1b",
+            "network": "Optimism",
+            "wrapperAddressV2": "0xd762788960c607109151ef84efccb19c3ad18012",
+            "supportsAtomicSwaps": false,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Optimism",
+                "address": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": false
+              }
+            ]
+          },
+          {
+            "address": "0x62a48560861b0b451654bfffdb5be6e47aa8ff1b",
+            "network": "Ethereum",
+            "wrapperAddress": "0xbd1b73b2e89967e83507b500d798998200a53380",
+            "wrapperAddressV2": "0xd762788960c607109151ef84efccb19c3ad18012",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Ethereum",
+                "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "USDT",
+                "currency": "USD",
+                "network": "Ethereum",
+                "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "PYUSD",
+                "currency": "USD",
+                "network": "Ethereum",
+                "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "EURC",
+                "currency": "EUR",
+                "network": "Ethereum",
+                "address": "0x1abaea1f7c830bd89acc67ec4af516284b1bc33c",
+                "decimals": 6,
+                "issuance": false,
+                "redemption": false,
+                "supportsAtomicSwaps": true
+              },
+              {
+                "symbol": "USDG",
+                "currency": "USD",
+                "network": "Ethereum",
+                "address": "0xe343167631d89b6ffc58b88d6b7fb0228795491d",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          },
+          {
+            "address": "0x62a48560861b0b451654bfffdb5be6e47aa8ff1b",
+            "network": "Arbitrum",
+            "wrapperAddress": "0xbd1b73b2e89967e83507b500d798998200a53380",
+            "wrapperAddressV2": "0xd762788960c607109151ef84efccb19c3ad18012",
+            "supportsAtomicSwaps": true,
+            "stablecoins": [
+              {
+                "symbol": "USDC",
+                "currency": "USD",
+                "network": "Arbitrum",
+                "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+                "decimals": 6,
+                "issuance": true,
+                "redemption": true,
+                "supportsAtomicSwaps": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "multiplier": {
+      "fetchedAtUtc": "2026-09-16T03:16:48Z",
+      "requestUrl": "https://api.xstocks.fi/api/v2/public/assets/HONx/multiplier?network=Solana",
+      "responseSha256": "0e82a6a9b6d6e87fe1cfa710f295b7d4c4ab31d1cacdfcc4b6a5d1a41e49ad41",
+      "rawResponse": {
+        "currentMultiplier": 1.0011576563945983,
+        "newMultiplier": 0,
+        "activationDateTime": 0,
+        "reason": null
+      }
+    },
+    "multiplierHistory": {
+      "fetchedAtUtc": "2026-09-16T03:16:54Z",
+      "requestUrl": "https://api.xstocks.fi/api/v2/public/assets/HONx/multiplier/history?network=Solana",
+      "responseSha256": "895ca2e33b7f516f70312e1499f1118de4f9d61ae7d458fe0e5e1953b199c186",
+      "rawResponse": {
+        "page": {
+          "currentPage": 0,
+          "hasNextPage": false
+        },
+        "nodes": [
+          {
+            "id": "56d90e2f-bc6d-44d5-a685-52ffbc0629b1",
+            "reason": "Dividend",
+            "multiplier": 1.0011576563945983,
+            "previousMultiplier": 0.9990655067370947,
+            "activationDateTime": "2026-08-14T00:30:00.000Z"
+          },
+          {
+            "id": "beace0ca-ccee-4e44-ad26-7afcf97386cf",
+            "reason": "Administrative",
+            "multiplier": 0.9990655067370947,
+            "previousMultiplier": 0.5120473566533945,
+            "activationDateTime": "2026-06-29T23:55:00.000Z"
+          },
+          {
+            "id": "27bc8841-13ac-4963-aa40-7b859da088ad",
+            "reason": "ReverseSplit",
+            "multiplier": 0.5120473566533945,
+            "previousMultiplier": 1.024094713306789,
+            "activationDateTime": "2026-06-29T15:30:00.000Z"
+          },
+          {
+            "id": "6f8bc507-7356-4c21-b9ac-fdb203864656",
+            "reason": "Dividend",
+            "multiplier": 1.024094713306789,
+            "previousMultiplier": 1.020191445467247,
+            "activationDateTime": "2026-05-15T00:30:00.000Z"
+          },
+          {
+            "id": "d7c7ea13-4323-4445-87fe-b887f59f9532",
+            "reason": "Dividend",
+            "multiplier": 1.020191445467247,
+            "previousMultiplier": 1.0166756251597866,
+            "activationDateTime": "2026-02-27T01:30:00.000Z"
+          },
+          {
+            "id": "21e669f3-08d0-4575-8095-d423a02571f0",
+            "reason": "Dividend",
+            "multiplier": 1.0166756251597866,
+            "previousMultiplier": 1.0126918396698434,
+            "activationDateTime": "2025-12-05T23:55:00.000Z"
+          },
+          {
+            "id": "b8e203a0-c3c0-4365-ade0-8ce6fdfe684f",
+            "reason": "Dividend",
+            "multiplier": 1.0126918396698434,
+            "previousMultiplier": 1.00165535414,
+            "activationDateTime": "2025-10-30T23:55:00.000Z"
+          },
+          {
+            "id": "c6223e2d-7550-40de-a2bd-d03af9c0fdaa",
+            "reason": "Dividend",
+            "multiplier": 1.00165535414,
+            "previousMultiplier": 1,
+            "activationDateTime": "2025-09-05T23:55:00.000Z"
+          }
+        ]
+      }
+    },
+    "corporateActionHistory": {
+      "fetchedAtUtc": "2026-09-16T03:16:46Z",
+      "requestUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=HONx&sortBy=createdTimeUtc&sortOrder=asc",
+      "responseSha256": "d7d1d1844f67980b87320a79952ac88c1e6fa55d0a0da91e53b6f8cac990653b",
+      "rawResponse": {
+        "page": {
+          "currentPage": 1,
+          "pageSize": 100,
+          "totalPages": 1,
+          "totalNodes": 8,
+          "hasNextPage": false,
+          "hasPreviousPage": false
+        },
+        "nodes": [
+          {
+            "eventId": "ed7d5080-04d3-4581-b979-d58f037b63b3",
+            "version": 1,
+            "xstockSymbol": "HONx",
+            "spvSymbol": "HON",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2025-09-05T23:55:00.000Z",
+            "multiplierOld": "1",
+            "multiplierNew": "1.00165535414",
+            "grossCashflowUsd": "1.13",
+            "netCashflowUsd": "0.791",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2025-09-05T20:38:33.904Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219583",
+            "spvIsin": "US4385161066"
+          },
+          {
+            "eventId": "13e01fd9-ce80-42bf-b1f1-c1ac4f145536",
+            "version": 1,
+            "xstockSymbol": "HONx",
+            "spvSymbol": "HON",
+            "caType": "SpinOff",
+            "effectiveTimeUtc": "2025-10-30T23:55:00.000Z",
+            "multiplierOld": "1.00165535414",
+            "multiplierNew": "1.012691839669843441",
+            "grossCashflowUsd": null,
+            "netCashflowUsd": null,
+            "withholdingTaxRate": null,
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2025-10-30T21:16:18.400Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219583",
+            "spvIsin": "US4385161066"
+          },
+          {
+            "eventId": "a914bc61-0257-4a3f-96d7-751464ea584d",
+            "version": 1,
+            "xstockSymbol": "HONx",
+            "spvSymbol": "HON",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2025-12-05T23:55:00.000Z",
+            "multiplierOld": "1.012691839669843441",
+            "multiplierNew": "1.016675625159786636",
+            "grossCashflowUsd": "1.19",
+            "netCashflowUsd": "0.833",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2025-12-05T21:28:09.027Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219583",
+            "spvIsin": "US4385161066"
+          },
+          {
+            "eventId": "006e4c1f-910c-4598-bd68-8080d8857a13",
+            "version": 1,
+            "xstockSymbol": "HONx",
+            "spvSymbol": "HON",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-02-27T01:30:00.000Z",
+            "multiplierOld": "1.016675625159786636",
+            "multiplierNew": "1.0201914454672472",
+            "grossCashflowUsd": "1.19",
+            "netCashflowUsd": "0.833",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-02-27T01:21:06.683Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219583",
+            "spvIsin": "US4385161066"
+          },
+          {
+            "eventId": "a1d6c16c-fcc1-418b-b7f9-1e36cd541ac9",
+            "version": 2,
+            "xstockSymbol": "HONx",
+            "spvSymbol": "HON",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-05-15T00:30:00.000Z",
+            "multiplierOld": "1.0201914454672472",
+            "multiplierNew": "1.024094713306789",
+            "grossCashflowUsd": "1.19",
+            "netCashflowUsd": "0.833",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-05-15T00:02:44.461Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219583",
+            "spvIsin": "US4385161066"
+          },
+          {
+            "eventId": "ccb423a2-6045-4d1c-9a94-1f37f0ab8d63",
+            "version": 2,
+            "xstockSymbol": "HONx",
+            "spvSymbol": "HON",
+            "caType": "ReverseSplit",
+            "effectiveTimeUtc": "2026-06-29T15:30:00.000Z",
+            "multiplierOld": "1.024094713306789",
+            "multiplierNew": "0.5120473566533945",
+            "grossCashflowUsd": null,
+            "netCashflowUsd": null,
+            "withholdingTaxRate": null,
+            "fromUnits": "2",
+            "toUnits": "1",
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-06-29T15:09:01.930Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219583",
+            "spvIsin": "US4385161066"
+          },
+          {
+            "eventId": "ca3da1bc-04d2-4c6a-a23e-51f7c58ee06d",
+            "version": 2,
+            "xstockSymbol": "HONx",
+            "spvSymbol": "HON",
+            "caType": "SpinOff",
+            "effectiveTimeUtc": "2026-06-29T23:55:00.000Z",
+            "multiplierOld": "0.5120473566533945",
+            "multiplierNew": "0.9990655067370947",
+            "grossCashflowUsd": "216.6649884",
+            "netCashflowUsd": "216.6649884",
+            "withholdingTaxRate": "0",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-06-29T23:16:13.809Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219583",
+            "spvIsin": "US4385161066"
+          },
+          {
+            "eventId": "7d20da53-6639-4781-bfa3-806ffa86f5cb",
+            "version": 2,
+            "xstockSymbol": "HONx",
+            "spvSymbol": "HON",
+            "caType": "CashDividend",
+            "effectiveTimeUtc": "2026-08-14T00:30:00.000Z",
+            "multiplierOld": "0.9990655067370947",
+            "multiplierNew": "1.0011576563945983",
+            "grossCashflowUsd": "0.7",
+            "netCashflowUsd": "0.49",
+            "withholdingTaxRate": "0.3",
+            "fromUnits": null,
+            "toUnits": null,
+            "redemptionPriceUsd": null,
+            "notes": null,
+            "createdTimeUtc": "2026-08-13T20:21:52.675Z",
+            "status": "Initial",
+            "xstockIsin": "CH1436219583",
+            "spvIsin": "US4385161066"
+          }
+        ]
+      }
+    }
+  },
+  "verifiedConclusions": {
+    "koLatestEventStillMatchesPriorSnapshot": true,
+    "koLatestEventId": "75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e",
+    "koLatestEventVersion": 2,
+    "koXstocksEffectiveTimeUtc": "2026-09-15T00:30:00.000Z",
+    "koCompanyRecordDate": "2026-09-15",
+    "koCompanyPaymentDate": "2026-10-01",
+    "koCompanyExDividendDateVerifiedFromOfficialAnnouncement": false,
+    "futureKoxCorporateActionPresent": false,
+    "futureKoxCaveat": "The upcoming endpoint returned Scheduled version-1 rows for March, June, and September 2026 events, all already effective. The October 1 company payment belongs to the already-effective September action; it is not a new future xStocks multiplier event.",
+    "realControlEventId": "ccb423a2-6045-4d1c-9a94-1f37f0ab8d63",
+    "realControlEventType": "ReverseSplit",
+    "realControlSymbol": "HONx",
+    "realControlRatio": "2:1",
+      "realControlMultiplierOld": "1.024094713306789",
+      "realControlMultiplierNew": "0.5120473566533945",
+      "realControlScopeCaveat": "Valid only as an event-level rejection/classification control. A separate unsupported SpinOff at 2026-06-29T23:55:00.000Z means HONx is not a pure-split full-day history or a supported live end-to-end series.",
+      "correctionAndStatusCaveat": "The 732-row history contained Initial, Corrected, and Cancelled versions. KOx latest v2 and HONx reverse-split v2 are status Initial; the API exposed no terminal Final status in these records. Upcoming also retained stale Scheduled versions. Consumers must resolve eventId/version, reject Cancelled rows, and corroborate the active onchain multiplier before settlement."
+  }
+}

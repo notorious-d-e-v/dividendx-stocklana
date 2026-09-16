@@ -1,0 +1,101 @@
+{
+  "schema": "dividendx.backpack-scope-mu-event.v1",
+  "observedAt": "2026-09-16T05:56:09Z",
+  "classification": "onchain reconstruction; not an official Backpack event ledger",
+  "sources": {
+    "officialBackpackProduct": "https://learn.backpack.exchange/blog/tokenized-micron-mu",
+    "officialMicronResults": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Results-for-the-Third-Quarter-of-Fiscal-2026/default.aspx",
+    "officialMicronQuarterlyResults": "https://investors.micron.com/financials/quarterly-results/",
+    "solanaDividendTransaction": "https://explorer.solana.com/tx/39vTkahE7rUnFypAkKpaHUxwMyuC1nG4nJ12GEm3y9V1Kqep6ijvcX4isqsNXB63s3vsGNDjfi7uFFgH32Te59R",
+    "solanaPriorRedemptionTransaction": "https://explorer.solana.com/tx/2dm9fGhwsVKYdsA3HWvALMoipEZY12qNkj6BpMiASvruNNpSFVBrrp2yWskathjf5Zb7nQFpPymjChkFYecJqqqz",
+    "backpackExternalKlines": "https://api.backpack.exchange/api/v1/klines?symbol=MU.US_USDC&interval=1m&startTime=1784836800&endTime=1784840400&priceType=Last&source=External"
+  },
+  "underlyingCorporateEvent": {
+    "issuer": "Micron Technology, Inc.",
+    "grossDividendUsdPerShare": "0.15",
+    "declarationDate": "2026-06-24",
+    "recordDate": "2026-07-06",
+    "paymentDate": "2026-07-21"
+  },
+  "publicToken": {
+    "symbol": "MU.US",
+    "mint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+    "program": "spl-token-2022",
+    "scaledUiAuthority": "6XPofT3JgdoZAkUxqAbYZLNbsDvBCkDqrEWeaTiQKRBD"
+  },
+  "priorObservedUpdate": {
+    "signature": "2dm9fGhwsVKYdsA3HWvALMoipEZY12qNkj6BpMiASvruNNpSFVBrrp2yWskathjf5Zb7nQFpPymjChkFYecJqqqz",
+    "slot": 434765325,
+    "blockTime": 1784830772,
+    "blockTimeIso": "2026-07-23T18:19:32Z",
+    "program": "FewRXXTzV2WwigvTQNsVanhEmCM9wzfNvoT1divNtbVH",
+    "loggedInstruction": "SupplyRedeemAndTransferExternal",
+    "updatedMultiplier": "1"
+  },
+  "dividendUpdate": {
+    "signature": "39vTkahE7rUnFypAkKpaHUxwMyuC1nG4nJ12GEm3y9V1Kqep6ijvcX4isqsNXB63s3vsGNDjfi7uFFgH32Te59R",
+    "slot": 434783905,
+    "blockTime": 1784838592,
+    "blockTimeIso": "2026-07-23T20:29:52Z",
+    "program": "FewRXXTzV2WwigvTQNsVanhEmCM9wzfNvoT1divNtbVH",
+    "loggedInstruction": "DividendDistribute",
+    "underlyingReceiptMint": "MUwUiQVJKJLvePvu6uL1QGydXVb1Kx8WMkg7VHVvSHa",
+    "underlyingReceiptProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "backingOwner": "Fx4YnkhSSexBbQNqHXdHJdsb2zdUo3UD5FFS6mGmCqR6",
+    "backingBeforeShares": "6401.424441",
+    "sharesAdded": "0.683203",
+    "backingAfterShares": "6402.107644",
+    "oldMultiplier": "1",
+    "newMultiplier": "1.000106726714702",
+    "exactRatio": "6402.107644 / 6401.424441 = 1.000106726714701841...",
+    "effectiveTimestamp": 0
+  },
+  "bracketProof": {
+    "method": "getSignaturesForAddress on scaledUiAuthority, followed by parsed finalized transactions",
+    "fromSlotInclusive": 434765325,
+    "toSlotInclusive": 434783905,
+    "successfulAuthorityTouchingSignaturesInRange": 2,
+    "signaturesInOrder": [
+      "2dm9fGhwsVKYdsA3HWvALMoipEZY12qNkj6BpMiASvruNNpSFVBrrp2yWskathjf5Zb7nQFpPymjChkFYecJqqqz",
+      "39vTkahE7rUnFypAkKpaHUxwMyuC1nG4nJ12GEm3y9V1Kqep6ijvcX4isqsNXB63s3vsGNDjfi7uFFgH32Te59R"
+    ],
+    "conclusion": "No intervening transaction touching the scale authority exists in the covered finalized signature history. The multiplier immediately before DividendDistribute was 1."
+  },
+  "timing": {
+    "calendarDaysAfterPaymentDate": 2,
+    "elapsedFromPaymentDateStartUtcSeconds": 246592,
+    "elapsedFromPriorObservedUpdateSeconds": 7820
+  },
+  "publicMarketReferenceAtActivationMinute": {
+    "minuteStartUtc": "2026-07-23T20:29:00Z",
+    "open": "996",
+    "high": "996",
+    "low": "994.21",
+    "close": "995",
+    "trades": "202",
+    "warning": "External reference tape; not proof of the reinvestment execution price."
+  },
+  "grossNetReconciliation": {
+    "grossCashOnPreEventBackingUsd": "960.21366615",
+    "publiclyVerifiedNetCashUsd": null,
+    "publiclyVerifiedTaxWithholdingUsd": null,
+    "publiclyVerifiedFeesUsd": null,
+    "publiclyVerifiedExecutionPriceUsdPerShare": null,
+    "illustrativeOnly": "A 30% withholding assumption gives net $672.149566305 and $983.82115755/share for 0.683203 shares; this is plausible against the public tape but is not evidence of actual withholding or execution."
+  },
+  "drift": {
+    "activationMultiplier": "1.000106726714702",
+    "observedCurrentMultiplierAtRpcSlot447444271": "1.0001068649823912",
+    "causeObserved": "Later mint/redemption instructions also call updateMultiplier as backing and supply change.",
+    "accountingRule": "Never use the current multiplier as the event M1. Classify DividendDistribute separately and exclude mint/redemption updates from corporate-event ingestion."
+  },
+  "provenanceLimits": {
+    "officialMintPublishedByBackpack": true,
+    "programControlRelationshipObservedOnchain": true,
+    "officialProgramIdOrIdlPublished": false,
+    "publicEventApiFound": false,
+    "officialEventIdRevisionOrCorrectionSchemaFound": false,
+    "settlementOrNetCashLedgerPubliclyValidated": false
+  },
+  "rawTransactionsFile": "backpack-scope-mu-raw-transactions-2026-09-16.json"
+}
