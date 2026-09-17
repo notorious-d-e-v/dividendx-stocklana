@@ -43,3 +43,16 @@ Token-2022 programs 0.14.0:
 The suite uses Mollusk's atomic transaction API for setup and rollback checks.
 It does not claim signed-bank coverage; the transaction SDK's validator smoke
 owns that separate evidence.
+
+## Captured issuer configurations, 18 September
+
+The separate `issuer_custody_sbf` case exercises all 15 captured issuer mints
+through the same pinned ELF. The full program suite now passes 47 tests: 12
+program unit tests, 18 ABI/oracle tests and 17 compiled-SBF cases. The new case
+contains 15 independent custody journeys. It preserves mint bytes and issuer
+controls; only holder funding, subsequent time and event attestations are
+synthetic. No issuer key signs and no mainnet transaction executes.
+
+See [acceptance](../../../planning/issuer-custody-review.md) and the
+[per-asset receipt](../../../planning/evidence/issuer-custody-conformance-2026-09-18.json)
+for hashes, CPI compute, cumulative payouts and exact proof boundaries.

@@ -1,0 +1,1122 @@
+{
+  "schema": "dividendx-issuer-custody-conformance-v1",
+  "inputSnapshot": "tests/protocol/fixtures/issuer-mints-2026-09-18.json",
+  "inputSnapshotSha256": "5f75decb014072a82708ff76319df5dee15646460f8006461ba4786978fed7ac",
+  "catalogSha256": "cd8c51171fb5d7ebb18b3c113ba30d339a4103c999bde51ebf031ae27ccd27fd",
+  "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+  "environment": "mollusk_offline",
+  "syntheticFunding": true,
+  "syntheticClockAndEvents": true,
+  "issuerAuthoritySignatures": 0,
+  "mainnetTransactions": 0,
+  "liveCustodyTested": false,
+  "settlementReady": false,
+  "supportedAssets": 15,
+  "executedAssets": 15,
+  "assets": [
+    {
+      "issuerId": "xstocks",
+      "symbol": "KOx",
+      "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+      "mintDataSha256": "8a4ca9acaf74020627066ed846672837b24c4691f4b30fd733a3a6830a43f1ae",
+      "profile": {
+        "decimals": 8,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607264977872978803",
+        "pendingMultiplierBits": "4607284020568871647",
+        "pendingEffectiveTimestamp": "1789432200",
+        "activeMultiplierBitsAtCapture": "4607284020568871647",
+        "controlsFingerprint": "1e7ff9d97d03c461fa8456c398b0b310bbb05033cedf6b63ce610c6bb2dd1b42",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 64630,
+        "deposit": 29942,
+        "recombine": 29698,
+        "upsertEvents": [
+          28768,
+          25695,
+          22716,
+          28768
+        ],
+        "beginFinalization": 16371,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23466,
+        "redemptions": [
+          26199,
+          26196,
+          26198,
+          26195
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "AAPLx",
+      "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+      "mintDataSha256": "d54d86aaa9fb77fe9f5536f3931c37d3777a1f070c4eec2021bd0969fac1103c",
+      "profile": {
+        "decimals": 8,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607194417324324176",
+        "pendingMultiplierBits": "4607197141123673605",
+        "pendingEffectiveTimestamp": "1786149000",
+        "activeMultiplierBitsAtCapture": "4607197141123673605",
+        "controlsFingerprint": "f2335a1f11aad5e435c748df2694878b5a1d59b5da7280e0e6c8fa43f4571257",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 64630,
+        "deposit": 29959,
+        "recombine": 29715,
+        "upsertEvents": [
+          22768,
+          22695,
+          22695,
+          22785
+        ],
+        "beginFinalization": 16371,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23466,
+        "redemptions": [
+          26216,
+          26213,
+          26215,
+          26212
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "MSFTx",
+      "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+      "mintDataSha256": "6f97c7921b8043398553031ea2e5b5f44eac520e7482a4e3f2e1a5e5c1072dc7",
+      "profile": {
+        "decimals": 8,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607203054701097332",
+        "pendingMultiplierBits": "4607209005307177709",
+        "pendingEffectiveTimestamp": "1787185800",
+        "activeMultiplierBitsAtCapture": "4607209005307177709",
+        "controlsFingerprint": "b80a3c95084e9ea1b40c61803fcb606c1c55bd717f3fa0da24c99f04ae75a313",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 70639,
+        "deposit": 29942,
+        "recombine": 29698,
+        "upsertEvents": [
+          21268,
+          27195,
+          24195,
+          27289
+        ],
+        "beginFinalization": 16371,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23466,
+        "redemptions": [
+          26199,
+          26196,
+          26198,
+          26195
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "MUx",
+      "mint": "XsQLZycSZ7QnBBdBXQaTbQdiUcbRqjNJgyBGAMzhHav",
+      "mintDataSha256": "e38152a3f4d3f3767e3c14725998d235870ea5212ce65494c2f5de1ff9c2e1f5",
+      "profile": {
+        "decimals": 8,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607183742572372964",
+        "pendingMultiplierBits": "4607184227439482082",
+        "pendingEffectiveTimestamp": "1783295700",
+        "activeMultiplierBitsAtCapture": "4607184227439482082",
+        "controlsFingerprint": "7a7e27bfd2b0711887d0cb50cfa1ff7139ff760e81c697ae4edf40187720e498",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 72130,
+        "deposit": 29963,
+        "recombine": 29719,
+        "upsertEvents": [
+          21268,
+          30195,
+          24195,
+          22768
+        ],
+        "beginFinalization": 16371,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23466,
+        "redemptions": [
+          26199,
+          26217,
+          26198,
+          26216
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "NKEx",
+      "mint": "XsGYpMvKbVt6ViHqRd7cF3s746dAMFBQWcC49hB9VVP",
+      "mintDataSha256": "c41eb4d2ccf63e859e19cdd861d8d10867cf7c20d0f24f5aa6a2f04128ad8cb3",
+      "profile": {
+        "decimals": 8,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607182418800017408",
+        "pendingMultiplierBits": "4607215509765021853",
+        "pendingEffectiveTimestamp": "1788222600",
+        "activeMultiplierBitsAtCapture": "4607215509765021853",
+        "controlsFingerprint": "91b6fa93e608d6e99801e7c7aaf1d71563639ba96eaf36054f5309f787e04b1b",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 75130,
+        "deposit": 29980,
+        "recombine": 29736,
+        "upsertEvents": [
+          24268,
+          22695,
+          24195,
+          25768
+        ],
+        "beginFinalization": 16371,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23466,
+        "redemptions": [
+          26237,
+          26234,
+          26236,
+          26233
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "IBMx",
+      "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+      "mintDataSha256": "d03c5717c46b1ba665c9c6f0471a78e6de3048426892b2eecd95e25bc4dcc036",
+      "profile": {
+        "decimals": 8,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607251507458406854",
+        "pendingMultiplierBits": "4607274305377497128",
+        "pendingEffectiveTimestamp": "1786149000",
+        "activeMultiplierBitsAtCapture": "4607274305377497128",
+        "controlsFingerprint": "e24c9216ced66bf57f68a9dedde5dde0903245d97e8da796b705a09e88e11d6a",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 66130,
+        "deposit": 29942,
+        "recombine": 29698,
+        "upsertEvents": [
+          22768,
+          24195,
+          28695,
+          22768
+        ],
+        "beginFinalization": 16371,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23466,
+        "redemptions": [
+          26199,
+          26196,
+          26198,
+          26195
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "backpack",
+      "symbol": "MU.US",
+      "mint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+      "mintDataSha256": "b6313118e40fd8bfe405ebc2545e6475968b94f2b42dcf3d7b10968f3f30ce8e",
+      "profile": {
+        "decimals": 6,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607182900085927711",
+        "pendingMultiplierBits": "4607182900085927711",
+        "pendingEffectiveTimestamp": "0",
+        "activeMultiplierBitsAtCapture": "4607182900085927711",
+        "controlsFingerprint": "4b0f6817330737a75eaea42458b7a64eba70bdf1aa9238e2fbe7730639c5416f",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 73629,
+        "deposit": 29833,
+        "recombine": 29589,
+        "upsertEvents": [
+          21268,
+          21195,
+          28695,
+          24268
+        ],
+        "beginFinalization": 16370,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23465,
+        "redemptions": [
+          26090,
+          26087,
+          26089,
+          26086
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "backpack",
+      "symbol": "NKE.US",
+      "mint": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+      "mintDataSha256": "b0fe8433d1dbef1180a4951f32ae301aa93fc7ccc0c5290876fa3a2adc18233a",
+      "profile": {
+        "decimals": 6,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607182418800017408",
+        "pendingMultiplierBits": "4607182418800017408",
+        "pendingEffectiveTimestamp": "0",
+        "activeMultiplierBitsAtCapture": "4607182418800017408",
+        "controlsFingerprint": "b79b2d6004d6bfef1b3655fd57108fa1bb96a042054b4a4b95e59f0e7deb18de",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 63129,
+        "deposit": 29854,
+        "recombine": 29610,
+        "upsertEvents": [
+          21268,
+          21195,
+          21195,
+          31768
+        ],
+        "beginFinalization": 16370,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23465,
+        "redemptions": [
+          26090,
+          26108,
+          26089,
+          26107
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "backpack",
+      "symbol": "IBM.US",
+      "mint": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+      "mintDataSha256": "0f9de3aae3838065ac9f8a6649d4612333bbf3ae07e1d8279cf8a08909376f97",
+      "profile": {
+        "decimals": 6,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "PermanentDelegate",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101470288",
+        "currentMultiplierBits": "4607182418800017408",
+        "pendingMultiplierBits": "4607182418800017408",
+        "pendingEffectiveTimestamp": "0",
+        "activeMultiplierBitsAtCapture": "4607182418800017408",
+        "controlsFingerprint": "fba6d56a392132a5f604822997386ac1f05c910e71935b45da6edee22e979424",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 63129,
+        "deposit": 29833,
+        "recombine": 29589,
+        "upsertEvents": [
+          22768,
+          25712,
+          24195,
+          24268
+        ],
+        "beginFinalization": 16370,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 23465,
+        "redemptions": [
+          26090,
+          26087,
+          26089,
+          26086
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "KOon",
+      "mint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+      "mintDataSha256": "449dad30de23356bc0779c409ae024b50f8e9a56c2ab41f0a0b44057a2d2ce88",
+      "profile": {
+        "decimals": 9,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101466192",
+        "currentMultiplierBits": "4607290012065628389",
+        "pendingMultiplierBits": "4607290012065628389",
+        "pendingEffectiveTimestamp": "1789430644",
+        "activeMultiplierBitsAtCapture": "4607290012065628389",
+        "controlsFingerprint": "ed96f86c4097739bf7ef5e54ca97324e29d6d908f2060d74edafcdbdaa35e600",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 85078,
+        "deposit": 29348,
+        "recombine": 29104,
+        "upsertEvents": [
+          22768,
+          25695,
+          21195,
+          24268
+        ],
+        "beginFinalization": 15774,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 22869,
+        "redemptions": [
+          25605,
+          25602,
+          25604,
+          25601
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "AAPLon",
+      "mint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+      "mintDataSha256": "9448c27a99f8cc7a3b9e99d0855a034bbc243e78f90f535f916ce54a63fe9b10",
+      "profile": {
+        "decimals": 9,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101466192",
+        "currentMultiplierBits": "4607197623284455843",
+        "pendingMultiplierBits": "4607197623284455843",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeMultiplierBitsAtCapture": "4607197623284455843",
+        "controlsFingerprint": "e7b69b7cc95bed83efaa419a6d8326585babdd5c94d8ca2dd2f5bb674f410d1c",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 71578,
+        "deposit": 29348,
+        "recombine": 29104,
+        "upsertEvents": [
+          27268,
+          21195,
+          30212,
+          24268
+        ],
+        "beginFinalization": 15774,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 22869,
+        "redemptions": [
+          25605,
+          25602,
+          25604,
+          25601
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "MSFTon",
+      "mint": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+      "mintDataSha256": "8cb1be689caf19025142dc668f4e7deece943933b64e90ad267fc06ec917213f",
+      "profile": {
+        "decimals": 9,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101466192",
+        "currentMultiplierBits": "4607208228284984263",
+        "pendingMultiplierBits": "4607208228284984263",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeMultiplierBitsAtCapture": "4607208228284984263",
+        "controlsFingerprint": "3ebc12931890f3bf704cad03319acb375c1451a7b3db1de01a262ec3f0e8f23b",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 64078,
+        "deposit": 29348,
+        "recombine": 29104,
+        "upsertEvents": [
+          21268,
+          22695,
+          22695,
+          27268
+        ],
+        "beginFinalization": 15774,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 22869,
+        "redemptions": [
+          25605,
+          25602,
+          25604,
+          25601
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "MUon",
+      "mint": "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo",
+      "mintDataSha256": "3c25a76a87facd8f3406f1b71601da63d3387b0264e911f7b3ee863d03f9192d",
+      "profile": {
+        "decimals": 9,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101466192",
+        "currentMultiplierBits": "4607187468404920996",
+        "pendingMultiplierBits": "4607187468404920996",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeMultiplierBitsAtCapture": "4607187468404920996",
+        "controlsFingerprint": "a3a07b30c0cf28065280e8960e068e21afaed7bda69fa8cf28d5253b8401ac73",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 71578,
+        "deposit": 29348,
+        "recombine": 29104,
+        "upsertEvents": [
+          21268,
+          24195,
+          27195,
+          24268
+        ],
+        "beginFinalization": 15774,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 22869,
+        "redemptions": [
+          25605,
+          25602,
+          25604,
+          25601
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "NKEon",
+      "mint": "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo",
+      "mintDataSha256": "721cc76ab4c81e086a6dc1459ed5f7b8157b2fdc42226bf3f11b2c72acf68b2d",
+      "profile": {
+        "decimals": 9,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101466192",
+        "currentMultiplierBits": "4607302111266157389",
+        "pendingMultiplierBits": "4607302111266157389",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeMultiplierBitsAtCapture": "4607302111266157389",
+        "controlsFingerprint": "318b574343c60ff8987621c664281c141ec72f065bc5d286e45c7ceecde4868f",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 70078,
+        "deposit": 29365,
+        "recombine": 29121,
+        "upsertEvents": [
+          22768,
+          21195,
+          24195,
+          25768
+        ],
+        "beginFinalization": 15774,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 22869,
+        "redemptions": [
+          25622,
+          25619,
+          25621,
+          25618
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "IBMon",
+      "mint": "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo",
+      "mintDataSha256": "08d59a01b8f5497af17bf1c8b51db90c1cd442c91b35302228df55be9d768449",
+      "profile": {
+        "decimals": 9,
+        "extensions": [
+          "ConfidentialTransferMint",
+          "DefaultAccountState",
+          "TransferHook",
+          "MetadataPointer",
+          "TokenMetadata",
+          "ScaledUiAmount",
+          "Pausable"
+        ],
+        "extensionsMask": "101466192",
+        "currentMultiplierBits": "4607285066538080321",
+        "pendingMultiplierBits": "4607285066538080321",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeMultiplierBitsAtCapture": "4607285066538080321",
+        "controlsFingerprint": "1f66a13a386b589b75eb9d2b923e4524b5ed7b3fee9744823a18ffb860b2ffeb",
+        "supported": true,
+        "unsupportedReason": null
+      },
+      "supported": true,
+      "executed": true,
+      "environment": "mollusk_offline",
+      "syntheticHolderFundingRaw": "10003",
+      "depositedRaw": "9997",
+      "recombinedRaw": "1331",
+      "finalizedBackingRaw": "8666",
+      "ptPoolRaw": "5778",
+      "drPoolRaw": "2888",
+      "finalHolderRaw": "10003",
+      "finalVaultRaw": "0",
+      "mintBytesUnchanged": true,
+      "redemptionPayoutsRaw": [
+        "1407",
+        "1058",
+        "4371",
+        "1830"
+      ],
+      "computeUnits": {
+        "createSeries": 65578,
+        "deposit": 29348,
+        "recombine": 29104,
+        "upsertEvents": [
+          22768,
+          22695,
+          24195,
+          24268
+        ],
+        "beginFinalization": 15774,
+        "accumulateEvents": [
+          10132,
+          8828,
+          8828,
+          10715
+        ],
+        "completeFinalization": 22869,
+        "redemptions": [
+          25605,
+          25602,
+          25604,
+          25601
+        ]
+      },
+      "issuerAuthoritySignatures": 0,
+      "mainnetTransactions": 0,
+      "liveCustodyTested": false,
+      "settlementReady": false
+    }
+  ]
+}

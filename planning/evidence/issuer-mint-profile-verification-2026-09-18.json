@@ -1,0 +1,436 @@
+{
+  "schema": "dividendx-issuer-mint-profile-verification-v1",
+  "verifiedAt": "2026-09-17T23:34:25.259Z",
+  "snapshotObjectSha256": "93b5c3df553efbc0095acb5eff45161d4bf942204a6ca8df9738364d487e50fa",
+  "snapshotObjectDigestEncoding": "SHA-256 of UTF-8 JSON.stringify(snapshot) using parsed insertion order",
+  "snapshotFileSha256": "5f75decb014072a82708ff76319df5dee15646460f8006461ba4786978fed7ac",
+  "catalogSha256": "cd8c51171fb5d7ebb18b3c113ba30d339a4103c999bde51ebf031ae27ccd27fd",
+  "contextSlot": 447920461,
+  "clock": {
+    "slot": "447920461",
+    "unixTimestamp": "1789687839",
+    "epoch": "1036"
+  },
+  "assets": [
+    {
+      "issuerId": "xstocks",
+      "symbol": "KOx",
+      "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+      "dataSha256": "8a4ca9acaf74020627066ed846672837b24c4691f4b30fd733a3a6830a43f1ae",
+      "supplyRaw": "21122341483328",
+      "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+      "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "1e7ff9d97d03c461fa8456c398b0b310bbb05033cedf6b63ce610c6bb2dd1b42",
+      "scale": {
+        "currentBits": "4607264977872978803",
+        "pendingBits": "4607284020568871647",
+        "pendingEffectiveTimestamp": "1789432200",
+        "activeBits": "4607284020568871647"
+      }
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "AAPLx",
+      "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+      "dataSha256": "d54d86aaa9fb77fe9f5536f3931c37d3777a1f070c4eec2021bd0969fac1103c",
+      "supplyRaw": "15376339423672",
+      "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+      "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "f2335a1f11aad5e435c748df2694878b5a1d59b5da7280e0e6c8fa43f4571257",
+      "scale": {
+        "currentBits": "4607194417324324176",
+        "pendingBits": "4607197141123673605",
+        "pendingEffectiveTimestamp": "1786149000",
+        "activeBits": "4607197141123673605"
+      }
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "MSFTx",
+      "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+      "dataSha256": "6f97c7921b8043398553031ea2e5b5f44eac520e7482a4e3f2e1a5e5c1072dc7",
+      "supplyRaw": "10497089328316",
+      "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+      "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "b80a3c95084e9ea1b40c61803fcb606c1c55bd717f3fa0da24c99f04ae75a313",
+      "scale": {
+        "currentBits": "4607203054701097332",
+        "pendingBits": "4607209005307177709",
+        "pendingEffectiveTimestamp": "1787185800",
+        "activeBits": "4607209005307177709"
+      }
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "MUx",
+      "mint": "XsQLZycSZ7QnBBdBXQaTbQdiUcbRqjNJgyBGAMzhHav",
+      "dataSha256": "e38152a3f4d3f3767e3c14725998d235870ea5212ce65494c2f5de1ff9c2e1f5",
+      "supplyRaw": "4219794164435",
+      "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+      "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "7a7e27bfd2b0711887d0cb50cfa1ff7139ff760e81c697ae4edf40187720e498",
+      "scale": {
+        "currentBits": "4607183742572372964",
+        "pendingBits": "4607184227439482082",
+        "pendingEffectiveTimestamp": "1783295700",
+        "activeBits": "4607184227439482082"
+      }
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "NKEx",
+      "mint": "XsGYpMvKbVt6ViHqRd7cF3s746dAMFBQWcC49hB9VVP",
+      "dataSha256": "c41eb4d2ccf63e859e19cdd861d8d10867cf7c20d0f24f5aa6a2f04128ad8cb3",
+      "supplyRaw": "14438695704488",
+      "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+      "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "91b6fa93e608d6e99801e7c7aaf1d71563639ba96eaf36054f5309f787e04b1b",
+      "scale": {
+        "currentBits": "4607182418800017408",
+        "pendingBits": "4607215509765021853",
+        "pendingEffectiveTimestamp": "1788222600",
+        "activeBits": "4607215509765021853"
+      }
+    },
+    {
+      "issuerId": "xstocks",
+      "symbol": "IBMx",
+      "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+      "dataSha256": "d03c5717c46b1ba665c9c6f0471a78e6de3048426892b2eecd95e25bc4dcc036",
+      "supplyRaw": "5442776890217",
+      "mintAuthority": "7pt9tkctJPK7PPNQJ77GKg8ZffSF6QxoMiCFYHxrtaCj",
+      "freezeAuthority": "JDq14BWvqCRFNu1krb12bcRpbGtJZ1FLEakMw6FdxJNs",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "e24c9216ced66bf57f68a9dedde5dde0903245d97e8da796b705a09e88e11d6a",
+      "scale": {
+        "currentBits": "4607251507458406854",
+        "pendingBits": "4607274305377497128",
+        "pendingEffectiveTimestamp": "1786149000",
+        "activeBits": "4607274305377497128"
+      }
+    },
+    {
+      "issuerId": "backpack",
+      "symbol": "MU.US",
+      "mint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+      "dataSha256": "b6313118e40fd8bfe405ebc2545e6475968b94f2b42dcf3d7b10968f3f30ce8e",
+      "supplyRaw": "7019058948",
+      "mintAuthority": "6XPofT3JgdoZAkUxqAbYZLNbsDvBCkDqrEWeaTiQKRBD",
+      "freezeAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "4b0f6817330737a75eaea42458b7a64eba70bdf1aa9238e2fbe7730639c5416f",
+      "scale": {
+        "currentBits": "4607182900085927711",
+        "pendingBits": "4607182900085927711",
+        "pendingEffectiveTimestamp": "0",
+        "activeBits": "4607182900085927711"
+      }
+    },
+    {
+      "issuerId": "backpack",
+      "symbol": "NKE.US",
+      "mint": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+      "dataSha256": "b0fe8433d1dbef1180a4951f32ae301aa93fc7ccc0c5290876fa3a2adc18233a",
+      "supplyRaw": "11514373204",
+      "mintAuthority": "5tPguepcKacsBPHrbWXr8Zo8A3osVKzLG65y697SvKTh",
+      "freezeAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "b79b2d6004d6bfef1b3655fd57108fa1bb96a042054b4a4b95e59f0e7deb18de",
+      "scale": {
+        "currentBits": "4607182418800017408",
+        "pendingBits": "4607182418800017408",
+        "pendingEffectiveTimestamp": "0",
+        "activeBits": "4607182418800017408"
+      }
+    },
+    {
+      "issuerId": "backpack",
+      "symbol": "IBM.US",
+      "mint": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+      "dataSha256": "0f9de3aae3838065ac9f8a6649d4612333bbf3ae07e1d8279cf8a08909376f97",
+      "supplyRaw": "292475287",
+      "mintAuthority": "7D7ZBEbWfCGco23pKqEqb9uySdMe25mbKaeHwh16opfh",
+      "freezeAuthority": "2cVYpagTt7ZGc3mmTXBa7fAznUtx5DUu6aCq8uVDaf4a",
+      "extensionTypes": [
+        4,
+        6,
+        12,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101470288",
+      "controlsFingerprint": "fba6d56a392132a5f604822997386ac1f05c910e71935b45da6edee22e979424",
+      "scale": {
+        "currentBits": "4607182418800017408",
+        "pendingBits": "4607182418800017408",
+        "pendingEffectiveTimestamp": "0",
+        "activeBits": "4607182418800017408"
+      }
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "KOon",
+      "mint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+      "dataSha256": "449dad30de23356bc0779c409ae024b50f8e9a56c2ab41f0a0b44057a2d2ce88",
+      "supplyRaw": "101920923457",
+      "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+      "extensionTypes": [
+        4,
+        6,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101466192",
+      "controlsFingerprint": "ed96f86c4097739bf7ef5e54ca97324e29d6d908f2060d74edafcdbdaa35e600",
+      "scale": {
+        "currentBits": "4607290012065628389",
+        "pendingBits": "4607290012065628389",
+        "pendingEffectiveTimestamp": "1789430644",
+        "activeBits": "4607290012065628389"
+      }
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "AAPLon",
+      "mint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+      "dataSha256": "9448c27a99f8cc7a3b9e99d0855a034bbc243e78f90f535f916ce54a63fe9b10",
+      "supplyRaw": "348102713559",
+      "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+      "extensionTypes": [
+        4,
+        6,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101466192",
+      "controlsFingerprint": "e7b69b7cc95bed83efaa419a6d8326585babdd5c94d8ca2dd2f5bb674f410d1c",
+      "scale": {
+        "currentBits": "4607197623284455843",
+        "pendingBits": "4607197623284455843",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeBits": "4607197623284455843"
+      }
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "MSFTon",
+      "mint": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+      "dataSha256": "8cb1be689caf19025142dc668f4e7deece943933b64e90ad267fc06ec917213f",
+      "supplyRaw": "406802425472",
+      "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+      "extensionTypes": [
+        4,
+        6,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101466192",
+      "controlsFingerprint": "3ebc12931890f3bf704cad03319acb375c1451a7b3db1de01a262ec3f0e8f23b",
+      "scale": {
+        "currentBits": "4607208228284984263",
+        "pendingBits": "4607208228284984263",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeBits": "4607208228284984263"
+      }
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "MUon",
+      "mint": "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo",
+      "dataSha256": "3c25a76a87facd8f3406f1b71601da63d3387b0264e911f7b3ee863d03f9192d",
+      "supplyRaw": "7523051419715",
+      "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+      "extensionTypes": [
+        4,
+        6,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101466192",
+      "controlsFingerprint": "a3a07b30c0cf28065280e8960e068e21afaed7bda69fa8cf28d5253b8401ac73",
+      "scale": {
+        "currentBits": "4607187468404920996",
+        "pendingBits": "4607187468404920996",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeBits": "4607187468404920996"
+      }
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "NKEon",
+      "mint": "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo",
+      "dataSha256": "721cc76ab4c81e086a6dc1459ed5f7b8157b2fdc42226bf3f11b2c72acf68b2d",
+      "supplyRaw": "762726140047",
+      "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+      "extensionTypes": [
+        4,
+        6,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101466192",
+      "controlsFingerprint": "318b574343c60ff8987621c664281c141ec72f065bc5d286e45c7ceecde4868f",
+      "scale": {
+        "currentBits": "4607302111266157389",
+        "pendingBits": "4607302111266157389",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeBits": "4607302111266157389"
+      }
+    },
+    {
+      "issuerId": "ondo",
+      "symbol": "IBMon",
+      "mint": "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo",
+      "dataSha256": "08d59a01b8f5497af17bf1c8b51db90c1cd442c91b35302228df55be9d768449",
+      "supplyRaw": "145376472860",
+      "mintAuthority": "9foMHsSDq7nMg4WPusSz9eY7tyxyukqborA8GyU5cUxD",
+      "freezeAuthority": "51QVCuHfL1FeNjd8BDeffCKhCcAYoULnVB3yjNhShiuK",
+      "extensionTypes": [
+        4,
+        6,
+        14,
+        18,
+        19,
+        25,
+        26
+      ],
+      "profileStatus": "supported",
+      "extensionsMask": "101466192",
+      "controlsFingerprint": "1f66a13a386b589b75eb9d2b923e4524b5ed7b3fee9744823a18ffb860b2ffeb",
+      "scale": {
+        "currentBits": "4607285066538080321",
+        "pendingBits": "4607285066538080321",
+        "pendingEffectiveTimestamp": "1788344044",
+        "activeBits": "4607285066538080321"
+      }
+    }
+  ],
+  "supportedAssets": 15,
+  "unsupportedAssets": 0,
+  "structuralCompatibilityOnly": true,
+  "liveCustodyTested": false,
+  "settlementReady": false,
+  "rentEpochHandling": "RPC rentEpoch omitted because JSON numbers can be lossy; verifier uses local value 0 and does not treat it as an economic input."
+}

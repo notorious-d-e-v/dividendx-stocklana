@@ -92,6 +92,8 @@ Show multi-issuer observation and qualified execution clearly. Keep observation-
 
 Next, resolve the source questions recorded in the [follow-up](research/issuer-qualification-followup-2026-09-18.md): issuer event/ex-date binding, historical transitions, revisions/cancellations, finality and period coverage. Review exact ordinary custody separately. Only a later, explicitly reviewed policy may connect qualified inputs to staged settlement. Never infer ex-date from payment/activation or generate completeness from empty results/pagination.
 
+**Accepted captured-custody slice (18 September):** Sol high implemented the bounded public snapshot/verifier and compiled-program tests in disjoint paths under [custody conformance v1](../spec/issuer-custody-conformance-v1.md). Astra independently checked raw bytes, SDK/Rust profile agreement and cumulative payouts, then verified 95 root tests and 47 Rust tests. All 15 captured configurations execute deposit, stale paired exit, synthetic multi-event finalization and independent redemption. See [acceptance](issuer-custody-review.md). No program, SDK or live-status change; the [source check](research/issuer-public-policy-check-2026-09-18.md) still leaves external policy/history questions unresolved.
+
 Refresh submission materials around functionality actually completed. Preserve the approved slides and narration; prepare versioned updates in the submission phase. External publication/submission uses authorization at execution time.
 
 ## Source-access work alongside production

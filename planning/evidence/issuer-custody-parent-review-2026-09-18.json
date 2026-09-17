@@ -1,0 +1,43 @@
+{
+  "schema": "dividendx-issuer-custody-parent-review-v1",
+  "reviewedAt": "2026-09-17T23:44:24.296459+00:00",
+  "inputSnapshotSha256": "5f75decb014072a82708ff76319df5dee15646460f8006461ba4786978fed7ac",
+  "conformanceReceiptSha256": "fc4021c9259e3b40fdc322c45d3152ccd623b4986bb67057feb24c30e69653e9",
+  "sdkProfileReportSha256": "3b80aba48448c9bc4d473673271084e021d799f793ed3c3f45749833d7afcc89",
+  "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+  "idlSha256": "d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4",
+  "checkedAssets": 15,
+  "issuerCounts": {
+    "xstocks": 6,
+    "backpack": 3,
+    "ondo": 6
+  },
+  "checks": {
+    "rawCatalogAndDataHashes": true,
+    "manualMintDecimalAndScaleTlvDecode": true,
+    "clockMatchesRpcContext": true,
+    "sdkAndRustProfilesMatch": true,
+    "exactPoolsAndEveryCumulativePayout": true,
+    "allBackingReturned": true,
+    "compiledProgramFullSuite": true,
+    "fixedSourceAndElfHashPins": true
+  },
+  "validation": {
+    "rootTests": 95,
+    "nodeSnapshotTests": 10,
+    "rustTests": 47,
+    "compiledSbfTests": 17,
+    "capturedMintJourneys": 15,
+    "typecheck": "passed",
+    "isolatedProductionBuild": "passed",
+    "browser": "not rerun; web and runtime sources unchanged",
+    "rustfmt": "unavailable in installed toolchain"
+  },
+  "environment": "mollusk_offline",
+  "syntheticFundingClockAndEvents": true,
+  "mainnetTransactions": 0,
+  "issuerAuthoritySignatures": 0,
+  "liveCustodyTested": false,
+  "settlementReady": false,
+  "proofBoundary": "Captured mint configuration compatibility and controlled local raw accounting; no live issuer transfer, whole-ledger supply, dividend classification/finality, annual completeness or mainnet admission claim."
+}

@@ -104,6 +104,15 @@ npm run review:issuers -- --year 2026 --snapshot /absolute/private/issuer-observ
 
 The unsigned dossier checks identities, revisions, candidate dates and current mint evidence while preserving unresolved settlement gates. It never signs or emits transactions. See [qualification acceptance](planning/issuer-qualification-review.md) and the package README for supplemental evidence and private archiving.
 
+The separate [captured-mint conformance suite](spec/issuer-custody-conformance-v1.md) tests ordinary vault custody with the exact public configurations of all 15 selected stock mints:
+
+```sh
+npm run verify:issuer-mints
+npm run test:issuer-custody
+```
+
+This runs locally with synthetic holder balances, events and term timing. It preserves mint bytes and issuer controls, and does not enable live issuer settlement. See [custody acceptance](planning/issuer-custody-review.md) for the 15 passing journeys and [protocol fixtures](tests/protocol/fixtures/README.md) for snapshot provenance.
+
 ## Run the Raydium integration
 
 The isolated [AMM package](packages/amm-integration/README.md) pins Raydium SDK v2, validates the exact devnet program/config/fee receiver and DividendX ELF, simulates every transaction, and records raw-unit conservation. Install its additional dependencies only when running this integration:

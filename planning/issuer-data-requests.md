@@ -1,6 +1,6 @@
 # Issuer data needed for DividendX
 
-Updated 17 September 2026. These are drafts and technical requirements, not messages sent. Ondo read-only access is now verified; see [authenticated access review](research/ondo-api-access-2026-09-17.md). The missing work is settlement-grade annual corporate-action data: authoritative civil ex-dates, exact factor joins, complete period coverage, revisions and finality.
+Updated 18 September 2026. These are drafts and technical requirements, not messages sent. Ondo read-only access is now verified; see [authenticated access review](research/ondo-api-access-2026-09-17.md). The missing work is settlement-grade annual corporate-action data: authoritative civil ex-dates, exact factor joins, complete period coverage, revisions and finality.
 
 ## Getting access and storing credentials
 
@@ -47,5 +47,9 @@ Only xStocks, Backpack/Trek and Ondo are active integration targets. Permissione
 ## Minimum to unlock an annual settlement claim
 
 A trustworthy source must bind **issuer + exact mint + official civil ex-date + classified isolated cash dividend + stable event identity/revision + exact before/after factors**, and must provide the complete eligible-period history plus an accepted finality/completeness rule. The protocol can multiply qualified event ratios without guessing a cash price. Gross/net amounts and reinvestment price make dollar reconciliation possible but must remain absent if not supplied.
+
+The [public-documentation check](research/issuer-public-policy-check-2026-09-18.md) confirms that Ondo multiplier history can omit corporate actions and finds no additional documented historical ledger. Ask for the missing event history and its operating rules, not another key or duplicate registry access.
+
+An issuer need not build a custom signed calendar-year certificate for DividendX. Our trusted attestor can certify coverage from a documented exhaustive ledger, reconciled source evidence and a reviewed cutoff/dispute policy. We still need evidence for that policy; neither a waiting period alone nor an operator checkbox establishes completeness. Post-finalization source corrections require a disclosed dispute procedure, since redeemed pools cannot be rewritten.
 
 The existing KOx and MU factors may be used locally with explicitly synthetic test ex-dates and a disclosed prototype completeness attestation. Label each as one sourced event, not a complete annual payout. Ondo remains without a fixture. Production additionally requires permitted real custody, continuing event access, late-payment handling, revisions and operational finality.

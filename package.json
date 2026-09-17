@@ -14,7 +14,7 @@
     "build": "tsc -b && npm --prefix packages/issuer-readers run build && vite build --config apps/web/vite.config.ts",
     "pretypecheck": "npm run build:transactions",
     "typecheck": "tsc -b && npm --prefix packages/issuer-readers run typecheck",
-    "test": "node packages/demo-fixtures/verify.mjs && npm --prefix packages/sdk test && npm run test:issuers",
+    "test": "node packages/demo-fixtures/verify.mjs && npm --prefix packages/sdk test && npm run test:issuers && npm run test:issuer-mints",
     "test:issuers": "npm --prefix packages/issuer-readers test && node --test scripts/issuers/ondo-readonly.test.mjs",
     "read:issuers": "npm --prefix packages/issuer-readers run read --",
     "test:amm": "npm --prefix packages/amm-integration test",
@@ -29,7 +29,10 @@
     "build:program": "sh scripts/protocol/build-sbf.sh",
     "build:idl": "scripts/protocol/toolchain.sh exec cargo run --locked -p dividendx --example build_idl",
     "test:program": "scripts/protocol/toolchain.sh exec cargo test --locked -p dividendx -p dividendx-protocol-tests",
-    "review:issuers": "npm --prefix packages/issuer-readers run review --"
+    "review:issuers": "npm --prefix packages/issuer-readers run review --",
+    "test:issuer-mints": "npm run build:transactions --silent && node --test scripts/protocol/issuer-mint-snapshot.test.mjs",
+    "verify:issuer-mints": "npm run build:transactions --silent && node scripts/protocol/issuer-mint-snapshot.mjs verify --snapshot tests/protocol/fixtures/issuer-mints-2026-09-18.json",
+    "test:issuer-custody": "scripts/protocol/toolchain.sh exec cargo test --locked -p dividendx-protocol-tests --test issuer_custody_sbf"
   },
   "dependencies": {
     "@dividendx/transaction-sdk": "file:packages/transaction-sdk",

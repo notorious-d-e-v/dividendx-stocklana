@@ -44,6 +44,8 @@ Higher authorized revisions replace previous contributions before finalization. 
 
 Finalization is separate from maturity. It freezes the accepted journal and raw pools once after all relevant events are resolved. Redeem PT and DR independently with cumulative rounding; neither has a time-based forfeiture. Later corrections cannot retroactively rewrite redeemed pools. A live dispute/finality policy remains a release requirement.
 
+The trusted attestor owns the complete-period assertion. It may derive coverage from a documented exhaustive issuer ledger and reconciled evidence under a versioned cutoff/dispute policy; a bespoke issuer-signed annual certificate is optional. This does not let an operator approve unknown history or infer completeness from elapsed time. The current unsigned review tool has no such approval path.
+
 Ordinary SPL external burns do not reduce the original nominal redemption denominator or raise other holders' payout rates. Abandoned backing, donations and AMM-held claims retain their reserves; no admin sweep. Pause/freeze or deficits can block physical custody; source staleness alone must not prevent a healthy settled redemption or paired exit. Zero-output claim closure requires explicit consent.
 
 Both allocations are paid in the stock token. They retain stock-price and later embedded-return exposure while unredeemed. PT is not dollar protection; DR is not a cash guarantee. Ex-date membership defines the annual dividend allocation, not perpetual isolation of the resulting stock tokens from later returns.
