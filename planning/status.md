@@ -1,6 +1,6 @@
 # Current status
 
-Updated 17 September 2026 after the wallet, issuer-reader and Raydium CPMM slices. Deposits still close at year-start.
+Updated 17 September 2026 after the guided two-wallet Raydium demo was accepted. Deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -20,11 +20,12 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
 | Issuer readers | Typed observations across the selected 15 identities, exact source records, private snapshots and explicit data gaps; [acceptance](issuer-reader-review.md) |
 | AMM integration | Isolated [Node CLI](../packages/amm-integration/README.md) with a 15-transaction finalized public devnet Raydium CPMM round trip and a separate 14-transaction captured-bytecode local proof; [acceptance](amm-review.md) |
+| Guided demos | `/demos/`: nine actions, two disposable wallets and 37 real local transactions through Raydium and annual redemption; [acceptance](guided-demo-review.md) |
 | Fallback | Original single-event SDK and technical rehearsal at `/rehearsal/`, preserved |
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; historical KOx and Backpack MU factors |
 | Research | [Annual conventions and fixture gaps](research/annual-dividend-series.md), extending the [prior-art review](research/prior-art-review.md) |
 
-The two previews remain simulated. The separate `/app/` wallet application executes actual custody, PT/DR minting, transfers and redemption through the compiled SBF program on an offline local network. The temporary wallet signs in browser memory; installed extension wallets have not been verified. Public devnet now has the exact accepted DividendX ELF and the test-only Raydium pool `2yhUcyx6jawJo9z5YMqFQgmxmvvE6Qz1g1zmDQjVH5Cm`, but that flow runs through the isolated CLI and is not in the web app. The existing web app on port 4174 and local runtime on port 4180 are unchanged. Controlled journal inputs and every AMM asset are synthetic; issuer observations do not produce settlement attestations.
+The two previews remain simulated. The separate `/app/` wallet application executes actual custody, PT/DR minting, transfers and redemption through the compiled SBF program on an offline local network. The temporary wallet signs in browser memory; installed extension wallets have not been verified. Public devnet now has the exact accepted DividendX ELF and the test-only Raydium pool `2yhUcyx6jawJo9z5YMqFQgmxmvvE6Qz1g1zmDQjVH5Cm`, and that public flow remains an isolated CLI proof. The separate `/demos/` page now executes liquidity, purchase, withdrawal and independent redemption on its own offline chain through port 4181. Core Split/Redeem and the running wallet runtime on port 4180 are preserved. Controlled journal inputs and every AMM asset are synthetic; issuer observations do not produce settlement attestations.
 
 ## Annual decisions
 
@@ -49,9 +50,11 @@ The server-only reader slice adds **22 reader tests** and **16 reviewed Ondo tra
 
 The AMM package adds **11 tests** plus self-import and package checks. The existing root **71 tests**, type check and production build pass without changing the running web app. Its public receipt records **15 finalized devnet transactions** from slots 499760641–499761026, independently rechecked at finalized slot 499762083. The flow deposited 100 synthetic test-stock units, seeded 40 DR / 80 quote, added 60 DR / 120 quote, spent 20 quote for `907024323` DR raw (`9.07024323`), withdrew all user LP, and recombined `9092975034` raw paired claims (`90.92975034`). Provider LP and LP mint supply are zero; Raydium retains 100 internal LP and 643 DR raw. Final PT supply, DR supply and vault backing each equal `907024966` raw (`9.07024966`). See [AMM acceptance](amm-review.md) and the [public receipt](evidence/amm-devnet-roundtrip-2026-09-17.json).
 
-## Next: product exposure and qualified issuer evidence
+The guided slice adds **four runtime tests**, **five browser tests**, a complete **nine-action / 37-transaction browser journey**, and an independent RPC verifier. Exact deployed bytecode, all signatures, four journal records, claim supplies and final custody conservation pass. The remaining 643 DR raw in Raydium retain 25 raw collateral in the vault. Root tests, type checking and the production build pass; see [guided acceptance](guided-demo-review.md).
 
-1. **Expose the validated liquidity flow in the wallet app.** Keep the isolated CLI and receipts as the execution source, and add the wallet experience as a separate slice without changing the preserved preview routes. The separate guided walkthrough page remains deferred.
+## Next: review, qualified issuer evidence and submission
+
+1. **Review the completed guided page.** `/demos/` is ready at port 4174 under [guided demos v1](../spec/guided-demos-v1.md). The user can repeat the two-wallet flow with test assets and an accelerated synthetic year. PT trading is the next compact demo candidate; borrowing needs venue, price and liquidation qualification before implementation.
 2. **Complete issuer qualification.** Observation readers now work across the selected package. Authoritative ex-date joins, classified event/factor binding, correction/finality rules, full annual coverage and live custody admission still need evidence. Keep these gaps visible; the readers do not produce settlement attestations.
 3. **Refresh the submission package.** Capture the working wallet and public test-only AMM proof, synchronize copy with user review, and verify the actual submission form/deadline. Do not revise the approved slides or narration in this documentation sync.
 

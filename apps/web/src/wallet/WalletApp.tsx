@@ -311,7 +311,7 @@ export function WalletApp() {
   };
 
   if (runtime.kind === 'loading') return <main className="wallet-gate"><Mark /><h1>Connecting to the local runtime…</h1><p>Verifying genesis, program and deployment identity.</p></main>;
-  if (runtime.kind === 'error') return <main className="wallet-gate" data-testid="runtime-error"><Mark /><p className="eyebrow">Runtime unavailable</p><h1>The local runtime could not be verified.</h1><p>DividendX could not reach or verify the required localhost service. Retry checks it again; it does not start the service.</p><div className="wallet-runtime-error"><b>Runtime check failed</b><p>{runtime.message}</p></div><p>From the project root, start the runtime and wait until it reports ready:</p><code className="wallet-runtime-command">npm --prefix packages/local-runtime start</code><div className="wallet-gate-actions"><button className="p-primary" onClick={boot}>Retry localhost runtime</button><a href="/">Return to annual reference</a></div></main>;
+  if (runtime.kind === 'error') return <main className="wallet-gate" data-testid="runtime-error"><Mark /><p className="eyebrow">Runtime unavailable</p><h1>The local runtime could not be verified.</h1><p>DividendX could not reach or verify the required localhost service. Retry checks it again; it does not start the service.</p><div className="wallet-runtime-error"><b>Runtime check failed</b><p>{runtime.message}</p></div><p>From the project root, start the runtime and wait until it reports ready:</p><code className="wallet-runtime-command">npm --prefix packages/local-runtime start</code><div className="wallet-gate-actions"><button className="p-primary" onClick={boot}>Retry localhost runtime</button><a href="/demos/">Open guided demos</a><a href="/">Return to annual reference</a></div></main>;
 
   const verifiedManifest = runtime.manifest;
   const activeBits = snapshot?.quote.mintProfile.scale.activeBits;
@@ -321,7 +321,7 @@ export function WalletApp() {
 
   return <><a className="p-skip" href="#wallet-main">Skip to content</a>
     <header className="p-header wallet-header"><a className="p-brand" href="/"><Mark />DividendX</a><nav aria-label="Primary">{(['market', 'split', 'redeem'] as Tab[]).map((item) => <button key={item} className={tab === item ? 'active' : ''} onClick={() => setTab(item)}>{item[0]!.toUpperCase() + item.slice(1)}</button>)}</nav><span className="balance-label">{holder ? shortAddress(holder) : 'Wallet disconnected'}</span></header>
-    <div className="preview-banner wallet-banner"><b>Local demo · test tokens</b><span>Real program transactions in a local Solana sandbox. Date controls are {verifiedManifest.clockControl ? 'available' : 'unavailable'}.</span><a href="/">Open annual reference →</a></div>
+    <div className="preview-banner wallet-banner"><b>Local demo · test tokens</b><span>Real program transactions in a local Solana sandbox. Date controls are {verifiedManifest.clockControl ? 'available' : 'unavailable'}.</span><a href="/demos/">Guided demos →</a><a href="/">Open annual reference →</a></div>
     <main id="wallet-main" className="p-page wallet-page">
       <section className="wallet-network" aria-label="Verified runtime"><div><span className="online-dot" />Verified {runtimeLabel}</div><span>Connected to the local demo network</span></section>
 

@@ -7,5 +7,6 @@ export * from './manifest.js';
 export * from './quote.js';
 export * from './rpc.js';
 export * from './signers.js';
+export * from './state.js';
 export * from './transactions.js';
 export * from './types.js';

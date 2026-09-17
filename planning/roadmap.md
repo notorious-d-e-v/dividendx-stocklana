@@ -2,11 +2,12 @@
 
 17 September 2026. The user supplied a side-chat discussion and explicitly deferred its additional products. This records direction, not implemented features or a change to the current annual program scope.
 
-**Fixed-term protocol, transferable tokens, rolling user experience.** Annual issuer/mint/year series remain the settlement foundation. PT and DR can move between holders without changing their term or backing. Wallet and AMM integrations are the next application phase after the program and transaction SDK.
+**Fixed-term protocol, transferable tokens, rolling user experience.** Annual issuer/mint/year series remain the settlement foundation. PT and DR can move between holders without changing their term or backing. The wallet and bounded Raydium transaction integrations are accepted. The separate guided page is now accepted under [guided demos v1](../spec/guided-demos-v1.md), with [browser and chain proof](guided-demo-review.md).
 
 | Later item | Purpose | Conditions before implementation |
 |---|---|---|
-| Guided walkthrough page | Walk users through splitting, transferring or trading claims, providing and withdrawing liquidity, recombining, and separate redemption | User requested this after approving the wallet app; build later as a separate page, using only flows that actually work and clearly identifying local/test-network execution |
+| PT trading demo | Show that stock exposure can trade independently too | Separate tested PT market; reuse the validated venue integration without implying the DR proof already covers PT |
+| Borrowing demo | Borrow against stock exposure, repay and recover the claim | Verify permissionless venue admission, pricing, liquidation and term handling; [research shortlist](research/defi-demo-sequence.md) |
 | Following-year series listed early | Give holders a clear next term when current-year deposits have closed | Reviewed pre-year corporate actions, opening/listing policy, useful liquidity and clear year selection; not midyear minting into the current term |
 | Rolling DR vault | Let users hold one strategy share while the vault owns and trades annual vintages | NAV and entry/exit rules, execution limits, fees, late-finalization handling and available next-year liquidity; keep backing and rights separate from the annual vault |
 | Direct vintage choice | Keep individual annual PT/DR available beside a rolling product | Clear balances, prices and risk by exact issuer/mint/year |

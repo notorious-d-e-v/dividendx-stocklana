@@ -21,6 +21,7 @@ export default defineConfig({
         product: fileURLToPath(new URL('./index.html', import.meta.url)),
         rehearsal: fileURLToPath(new URL('./rehearsal/index.html', import.meta.url)),
         wallet: fileURLToPath(new URL('./app/index.html', import.meta.url)),
+        demos: fileURLToPath(new URL('./demos/index.html', import.meta.url)),
       },
     },
   },

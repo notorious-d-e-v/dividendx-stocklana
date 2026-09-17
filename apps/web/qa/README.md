@@ -1,5 +1,28 @@
 # Product and rehearsal verification
 
+## Guided DeFi demo — 17 September 2026
+
+Actual guided page: [http://127.0.0.1:4174/demos/](http://127.0.0.1:4174/demos/). It uses a separate runtime on loopback port **4181**; the preserved `/app/` wallet runtime remains on 4180. Start the web app and `npm run demo:guided`, then prepare the two disposable server-managed test wallets. No extension wallet is required.
+
+The fixed journey completes nine user actions and **37 confirmed local transactions**: split 100 test stock into PT/DR, create and add liquidity to a Raydium DR/test-quote pool, buy DR, withdraw all user-held LP, recombine recovered paired claims, advance an accelerated test year through four synthetic dividend events, redeem buyer DR and independently redeem provider PT. It executes the accepted DividendX ELF and captured genuine Raydium devnet binary/config on its own offline Surfpool. Test quote has no monetary value, and the synthetic events are not issuer payouts. Raydium's locked residual DR remains backed.
+
+The guided runtime has four backend checks. The AMM regression suite remains 11/11. The five guided Playwright cases cover guarded actions, stale/partial failure receipts, session reload, unavailable-runtime recovery, keyboard access and mobile overflow; the preserved 27 browser cases also pass. Root fixture/reference checks pass 71/71 with TypeScript and the production build.
+
+Run a fresh package smoke independently, or use the real browser driver against a fresh server session and then verify the completed chain state:
+
+```sh
+npm run test:guided
+npm --prefix packages/guided-runtime run smoke
+npm run demo:guided
+# In another terminal with Vite available on 4174 or isolated QA port 4184:
+DIVIDENDX_REVIEW_URL=http://127.0.0.1:4174 node apps/web/qa/guided-demo-review.mjs
+node scripts/protocol/guided-runtime-verify.mjs --output planning/evidence/guided-demo-chain-verification-2026-09-17.json
+```
+
+The [acceptance review](../../../planning/guided-demo-review.md) records the proof boundary. The [browser record](../../../planning/evidence/guided-demo-browser-2026-09-17.json) preserves every checkpoint, final state, reload behavior and 1440/1024/768/390 px overflow checks. The [chain verifier](../../../planning/evidence/guided-demo-chain-verification-2026-09-17.json) independently reads RPC program payloads, journal and token accounts, confirms every reported signature and proves exact residual conservation. Review captures are `guided-demo-ready-1440.png`, `guided-demo-complete-1440.png` and `guided-demo-complete-390.png`.
+
+The guided proof is local and test-only. The accepted public devnet pool remains separately inspectable; local signatures are not explorer-linked. PT trading and borrowing remain planned rows until a venue assessment covers admission, pricing/oracles, maturity and liquidation.
+
 ## Wallet application — 17 September 2026
 
 Actual transaction app: [http://127.0.0.1:4174/app/](http://127.0.0.1:4174/app/). Start Vite and the [local runtime](../../../packages/local-runtime/README.md) first. The original preview/rehearsal below remain preserved.

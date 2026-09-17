@@ -6,6 +6,8 @@ Updated 17 September 2026. This map identifies the current review surfaces, sour
 
 - [README](../README.md) — run the real local wallet application, preserved previews and their checks.
 - [AMM review](../planning/amm-review.md) — finalized public devnet round trip and separate captured-bytecode local proof.
+- [Guided demos specification](../spec/guided-demos-v1.md) — separate `/demos/` product and fixed nine-action local execution contract.
+- [Guided demo acceptance](../planning/guided-demo-review.md) — independent browser, RPC, binary identity and exact-conservation review.
 - [Current plan](../planning/plan.md) — current scope, completed work and next implementation phase.
 - [Architecture decision](../planning/adapter-decision.md) and [issuer synthesis](../planning/solana-issuer-synthesis.md) — the selected xStocks, Backpack/Trek and Ondo design, its evidence boundary and unresolved dependencies.
 - [Annual product specification](../spec/annual-product.md) — annual Market / Split / Redeem flow at `/`, extending the approved visual design.
@@ -18,7 +20,9 @@ Updated 17 September 2026. This map identifies the current review surfaces, sour
 |---|---|---|
 | [`apps/web/src/ProductApp.tsx`](../apps/web/src/ProductApp.tsx) | Main local product flow | In-memory preview; no wallet, vault or network transaction |
 | [`apps/web/src/wallet/`](../apps/web/src/wallet/) | `/app/` wallet flow | Real local test transactions; temporary browser wallet and Wallet Standard interface |
+| [`apps/web/src/demos/`](../apps/web/src/demos/) | `/demos/` guided DeFi flow | Two server-managed test wallets; nine fixed actions and real local receipts, with no extension wallet or caller-supplied transaction data |
 | [`packages/local-runtime/`](../packages/local-runtime/) | Offline Surfpool test network | Disposable test profiles and synthetic annual journal; no real issuer assets |
+| [`packages/guided-runtime/`](../packages/guided-runtime/) | Separate guided runtime on port 4181 | Accepted DividendX ELF plus captured genuine Raydium devnet binary/config; disposable local chain, synthetic assets and accelerated test year |
 | [`packages/issuer-readers/`](../packages/issuer-readers/) | Server-side issuer observations | Selected registry identities and available source records; explicit gaps, private snapshots, no settlement writer |
 | [`packages/amm-integration/`](../packages/amm-integration/) | Raydium CPMM execution package | Isolated Node CLI; finalized public devnet test flow and captured-bytecode local fallback, not wired into `/app/` |
 | [`apps/web/src/App.tsx`](../apps/web/src/App.tsx) | Detailed rehearsal | Local accounting demonstration and fallback |
@@ -28,7 +32,7 @@ Updated 17 September 2026. This map identifies the current review surfaces, sour
 | [`tests/protocol/`](../tests/protocol/) | Independent oracle and compiled-SBF conformance | Controlled mints, clocks and attestations; preserves source fixture provenance |
 | [`packages/sdk/src/index.ts`](../packages/sdk/src/index.ts) | Preserved single-event rehearsal SDK | Legacy behavior, not the annual program contract |
 | [`packages/demo-fixtures/`](../packages/demo-fixtures/) | Frozen catalog, events, digests and verifier | Reproducible historical fixtures; not live availability |
-| [`apps/web/qa/README.md`](../apps/web/qa/README.md) | UI review record and reproduction commands | Distinguishes simulated previews from actual local wallet execution |
+| [`apps/web/qa/README.md`](../apps/web/qa/README.md) | UI review record and reproduction commands | Distinguishes simulated previews, the wallet runtime and the separate guided execution proof |
 | [`design/design-system.md`](../design/design-system.md) | Approved product visual language | Design rules, not operational capability |
 | [`design/illustrations/illustration-guide.md`](../design/illustrations/illustration-guide.md) | Approved illustration system | Metaphors and communication rules; pictures do not prove integrations |
 
@@ -64,6 +68,7 @@ The evidence directory is archival source material and should remain tracked eve
 - [Authenticated Ondo access](../planning/research/ondo-api-access-2026-09-17.md) — verified read-only endpoints and six matching mint identities; raw responses and credentials stay outside Git, historical settlement gaps remain.
 - [Issuer reader contract](../spec/issuer-readers-v1.md) and [public source schemas](../planning/research/issuer-reader-source-contracts-2026-09-17.md) — typed observation boundaries, exact identity checks, source revisions and incomplete-history handling.
 - [AMM feasibility](../planning/research/claim-amm-feasibility.md), [acceptance review](../planning/amm-review.md), [public receipt](../planning/evidence/amm-devnet-roundtrip-2026-09-17.json) and [local captured-bytecode receipt](../packages/amm-integration/evidence/local-captured-raydium-receipt-2026-09-17.json) — exact execution boundaries, identities and residual accounting. The public proof has 15 finalized transactions; the local proof has 14.
+- [Guided acceptance](../planning/guided-demo-review.md), [browser journey](../planning/evidence/guided-demo-browser-2026-09-17.json) and [independent chain verification](../planning/evidence/guided-demo-chain-verification-2026-09-17.json) — nine actions and 37 confirmed local transactions across two disposable wallets, including captured Raydium execution, four synthetic annual events, separate redemption and exact residual backing. This is isolated from the wallet runtime on 4180 and the public devnet proof.
 - [Annual dividend research](../planning/research/annual-dividend-series.md) — exchange period/ex-date conventions, revisions and actual fixture gaps.
 - [Prior-art decision review](../planning/research/prior-art-review.md) — dated single-event architecture review with reusable lessons; annual specifications supersede its term design.
 - [Wallet acceptance](../planning/wallet-review.md) and [three-profile transaction evidence](../planning/evidence/wallet-runtime-smoke-2026-09-17.json) — actual local SBF lifecycle, transfers and redemption; not public consensus or a live issuer feed.

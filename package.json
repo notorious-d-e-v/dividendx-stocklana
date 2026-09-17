@@ -18,6 +18,8 @@
     "test:issuers": "npm --prefix packages/issuer-readers test && node --test scripts/issuers/ondo-readonly.test.mjs",
     "read:issuers": "npm --prefix packages/issuer-readers run read --",
     "test:amm": "npm --prefix packages/amm-integration test",
+    "test:guided": "npm --prefix packages/guided-runtime test",
+    "demo:guided": "npm --prefix packages/guided-runtime start",
     "amm:preflight": "npm --prefix packages/amm-integration run preflight --",
     "amm:local": "npm --prefix packages/amm-integration run run:local --",
     "amm:devnet": "npm --prefix packages/amm-integration run run:public --",

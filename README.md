@@ -2,11 +2,12 @@
 
 DividendX separates a tokenized-stock position into annual claims: principal tokens (PT) for the remaining stock exposure and dividend-right tokens (DR) for the year's qualified dividend allocation. For example, `PT-KOx-2027` and `DR-KOx-2027` belong to the Coca-Cola KOx 2027 series. Deposits close when the year starts. Matching PT and DR can recombine before finalization; afterward each side redeems independently, without an expiry or forfeiture deadline.
 
-The repository contains the annual Solana program, transaction SDK, wallet application, compiled-program tests, issuer readers, an isolated Raydium integration and preserved accounting previews. `/app/` executes real signed transactions in a disposable local SBF sandbox. The same accepted program ELF is deployed on devnet, where the separate Node CLI completed a finalized test-only Raydium CPMM round trip. That public flow is not exposed in the running web app and does not enable live issuer settlement.
+The repository contains the annual Solana program, transaction SDK, wallet application, guided DeFi demo, compiled-program tests, issuer readers, an isolated Raydium integration and preserved accounting previews. `/app/` executes real signed transactions in a disposable local SBF sandbox. `/demos/` runs a separate two-wallet local journey against the accepted DividendX program and captured genuine Raydium devnet bytecode. The same DividendX ELF is deployed on devnet, where the separate Node CLI completed a finalized test-only Raydium CPMM round trip. None of these test flows enables live issuer settlement.
 
 ## Current demo
 
 - `/app/` is the wallet application: request test collateral, split into PT/DR, transfer either claim, recombine pairs, and redeem independently after annual finalization. It needs the local runtime below.
+- `/demos/` is the guided DeFi journey: two disposable server-managed test wallets complete nine actions and 37 signed local transactions across split, Raydium liquidity, a DR purchase, liquidity withdrawal, paired recombination, four synthetic dividend events and separate DR/PT redemption. It needs the guided runtime on port 4181.
 - `/` is the annual Market / Split / Redeem preview, with separate 2027 and 2028 series, cumulative allocation and distinct year-end/finalization states.
 - `/rehearsal/` preserves the original single-event two-account walkthrough.
 - The catalog contains 15 observed Solana stock-token candidates across xStocks, Backpack/Trek, and Ondo.
@@ -61,6 +62,27 @@ All keys and tokens are disposable. The server uses pinned Surfpool 1.5.0 offlin
 
 On a fresh runtime, `node scripts/protocol/wallet-runtime-smoke.mjs` checks all three assets. Restart it before `node apps/web/qa/wallet-app-review.mjs`, which exercises the actual app with two browser wallets. Both checks consume the annual test lifecycle; restart again for a fresh demonstration.
 
+## Run the guided DeFi demo
+
+The guided runtime is separate from the wallet runtime: it listens on loopback port **4181**, while `/app/` continues to use port **4180**. Complete the dependency and accepted-ELF setup in the [guided runtime README](packages/guided-runtime/README.md), keep the web app on 4174 running, then start the guided service in another terminal:
+
+```sh
+npm run test:guided
+npm run demo:guided
+```
+
+Open [the guided demo](http://127.0.0.1:4174/demos/). The service creates two disposable in-memory wallets; no extension wallet, caller address, amount, key or remote RPC is accepted. Its accelerated local 2027 records four synthetic dividend events. The quote token has no value, and the resulting 37 transactions prove only this controlled local test journey. Raydium's locked residual DR remains backed after the Stock holder and Dividend buyer complete their separate exits.
+
+For a fresh isolated runtime, the package smoke runs the same fixed nine actions. Against a completed server session, the browser driver and independent chain verifier reproduce the UI and RPC checks:
+
+```sh
+npm --prefix packages/guided-runtime run smoke
+DIVIDENDX_REVIEW_URL=http://127.0.0.1:4174 node apps/web/qa/guided-demo-review.mjs
+node scripts/protocol/guided-runtime-verify.mjs --output planning/evidence/guided-demo-chain-verification-2026-09-17.json
+```
+
+The [guided demo acceptance](planning/guided-demo-review.md), [real-browser journey](planning/evidence/guided-demo-browser-2026-09-17.json) and [independent chain verification](planning/evidence/guided-demo-chain-verification-2026-09-17.json) verify all 37 reported transactions, actual loaded program payloads, the four-event journal and exact residual conservation. The public devnet pool remains a separate proof.
+
 ## Read issuer observations
 
 The server-side [issuer readers](packages/issuer-readers/README.md) collect the selected xStocks, Backpack/Trek and Ondo identities and available source records:
@@ -111,6 +133,7 @@ The SBF suite advances a controlled test clock to cover the annual lifecycle. Th
 | [`programs/dividendx/`](programs/dividendx/) | Annual custody program and generated Anchor IDL |
 | [`packages/transaction-sdk/`](packages/transaction-sdk/) | Instruction builders, coherent account reads, quotes and signing helpers |
 | [`packages/local-runtime/`](packages/local-runtime/) | Disposable offline SBF network, test faucet and controlled annual lifecycle |
+| [`packages/guided-runtime/`](packages/guided-runtime/) | Separate two-wallet guided runtime with captured Raydium bytecode and fixed local actions |
 | [`packages/issuer-readers/`](packages/issuer-readers/) | Server-side observations with explicit evidence and qualification gaps |
 | [`packages/amm-integration/`](packages/amm-integration/) | Isolated Raydium CPMM preflight and local/public test-only execution CLI |
 | [`tests/protocol/`](tests/protocol/) | Independent arithmetic oracle and compiled-SBF conformance |
@@ -129,4 +152,4 @@ Ondo read-only API access is verified. Run `node scripts/issuers/ondo-readonly.m
 
 The [annual research](planning/research/annual-dividend-series.md) extends the [prior-art review](planning/research/prior-art-review.md). Calendar-year periods are our choice; traditional exchange dividend contracts do not all use those exact dates. Membership uses the reference share's official ex-date, including late-paid dividends; maturity stops new eligible dates, while finalization waits for a complete resolved journal. The model replaces corrected events and compounds accepted factors before rounding once. It does not sum separately rounded event payouts.
 
-Next are exposing the validated liquidity flow in the wallet app, completing issuer qualification, and refreshing the submission package. The public AMM proof does not turn source observations into settlement attestations: the program still needs trusted event classification, authoritative ex-dates and complete-period coverage for a live issuer. The separate guided walkthrough remains deferred. Rolling vaults, quarterly terms and perpetual-product research remain on the [roadmap](planning/roadmap.md).
+Next are completing issuer qualification and refreshing the submission package. The public AMM and local guided proofs do not turn source observations into settlement attestations: the program still needs trusted event classification, authoritative ex-dates and complete-period coverage for a live issuer. PT trading and borrowing demos remain roadmap work and require a concrete venue assessment, including market admission, pricing/oracles, maturity handling and liquidation behavior. Rolling vaults, quarterly terms and perpetual-product research remain on the [roadmap](planning/roadmap.md).
