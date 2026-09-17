@@ -29,9 +29,25 @@ test('captured Raydium program and account fixtures match pinned hashes', async 
   }
 });
 
+test('captured Circle devnet USDC mint is exact and discloses local funding boundary', async () => {
+  const fixture = JSON.parse(await readFile(resolve(ROOT,
+    'packages/guided-runtime/fixtures/circle-devnet-usdc-2026-09-17.json'), 'utf8'));
+  const data = Buffer.from(fixture.data, 'base64');
+  assert.equal(fixture.sourceGenesisHash, 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG');
+  assert.equal(fixture.sourceSlot, 499_830_485);
+  assert.equal(fixture.mint, '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU');
+  assert.equal(fixture.owner, 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+  assert.equal(fixture.decimals, 6);
+  assert.equal(data.length, 82);
+  assert.equal(createHash('sha256').update(data).digest('hex'),
+    '3c8a2c7c49c355902bf2b2cb4b5bded7772a7971bb7e8168b0873d2f9d2b42b6');
+  assert.match(fixture.boundary, /synthetic local funding/);
+});
+
 test('idle runtime rejects stale and out-of-order mutations without creating a chain', async () => {
   const runtime = new GuidedDemoRuntime();
   const initial = runtime.publicState();
+  assert.equal(initial.schemaVersion, 2);
   await assert.rejects(runtime.beginStart('wrong-runtime', initial.revision), /stale runtime or revision/);
   await assert.rejects(runtime.beginStep(initial.runtimeId, 'missing', initial.revision, 'split'), /stale runtime, session, or revision/);
   assert.deepEqual(runtime.publicState(), initial);

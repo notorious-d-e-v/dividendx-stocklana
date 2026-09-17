@@ -7,7 +7,7 @@ The repository contains the annual Solana program, transaction SDK, wallet appli
 ## Current demo
 
 - `/app/` is the wallet application: request test collateral, split into PT/DR, transfer either claim, recombine pairs, and redeem independently after annual finalization. It needs the local runtime below.
-- `/demos/` is the guided DeFi journey: two disposable server-managed test wallets complete nine actions and 37 signed local transactions across split, Raydium liquidity, a DR purchase, liquidity withdrawal, paired recombination, four synthetic dividend events and separate DR/PT redemption. It needs the guided runtime on port 4181.
+- `/demos/` is the guided DeFi journey: two disposable server-managed test wallets complete nine actions and 36 signed local transactions across split, Raydium liquidity, a DR purchase, liquidity withdrawal, paired recombination, four synthetic dividend events and separate DR/PT redemption. Its v2 runtime uses a captured Circle devnet USDC mint account with synthetic local Test USDC balances and listens on port 4181.
 - `/` is the annual Market / Split / Redeem preview, with separate 2027 and 2028 series, cumulative allocation and distinct year-end/finalization states.
 - `/rehearsal/` preserves the original single-event two-account walkthrough.
 - The catalog contains 15 observed Solana stock-token candidates across xStocks, Backpack/Trek, and Ondo.
@@ -71,17 +71,19 @@ npm run test:guided
 npm run demo:guided
 ```
 
-Open [the guided demo](http://127.0.0.1:4174/demos/). The service creates two disposable in-memory wallets; no extension wallet, caller address, amount, key or remote RPC is accepted. Its accelerated local 2027 records four synthetic dividend events. The quote token has no value, and the resulting 37 transactions prove only this controlled local test journey. Raydium's locked residual DR remains backed after the Stock holder and Dividend buyer complete their separate exits.
+Open [the guided demo](http://127.0.0.1:4174/demos/). The service creates two disposable in-memory wallets; no extension wallet, caller address, amount, key or remote RPC is accepted. Runtime v2 loads an exact local copy of Circle's six-decimal devnet USDC mint account, `4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU`, then creates synthetic local balances of 10 Test USDC for the provider and 1 for the buyer. These balances are not a public faucet transfer and do not establish dollar value. The flow seeds 40 DR / 4 Test USDC, adds 60 DR / 6 Test USDC and buys DR with 1 Test USDC.
+
+Its accelerated local 2027 records four synthetic dividend events. The resulting 36 transactions prove only this controlled local journey; the prior quote-mint creation transaction is absent because v2 loads the captured mint account. Raydium's locked residual DR remains backed after the Stock holder and Dividend buyer complete their separate exits. See the [Test USDC specification](spec/guided-usdc-v1.md).
 
 For a fresh isolated runtime, the package smoke runs the same fixed nine actions. Against a completed server session, the browser driver and independent chain verifier reproduce the UI and RPC checks:
 
 ```sh
 npm --prefix packages/guided-runtime run smoke
 DIVIDENDX_REVIEW_URL=http://127.0.0.1:4174 node apps/web/qa/guided-demo-review.mjs
-node scripts/protocol/guided-runtime-verify.mjs --output planning/evidence/guided-demo-chain-verification-2026-09-17.json
+node scripts/protocol/guided-runtime-verify.mjs --output planning/evidence/guided-usdc-chain-verification-2026-09-17.json
 ```
 
-The [guided demo acceptance](planning/guided-demo-review.md), [real-browser journey](planning/evidence/guided-demo-browser-2026-09-17.json) and [independent chain verification](planning/evidence/guided-demo-chain-verification-2026-09-17.json) verify all 37 reported transactions, actual loaded program payloads, the four-event journal and exact residual conservation. The public devnet pool remains a separate proof.
+The v2 acceptance set is the [Test USDC review](planning/usdc-demo-review.md), [real-browser journey](planning/evidence/guided-usdc-browser-2026-09-17.json), [runtime receipt](planning/evidence/guided-usdc-receipt-2026-09-17.json) and [independent chain verification](planning/evidence/guided-usdc-chain-verification-2026-09-17.json). The verifier accepts both v1 and v2 receipts. The preserved [generic-quote review](planning/guided-demo-review.md), [browser journey](planning/evidence/guided-demo-browser-2026-09-17.json) and [chain verification](planning/evidence/guided-demo-chain-verification-2026-09-17.json) record the earlier 37-transaction run and remain historical evidence.
 
 ## Read issuer observations
 
@@ -106,7 +108,9 @@ npm run amm:local -- --manifest /absolute/path/to/manifest.json --admin-signer /
 npm run amm:devnet -- --manifest /absolute/path/to/manifest.json --admin-signer /absolute/path/to/admin.json --state-dir /absolute/path/to/repo/.local-tools/amm-devnet-run --receipt /absolute/path/to/repo/.local-tools/amm-devnet-run/receipt.json
 ```
 
-Each execution requires a fresh, distinct state directory that is a direct child of the repository's ignored `.local-tools/` directory. The public receipt contains 15 finalized devnet transactions. The earlier isolated-validator receipt contains 14 transactions against captured genuine Raydium devnet bytecode. Both use the same test quantities: 40 DR / 80 quote for the seed, 60 DR / 120 quote added, and 20 quote spent for `9.07024323` DR. See the [AMM review](planning/amm-review.md) and [public evidence](planning/evidence/amm-devnet-roundtrip-2026-09-17.json). Public chain time leaves the 2027 series open, so the flow ends with paired recombination; independent post-maturity redemption remains a separate local proof.
+Each execution requires a fresh, distinct state directory that is a direct child of the repository's ignored `.local-tools/` directory. The preserved default mock-quote public receipt contains 15 finalized devnet transactions. The earlier isolated-validator receipt contains 14 transactions against captured genuine Raydium devnet bytecode. Both use the historical test quantities: 40 DR / 80 quote for the seed, 60 DR / 120 quote added, and 20 quote spent for `9.07024323` DR. See the [AMM review](planning/amm-review.md) and [public evidence](planning/evidence/amm-devnet-roundtrip-2026-09-17.json). Public chain time leaves the 2027 series open, so the flow ends with paired recombination; independent post-maturity redemption remains a separate local proof.
+
+The separate Circle mode keeps the mock quote as the CLI default and requires the explicit `--quote circle-devnet-usdc` option shown in the [AMM package README](packages/amm-integration/README.md). Its 15 AMM tests pass, and the [public USDC receipt](planning/evidence/amm-usdc-devnet-roundtrip-2026-09-17.json) now records 14 finalized transactions, independently checked in [RPC verification](planning/evidence/amm-usdc-devnet-verification-2026-09-17.json). The run transferred 11 of the supplied 20 test USDC into the two test wallets, leaving 9 in the funding wallet. This public proof remains separate from the local annual walkthrough.
 
 ## Program and transaction SDK
 

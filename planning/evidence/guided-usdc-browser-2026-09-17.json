@@ -1,0 +1,487 @@
+{
+  "reviewedAt": "2026-09-17T13:34:41.733Z",
+  "baseUrl": "http://127.0.0.1:4184",
+  "kind": "real-browser-local-test-usdc-transactions",
+  "sessionId": "d19c0545-dfda-4051-a9d9-249832613c0a",
+  "runtimeId": "53f208b7-c11b-4a63-82ae-c60a7cdc906c",
+  "actions": [
+    {
+      "path": "/start",
+      "step": "setup"
+    },
+    {
+      "path": "/step",
+      "step": "split"
+    },
+    {
+      "path": "/step",
+      "step": "create-pool"
+    },
+    {
+      "path": "/step",
+      "step": "add-liquidity"
+    },
+    {
+      "path": "/step",
+      "step": "buy-dr"
+    },
+    {
+      "path": "/step",
+      "step": "remove-liquidity"
+    },
+    {
+      "path": "/step",
+      "step": "recombine"
+    },
+    {
+      "path": "/step",
+      "step": "settle-year"
+    },
+    {
+      "path": "/step",
+      "step": "redeem-buyer"
+    },
+    {
+      "path": "/step",
+      "step": "redeem-provider"
+    }
+  ],
+  "checkpoints": [
+    {
+      "step": "split",
+      "revision": 22,
+      "slot": 7683929487,
+      "transactions": 9
+    },
+    {
+      "step": "create-pool",
+      "revision": 26,
+      "slot": 7683554000,
+      "transactions": 10
+    },
+    {
+      "step": "add-liquidity",
+      "revision": 30,
+      "slot": 7683554013,
+      "transactions": 11
+    },
+    {
+      "step": "buy-dr",
+      "revision": 34,
+      "slot": 7683554027,
+      "transactions": 12
+    },
+    {
+      "step": "remove-liquidity",
+      "revision": 38,
+      "slot": 7683554042,
+      "transactions": 13
+    },
+    {
+      "step": "recombine",
+      "revision": 42,
+      "slot": 7683554057,
+      "transactions": 14
+    },
+    {
+      "step": "settle-year",
+      "revision": 84,
+      "slot": 40773023005,
+      "transactions": 34
+    },
+    {
+      "step": "redeem-buyer",
+      "revision": 88,
+      "slot": 40773023019,
+      "transactions": 35
+    },
+    {
+      "step": "redeem-provider",
+      "revision": 92,
+      "slot": 40773023033,
+      "transactions": 36
+    }
+  ],
+  "layout": [
+    {
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "overflow": false
+    }
+  ],
+  "pageErrors": [],
+  "reloadPreservedSession": true,
+  "finalState": {
+    "schemaVersion": 2,
+    "runtimeId": "53f208b7-c11b-4a63-82ae-c60a7cdc906c",
+    "revision": 92,
+    "sessionId": "d19c0545-dfda-4051-a9d9-249832613c0a",
+    "status": "complete",
+    "activeStep": null,
+    "nextStep": null,
+    "completedSteps": [
+      "split",
+      "create-pool",
+      "add-liquidity",
+      "buy-dr",
+      "remove-liquidity",
+      "recombine",
+      "settle-year",
+      "redeem-buyer",
+      "redeem-provider"
+    ],
+    "snapshot": {
+      "observedAt": "2026-09-17T13:34:40.435Z",
+      "slot": 40773023033,
+      "unixTimestamp": "1830427200",
+      "genesisHash": "C8QBLYnJUwrnZwB5hTf7b4TAC3jHxXaWufYt4p8ifvAg",
+      "rpcUrl": "http://127.0.0.1:53962",
+      "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+      "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+      "series": "GNW2JgFhckLsVcqrotgkqni27q5ePhSAMbbyRdD2uUqx",
+      "year": 2027,
+      "phase": "finalized",
+      "eventCount": 4,
+      "stockDecimals": 8,
+      "quoteDecimals": 6,
+      "quoteAsset": {
+        "symbol": "USDC",
+        "provenance": "local-circle-devnet-clone",
+        "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+      },
+      "lpDecimals": 9,
+      "stockMultiplierBits": "4607362562785112228",
+      "provider": {
+        "address": "8eXQ1V7P3yu11SJQhGqRWzSuyBCgBH54sVqzyfiZ1AjU",
+        "stockRaw": "9965114339",
+        "ptRaw": "0",
+        "drRaw": "0",
+        "quoteRaw": "10999596",
+        "lpRaw": "0"
+      },
+      "buyer": {
+        "address": "4RjyqRSpM9fG8MEdnC7Ar9M3PV7MTj7YrFisJpicdzfA",
+        "stockRaw": "34885550",
+        "ptRaw": "0",
+        "drRaw": "0",
+        "quoteRaw": "0",
+        "lpRaw": "0"
+      },
+      "mints": {
+        "stock": "2L5uueiQnJjfxr4JAjbUfC8fGh1w3oVpoxsp93Ex4T7B",
+        "pt": "DTGbY8e6RjGLwhkVV4qDYX9JcSTomwvr8M1JhkokyWwE",
+        "dr": "A8uUgVXwSNgAipnKXc7y3kCu3Qa11DZ2meYYrNiLxSmV",
+        "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+        "lp": "2g7Gz1q44pnFdjmH6a32BeX6jvL5bwREnMBhRwnPW653"
+      },
+      "pool": {
+        "address": "BkcnYipctXLXVWhjBVZ76EfS1XyDYhZgi3a8725DnZ9x",
+        "drRaw": "2876",
+        "quoteRaw": "404",
+        "lockedLpRaw": "100"
+      },
+      "vaultRaw": "111",
+      "ptSupplyRaw": "0",
+      "drSupplyRaw": "2876",
+      "backingVerified": true,
+      "swap": {
+        "inputQuoteRaw": "1000000",
+        "outputDrRaw": "907024323",
+        "minimumDrRaw": "902489201"
+      }
+    },
+    "transactions": [
+      {
+        "step": "setup",
+        "name": "initialize_dividendx_config",
+        "signature": "3mf4UdtEx1wAQwBipEsXR9m5dA4f1kGHRz2rLu2Zx12eM4yFBUNhE7nuyRK8YCJskZnePuHs4s4vFn1v9HLPns8V",
+        "status": "confirmed",
+        "slot": 7683929464
+      },
+      {
+        "step": "setup",
+        "name": "fund_test_participants",
+        "signature": "3WcFgNGch8C5K1dxSvQFDRfjNUgP9u7r5UbyLysqbBY7JMRVa7RwJ6UCuwcknaWAwyYogudCDApxCTTpYFJ6rdQo",
+        "status": "confirmed",
+        "slot": 7683929466
+      },
+      {
+        "step": "setup",
+        "name": "create_test_collateral_mint",
+        "signature": "4ksfiocYnYNCGiMTbUfx1rVksbPR6seM7kZJ1eMPaTGvuC2U45WdeFJDAdi1hWN5vsTxchKdZ8aiK9kq4QDaCtFc",
+        "status": "confirmed",
+        "slot": 7683929467
+      },
+      {
+        "step": "setup",
+        "name": "register_test_asset",
+        "signature": "53sDUdRQ2UjSMdBXrDZseRKsptTk1YQuL2t5Bi7XiEJ4VtcbcxRsKVzeR3xAJyW2x7wVGPjKPmhDKYfNHpHehorj",
+        "status": "confirmed",
+        "slot": 7683929469
+      },
+      {
+        "step": "setup",
+        "name": "refresh_test_asset_observation_setup",
+        "signature": "29CRYi82g2ajsGvLNCG4u4AZyxeTmKrHpXpJwmdLzeqchhj8MqEG5rdtUhohpLwokNtdzCiATkFzB7HMGhUkXzAu",
+        "status": "confirmed",
+        "slot": 7683929470
+      },
+      {
+        "step": "setup",
+        "name": "create_2027_series",
+        "signature": "4jiigjbEG4yUYXGBUCyGprmPhH5hZSUVqzSwZCtF6TJw8Hc4UvaR2LgMAW2DXv2iZ9hZAfqwS5uSymZLHzqEY2uy",
+        "status": "confirmed",
+        "slot": 7683929471
+      },
+      {
+        "step": "setup",
+        "name": "create_provider_token_accounts",
+        "signature": "wCKQM2W1suKmNfKd99bD5LUivLYgsDiyAxABrFgfYSKo6pZC9XxaEg9GV1vbUXd5At7pKKb4U4WCQYphTLsVsvR",
+        "status": "confirmed",
+        "slot": 7683929473
+      },
+      {
+        "step": "setup",
+        "name": "create_buyer_token_accounts",
+        "signature": "WerxM3E4xWQ8WySwueSHK8H6383gTSqSSWPvpPhctkSU99SkrpaoM3cx3i7jtuxBddQMn6vyQMmNE3sKUEYXgAA",
+        "status": "confirmed",
+        "slot": 7683929474
+      },
+      {
+        "step": "split",
+        "name": "deposit_100_test_stock",
+        "signature": "5vQzGcZRURXpPR46rtBEZiXZDtvGNLiTwMZcAH7hfbxvZKwo3A9mE4mSHaK8EnwkzDNx1SXgPZi3zNTR6k3vcGWL",
+        "status": "confirmed",
+        "slot": 7683929486
+      },
+      {
+        "step": "create-pool",
+        "name": "create_cpmm_pool",
+        "signature": "4vznPQD7YqopUWU4dYVLWJnaF28tnwSwxvGFxJGoz15Ud1CGtAx5Qd8J3QMenWe8AnFodmVcGYgCnRxkqMHApCxS",
+        "status": "confirmed",
+        "slot": 7683929501
+      },
+      {
+        "step": "add-liquidity",
+        "name": "add_cpmm_liquidity",
+        "signature": "5ssZ8tZD3MEU6PEGZf4djiX8pfVgNvm4uPaNZjMGScm6cUsyfbmonxTY2X5LNR2JoXxCfPduYwmpN5quTTURNo7J",
+        "status": "confirmed",
+        "slot": 7683554012
+      },
+      {
+        "step": "buy-dr",
+        "name": "buyer_swap_quote_for_dr",
+        "signature": "YsLYDRCdJ5zCXPYtPGCAu2CLCThhE1FjoBGS2gFKnbyz1x2r9hgU3XFp69M9FnSR5TbosyTXxNuYR9SBjqSWucu",
+        "status": "confirmed",
+        "slot": 7683554026
+      },
+      {
+        "step": "remove-liquidity",
+        "name": "withdraw_all_provider_lp",
+        "signature": "2kvhQwDWE7QwMbb8JvnvwSRRgagCFGU8x6GztFY2UnjxV92QLff4V6P1rkdjg9cEwRzU2fDGUBnirKiL7CPsUo44",
+        "status": "confirmed",
+        "slot": 7683554040
+      },
+      {
+        "step": "recombine",
+        "name": "recombine_recovered_dr_with_pt",
+        "signature": "3FaD4qV9JoXk3Tpwm14yn3c8BBzgfnbV2RzYMWF7eAfB3B6jr26WQCov6qDLa5v3MmmZTcbhngRFdPdL8Ks5S8jS",
+        "status": "confirmed",
+        "slot": 7683554055
+      },
+      {
+        "step": "settle-year",
+        "name": "refresh_test_asset_observation_start-year",
+        "signature": "4jPr33de78e18Pf2GV8AY48XKr8GsqY6efbxbxm5N4juYo5T8R3uoEvoVNe2iL2YMPUVWwd1QGtba4iBmk9guiDy",
+        "status": "confirmed",
+        "slot": 9238749929
+      },
+      {
+        "step": "settle-year",
+        "name": "update_test_multiplier_q1",
+        "signature": "2VCngENMY4TcZZWyRNu8SzcKvQjwLAw6aARu5CnsQzwS5GfTi7vMkkxpzURyfy2rC6gkBdRVpUEm1ksKNu6Sb2Zf",
+        "status": "confirmed",
+        "slot": 15459121000
+      },
+      {
+        "step": "settle-year",
+        "name": "refresh_test_asset_observation_quarter-1",
+        "signature": "2tkZJKjr4QiYk9LcnE5dkuXeE9wb2jbt6zXoXnC4kKiN74rFUoDTdJZAYcYH7guKqyYVAzsfqn76bZy1vG63pvWh",
+        "status": "confirmed",
+        "slot": 15459121001
+      },
+      {
+        "step": "settle-year",
+        "name": "record_synthetic_dividend_q1",
+        "signature": "4iTeKk3hvCFT8SRcsLonFUpeb2a9ExjUtwmhTJeCoMJ6GKuuPScmq3TbqiSWWs7qNWZXxsdmvPENv8BqEswQGCuj",
+        "status": "confirmed",
+        "slot": 15459121002
+      },
+      {
+        "step": "settle-year",
+        "name": "update_test_multiplier_q2",
+        "signature": "4GFf8p1HKY8gD252eyrcPprj1M6uEqmHiyQ2RRdjPsQxQkz554yRddPzTYTVgmDfhshdhzcBaAM3WB46wufxDkW",
+        "status": "confirmed",
+        "slot": 23407919995
+      },
+      {
+        "step": "settle-year",
+        "name": "refresh_test_asset_observation_quarter-2",
+        "signature": "3DeRRgDZVhkTEbaRPKUu3hYWgXQdj4ijESRLMkGH6XNTuFFJhjCBMBsFC7sz5hMCqvzCjGvFp2BwqQT66m8Nb1aH",
+        "status": "confirmed",
+        "slot": 23407919996
+      },
+      {
+        "step": "settle-year",
+        "name": "record_synthetic_dividend_q2",
+        "signature": "4kZ6PBu882bCMA4bmj1oXKypzSMBjAMPs2QcETGAPV37zCucwuzow23CCd8sdE1XfFvyY9pQ4K5GzajMnqP1pRqo",
+        "status": "confirmed",
+        "slot": 23407919997
+      },
+      {
+        "step": "settle-year",
+        "name": "update_test_multiplier_q3",
+        "signature": "4d7tUQCaSSzyhSa5PCH27TLmpyxyrkzCemGqGgW4jSPHBhtKZhEm8H8ALN5CFXsQQ11r3Dxq6fpFcninCneMj736",
+        "status": "confirmed",
+        "slot": 31356287996
+      },
+      {
+        "step": "settle-year",
+        "name": "refresh_test_asset_observation_quarter-3",
+        "signature": "JxzGLYBmkkDK4biP1gGdxcFNbxtRyeXfWeAEjBQSy3tYYKNndRmxw2DrGw6zqpGPh46EghpJJfyxhjU5LgVkrCG",
+        "status": "confirmed",
+        "slot": 31356287997
+      },
+      {
+        "step": "settle-year",
+        "name": "record_synthetic_dividend_q3",
+        "signature": "36jMoyFZGi1jNyzV5aySUme6NkkD7SRAxeDbvUSskrKXmJjgkTcadJMLEU58yJJ9XqoFfU5iWw6bAXnHf5kHMuS8",
+        "status": "confirmed",
+        "slot": 31356287998
+      },
+      {
+        "step": "settle-year",
+        "name": "update_test_multiplier_q4",
+        "signature": "2iMnsEAuAFoZTnDwTQAoLT6UntwQhvncn6VkAmku2t6pSXaf66BYgbyL79juKm1Rkwnz7TfNfjn7P8A8F8PeBQR4",
+        "status": "confirmed",
+        "slot": 39218255996
+      },
+      {
+        "step": "settle-year",
+        "name": "refresh_test_asset_observation_quarter-4",
+        "signature": "5i6maEtf3bDvLwvBqXtwZfnHzRUss1TNdWWmyFxSSLN3UKpdRkYVRGvbEwneY1pEnB1dvHQe7xRRgj2v5UDxWbm9",
+        "status": "confirmed",
+        "slot": 39218255997
+      },
+      {
+        "step": "settle-year",
+        "name": "record_synthetic_dividend_q4",
+        "signature": "wqLgRw6r1UMXgsMt8UH9gzEBF4CYnP8Kx3GgitmQZc59A6RnzuapDmJUbJHHF1B9ueMtnFXsviaqmEPe2ZNEQaz",
+        "status": "confirmed",
+        "slot": 39218255998
+      },
+      {
+        "step": "settle-year",
+        "name": "refresh_test_asset_observation_end-year",
+        "signature": "2oMyxPFuVdaBXvQ7GM7BeWh2zsukq95LuYFSP2Grb1jYvwdjggoFa2YT7trcEoxzGHiWHqki2NyywUUD7n5dd2Kh",
+        "status": "confirmed",
+        "slot": 40773022996
+      },
+      {
+        "step": "settle-year",
+        "name": "begin_annual_finalization",
+        "signature": "3sGGAmeTny9ZbtKJQW2nuV8w4Bcyiay3rPQw5PoK24Lqxz1fiesFHXWPg4r4MvFkNMwZSjcQhvKSmhER9s6LpKng",
+        "status": "confirmed",
+        "slot": 40773022997
+      },
+      {
+        "step": "settle-year",
+        "name": "accumulate_synthetic_dividend_q1",
+        "signature": "4Qu5n6R4tE73rEa5c9yiGfjYqjCjL8rTjXxcwDe7CUhprqzbMkybqH9UcxHJLgwfrqRfvaTDokffnuYi9vfo7F24",
+        "status": "confirmed",
+        "slot": 40773022998
+      },
+      {
+        "step": "settle-year",
+        "name": "accumulate_synthetic_dividend_q2",
+        "signature": "4HzNoEpjLcUFfh6WKqQzPPqZFhvAAQkaAEFbGtYv3xHRTJEypho128Y4MWhwj4b2v1m3cQiHwbySeBrFiFXFKMkE",
+        "status": "confirmed",
+        "slot": 40773023000
+      },
+      {
+        "step": "settle-year",
+        "name": "accumulate_synthetic_dividend_q3",
+        "signature": "4Lotq69qE4XXds9SMT6zgb2H6g2aMPAAiLCtVSuqSTsoKRiF8kpMjMJhGXHnKBjaFA7sCgazhfLjr47gZJXDKyRg",
+        "status": "confirmed",
+        "slot": 40773023001
+      },
+      {
+        "step": "settle-year",
+        "name": "accumulate_synthetic_dividend_q4",
+        "signature": "3g83bU1wgiJAcb2ShFujpN7FiqoALG5MnXuCHdstN4Msoi1eazEpgnJ7q95NtFJkPD6HMFeJsAKYBZxbK6DUC7gv",
+        "status": "confirmed",
+        "slot": 40773023002
+      },
+      {
+        "step": "settle-year",
+        "name": "complete_annual_finalization",
+        "signature": "3iaaQttXytKxiotDaDAKQ6LbztPKW1XaE6f3B2SnuX8gtVzfYnJS7eZ41GXZuwbiRZoyjVm1ArPUhH46QzjPMFGr",
+        "status": "confirmed",
+        "slot": 40773023004
+      },
+      {
+        "step": "redeem-buyer",
+        "name": "buyer_redeem_purchased_dr",
+        "signature": "2rcNUZbMThkzkiipXJpKHBYu44oQkSLnZPXDEw9whNMm9cvyjvnERE27my8PVNNYLQJLhtLHgXBKgqvifQUKJB1z",
+        "status": "confirmed",
+        "slot": 40773023017
+      },
+      {
+        "step": "redeem-provider",
+        "name": "provider_redeem_remaining_pt",
+        "signature": "3cdqEykbMidfmgS33wVAm1XuQwBwr2MNGXLLxUCPsGotcSoubUqtAH9yp21PxzyUCSNsRjArwLj8HPHEq9y1iazS",
+        "status": "confirmed",
+        "slot": 40773023031
+      }
+    ],
+    "error": null
+  },
+  "quoteEvidence": {
+    "boundary": "offline-local-circle-devnet-usdc-clone",
+    "circleUsdc": {
+      "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+      "sourceCluster": "devnet",
+      "sourceGenesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+      "sourceSlot": 499830485,
+      "mint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+      "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "dataSha256": "3c8a2c7c49c355902bf2b2cb4b5bded7772a7971bb7e8168b0873d2f9d2b42b6",
+      "supplyRaw": "16286784303000596319",
+      "decimals": 6,
+      "mintAuthority": "GrNg1XM2ctzeE2mXxXCfhcTUbejM8Z4z4wNVTy2FjMEz",
+      "freezeAuthority": "CJtyoKSLrktozQzjERTiK3btQtiTK3nN4QrqGHLidyCT"
+    },
+    "localFunding": {
+      "method": "surfpool-set-account",
+      "providerRaw": "10000000",
+      "buyerRaw": "1000000",
+      "totalRaw": "11000000",
+      "publicFaucetTransfer": false
+    }
+  },
+  "limits": [
+    "Local chain with a copied Circle devnet USDC mint account and synthetic local balances; no dollar-value claim.",
+    "Public devnet Test USDC execution remains pending faucet funding."
+  ]
+}

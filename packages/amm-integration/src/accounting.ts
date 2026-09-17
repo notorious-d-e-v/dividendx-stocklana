@@ -11,13 +11,25 @@ export function assertControlledConservation(value: AssetBalances): void {
     value.testQuote.poolFundFees, value.testQuote.poolCreatorFees, value.testQuote.otherKnown,
     value.testQuote.supply, value.lp.provider, value.lp.mintSupply, value.lp.internalPoolLpAmount,
   ]) invariant(amount >= 0n, 'NEGATIVE_ACCOUNTING_VALUE');
+  if (value.testQuote.controlledTotal !== undefined) invariant(value.testQuote.controlledTotal >= 0n,
+    'NEGATIVE_ACCOUNTING_VALUE');
   invariant(value.collateral.provider + value.collateral.vault === value.collateral.supply,
     'COLLATERAL_CONSERVATION_FAILED');
   invariant(value.pt.provider + value.pt.otherKnown === value.pt.supply, 'PT_CONSERVATION_FAILED');
   invariant(value.dr.provider + value.dr.buyer + value.dr.poolVault + value.dr.otherKnown === value.dr.supply,
     'DR_CONSERVATION_FAILED');
-  invariant(value.testQuote.provider + value.testQuote.buyer + value.testQuote.poolVault
-    + value.testQuote.otherKnown === value.testQuote.supply, 'QUOTE_CONSERVATION_FAILED');
+  const controlledQuote = value.testQuote.provider + value.testQuote.buyer + value.testQuote.poolVault
+    + value.testQuote.otherKnown;
+  invariant(controlledQuote === (value.testQuote.controlledTotal ?? value.testQuote.supply),
+    'QUOTE_CONSERVATION_FAILED');
+}
+
+function sameQuoteScope(before: AssetBalances, after: AssetBalances): boolean {
+  if (before.testQuote.controlledTotal !== undefined || after.testQuote.controlledTotal !== undefined) {
+    return before.testQuote.controlledTotal !== undefined
+      && before.testQuote.controlledTotal === after.testQuote.controlledTotal;
+  }
+  return before.testQuote.supply === after.testQuote.supply;
 }
 
 export function assertPrefinalBacking(value: AssetBalances): void {
@@ -51,7 +63,7 @@ export function assertSwapDelta(before: AssetBalances, after: AssetBalances, exp
     && after.dr.supply === before.dr.supply
     && after.testQuote.provider === before.testQuote.provider
     && after.testQuote.otherKnown === before.testQuote.otherKnown
-    && after.testQuote.supply === before.testQuote.supply
+    && sameQuoteScope(before, after)
     && after.pt.provider === before.pt.provider && after.pt.otherKnown === before.pt.otherKnown
     && after.pt.supply === before.pt.supply
     && after.collateral.provider === before.collateral.provider
@@ -80,7 +92,7 @@ export function assertRecombineDelta(before: AssetBalances, after: AssetBalances
     && after.testQuote.poolVault === before.testQuote.poolVault
     && after.pt.otherKnown === before.pt.otherKnown && after.dr.otherKnown === before.dr.otherKnown
     && after.testQuote.otherKnown === before.testQuote.otherKnown
-    && after.testQuote.supply === before.testQuote.supply
+    && sameQuoteScope(before, after)
     && after.dr.poolProtocolFees === before.dr.poolProtocolFees
     && after.dr.poolFundFees === before.dr.poolFundFees
     && after.dr.poolCreatorFees === before.dr.poolCreatorFees
@@ -134,7 +146,7 @@ export function assertSoleProviderWithdrawal(before: AssetBalances, after: Asset
     && after.dr.supply === before.dr.supply
     && after.testQuote.buyer === before.testQuote.buyer
     && after.testQuote.otherKnown === before.testQuote.otherKnown
-    && after.testQuote.supply === before.testQuote.supply
+    && sameQuoteScope(before, after)
     && after.pt.provider === before.pt.provider && after.pt.supply === before.pt.supply
     && after.collateral.provider === before.collateral.provider
     && after.collateral.vault === before.collateral.vault

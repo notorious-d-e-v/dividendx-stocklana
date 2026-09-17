@@ -4,6 +4,8 @@ This isolated test harness executes the real DividendX program and Raydium CPMM.
 
 The seeded ratio is artificial: 40 DR to 80 six-decimal test-quote units, followed by 60 DR and 120 test-quote units. The quote mint is not USDC, has no value, and has no redemption right. The package does not claim Raydium UI/indexer discovery or a public market price.
 
+This mock quote remains the default. Public devnet runs can instead select Circle's official six-decimal devnet USDC mint explicitly. Test USDC is a faucet asset and this option does not make a mainnet backing or price claim.
+
 ## Install and verify
 
 ```sh
@@ -36,6 +38,21 @@ npm --prefix packages/amm-integration run run:public -- \
   --state-dir /absolute/path/to/.local-tools/amm-integration-devnet-20260917 \
   --receipt /absolute/path/to/.local-tools/amm-integration-devnet-20260917/receipt.json
 ```
+
+To use official Circle devnet USDC, fund the dedicated admin wallet's canonical USDC associated token account with at least 11 test USDC, then add the explicit quote option:
+
+```sh
+npm --prefix packages/amm-integration run run:public -- \
+  --manifest /absolute/path/to/packages/amm-integration/manifests/devnet.example.json \
+  --admin-signer /absolute/path/to/.local-tools/keys/dividendx-devnet-deployer-keypair.json \
+  --state-dir /absolute/path/to/.local-tools/amm-integration-circle-usdc-devnet \
+  --receipt /absolute/path/to/.local-tools/amm-integration-circle-usdc-devnet/receipt.json \
+  --quote circle-devnet-usdc
+```
+
+Circle mode is restricted to the fixed public-devnet manifest. Before any chain mutation, it verifies mint `4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU` as an initialized 82-byte classic SPL mint with six decimals and the reviewed Circle mint/freeze authorities. It also requires a fresh provider and buyer ATA plus at least 11 USDC (11,000,000 raw units) in the admin source. The admin then signs checked transfers of 10 USDC to the provider and 1 USDC to the buyer. The flow seeds 40 DR / 4 USDC, adds 60 DR / 6 USDC, and swaps 1 USDC. Receipts record the mint source, observed data hash, funding account and before/after balances. Accounting conserves the controlled 11 USDC without equating those accounts to the mint's global supply.
+
+The [accepted public Circle-USDC run](../../planning/usdc-demo-review.md) completed 14 finalized transactions in pool `Fi94TtWky2e9SnSFAUzoPAcKKNV1WziEmLtZZ3FTi65S`. Its [receipt](../../planning/evidence/amm-usdc-devnet-roundtrip-2026-09-17.json) and [independent RPC verification](../../planning/evidence/amm-usdc-devnet-verification-2026-09-17.json) preserve funding and custody evidence. Reproduce the read-only verification with `node scripts/protocol/amm-usdc-verify.mjs --receipt planning/evidence/amm-usdc-devnet-roundtrip-2026-09-17.json --output /tmp/amm-usdc-verification.json` from the root.
 
 `progress.json` is rewritten after every confirmed transaction and accounting checkpoint. A failed run does not fabricate success; persisted keys and signatures support inspection and manual recovery. The bounded runner refuses a dirty fixture rather than minting/depositing twice.
 

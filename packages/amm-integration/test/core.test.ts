@@ -91,6 +91,24 @@ test('four-asset accounting includes buyer and locked pool residual', () => {
   assert.doesNotThrow(() => assertRecombineDelta(afterSwap, afterRecombine, 500n));
 });
 
+test('controlled quote conservation does not equate official USDC balances to global supply', () => {
+  const before = balances();
+  before.testQuote.controlledTotal = before.testQuote.provider + before.testQuote.buyer + before.testQuote.poolVault;
+  before.testQuote.supply = 1_000_000_000_000n;
+  assert.doesNotThrow(() => assertControlledConservation(before));
+  const after = structuredClone(before);
+  after.dr.buyer += 500n;
+  after.dr.poolVault -= 500n;
+  after.testQuote.buyer -= 1_000n;
+  after.testQuote.poolVault += 1_000n;
+  after.testQuote.supply += 50_000n;
+  assert.doesNotThrow(() => assertSwapDelta(before, after, {
+    inputQuote: 1_000n, outputDr: 500n, minimumDr: 499n, protocolFee: 0n, fundFee: 0n,
+  }));
+  after.testQuote.buyer += 1n;
+  assert.throws(() => assertControlledConservation(after), /QUOTE_CONSERVATION_FAILED/);
+});
+
 test('state signers persist privately without exposing secret material', async () => {
   const parent = await mkdtemp(join(tmpdir(), 'amm-state-'));
   const directory = join(parent, 'private');

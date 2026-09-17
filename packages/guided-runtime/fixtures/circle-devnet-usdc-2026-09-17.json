@@ -1,0 +1,22 @@
+{
+  "schema": "dividendx-circle-devnet-usdc-capture-v1",
+  "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+  "sourceRpc": "https://api.devnet.solana.com",
+  "sourceCluster": "devnet",
+  "sourceGenesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "commitment": "finalized",
+  "sourceSlot": 499830485,
+  "capturedAt": "2026-09-17T13:16:05.222Z",
+  "mint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+  "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+  "lamports": 418423285289,
+  "executable": false,
+  "space": 82,
+  "data": "AQAAAOuFRM+RGCd6ljLpmVBmZRu/sUCLhXPrwC5T76tavw4LXy/CUQhIBuIGAQEAAACoBjP/Bn2I36XUNXv0TibOzM8IZmiBA8a6YJ+kTBjSCA==",
+  "dataSha256": "3c8a2c7c49c355902bf2b2cb4b5bded7772a7971bb7e8168b0873d2f9d2b42b6",
+  "decimals": 6,
+  "mintAuthority": "GrNg1XM2ctzeE2mXxXCfhcTUbejM8Z4z4wNVTy2FjMEz",
+  "freezeAuthority": "CJtyoKSLrktozQzjERTiK3btQtiTK3nN4QrqGHLidyCT",
+  "supplyRaw": "16286784303000596319",
+  "boundary": "Exact public mint capture; offline guided balances are synthetic local funding, not Circle faucet transfers."
+}

@@ -1,5 +1,7 @@
 # Raydium claim integration v1
 
+Current quote update: [Test USDC v1](guided-usdc-v1.md) governs new guided runs and the explicit public Circle mode. Earlier private-quote amounts below describe the preserved original proof/default CLI.
+
 17 September 2026. Implements the next accepted [work order](../planning/phase-work-orders.md) without changing the annual program or the running wallet app. [AMM feasibility](../planning/research/claim-amm-feasibility.md) explains the venue choice.
 
 ## Execution contract

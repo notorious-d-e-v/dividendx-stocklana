@@ -4,9 +4,6 @@ import { amountContext, displayBalance, displayDelta, type BalanceKey } from './
 import { DemoHttpError, readDemoReceipt, readDemoState, runDemoStep, startDemo } from './client';
 import { DEMO_STEPS, stepCopy } from './steps';
 
-const PUBLIC_POOL = '2yhUcyx6jawJo9z5YMqFQgmxmvvE6Qz1g1zmDQjVH5Cm';
-const PUBLIC_POOL_URL = `https://explorer.solana.com/address/${PUBLIC_POOL}?cluster=devnet`;
-
 type WalletRole = 'provider' | 'buyer';
 interface ChangeSet { before: DemoSnapshot; after: DemoSnapshot }
 
@@ -39,7 +36,7 @@ const BALANCES: readonly { key: BalanceKey; label: string; unit: string }[] = [
   { key: 'stockRaw', label: 'Test stock', unit: 'stock' },
   { key: 'ptRaw', label: 'Stock exposure', unit: 'PT' },
   { key: 'drRaw', label: 'Dividend rights', unit: 'DR' },
-  { key: 'quoteRaw', label: 'Test quote', unit: 'quote' },
+  { key: 'quoteRaw', label: 'Test USDC', unit: 'USDC' },
   { key: 'lpRaw', label: 'Raydium liquidity', unit: 'LP' },
 ];
 
@@ -106,7 +103,7 @@ function CurrentAction({ state, unavailable, pending, onAction, onReconnect }: {
 
   if (state.status === 'idle') return <section className="current-action" aria-labelledby="current-action-title">
     <p className="demo-kicker">Start the local journey</p><h2 id="current-action-title">Prepare two disposable test wallets.</h2>
-    <p>The test service creates a fresh local network and two test wallets. No wallet extension or private key is needed.</p>
+    <p>The test service creates a fresh local network, two test wallets and synthetic local Test USDC balances. No wallet extension or private key is needed.</p>
     <button className="demo-primary" disabled={pending} onClick={onAction}>{pending ? 'Preparing…' : 'Prepare demo wallets'}</button>
   </section>;
 
@@ -136,7 +133,7 @@ function CurrentAction({ state, unavailable, pending, onAction, onReconnect }: {
 function RawBalances({ snapshot }: { snapshot: DemoSnapshot }) {
   return <div className="raw-grid">
     {(['provider', 'buyer'] as const).map((role) => <div key={role}><h4>{role === 'provider' ? 'Stock holder' : 'Dividend buyer'} · exact raw units</h4>{BALANCES.map(({ key, label }) => <p key={key}><span>{label}</span><code>{snapshot[role][key]}</code></p>)}</div>)}
-    <div><h4>Backing and supply · exact raw units</h4><p><span>Vault</span><code>{snapshot.vaultRaw}</code></p><p><span>PT supply</span><code>{snapshot.ptSupplyRaw}</code></p><p><span>DR supply</span><code>{snapshot.drSupplyRaw}</code></p>{snapshot.pool && <><p><span>Pool DR</span><code>{snapshot.pool.drRaw}</code></p><p><span>Pool locked LP</span><code>{snapshot.pool.lockedLpRaw}</code></p></>}{snapshot.swap && <><p><span>Swap quote paid</span><code>{snapshot.swap.inputQuoteRaw}</code></p><p><span>Swap DR received</span><code>{snapshot.swap.outputDrRaw}</code></p><p><span>Enforced minimum DR</span><code>{snapshot.swap.minimumDrRaw}</code></p></>}</div>
+    <div><h4>Backing and supply · exact raw units</h4><p><span>Vault</span><code>{snapshot.vaultRaw}</code></p><p><span>PT supply</span><code>{snapshot.ptSupplyRaw}</code></p><p><span>DR supply</span><code>{snapshot.drSupplyRaw}</code></p>{snapshot.pool && <><p><span>Pool DR</span><code>{snapshot.pool.drRaw}</code></p><p><span>Pool locked LP</span><code>{snapshot.pool.lockedLpRaw}</code></p></>}{snapshot.swap && <><p><span>Swap Test USDC paid</span><code>{snapshot.swap.inputQuoteRaw}</code></p><p><span>Swap DR received</span><code>{snapshot.swap.outputDrRaw}</code></p><p><span>Enforced minimum DR</span><code>{snapshot.swap.minimumDrRaw}</code></p></>}</div>
   </div>;
 }
 
@@ -153,7 +150,7 @@ function Evidence({ state, receipt, receiptError, receiptLoading, onOpen }: {
       {state?.snapshot ? <>
         <div className="evidence-facts"><p><span>Local slot</span><b>{state.snapshot.slot}</b></p><p><span>Journal</span><b>{state.snapshot.eventCount} synthetic events · {state.snapshot.phase}</b></p><p><span>Backing check</span><b>{state.snapshot.backingVerified ? 'Verified' : 'Not yet verified'}</b></p><p><span>Observed</span><b>{state.snapshot.observedAt}</b></p></div>
         <RawBalances snapshot={state.snapshot} />
-        <div className="identity-list"><p><span>Stock holder</span><code>{state.snapshot.provider.address}</code></p><p><span>Dividend buyer</span><code>{state.snapshot.buyer.address}</code></p><p><span>DividendX program</span><code>{state.snapshot.dividendXProgram}</code></p><p><span>Raydium program</span><code>{state.snapshot.raydiumProgram}</code></p><p><span>Series</span><code>{state.snapshot.series}</code></p>{state.snapshot.pool && <p><span>Local Raydium pool</span><code>{state.snapshot.pool.address}</code></p>}</div>
+        <div className="identity-list"><p><span>Stock holder</span><code>{state.snapshot.provider.address}</code></p><p><span>Dividend buyer</span><code>{state.snapshot.buyer.address}</code></p><p><span>Test USDC provenance</span><b>Circle devnet mint copied locally · synthetic local balances</b></p><p><span>Canonical Circle devnet mint</span><code>{state.snapshot.quoteAsset.canonicalMint}</code></p><p><span>Observed local quote mint</span><code>{state.snapshot.mints.quote}</code></p><p><span>DividendX program</span><code>{state.snapshot.dividendXProgram}</code></p><p><span>Raydium program</span><code>{state.snapshot.raydiumProgram}</code></p><p><span>Series</span><code>{state.snapshot.series}</code></p>{state.snapshot.pool && <p><span>Local Raydium pool</span><code>{state.snapshot.pool.address}</code></p>}</div>
       </> : <p>No chain snapshot exists yet.</p>}
       <section className="transaction-list"><h3>Submitted transaction records</h3>{state?.transactions.length ? state.transactions.map((transaction, index) => <article key={`${transaction.signature}-${index}`}><div><b>{transaction.name}</b><span>{transaction.step} · {transaction.status}{transaction.slot === null ? '' : ` · slot ${transaction.slot}`}</span></div><code>{transaction.signature}</code></article>) : <p>No transaction has been submitted.</p>}</section>
       <section className="receipt-record"><h3>Runtime receipt record</h3>{receiptLoading ? <p>Loading receipt…</p> : receiptError ? <p className="inline-error">{receiptError}</p> : receipt ? <pre>{JSON.stringify(receipt, null, 2)}</pre> : <p>Open this after a run starts to load its public provenance record.</p>}</section>
@@ -289,7 +286,7 @@ export function GuidedDemosApp() {
   const snapshot = state?.snapshot ?? null;
   const activeActor = actorFor(state);
   const runtimeUnavailable = Boolean(connectionError);
-  const boundaryDetail = useMemo(() => 'The accepted DividendX program and captured genuine Raydium devnet bytecode execute on an isolated local chain. Time advances only inside that disposable test network.', []);
+  const boundaryDetail = useMemo(() => 'The accepted DividendX program and captured genuine Raydium devnet bytecode execute on an isolated local chain. Test USDC uses an exact copy of Circle’s devnet mint account, but its balances are created only inside this local test network. They are not faucet funds or a claim of dollar value. A separate public devnet run also verified trading with faucet-funded Test USDC.', []);
 
   return <div className="demo-shell">
     <a className="skip-link" href="#demo-main">Skip to demo</a>
@@ -302,7 +299,7 @@ export function GuidedDemosApp() {
 
     <main id="demo-main">
       <section className="demo-hero">
-        <div><p className="demo-kicker">Guided DeFi demo · Raydium</p><h1>Sell dividend rights <span>through a market.</span></h1><p>Follow two test wallets through nine signed actions. Every balance and receipt comes from the local test network.</p><div className="hero-proof"><p>Separate public proof</p><a href={PUBLIC_POOL_URL} target="_blank" rel="noreferrer">Verified devnet test pool <span aria-hidden="true">↗</span></a><small>{PUBLIC_POOL}</small></div></div>
+        <div><p className="demo-kicker">Guided DeFi demo · Raydium</p><h1>Sell dividend rights <span>through a market.</span></h1><p>Follow two test wallets through nine signed actions using local Test USDC. Every balance and receipt comes from the local test network.</p><div className="hero-proof"><p>Public devnet · Test USDC</p><a href="https://explorer.solana.com/address/Fi94TtWky2e9SnSFAUzoPAcKKNV1WziEmLtZZ3FTi65S?cluster=devnet" target="_blank" rel="noreferrer">Verified DR / Test USDC pool ↗</a><small>This walkthrough uses a local copy of the Circle devnet mint with synthetic local balances.</small></div></div>
         <CurrentAction state={state} unavailable={runtimeUnavailable} pending={pending} onAction={() => void action()} onReconnect={() => void reconnect()} />
       </section>
 

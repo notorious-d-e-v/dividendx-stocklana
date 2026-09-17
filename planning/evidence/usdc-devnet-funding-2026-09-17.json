@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-09-17T13:22:14.124Z",
+  "cluster": "devnet",
+  "commitment": "finalized",
+  "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+  "slot": 499832708,
+  "wallet": "DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv",
+  "usdcMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+  "usdcAccount": "AdVHzgNA1kHjpu2bPdV8s3oh2fmTfk6UCE1Bwrwq7ALC",
+  "usdcRaw": "20000000",
+  "devnetLamports": 5672550960,
+  "requiredUsdcRaw": "11000000",
+  "ready": true
+}

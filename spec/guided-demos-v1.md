@@ -1,5 +1,7 @@
 # Guided DeFi demos v1
 
+Current quote update: [Test USDC v1](guided-usdc-v1.md) governs new guided runs and the explicit public Circle mode. Earlier private-quote amounts below describe the preserved original proof/default CLI.
+
 17 September 2026. The user authorizes a separate **`/demos/`** page. Market, Split and Redeem remain the core product. This slice exposes a repeatable, two-wallet Raydium journey; lending and other venues remain future demos.
 
 ## Product

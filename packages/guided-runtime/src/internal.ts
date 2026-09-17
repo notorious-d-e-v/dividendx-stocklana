@@ -12,7 +12,6 @@ export interface RuntimeSigners {
   provider: Keypair;
   buyer: Keypair;
   collateralMint: Keypair;
-  testQuoteMint: Keypair;
 }
 
 export interface KnownAddresses {
@@ -51,10 +50,10 @@ export interface DemoCheckpoint {
 }
 
 export interface PublicReceipt {
-  schemaVersion: 1;
+  schemaVersion: 2;
   runtimeId: string;
   sessionId: string;
-  boundary: 'local-captured-raydium-devnet-bytecode';
+  boundary: 'offline-local-circle-devnet-usdc-clone';
   capture: {
     sourceCluster: 'devnet';
     sourceSlot: number;
@@ -64,6 +63,26 @@ export interface PublicReceipt {
     dividendXElfSha256: string;
     configAccountSha256: string;
     feeAccountSha256: string;
+    circleUsdc: {
+      sourceUrl: string;
+      sourceCluster: 'devnet';
+      sourceGenesisHash: string;
+      sourceSlot: number;
+      mint: string;
+      owner: string;
+      dataSha256: string;
+      supplyRaw: string;
+      decimals: 6;
+      mintAuthority: string;
+      freezeAuthority: string;
+    };
+  };
+  localFunding: {
+    method: 'surfpool-set-account';
+    providerRaw: '10000000';
+    buyerRaw: '1000000';
+    totalRaw: '11000000';
+    publicFaucetTransfer: false;
   };
   identities: {
     programs: { dividendX: string; raydium: string; raydiumConfig: string; raydiumFeeReceiver: string };

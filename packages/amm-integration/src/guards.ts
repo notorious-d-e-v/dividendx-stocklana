@@ -1,11 +1,14 @@
 import { createHash } from 'node:crypto';
 import { CpmmConfigInfoLayout, getCpmmPdaAmmConfigId } from '@raydium-io/raydium-sdk-v2';
-import { NATIVE_MINT, TOKEN_PROGRAM_ID, unpackAccount } from '@solana/spl-token';
+import {
+  ACCOUNT_SIZE, MINT_SIZE, NATIVE_MINT, TOKEN_PROGRAM_ID, getAssociatedTokenAddressSync, unpackAccount, unpackMint,
+} from '@solana/spl-token';
 import {
   BPF_LOADER_PROGRAM_ID, type AccountInfo, Connection, PublicKey,
 } from '@solana/web3.js';
 import {
-  DIVIDENDX_PROGRAM_ID, FEE_RATE_DENOMINATOR, MAX_TRADE_FEE_RATE, RAYDIUM_CONFIG,
+  CIRCLE_DEVNET_USDC_FREEZE_AUTHORITY, CIRCLE_DEVNET_USDC_MINT, CIRCLE_DEVNET_USDC_MINT_AUTHORITY,
+  CIRCLE_USDC_REQUIRED_FUNDING_RAW, DIVIDENDX_PROGRAM_ID, FEE_RATE_DENOMINATOR, MAX_TRADE_FEE_RATE, RAYDIUM_CONFIG,
   PUBLIC_CLUSTER_GENESIS_HASHES, RAYDIUM_CPMM_PROGRAM_ID, RAYDIUM_CREATE_POOL_FEE_RECEIVER,
 } from './constants.js';
 import { invariant } from './errors.js';
@@ -13,6 +16,51 @@ import type { AmmConfigSnapshot, ExecutionManifest, PreflightResult, ProgramIden
 
 const AMM_CONFIG_DISCRIMINATOR = createHash('sha256').update('account:AmmConfig').digest().subarray(0, 8);
 const BPF_LOADER_UPGRADEABLE_PROGRAM_ID = new PublicKey('BPFLoaderUpgradeab1e11111111111111111111111');
+
+export interface CircleUsdcFundingPreflight {
+  contextSlot: number;
+  mintDataSha256: string;
+  mintSupplyRaw: bigint;
+  sourceAccount: PublicKey;
+  providerAccount: PublicKey;
+  buyerAccount: PublicKey;
+  sourceBalanceRaw: bigint;
+}
+
+export function validateCircleDevnetUsdcMintInfo(info: AccountInfo<Buffer> | null): string {
+  invariant(info !== null && info.owner.equals(TOKEN_PROGRAM_ID) && info.data.length === MINT_SIZE,
+    'CIRCLE_USDC_MINT_INVALID');
+  const mint = unpackMint(CIRCLE_DEVNET_USDC_MINT, info, TOKEN_PROGRAM_ID);
+  invariant(mint.isInitialized && mint.decimals === 6
+    && mint.mintAuthority?.equals(CIRCLE_DEVNET_USDC_MINT_AUTHORITY)
+    && mint.freezeAuthority?.equals(CIRCLE_DEVNET_USDC_FREEZE_AUTHORITY),
+  'CIRCLE_USDC_MINT_INVALID');
+  return createHash('sha256').update(info.data).digest('hex');
+}
+
+export async function verifyCircleDevnetUsdcFunding(connection: Connection, admin: PublicKey,
+  provider: PublicKey, buyer: PublicKey): Promise<CircleUsdcFundingPreflight> {
+  const sourceAccount = getAssociatedTokenAddressSync(CIRCLE_DEVNET_USDC_MINT, admin);
+  const providerAccount = getAssociatedTokenAddressSync(CIRCLE_DEVNET_USDC_MINT, provider);
+  const buyerAccount = getAssociatedTokenAddressSync(CIRCLE_DEVNET_USDC_MINT, buyer);
+  const response = await connection.getMultipleAccountsInfoAndContext(
+    [CIRCLE_DEVNET_USDC_MINT, sourceAccount, providerAccount, buyerAccount], { commitment: 'confirmed' },
+  );
+  const [mintInfo, sourceInfo, providerInfo, buyerInfo] = response.value;
+  const mintDataSha256 = validateCircleDevnetUsdcMintInfo(mintInfo);
+  const mintSupplyRaw = unpackMint(CIRCLE_DEVNET_USDC_MINT, mintInfo, TOKEN_PROGRAM_ID).supply;
+  invariant(sourceInfo !== null && sourceInfo.owner.equals(TOKEN_PROGRAM_ID)
+    && sourceInfo.data.length === ACCOUNT_SIZE, 'CIRCLE_USDC_FUNDING_ACCOUNT_INVALID');
+  const source = unpackAccount(sourceAccount, sourceInfo, TOKEN_PROGRAM_ID);
+  invariant(source.isInitialized && !source.isFrozen && source.mint.equals(CIRCLE_DEVNET_USDC_MINT)
+    && source.owner.equals(admin), 'CIRCLE_USDC_FUNDING_ACCOUNT_INVALID');
+  invariant(source.amount >= CIRCLE_USDC_REQUIRED_FUNDING_RAW, 'CIRCLE_USDC_FUNDING_INSUFFICIENT');
+  invariant(providerInfo === null && buyerInfo === null, 'CIRCLE_USDC_RECIPIENT_NOT_FRESH');
+  return {
+    contextSlot: response.context.slot, mintDataSha256, mintSupplyRaw, sourceAccount, providerAccount, buyerAccount,
+    sourceBalanceRaw: source.amount,
+  };
+}
 
 function u64(data: Buffer, offset: number): number {
   const value = data.readBigUInt64LE(offset);

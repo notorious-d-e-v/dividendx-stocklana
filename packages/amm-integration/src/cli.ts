@@ -9,6 +9,7 @@ import { verifyExecutionEnvironment } from './guards.js';
 import { loadExplicitSigner } from './signers.js';
 import { loadOrCreateStateSigner, writePrivateJson } from './state.js';
 import { runAmmFlow } from './flow.js';
+import type { QuoteMode } from './constants.js';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const repositoryRoot = resolve(packageRoot, '../..');
@@ -40,10 +41,17 @@ function printable(value: unknown): string {
 async function main(): Promise<void> {
   const parsed = argumentsMap(process.argv.slice(2));
   const manifest = await loadManifest(required(parsed.values, 'manifest'));
+  const quoteMode = parsed.values.get('quote') ?? 'mock';
+  invariant(quoteMode === 'mock' || quoteMode === 'circle-devnet-usdc', 'CLI_USAGE',
+    '--quote must be mock or circle-devnet-usdc');
+  const selectedQuote = quoteMode as QuoteMode;
   invariant((parsed.command === 'public') === (manifest.mode === 'devnet') || parsed.command === 'preflight',
     'EXECUTION_MODE_MISMATCH');
+  if (selectedQuote === 'circle-devnet-usdc') invariant(parsed.command === 'public' && manifest.mode === 'devnet',
+    'CIRCLE_USDC_REQUIRES_PUBLIC_DEVNET');
   const connection = connectionForManifest(manifest);
   if (parsed.command === 'preflight') {
+    invariant(selectedQuote === 'mock', 'CLI_USAGE', 'Circle funding preflight runs as part of the public command');
     process.stdout.write(`${printable(await verifyExecutionEnvironment(connection, manifest))}\n`);
     return;
   }
@@ -62,11 +70,13 @@ async function main(): Promise<void> {
     provider: await loadOrCreateStateSigner(stateDirectory, 'provider'),
     buyer: await loadOrCreateStateSigner(stateDirectory, 'buyer'),
     collateralMint: await loadOrCreateStateSigner(stateDirectory, 'collateral-mint'),
-    testQuoteMint: await loadOrCreateStateSigner(stateDirectory, 'test-quote-mint'),
+    testQuoteMint: selectedQuote === 'mock'
+      ? await loadOrCreateStateSigner(stateDirectory, 'test-quote-mint') : undefined,
   };
   const progressPath = resolve(stateDirectory, 'progress.json');
   const receipt = await runAmmFlow(connection, manifest, signers,
-    async (progress) => writePrivateJson(progressPath, { schema: 'dividendx-raydium-cpmm-progress-v1', ...progress }));
+    async (progress) => writePrivateJson(progressPath, { schema: 'dividendx-raydium-cpmm-progress-v1', ...progress }),
+    selectedQuote);
   await writePrivateJson(receiptPath, receipt);
   process.stdout.write(`${printable({ receipt: receiptPath, boundary: receipt.boundary,
     transactions: receipt.transactions.map(({ name, signature, slot }) => ({ name, signature, slot })),

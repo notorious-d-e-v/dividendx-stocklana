@@ -30,6 +30,13 @@ export const CLAIM_DECIMALS = 8;
 export const TEST_QUOTE_DECIMALS = 6;
 export const SERIES_YEAR = 2027;
 
+export const CIRCLE_DEVNET_USDC_MINT = new PublicKey('4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU');
+export const CIRCLE_DEVNET_USDC_MINT_AUTHORITY = new PublicKey('GrNg1XM2ctzeE2mXxXCfhcTUbejM8Z4z4wNVTy2FjMEz');
+export const CIRCLE_DEVNET_USDC_FREEZE_AUTHORITY = new PublicKey('CJtyoKSLrktozQzjERTiK3btQtiTK3nN4QrqGHLidyCT');
+export const CIRCLE_USDC_SOURCE_URL = 'https://developers.circle.com/stablecoins/usdc-contract-addresses';
+export const CIRCLE_USDC_REQUIRED_FUNDING_RAW = 11n * 10n ** 6n;
+export type QuoteMode = 'mock' | 'circle-devnet-usdc';
+
 export const FLOW = Object.freeze({
   collateralDepositRaw: 100n * 10n ** 8n,
   seedDrRaw: 40n * 10n ** 8n,
@@ -37,6 +44,16 @@ export const FLOW = Object.freeze({
   addDrRaw: 60n * 10n ** 8n,
   addQuoteRaw: 120n * 10n ** 6n,
   buyerQuoteRaw: 20n * 10n ** 6n,
+  slippageBps: 50,
+});
+
+export const USDC_FLOW: typeof FLOW = Object.freeze({
+  collateralDepositRaw: 100n * 10n ** 8n,
+  seedDrRaw: 40n * 10n ** 8n,
+  seedQuoteRaw: 4n * 10n ** 6n,
+  addDrRaw: 60n * 10n ** 8n,
+  addQuoteRaw: 6n * 10n ** 6n,
+  buyerQuoteRaw: 1n * 10n ** 6n,
   slippageBps: 50,
 });
 

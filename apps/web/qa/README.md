@@ -4,9 +4,11 @@
 
 Actual guided page: [http://127.0.0.1:4174/demos/](http://127.0.0.1:4174/demos/). It uses a separate runtime on loopback port **4181**; the preserved `/app/` wallet runtime remains on 4180. Start the web app and `npm run demo:guided`, then prepare the two disposable server-managed test wallets. No extension wallet is required.
 
-The fixed journey completes nine user actions and **37 confirmed local transactions**: split 100 test stock into PT/DR, create and add liquidity to a Raydium DR/test-quote pool, buy DR, withdraw all user-held LP, recombine recovered paired claims, advance an accelerated test year through four synthetic dividend events, redeem buyer DR and independently redeem provider PT. It executes the accepted DividendX ELF and captured genuine Raydium devnet binary/config on its own offline Surfpool. Test quote has no monetary value, and the synthetic events are not issuer payouts. Raydium's locked residual DR remains backed.
+The Test USDC v2 journey completes nine user actions and **36 confirmed local transactions**: split 100 test stock into PT/DR, seed 40 DR / 4 Test USDC, add 60 DR / 6 Test USDC, buy DR with 1 Test USDC, withdraw all user-held LP, recombine recovered paired claims, advance an accelerated test year through four synthetic dividend events, redeem buyer DR and independently redeem provider PT. The removed transaction is the old private quote-mint creation.
 
-The guided runtime has four backend checks. The AMM regression suite remains 11/11. The five guided Playwright cases cover guarded actions, stale/partial failure receipts, session reload, unavailable-runtime recovery, keyboard access and mobile overflow; the preserved 27 browser cases also pass. Root fixture/reference checks pass 71/71 with TypeScript and the production build.
+The runtime executes the accepted DividendX ELF and captured genuine Raydium devnet binary/config on its own offline Surfpool. It loads an exact local copy of Circle's six-decimal devnet USDC mint account, `4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU`, then creates synthetic local balances of 10 Test USDC for the provider and 1 for the buyer. This is not a public faucet transfer or proof of dollar value. The four dividend events are synthetic, and Raydium's locked residual DR remains backed.
+
+The package runtime checks and 36-transaction smoke pass. The combined browser suite passes **34/34**: seven guided cases plus the preserved 27 cases. Guided coverage includes v1 runtime rejection, pinned Test USDC identity and amounts, guarded actions, stale/partial failure receipts, session reload, unavailable-runtime recovery, keyboard access and mobile overflow. Root fixture/reference checks pass 71/71 with TypeScript and the production build; the AMM package's 15 tests also pass.
 
 Run a fresh package smoke independently, or use the real browser driver against a fresh server session and then verify the completed chain state:
 
@@ -16,12 +18,14 @@ npm --prefix packages/guided-runtime run smoke
 npm run demo:guided
 # In another terminal with Vite available on 4174 or isolated QA port 4184:
 DIVIDENDX_REVIEW_URL=http://127.0.0.1:4174 node apps/web/qa/guided-demo-review.mjs
-node scripts/protocol/guided-runtime-verify.mjs --output planning/evidence/guided-demo-chain-verification-2026-09-17.json
+node scripts/protocol/guided-runtime-verify.mjs --output planning/evidence/guided-usdc-chain-verification-2026-09-17.json
 ```
 
-The [acceptance review](../../../planning/guided-demo-review.md) records the proof boundary. The [browser record](../../../planning/evidence/guided-demo-browser-2026-09-17.json) preserves every checkpoint, final state, reload behavior and 1440/1024/768/390 px overflow checks. The [chain verifier](../../../planning/evidence/guided-demo-chain-verification-2026-09-17.json) independently reads RPC program payloads, journal and token accounts, confirms every reported signature and proves exact residual conservation. Review captures are `guided-demo-ready-1440.png`, `guided-demo-complete-1440.png` and `guided-demo-complete-390.png`.
+The [Test USDC specification](../../../spec/guided-usdc-v1.md) and [acceptance review](../../../planning/usdc-demo-review.md) record the v2 proof boundary. The [browser record](../../../planning/evidence/guided-usdc-browser-2026-09-17.json), [runtime receipt](../../../planning/evidence/guided-usdc-receipt-2026-09-17.json) and [chain verification](../../../planning/evidence/guided-usdc-chain-verification-2026-09-17.json) preserve the browser checkpoints, captured mint metadata, synthetic funding disclosure, every confirmed signature and exact residual conservation. Review captures use `guided-usdc-*.png` names.
 
-The guided proof is local and test-only. The accepted public devnet pool remains separately inspectable; local signatures are not explorer-linked. PT trading and borrowing remain planned rows until a venue assessment covers admission, pricing/oracles, maturity and liquidation.
+The verifier accepts both v1 and v2 receipts. The preserved [generic-quote review](../../../planning/guided-demo-review.md), [browser record](../../../planning/evidence/guided-demo-browser-2026-09-17.json) and [chain verification](../../../planning/evidence/guided-demo-chain-verification-2026-09-17.json) remain the historical 37-transaction proof; the AMM CLI also keeps the old mock quote as its default.
+
+The guided proof is local and test-only. The public Circle-USDC run completed 14 finalized transactions, including checked transfers of 11 test USDC from the funded wallet; see [independent verification](../../../planning/evidence/amm-usdc-devnet-verification-2026-09-17.json). Follow the [AMM package reproduction command](../../../packages/amm-integration/README.md) with `--quote circle-devnet-usdc`; local signatures are not explorer-linked. PT trading and borrowing remain planned rows until a venue assessment covers admission, pricing/oracles, maturity and liquidation.
 
 ## Wallet application — 17 September 2026
 

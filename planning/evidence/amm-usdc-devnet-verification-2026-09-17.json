@@ -1,0 +1,116 @@
+{
+  "ok": true,
+  "verifiedAt": "2026-09-17T13:42:36.285Z",
+  "cluster": "devnet",
+  "commitment": "finalized",
+  "slot": 499840093,
+  "mint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+  "pool": "Fi94TtWky2e9SnSFAUzoPAcKKNV1WziEmLtZZ3FTi65S",
+  "fundingDebitedRaw": "11000000",
+  "final": {
+    "providerStock": "9092972801",
+    "vault": "907027199",
+    "providerPt": "907027199",
+    "providerDr": "0",
+    "buyerDr": "907024323",
+    "poolDr": "2876",
+    "providerUsdc": "10999596",
+    "buyerUsdc": "0",
+    "poolUsdc": "404",
+    "providerLp": "0"
+  },
+  "globalUsdcSupplyRaw": "16286784302999597319",
+  "checks": {
+    "checkedFundingTransfers": true,
+    "actualRaydiumTransactions": true,
+    "officialUsdcPool": true,
+    "controlledUsdcConservation": true,
+    "remainingClaimsBacked": true
+  },
+  "signatures": [
+    {
+      "name": "fund_test_participants",
+      "signature": "xyX4d2AnAU1D8DfrdpF3p3KLZiEVvF7fxphFCwmYcxxQaMfjXzSspeLM6VLKepfPbEk6pqYkGRinafN79YoiKSu",
+      "slot": 499836897,
+      "status": "finalized"
+    },
+    {
+      "name": "create_test_collateral_mint",
+      "signature": "eaMUaMKMHKewr64Ttd3qaLSidxhXgetqBWNyyP8aPcCQDihCehesmXSGgwr2Gyoxbfe5RcNkKaL92g2q6iBQ1zB",
+      "slot": 499836916,
+      "status": "finalized"
+    },
+    {
+      "name": "register_test_asset",
+      "signature": "2xJSPG8kxaBntUH7FKEt4xSK2v3LuiMbq2fyV54scW9oC8T4eGKSE6aJbWrsigWcTcznZ6MMKqL7jSXQp4hf3B49",
+      "slot": 499836933,
+      "status": "finalized"
+    },
+    {
+      "name": "refresh_test_asset_observation",
+      "signature": "5UUyWLSBrvhYm34ciXVhM7BuhDUaweE6AGyFqVnSNHbf6tbFWknFrHEZjQk1LoHNPUayCTgGFuybr89uJNiVALkR",
+      "slot": 499836953,
+      "status": "finalized"
+    },
+    {
+      "name": "create_2027_series",
+      "signature": "63DuajTgZe2yJM8tqP5fU7wuHeCp2PBYJHQnsFdD4fKH7izUZuLkiTLtk6XFcwVKuakZkrQip9SGh8kvhcAgihYf",
+      "slot": 499836972,
+      "status": "finalized"
+    },
+    {
+      "name": "create_provider_token_accounts",
+      "signature": "4p7BHzGQFESVnYQciRsKUhDWEX3PFZnKquBMivniznwPbiZtKjqxaMFHqZhdNdV1725GKbrhW7YtHqpkRRPSX3D4",
+      "slot": 499836985,
+      "status": "finalized"
+    },
+    {
+      "name": "create_buyer_token_accounts",
+      "signature": "5DTV9EPYfosrXeriRokjc8TX6cvLaKuAFPhSE2yXg8RPZ2zW4dfWdtazohHLHspzpw7t7bj7rCtcv8vhWsUQ37CF",
+      "slot": 499837011,
+      "status": "finalized"
+    },
+    {
+      "name": "fund_circle_devnet_usdc_accounts",
+      "signature": "4PLjzGYWJ5as9nu3spL4CaznH4jwQYo8qAeEb313gzQBz37jUs5Gg7MGaLX449nWW3iVCb9XNn22q1vFwE5PrLxY",
+      "slot": 499837027,
+      "status": "finalized"
+    },
+    {
+      "name": "deposit_100_test_stock",
+      "signature": "4Sa9PYCjmyy12n6jJ9mUux71ra8U59eH1fZAg3nRPEMkjYw6oib3JqF9zntQLuFLaUGYVb8RtYgEpHzHBgckevir",
+      "slot": 499837045,
+      "status": "finalized"
+    },
+    {
+      "name": "create_cpmm_pool",
+      "signature": "3TpspvV57UPE4DyfcuiZFry2BrUHJuy5dc87fgZ1Yz2Dw71SPWq4Da8qs68bkLPStSA1HmJyMYbdNnPw7SrD2YXY",
+      "slot": 499837148,
+      "status": "finalized"
+    },
+    {
+      "name": "add_cpmm_liquidity",
+      "signature": "5A4RE2wsYycjEhWHUsLMCtJHWVq7nNTo1S45ZAgmMcAhaNqw9zPpeZXuUmbL8DLvbNKznWtahhUGSQgkPfhbfWBg",
+      "slot": 499837180,
+      "status": "finalized"
+    },
+    {
+      "name": "buyer_swap_quote_for_dr",
+      "signature": "4iBsVirJFpRmZ3eatt6ngn3VSWQqGf3mkezUa4cqtvPp5tTi2sjqnq2wTH2g8qWRN1YKS8Uvxe8UmvHBYH67DLVh",
+      "slot": 499837265,
+      "status": "finalized"
+    },
+    {
+      "name": "withdraw_all_provider_lp",
+      "signature": "54bk1k1KR7BeeyxErcAEyhjDqWFLWy77GQiB55bZnQqcMUiC5FUJJsAe1cqAx3aUtjLbySSBpTGQfxmm6RzkeabU",
+      "slot": 499837298,
+      "status": "finalized"
+    },
+    {
+      "name": "recombine_recovered_dr_with_pt",
+      "signature": "4S9wb9bnrSyroMc8YnwBwp77BQSFYasTroubA2zZ4ym1HhFV2beEXkmwrfq9c76jniuvutpX4EtcH1wx6FGvem7B",
+      "slot": 499837321,
+      "status": "finalized"
+    }
+  ]
+}

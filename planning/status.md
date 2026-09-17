@@ -1,6 +1,6 @@
 # Current status
 
-Updated 17 September 2026 after the guided two-wallet Raydium demo was accepted. Deposits still close at year-start.
+Updated 17 September 2026 after the Test USDC guided demo and faucet-funded public devnet round trip were accepted. Deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -20,7 +20,7 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
 | Issuer readers | Typed observations across the selected 15 identities, exact source records, private snapshots and explicit data gaps; [acceptance](issuer-reader-review.md) |
 | AMM integration | Isolated [Node CLI](../packages/amm-integration/README.md) with a 15-transaction finalized public devnet Raydium CPMM round trip and a separate 14-transaction captured-bytecode local proof; [acceptance](amm-review.md) |
-| Guided demos | `/demos/`: nine actions, two disposable wallets and 37 real local transactions through Raydium and annual redemption; [acceptance](guided-demo-review.md) |
+| Guided demos | `/demos/`: Test USDC v2, nine actions, two disposable wallets and 36 local transactions through Raydium and annual redemption; [acceptance](usdc-demo-review.md) |
 | Fallback | Original single-event SDK and technical rehearsal at `/rehearsal/`, preserved |
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; historical KOx and Backpack MU factors |
 | Research | [Annual conventions and fixture gaps](research/annual-dividend-series.md), extending the [prior-art review](research/prior-art-review.md) |
@@ -50,7 +50,7 @@ The server-only reader slice adds **22 reader tests** and **16 reviewed Ondo tra
 
 The AMM package adds **11 tests** plus self-import and package checks. The existing root **71 tests**, type check and production build pass without changing the running web app. Its public receipt records **15 finalized devnet transactions** from slots 499760641–499761026, independently rechecked at finalized slot 499762083. The flow deposited 100 synthetic test-stock units, seeded 40 DR / 80 quote, added 60 DR / 120 quote, spent 20 quote for `907024323` DR raw (`9.07024323`), withdrew all user LP, and recombined `9092975034` raw paired claims (`90.92975034`). Provider LP and LP mint supply are zero; Raydium retains 100 internal LP and 643 DR raw. Final PT supply, DR supply and vault backing each equal `907024966` raw (`9.07024966`). See [AMM acceptance](amm-review.md) and the [public receipt](evidence/amm-devnet-roundtrip-2026-09-17.json).
 
-The guided slice adds **four runtime tests**, **five browser tests**, a complete **nine-action / 37-transaction browser journey**, and an independent RPC verifier. Exact deployed bytecode, all signatures, four journal records, claim supplies and final custody conservation pass. The remaining 643 DR raw in Raydium retain 25 raw collateral in the vault. Root tests, type checking and the production build pass; see [guided acceptance](guided-demo-review.md).
+The current guided slice uses an exact local copy of Circle devnet USDC, with explicit synthetic 10 + 1 USDC balances and 4/6/1 trading amounts. **Five runtime tests**, **34 browser tests**, a **nine-action / 36-transaction browser journey**, independent local RPC verification, root tests and build/type checks pass. Residual 2,876 DR raw retain 111 raw collateral. A separate faucet-funded public run has **14 independently finalized transactions** using the real official devnet USDC mint, with 11 USDC funded and 9 left in the original test wallet. The expanded AMM suite passes **15 tests**. See [Test USDC acceptance](usdc-demo-review.md); older generic-quote evidence remains preserved.
 
 ## Next: review, qualified issuer evidence and submission
 

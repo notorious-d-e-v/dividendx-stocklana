@@ -74,7 +74,9 @@ const EXPECTED_CONFIG_HASH = '3b5ca2f3187261cc048e2353789242067c3aff19cab67168f8
 const EXPECTED_FEE_HASH = 'c8c0238152ce9c374de300598a8513b59018396b39f603cdc2eba44bca357464';
 const EXPECTED_CAPTURE_SLOT = 499_784_549;
 const EXPECTED_RAYDIUM_DEPLOY_SLOT = 498_629_438;
-const EXPECTED_POOL_RESIDUAL_DR = 643n;
+const CIRCLE_USDC = new PublicKey('4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU');
+const EXPECTED_USDC_HASH = '3c8a2c7c49c355902bf2b2cb4b5bded7772a7971bb7e8168b0873d2f9d2b42b6';
+const RAYDIUM_AUTHORITY = new PublicKey('CXniRufdq5xL8t8jZAPxsPZDpuudwuJSPWnbcD5Y5Nxq');
 const EXPECTED_EVENT_DATES = Object.freeze([20_270_315, 20_270_615, 20_270_915, 20_271_215]);
 const EXPECTED_EVENT_M0 = Object.freeze([1, 1.01, 1.02, 1.03].map(f64ToBits));
 const EXPECTED_EVENT_M1 = Object.freeze([1.01, 1.02, 1.03, 1.04].map(f64ToBits));
@@ -190,8 +192,8 @@ function parseCli(argv) {
 function validateStateAndReceipt(stateValue, receiptValue) {
   const state = object(stateValue, 'state');
   const receipt = object(receiptValue, 'receipt');
-  assert.equal(state.schemaVersion, 1, 'unsupported state schema');
-  assert.equal(receipt.schemaVersion, 1, 'unsupported receipt schema');
+  assert.ok(state.schemaVersion === 1 || state.schemaVersion === 2, 'unsupported state schema');
+  assert.equal(receipt.schemaVersion, state.schemaVersion, 'receipt schema differs from state');
   assert.equal(state.status, 'complete', 'guided run is not complete');
   assert.equal(state.activeStep, null, 'completed run still has an active step');
   assert.equal(state.nextStep, null, 'completed run still has a next step');
@@ -231,7 +233,20 @@ function validateStateAndReceipt(stateValue, receiptValue) {
     receipt.transactions.length, 'transaction signatures are not unique');
 
   const capture = object(receipt.capture, 'receipt capture');
-  assert.equal(receipt.boundary, 'local-captured-raydium-devnet-bytecode', 'receipt boundary mismatch');
+  assert.equal(receipt.boundary, state.schemaVersion === 2
+    ? 'offline-local-circle-devnet-usdc-clone' : 'local-captured-raydium-devnet-bytecode', 'receipt boundary mismatch');
+  if (state.schemaVersion === 2) {
+    const expectedAsset = { symbol: 'USDC', provenance: 'local-circle-devnet-clone', canonicalMint: CIRCLE_USDC.toBase58() };
+    for (const { snapshot } of receipt.checkpoints) {
+      assert.deepEqual(snapshot.quoteAsset, expectedAsset, 'checkpoint USDC identity mismatch');
+      assert.equal(snapshot.mints.quote, CIRCLE_USDC.toBase58(), 'checkpoint uses a different quote mint');
+      assert.equal(snapshot.quoteDecimals, 6, 'USDC decimals mismatch');
+    }
+    assert.deepEqual(receipt.localFunding, { method: 'surfpool-set-account', providerRaw: '10000000',
+      buyerRaw: '1000000', totalRaw: '11000000', publicFaucetTransfer: false }, 'local USDC funding disclosure mismatch');
+    assert.equal(receipt.checkpoints[0].snapshot.provider.quoteRaw, '10000000', 'provider initial USDC mismatch');
+    assert.equal(receipt.checkpoints[0].snapshot.buyer.quoteRaw, '1000000', 'buyer initial USDC mismatch');
+  }
   assert.equal(capture.sourceCluster, 'devnet', 'capture source cluster mismatch');
   assert.equal(capture.sourceSlot, EXPECTED_CAPTURE_SLOT, 'capture source slot mismatch');
   assert.equal(capture.raydiumProgramData, RAYDIUM_PROGRAM_DATA.toBase58(), 'captured ProgramData mismatch');
@@ -594,6 +609,23 @@ async function verifyAccounts(connection, snapshot, receipt) {
   const drMint = unpackMint(drMintAddress, info.drMint, TOKEN_PROGRAM_ID);
   const quoteMint = unpackMint(quoteMintAddress, info.quoteMint, TOKEN_PROGRAM_ID);
   const lpMint = unpackMint(lpMintAddress, info.lpMint, TOKEN_PROGRAM_ID);
+  if (receipt.schemaVersion === 2) {
+    equalKey(quoteMintAddress, CIRCLE_USDC, 'canonical Circle devnet mint');
+    assert.equal(info.quoteMint.data.length, 82, 'USDC mint size mismatch');
+    assert.ok(quoteMint.isInitialized && quoteMint.decimals === 6, 'USDC mint is not initialized with six decimals');
+    assert.equal(sha256(info.quoteMint.data), EXPECTED_USDC_HASH, 'local USDC bytes differ from captured Circle mint');
+    const source = JSON.parse(await readFile(resolve(repositoryRoot,
+      'packages/guided-runtime/fixtures/circle-devnet-usdc-2026-09-17.json'), 'utf8'));
+    assert.equal(sha256(Buffer.from(source.data, 'base64')), EXPECTED_USDC_HASH, 'USDC fixture hash mismatch');
+    for (const field of ['sourceUrl', 'sourceCluster', 'sourceGenesisHash', 'sourceSlot', 'mint', 'owner',
+      'dataSha256', 'supplyRaw', 'decimals', 'mintAuthority', 'freezeAuthority']) {
+      assert.deepEqual(receipt.capture.circleUsdc[field], source[field], `USDC provenance ${field} mismatch`);
+    }
+    assert.equal(quoteMint.supply.toString(), source.supplyRaw, 'captured USDC global supply changed');
+    assert.equal(quoteMint.mintAuthority?.toBase58(), source.mintAuthority, 'Circle mint authority changed');
+    assert.equal(quoteMint.freezeAuthority?.toBase58(), source.freezeAuthority, 'Circle freeze authority changed');
+  }
+
   const profile = await inspectMintProfile(stockMint, clock);
   assert.ok(mintProfileMatchesPolicy(policy, profile), 'actual mint profile differs from its reviewed asset policy');
   assert.equal(profile.scale.activeBits.toString(), snapshot.stockMultiplierBits, 'snapshot stock multiplier differs from mint');
@@ -635,9 +667,9 @@ async function verifyAccounts(connection, snapshot, receipt) {
     new PublicKey(pool.mintA.toBase58()), new PublicKey(pool.mintB.toBase58())).publicKey;
   assert.equal(expectedPool.toBase58(), poolAddress.toBase58(), 'pool PDA mismatch');
   const poolVaultA = requireTokenAccount(poolVaultAAddress, info.poolVaultA, TOKEN_PROGRAM_ID,
-    new PublicKey(pool.mintA.toBase58()), null, 'pool vault A');
+    new PublicKey(pool.mintA.toBase58()), RAYDIUM_AUTHORITY, 'pool vault A');
   const poolVaultB = requireTokenAccount(poolVaultBAddress, info.poolVaultB, TOKEN_PROGRAM_ID,
-    new PublicKey(pool.mintB.toBase58()), null, 'pool vault B');
+    new PublicKey(pool.mintB.toBase58()), RAYDIUM_AUTHORITY, 'pool vault B');
   const drIsA = pool.mintA.toBase58() === drMintAddress.toBase58();
   assert.ok(drIsA || pool.mintB.toBase58() === drMintAddress.toBase58(), 'pool does not contain DR');
   assert.equal(drIsA ? pool.mintB.toBase58() : pool.mintA.toBase58(), quoteMintAddress.toBase58(),
@@ -685,12 +717,13 @@ async function verifyAccounts(connection, snapshot, receipt) {
   assert.equal(buyerAccounts.lpRaw, 0n, 'buyer unexpectedly owns LP');
   assert.equal(ptMint.supply, 0n, 'PT mint supply remains after provider redemption');
   assert.equal(lpMint.supply, 0n, 'LP mint supply remains after provider withdrawal');
-  assert.equal(poolDr.amount, EXPECTED_POOL_RESIDUAL_DR, 'Raydium residual DR differs from the fixed flow');
+  assert.ok(poolDr.amount > 0n, 'Raydium residual DR is missing');
   assert.equal(drMint.supply, poolDr.amount, 'DR supply is not exactly the Raydium residual');
   assert.equal(stockMint.supply, providerAccounts.stock.amount + buyerAccounts.stock.amount + vault.amount,
     'stock raw supply is not conserved across wallets and custody');
-  assert.equal(quoteMint.supply, providerAccounts.quote.amount + buyerAccounts.quote.amount + poolQuote.amount,
-    'quote raw supply is not conserved across wallets and pool');
+  assert.equal(receipt.schemaVersion === 2 ? 11_000_000n : quoteMint.supply,
+    providerAccounts.quote.amount + buyerAccounts.quote.amount + poolQuote.amount,
+    'funded quote raw is not conserved across wallets and pool');
 
   const journal = await verifyJournal(connection, seriesAddress, accumulator, series);
   const obligations = requiredCustodyRaw(series);
@@ -750,21 +783,34 @@ function verifyJourney(transactionProof, accounts, snapshot) {
   assert.equal(delta('split', provider, dr), splitRaw, 'split did not mint exactly 100 DR');
 
   const fixedQuoteUnit = 10n ** BigInt(snapshot.quoteDecimals);
+  const quoteScale = snapshot.quoteAsset ? 1n : 20n;
+  const seedQuote = 4n * quoteScale * fixedQuoteUnit;
+  const addQuote = 6n * quoteScale * fixedQuoteUnit;
+  const spendQuote = quoteScale * fixedQuoteUnit;
   assert.equal(delta('create-pool', provider, dr), -40n * stockUnit, 'pool creation did not seed 40 DR');
-  assert.equal(delta('create-pool', provider, quote), -80n * fixedQuoteUnit, 'pool creation did not seed 80 quote');
+  assert.equal(delta('create-pool', provider, quote), -seedQuote, 'pool creation quote differs from fixed flow');
   assert.equal(delta('add-liquidity', provider, dr), -60n * stockUnit, 'liquidity addition did not add 60 DR');
-  assert.equal(delta('add-liquidity', provider, quote), -120n * fixedQuoteUnit, 'liquidity addition did not add 120 quote');
-  assert.equal(delta('buy-dr', buyer, quote), -20n * fixedQuoteUnit, 'buyer did not spend 20 quote');
+  assert.equal(delta('add-liquidity', provider, quote), -addQuote, 'liquidity addition quote differs from fixed flow');
+  assert.equal(delta('buy-dr', buyer, quote), -spendQuote, 'buyer quote spend differs from fixed flow');
   const buyerDrAcquired = delta('buy-dr', buyer, dr);
   assert.ok(buyerDrAcquired > 0n, 'buyer did not acquire DR through Raydium');
   assert.ok(snapshot.swap, 'final snapshot lacks the swap record');
-  assert.equal(raw(snapshot.swap.inputQuoteRaw, 'snapshot swap input'), 20n * fixedQuoteUnit,
+  assert.equal(raw(snapshot.swap.inputQuoteRaw, 'snapshot swap input'), spendQuote,
     'snapshot swap input differs from the fixed flow');
   assert.equal(raw(snapshot.swap.outputDrRaw, 'snapshot swap output'), buyerDrAcquired,
     'snapshot swap output differs from transaction balances');
   assert.ok(raw(snapshot.swap.minimumDrRaw, 'snapshot minimum DR') <= buyerDrAcquired,
     'snapshot swap output is below its minimum');
   assert.ok(delta('remove-liquidity', provider, lp) < 0n, 'provider did not burn LP on withdrawal');
+  const withdrawal = transactionProof.groups.get('remove-liquidity');
+  assert.equal(withdrawal.length, 1, 'fixed flow should have one withdrawal transaction');
+  const beforeLp = tokenAmount(withdrawal[0].meta.preTokenBalances, provider, lp);
+  const beforePoolDr = tokenAmount(withdrawal[0].meta.preTokenBalances, RAYDIUM_AUTHORITY.toBase58(), dr);
+  assert.ok(beforeLp > 0n && beforePoolDr > 0n, 'withdrawal pre-balances are missing');
+  // This single-quote-input flow accrues fees only on USDC, not DR.
+  const expectedResidualDr = (100n * beforePoolDr + beforeLp + 99n) / (beforeLp + 100n);
+  assert.equal(accounts.balances.poolDr, expectedResidualDr, 'locked LP DR remainder differs from exact withdrawal');
+
 
   const recombinedPt = -delta('recombine', provider, pt);
   const recombinedDr = -delta('recombine', provider, dr);
@@ -786,7 +832,7 @@ function verifyJourney(transactionProof, accounts, snapshot) {
   assert.equal(providerStockPaid, accounts.series.ptPaidRaw, 'provider stock payout does not match cumulative PT payout');
   return {
     splitRaw,
-    buyerQuoteSpentRaw: 20n * fixedQuoteUnit,
+    buyerQuoteSpentRaw: spendQuote,
     buyerDrAcquiredRaw: buyerDrAcquired,
     buyerDrRedeemedRaw: buyerDrBurned,
     buyerStockPayoutRaw: buyerStockPaid,
@@ -843,7 +889,7 @@ async function main() {
   assert.equal(await connection.getGenesisHash(), actualGenesisHash, 'RPC genesis changed during verification');
 
   const output = {
-    schemaVersion: 1,
+    schemaVersion: state.schemaVersion,
     ok: true,
     verifiedAt: new Date().toISOString(),
     runtimeId: state.runtimeId,
@@ -853,6 +899,8 @@ async function main() {
     genesisHash: actualGenesisHash,
     slot: accountProof.responseSlot,
     checks: {
+      quoteAsset: snapshot.quoteAsset ?? { symbol: 'private-test-quote' },
+      fundedQuoteRaw: snapshot.quoteAsset ? '11000000' : '220000000',
       fixedNineStepJourney: true,
       allReportedTransactionsConfirmed: true,
       actualProgramPayloads: { dividendX: dividendXProgram, raydium: raydiumProgram },

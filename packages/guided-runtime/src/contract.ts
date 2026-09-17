@@ -30,6 +30,11 @@ export interface DemoSnapshot {
   eventCount: number;
   stockDecimals: number;
   quoteDecimals: number;
+  quoteAsset: {
+    symbol: 'USDC';
+    provenance: 'local-circle-devnet-clone';
+    canonicalMint: string;
+  };
   lpDecimals: number;
   stockMultiplierBits: string;
   provider: DemoWallet;
@@ -43,7 +48,7 @@ export interface DemoSnapshot {
   swap: null | { inputQuoteRaw: string; outputDrRaw: string; minimumDrRaw: string };
 }
 export interface DemoState {
-  schemaVersion: 1;
+  schemaVersion: 2;
   runtimeId: string;
   revision: number;
   sessionId: string | null;

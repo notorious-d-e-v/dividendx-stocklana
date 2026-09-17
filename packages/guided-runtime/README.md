@@ -1,8 +1,8 @@
 # DividendX guided demo runtime
 
-This package serves the isolated `/demos/` transaction scenario on `127.0.0.1:4181`. It starts its own offline Surfpool, deploys the accepted DividendX ELF, loads the pinned captured Raydium devnet CPMM bytecode and public config fixtures, and manages two disposable in-memory test wallets. It does not use the wallet runtime on 4180, a default Solana wallet, public funding, mainnet, issuer credentials, or assets with value.
+This package serves the isolated `/demos/` transaction scenario on `127.0.0.1:4181`. It starts its own offline Surfpool, deploys the accepted DividendX ELF, loads the pinned captured Raydium devnet CPMM bytecode and public config fixtures, and manages two disposable in-memory test wallets. Its Test USDC quote uses the exact captured Circle devnet mint account and synthetic local balances. It does not use the wallet runtime on 4180, a default Solana wallet, public funding, mainnet, issuer credentials, or assets with value.
 
-The fixed actions are split, create/seed pool, add liquidity, buyer swap, remove provider liquidity, recombine recovered claims, settle the synthetic test year, buyer DR redemption, and provider PT redemption. Every mutation is signed and confirmed locally. Raydium's locked DR residual remains backed after the two wallets redeem.
+The fixed actions are split, create/seed a 40 DR / 4 USDC pool, add 60 DR / 6 USDC, swap the buyer's 1 USDC, remove provider liquidity, recombine recovered claims, settle the synthetic test year, redeem buyer DR, and redeem provider PT. Every mutation after initial local state setup is signed and confirmed locally. Raydium's locked DR residual remains backed after the two wallets redeem.
 
 ## Install and run
 
@@ -24,13 +24,19 @@ The runtime requires the root workspace dependencies, the built transaction SDK,
 
 The browser API is `GET /state`, `POST /start`, `POST /step`, and `GET /receipt`. Mutations require the exact runtime/session revision, an approved loopback Origin, JSON content type, and `X-DividendX-Demo: 1`. Caller-supplied instructions, amounts, addresses and network targets are not accepted.
 
-Run the complete local chain journey with:
+Run the complete local chain journey in its own in-process Surfpool, without binding port 4181, with:
 
 ```sh
 npm --prefix packages/guided-runtime run smoke
 ```
 
 Public progress is atomically stored under ignored `.local-tools/guided-runtime/`. Each session has a UUID-named evidence file; keys are never persisted. A server restart creates a new runtime identity and cannot resume the destroyed Surfpool.
+
+## Test USDC boundary
+
+[`fixtures/circle-devnet-usdc-2026-09-17.json`](fixtures/circle-devnet-usdc-2026-09-17.json) contains the exact 82-byte classic SPL Token mint account captured from finalized Solana devnet slot `499830485`. Startup pins its address, owner, data hash, supply, decimals, mint authority, freeze authority, Circle source URL, and devnet genesis.
+
+Offline Surfpool receives synthetic provider and buyer token-account state totaling 11 Test USDC (10 plus 1). The mint bytes and global captured supply remain unchanged. This local setup is not a Circle faucet transfer, public USDC balance, or mint signature. All later USDC custody changes occur through signed Raydium transactions, and every checkpoint verifies exact conservation of the controlled 11 USDC independently of the captured global supply.
 
 ## Captured Raydium boundary
 

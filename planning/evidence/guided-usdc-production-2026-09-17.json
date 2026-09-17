@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "observedAt": "2026-09-17T13:47:15.933Z",
+  "url": "http://127.0.0.1:4174/demos/",
+  "sessionId": "74310846-8f64-4b3d-bdb3-2e2af50ef1ce",
+  "runtimeId": "4c49f3d0-cb1b-4fae-9452-8d01eeaa0c3e",
+  "schemaVersion": 2,
+  "status": "ready",
+  "quoteAsset": {
+    "symbol": "USDC",
+    "provenance": "local-circle-devnet-clone",
+    "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+  },
+  "providerUsdcRaw": "10000000",
+  "buyerUsdcRaw": "1000000",
+  "publicProofPool": "Fi94TtWky2e9SnSFAUzoPAcKKNV1WziEmLtZZ3FTi65S",
+  "pageErrors": [],
+  "layout": [
+    {
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "overflow": false
+    }
+  ]
+}

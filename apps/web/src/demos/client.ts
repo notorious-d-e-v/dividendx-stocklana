@@ -5,6 +5,7 @@ import type {
 } from '../../../../packages/guided-runtime/src/contract';
 
 export const GUIDED_RUNTIME_URL = 'http://127.0.0.1:4181';
+export const CIRCLE_DEVNET_USDC_MINT = '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU';
 const READ_TIMEOUT_MS = 5_000;
 const MUTATION_TIMEOUT_MS = 15_000;
 
@@ -45,6 +46,9 @@ async function errorMessage(response: Response): Promise<string> {
 
 function assertState(value: unknown): DemoState {
   if (!value || typeof value !== 'object') throw new Error('The guided runtime returned an invalid state.');
+  if ((value as Record<string, unknown>).schemaVersion !== 2) {
+    throw new Error('This page requires guided runtime v2 with pinned Test USDC. Update and restart npm run demo:guided.');
+  }
   const state = value as Partial<DemoState>;
   const statuses = ['idle', 'preparing', 'ready', 'running', 'failed', 'complete'];
   const steps = ['split', 'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity', 'recombine', 'settle-year', 'redeem-buyer', 'redeem-provider'];
@@ -66,6 +70,7 @@ function assertState(value: unknown): DemoState {
     if (!snapshot || typeof snapshot !== 'object') return false;
     const item = snapshot as Record<string, unknown>;
     const mints = item.mints as Record<string, unknown> | null;
+    const quoteAsset = item.quoteAsset as Record<string, unknown> | null;
     const pool = item.pool as Record<string, unknown> | null;
     const swap = item.swap as Record<string, unknown> | null;
     const validPool = pool === null || (Boolean(pool) && typeof pool?.address === 'string' && ['drRaw', 'quoteRaw', 'lockedLpRaw'].every((key) => typeof pool?.[key] === 'string' && /^\d+$/.test(pool[key] as string)));
@@ -76,9 +81,12 @@ function assertState(value: unknown): DemoState {
       && ['slot', 'eventCount', 'stockDecimals', 'quoteDecimals', 'lpDecimals'].every((key) => Number.isSafeInteger(item[key]) && Number(item[key]) >= 0)
       && item.year === 2027 && ['open', 'sealing', 'finalized'].includes(String(item.phase)) && typeof item.backingVerified === 'boolean'
       && Boolean(mints) && ['stock', 'pt', 'dr', 'quote'].every((key) => typeof mints?.[key] === 'string')
-      && (mints?.lp === null || typeof mints?.lp === 'string') && validPool && validSwap;
+      && (mints?.lp === null || typeof mints?.lp === 'string')
+      && item.quoteDecimals === 6 && Boolean(quoteAsset) && quoteAsset?.symbol === 'USDC'
+      && quoteAsset?.provenance === 'local-circle-devnet-clone' && quoteAsset?.canonicalMint === CIRCLE_DEVNET_USDC_MINT
+      && mints?.quote === CIRCLE_DEVNET_USDC_MINT && validPool && validSwap;
   })();
-  if (state.schemaVersion !== 1 || typeof state.runtimeId !== 'string' || typeof state.revision !== 'number'
+  if (state.schemaVersion !== 2 || typeof state.runtimeId !== 'string' || typeof state.revision !== 'number'
     || !statuses.includes(String(state.status)) || !validStep(state.activeStep, true) || !validStep(state.nextStep)
     || !Array.isArray(state.completedSteps) || !state.completedSteps.every((step) => validStep(step) && step !== null)
     || !Array.isArray(state.transactions) || !state.transactions.every(validTransaction) || !validSnapshot
@@ -115,5 +123,9 @@ export function runDemoStep(body: DemoStepRequest): Promise<void> {
 export async function readDemoReceipt(): Promise<unknown> {
   const response = await boundedFetch('/receipt');
   if (!response.ok) throw new DemoHttpError(await errorMessage(response), response.status);
-  return response.json();
+  const receipt = await response.json() as unknown;
+  if (!receipt || typeof receipt !== 'object' || (receipt as Record<string, unknown>).schemaVersion !== 2) {
+    throw new Error('The guided runtime returned an unsupported Test USDC receipt.');
+  }
+  return receipt;
 }

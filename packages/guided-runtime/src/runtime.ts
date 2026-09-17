@@ -1,4 +1,4 @@
-import { createHash, randomBytes, randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6,10 +6,11 @@ import type { Idl } from '@anchor-lang/core';
 import { CpmmPoolInfoLayout, Percent, Raydium, TxVersion } from '@raydium-io/raydium-sdk-v2';
 import BN from 'bn.js';
 import {
-  ASSOCIATED_TOKEN_PROGRAM_ID, ExtensionType, TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID,
+  ACCOUNT_SIZE, ASSOCIATED_TOKEN_PROGRAM_ID, AccountLayout, AccountState, ExtensionType,
+  TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID,
   createAssociatedTokenAccountIdempotentInstruction, createInitializeMintInstruction,
   createInitializeScaledUiAmountConfigInstruction, createMintToCheckedInstruction,
-  createUpdateMultiplierDataInstruction, getAccount, getAssociatedTokenAddressSync, getMint,
+  createUpdateMultiplierDataInstruction, getAccount, getAssociatedTokenAddressSync,
   getMintLen, getScaledUiAmountConfig, unpackAccount, unpackMint,
 } from '@solana/spl-token';
 import { Surfnet } from '@solana/surfpool';
@@ -17,10 +18,12 @@ import {
   Connection, Keypair, PublicKey, SYSVAR_CLOCK_PUBKEY, SystemProgram, Transaction, type Signer, type TransactionInstruction,
 } from '@solana/web3.js';
 import {
+  CIRCLE_DEVNET_USDC_FREEZE_AUTHORITY, CIRCLE_DEVNET_USDC_MINT, CIRCLE_DEVNET_USDC_MINT_AUTHORITY,
+  CIRCLE_USDC_REQUIRED_FUNDING_RAW, CIRCLE_USDC_SOURCE_URL,
   CLAIM_DECIMALS, COLLATERAL_DECIMALS, DIVIDENDX_ELF_SHA256, DIVIDENDX_PROGRAM_ID,
-  FLOW, RAYDIUM_CAPTURED_ELF_SHA256, RAYDIUM_CAPTURED_PROGRAM_DATA,
+  PUBLIC_CLUSTER_GENESIS_HASHES, RAYDIUM_CAPTURED_ELF_SHA256,
   RAYDIUM_CONFIG, RAYDIUM_CPMM_PROGRAM_ID, RAYDIUM_CREATE_POOL_FEE_RECEIVER,
-  RAYDIUM_PROGRAM_DEPLOY_SLOT, SERIES_YEAR, TEST_QUOTE_DECIMALS,
+  SERIES_YEAR, TEST_QUOTE_DECIMALS, USDC_FLOW as GUIDED_FLOW,
   assertPrefinalBacking, assertRecombineDelta, assertSoleProviderWithdrawal, assertSwapDelta,
   assertSwapInstructionBounds, assertWithdrawBoundary, buildSimulateSend, quoteCreatorDisabledSwap,
   simulateSendAndConfirm, verifyExecutionEnvironment, writePrivateJson,
@@ -44,10 +47,16 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const PACKAGE_ROOT = resolve(HERE, '../..');
 const REPOSITORY_ROOT = resolve(PACKAGE_ROOT, '../..');
 const CAPTURE_PATH = resolve(REPOSITORY_ROOT, 'packages/amm-integration/fixtures/raydium-devnet-2026-09-17/capture.json');
+const USDC_CAPTURE_PATH = resolve(PACKAGE_ROOT, 'fixtures/circle-devnet-usdc-2026-09-17.json');
 const RAYDIUM_ELF_PATH = resolve(REPOSITORY_ROOT, 'packages/amm-integration/fixtures/raydium-devnet-2026-09-17/raydium-cpmm.so');
 const DIVIDENDX_ELF_PATH = resolve(REPOSITORY_ROOT, 'target/deploy/dividendx.so');
 const STATE_DIRECTORY = resolve(REPOSITORY_ROOT, '.local-tools/guided-runtime');
 const STATE_PATH = resolve(STATE_DIRECTORY, 'current.json');
+const CIRCLE_DEVNET_USDC_CAPTURE_SHA256 = '3c8a2c7c49c355902bf2b2cb4b5bded7772a7971bb7e8168b0873d2f9d2b42b6';
+const CIRCLE_DEVNET_GENESIS_HASH = 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG';
+const CIRCLE_DEVNET_USDC_CAPTURE_SLOT = 499_830_485;
+const LOCAL_USDC_PROVIDER_RAW = 10_000_000n;
+const LOCAL_USDC_BUYER_RAW = 1_000_000n;
 const PRE_YEAR_MS = Date.UTC(2026, 11, 15, 12);
 const START_YEAR_MS = Date.UTC(2027, 0, 2, 12);
 const END_YEAR_MS = Date.UTC(2028, 0, 2, 12);
@@ -63,6 +72,12 @@ interface CaptureFixture {
   sourceSlot: number;
   program: { address: string; programData: string; deploySlot: number; file: string; sha256: string; bytes: number };
   accounts: CaptureAccount[];
+}
+interface UsdcCaptureFixture {
+  schema: string; sourceUrl: string; sourceCluster: string; sourceGenesisHash: string;
+  sourceSlot: number; mint: string; owner: string; lamports: number; executable: boolean;
+  space: number; data: string; dataSha256: string; decimals: number; mintAuthority: string;
+  freezeAuthority: string; supplyRaw: string;
 }
 
 function digest(value: string): Uint8Array { return new Uint8Array(createHash('sha256').update(value).digest()); }
@@ -95,6 +110,14 @@ function toFeeConfig(preflight: PreflightResult) {
 function tokenDescriptor(address: PublicKey, decimals: number) {
   return { address: address.toBase58(), decimals, programId: TOKEN_PROGRAM_ID.toBase58() };
 }
+const ZERO_PUBLIC_KEY = new PublicKey(new Uint8Array(32));
+function encodeSyntheticTokenAccount(mint: PublicKey, owner: PublicKey, amount: bigint): Buffer {
+  const data = Buffer.alloc(ACCOUNT_SIZE);
+  AccountLayout.encode({ mint, owner, amount, delegateOption: 0, delegate: ZERO_PUBLIC_KEY,
+    state: AccountState.Initialized, isNativeOption: 0, isNative: 0n, delegatedAmount: 0n,
+    closeAuthorityOption: 0, closeAuthority: ZERO_PUBLIC_KEY }, data);
+  return data;
+}
 function stringifySafe(value: unknown): string {
   return JSON.stringify(value, (_key, entry) => typeof entry === 'bigint' ? entry.toString() : entry);
 }
@@ -112,7 +135,7 @@ export class GuidedDemoRuntime {
   private receipt: PublicReceipt | null = null;
   private swap: DemoSnapshot['swap'] = null;
   private state: DemoState = {
-    schemaVersion: 1, runtimeId: this.runtimeId, revision: 0, sessionId: null, status: 'idle',
+    schemaVersion: 2, runtimeId: this.runtimeId, revision: 0, sessionId: null, status: 'idle',
     activeStep: null, nextStep: null, completedSteps: [], snapshot: null, transactions: [], error: null,
   };
 
@@ -172,7 +195,7 @@ export class GuidedDemoRuntime {
     const sessionId = randomUUID();
     this.connection = null; this.signers = null; this.known = null; this.pool = null; this.manifest = null; this.preflight = null; this.receipt = null; this.swap = null;
     await this.update(() => {
-      this.state = { schemaVersion: 1, runtimeId: this.runtimeId, revision: this.state.revision,
+      this.state = { schemaVersion: 2, runtimeId: this.runtimeId, revision: this.state.revision,
         sessionId, status: 'preparing', activeStep: 'setup', nextStep: null, completedSteps: [], snapshot: null, transactions: [], error: null };
     });
     void this.runSetup(sessionId).catch((error) => this.fail(error));
@@ -202,23 +225,40 @@ export class GuidedDemoRuntime {
 
   private async runSetup(sessionId: string): Promise<void> {
     const capture = JSON.parse(await readFile(CAPTURE_PATH, 'utf8')) as CaptureFixture;
+    const usdcCapture = JSON.parse(await readFile(USDC_CAPTURE_PATH, 'utf8')) as UsdcCaptureFixture;
     const [dividendXElf, raydiumElf] = await Promise.all([readFile(DIVIDENDX_ELF_PATH), readFile(RAYDIUM_ELF_PATH)]);
     if (hash(dividendXElf) !== DIVIDENDX_ELF_SHA256 || hash(raydiumElf) !== RAYDIUM_CAPTURED_ELF_SHA256
       || capture.program.sha256 !== RAYDIUM_CAPTURED_ELF_SHA256 || capture.program.bytes !== raydiumElf.length) throw new Error('CAPTURE_HASH_MISMATCH');
     for (const account of capture.accounts) if (hash(Buffer.from(account.data, 'base64')) !== account.dataSha256
       || Buffer.from(account.data, 'base64').length !== account.space) throw new Error('CAPTURE_ACCOUNT_HASH_MISMATCH');
+    const usdcData = Buffer.from(usdcCapture.data, 'base64');
+    if (usdcCapture.schema !== 'dividendx-circle-devnet-usdc-capture-v1'
+      || usdcCapture.sourceCluster !== 'devnet' || usdcCapture.sourceGenesisHash !== CIRCLE_DEVNET_GENESIS_HASH
+      || usdcCapture.sourceSlot !== CIRCLE_DEVNET_USDC_CAPTURE_SLOT || usdcCapture.sourceUrl !== CIRCLE_USDC_SOURCE_URL
+      || usdcCapture.mint !== CIRCLE_DEVNET_USDC_MINT.toBase58() || usdcCapture.owner !== TOKEN_PROGRAM_ID.toBase58()
+      || usdcCapture.space !== 82 || usdcData.length !== usdcCapture.space
+      || usdcCapture.dataSha256 !== CIRCLE_DEVNET_USDC_CAPTURE_SHA256
+      || hash(usdcData) !== CIRCLE_DEVNET_USDC_CAPTURE_SHA256) throw new Error('USDC_CAPTURE_IDENTITY_MISMATCH');
+    const capturedUsdcMint = unpackMint(CIRCLE_DEVNET_USDC_MINT, { data: usdcData, executable: false,
+      lamports: usdcCapture.lamports, owner: TOKEN_PROGRAM_ID, rentEpoch: 0 }, TOKEN_PROGRAM_ID);
+    if (capturedUsdcMint.decimals !== TEST_QUOTE_DECIMALS || capturedUsdcMint.supply.toString() !== usdcCapture.supplyRaw
+      || !capturedUsdcMint.mintAuthority?.equals(CIRCLE_DEVNET_USDC_MINT_AUTHORITY)
+      || !capturedUsdcMint.freezeAuthority?.equals(CIRCLE_DEVNET_USDC_FREEZE_AUTHORITY)
+      || usdcCapture.mintAuthority !== CIRCLE_DEVNET_USDC_MINT_AUTHORITY.toBase58()
+      || usdcCapture.freezeAuthority !== CIRCLE_DEVNET_USDC_FREEZE_AUTHORITY.toBase58()) throw new Error('USDC_CAPTURE_MINT_MISMATCH');
 
     const surfnet = this.surfnet = Surfnet.startWithConfig({ offline: true, blockProductionMode: 'transaction' });
     this.drain = setInterval(() => { try { surfnet.drainEvents(); } catch {} }, 50);
     this.drain.unref();
     const signers = this.signers = {
       admin: Keypair.generate(), attestor: Keypair.generate(), provider: Keypair.generate(), buyer: Keypair.generate(),
-      collateralMint: Keypair.generate(), testQuoteMint: Keypair.generate(),
+      collateralMint: Keypair.generate(),
     };
     surfnet.deploy({ programId: DIVIDENDX_PROGRAM_ID.toBase58(), soBytes: dividendXElf });
     await rawRpc(surfnet.rpcUrl, 'surfnet_setProgramAuthority', [DIVIDENDX_PROGRAM_ID.toBase58(), signers.admin.publicKey.toBase58()]);
     surfnet.deploy({ programId: RAYDIUM_CPMM_PROGRAM_ID.toBase58(), soBytes: raydiumElf });
     for (const account of capture.accounts) surfnet.setAccount(account.address, account.lamports, Buffer.from(account.data, 'base64'), account.owner);
+    surfnet.setAccount(usdcCapture.mint, usdcCapture.lamports, usdcData, usdcCapture.owner);
     surfnet.fundSol(signers.admin.publicKey.toBase58(), 5_000_000_000);
     surfnet.timeTravelToTimestamp(PRE_YEAR_MS);
     const boundedFetch: typeof fetch = async (input, init = {}) => {
@@ -230,6 +270,14 @@ export class GuidedDemoRuntime {
       commitment: 'confirmed', confirmTransactionInitialTimeout: 15_000, disableRetryOnRateLimit: true, fetch: boundedFetch,
     });
     const genesisHash = await connection.getGenesisHash();
+    if (PUBLIC_CLUSTER_GENESIS_HASHES.has(genesisHash)) throw new Error('LOCAL_USDC_FUNDING_REQUIRES_NON_PUBLIC_GENESIS');
+    const providerQuote = getAssociatedTokenAddressSync(CIRCLE_DEVNET_USDC_MINT, signers.provider.publicKey);
+    const buyerQuote = getAssociatedTokenAddressSync(CIRCLE_DEVNET_USDC_MINT, signers.buyer.publicKey);
+    const tokenAccountRent = await connection.getMinimumBalanceForRentExemption(ACCOUNT_SIZE);
+    surfnet.setAccount(providerQuote.toBase58(), tokenAccountRent,
+      encodeSyntheticTokenAccount(CIRCLE_DEVNET_USDC_MINT, signers.provider.publicKey, LOCAL_USDC_PROVIDER_RAW), TOKEN_PROGRAM_ID.toBase58());
+    surfnet.setAccount(buyerQuote.toBase58(), tokenAccountRent,
+      encodeSyntheticTokenAccount(CIRCLE_DEVNET_USDC_MINT, signers.buyer.publicKey, LOCAL_USDC_BUYER_RAW), TOKEN_PROGRAM_ID.toBase58());
     const deploymentDomain = new PublicKey(genesisHash).toBytes();
     const manifest = this.manifest = {
       schema: 'dividendx-raydium-cpmm-v1', mode: 'local-clone', rpcUrl: surfnet.rpcUrl,
@@ -242,16 +290,22 @@ export class GuidedDemoRuntime {
     const builders = new DividendXInstructions(DIVIDENDX_IDL as Idl);
     const config = configPda().address;
     this.receipt = {
-      schemaVersion: 1, runtimeId: this.runtimeId, sessionId, boundary: 'local-captured-raydium-devnet-bytecode',
+      schemaVersion: 2, runtimeId: this.runtimeId, sessionId, boundary: 'offline-local-circle-devnet-usdc-clone',
       capture: { sourceCluster: 'devnet', sourceSlot: capture.sourceSlot, raydiumProgramData: capture.program.programData,
         raydiumDeploySlot: capture.program.deploySlot, raydiumElfSha256: RAYDIUM_CAPTURED_ELF_SHA256,
         dividendXElfSha256: DIVIDENDX_ELF_SHA256, configAccountSha256: capture.accounts[0]!.dataSha256,
-        feeAccountSha256: capture.accounts[1]!.dataSha256 },
+        feeAccountSha256: capture.accounts[1]!.dataSha256,
+        circleUsdc: { sourceUrl: usdcCapture.sourceUrl, sourceCluster: 'devnet', sourceGenesisHash: usdcCapture.sourceGenesisHash,
+          sourceSlot: usdcCapture.sourceSlot, mint: usdcCapture.mint, owner: usdcCapture.owner,
+          dataSha256: usdcCapture.dataSha256, supplyRaw: usdcCapture.supplyRaw, decimals: 6,
+          mintAuthority: usdcCapture.mintAuthority, freezeAuthority: usdcCapture.freezeAuthority } },
+      localFunding: { method: 'surfpool-set-account', providerRaw: '10000000', buyerRaw: '1000000',
+        totalRaw: '11000000', publicFaucetTransfer: false },
       identities: {
         programs: { dividendX: DIVIDENDX_PROGRAM_ID.toBase58(), raydium: RAYDIUM_CPMM_PROGRAM_ID.toBase58(),
           raydiumConfig: RAYDIUM_CONFIG.toBase58(), raydiumFeeReceiver: RAYDIUM_CREATE_POOL_FEE_RECEIVER.toBase58() },
         wallets: { provider: signers.provider.publicKey.toBase58(), buyer: signers.buyer.publicKey.toBase58() },
-        mints: { stock: signers.collateralMint.publicKey.toBase58(), pt: '', dr: '', quote: signers.testQuoteMint.publicKey.toBase58(), lp: null },
+        mints: { stock: signers.collateralMint.publicKey.toBase58(), pt: '', dr: '', quote: CIRCLE_DEVNET_USDC_MINT.toBase58(), lp: null },
         dividendX: { assetPolicy: '', series: '', accumulator: '', vault: '' },
         accounts: { providerStock: '', providerPt: '', providerDr: '', providerQuote: '', providerLp: null,
           buyerStock: '', buyerPt: '', buyerDr: '', buyerQuote: '', poolVaultA: null, poolVaultB: null, poolDrVault: null, poolQuoteVault: null },
@@ -260,7 +314,7 @@ export class GuidedDemoRuntime {
       transactions: [], checkpoints: [], failure: null, limits: [
         'Local transactions using test assets and an accelerated test year.',
         'Raydium executes from captured genuine devnet bytecode; these signatures are not public devnet signatures.',
-        'The seeded test quote has no value or redemption right.',
+        'Test USDC uses an exact Circle devnet mint clone with synthetic local balances, not faucet transfers or public USDC.',
       ],
     };
     await this.persist();
@@ -275,21 +329,13 @@ export class GuidedDemoRuntime {
       SystemProgram.transfer({ fromPubkey: signers.admin.publicKey, toPubkey: signers.attestor.publicKey, lamports: 50_000_000 }),
     ]);
     const collateralSpace = getMintLen([ExtensionType.ScaledUiAmountConfig]);
-    const [collateralRent, quoteRent] = await Promise.all([
-      connection.getMinimumBalanceForRentExemption(collateralSpace), connection.getMinimumBalanceForRentExemption(82),
-    ]);
+    const collateralRent = await connection.getMinimumBalanceForRentExemption(collateralSpace);
     await this.send('setup', 'create_test_collateral_mint', signers.admin, [
       SystemProgram.createAccount({ fromPubkey: signers.admin.publicKey, newAccountPubkey: signers.collateralMint.publicKey,
         lamports: collateralRent, space: collateralSpace, programId: TOKEN_2022_PROGRAM_ID }),
       createInitializeScaledUiAmountConfigInstruction(signers.collateralMint.publicKey, signers.admin.publicKey, 1, TOKEN_2022_PROGRAM_ID),
       createInitializeMintInstruction(signers.collateralMint.publicKey, COLLATERAL_DECIMALS, signers.admin.publicKey, null, TOKEN_2022_PROGRAM_ID),
     ], [signers.collateralMint]);
-    await this.send('setup', 'create_worthless_test_quote_mint', signers.admin, [
-      SystemProgram.createAccount({ fromPubkey: signers.admin.publicKey, newAccountPubkey: signers.testQuoteMint.publicKey,
-        lamports: quoteRent, space: 82, programId: TOKEN_PROGRAM_ID }),
-      createInitializeMintInstruction(signers.testQuoteMint.publicKey, TEST_QUOTE_DECIMALS, signers.admin.publicKey, null, TOKEN_PROGRAM_ID),
-    ], [signers.testQuoteMint]);
-
     const issuerId = await issuerIdentityHash(`surfnet-guided:${this.runtimeId}:${genesisHash}`, 'dividendx-guided-test-issuer');
     const assetPolicy = assetPolicyPda(issuerId, signers.collateralMint.publicKey).address;
     const series = annualSeriesAddresses(issuerId, signers.collateralMint.publicKey, SERIES_YEAR);
@@ -309,26 +355,22 @@ export class GuidedDemoRuntime {
       providerCollateral: getAssociatedTokenAddressSync(signers.collateralMint.publicKey, signers.provider.publicKey, false, TOKEN_2022_PROGRAM_ID),
       providerPt: getAssociatedTokenAddressSync(series.ptMint, signers.provider.publicKey),
       providerDr: getAssociatedTokenAddressSync(series.drMint, signers.provider.publicKey),
-      providerQuote: getAssociatedTokenAddressSync(signers.testQuoteMint.publicKey, signers.provider.publicKey),
+      providerQuote,
       buyerCollateral: getAssociatedTokenAddressSync(signers.collateralMint.publicKey, signers.buyer.publicKey, false, TOKEN_2022_PROGRAM_ID),
       buyerPt: getAssociatedTokenAddressSync(series.ptMint, signers.buyer.publicKey),
       buyerDr: getAssociatedTokenAddressSync(series.drMint, signers.buyer.publicKey),
-      buyerQuote: getAssociatedTokenAddressSync(signers.testQuoteMint.publicKey, signers.buyer.publicKey),
+      buyerQuote,
     };
     const ata = (address: PublicKey, owner: PublicKey, mint: PublicKey, program = TOKEN_PROGRAM_ID) =>
       createAssociatedTokenAccountIdempotentInstruction(signers.admin.publicKey, address, owner, mint, program);
     await this.send('setup', 'create_provider_token_accounts', signers.admin, [
       ata(known.providerCollateral, signers.provider.publicKey, signers.collateralMint.publicKey, TOKEN_2022_PROGRAM_ID),
       ata(known.providerPt, signers.provider.publicKey, series.ptMint), ata(known.providerDr, signers.provider.publicKey, series.drMint),
-      ata(known.providerQuote, signers.provider.publicKey, signers.testQuoteMint.publicKey),
-      createMintToCheckedInstruction(signers.collateralMint.publicKey, known.providerCollateral, signers.admin.publicKey, FLOW.collateralDepositRaw, COLLATERAL_DECIMALS, [], TOKEN_2022_PROGRAM_ID),
-      createMintToCheckedInstruction(signers.testQuoteMint.publicKey, known.providerQuote, signers.admin.publicKey, FLOW.seedQuoteRaw + FLOW.addQuoteRaw, TEST_QUOTE_DECIMALS),
+      createMintToCheckedInstruction(signers.collateralMint.publicKey, known.providerCollateral, signers.admin.publicKey, GUIDED_FLOW.collateralDepositRaw, COLLATERAL_DECIMALS, [], TOKEN_2022_PROGRAM_ID),
     ]);
     await this.send('setup', 'create_buyer_token_accounts', signers.admin, [
       ata(known.buyerCollateral, signers.buyer.publicKey, signers.collateralMint.publicKey, TOKEN_2022_PROGRAM_ID),
       ata(known.buyerPt, signers.buyer.publicKey, series.ptMint), ata(known.buyerDr, signers.buyer.publicKey, series.drMint),
-      ata(known.buyerQuote, signers.buyer.publicKey, signers.testQuoteMint.publicKey),
-      createMintToCheckedInstruction(signers.testQuoteMint.publicKey, known.buyerQuote, signers.admin.publicKey, FLOW.buyerQuoteRaw, TEST_QUOTE_DECIMALS),
     ]);
     const ids = this.receipt.identities;
     ids.mints.pt = series.ptMint.toBase58(); ids.mints.dr = series.drMint.toBase58();
@@ -399,13 +441,13 @@ export class GuidedDemoRuntime {
     const { connection, signers, known } = this.requireSession();
     const accounts = this.holderAccounts('provider');
     const snapshot = await fetchQuoteSnapshot(connection, DIVIDENDX_IDL as Idl, { ...accounts, accumulator: known.series.accumulator });
-    const quote = quoteDeposit(snapshot.series, snapshot.policy, snapshot.vaultRaw, FLOW.collateralDepositRaw,
+    const quote = quoteDeposit(snapshot.series, snapshot.policy, snapshot.vaultRaw, GUIDED_FLOW.collateralDepositRaw,
       snapshot.holderCollateralRaw!, snapshot.clock, snapshot.clock.unixTimestamp + 300n);
     const builders = new DividendXInstructions(DIVIDENDX_IDL as Idl);
     await this.send('split', 'deposit_100_test_stock', signers.provider, [builders.holder.deposit(accounts, quote.inputRaw, quote.guard)]);
     const current = await this.readAmmBalances(false);
-    if (current.collateral.vault !== FLOW.collateralDepositRaw || current.pt.supply !== FLOW.collateralDepositRaw
-      || current.dr.supply !== FLOW.collateralDepositRaw) throw new Error('SPLIT_DELTA_FAILED');
+    if (current.collateral.vault !== GUIDED_FLOW.collateralDepositRaw || current.pt.supply !== GUIDED_FLOW.collateralDepositRaw
+      || current.dr.supply !== GUIDED_FLOW.collateralDepositRaw) throw new Error('SPLIT_DELTA_FAILED');
   }
 
   private raydium(owner: Keypair): Promise<Raydium> {
@@ -419,14 +461,14 @@ export class GuidedDemoRuntime {
     if (stringifySafe(preflight.config) !== stringifySafe(this.preflight!.config)) throw new Error('RAYDIUM_CONFIG_CHANGED');
     const raydium = await this.raydium(signers.provider);
     const dr = tokenDescriptor(known.series.drMint, CLAIM_DECIMALS);
-    const quote = tokenDescriptor(signers.testQuoteMint.publicKey, TEST_QUOTE_DECIMALS);
-    const drFirst = Buffer.compare(known.series.drMint.toBuffer(), signers.testQuoteMint.publicKey.toBuffer()) < 0;
+    const quote = tokenDescriptor(CIRCLE_DEVNET_USDC_MINT, TEST_QUOTE_DECIMALS);
+    const drFirst = Buffer.compare(known.series.drMint.toBuffer(), CIRCLE_DEVNET_USDC_MINT.toBuffer()) < 0;
     const mintA = drFirst ? dr : quote;
     const mintB = drFirst ? quote : dr;
     const created = await raydium.cpmm.createPool({
       programId: RAYDIUM_CPMM_PROGRAM_ID, poolFeeAccount: RAYDIUM_CREATE_POOL_FEE_RECEIVER,
-      mintA, mintB, mintAAmount: new BN((drFirst ? FLOW.seedDrRaw : FLOW.seedQuoteRaw).toString()),
-      mintBAmount: new BN((drFirst ? FLOW.seedQuoteRaw : FLOW.seedDrRaw).toString()), startTime: new BN(0),
+      mintA, mintB, mintAAmount: new BN((drFirst ? GUIDED_FLOW.seedDrRaw : GUIDED_FLOW.seedQuoteRaw).toString()),
+      mintBAmount: new BN((drFirst ? GUIDED_FLOW.seedQuoteRaw : GUIDED_FLOW.seedDrRaw).toString()), startTime: new BN(0),
       feeConfig: toFeeConfig(preflight), associatedOnly: true,
       ownerInfo: { feePayer: signers.provider.publicKey, useSOLBalance: false }, txVersion: TxVersion.LEGACY,
     });
@@ -438,14 +480,14 @@ export class GuidedDemoRuntime {
       poolId: created.extInfo.address.poolId, lpMint: created.extInfo.address.lpMint,
       vaultA: created.extInfo.address.vaultA, vaultB: created.extInfo.address.vaultB,
       drVault: poolData.rpcData.mintA.equals(known.series.drMint) ? created.extInfo.address.vaultA : created.extInfo.address.vaultB,
-      quoteVault: poolData.rpcData.mintA.equals(signers.testQuoteMint.publicKey) ? created.extInfo.address.vaultA : created.extInfo.address.vaultB,
+      quoteVault: poolData.rpcData.mintA.equals(CIRCLE_DEVNET_USDC_MINT) ? created.extInfo.address.vaultA : created.extInfo.address.vaultB,
       providerLp: getAssociatedTokenAddressSync(created.extInfo.address.lpMint, signers.provider.publicKey),
     };
     const openTime = BigInt(poolData.rpcData.openTime.toString());
     const clock = await fetchClock(connection);
     if (clock.unixTimestamp <= openTime) this.surfnet!.timeTravelToTimestamp(Number(openTime + 1n) * 1_000);
     const balances = await this.readAmmBalances(true);
-    if (balances.dr.poolVault !== FLOW.seedDrRaw || balances.testQuote.poolVault !== FLOW.seedQuoteRaw) throw new Error('SEED_DELTA_FAILED');
+    if (balances.dr.poolVault !== GUIDED_FLOW.seedDrRaw || balances.testQuote.poolVault !== GUIDED_FLOW.seedQuoteRaw) throw new Error('SEED_DELTA_FAILED');
     assertPrefinalBacking(balances);
     const ids = this.receipt!.identities;
     ids.pool = pool.poolId.toBase58(); ids.mints.lp = pool.lpMint.toBase58();
@@ -462,16 +504,16 @@ export class GuidedDemoRuntime {
     const raydium = await this.raydium(signers.provider);
     let info = await raydium.cpmm.getPoolInfoFromRpc(pool.poolId.toBase58());
     const added = await raydium.cpmm.addLiquidity({ poolInfo: info.poolInfo, poolKeys: info.poolKeys,
-      inputAmount: new BN(FLOW.addDrRaw.toString()), baseIn: info.rpcData.mintA.equals(this.known!.series.drMint),
+      inputAmount: new BN(GUIDED_FLOW.addDrRaw.toString()), baseIn: info.rpcData.mintA.equals(this.known!.series.drMint),
       slippage: new Percent(0, 10_000), txVersion: TxVersion.LEGACY });
     await this.sendRaydium('add-liquidity', 'add_cpmm_liquidity', added.transaction as Transaction, [signers.provider, ...added.signers]);
     await raydium.account.fetchWalletTokenAccounts({ forceUpdate: true, commitment: 'confirmed' });
     info = await raydium.cpmm.getPoolInfoFromRpc(pool.poolId.toBase58());
     const after = await this.readAmmBalances(true);
-    if (before.dr.provider - after.dr.provider !== FLOW.addDrRaw
-      || before.testQuote.provider - after.testQuote.provider !== FLOW.addQuoteRaw
-      || after.dr.poolVault - before.dr.poolVault !== FLOW.addDrRaw
-      || after.testQuote.poolVault - before.testQuote.poolVault !== FLOW.addQuoteRaw
+    if (before.dr.provider - after.dr.provider !== GUIDED_FLOW.addDrRaw
+      || before.testQuote.provider - after.testQuote.provider !== GUIDED_FLOW.addQuoteRaw
+      || after.dr.poolVault - before.dr.poolVault !== GUIDED_FLOW.addDrRaw
+      || after.testQuote.poolVault - before.testQuote.poolVault !== GUIDED_FLOW.addQuoteRaw
       || after.lp.provider <= before.lp.provider) throw new Error('ADD_LIQUIDITY_DELTA_FAILED');
     assertPrefinalBacking(after);
   }
@@ -483,22 +525,22 @@ export class GuidedDemoRuntime {
     const before = await this.readAmmBalances(true);
     const provider = await this.raydium(signers.provider);
     const info = await provider.cpmm.getPoolInfoFromRpc(pool.poolId.toBase58());
-    const quoteIsA = info.rpcData.mintA.equals(signers.testQuoteMint.publicKey);
+    const quoteIsA = info.rpcData.mintA.equals(CIRCLE_DEVNET_USDC_MINT);
     const inputReserve = BigInt((quoteIsA ? info.rpcData.baseReserve : info.rpcData.quoteReserve).toString());
     const outputReserve = BigInt((quoteIsA ? info.rpcData.quoteReserve : info.rpcData.baseReserve).toString());
     const preflight = await verifyExecutionEnvironment(connection, this.manifest!);
-    const quote = quoteCreatorDisabledSwap(FLOW.buyerQuoteRaw, inputReserve, outputReserve,
-      preflight.config, info.rpcData.enableCreatorFee, FLOW.slippageBps);
+    const quote = quoteCreatorDisabledSwap(GUIDED_FLOW.buyerQuoteRaw, inputReserve, outputReserve,
+      preflight.config, info.rpcData.enableCreatorFee, GUIDED_FLOW.slippageBps);
     const buyer = await this.raydium(signers.buyer);
     const swapped = await buyer.cpmm.swap({ poolInfo: info.poolInfo, poolKeys: info.poolKeys,
-      inputAmount: new BN(FLOW.buyerQuoteRaw.toString()), swapResult: quote.sdkSwapResult,
-      baseIn: quoteIsA, fixedOut: false, slippage: FLOW.slippageBps / 10_000, txVersion: TxVersion.LEGACY });
-    assertSwapInstructionBounds(swapped.transaction as Transaction, FLOW.buyerQuoteRaw, quote.minimumOutput);
+      inputAmount: new BN(GUIDED_FLOW.buyerQuoteRaw.toString()), swapResult: quote.sdkSwapResult,
+      baseIn: quoteIsA, fixedOut: false, slippage: GUIDED_FLOW.slippageBps / 10_000, txVersion: TxVersion.LEGACY });
+    assertSwapInstructionBounds(swapped.transaction as Transaction, GUIDED_FLOW.buyerQuoteRaw, quote.minimumOutput);
     await this.sendRaydium('buy-dr', 'buyer_swap_quote_for_dr', swapped.transaction as Transaction, [signers.buyer, ...swapped.signers]);
     const after = await this.readAmmBalances(true);
-    assertSwapDelta(before, after, { inputQuote: FLOW.buyerQuoteRaw, outputDr: quote.outputAmount,
+    assertSwapDelta(before, after, { inputQuote: GUIDED_FLOW.buyerQuoteRaw, outputDr: quote.outputAmount,
       minimumDr: quote.minimumOutput, protocolFee: quote.protocolFee, fundFee: quote.fundFee });
-    this.swap = { inputQuoteRaw: FLOW.buyerQuoteRaw.toString(), outputDrRaw: quote.outputAmount.toString(), minimumDrRaw: quote.minimumOutput.toString() };
+    this.swap = { inputQuoteRaw: GUIDED_FLOW.buyerQuoteRaw.toString(), outputDrRaw: quote.outputAmount.toString(), minimumDrRaw: quote.minimumOutput.toString() };
     if (after.dr.buyer <= 0n || !known.buyerDr) throw new Error('BUYER_DR_MISSING');
   }
 
@@ -511,7 +553,7 @@ export class GuidedDemoRuntime {
     await raydium.account.fetchWalletTokenAccounts({ forceUpdate: true, commitment: 'confirmed' });
     const info = await raydium.cpmm.getPoolInfoFromRpc(pool.poolId.toBase58());
     const withdrawn = await raydium.cpmm.withdrawLiquidity({ poolInfo: info.poolInfo, poolKeys: info.poolKeys,
-      lpAmount: new BN(before.lp.provider.toString()), slippage: new Percent(FLOW.slippageBps, 10_000), txVersion: TxVersion.LEGACY });
+      lpAmount: new BN(before.lp.provider.toString()), slippage: new Percent(GUIDED_FLOW.slippageBps, 10_000), txVersion: TxVersion.LEGACY });
     await this.sendRaydium('remove-liquidity', 'withdraw_all_provider_lp', withdrawn.transaction as Transaction, [signers.provider, ...withdrawn.signers]);
     const after = await this.readAmmBalances(true);
     assertSoleProviderWithdrawal(before, after);
@@ -646,7 +688,7 @@ export class GuidedDemoRuntime {
       signers.collateralMint.publicKey, known.series.vault,
       known.providerCollateral, known.providerPt, known.providerDr, known.providerQuote,
       known.buyerCollateral, known.buyerPt, known.buyerDr, known.buyerQuote,
-      known.series.ptMint, known.series.drMint, signers.testQuoteMint.publicKey,
+      known.series.ptMint, known.series.drMint, CIRCLE_DEVNET_USDC_MINT,
       ...(this.pool ? [this.pool.vaultA, this.pool.vaultB, this.pool.lpMint, this.pool.providerLp, this.pool.poolId] : []),
     ];
     const response = await connection.getMultipleAccountsInfoAndContext(addresses, { commitment: 'confirmed' });
@@ -674,14 +716,19 @@ export class GuidedDemoRuntime {
     const providerStock = tokenAccount(6, known.providerCollateral, signers.collateralMint.publicKey, signers.provider.publicKey, TOKEN_2022_PROGRAM_ID);
     const providerPt = tokenAccount(7, known.providerPt, known.series.ptMint, signers.provider.publicKey);
     const providerDr = tokenAccount(8, known.providerDr, known.series.drMint, signers.provider.publicKey);
-    const providerQuote = tokenAccount(9, known.providerQuote, signers.testQuoteMint.publicKey, signers.provider.publicKey);
+    const providerQuote = tokenAccount(9, known.providerQuote, CIRCLE_DEVNET_USDC_MINT, signers.provider.publicKey);
     const buyerStock = tokenAccount(10, known.buyerCollateral, signers.collateralMint.publicKey, signers.buyer.publicKey, TOKEN_2022_PROGRAM_ID);
     const buyerPt = tokenAccount(11, known.buyerPt, known.series.ptMint, signers.buyer.publicKey);
     const buyerDr = tokenAccount(12, known.buyerDr, known.series.drMint, signers.buyer.publicKey);
-    const buyerQuote = tokenAccount(13, known.buyerQuote, signers.testQuoteMint.publicKey, signers.buyer.publicKey);
+    const buyerQuote = tokenAccount(13, known.buyerQuote, CIRCLE_DEVNET_USDC_MINT, signers.buyer.publicKey);
     const ptMint = unpackMint(known.series.ptMint, owned(14, TOKEN_PROGRAM_ID, 'PT mint'), TOKEN_PROGRAM_ID);
     const drMint = unpackMint(known.series.drMint, owned(15, TOKEN_PROGRAM_ID, 'DR mint'), TOKEN_PROGRAM_ID);
-    const quoteMint = unpackMint(signers.testQuoteMint.publicKey, owned(16, TOKEN_PROGRAM_ID, 'quote mint'), TOKEN_PROGRAM_ID);
+    const quoteMintInfo = owned(16, TOKEN_PROGRAM_ID, 'USDC mint');
+    if (hash(quoteMintInfo.data) !== CIRCLE_DEVNET_USDC_CAPTURE_SHA256) throw new Error('USDC_MINT_BYTES_CHANGED');
+    const quoteMint = unpackMint(CIRCLE_DEVNET_USDC_MINT, quoteMintInfo, TOKEN_PROGRAM_ID);
+    if (quoteMint.decimals !== TEST_QUOTE_DECIMALS
+      || !quoteMint.mintAuthority?.equals(CIRCLE_DEVNET_USDC_MINT_AUTHORITY)
+      || !quoteMint.freezeAuthority?.equals(CIRCLE_DEVNET_USDC_FREEZE_AUTHORITY)) throw new Error('USDC_MINT_IDENTITY_CHANGED');
     if (!policy.collateralMint.equals(signers.collateralMint.publicKey) || !series.assetPolicy.equals(known.assetPolicy)
       || !series.collateralMint.equals(signers.collateralMint.publicKey) || !series.ptMint.equals(known.series.ptMint)
       || !series.drMint.equals(known.series.drMint) || !series.vault.equals(known.series.vault)
@@ -700,8 +747,8 @@ export class GuidedDemoRuntime {
       poolData = CpmmPoolInfoLayout.decode(owned(21, RAYDIUM_CPMM_PROGRAM_ID, 'Raydium pool').data);
       if (!poolData.vaultA.equals(this.pool.vaultA) || !poolData.vaultB.equals(this.pool.vaultB)
         || !poolData.mintLp.equals(this.pool.lpMint)
-        || !(poolData.mintA.equals(known.series.drMint) && poolData.mintB.equals(signers.testQuoteMint.publicKey)
-          || poolData.mintB.equals(known.series.drMint) && poolData.mintA.equals(signers.testQuoteMint.publicKey))) {
+        || !(poolData.mintA.equals(known.series.drMint) && poolData.mintB.equals(CIRCLE_DEVNET_USDC_MINT)
+          || poolData.mintB.equals(known.series.drMint) && poolData.mintA.equals(CIRCLE_DEVNET_USDC_MINT))) {
         throw new Error('POOL_IDENTITY_MISMATCH');
       }
     }
@@ -727,13 +774,17 @@ export class GuidedDemoRuntime {
       quoteProtocol = raw(`protocolFees${quoteSuffix}` as keyof typeof value.poolData); quoteFund = raw(`fundFees${quoteSuffix}` as keyof typeof value.poolData); quoteCreator = raw(`creatorFees${quoteSuffix}` as keyof typeof value.poolData);
       lpInternal = raw('lpAmount');
     }
+    const controlledQuote = value.providerQuote.amount + value.buyerQuote.amount + quotePool;
+    if (controlledQuote !== CIRCLE_USDC_REQUIRED_FUNDING_RAW) throw new Error('LOCAL_USDC_CONSERVATION_FAILED');
+    const testQuote = { provider: value.providerQuote.amount, buyer: value.buyerQuote.amount, poolVault: quotePool,
+      poolProtocolFees: quoteProtocol, poolFundFees: quoteFund, poolCreatorFees: quoteCreator, otherKnown: 0n,
+      supply: value.quoteMint.supply, controlledTotal: CIRCLE_USDC_REQUIRED_FUNDING_RAW } as AssetBalances['testQuote'] & { controlledTotal: bigint };
     return {
       collateral: { provider: value.providerStock.amount, vault: value.vault.amount, supply: value.stockMint.supply },
       pt: { provider: value.providerPt.amount, otherKnown: value.buyerPt.amount, supply: value.ptMint.supply },
       dr: { provider: value.providerDr.amount, buyer: value.buyerDr.amount, poolVault: drPool,
         poolProtocolFees: drProtocol, poolFundFees: drFund, poolCreatorFees: drCreator, otherKnown: 0n, supply: value.drMint.supply },
-      testQuote: { provider: value.providerQuote.amount, buyer: value.buyerQuote.amount, poolVault: quotePool,
-        poolProtocolFees: quoteProtocol, poolFundFees: quoteFund, poolCreatorFees: quoteCreator, otherKnown: 0n, supply: value.quoteMint.supply },
+      testQuote,
       lp: { provider: value.providerLp?.amount ?? 0n, mintSupply: value.lpMint?.supply ?? 0n, internalPoolLpAmount: lpInternal },
     };
   }
@@ -763,13 +814,14 @@ export class GuidedDemoRuntime {
       ? value.vault.amount === requiredCustodyRaw(value.series)
       : value.vault.amount === value.ptMint.supply && value.ptMint.supply === value.drMint.supply;
     const backingVerified = knownStock === value.stockMint.supply && knownPt === value.ptMint.supply
-      && knownDr === value.drMint.supply && knownQuote === value.quoteMint.supply && custodyHealthy;
+      && knownDr === value.drMint.supply && knownQuote === CIRCLE_USDC_REQUIRED_FUNDING_RAW && custodyHealthy;
     return {
       observedAt: new Date().toISOString(), slot: Number(value.clock.slot), unixTimestamp: value.clock.unixTimestamp.toString(),
       genesisHash: value.genesisHash, rpcUrl: connection.rpcEndpoint,
       dividendXProgram: DIVIDENDX_PROGRAM_ID.toBase58(), raydiumProgram: RAYDIUM_CPMM_PROGRAM_ID.toBase58(),
       series: known.series.series.toBase58(), year: SERIES_YEAR, phase: value.series.phase,
       eventCount: value.series.eventCount, stockDecimals: value.stockMint.decimals, quoteDecimals: value.quoteMint.decimals,
+      quoteAsset: { symbol: 'USDC', provenance: 'local-circle-devnet-clone', canonicalMint: CIRCLE_DEVNET_USDC_MINT.toBase58() },
       lpDecimals: value.lpMint?.decimals ?? 9, stockMultiplierBits: value.stockProfile.scale.activeBits.toString(),
       provider: { address: signers.provider.publicKey.toBase58(), stockRaw: value.providerStock.amount.toString(),
         ptRaw: value.providerPt.amount.toString(), drRaw: value.providerDr.amount.toString(),
@@ -778,7 +830,7 @@ export class GuidedDemoRuntime {
         ptRaw: value.buyerPt.amount.toString(), drRaw: value.buyerDr.amount.toString(),
         quoteRaw: value.buyerQuote.amount.toString(), lpRaw: '0' },
       mints: { stock: signers.collateralMint.publicKey.toBase58(), pt: known.series.ptMint.toBase58(), dr: known.series.drMint.toBase58(),
-        quote: signers.testQuoteMint.publicKey.toBase58(), lp: this.pool?.lpMint.toBase58() ?? null },
+        quote: CIRCLE_DEVNET_USDC_MINT.toBase58(), lp: this.pool?.lpMint.toBase58() ?? null },
       pool: poolView, vaultRaw: value.vault.amount.toString(), ptSupplyRaw: value.ptMint.supply.toString(),
       drSupplyRaw: value.drMint.supply.toString(), backingVerified, swap: this.swap,
     };

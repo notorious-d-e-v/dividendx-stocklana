@@ -59,7 +59,7 @@ export interface AssetBalances {
   collateral: { provider: bigint; vault: bigint; supply: bigint };
   pt: { provider: bigint; otherKnown: bigint; supply: bigint };
   dr: { provider: bigint; buyer: bigint; poolVault: bigint; poolProtocolFees: bigint; poolFundFees: bigint; poolCreatorFees: bigint; otherKnown: bigint; supply: bigint };
-  testQuote: { provider: bigint; buyer: bigint; poolVault: bigint; poolProtocolFees: bigint; poolFundFees: bigint; poolCreatorFees: bigint; otherKnown: bigint; supply: bigint };
+  testQuote: { provider: bigint; buyer: bigint; poolVault: bigint; poolProtocolFees: bigint; poolFundFees: bigint; poolCreatorFees: bigint; otherKnown: bigint; supply: bigint; controlledTotal?: bigint };
   lp: { provider: bigint; mintSupply: bigint; internalPoolLpAmount: bigint };
 }
 
