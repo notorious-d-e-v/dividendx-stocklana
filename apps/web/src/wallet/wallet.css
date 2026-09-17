@@ -5,6 +5,10 @@
 .wallet-gate h1 { max-width: 700px; margin: 0; font-size: clamp(2.5rem, 7vw, 5rem); letter-spacing: -.06em; }
 .wallet-gate p { max-width: 620px; margin: 0; }
 .wallet-gate a { color: inherit; }
+.wallet-runtime-error { width: min(620px, 100%); padding: 1rem; border-left: 4px solid var(--dx-danger); background: var(--dx-surface); }
+.wallet-runtime-error p { margin-top: .35rem; overflow-wrap: anywhere; }
+.wallet-runtime-command { width: min(620px, 100%); padding: .85rem 1rem; border: 1px solid var(--dx-line-strong); background: var(--dx-surface); overflow-wrap: anywhere; }
+.wallet-gate-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .wallet-network { margin: 1.25rem 0 2rem; padding: .8rem 1rem; border: 1px solid var(--dx-positive); background: var(--dx-positive-soft); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .wallet-network div { font-weight: 750; }.wallet-network code { margin-left: auto; }.wallet-network small { color: var(--dx-ink-muted); }
 .online-dot { display: inline-block; width: .65rem; height: .65rem; margin-right: .5rem; border-radius: 50%; background: var(--dx-positive); }

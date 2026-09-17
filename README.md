@@ -54,6 +54,8 @@ npm --prefix packages/local-runtime start
 
 Wait for the runtime's ready message, then open [the wallet app](http://127.0.0.1:4174/app/). Create a temporary test wallet and request test SOL/stock. Split before using the collapsed **Network-wide test dates** controls. The clock is shared, so deposit into every desired asset before starting the year. Record four test dividends for the selected asset, end the year, then finalize that asset. Maturity alone does not enable independent redemption.
 
+Keep the runtime terminal open while testing. If the app cannot connect, check that this service is still running; from the project root, `npm --prefix packages/local-runtime start` starts it. **Retry localhost runtime** checks the connection again after the ready message; it cannot launch the service. Restarting the runtime creates an empty test network.
+
 All keys and tokens are disposable. The server uses pinned Surfpool 1.5.0 offline; its native runtime was verified on macOS arm64. Wallet Standard signing is implemented, but installed browser extensions have not been verified. See [runtime setup](packages/local-runtime/README.md), [wallet contract](spec/wallet-integration-v1.md) and [acceptance evidence](planning/wallet-review.md).
 
 On a fresh runtime, `node scripts/protocol/wallet-runtime-smoke.mjs` checks all three assets. Restart it before `node apps/web/qa/wallet-app-review.mjs`, which exercises the actual app with two browser wallets. Both checks consume the annual test lifecycle; restart again for a fresh demonstration.

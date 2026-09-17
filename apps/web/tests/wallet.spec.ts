@@ -29,8 +29,7 @@ function manifest(programId = DIVIDENDX_PROGRAM_ID.toBase58()) {
   };
 }
 
-async function mockReadyRuntime(page: Page) {
-  await page.route('http://127.0.0.1:4180/manifest', (route) => route.fulfill({ json: manifest(), headers: { 'Access-Control-Allow-Origin': '*' } }));
+async function mockReadyRpc(page: Page) {
   await page.route('http://127.0.0.1:8899/', async (route) => {
     const request = route.request().postDataJSON() as { id: number; method: string; params?: unknown[] } | { id: number; method: string; params?: unknown[] }[];
     const answer = (entry: { id: number; method: string; params?: unknown[] }) => {
@@ -46,6 +45,11 @@ async function mockReadyRuntime(page: Page) {
     };
     await route.fulfill({ json: Array.isArray(request) ? request.map(answer) : answer(request), headers: { 'Access-Control-Allow-Origin': '*' } });
   });
+}
+
+async function mockReadyRuntime(page: Page) {
+  await page.route('http://127.0.0.1:4180/manifest', (route) => route.fulfill({ json: manifest(), headers: { 'Access-Control-Allow-Origin': '*' } }));
+  await mockReadyRpc(page);
 }
 
 function installTestWallet(page: Page, reject: boolean) {
@@ -70,11 +74,44 @@ function installTestWallet(page: Page, reject: boolean) {
   }, { rejectConnect: reject });
 }
 
-test('missing localhost runtime fails closed without preview balances', async ({ page }) => {
-  await page.route('http://127.0.0.1:4180/manifest', (route) => route.abort());
+test('failed runtime retries show progress, preserve feedback, and can recover', async ({ page }) => {
+  let requestCount = 0;
+  let shouldSucceed = false;
+  let blockedRequest: Promise<void> | undefined;
+  let finishFailedRetry!: () => void;
+  const failedRetry = new Promise<void>((resolve) => { finishFailedRetry = resolve; });
+  await mockReadyRpc(page);
+  await page.route('http://127.0.0.1:4180/manifest', async (route) => {
+    requestCount += 1;
+    await blockedRequest;
+    if (!shouldSucceed) {
+      await route.fulfill({ status: 503, body: 'runtime unavailable', headers: { 'Access-Control-Allow-Origin': '*' } });
+      return;
+    }
+    await route.fulfill({ json: manifest(), headers: { 'Access-Control-Allow-Origin': '*' } });
+  });
   await page.goto('/app/');
-  await expect(page.getByTestId('runtime-error')).toContainText('transaction app is offline');
+  const gate = page.getByTestId('runtime-error');
+  await expect(gate).toContainText('could not be verified');
+  await expect(gate).toContainText('Runtime check failed');
+  await expect(gate).toContainText('Local runtime returned HTTP 503.');
+  await expect(gate).toContainText('Retry checks it again; it does not start the service.');
+  await expect(gate.getByText('npm --prefix packages/local-runtime start')).toBeVisible();
   await expect(page.getByText('Your annual claims')).toHaveCount(0);
+
+  blockedRequest = failedRetry;
+  await gate.getByRole('button', { name: 'Retry localhost runtime' }).click();
+  await expect(page.getByRole('heading', { name: 'Connecting to the local runtime…' })).toBeVisible();
+  await expect(page.getByText('Verifying genesis, program and deployment identity.')).toBeVisible();
+  finishFailedRetry();
+  await expect(page.getByTestId('runtime-error')).toContainText('Local runtime returned HTTP 503.');
+
+  blockedRequest = undefined;
+  shouldSucceed = true;
+  await page.getByRole('button', { name: 'Retry localhost runtime' }).click();
+  await expect(page.getByRole('heading', { name: /Connect your wallet or create a test wallet/ })).toBeVisible();
+  await expect(page.getByLabel('Verified runtime')).toContainText('Verified Local SBF sandbox');
+  expect(requestCount).toBeGreaterThanOrEqual(3);
 });
 
 test('program identity mismatch is clear and never reaches a wallet prompt', async ({ page }) => {

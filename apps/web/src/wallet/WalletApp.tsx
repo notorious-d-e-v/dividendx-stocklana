@@ -311,7 +311,7 @@ export function WalletApp() {
   };
 
   if (runtime.kind === 'loading') return <main className="wallet-gate"><Mark /><h1>Connecting to the local runtime…</h1><p>Verifying genesis, program and deployment identity.</p></main>;
-  if (runtime.kind === 'error') return <main className="wallet-gate" data-testid="runtime-error"><Mark /><p className="eyebrow">Runtime unavailable</p><h1>The transaction app is offline.</h1><p>{runtime.message}</p><button className="p-primary" onClick={boot}>Retry localhost runtime</button><a href="/">Return to annual reference</a></main>;
+  if (runtime.kind === 'error') return <main className="wallet-gate" data-testid="runtime-error"><Mark /><p className="eyebrow">Runtime unavailable</p><h1>The local runtime could not be verified.</h1><p>DividendX could not reach or verify the required localhost service. Retry checks it again; it does not start the service.</p><div className="wallet-runtime-error"><b>Runtime check failed</b><p>{runtime.message}</p></div><p>From the project root, start the runtime and wait until it reports ready:</p><code className="wallet-runtime-command">npm --prefix packages/local-runtime start</code><div className="wallet-gate-actions"><button className="p-primary" onClick={boot}>Retry localhost runtime</button><a href="/">Return to annual reference</a></div></main>;
 
   const verifiedManifest = runtime.manifest;
   const activeBits = snapshot?.quote.mintProfile.scale.activeBits;
