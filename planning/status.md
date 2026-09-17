@@ -52,15 +52,17 @@ The AMM package adds **11 tests** plus self-import and package checks. The exist
 
 The current guided slice uses an exact local copy of Circle devnet USDC, with explicit synthetic 10 + 1 USDC balances and 4/6/1 trading amounts. **Five runtime tests**, **34 browser tests**, a **nine-action / 36-transaction browser journey**, independent local RPC verification, root tests and build/type checks pass. Residual 2,876 DR raw retain 111 raw collateral. A separate faucet-funded public run has **14 independently finalized transactions** using the real official devnet USDC mint, with 11 USDC funded and 9 left in the original test wallet. The expanded AMM suite passes **15 tests**. See [Test USDC acceptance](usdc-demo-review.md); older generic-quote evidence remains preserved.
 
-## Next: review, qualified issuer evidence and submission
+The future-demo update adds eight noninteractive roadmap rows and preserves that journey. A fresh issuer qualification pass records explicit Microsoft ex-dates, three candidate MSFTx joins and a matching current onchain factor; [the report](research/issuer-settlement-qualification-2026-09-17.md) keeps historical evidence, finality, annual coverage and custody gates explicit. Root tests/build/type checks pass; all 34 browser cases pass across the main run and one isolated browser-startup retry. The AMM suite now passes 16 tests after correcting the local-mode mainnet exclusion hash and adding an offline rejection regression. See [QA](../apps/web/qa/README.md).
 
-1. **Review the completed guided page.** `/demos/` is ready at port 4174 under [guided demos v1](../spec/guided-demos-v1.md). The user can repeat the two-wallet flow with test assets and an accelerated synthetic year. PT trading is the next compact demo candidate; borrowing needs venue, price and liquidation qualification before implementation.
-2. **Complete issuer qualification.** Observation readers now work across the selected package. Authoritative ex-date joins, classified event/factor binding, correction/finality rules, full annual coverage and live custody admission still need evidence. Keep these gaps visible; the readers do not produce settlement attestations.
+## Next: qualified issuer evidence and settlement
+
+1. **Complete issuer qualification.** The user has deferred all additional DeFi integrations. Prove an authoritative source path from company/exchange ex-date to classified issuer event, exact onchain multiplier transition, correction/finality policy and custody profile. Review findings are recorded in [issuer settlement qualification](research/issuer-settlement-qualification-2026-09-17.md). Readers remain observations, not settlement attestations.
+2. **Prepare settlement from qualified evidence.** Separate event qualification from complete annual coverage. Only after the evidence contract is established, add an unsigned operator review dossier and validate its mapping to the existing staged settlement instructions. The current year must mature before annual finalization; incomplete inputs keep settlement blocked.
 3. **Refresh the submission package.** Capture the working wallet and public test-only AMM proof, synchronize copy with user review, and verify the actual submission form/deadline. Do not revise the approved slides or narration in this documentation sync.
 
 No redesign, wider issuer audit, custom AMM, bridge or reward token is required for this next phase.
 
-The [roadmap](roadmap.md) records early next-year listings, rolling DR vaults, demand-led quarterly terms and perpetual-product research. None changes the annual settlement primitive or adds scope to the current program.
+The completed Raydium Test USDC journey stays available at `/demos/`. Its future section lists Streamflow sales, Jupiter Lock vesting/locks, Squads treasuries, Meteora limit orders, Jupiter recurring purchases, combined transactions, borrowing and lower-priority PT trading. All are noninteractive roadmap items; no additional venue integration is implemented. The [roadmap](roadmap.md) also retains early next-year listings, rolling DR vaults, demand-led quarterly terms and perpetual-product research.
 
 ## Dependencies and operating notes
 

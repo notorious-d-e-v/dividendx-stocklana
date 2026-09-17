@@ -1,0 +1,299 @@
+{
+  "schema": "dividendx-public-qualification-research-v1",
+  "asOf": "2026-09-17",
+  "purpose": "Candidate evidence only; not an event attestation or annual completeness claim.",
+  "settlementReady": false,
+  "identity": {
+    "issuerId": "xstocks",
+    "symbol": "MSFTx",
+    "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+    "xstockIsin": "CH1436219203",
+    "underlyingSymbol": "MSFT",
+    "underlyingIsin": "US5949181045",
+    "registryReferenceMarket": {
+      "mic": "XNAS",
+      "abbreviation": "NASDAQ",
+      "name": "Nasdaq Stock Market",
+      "timezone": "America/New_York"
+    }
+  },
+  "sources": [
+    {
+      "name": "registry",
+      "url": "https://api.xstocks.fi/api/v2/public/assets/MSFTx",
+      "finalUrl": "https://api.xstocks.fi/api/v2/public/assets/MSFTx",
+      "status": 200,
+      "retrievedAt": "2026-09-17T14:56:32.101036+00:00",
+      "sha256": "020f264852fe073fd9eba2bffe8dc9501de11f464faf395ab5bed79c2c98287e"
+    },
+    {
+      "name": "history",
+      "url": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=MSFTx&sortBy=createdTimeUtc&sortOrder=asc",
+      "finalUrl": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=MSFTx&sortBy=createdTimeUtc&sortOrder=asc",
+      "status": 200,
+      "retrievedAt": "2026-09-17T14:56:33.173233+00:00",
+      "sha256": "13ebeafcf571638820bc3ddedd276a64a77af87539c0eee3e1e85ded0e8ed571"
+    },
+    {
+      "name": "august",
+      "url": "https://news.microsoft.com/source/2026/06/10/microsoft-announces-quarterly-dividend-29/",
+      "finalUrl": "https://news.microsoft.com/source/2026/06/10/microsoft-announces-quarterly-dividend-29/",
+      "status": 200,
+      "retrievedAt": "2026-09-17T14:56:35.573283+00:00",
+      "sha256": "4abf891cafd92ba465842e0e8256ede6d242baee8bb56b2cd15e5a68f6187377"
+    },
+    {
+      "name": "may",
+      "url": "https://news.microsoft.com/source/2026/03/10/microsoft-announces-quarterly-dividend-28/",
+      "finalUrl": "https://news.microsoft.com/source/2026/03/10/microsoft-announces-quarterly-dividend-28/",
+      "status": 200,
+      "retrievedAt": "2026-09-17T14:56:38.531036+00:00",
+      "sha256": "758243d3a4a3805e0d1b4724c24a705405586eb349189668cc9a35c48d2f62f6"
+    },
+    {
+      "name": "february",
+      "url": "https://news.microsoft.com/source/2025/12/02/microsoft-announces-quarterly-dividend-27/",
+      "finalUrl": "https://news.microsoft.com/source/2025/12/02/microsoft-announces-quarterly-dividend-27/",
+      "status": 200,
+      "retrievedAt": "2026-09-17T14:56:43.674200+00:00",
+      "sha256": "1decc2a8a021a24d0cf868733a2448dfc06c97897716c533652e742804e5a526"
+    },
+    {
+      "name": "november",
+      "url": "https://news.microsoft.com/source/2026/09/15/microsoft-announces-quarterly-dividend-increase-7/",
+      "finalUrl": "https://news.microsoft.com/source/2026/09/15/microsoft-announces-quarterly-dividend-increase-7/",
+      "status": 200,
+      "retrievedAt": "2026-09-17T14:56:48.109069+00:00",
+      "sha256": "793834fec82fe13da4845d9b20d469d7fa30b320c3004fcfd761dba11c1a6a18"
+    }
+  ],
+  "reportedHistoryPagination": {
+    "currentPage": 1,
+    "pageSize": 100,
+    "totalPages": 1,
+    "totalNodes": 5,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  },
+  "historyPaginationIsAnnualCoverage": false,
+  "issuerEvents": [
+    {
+      "eventId": "828031e5-5951-4527-96df-53b07df460e0",
+      "version": 1,
+      "xstockSymbol": "MSFTx",
+      "spvSymbol": "MSFT",
+      "caType": "CashDividend",
+      "status": "Initial",
+      "effectiveTimeUtc": "2025-09-11T23:55:00.000Z",
+      "createdTimeUtc": "2025-09-11T20:41:11.385Z",
+      "multiplierOld": "1",
+      "multiplierNew": "1.0009778552409",
+      "grossCashflowUsd": "0.83",
+      "netCashflowUsd": "0.581",
+      "withholdingTaxRate": "0.3",
+      "xstockIsin": "CH1436219203",
+      "spvIsin": "US5949181045"
+    },
+    {
+      "eventId": "47107fb5-3e70-462c-9dae-a663e25801dc",
+      "version": 1,
+      "xstockSymbol": "MSFTx",
+      "spvSymbol": "MSFT",
+      "caType": "CashDividend",
+      "status": "Initial",
+      "effectiveTimeUtc": "2025-12-11T23:55:00.000Z",
+      "createdTimeUtc": "2025-12-11T21:58:45.761Z",
+      "multiplierOld": "1.0009778552409",
+      "multiplierNew": "1.002157028782502298",
+      "grossCashflowUsd": "0.91",
+      "netCashflowUsd": "0.637",
+      "withholdingTaxRate": "0.3",
+      "xstockIsin": "CH1436219203",
+      "spvIsin": "US5949181045"
+    },
+    {
+      "eventId": "7c31ccb0-9a9e-471e-af0b-47921ca5dcd4",
+      "version": 2,
+      "xstockSymbol": "MSFTx",
+      "spvSymbol": "MSFT",
+      "caType": "CashDividend",
+      "status": "Initial",
+      "effectiveTimeUtc": "2026-03-12T23:55:00.000Z",
+      "createdTimeUtc": "2026-03-12T20:43:11.962Z",
+      "multiplierOld": "1.002157028782502298",
+      "multiplierNew": "1.0030646056933608",
+      "grossCashflowUsd": "0.91",
+      "netCashflowUsd": "0.637",
+      "withholdingTaxRate": "0.3",
+      "xstockIsin": "CH1436219203",
+      "spvIsin": "US5949181045"
+    },
+    {
+      "eventId": "5ed19bd9-5444-49fc-aadd-de45c617faaa",
+      "version": 2,
+      "xstockSymbol": "MSFTx",
+      "spvSymbol": "MSFT",
+      "caType": "CashDividend",
+      "status": "Initial",
+      "effectiveTimeUtc": "2026-05-21T00:30:00.000Z",
+      "createdTimeUtc": "2026-05-20T23:46:25.028Z",
+      "multiplierOld": "1.0030646056933608",
+      "multiplierNew": "1.0045820905025638",
+      "grossCashflowUsd": "0.91",
+      "netCashflowUsd": "0.637",
+      "withholdingTaxRate": "0.3",
+      "xstockIsin": "CH1436219203",
+      "spvIsin": "US5949181045"
+    },
+    {
+      "eventId": "e06d3eca-7b09-40b6-a904-6bb880e3f205",
+      "version": 2,
+      "xstockSymbol": "MSFTx",
+      "spvSymbol": "MSFT",
+      "caType": "CashDividend",
+      "status": "Initial",
+      "effectiveTimeUtc": "2026-08-20T00:30:00.000Z",
+      "createdTimeUtc": "2026-08-19T20:28:21.196Z",
+      "multiplierOld": "1.0045820905025638",
+      "multiplierNew": "1.0059033904787456",
+      "grossCashflowUsd": "0.91",
+      "netCashflowUsd": "0.637",
+      "withholdingTaxRate": "0.3",
+      "xstockIsin": "CH1436219203",
+      "spvIsin": "US5949181045"
+    }
+  ],
+  "companyAnnouncements": [
+    {
+      "id": "microsoft-february-2026",
+      "underlyingSymbol": "MSFT",
+      "officialCivilExDate": "2026-02-19",
+      "payableDate": "2026-03-12",
+      "grossCashflowUsd": "0.91",
+      "currency": "USD",
+      "sourceUrl": "https://news.microsoft.com/source/2025/12/02/microsoft-announces-quarterly-dividend-27/",
+      "sourceSha256": "1decc2a8a021a24d0cf868733a2448dfc06c97897716c533652e742804e5a526",
+      "futureAsOfObservation": false
+    },
+    {
+      "id": "microsoft-may-2026",
+      "underlyingSymbol": "MSFT",
+      "officialCivilExDate": "2026-05-21",
+      "payableDate": "2026-06-11",
+      "grossCashflowUsd": "0.91",
+      "currency": "USD",
+      "sourceUrl": "https://news.microsoft.com/source/2026/03/10/microsoft-announces-quarterly-dividend-28/",
+      "sourceSha256": "758243d3a4a3805e0d1b4724c24a705405586eb349189668cc9a35c48d2f62f6",
+      "futureAsOfObservation": false
+    },
+    {
+      "id": "microsoft-august-2026",
+      "underlyingSymbol": "MSFT",
+      "officialCivilExDate": "2026-08-20",
+      "payableDate": "2026-09-10",
+      "grossCashflowUsd": "0.91",
+      "currency": "USD",
+      "sourceUrl": "https://news.microsoft.com/source/2026/06/10/microsoft-announces-quarterly-dividend-29/",
+      "sourceSha256": "4abf891cafd92ba465842e0e8256ede6d242baee8bb56b2cd15e5a68f6187377",
+      "futureAsOfObservation": false
+    },
+    {
+      "id": "microsoft-november-2026",
+      "underlyingSymbol": "MSFT",
+      "officialCivilExDate": "2026-11-19",
+      "payableDate": "2026-12-10",
+      "grossCashflowUsd": "0.98",
+      "currency": "USD",
+      "sourceUrl": "https://news.microsoft.com/source/2026/09/15/microsoft-announces-quarterly-dividend-increase-7/",
+      "sourceSha256": "793834fec82fe13da4845d9b20d469d7fa30b320c3004fcfd761dba11c1a6a18",
+      "futureAsOfObservation": true
+    }
+  ],
+  "candidateJoins": [
+    {
+      "eventId": "7c31ccb0-9a9e-471e-af0b-47921ca5dcd4",
+      "sourceVersion": 2,
+      "companyAnnouncementId": "microsoft-february-2026",
+      "joinStatus": "candidate",
+      "basis": "Matching security identity, gross dividend amount and chronological event sequence; company dates are explicit, but the issuer has not supplied the event-to-ex-date join.",
+      "issuerConfirmed": false,
+      "sourceFinal": false,
+      "settlementReady": false
+    },
+    {
+      "eventId": "5ed19bd9-5444-49fc-aadd-de45c617faaa",
+      "sourceVersion": 2,
+      "companyAnnouncementId": "microsoft-may-2026",
+      "joinStatus": "candidate",
+      "basis": "Matching security identity, gross dividend amount and chronological event sequence; company dates are explicit, but the issuer has not supplied the event-to-ex-date join.",
+      "issuerConfirmed": false,
+      "sourceFinal": false,
+      "settlementReady": false
+    },
+    {
+      "eventId": "e06d3eca-7b09-40b6-a904-6bb880e3f205",
+      "sourceVersion": 2,
+      "companyAnnouncementId": "microsoft-august-2026",
+      "joinStatus": "candidate",
+      "basis": "Matching security identity, gross dividend amount and chronological event sequence; company dates are explicit, but the issuer has not supplied the event-to-ex-date join.",
+      "issuerConfirmed": false,
+      "sourceFinal": false,
+      "settlementReady": false
+    }
+  ],
+  "currentMintObservation": {
+    "schema": "dividendx-current-mint-observation-v1",
+    "retrievedAt": "2026-09-17T15:06:43.025Z",
+    "endpoint": "https://api.mainnet-beta.solana.com",
+    "genesisHash": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+    "commitment": "finalized",
+    "contextSlot": 447825157,
+    "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+    "clock": {
+      "slot": "447825157",
+      "epochStartTimestamp": "1789571004",
+      "epoch": "1036",
+      "leaderScheduleEpoch": "1037",
+      "unixTimestamp": "1789657592",
+      "contextSlot": 447825157
+    },
+    "profile": {
+      "decimals": 8,
+      "extensionsMask": "101470288",
+      "scale": {
+        "currentBits": "4607203054701097332",
+        "pendingBits": "4607209005307177709",
+        "pendingEffectiveTimestamp": "1787185800",
+        "activeBits": "4607209005307177709"
+      },
+      "controlsFingerprint": "b80a3c95084e9ea1b40c61803fcb606c1c55bd717f3fa0da24c99f04ae75a313",
+      "accountingFactorsSupported": true
+    },
+    "latestSourceMultiplier": "1.0059033904787456",
+    "latestSourceMultiplierMatchesActiveBits": true,
+    "accounts": [
+      {
+        "address": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+        "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "dataBase64": "AQAAAGVqQkIv6okUBqQZ0dHeCPQqhHlBtaGulevOYZrDFyk0KFpdC4wJAAAIAQEAAAD/3+wbzSzTg5PITaoIyRzA041nf/jQq3tdAz8A9zLMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARIAQABD+fHuLje4B+pFy3TmAJcivsAJKWAm5ORVi0NeJKXpxgfo5SPA5t7xZxg5s3r68ub+Daoo3M0mxKtv7W9m8+eGDAAgAEP58e4uN7gH6kXLdOYAlyK+wAkpYCbk5FWLQ14kpenGBgABAAEZADgABm9ZIlHMR3R4JaWa0UIupDVz9SjaXe4q94ErMU+ZReN0sY2rxBLwP4hKhmoAAAAA7apQJy4Y8D8aACEA/9/sG80s04OTyE2qCMkcwNONZ3/40Kt7XQM/APcyzDAABABBAEP58e4uN7gH6kXLdOYAlyK+wAkpYCbk5FWLQ14kpenGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgBAAEP58e4uN7gH6kXLdOYAlyK+wAkpYCbk5FWLQ14kpenGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAKkAQ/nx7i43uAfqRct05gCXIr7ACSlgJuTkVYtDXiSl6cYH6OUjwObe8WcYObN6+vLm/g2qKNzNJsSrb+1vZvPnhhAAAABNaWNyb3NvZnQgeFN0b2NrBQAAAE1TRlR4RAAAAGh0dHBzOi8veHN0b2Nrcy1tZXRhZGF0YS5iYWNrZWQuZmkvdG9rZW5zL1NvbGFuYS9NU0ZUeC9tZXRhZGF0YS5qc29uAAAAAA==",
+        "sha256": "3ddaf11a7ff93e990211d55c9e0cc0f7797baa0fe18348df1a250c3a6d650bf2"
+      },
+      {
+        "address": "SysvarC1ock11111111111111111111111111111111",
+        "owner": "Sysvar1111111111111111111111111111111111111",
+        "dataBase64": "BUWxGgAAAAC8r6pqAAAAAAwEAAAAAAAADQQAAAAAAAD4AaxqAAAAAA==",
+        "sha256": "8a94288ff36096487798487d75dec0f7c734a8d14f3eacfedf2189d5b20ac27e"
+      }
+    ],
+    "historicalBeforeAfterBitsVerified": false,
+    "liveCustodyAdmission": false,
+    "settlementReady": false
+  },
+  "openGates": [
+    "issuer_confirmed_event_to_ex_date_join",
+    "revision_cancellation_and_finality_semantics",
+    "historical_before_after_multiplier_bits",
+    "complete_annual_coverage_after_maturity",
+    "live_custody_admission"
+  ]
+}

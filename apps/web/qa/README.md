@@ -1,5 +1,13 @@
 # Product and rehearsal verification
 
+## Future guided demos — 17 September 2026
+
+The noninteractive roadmap section now lists Streamflow sales, Jupiter Lock, Squads treasuries, Meteora limit orders, Jupiter recurring purchases, combined flows, borrowing and lower-priority PT trading. Qualified issuer data and settlement take priority over implementing those integrations. The accepted nine-action Raydium/Test USDC journey is unchanged.
+
+Verification: fixture checks and 71 root tests, TypeScript and production build pass. The browser suite passed 33 checks initially; one test timed out while creating Chrome's context, then passed in isolation with one worker. No application assertion failed. Independent read-only Chrome inspection found eight roadmap rows, zero controls, no page errors and no horizontal overflow at 390, 768, 940, 1024 and 1440 pixels. Astra reviewed [desktop](guided-future-roadmap-1440.png) and [mobile](guided-future-roadmap-390.png) captures. Existing app/runtime processes and demonstration state were preserved.
+
+Issuer research also exposed a typo in the local-mode mainnet exclusion hash. Corrected it in the AMM guard constants and guided verifier; the exact devnet allowlist was already correct. An offline regression rejects canonical mainnet before account reads. The AMM suite passes 16/16, including its TypeScript build, and verifier syntax checks pass. No new onchain flow was run for these changes.
+
 ## Guided DeFi demo — 17 September 2026
 
 Actual guided page: [http://127.0.0.1:4174/demos/](http://127.0.0.1:4174/demos/). It uses a separate runtime on loopback port **4181**; the preserved `/app/` wallet runtime remains on 4180. Start the web app and `npm run demo:guided`, then prepare the two disposable server-managed test wallets. No extension wallet is required.

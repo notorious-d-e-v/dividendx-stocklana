@@ -86,7 +86,11 @@ Show multi-issuer observation and qualified execution clearly. Keep observation-
 
 **Accepted Test USDC update (17 September):** [USDC specification](../spec/guided-usdc-v1.md) and [acceptance](usdc-demo-review.md) replace the new guided quote with a local copy of Circle devnet USDC and synthetic 10 + 1 funding. Nine actions now produce 36 local transactions. A separate public run transfers 11 faucet-funded test USDC into fresh wallets and completes 14 finalized transactions. The 4/6/1 quote flow preserves exact residual backing; the earlier 37-transaction generic proof and default mock CLI remain available. No program, core wallet or annual-policy changes.
 
-After the guided slice, complete issuer qualification and refresh submission materials around functionality actually completed. Preserve the existing approved slides and narration; prepare versioned updates in the submission phase. External publication/submission uses authorization at execution time.
+**Current user direction (17 September):** additional guided integrations are roadmap-only. Mention Streamflow fixed-price sales, Jupiter Lock vesting/locks, Squads treasuries, Meteora limit orders, Jupiter recurring purchases, combined flows, borrowing and lower-priority PT trading in the noninteractive future section. Do not create new pools, locks, escrows or loans for this update.
+
+Next, complete the [issuer qualification work](research/issuer-settlement-qualification-2026-09-17.md): prove a company/exchange ex-date and issuer-event/factor join, obtain revision/finality and period-coverage rules, and verify custody. Establish that real evidence schema before implementing a server-only unsigned review dossier. Never generate completeness from empty results or pagination success, infer ex-date from payment/activation, or sign live settlement from unresolved observations. Preserve annual cutoff/maturity, current program/SDK and running demos.
+
+Refresh submission materials around functionality actually completed. Preserve the approved slides and narration; prepare versioned updates in the submission phase. External publication/submission uses authorization at execution time.
 
 ## Source-access work alongside production
 

@@ -59,7 +59,7 @@ const EXPECTED_STEPS = Object.freeze([
 ]);
 const EXPECTED_CHECKPOINTS = Object.freeze(['setup', ...EXPECTED_STEPS]);
 const PUBLIC_GENESIS_HASHES = new Set([
-  '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N2d',
+  '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d',
   'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG',
   '4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY',
 ]);

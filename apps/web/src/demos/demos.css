@@ -120,13 +120,15 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 32px 80px; }
 .transaction-list p,.receipt-record p { color: var(--dx-ink-muted); font-size: 11px; }
 .receipt-record pre { max-height: 340px; margin: 0; padding: 18px; overflow: auto; border-radius: var(--dx-radius-sm); color: #dfe7ec; background: var(--dx-ink); font-size: 9px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
 .inline-error { color: var(--dx-danger) !important; }
-.future-demos { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 72px; padding: 72px 0 24px; }
+.future-demos { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: 72px; padding: 72px 0 24px; }
 .future-demos > div:first-child > p:last-child { max-width: 450px; color: var(--dx-ink-muted); font-size: 13px; line-height: 1.55; }
-.future-demos > div:last-child { border-top: 1px solid var(--dx-line); }
-.future-demos article { display: grid; grid-template-columns: 120px minmax(180px, .8fr) minmax(200px, 1.2fr); gap: 18px; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--dx-line); }
+.future-demo-list { border-top: 1px solid var(--dx-line); }
+.future-demos article { display: grid; grid-template-columns: minmax(132px, .7fr) minmax(170px, .9fr) minmax(200px, 1.3fr); gap: 18px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--dx-line); }
 .future-demos article span { color: var(--dx-ink-muted); font-size: 9px; font-weight: 760; text-transform: uppercase; }
 .future-demos article h3 { margin: 0; font-size: 15px; }
 .future-demos article p { margin: 0; color: var(--dx-ink-muted); font-size: 11px; line-height: 1.5; }
+.future-demos article.future-demo-later { padding-block: 14px; }
+.future-demos article.future-demo-later h3,.future-demos article.future-demo-later p { font-size: 10px; }
 footer { min-height: 84px; display: flex; align-items: center; gap: 10px; padding: 20px 32px; border-top: 1px solid var(--dx-line); color: var(--dx-ink-muted); background: var(--dx-surface); font-size: 10px; }
 footer .demo-mark { width: 19px; height: 19px; } footer .demo-mark i { width: 9px; height: 14px; } footer .demo-mark i:first-child { margin-right: -3px; }
 footer a { margin-left: auto; color: var(--dx-ink); font-weight: 760; }

@@ -4,7 +4,7 @@ import { PublicKey } from '@solana/web3.js';
 export const DEVNET_RPC_URL = 'https://api.devnet.solana.com';
 export const DEVNET_GENESIS_HASH = 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG';
 export const PUBLIC_CLUSTER_GENESIS_HASHES = new Set([
-  '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N2d',
+  '5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d',
   DEVNET_GENESIS_HASH,
   '4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY',
 ]);

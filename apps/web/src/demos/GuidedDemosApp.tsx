@@ -323,8 +323,21 @@ export function GuidedDemosApp() {
       <Evidence state={state} receipt={receipt} receiptError={receiptError} receiptLoading={receiptLoading} onOpen={setEvidenceOpen} />
 
       <section className="future-demos" aria-labelledby="future-heading">
-        <div><p className="demo-kicker">Planned, not integrated</p><h2 id="future-heading">Future guided demos.</h2><p>Each one needs a tested market, reliable pricing and safe handling before it can become an action here.</p></div>
-        <div><article><span>01 · Planned</span><h3>Trade stock exposure (PT)</h3><p>Test a real permissionless venue before enabling controls.</p></article><article><span>02 · Research next</span><h3>Borrow against stock exposure</h3><p>Requires defensible oracle, maturity and liquidation handling.</p></article></div>
+        <div>
+          <p className="demo-kicker">Roadmap after settlement</p>
+          <h2 id="future-heading">Future guided demos</h2>
+          <p>More ways to use your PT and DR. These demos are planned. We’re focusing next on verified issuer data and dividend settlement.</p>
+        </div>
+        <div className="future-demo-list">
+          <article><span>Planned · Streamflow</span><h3>Fixed-price dividend sale</h3><p>Offer your dividend rights at a price you choose.</p></article>
+          <article><span>Planned · Jupiter Lock</span><h3>Token locks and vesting</h3><p>Give someone PT or DR tokens that unlock on a schedule.</p></article>
+          <article><span>Planned · Squads</span><h3>Shared treasury</h3><p>Hold and manage PT or DR with shared approvals.</p></article>
+          <article><span>Planned · Meteora</span><h3>Limit orders</h3><p>Set a target price for a future PT or DR trade.</p></article>
+          <article><span>Planned · Jupiter</span><h3>Recurring purchases</h3><p>Buy stock exposure or dividend rights on a schedule.</p></article>
+          <article><span>Planned · Combined flow</span><h3>Split and sell in one step</h3><p>Or buy the missing dividend rights to put your stock back together.</p></article>
+          <article><span>Needs market groundwork</span><h3>Borrow against PT</h3><p>Requires valuation, liquidation rules and venue admission.</p></article>
+          <article className="future-demo-later"><span>Lower priority</span><h3>PT trading</h3><p>Trade stock exposure separately from dividend rights.</p></article>
+        </div>
       </section>
     </main>
     <footer><Mark /><span>DividendX guided demo</span><a href="/app/">Return to the wallet app</a></footer>
