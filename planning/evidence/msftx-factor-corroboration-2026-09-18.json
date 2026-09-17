@@ -1,0 +1,110 @@
+{
+  "schema": "dividendx-factor-corroboration-research-v1",
+  "reviewDate": "2026-09-18",
+  "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+  "sourceEvidence": {
+    "path": "planning/evidence/msftx-qualification-candidates-2026-09-17.json",
+    "sha256": "ec96ff4fc314661bdbdfa6b3cb29ed74b54633fbf987f9de725933c7c2c10acb",
+    "contextSlot": 447825157
+  },
+  "sources": [
+    {
+      "name": "02-xstocks-multiplier-history.json",
+      "url": "https://api.xstocks.fi/api/v2/public/assets/MSFTx/multiplier/history?network=Solana",
+      "sha256": "80fab8338b5d7ccdff81382354873cc7276e877ba83e1d17561a451c1349fbf3",
+      "localRecordedAt": "2026-09-17T22:39:17.065Z",
+      "timeMeaning": "Filesystem recording time; no HTTP retrieval timestamp or response headers preserved.",
+      "bytes": 963
+    },
+    {
+      "name": "03-xstocks-current-multiplier.json",
+      "url": "https://api.xstocks.fi/api/v2/public/assets/MSFTx/multiplier?network=Solana",
+      "sha256": "6eb94b2c0456c3a1af23ce6bf78ed215539961dc5d0814a78adbd72ce4fa99b9",
+      "localRecordedAt": "2026-09-17T22:39:18.069Z",
+      "timeMeaning": "Filesystem recording time; no HTTP retrieval timestamp or response headers preserved.",
+      "bytes": 95
+    },
+    {
+      "name": "05-xstocks-openapi-wrapper.json",
+      "url": "https://docs.xstocks.fi/_bundle/apis/@v2/openapi.json?download",
+      "sha256": "c35cad6bd229e5f60f2c96bd276bd665a98ecaaa75557e648f8e821f363619f3",
+      "localRecordedAt": "2026-09-17T22:39:57.993Z",
+      "timeMeaning": "Filesystem recording time; no HTTP retrieval timestamp or response headers preserved.",
+      "bytes": 221453
+    }
+  ],
+  "multiplierHistoryFactorEncoding": "JSON number; not exact original decimal strings",
+  "events": [
+    {
+      "eventId": "7c31ccb0-9a9e-471e-af0b-47921ca5dcd4",
+      "sourceVersion": 2,
+      "multiplierHistoryId": "2045b0fb-7edc-4366-b41b-944ee01b35b4",
+      "reason": "Dividend",
+      "effectiveTimeUtc": "2026-03-12T23:55:00.000Z",
+      "sourceDecimalOld": "1.002157028782502298",
+      "sourceDecimalNew": "1.0030646056933608",
+      "candidateM0Bits": "4607192133194038513",
+      "candidateM1Bits": "4607196220557076065",
+      "apiFactorAndTimeMatch": true,
+      "identifierJoin": "inferred; source APIs expose distinct IDs without an explicit join",
+      "configuredPairMatches": false,
+      "historicalTransactionOrPriorAccountStateRecovered": false,
+      "settlementReady": false
+    },
+    {
+      "eventId": "5ed19bd9-5444-49fc-aadd-de45c617faaa",
+      "sourceVersion": 2,
+      "multiplierHistoryId": "5c5e26a9-4bd5-4f29-b184-a5fe69e134a4",
+      "reason": "Dividend",
+      "effectiveTimeUtc": "2026-05-21T00:30:00.000Z",
+      "sourceDecimalOld": "1.0030646056933608",
+      "sourceDecimalNew": "1.0045820905025638",
+      "candidateM0Bits": "4607196220557076065",
+      "candidateM1Bits": "4607203054701097332",
+      "apiFactorAndTimeMatch": true,
+      "identifierJoin": "inferred; source APIs expose distinct IDs without an explicit join",
+      "configuredPairMatches": false,
+      "historicalTransactionOrPriorAccountStateRecovered": false,
+      "settlementReady": false
+    },
+    {
+      "eventId": "e06d3eca-7b09-40b6-a904-6bb880e3f205",
+      "sourceVersion": 2,
+      "multiplierHistoryId": "bb7628b3-3fbe-4b22-8eff-67487b53955c",
+      "reason": "Dividend",
+      "effectiveTimeUtc": "2026-08-20T00:30:00.000Z",
+      "sourceDecimalOld": "1.0045820905025638",
+      "sourceDecimalNew": "1.0059033904787456",
+      "candidateM0Bits": "4607203054701097332",
+      "candidateM1Bits": "4607209005307177709",
+      "apiFactorAndTimeMatch": true,
+      "identifierJoin": "inferred; source APIs expose distinct IDs without an explicit join",
+      "configuredPairMatches": true,
+      "historicalTransactionOrPriorAccountStateRecovered": false,
+      "settlementReady": false
+    }
+  ],
+  "currentMintConfiguredPair": {
+    "currentBits": "4607203054701097332",
+    "pendingBits": "4607209005307177709",
+    "pendingEffectiveTimestamp": "1787185800",
+    "activeBits": "4607209005307177709"
+  },
+  "apiStatusEnum": [
+    "Initial",
+    "Corrected",
+    "Cancelled",
+    "Scheduled"
+  ],
+  "sourceFinalitySemanticsEstablished": false,
+  "search": {
+    "rpcRequests": 36,
+    "returnedAuthoritySignatures": 1000,
+    "inspectedBlocks": 21,
+    "retainedScanSha256": "abf796e2e487164b65f35c6fa7ab557fb3b933abfdfb7df01f5d610cc0e6db48",
+    "result": "No MSFTx mint match appeared in the account-key lists returned by RPC for the 21 inspected blocks.",
+    "limits": "Bounded search, not complete mint history; nonmatching raw account lists and independent ALT completeness were not retained/proved."
+  },
+  "historicalCoverageComplete": false,
+  "settlementReady": false
+}

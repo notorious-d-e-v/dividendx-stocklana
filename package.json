@@ -28,7 +28,8 @@
     "test:transactions": "npm --prefix packages/transaction-sdk test",
     "build:program": "sh scripts/protocol/build-sbf.sh",
     "build:idl": "scripts/protocol/toolchain.sh exec cargo run --locked -p dividendx --example build_idl",
-    "test:program": "scripts/protocol/toolchain.sh exec cargo test --locked -p dividendx -p dividendx-protocol-tests"
+    "test:program": "scripts/protocol/toolchain.sh exec cargo test --locked -p dividendx -p dividendx-protocol-tests",
+    "review:issuers": "npm --prefix packages/issuer-readers run review --"
   },
   "dependencies": {
     "@dividendx/transaction-sdk": "file:packages/transaction-sdk",

@@ -1,0 +1,76 @@
+{
+  "schema": "dividendx-qualification-parent-review-v1",
+  "reviewedAt": "2026-09-17T22:58:30.245Z",
+  "dossierSha256": "650fecb62c21f1e96da28b2329c268d23c82b1532b5c45518c4d1fd40d40bec8",
+  "inputDigests": {
+    "observation": {
+      "sha256": "3a4b89b4e70af3ea8b99a67ebc55313b262e6e042a4766bda10563c8b97adf62",
+      "startedAt": "2026-09-17T22:40:56.927Z",
+      "completedAt": "2026-09-17T22:41:05.616Z",
+      "requestObservations": [
+        {
+          "retrievedAt": "2026-09-17T22:40:58.133Z",
+          "dataDigest": "sha256:a7742e0abe557de89b2b1a6a01aed7c25059a777a5a2867c47f4c49b875a95f9"
+        },
+        {
+          "retrievedAt": "2026-09-17T22:40:58.740Z",
+          "dataDigest": "sha256:13ebeafcf571638820bc3ddedd276a64a77af87539c0eee3e1e85ded0e8ed571"
+        },
+        {
+          "retrievedAt": "2026-09-17T22:41:00.659Z",
+          "dataDigest": "sha256:399f2d63a8ad021ee9eb3001b110f7b2255f8d95575daa1eefbc66a6fc581197"
+        },
+        {
+          "retrievedAt": "2026-09-17T22:41:02.563Z",
+          "dataDigest": "sha256:3991d56b43d67646c9b429b5213546fb90f8fe41336e12caa58a0d3fe4ebc63d"
+        },
+        {
+          "retrievedAt": "2026-09-17T22:41:04.301Z",
+          "dataDigest": "sha256:fecb6ad296947c08c89dc2880f5ac13b56772e6af81b7e5875a7fbef0dff9f13"
+        },
+        {
+          "retrievedAt": "2026-09-17T22:41:05.174Z",
+          "dataDigest": "sha256:02adfc437a6ccebfb58a1a6117a6fa0cee32daa70e6901d33c632acdf92ed73e"
+        },
+        {
+          "retrievedAt": "2026-09-17T22:41:05.616Z",
+          "dataDigest": "sha256:f8859bea781298a43764da5d75545414ef16efc46685495ef4015b4e4f334388"
+        }
+      ]
+    },
+    "supplement": {
+      "sha256": "ec96ff4fc314661bdbdfa6b3cb29ed74b54633fbf987f9de725933c7c2c10acb",
+      "asOf": "2026-09-17"
+    }
+  },
+  "checks": {
+    "threeIssuerReview": true,
+    "fiveMsftHeads": true,
+    "threeCandidateExDates": true,
+    "twoUnknownExDatesPreserved": true,
+    "unlinkedFutureAnnouncementPreserved": true,
+    "currentMintBytesAndClaimsConsistent": true,
+    "augustConfiguredPairMatch": true,
+    "privateDirectory0700": true,
+    "exclusiveFile0600": true,
+    "observationOnlyReviewBlocked": true,
+    "maturityDoesNotEstablishCoverage": true,
+    "noTransactionPayload": true
+  },
+  "configuredPair": {
+    "eventId": "e06d3eca-7b09-40b6-a904-6bb880e3f205",
+    "sourceVersion": 2,
+    "matchKind": "configured_pair_match_not_historical_transition_verified"
+  },
+  "settlementReady": false,
+  "signable": false,
+  "validation": {
+    "rootTests": 85,
+    "qualificationTests": 14,
+    "readerPackageTests": 36,
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "browserAndSbf": "not rerun; web, program and transaction SDK sources unchanged"
+  },
+  "proofBoundary": "Offline consistency review; candidate joins, current configured pair and HTTP success do not establish historical event qualification, annual completeness, issuer finality or custody admission."
+}

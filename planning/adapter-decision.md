@@ -28,6 +28,12 @@ Permissionless describes holder access to admitted series: no DividendX holder a
 
 Only readers/attestors classify events; a current mint state cannot explain every historical factor change. The program checks authenticated series/event inputs, identity, time and permitted mint state. The attestor is an explicit trust boundary, not a trustless oracle or custody owner. Claims of complete annual event coverage need evidence beyond a list of records already fetched.
 
+## Qualification implementation boundary
+
+The [unsigned dossier v1](../spec/issuer-qualification-v1.md) consumes saved observations and candidate source evidence. It validates identities, source revisions, company-date links and current raw mint consistency while preserving unresolved gates. V1 is always blocked and unsigned: no inferred finality, approval override, EventInput builder or settlement writer. This lets operator tooling progress while the issuer contract remains unresolved. An issuer response and a separately reviewed attestation policy are needed before adding an approval-capable path.
+
+Ordinary secondary custody is distinct from direct issuer issuance/redemption. Public xStocks documentation supports permissionless secondary transfers; do not invent a requirement for a special approved-vault agreement. Exact asset controls, PDA custody execution and DividendX admission still require their own review.
+
 ## Core accounting and lifecycle
 
 Deposits mint equal raw PT/DR quantities strictly before January 1 UTC. No new issuance after the cutoff, including after zero events or corrections. Let remaining accounted raw collateral be Q and R the product of each accepted eligible event's M0/M1. Cumulative DR allocation is `floor(Q × (1 − R))`; PT gets the remainder. Never sum full-deposit single-event allocations or repeatedly round away small dividends.

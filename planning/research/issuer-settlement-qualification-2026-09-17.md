@@ -53,3 +53,5 @@ The existing program accepts trusted attestor commitments; it does not independe
 4. Validate wrong mint/year, missing or ambiguous ex-date, revision replacement/cancellation, duplicate entitlement, unsupported actions, factor mismatches, incomplete pagination, missing coverage/finality, stale controls and digest mismatch. Only then exercise qualified event ingestion and staged settlement on a controlled test series.
 
 The unsigned dossier is not implemented in this pass. Annual issuer/mint/year isolation, pre-year deposit closure, multiple qualified events, recombination and independent redemption after finalization remain unchanged. No 2026 late deposits, fabricated annual completeness or real-fund transaction is authorized by this research.
+
+**18 September follow-up:** the [offline dossier is now implemented and accepted](../issuer-qualification-review.md) under a narrower, always-blocked contract with no attestor approval or transaction output. [Further source research](issuer-qualification-followup-2026-09-18.md) strengthens August's configured-pair corroboration while preserving the unresolved issuer-policy and historical-transition gates above.

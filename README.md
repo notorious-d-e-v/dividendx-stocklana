@@ -96,6 +96,14 @@ npm run test:issuers
 
 Ondo uses the external `ONDO_API_KEY` credential file described in the reader README. The command prints a summary of identity checks, counts and missing evidence; credentials and authenticated response bodies stay outside Git and the browser. These observations do not authorize annual settlement. The package does not change the running app or test network.
 
+Review an existing private snapshot offline:
+
+```sh
+npm run review:issuers -- --year 2026 --snapshot /absolute/private/issuer-observations.json
+```
+
+The unsigned dossier checks identities, revisions, candidate dates and current mint evidence while preserving unresolved settlement gates. It never signs or emits transactions. See [qualification acceptance](planning/issuer-qualification-review.md) and the package README for supplemental evidence and private archiving.
+
 ## Run the Raydium integration
 
 The isolated [AMM package](packages/amm-integration/README.md) pins Raydium SDK v2, validates the exact devnet program/config/fee receiver and DividendX ELF, simulates every transaction, and records raw-unit conservation. Install its additional dependencies only when running this integration:
@@ -138,7 +146,7 @@ The SBF suite advances a controlled test clock to cover the annual lifecycle. Th
 | [`packages/transaction-sdk/`](packages/transaction-sdk/) | Instruction builders, coherent account reads, quotes and signing helpers |
 | [`packages/local-runtime/`](packages/local-runtime/) | Disposable offline SBF network, test faucet and controlled annual lifecycle |
 | [`packages/guided-runtime/`](packages/guided-runtime/) | Separate two-wallet guided runtime with captured Raydium bytecode and fixed local actions |
-| [`packages/issuer-readers/`](packages/issuer-readers/) | Server-side observations with explicit evidence and qualification gaps |
+| [`packages/issuer-readers/`](packages/issuer-readers/) | Server-side observations and offline unsigned qualification review |
 | [`packages/amm-integration/`](packages/amm-integration/) | Isolated Raydium CPMM preflight and local/public test-only execution CLI |
 | [`tests/protocol/`](tests/protocol/) | Independent arithmetic oracle and compiled-SBF conformance |
 | [`packages/demo-fixtures/`](packages/demo-fixtures/) | Frozen catalog and historical event fixtures |
@@ -156,4 +164,4 @@ Ondo read-only API access is verified. Run `node scripts/issuers/ondo-readonly.m
 
 The [annual research](planning/research/annual-dividend-series.md) extends the [prior-art review](planning/research/prior-art-review.md). Calendar-year periods are our choice; traditional exchange dividend contracts do not all use those exact dates. Membership uses the reference share's official ex-date, including late-paid dividends; maturity stops new eligible dates, while finalization waits for a complete resolved journal. The model replaces corrected events and compounds accepted factors before rounding once. It does not sum separately rounded event payouts.
 
-Next are completing issuer qualification and refreshing the submission package. The public AMM and local guided proofs do not turn source observations into settlement attestations: the program still needs trusted event classification, authoritative ex-dates and complete-period coverage for a live issuer. Streamflow sales, Jupiter Lock, shared treasuries, orders, recurring purchases, combined flows, PT trading and borrowing are noninteractive [future guided demos](planning/research/defi-demo-sequence.md). Each requires its own venue assessment before implementation. Current evidence and remaining settlement gates are recorded in the [qualification review](planning/research/issuer-settlement-qualification-2026-09-17.md). Rolling vaults, quarterly terms and perpetual-product research remain on the [roadmap](planning/roadmap.md).
+Next are completing issuer qualification and refreshing the submission package. The public AMM and local guided proofs do not turn source observations into settlement attestations: the program still needs trusted event classification, authoritative ex-dates and complete-period coverage for a live issuer. Streamflow sales, Jupiter Lock, shared treasuries, orders, recurring purchases, combined flows, PT trading and borrowing are noninteractive [future guided demos](planning/research/defi-demo-sequence.md). Each requires its own venue assessment before implementation. The offline unsigned review tool is [accepted](planning/issuer-qualification-review.md); the [source follow-up](planning/research/issuer-qualification-followup-2026-09-18.md) records remaining settlement gates. Rolling vaults, quarterly terms and perpetual-product research remain on the [roadmap](planning/roadmap.md).

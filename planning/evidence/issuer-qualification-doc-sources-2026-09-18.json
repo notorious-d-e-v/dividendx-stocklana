@@ -1,0 +1,56 @@
+{
+  "schema": "dividendx-public-source-provenance-v1",
+  "reviewDate": "2026-09-18",
+  "sources": [
+    {
+      "name": "multipliers",
+      "url": "https://docs.xstocks.fi/developers/multipliers",
+      "finalUrl": "https://docs.xstocks.fi/developers/multipliers",
+      "status": 200,
+      "retrievedAt": "2026-09-17T22:40:58.693668+00:00",
+      "bytes": 379155,
+      "sha256": "6b559978bf4e12c902ca487148df362c126cbe87e3c07d7285a725086e650877",
+      "contentType": "text/html; charset=UTF-8",
+      "timingParagraphPresent": true
+    },
+    {
+      "name": "corporate-actions",
+      "url": "https://docs.xstocks.fi/apis/openapi/corporate-actions",
+      "finalUrl": "https://docs.xstocks.fi/apis/openapi/corporate-actions",
+      "status": 200,
+      "retrievedAt": "2026-09-17T22:40:58.463359+00:00",
+      "bytes": 431241,
+      "sha256": "dd8677c77a468b53baaea7855513b7aeb9ded4fd868eaae0c5f03c5726b7d10a",
+      "contentType": "text/html; charset=UTF-8",
+      "timingParagraphPresent": false
+    },
+    {
+      "name": "how-xstocks-work",
+      "url": "https://docs.xstocks.fi/docs/how-xstocks-work",
+      "finalUrl": "https://docs.xstocks.fi/docs/how-xstocks-work",
+      "status": 200,
+      "retrievedAt": "2026-09-17T22:40:58.363380+00:00",
+      "bytes": 326710,
+      "sha256": "9ba80a2941c643a91742d40669b691032e89ee55498ecbbc0ab3710d74b88d08",
+      "contentType": "text/html; charset=UTF-8",
+      "timingParagraphPresent": false
+    },
+    {
+      "name": "faq",
+      "url": "https://docs.xstocks.fi/docs/frequently-asked-questions",
+      "finalUrl": "https://docs.xstocks.fi/docs/frequently-asked-questions",
+      "status": 200,
+      "retrievedAt": "2026-09-17T22:40:58.505611+00:00",
+      "bytes": 315352,
+      "sha256": "7b31360adb7ff45e98b499aa3f919b758aa503b99203840cb659655a125f8120",
+      "contentType": "text/html; charset=UTF-8",
+      "timingParagraphPresent": false
+    }
+  ],
+  "claims": {
+    "exDateFromActivationAllowed": false,
+    "issuerApprovalForOrdinarySecondaryTransferRequiredByReviewedDocs": false,
+    "liveCustodyAdmission": false,
+    "settlementReady": false
+  }
+}

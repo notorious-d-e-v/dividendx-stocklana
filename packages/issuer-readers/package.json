@@ -11,10 +11,17 @@
   },
   "files": ["dist", "README.md"],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build:sdk": "npm --prefix ../transaction-sdk run build",
+    "build": "npm run build:sdk --silent && tsc -p tsconfig.json",
+    "typecheck": "npm run build:sdk --silent && tsc -p tsconfig.json --noEmit",
     "test": "npm run build && node --test dist/test/*.test.js",
-    "read": "npm run build --silent && node dist/src/cli.js"
+    "read": "npm run build --silent && node dist/src/cli.js",
+    "review": "npm run build --silent && node dist/src/qualification-cli.js review"
+  },
+  "dependencies": {
+    "@dividendx/transaction-sdk": "file:../transaction-sdk",
+    "@solana/spl-token": "0.4.14",
+    "@solana/web3.js": "1.98.4"
   },
   "engines": { "node": ">=24" }
 }

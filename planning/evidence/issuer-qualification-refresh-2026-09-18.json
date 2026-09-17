@@ -1,0 +1,193 @@
+{
+  "schema": "dividendx-issuer-summary-v1",
+  "requestedYear": 2026,
+  "startedAt": "2026-09-17T22:40:56.927Z",
+  "completedAt": "2026-09-17T22:41:05.616Z",
+  "settlementReady": false,
+  "blockers": [
+    "authoritative_event_to_mint_factor_binding",
+    "official_civil_ex_dates",
+    "revision_and_cancellation_semantics",
+    "complete_annual_coverage_and_finality",
+    "live_custody_admission"
+  ],
+  "issuers": [
+    {
+      "issuerId": "xstocks",
+      "state": "observed",
+      "stopped": null,
+      "assets": [
+        {
+          "symbol": "MSFTx",
+          "chain": "solana:mainnet-beta",
+          "expectedMint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+          "expectedDecimals": 8,
+          "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "tokenProgramReobserved": false,
+          "identityState": "observed",
+          "identityCode": null,
+          "identityVerified": true,
+          "observedDecimals": null,
+          "decimalsReobserved": false,
+          "counts": {
+            "corporateActionRecords": 5
+          },
+          "components": {
+            "registry": {
+              "state": "observed"
+            },
+            "corporateActions": {
+              "state": "observed"
+            }
+          },
+          "blockers": [
+            "authoritative_event_to_mint_factor_binding",
+            "official_civil_ex_dates",
+            "revision_and_cancellation_semantics",
+            "complete_annual_coverage_and_finality",
+            "live_custody_admission"
+          ]
+        }
+      ],
+      "requests": [
+        {
+          "endpoint": "/api/v2/public/assets/MSFTx",
+          "retrievedAt": "2026-09-17T22:40:58.133Z",
+          "status": 200,
+          "dataDigest": "sha256:a7742e0abe557de89b2b1a6a01aed7c25059a777a5a2867c47f4c49b875a95f9",
+          "error": null
+        },
+        {
+          "endpoint": "/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=MSFTx&sortBy=createdTimeUtc&sortOrder=asc",
+          "retrievedAt": "2026-09-17T22:40:58.740Z",
+          "status": 200,
+          "dataDigest": "sha256:13ebeafcf571638820bc3ddedd276a64a77af87539c0eee3e1e85ded0e8ed571",
+          "error": null
+        }
+      ]
+    },
+    {
+      "issuerId": "backpack",
+      "state": "observed",
+      "stopped": null,
+      "assets": [
+        {
+          "symbol": "MU.US",
+          "chain": "solana:mainnet-beta",
+          "expectedMint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+          "expectedDecimals": 6,
+          "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "tokenProgramReobserved": false,
+          "identityState": "observed",
+          "identityCode": null,
+          "identityVerified": true,
+          "observedDecimals": 6,
+          "decimalsReobserved": true,
+          "counts": {
+            "corporateActionRecords": 0
+          },
+          "components": {
+            "listing": {
+              "state": "observed"
+            },
+            "corporateActions": {
+              "state": "unavailable",
+              "code": "issuer_event_endpoint_not_public"
+            }
+          },
+          "blockers": [
+            "authoritative_event_to_mint_factor_binding",
+            "official_civil_ex_dates",
+            "revision_and_cancellation_semantics",
+            "complete_annual_coverage_and_finality",
+            "live_custody_admission",
+            "issuer_corporate_action_ledger_unavailable"
+          ]
+        }
+      ],
+      "requests": [
+        {
+          "endpoint": "/api/v1/assets",
+          "retrievedAt": "2026-09-17T22:41:00.659Z",
+          "status": 200,
+          "dataDigest": "sha256:399f2d63a8ad021ee9eb3001b110f7b2255f8d95575daa1eefbc66a6fc581197",
+          "error": null
+        }
+      ]
+    },
+    {
+      "issuerId": "ondo",
+      "state": "observed",
+      "stopped": null,
+      "assets": [
+        {
+          "symbol": "KOon",
+          "chain": "solana:mainnet-beta",
+          "expectedMint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+          "expectedDecimals": 9,
+          "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "tokenProgramReobserved": false,
+          "identityState": "observed",
+          "identityCode": null,
+          "identityVerified": true,
+          "observedDecimals": 9,
+          "decimalsReobserved": true,
+          "counts": {
+            "pauseNotices": 0,
+            "multiplierPoints": 6
+          },
+          "components": {
+            "pauses": {
+              "state": "observed"
+            },
+            "multiplier": {
+              "state": "observed"
+            },
+            "dividend": {
+              "state": "observed"
+            }
+          },
+          "blockers": [
+            "authoritative_event_to_mint_factor_binding",
+            "official_civil_ex_dates",
+            "revision_and_cancellation_semantics",
+            "complete_annual_coverage_and_finality",
+            "live_custody_admission",
+            "authenticated_notices_are_not_an_event_ledger"
+          ]
+        }
+      ],
+      "requests": [
+        {
+          "endpoint": "/v1/assets/all/addresses",
+          "retrievedAt": "2026-09-17T22:41:02.563Z",
+          "status": 200,
+          "dataDigest": "sha256:3991d56b43d67646c9b429b5213546fb90f8fe41336e12caa58a0d3fe4ebc63d",
+          "error": null
+        },
+        {
+          "endpoint": "/v1/status/assets",
+          "retrievedAt": "2026-09-17T22:41:04.301Z",
+          "status": 200,
+          "dataDigest": "sha256:fecb6ad296947c08c89dc2880f5ac13b56772e6af81b7e5875a7fbef0dff9f13",
+          "error": null
+        },
+        {
+          "endpoint": "/v1/assets/KOon/shares-multiplier?range=all",
+          "retrievedAt": "2026-09-17T22:41:05.174Z",
+          "status": 200,
+          "dataDigest": "sha256:02adfc437a6ccebfb58a1a6117a6fa0cee32daa70e6901d33c632acdf92ed73e",
+          "error": null
+        },
+        {
+          "endpoint": "/v1/assets/KOon/dividends",
+          "retrievedAt": "2026-09-17T22:41:05.616Z",
+          "status": 200,
+          "dataDigest": "sha256:f8859bea781298a43764da5d75545414ef16efc46685495ef4015b4e4f334388",
+          "error": null
+        }
+      ]
+    }
+  ],
+  "archiveWritten": true
+}

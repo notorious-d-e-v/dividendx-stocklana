@@ -1,6 +1,6 @@
 # Current status
 
-Updated 17 September 2026 after the Test USDC guided demo and faucet-funded public devnet round trip were accepted. Deposits still close at year-start.
+Updated 18 September 2026 after the offline issuer qualification review was accepted. Live issuer settlement remains incomplete; deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -19,6 +19,7 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Wallet app | `/app/`: actual local wallet signing, custody, PT/DR transfers, recombination and independent redemption; [acceptance](wallet-review.md) |
 | Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
 | Issuer readers | Typed observations across the selected 15 identities, exact source records, private snapshots and explicit data gaps; [acceptance](issuer-reader-review.md) |
+| Issuer qualification | Offline unsigned dossiers check identities, revisions, candidate dates and current mint evidence; every dossier retains unresolved settlement gates; [acceptance](issuer-qualification-review.md) |
 | AMM integration | Isolated [Node CLI](../packages/amm-integration/README.md) with a 15-transaction finalized public devnet Raydium CPMM round trip and a separate 14-transaction captured-bytecode local proof; [acceptance](amm-review.md) |
 | Guided demos | `/demos/`: Test USDC v2, nine actions, two disposable wallets and 36 local transactions through Raydium and annual redemption; [acceptance](usdc-demo-review.md) |
 | Fallback | Original single-event SDK and technical rehearsal at `/rehearsal/`, preserved |
@@ -54,10 +55,12 @@ The current guided slice uses an exact local copy of Circle devnet USDC, with ex
 
 The future-demo update adds eight noninteractive roadmap rows and preserves that journey. A fresh issuer qualification pass records explicit Microsoft ex-dates, three candidate MSFTx joins and a matching current onchain factor; [the report](research/issuer-settlement-qualification-2026-09-17.md) keeps historical evidence, finality, annual coverage and custody gates explicit. Root tests/build/type checks pass; all 34 browser cases pass across the main run and one isolated browser-startup retry. The AMM suite now passes 16 tests after correcting the local-mode mainnet exclusion hash and adding an offline rejection regression. See [QA](../apps/web/qa/README.md).
 
+The offline qualification slice adds **14 tests**, bringing the issuer package to **36** and the current root suite to **85**. Fixture verification, type checking and an isolated production build pass. Independent review of fresh MSFTx/MU.US/KOon observations verified candidate-date handling, August current-mint corroboration, private archives and continued blocking after maturity. No browser, program or transaction-SDK source changed. The running preview and runtimes remain untouched; see [qualification acceptance](issuer-qualification-review.md).
+
 ## Next: qualified issuer evidence and settlement
 
-1. **Complete issuer qualification.** The user has deferred all additional DeFi integrations. Prove an authoritative source path from company/exchange ex-date to classified issuer event, exact onchain multiplier transition, correction/finality policy and custody profile. Review findings are recorded in [issuer settlement qualification](research/issuer-settlement-qualification-2026-09-17.md). Readers remain observations, not settlement attestations.
-2. **Prepare settlement from qualified evidence.** Separate event qualification from complete annual coverage. Only after the evidence contract is established, add an unsigned operator review dossier and validate its mapping to the existing staged settlement instructions. The current year must mature before annual finalization; incomplete inputs keep settlement blocked.
+1. **Resolve the remaining source semantics.** The user has deferred all additional DeFi integrations. Establish authoritative event/ex-date/factor joins, historical transitions, correction/finality and complete-period policy, and ordinary custody admission. The [source follow-up](research/issuer-qualification-followup-2026-09-18.md) records the current evidence and precise gaps. August MSFTx has a matching configured factor pair; that does not complete historical qualification.
+2. **Prepare settlement from qualified evidence.** The [unsigned review tool](issuer-qualification-review.md) is complete and keeps every dossier blocked. A later reviewed issuer policy must establish an attestor decision and mapping to the existing staged settlement instructions. Event qualification and annual coverage remain separate; year-end alone never authorizes finalization.
 3. **Refresh the submission package.** Capture the working wallet and public test-only AMM proof, synchronize copy with user review, and verify the actual submission form/deadline. Do not revise the approved slides or narration in this documentation sync.
 
 No redesign, wider issuer audit, custom AMM, bridge or reward token is required for this next phase.

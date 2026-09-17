@@ -1,6 +1,6 @@
 # DividendX artifact map
 
-Updated 17 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. The accepted program ELF and a test-only Raydium round trip are now proven on public devnet; this does not establish live issuer integration.
+Updated 18 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. The accepted program ELF and a test-only Raydium round trip are now proven on public devnet; this does not establish live issuer integration.
 
 ## Start here
 
@@ -67,6 +67,7 @@ The evidence directory is archival source material and should remain tracked eve
 - [Backpack MU event](../planning/evidence/backpack-scope-mu-event-2026-09-16.json), [raw transactions](../planning/evidence/backpack-scope-mu-raw-transactions-2026-09-16.json) and [authority history](../planning/evidence/backpack-scope-mu-authority-history-2026-09-16.json) — sourced onchain reconstruction; not an issuer-published final event ledger.
 - [Ondo report](../planning/research/ondo-solana.md) and [Ondo evidence](../planning/evidence/ondo-solana-2026-09-16.json) — research snapshot; no source-complete Ondo event is claimed.
 - [Authenticated Ondo access](../planning/research/ondo-api-access-2026-09-17.md) — verified read-only endpoints and six matching mint identities; raw responses and credentials stay outside Git, historical settlement gaps remain.
+- [Unsigned qualification contract](../spec/issuer-qualification-v1.md), [acceptance](../planning/issuer-qualification-review.md) and [source follow-up](../planning/research/issuer-qualification-followup-2026-09-18.md) — implemented offline review of saved observations, candidate dates and current mint evidence; no signing or approval path.
 - [Issuer qualification research](../planning/research/issuer-settlement-qualification-2026-09-17.md) — current priority, sanitized refresh, explicit Microsoft dates and candidate MSFTx joins; no live settlement approval.
 - [Future DeFi demos](../planning/research/defi-demo-sequence.md) — deferred Streamflow/Jupiter Lock and other candidates on the guided page.
 - [Issuer reader contract](../spec/issuer-readers-v1.md) and [public source schemas](../planning/research/issuer-reader-source-contracts-2026-09-17.md) — typed observation boundaries, exact identity checks, source revisions and incomplete-history handling.
