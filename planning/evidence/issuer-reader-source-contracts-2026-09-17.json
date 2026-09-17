@@ -1,0 +1,77 @@
+{
+  "schema": "dividendx.issuer-reader-source-contracts.v1",
+  "observedAtUtc": "2026-09-17T08:51:05Z",
+  "scope": "sanitized public GET schema confirmation; not a raw response archive",
+  "xstocks": {
+    "assetEndpoint": "https://api.xstocks.fi/api/v2/public/assets/{symbol}",
+    "historyEndpoint": "https://api.xstocks.fi/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol={symbol}&sortBy=createdTimeUtc&sortOrder=asc",
+    "historyPagination": {
+      "base": 1,
+      "maximumPageSize": 100,
+      "pageFields": [
+        "currentPage",
+        "pageSize",
+        "totalPages",
+        "totalNodes",
+        "hasNextPage",
+        "hasPreviousPage"
+      ]
+    },
+    "exactDecimalStringFields": [
+      "multiplierOld",
+      "multiplierNew",
+      "grossCashflowUsd",
+      "netCashflowUsd",
+      "withholdingTaxRate",
+      "fromUnits",
+      "toUnits",
+      "redemptionPriceUsd"
+    ],
+    "liveKox": {
+      "mintMatched": true,
+      "historyNodeCount": 5,
+      "latestEventId": "75c0c70e-1ae4-4ccd-ace6-d8990e1e8f9e",
+      "latestVersion": 2,
+      "latestStatus": "Initial"
+    },
+    "unavailable": [
+      "officialExDate",
+      "referenceMarketBinding",
+      "cancellationSemantics",
+      "issuerFinalityRule",
+      "annualCompleteness"
+    ]
+  },
+  "backpack": {
+    "assetEndpoint": "https://api.backpack.exchange/api/v1/assets",
+    "responseShape": "array of asset objects with nested tokens array",
+    "selectedLiveMatches": [
+      {
+        "symbol": "MU.US",
+        "mint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+        "nativeDecimals": 6,
+        "depositEnabled": true,
+        "withdrawEnabled": true
+      },
+      {
+        "symbol": "NKE.US",
+        "mint": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+        "nativeDecimals": 6,
+        "depositEnabled": true,
+        "withdrawEnabled": true
+      },
+      {
+        "symbol": "IBM.US",
+        "mint": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+        "nativeDecimals": 6,
+        "depositEnabled": true,
+        "withdrawEnabled": true
+      }
+    ],
+    "corporateActionLedger": {
+      "status": "unavailable",
+      "reason": "issuer_event_endpoint_not_public"
+    }
+  },
+  "settlementReady": false
+}

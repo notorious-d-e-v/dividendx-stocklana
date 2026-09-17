@@ -4,6 +4,12 @@
 
 Checked 16 September 2026 against official Solana, Raydium and Meteora documentation and repositories. This is a bounded integration decision, not a deployed pool or proof that real stock collateral is admissible.
 
+### Annual execution boundary — 17 September
+
+The local program and claim mints are now implemented. A [read-only devnet check](../evidence/amm-devnet-preflight-2026-09-17.json) at finalized slot 499734988 found Raydium's published CPMM program executable; the DividendX program ID had no devnet account. Config, fees, funding and pool execution remain unchecked.
+
+A newly funded annual series cannot both accept deposits and reach maturity during this hackathon on public devnet. Deposits close at year-start and the public chain clock cannot be advanced. The public-network proof should therefore use a future annual series, create/add/swap/withdraw liquidity, then **recombine recovered DR with matching retained PT**. Preserve backing for the buyer's and AMM's remaining claims. Demonstrate post-maturity independent redemption separately on the controlled local network, where it is already tested; those are different networks and claims. Do not backdate deposits, shorten annual terms or add a production clock bypass to manufacture a public maturity receipt. The post-finalization steps below describe the eventual full lifecycle, not a promise to mature a new public series during the hackathon.
+
 ## Decision
 
 **Use one Raydium CPMM DR/private-test-USD pool on Solana devnet for the hackathon.** Mint PT and DR with the original SPL Token Program as ordinary transferable fungible tokens. Mint a separate, worthless quote token named and labeled as DividendX test money; never call it USDC or use canonical-USDC branding. Seed DR against that quote at an explicitly configured demo consideration basis, execute a small purchase, add liquidity, receive the separate Raydium LP token, withdraw it, then redeem the recovered DR after the DividendX series settles.

@@ -1,0 +1,897 @@
+{
+  "schemaVersion": 1,
+  "kind": "issuer-reader-live-acceptance",
+  "observationOnly": true,
+  "settlementReady": false,
+  "runs": [
+    {
+      "schema": "dividendx-issuer-summary-v1",
+      "requestedYear": 2026,
+      "startedAt": "2026-09-17T09:08:01.687Z",
+      "completedAt": "2026-09-17T09:08:23.527Z",
+      "settlementReady": false,
+      "blockers": [
+        "authoritative_event_to_mint_factor_binding",
+        "official_civil_ex_dates",
+        "revision_and_cancellation_semantics",
+        "complete_annual_coverage_and_finality",
+        "live_custody_admission"
+      ],
+      "issuers": [
+        {
+          "issuerId": "xstocks",
+          "state": "observed",
+          "stopped": null,
+          "assets": [
+            {
+              "symbol": "KOx",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+              "expectedDecimals": 8,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 5
+              },
+              "components": {
+                "registry": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission"
+              ]
+            },
+            {
+              "symbol": "AAPLx",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+              "expectedDecimals": 8,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 5
+              },
+              "components": {
+                "registry": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission"
+              ]
+            },
+            {
+              "symbol": "MSFTx",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+              "expectedDecimals": 8,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 5
+              },
+              "components": {
+                "registry": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission"
+              ]
+            },
+            {
+              "symbol": "MUx",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "XsQLZycSZ7QnBBdBXQaTbQdiUcbRqjNJgyBGAMzhHav",
+              "expectedDecimals": 8,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 2
+              },
+              "components": {
+                "registry": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission"
+              ]
+            },
+            {
+              "symbol": "NKEx",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "XsGYpMvKbVt6ViHqRd7cF3s746dAMFBQWcC49hB9VVP",
+              "expectedDecimals": 8,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 1
+              },
+              "components": {
+                "registry": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission"
+              ]
+            },
+            {
+              "symbol": "IBMx",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+              "expectedDecimals": 8,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 5
+              },
+              "components": {
+                "registry": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission"
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "endpoint": "/api/v2/public/assets/KOx",
+              "retrievedAt": "2026-09-17T09:08:03.210Z",
+              "status": 200,
+              "dataDigest": "sha256:05e2a8795d11d59685bd475594a40f6bf692d3d311d67afe3e4604fa10a324ee",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=KOx&sortBy=createdTimeUtc&sortOrder=asc",
+              "retrievedAt": "2026-09-17T09:08:03.991Z",
+              "status": 200,
+              "dataDigest": "sha256:0e15a605daa136fbce8bb368642d95b4a53cec47cd7e88f1c57405157b3b883e",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/assets/AAPLx",
+              "retrievedAt": "2026-09-17T09:08:04.697Z",
+              "status": 200,
+              "dataDigest": "sha256:9d55de1c4f958b447d76f928b1b6448b6227f1a2a9a3b101180c01369e930361",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=AAPLx&sortBy=createdTimeUtc&sortOrder=asc",
+              "retrievedAt": "2026-09-17T09:08:05.410Z",
+              "status": 200,
+              "dataDigest": "sha256:0a1b9c34cacd1aae291617487fac04e31e8cbbe1966ad75f2fc13bce2ea7db69",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/assets/MSFTx",
+              "retrievedAt": "2026-09-17T09:08:06.020Z",
+              "status": 200,
+              "dataDigest": "sha256:b86e83f1d5de6e031ca5ce2f387ab031c96ce506d5565c1968d739ed6078ee92",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=MSFTx&sortBy=createdTimeUtc&sortOrder=asc",
+              "retrievedAt": "2026-09-17T09:08:06.534Z",
+              "status": 200,
+              "dataDigest": "sha256:13ebeafcf571638820bc3ddedd276a64a77af87539c0eee3e1e85ded0e8ed571",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/assets/MUx",
+              "retrievedAt": "2026-09-17T09:08:07.143Z",
+              "status": 200,
+              "dataDigest": "sha256:8d42b7f376158f5912026e584f6247e5e0eaac1f0f5c9409f269372b11036fb6",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=MUx&sortBy=createdTimeUtc&sortOrder=asc",
+              "retrievedAt": "2026-09-17T09:08:07.792Z",
+              "status": 200,
+              "dataDigest": "sha256:d525746e2098da34594d982895876957fce4374a1fa569bfeb5912023dfb433e",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/assets/NKEx",
+              "retrievedAt": "2026-09-17T09:08:08.282Z",
+              "status": 200,
+              "dataDigest": "sha256:62adb8edfa4010b2724a8095e6bd254ee83a7a50901306fc7413963a3bbdac03",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=NKEx&sortBy=createdTimeUtc&sortOrder=asc",
+              "retrievedAt": "2026-09-17T09:08:08.925Z",
+              "status": 200,
+              "dataDigest": "sha256:9415869b810d7b4960c9101107cd94781bc54cb25115a038ee9eea674e424956",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/assets/IBMx",
+              "retrievedAt": "2026-09-17T09:08:09.870Z",
+              "status": 200,
+              "dataDigest": "sha256:9ac8e861d6c2a8788dbbb26dd8eae00901a56c8ca9f5627d68be1ebdb73edb4d",
+              "error": null
+            },
+            {
+              "endpoint": "/api/v2/public/corporate-actions/history?page=1&pageSize=100&symbol=IBMx&sortBy=createdTimeUtc&sortOrder=asc",
+              "retrievedAt": "2026-09-17T09:08:10.591Z",
+              "status": 200,
+              "dataDigest": "sha256:694141765ff456ce18883afe268ea7bb40bddc0a2f58289e80e2cd1cf8cf6c6a",
+              "error": null
+            }
+          ]
+        },
+        {
+          "issuerId": "backpack",
+          "state": "failed",
+          "stopped": null,
+          "assets": [
+            {
+              "symbol": "MU.US",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+              "expectedDecimals": 6,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "failed",
+              "identityCode": "response_too_large",
+              "identityVerified": false,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 0
+              },
+              "components": {
+                "listing": {
+                  "state": "failed",
+                  "code": "response_too_large"
+                },
+                "corporateActions": {
+                  "state": "unavailable",
+                  "code": "issuer_event_endpoint_not_public"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "issuer_corporate_action_ledger_unavailable"
+              ]
+            },
+            {
+              "symbol": "NKE.US",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+              "expectedDecimals": 6,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "failed",
+              "identityCode": "response_too_large",
+              "identityVerified": false,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 0
+              },
+              "components": {
+                "listing": {
+                  "state": "failed",
+                  "code": "response_too_large"
+                },
+                "corporateActions": {
+                  "state": "unavailable",
+                  "code": "issuer_event_endpoint_not_public"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "issuer_corporate_action_ledger_unavailable"
+              ]
+            },
+            {
+              "symbol": "IBM.US",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+              "expectedDecimals": 6,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "failed",
+              "identityCode": "response_too_large",
+              "identityVerified": false,
+              "observedDecimals": null,
+              "decimalsReobserved": false,
+              "counts": {
+                "corporateActionRecords": 0
+              },
+              "components": {
+                "listing": {
+                  "state": "failed",
+                  "code": "response_too_large"
+                },
+                "corporateActions": {
+                  "state": "unavailable",
+                  "code": "issuer_event_endpoint_not_public"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "issuer_corporate_action_ledger_unavailable"
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "endpoint": "/api/v1/assets",
+              "retrievedAt": "2026-09-17T09:08:12.907Z",
+              "status": null,
+              "dataDigest": null,
+              "error": "response_too_large"
+            }
+          ]
+        },
+        {
+          "issuerId": "ondo",
+          "state": "observed",
+          "stopped": null,
+          "assets": [
+            {
+              "symbol": "KOon",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+              "expectedDecimals": 9,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 9,
+              "decimalsReobserved": true,
+              "counts": {
+                "pauseNotices": 0,
+                "multiplierPoints": 6
+              },
+              "components": {
+                "pauses": {
+                  "state": "observed"
+                },
+                "multiplier": {
+                  "state": "observed"
+                },
+                "dividend": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "authenticated_notices_are_not_an_event_ledger"
+              ]
+            },
+            {
+              "symbol": "AAPLon",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+              "expectedDecimals": 9,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 9,
+              "decimalsReobserved": true,
+              "counts": {
+                "pauseNotices": 0,
+                "multiplierPoints": 6
+              },
+              "components": {
+                "pauses": {
+                  "state": "observed"
+                },
+                "multiplier": {
+                  "state": "observed"
+                },
+                "dividend": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "authenticated_notices_are_not_an_event_ledger"
+              ]
+            },
+            {
+              "symbol": "MSFTon",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+              "expectedDecimals": 9,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 9,
+              "decimalsReobserved": true,
+              "counts": {
+                "pauseNotices": 1,
+                "multiplierPoints": 5
+              },
+              "components": {
+                "pauses": {
+                  "state": "observed"
+                },
+                "multiplier": {
+                  "state": "observed"
+                },
+                "dividend": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "authenticated_notices_are_not_an_event_ledger"
+              ]
+            },
+            {
+              "symbol": "MUon",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo",
+              "expectedDecimals": 9,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 9,
+              "decimalsReobserved": true,
+              "counts": {
+                "pauseNotices": 1,
+                "multiplierPoints": 5
+              },
+              "components": {
+                "pauses": {
+                  "state": "observed"
+                },
+                "multiplier": {
+                  "state": "observed"
+                },
+                "dividend": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "authenticated_notices_are_not_an_event_ledger"
+              ]
+            },
+            {
+              "symbol": "NKEon",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo",
+              "expectedDecimals": 9,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 9,
+              "decimalsReobserved": true,
+              "counts": {
+                "pauseNotices": 1,
+                "multiplierPoints": 6
+              },
+              "components": {
+                "pauses": {
+                  "state": "observed"
+                },
+                "multiplier": {
+                  "state": "observed"
+                },
+                "dividend": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "authenticated_notices_are_not_an_event_ledger"
+              ]
+            },
+            {
+              "symbol": "IBMon",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo",
+              "expectedDecimals": 9,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 9,
+              "decimalsReobserved": true,
+              "counts": {
+                "pauseNotices": 0,
+                "multiplierPoints": 6
+              },
+              "components": {
+                "pauses": {
+                  "state": "observed"
+                },
+                "multiplier": {
+                  "state": "observed"
+                },
+                "dividend": {
+                  "state": "observed"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "authenticated_notices_are_not_an_event_ledger"
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "endpoint": "/v1/assets/all/addresses",
+              "retrievedAt": "2026-09-17T09:08:15.766Z",
+              "status": 200,
+              "dataDigest": "sha256:3991d56b43d67646c9b429b5213546fb90f8fe41336e12caa58a0d3fe4ebc63d",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/status/assets",
+              "retrievedAt": "2026-09-17T09:08:16.860Z",
+              "status": 200,
+              "dataDigest": "sha256:9d896a2ddb1efc019681c893b132ebfb14b6ed42439185a765af9e060c3668b2",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/KOon/shares-multiplier?range=all",
+              "retrievedAt": "2026-09-17T09:08:17.322Z",
+              "status": 200,
+              "dataDigest": "sha256:3869b1e4f14c1599198cf071fc2710bcd10f054fd8bca8ebdc5f15b953d94b67",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/KOon/dividends",
+              "retrievedAt": "2026-09-17T09:08:17.778Z",
+              "status": 200,
+              "dataDigest": "sha256:71added31dd409d204925a0809b96f3b22bda9a4d0ef82fe3d21a3cfca4d9fad",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/AAPLon/shares-multiplier?range=all",
+              "retrievedAt": "2026-09-17T09:08:18.230Z",
+              "status": 200,
+              "dataDigest": "sha256:f537b0f097d7492600ac855d756791d4925b71de914e94d7dac901f0ecd21ced",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/AAPLon/dividends",
+              "retrievedAt": "2026-09-17T09:08:18.696Z",
+              "status": 200,
+              "dataDigest": "sha256:e193e55744194003e48bbd12651339819987c8d92669be2c0a73d0b06ddb79e9",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/MSFTon/shares-multiplier?range=all",
+              "retrievedAt": "2026-09-17T09:08:19.146Z",
+              "status": 200,
+              "dataDigest": "sha256:dddeb44008dcd23dc0bdfe035189c13d5ecd0d6e338e767bad5dc1f76afe624a",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/MSFTon/dividends",
+              "retrievedAt": "2026-09-17T09:08:19.596Z",
+              "status": 200,
+              "dataDigest": "sha256:1df248412e0243f1b22a5ff74dc0e4349e6dc03ea0ae313436851a83470d0b7e",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/MUon/shares-multiplier?range=all",
+              "retrievedAt": "2026-09-17T09:08:20.051Z",
+              "status": 200,
+              "dataDigest": "sha256:0882b2a88f12b30a31f5926195b48bb6c0e2603799bf111628a0f69f26995774",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/MUon/dividends",
+              "retrievedAt": "2026-09-17T09:08:20.486Z",
+              "status": 200,
+              "dataDigest": "sha256:c9d1c3b261c7db7c36ff2252e9116564470b26f08b9a87872a72ac26d52baf0a",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/NKEon/shares-multiplier?range=all",
+              "retrievedAt": "2026-09-17T09:08:21.354Z",
+              "status": 200,
+              "dataDigest": "sha256:9a23616c8ddfc7592f1dd87e55c291a3d5ef5f6b2bd5ff3547cf95d38da29559",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/NKEon/dividends",
+              "retrievedAt": "2026-09-17T09:08:22.233Z",
+              "status": 200,
+              "dataDigest": "sha256:60ce0480d385f2cd70e05c7143a79baa1410cb770bfccb4de2bcf9fd241c70bd",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/IBMon/shares-multiplier?range=all",
+              "retrievedAt": "2026-09-17T09:08:23.097Z",
+              "status": 200,
+              "dataDigest": "sha256:a2bbf4cd9db5b9dd94c46ca9332729fd59ae74c3acf65e097643d24d5a10c054",
+              "error": null
+            },
+            {
+              "endpoint": "/v1/assets/IBMon/dividends",
+              "retrievedAt": "2026-09-17T09:08:23.527Z",
+              "status": 200,
+              "dataDigest": "sha256:1e159920f24771589ed8618f755178f8af4c468f99e091ed9298d5bd1fae9cbb",
+              "error": null
+            }
+          ]
+        }
+      ],
+      "archiveWritten": true
+    },
+    {
+      "schema": "dividendx-issuer-summary-v1",
+      "requestedYear": 2026,
+      "startedAt": "2026-09-17T09:10:52.013Z",
+      "completedAt": "2026-09-17T09:10:53.689Z",
+      "settlementReady": false,
+      "blockers": [
+        "authoritative_event_to_mint_factor_binding",
+        "official_civil_ex_dates",
+        "revision_and_cancellation_semantics",
+        "complete_annual_coverage_and_finality",
+        "live_custody_admission"
+      ],
+      "issuers": [
+        {
+          "issuerId": "backpack",
+          "state": "observed",
+          "stopped": null,
+          "assets": [
+            {
+              "symbol": "MU.US",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1",
+              "expectedDecimals": 6,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 6,
+              "decimalsReobserved": true,
+              "counts": {
+                "corporateActionRecords": 0
+              },
+              "components": {
+                "listing": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "unavailable",
+                  "code": "issuer_event_endpoint_not_public"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "issuer_corporate_action_ledger_unavailable"
+              ]
+            },
+            {
+              "symbol": "NKE.US",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "NKEda5nHhNGgjrE9nDdMvaEmkmJ96qqxzBVZEcKmjSg",
+              "expectedDecimals": 6,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 6,
+              "decimalsReobserved": true,
+              "counts": {
+                "corporateActionRecords": 0
+              },
+              "components": {
+                "listing": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "unavailable",
+                  "code": "issuer_event_endpoint_not_public"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "issuer_corporate_action_ledger_unavailable"
+              ]
+            },
+            {
+              "symbol": "IBM.US",
+              "chain": "solana:mainnet-beta",
+              "expectedMint": "BMKdM4yUxX12moFqVk195k7coMbaybd4RUKCUdm7D1Sk",
+              "expectedDecimals": 6,
+              "expectedTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+              "tokenProgramReobserved": false,
+              "identityState": "observed",
+              "identityCode": null,
+              "identityVerified": true,
+              "observedDecimals": 6,
+              "decimalsReobserved": true,
+              "counts": {
+                "corporateActionRecords": 0
+              },
+              "components": {
+                "listing": {
+                  "state": "observed"
+                },
+                "corporateActions": {
+                  "state": "unavailable",
+                  "code": "issuer_event_endpoint_not_public"
+                }
+              },
+              "blockers": [
+                "authoritative_event_to_mint_factor_binding",
+                "official_civil_ex_dates",
+                "revision_and_cancellation_semantics",
+                "complete_annual_coverage_and_finality",
+                "live_custody_admission",
+                "issuer_corporate_action_ledger_unavailable"
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "endpoint": "/api/v1/assets",
+              "retrievedAt": "2026-09-17T09:10:53.677Z",
+              "status": 200,
+              "dataDigest": "sha256:dcb968249478a24888024ea5981f7b8b87bcfcdfd6fa9afe37db4fb5688bd421",
+              "error": null
+            }
+          ]
+        }
+      ],
+      "archiveWritten": true
+    }
+  ],
+  "backpackResponseSizeCheck": {
+    "checkedAt": "2026-09-17T09:10:10.548Z",
+    "status": 200,
+    "bytes": 2151135,
+    "sha256": "dcb968249478a24888024ea5981f7b8b87bcfcdfd6fa9afe37db4fb5688bd421"
+  },
+  "accepted": {
+    "identityMatches": 15,
+    "xstocksCorporateActionRecords": 23,
+    "ondoMultiplierPoints": 34,
+    "backpackLedger": "unavailable",
+    "privateSnapshots": 2,
+    "privateDirectoryMode": "0700",
+    "privateFileMode": "0600"
+  },
+  "notes": [
+    "First run correctly rejected the Backpack response above 2 MiB; a documented 8 MiB endpoint-specific limit and regression were added, then only Backpack was retried.",
+    "The two runs have different observation times. Complete pagination does not establish annual settlement coverage.",
+    "Raw authenticated responses, normalized private snapshot contents and credentials are omitted."
+  ]
+}

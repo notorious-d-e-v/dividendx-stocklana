@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "read-only-program-account-preflight",
+  "checkedAt": "2026-09-17T08:52:47.925Z",
+  "rpc": "https://api.devnet.solana.com",
+  "commitment": "finalized",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "slot": 499734988,
+  "programs": [
+    {
+      "role": "Raydium CPMM",
+      "address": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+      "exists": true,
+      "executable": true,
+      "owner": "BPFLoaderUpgradeab1e11111111111111111111111"
+    },
+    {
+      "role": "DividendX local program ID",
+      "address": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+      "exists": false,
+      "executable": false,
+      "owner": null
+    }
+  ],
+  "boundaries": {
+    "transactionsSubmitted": false,
+    "walletAccessed": false,
+    "fundingRequested": false,
+    "deploymentOrPoolCreated": false,
+    "configAndFeesVerified": false
+  },
+  "programAddressSource": "https://docs.raydium.io/reference/program-addresses"
+}

@@ -60,6 +60,17 @@ All keys and tokens are disposable. The server uses pinned Surfpool 1.5.0 offlin
 
 On a fresh runtime, `node scripts/protocol/wallet-runtime-smoke.mjs` checks all three assets. Restart it before `node apps/web/qa/wallet-app-review.mjs`, which exercises the actual app with two browser wallets. Both checks consume the annual test lifecycle; restart again for a fresh demonstration.
 
+## Read issuer observations
+
+The server-side [issuer readers](packages/issuer-readers/README.md) collect the selected xStocks, Backpack/Trek and Ondo identities and available source records:
+
+```sh
+npm run read:issuers -- --year 2026
+npm run test:issuers
+```
+
+Ondo uses the external `ONDO_API_KEY` credential file described in the reader README. The command prints a summary of identity checks, counts and missing evidence; credentials and authenticated response bodies stay outside Git and the browser. These observations do not authorize annual settlement. The package does not change the running app or test network.
+
 ## Program and transaction SDK
 
 Use the pinned Rust/Agave setup in [program toolchain](docs/program-toolchain.md), then run:

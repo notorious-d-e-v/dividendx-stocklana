@@ -6,6 +6,7 @@
 
 | Later item | Purpose | Conditions before implementation |
 |---|---|---|
+| Guided walkthrough page | Walk users through splitting, transferring or trading claims, providing and withdrawing liquidity, recombining, and separate redemption | User requested this after approving the wallet app; build later as a separate page, using only flows that actually work and clearly identifying local/test-network execution |
 | Following-year series listed early | Give holders a clear next term when current-year deposits have closed | Reviewed pre-year corporate actions, opening/listing policy, useful liquidity and clear year selection; not midyear minting into the current term |
 | Rolling DR vault | Let users hold one strategy share while the vault owns and trades annual vintages | NAV and entry/exit rules, execution limits, fees, late-finalization handling and available next-year liquidity; keep backing and rights separate from the annual vault |
 | Direct vintage choice | Keep individual annual PT/DR available beside a rolling product | Clear balances, prices and risk by exact issuer/mint/year |

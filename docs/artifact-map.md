@@ -18,6 +18,7 @@ Updated 17 September 2026. This map identifies the current review surfaces, sour
 | [`apps/web/src/ProductApp.tsx`](../apps/web/src/ProductApp.tsx) | Main local product flow | In-memory preview; no wallet, vault or network transaction |
 | [`apps/web/src/wallet/`](../apps/web/src/wallet/) | `/app/` wallet flow | Real local test transactions; temporary browser wallet and Wallet Standard interface |
 | [`packages/local-runtime/`](../packages/local-runtime/) | Offline Surfpool test network | Disposable test profiles and synthetic annual journal; no real issuer assets |
+| [`packages/issuer-readers/`](../packages/issuer-readers/) | Server-side issuer observations | Selected registry identities and available source records; explicit gaps, private snapshots, no settlement writer |
 | [`apps/web/src/App.tsx`](../apps/web/src/App.tsx) | Detailed rehearsal | Local accounting demonstration and fallback |
 | [`packages/sdk/src/annual-reference.ts`](../packages/sdk/src/annual-reference.ts) | Multi-event annual accounting and lifecycle reference | Preserved decimal-rational trusted-input model; program arithmetic instead uses exact onchain multiplier bits |
 | [`programs/dividendx/`](../programs/dividendx/) | Annual custody and settlement program, generated IDL | Controlled SBF/local-validator execution; no live issuer admission claim |
@@ -59,6 +60,7 @@ The evidence directory is archival source material and should remain tracked eve
 - [Backpack MU event](../planning/evidence/backpack-scope-mu-event-2026-09-16.json), [raw transactions](../planning/evidence/backpack-scope-mu-raw-transactions-2026-09-16.json) and [authority history](../planning/evidence/backpack-scope-mu-authority-history-2026-09-16.json) — sourced onchain reconstruction; not an issuer-published final event ledger.
 - [Ondo report](../planning/research/ondo-solana.md) and [Ondo evidence](../planning/evidence/ondo-solana-2026-09-16.json) — research snapshot; no source-complete Ondo event is claimed.
 - [Authenticated Ondo access](../planning/research/ondo-api-access-2026-09-17.md) — verified read-only endpoints and six matching mint identities; raw responses and credentials stay outside Git, historical settlement gaps remain.
+- [Issuer reader contract](../spec/issuer-readers-v1.md) and [public source schemas](../planning/research/issuer-reader-source-contracts-2026-09-17.md) — typed observation boundaries, exact identity checks, source revisions and incomplete-history handling.
 - [AMM feasibility](../planning/research/claim-amm-feasibility.md) — devnet integration decision and remaining prerequisites; no pool or deployed DividendX program is claimed.
 - [Annual dividend research](../planning/research/annual-dividend-series.md) — exchange period/ex-date conventions, revisions and actual fixture gaps.
 - [Prior-art decision review](../planning/research/prior-art-review.md) — dated single-event architecture review with reusable lessons; annual specifications supersede its term design.

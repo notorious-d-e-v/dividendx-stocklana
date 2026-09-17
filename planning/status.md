@@ -1,6 +1,6 @@
 # Current status
 
-Updated 17 September 2026 after acceptance of the wallet application and real local annual lifecycle. Deposits still close at year-start.
+Updated 17 September 2026 after acceptance of the wallet application and server-side issuer observation readers. Deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -18,6 +18,7 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Product | Annual Market / Split / Redeem at `/`, with isolated 2027/2028 series and distinct collecting, year-ended and finalized states |
 | Wallet app | `/app/`: actual local wallet signing, custody, PT/DR transfers, recombination and independent redemption; [acceptance](wallet-review.md) |
 | Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
+| Issuer readers | Typed observations across the selected 15 identities, exact source records, private snapshots and explicit data gaps; [acceptance](issuer-reader-review.md) |
 | Fallback | Original single-event SDK and technical rehearsal at `/rehearsal/`, preserved |
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; historical KOx and Backpack MU factors |
 | Research | [Annual conventions and fixture gaps](research/annual-dividend-series.md), extending the [prior-art review](research/prior-art-review.md) |
@@ -43,10 +44,12 @@ Current wallet acceptance adds **104 confirmed/finalized receipts** across three
 
 The fixture verifier and all **33 reference/legacy SDK tests**, **22 transaction-SDK tests**, **27 browser-runner tests**, type checking and the production build pass. Desktop/mobile wallet captures and the exact proof boundaries are in [wallet acceptance](wallet-review.md) and [web QA](../apps/web/qa/README.md).
 
-## Next: issuer evidence and liquidity
+The server-only reader slice adds **22 reader tests** and **16 reviewed Ondo transport tests** to the root checks. Live reads matched all 15 selected identities and retained 23 xStocks corporate-action records plus 34 Ondo multiplier observations. A bounded Backpack size-limit issue was corrected and retested. Root type/build checks pass; the running demo was not restarted. See [reader acceptance](issuer-reader-review.md).
 
-1. **Add operational issuer evidence.** Readers join official ex-dates, classification, revisions and complete-period coverage in the background. A shared token profile or historical factor is not a live annual feed. Keep missing source data visible.
-2. **Prove one AMM round trip.** Target Raydium CPMM on devnet with a specific annual DR and a clearly labeled private test quote token: add liquidity, swap, withdraw liquidity, then redeem eligible recovered claims. Preserve reserves for remaining AMM/lost claims. See [feasibility](research/claim-amm-feasibility.md). A public network cannot fast-forward annual maturity; keep its execution evidence distinct from controlled local time.
+## Next: liquidity and qualified issuer evidence
+
+1. **Prove one AMM round trip.** Target Raydium CPMM on devnet with a future annual DR and a clearly labeled private test quote token: add liquidity, swap, withdraw liquidity, then recombine recovered DR with matching PT. Preserve reserves for remaining AMM/buyer claims. Public time cannot fast-forward an annual maturity; keep independent post-maturity redemption as a separate local proof. See [feasibility](research/claim-amm-feasibility.md).
+2. **Complete issuer qualification.** Observation readers now work across the selected package. Authoritative ex-date joins, classified event/factor binding, correction/finality rules, full annual coverage and live custody admission still need evidence. Keep these gaps visible; the readers do not produce settlement attestations.
 3. **Refresh the submission package.** Export annual pitch wording in a new deck version, synchronize narration with user review, capture only working functionality and verify the actual submission form/deadline.
 
 No redesign, wider issuer audit, custom AMM, bridge or reward token is required for this next phase.
