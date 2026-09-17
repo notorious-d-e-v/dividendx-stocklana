@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "kind": "authenticated-ondo-access-observation",
+  "checkedAt": "2026-09-17T08:09:58.953Z",
+  "apiOrigin": "https://api.gm.ondo.finance",
+  "method": "GET",
+  "providedCredentialKind": "user-described read-only key; write privileges not probed",
+  "requests": [
+    {
+      "path": "/v1/assets/all/addresses",
+      "httpStatus": 200,
+      "retrievedAt": "2026-09-17T08:09:56.463Z",
+      "bytes": 151406,
+      "sha256": "3991d56b43d67646c9b429b5213546fb90f8fe41336e12caa58a0d3fe4ebc63d",
+      "topLevel": "array:458"
+    },
+    {
+      "path": "/v1/status/assets",
+      "httpStatus": 200,
+      "retrievedAt": "2026-09-17T08:09:56.962Z",
+      "bytes": 30610,
+      "sha256": "7c8d52dadd4270cea93d7630598b99a629c9e806e448288dee83094623bf5800",
+      "topLevel": "array:91"
+    },
+    {
+      "path": "/v1/assets/KOon/shares-multiplier?range=all",
+      "httpStatus": 200,
+      "retrievedAt": "2026-09-17T08:09:57.421Z",
+      "bytes": 487,
+      "sha256": "b27bff3798e92df39ba391ec1d708702789b24752799e1ae4c6195cd95e21f61",
+      "topLevel": [
+        "history",
+        "timestamp"
+      ]
+    },
+    {
+      "path": "/v1/assets/KOon/dividends",
+      "httpStatus": 200,
+      "retrievedAt": "2026-09-17T08:09:58.953Z",
+      "bytes": 170,
+      "sha256": "26bb6de4f432e80a9b9c36861a1004507597840ab41ace328b5e38da63dd2acc",
+      "topLevel": [
+        "ticker",
+        "dividendYield",
+        "payoutFrequency",
+        "lastCashAmount",
+        "lastPaymentDate",
+        "timestamp"
+      ]
+    }
+  ],
+  "registryEntryCount": 458,
+  "selectedSolanaRegistryChecks": [
+    {
+      "symbol": "KOon",
+      "solanaMint": "e6G4pfFcrdKxJuZ4YXixRFfMbpMvgXG2Mjcus71ondo",
+      "decimals": 9,
+      "matchesExistingCatalog": true
+    },
+    {
+      "symbol": "AAPLon",
+      "solanaMint": "123mYEnRLM2LLYsJW3K6oyYh8uP1fngj732iG638ondo",
+      "decimals": 9,
+      "matchesExistingCatalog": true
+    },
+    {
+      "symbol": "MSFTon",
+      "solanaMint": "FRmH6iRkMr33DLG6zVLR7EM4LojBFAuq6NtFzG6ondo",
+      "decimals": 9,
+      "matchesExistingCatalog": true
+    },
+    {
+      "symbol": "MUon",
+      "solanaMint": "Fz9edBpaURPPzpKVRR1A8PENYDEgHqwx5D5th28ondo",
+      "decimals": 9,
+      "matchesExistingCatalog": true
+    },
+    {
+      "symbol": "NKEon",
+      "solanaMint": "g646pcdG2Rt5DH9WZzL7VVnVDWCCMTTrnktwE74ondo",
+      "decimals": 9,
+      "matchesExistingCatalog": true
+    },
+    {
+      "symbol": "IBMon",
+      "solanaMint": "C8bZkgSxXkyT1RgxByp2teJ24hgimPLoyEYoNa9ondo",
+      "decimals": 9,
+      "matchesExistingCatalog": true
+    }
+  ],
+  "statusRecordCount": 91,
+  "statusClassesObserved": {
+    "active": 7,
+    "upcoming": 84
+  },
+  "koHistoryRowCount": 6,
+  "koHistoryRetainsDecimalStrings": true,
+  "koCurrentStatusRecordCount": 0,
+  "currentSelectedCashDividendSymbols": [
+    "MSFTon"
+  ],
+  "reviewedStatusHasExDateField": false,
+  "reviewedStatusHasRevisionField": false,
+  "dividendInformationFields": [
+    "ticker",
+    "dividendYield",
+    "payoutFrequency",
+    "lastCashAmount",
+    "lastPaymentDate",
+    "timestamp"
+  ],
+  "annualSettlementEligible": false,
+  "remainingEvidence": [
+    "Historical classified event ledger joined to exact Solana mint and multiplier transitions",
+    "Official civil ex-dates",
+    "Correction/cancellation revisions and finality contract",
+    "Complete-period coverage and finality attestation"
+  ],
+  "boundaries": {
+    "secretsIncluded": false,
+    "rawAuthenticatedResponsesCommitted": false,
+    "walletOrProgramTransactions": false,
+    "runtimeOrUiChanged": false,
+    "fixtureOrFinalizationEnabled": false
+  },
+  "sources": [
+    "https://docs.ondo.finance/api-reference/assets/get-shares-multiplier-history-for-an-asset",
+    "https://docs.ondo.finance/api-reference/status/get-asset-statuses",
+    "https://docs.ondo.finance/openapi.json"
+  ],
+  "checkerVerification": {
+    "checker": "ondo-readonly-v1",
+    "origin": "https://api.gm.ondo.finance",
+    "startedAt": "2026-09-17T08:17:15.443Z",
+    "completedAt": "2026-09-17T08:17:20.091Z",
+    "requestedSymbols": [
+      "KOon"
+    ],
+    "requestMethod": "GET",
+    "requestsAttempted": 4,
+    "observations": [
+      {
+        "endpoint": "/v1/assets/all/addresses",
+        "retrievedAt": "2026-09-17T08:17:17.498Z",
+        "status": 200,
+        "responseShape": "array",
+        "count": 458,
+        "dataDigest": "sha256:3991d56b43d67646c9b429b5213546fb90f8fe41336e12caa58a0d3fe4ebc63d",
+        "error": null
+      },
+      {
+        "endpoint": "/v1/status/assets",
+        "retrievedAt": "2026-09-17T08:17:18.795Z",
+        "status": 200,
+        "responseShape": "array",
+        "count": 90,
+        "dataDigest": "sha256:9d896a2ddb1efc019681c893b132ebfb14b6ed42439185a765af9e060c3668b2",
+        "error": null
+      },
+      {
+        "endpoint": "/v1/assets/KOon/shares-multiplier?range=all",
+        "retrievedAt": "2026-09-17T08:17:19.646Z",
+        "status": 200,
+        "responseShape": "object",
+        "count": 6,
+        "dataDigest": "sha256:371a167e3f51f155b769dbbcb53aa548d4b01e9a79895dcdae7dfa733ee1541e",
+        "error": null
+      },
+      {
+        "endpoint": "/v1/assets/KOon/dividends",
+        "retrievedAt": "2026-09-17T08:17:20.091Z",
+        "status": 200,
+        "responseShape": "object",
+        "count": 6,
+        "dataDigest": "sha256:f60ecd2bacb2909024bd71e95d0c05e868c44442bf7aaa8d9635073758219dd4",
+        "error": null
+      }
+    ],
+    "stopped": null,
+    "evidenceBoundary": {
+      "observationOnly": true,
+      "apiPermissionScopeEstablished": false,
+      "annualSettlementReady": false,
+      "missingAnnualSettlementGuarantees": [
+        "authoritative ex-date coverage for every qualified event",
+        "classification of every multiplier change",
+        "revision and cancellation finality",
+        "complete calendar-year event coverage",
+        "custody eligibility and settlement attestation"
+      ],
+      "note": "Multiplier changes are not classified as dividends by this checker."
+    }
+  },
+  "validation": {
+    "checkerTestsPassed": 16,
+    "existingReferenceTestsPassed": 33,
+    "typecheck": "pass",
+    "productionBuild": "pass; isolated output directory to preserve user test app",
+    "browserSuite": "not rerun; no browser source or configuration changed"
+  }
+}

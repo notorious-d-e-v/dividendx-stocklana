@@ -55,7 +55,7 @@ The [roadmap](roadmap.md) records early next-year listings, rolling DR vaults, d
 
 ## Dependencies and operating notes
 
-Every live issuer needs authoritative ex-date joins, complete annual history, revision/finality rules and qualified ordinary vault custody. Ondo additionally needs its classified event sample and API access; Backpack needs a durable ledger beyond the MU reconstruction. [Data requests](issuer-data-requests.md) distinguish those gaps from already public discovery. These dependencies do not block controlled program tests.
+Every live issuer needs authoritative ex-date joins, complete annual history, revision/finality rules and qualified ordinary vault custody. Ondo read-only API access is now [verified](research/ondo-api-access-2026-09-17.md); its historical classified event/factor joins and annual coverage/finality still need evidence. Backpack needs a durable ledger beyond the MU reconstruction. [Data requests](issuer-data-requests.md) distinguish those gaps from already public discovery. These dependencies do not block controlled program tests.
 
 Astra owns decisions and acceptance; Sol receives bounded work under [AGENTS.md](../AGENTS.md) and the [work orders](phase-work-orders.md). Verification supersedes plans through the [decision log](decision-log.md). Keep credentials outside the repository and browser bundle. Existing authorization covers public Git backup, not real-fund deployment, outreach or submission.
 

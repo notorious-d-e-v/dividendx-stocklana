@@ -1,6 +1,6 @@
 # Issuer data needed for DividendX
 
-16 September 2026. These are drafts and technical requirements, not messages sent. Public asset discovery is complete enough for the selected package. The missing work is settlement-grade annual corporate-action data: authoritative civil ex-dates, exact factor joins, complete period coverage, revisions and finality.
+Updated 17 September 2026. These are drafts and technical requirements, not messages sent. Ondo read-only access is now verified; see [authenticated access review](research/ondo-api-access-2026-09-17.md). The missing work is settlement-grade annual corporate-action data: authoritative civil ex-dates, exact factor joins, complete period coverage, revisions and finality.
 
 ## Getting access and storing credentials
 
@@ -8,9 +8,9 @@ Ondo's [official API overview](https://docs.ondo.finance/api-reference/overview)
 
 Backpack's [published exchange API](https://docs.backpack.exchange/) offers account-generated trading keys, but contains no documented dividend/corporate-action endpoint in the reviewed version. Ask the Backpack/Trek team for stock corporate-action data access using the draft below. Do not assume an exchange trading key grants the missing event data. The reviewed public xStocks registry/history path needs no key.
 
-Local credential file: `/Users/node/.config/dividendx/issuer-api.env`, outside the preview workspace. It contains blank `ONDO_API_KEY` and `BACKPACK_STOCKS_API_KEY` fields. The Backpack variable is only a project-local placeholder; the credential format and authentication method await their documentation. The directory is owner-only (0700), and the newly created file is owner-readable/writable (0600). Existing files are never overwritten or printed by setup.
+Local credential file: `/Users/node/.config/dividendx/issuer-api.env`, outside the preview workspace. The user populated `ONDO_API_KEY`; its four tested data endpoints return HTTP 200, and the file remains owner-readable/writable (0600). `BACKPACK_STOCKS_API_KEY` is only a project-local placeholder; its credential format and authentication method await documentation. Existing files are never overwritten or printed by setup.
 
-Fill values in a local editor; do not paste them into chat. No wallet secrets, trading keys or withdrawal access are needed. This file is reserved for server-side readers and is not yet connected to the demo. Never expose these values through `VITE_*`, public files, fixtures, browser requests or logs. Future reader tooling should load this file explicitly and report only access success/failure.
+Fill values in a local editor; do not paste them into chat. No wallet secrets, trading keys or withdrawal access are needed. This file is used only by the server-side read-only checker; the wallet demo remains unchanged. Never expose these values through `VITE_*`, public files, fixtures, browser requests or logs. Raw authenticated responses remain outside Git; publish only reviewed, sanitized evidence.
 
 ## Backpack
 
@@ -26,7 +26,7 @@ Public observations found a real MU `DividendDistribute` transaction, but the re
 
 Two-sentence outreach draft:
 
-> We're building DividendX for Stocklana, a shared Solana vault that separates a calendar year's qualified dividends from stock exposure, and we're integrating Ondo's native Solana stock tokens. Could we get read-only access to a complete historical corporate-action period, including official civil ex-dates, event IDs/revisions/types, exact multiplier joins and the signal that the eligible period is complete and final?
+> Thanks for the read-only API access—we've verified the registry, current statuses and multiplier history. Could you share the historical corporate-action ledger with official ex-dates, event IDs/revisions, exact multiplier joins, and the rules for corrections and when a period is complete and final?
 
 Documented endpoints: [shares-multiplier history](https://docs.ondo.finance/api-reference/assets/get-shares-multiplier-history-for-an-asset), [asset status](https://docs.ondo.finance/api-reference/status/get-asset-statuses), [registry](https://docs.ondo.finance/api-reference/assets/get-all-contract-addresses-across-networks). They require an API key. Do not paste credentials into chat or commit them; supply them through a local secret environment when implementing the server-side reader.
 

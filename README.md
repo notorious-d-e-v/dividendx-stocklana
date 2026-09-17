@@ -95,6 +95,8 @@ The checked-in presentation outputs are review artifacts. Rebuilding the decks r
 
 ## Next phase
 
+Ondo read-only API access is verified. Run `node scripts/issuers/ondo-readonly.mjs` to check its registry, statuses and Coca-Cola history using `ONDO_API_KEY` from the external `/Users/node/.config/dividendx/issuer-api.env` file. The CLI prints only structural observations and digests; it never loads the key into the web app. Use `--help` for an explicit credential path, selected symbols or private raw archiving. Run its offline tests with `node --test scripts/issuers/ondo-readonly.test.mjs`. Historical event joins and annual finality remain unresolved; see [access findings](planning/research/ondo-api-access-2026-09-17.md).
+
 The [annual research](planning/research/annual-dividend-series.md) extends the [prior-art review](planning/research/prior-art-review.md). Calendar-year periods are our choice; traditional exchange dividend contracts do not all use those exact dates. Membership uses the reference share's official ex-date, including late-paid dividends; maturity stops new eligible dates, while finalization waits for a complete resolved journal. The model replaces corrected events and compounds accepted factors before rounding once. It does not sum separately rounded event payouts.
 
 Next are operational issuer evidence and one verified AMM round trip. The program uses bounded exact multiplier-bit arithmetic and staged settlement; its attestor still supplies trusted event classification and complete-period coverage. Local fixtures do not prove live issuer finality. Rolling vaults, quarterly terms and perpetual-product research remain on the [roadmap](planning/roadmap.md).

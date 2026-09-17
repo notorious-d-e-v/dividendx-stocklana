@@ -1,5 +1,7 @@
 # Ondo Stocks on Solana: DividendX integration audit
 
+**17 September update:** the user supplied read-only API access, and the registry, status, multiplier-history and dividend-information requests now succeed. The dated keyless findings below remain historical; see the [authenticated access review](ondo-api-access-2026-09-17.md). Historical event joins, ex-dates, revisions and annual finality remain unresolved.
+
 **As of:** 2026-09-16  
 **Method:** independent review of Ondo documentation and source, finalized Solana mainnet RPC reads, and existing production transactions. No wallet was connected and no transaction was signed or submitted. Timestamped machine-readable evidence is in [`../evidence/ondo-solana-2026-09-16.json`](../evidence/ondo-solana-2026-09-16.json).
 
