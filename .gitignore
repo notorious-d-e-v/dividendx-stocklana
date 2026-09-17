@@ -15,6 +15,11 @@ secrets/
 *.pem
 *.key
 
+# Local Solana builds, tools, ledgers and disposable development keys.
+target/
+.local-tools/
+.local-ledger/
+
 # Regenerable presentation working files; keep sources, final decks and archives.
 presentation/build/rendered/
 presentation/build/rendered-v*/

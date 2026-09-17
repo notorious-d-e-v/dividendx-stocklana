@@ -1,0 +1,63 @@
+{
+  "reviewedAt": "2026-09-17",
+  "method": "Astra independent Node bigint oracle; exact positive normal IEEE-754 decomposition; no source-date inference",
+  "programExecution": false,
+  "bound": "64 * (53 significant bits + maximum 63-bit exponent shift) = 7424; u64 allocation product <= 7488 bits",
+  "cases": [
+    {
+      "name": "KOx historical factor regression",
+      "kind": "historical-factors-only",
+      "exDate": "synthetic in execution tests; not source-verified",
+      "q": "9819982084",
+      "m0Bits": "4607264977872978803",
+      "m1Bits": "4607284020568871647",
+      "events": 1,
+      "ptRaw": "9779376057",
+      "drRaw": "40606027",
+      "numeratorBits": 53,
+      "denominatorBits": 53,
+      "allocationProductBits": 78
+    },
+    {
+      "name": "MU historical factor regression",
+      "kind": "historical-factors-only",
+      "exDate": "synthetic in execution tests; not source-verified",
+      "q": "100000000",
+      "m0Bits": "4607182418800017408",
+      "m1Bits": "4607182899454409970",
+      "events": 1,
+      "ptRaw": "99989329",
+      "drRaw": "10671",
+      "numeratorBits": 53,
+      "denominatorBits": 53,
+      "allocationProductBits": 66
+    },
+    {
+      "name": "64 maximal exponent-span factors",
+      "kind": "synthetic arithmetic bound",
+      "q": "18446744073709551615",
+      "m0Bits": "4463067230724161536",
+      "m1Bits": "4751297606875873279",
+      "events": 64,
+      "ptRaw": "1",
+      "drRaw": "18446744073709551614",
+      "numeratorBits": 3329,
+      "denominatorBits": 7424,
+      "allocationProductBits": 7488
+    },
+    {
+      "name": "64 one-ULP dividends retain fractional allocation",
+      "kind": "synthetic rounding regression",
+      "q": "18446744073709551615",
+      "m0Bits": "4607182418800017408",
+      "m1Bits": "4607182418800017409",
+      "events": 64,
+      "naiveEventFloorSum": "262080",
+      "ptRaw": "18446744073709289472",
+      "drRaw": "262143",
+      "numeratorBits": 3329,
+      "denominatorBits": 3329,
+      "allocationProductBits": 3347
+    }
+  ]
+}

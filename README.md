@@ -2,7 +2,7 @@
 
 DividendX separates a tokenized-stock position into annual claims: principal tokens (PT) for the remaining stock exposure and dividend-right tokens (DR) for the year's qualified dividend allocation. For example, `PT-KOx-2027` and `DR-KOx-2027` belong to the Coca-Cola KOx 2027 series. Deposits close when the year starts. Matching PT and DR can recombine before finalization; afterward each side redeems independently, without an expiry or forfeiture deadline.
 
-The repository currently contains a local React preview, an exact bigint annual accounting reference and the preserved single-event rehearsal SDK. No Solana program, wallet integration, actual PT/DR mints, live issuer reader or AMM pool exists yet.
+The repository contains the annual Solana program, a separate transaction SDK, compiled-program tests, the local React preview and the preserved accounting references. Controlled local tests create actual PT/DR mints and custody accounts. The web preview remains an in-memory demo; wallet UI, live issuer feeds, public deployment and AMM liquidity are later work.
 
 ## Current demo
 
@@ -38,12 +38,31 @@ Browser tests use Playwright's bundled Chromium by default. Set `PLAYWRIGHT_CHRO
 
 The [GitHub Actions template](docs/ci-workflow.yml) is included but inactive: the publishing login needs GitHub's `workflow` scope before it can install workflows. See [CI setup](docs/ci-setup.md).
 
+## Program and transaction SDK
+
+Use the pinned Rust/Agave setup in [program toolchain](docs/program-toolchain.md), then run:
+
+```sh
+npm --prefix packages/transaction-sdk ci
+npm run build:program
+npm run build:idl
+npm --prefix packages/transaction-sdk run vectors
+npm run test:transactions
+npm run test:program
+npm --prefix packages/transaction-sdk run smoke:local
+```
+
+The SBF suite advances a controlled test clock to cover the annual lifecycle. The signed SDK smoke starts an isolated local validator with disposable keys and test collateral, then removes its ledger. Neither changes the deployed program's clock rules. See [acceptance review](planning/program-review.md), [program contract](spec/program-v1.md) and [transaction SDK](packages/transaction-sdk/README.md).
+
 ## Repository map
 
 | Path | Purpose |
 | --- | --- |
 | [`apps/web/`](apps/web/) | Annual product preview, preserved rehearsal and browser tests |
 | [`packages/sdk/`](packages/sdk/) | Annual reference model and preserved legacy SDK |
+| [`programs/dividendx/`](programs/dividendx/) | Annual custody program and generated Anchor IDL |
+| [`packages/transaction-sdk/`](packages/transaction-sdk/) | Instruction builders, coherent account reads, quotes and signing helpers |
+| [`tests/protocol/`](tests/protocol/) | Independent arithmetic oracle and compiled-SBF conformance |
 | [`packages/demo-fixtures/`](packages/demo-fixtures/) | Frozen catalog and historical event fixtures |
 | [`planning/evidence/`](planning/evidence/) | Dated source snapshots and verification records |
 | [`design/`](design/) | Approved visual system and illustrations |
@@ -57,4 +76,4 @@ The checked-in presentation outputs are review artifacts. Rebuilding the decks r
 
 The [annual research](planning/research/annual-dividend-series.md) extends the [prior-art review](planning/research/prior-art-review.md). Calendar-year periods are our choice; traditional exchange dividend contracts do not all use those exact dates. Membership uses the reference share's official ex-date, including late-paid dividends; maturity stops new eligible dates, while finalization waits for a complete resolved journal. The model replaces corrected events and compounds accepted factors before rounding once. It does not sum separately rounded event payouts.
 
-Next is the Solana program and transaction SDK, followed by wallets and one verified AMM round trip. Program work must resolve bounded arithmetic/Token-2022 factor conformance, account and authority design, complete event evidence and finalization/dispute policy. The local reference's caller-supplied finality flags are test inputs, not issuer attestations. Quarterly series remain future work.
+Next are wallet integration, operational issuer evidence and one verified AMM round trip. The program uses bounded exact multiplier-bit arithmetic and staged settlement; its attestor still supplies trusted event classification and complete-period coverage. Local fixtures do not prove live issuer finality. Rolling vaults, quarterly terms and perpetual-product research remain on the [roadmap](planning/roadmap.md).

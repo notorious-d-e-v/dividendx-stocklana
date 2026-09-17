@@ -1,0 +1,74 @@
+{
+  "kind": "local-validator-sdk-smoke",
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "endpoint": "http://127.0.0.1:18899",
+  "genesisHash": "CuqgJka5YHBMnUf52rnSpDV1dSZdQscubW4dUSLV3okp",
+  "quoteSnapshotSlots": {
+    "deposit": 7,
+    "recombine": 8
+  },
+  "idlSha256": "d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4",
+  "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+  "deposit": {
+    "signature": "5527rakcnZWiAfB54VS6Q6gTPmCgLp7n3kZ8Qxn62KPkYBsqaYL9cT5sdRTKrSx4TqvT5VTbb2L8FYrVQyhWKBBw",
+    "slot": 8,
+    "amountRaw": "1000"
+  },
+  "recombine": {
+    "signature": "55DAe5qdUaGL59AFbz6csZSHKJVm3dSCNBsc7TAV1EczC8RVNTu4rEFZ1yZ22qgghu1obZL6R7ftuuPvyfNrfmKj",
+    "slot": 9,
+    "amountRaw": "100"
+  },
+  "rollback": {
+    "signature": "2MzTVPqwwvbhE99DdCThtUB4c4MurzkcmkGpzKiZH6mHku3ZY7aAQmeYRvh2TSuT6Vfrv5hcPZmjUNvyEn3c19y2",
+    "slot": 10,
+    "failureInstructionIndex": 1,
+    "error": {
+      "InstructionError": [
+        1,
+        {
+          "Custom": 1
+        }
+      ]
+    },
+    "stateBefore": {
+      "nominalBacking": "900",
+      "stateVersion": "2",
+      "vaultRaw": "900",
+      "holderCollateralRaw": "999100",
+      "holderPtRaw": "900",
+      "holderDrRaw": "900",
+      "ptSupplyRaw": "900",
+      "drSupplyRaw": "900"
+    },
+    "stateAfter": {
+      "nominalBacking": "900",
+      "stateVersion": "2",
+      "vaultRaw": "900",
+      "holderCollateralRaw": "999100",
+      "holderPtRaw": "900",
+      "holderDrRaw": "900",
+      "ptSupplyRaw": "900",
+      "drSupplyRaw": "900"
+    },
+    "logs": [
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+      "Program log: Instruction: Recombine",
+      "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+      "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 131 of 186492 compute units",
+      "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+      "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+      "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 131 of 184658 compute units",
+      "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+      "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [2]",
+      "Program log: Instruction: TransferChecked",
+      "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 2259 of 182643 compute units",
+      "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 24977 of 203000 compute units",
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE success",
+      "Program 11111111111111111111111111111111 invoke [1]",
+      "Transfer: insufficient lamports 4999985000, need 100000000000",
+      "Program 11111111111111111111111111111111 failed: custom program error: 0x1"
+    ]
+  }
+}

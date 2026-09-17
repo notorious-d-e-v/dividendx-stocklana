@@ -1,6 +1,6 @@
 # DividendX artifact map
 
-Snapshot audited 16 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. It is a navigation aid, not a claim that the planned protocol has been deployed.
+Updated 17 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. Local program execution does not establish a public deployment or live issuer integration.
 
 ## Start here
 
@@ -9,7 +9,7 @@ Snapshot audited 16 September 2026. This map identifies the current review surfa
 - [Architecture decision](../planning/adapter-decision.md) and [issuer synthesis](../planning/solana-issuer-synthesis.md) — the selected xStocks, Backpack/Trek and Ondo design, its evidence boundary and unresolved dependencies.
 - [Annual product specification](../spec/annual-product.md) — annual Market / Split / Redeem flow at `/`, extending the approved visual design.
 - [Detailed rehearsal specification](../spec/frontend-rehearsal.md) — preserved two-account accounting walkthrough at `/rehearsal/`.
-- [Annual accounting](../spec/annual-series-accounting.md), [SDK contract](../spec/annual-series-sdk.md) and [test matrix](../spec/annual-series-tests.md) — current program-facing contract. Older [single-event accounting](../spec/series-accounting.md) and [SDK interface](../spec/sdk-interface.md) describe the preserved rehearsal only.
+- [Program v1](../spec/program-v1.md), [annual accounting](../spec/annual-series-accounting.md), [SDK contract](../spec/annual-series-sdk.md) and [test matrix](../spec/annual-series-tests.md) — current implementation contract. [Acceptance review](../planning/program-review.md) records execution evidence; [toolchain](program-toolchain.md) gives reproduction commands. Older [single-event accounting](../spec/series-accounting.md) and [SDK interface](../spec/sdk-interface.md) describe the preserved rehearsal only.
 
 ## Current product and proof material
 
@@ -17,7 +17,10 @@ Snapshot audited 16 September 2026. This map identifies the current review surfa
 |---|---|---|
 | [`apps/web/src/ProductApp.tsx`](../apps/web/src/ProductApp.tsx) | Main local product flow | In-memory preview; no wallet, vault or network transaction |
 | [`apps/web/src/App.tsx`](../apps/web/src/App.tsx) | Detailed rehearsal | Local accounting demonstration and fallback |
-| [`packages/sdk/src/annual-reference.ts`](../packages/sdk/src/annual-reference.ts) | Multi-event annual accounting and lifecycle reference | Local trusted-input model; bounded program arithmetic and attestation remain to implement |
+| [`packages/sdk/src/annual-reference.ts`](../packages/sdk/src/annual-reference.ts) | Multi-event annual accounting and lifecycle reference | Preserved decimal-rational trusted-input model; program arithmetic instead uses exact onchain multiplier bits |
+| [`programs/dividendx/`](../programs/dividendx/) | Annual custody and settlement program, generated IDL | Controlled SBF/local-validator execution; no live issuer admission claim |
+| [`packages/transaction-sdk/`](../packages/transaction-sdk/) | Actual instruction builders, snapshots, quotes and signing helpers | Separate from the simulated web client; caller supplies signers |
+| [`tests/protocol/`](../tests/protocol/) | Independent oracle and compiled-SBF conformance | Controlled mints, clocks and attestations; preserves source fixture provenance |
 | [`packages/sdk/src/index.ts`](../packages/sdk/src/index.ts) | Preserved single-event rehearsal SDK | Legacy behavior, not the annual program contract |
 | [`packages/demo-fixtures/`](../packages/demo-fixtures/) | Frozen catalog, events, digests and verifier | Reproducible historical fixtures; not live availability |
 | [`apps/web/qa/README.md`](../apps/web/qa/README.md) | UI review record and reproduction commands | Browser evidence for the preview only |

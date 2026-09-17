@@ -1,5 +1,7 @@
 # Annual dividend series: accounting and program contract
 
+Program implementation detail: [program v1](program-v1.md) now pins canonical IEEE-754 multiplier bits, bounded exact arithmetic, account/authority rules, token policy and staged finalization. The decimal-rational reference below remains an economic oracle; comparisons must first convert inputs to the canonical binary representation when asserting chain parity.
+
 16 September 2026. Astra decision after the user requested calendar-year PT/DR and explicitly chose to close deposits when the year starts. This supersedes the one-event architecture for all new implementation. The [old accounting](series-accounting.md) and `/rehearsal/` remain a preserved single-event demonstration.
 
 The executable [annual reference](../packages/sdk/src/annual-reference.ts) validates the arithmetic and lifecycle below. It is trusted-input local code, not a Solana program, issuer integration or a finalized SBF numerical implementation. The remaining program-specific gates are listed at the end.

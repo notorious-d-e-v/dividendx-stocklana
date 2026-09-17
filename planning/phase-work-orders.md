@@ -1,6 +1,6 @@
 # DividendX phase work orders
 
-Updated 16 September 2026. Workspace `/Users/node/workspace/dividendx-stocklana`. The visual system and illustrated pitch are approved. Scope is the selected asset package across xStocks, Backpack/Trek and Ondo. Permissioned holder/approved-vault products, onboarding and catalog UI are excluded. The annual model/product and preserved rehearsal are local references; no DividendX program, wallet integration or claim mint exists. This supersedes the archived broader and xStocks-only work orders.
+Updated 17 September 2026. Workspace `/Users/node/workspace/dividendx-stocklana`. The visual system and illustrated pitch are approved. Scope is the selected asset package across xStocks, Backpack/Trek and Ondo. Permissioned holder/approved-vault products, onboarding and catalog UI are excluded. The annual model/product and preserved rehearsal remain local references. The actual annual program and transaction SDK have passed local acceptance; wallet and issuer integration are the next work orders. This supersedes the archived broader and xStocks-only work orders.
 
 ## Delegation contract
 
@@ -47,6 +47,8 @@ The earlier `spec/product-app-v1.md` revision established the approved Market / 
 The annual product remains a local preview with seeded balances and test attestations. It does not complete the onchain or AMM target. Original rehearsal source and behavior stay available separately; the next implementation phase remains the actual annual vault, transaction SDK and claim mints.
 
 ## Phase 4: annual vault, SDK and issuer readers
+
+**Delivered implementation slice (17 September):** [program v1](../spec/program-v1.md) freezes the instruction/account contract, canonical multiplier bits, bounded arithmetic, mint policy, authority model and staged finalization. Sol implemented the program and compiled-SBF conformance at xhigh effort, and the separate transaction SDK at high effort. Astra accepted the local slice after 46 Rust tests, 22 transaction-SDK tests and signed validator deposit/recombination/rollback checks; see the [acceptance review](program-review.md). Controlled local collateral and disposable test signers preserve the web preview. Operational issuer readers, wallet UI and public deployment are later slices. The user's rolling-product ideas are recorded in the [roadmap](roadmap.md), outside this implementation.
 
 Sol **xhigh** as requested by the user. Start only after Astra freezes the bounded onchain factor representation, evidence serialization, authority model, compute limits and recovery policy. The controlling documents are [annual accounting](../spec/annual-series-accounting.md), the [annual SDK/reference contract](../spec/annual-series-sdk.md) and [annual acceptance matrix](../spec/annual-series-tests.md). Preserve the legacy SDK and `/rehearsal/`; do not evolve their event-equals-series contract into the program. Own `programs/dividendx/**`, assigned transaction-SDK paths, `packages/issuer-readers/**`, `tests/protocol/**`, `scripts/protocol/**` and specifically assigned Anchor configuration.
 

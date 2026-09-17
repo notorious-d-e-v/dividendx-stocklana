@@ -1,6 +1,6 @@
 # Current status
 
-Updated 16 September 2026 after the user changed DividendX to calendar-year dividend series and chose to close deposits at year-start.
+Updated 17 September 2026 after acceptance of the actual annual Solana program and transaction SDK for local integration. Deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -12,12 +12,15 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Pitch | Approved [illustrated v2](../presentation/output/DividendX-illustrated-v2.pptx) and [user narration](../presentation/narration.md), preserved; annual wording recorded for the next versioned export |
 | Annual contract | [Accounting](../spec/annual-series-accounting.md), [SDK](../spec/annual-series-sdk.md), [acceptance matrix](../spec/annual-series-tests.md) and [product copy](../spec/annual-product.md) |
 | Reference | Exact bigint [annual model](../packages/sdk/src/annual-reference.ts): multiple events, revisions/cancellations, cumulative rounding, paired exits and independent final redemption |
+| Program | [Anchor program](../programs/dividendx/README.md) with Token-2022 custody, ordinary SPL PT/DR mints, immutable event revisions, staged exact settlement and independent redemption |
+| Transaction SDK | [Separate package](../packages/transaction-sdk/README.md) with generated-IDL builders, coherent reads, raw-unit quotes and caller-supplied signing |
+| Program contract | [Frozen implementation contract](../spec/program-v1.md), [toolchain](../docs/program-toolchain.md) and [acceptance review](program-review.md) |
 | Product | Annual Market / Split / Redeem at `/`, with isolated 2027/2028 series and distinct collecting, year-ended and finalized states |
 | Fallback | Original single-event SDK and technical rehearsal at `/rehearsal/`, preserved |
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; historical KOx and Backpack MU factors |
 | Research | [Annual conventions and fixture gaps](research/annual-dividend-series.md), extending the [prior-art review](research/prior-art-review.md) |
 
-The annual model and preview are local. No deployed program, actual PT/DR token, wallet transaction, live issuer reader or AMM pool exists. Finality/completeness flags in the reference are controlled test inputs, not authenticated issuer evidence.
+The web preview remains local and simulated. The separate program tests execute actual token custody and PT/DR minting through the compiled SBF program. No public deployment, wallet UI, live issuer reader or AMM pool is claimed. Finality/completeness inputs in controlled tests are not authenticated issuer evidence; the program trusts its configured attestor for classification and complete-period coverage.
 
 ## Annual decisions
 
@@ -32,17 +35,20 @@ The preview clearly labels historical factors with synthetic term dates. Neither
 
 ## Verification
 
-The fixture verifier and all **33 SDK tests** passed, including 22 annual tests and the unchanged 11 legacy tests. All **20 browser tests**, type checking and the production build passed. Astra independently checked the combined accounting lifecycle, ran the annual Chrome review through both holders' redemptions, and inspected desktop/mobile renders. Markdown links and preservation checks passed. See [web QA](../apps/web/qa/README.md).
+The program build, generated IDL, **46 Rust tests** (including 16 compiled-SBF integration tests), **22 transaction-SDK tests** and package import passed. Signed local-validator transactions proved deposit, recombination and rollback of prior successful token CPIs after a later instruction failed. Exact artifacts and proof boundaries are in the [acceptance review](program-review.md).
 
-## Next: actual program and transferable tokens
+The fixture verifier and all **33 reference/legacy SDK tests**, type checking and the production build also passed. The previous **20 browser tests** and visual review remain the preserved UI baseline; this phase does not change the frontend. See [web QA](../apps/web/qa/README.md).
 
-1. **Astra finishes the program instruction/account contract.** Pin bounded arithmetic and Token-2022 factor conformance, PDA/account layouts, canonical evidence serialization, authority separation, completeness/finality policy and unsupported-action stop/recovery states. The exact rational reference is the mathematical oracle, not SBF code.
-2. **Sol implements at xhigh effort.** Build annual PDA custody, real PT/DR mints, pre-year issuance, revision-aware event records, recombination and post-maturity finalization/redemption. Support the multi-event acceptance matrix from the first version, even if the filmed demo uses one sourced example.
-3. **Astra reviews; Sol connects the product at high effort.** Add wallet-signed test-network/local-validator transactions and actual receipts. Readers process event evidence in the background.
-4. **Prove one AMM round trip.** Target Raydium CPMM on devnet with a specific annual DR and a clearly labeled private test quote token: add liquidity, swap, withdraw liquidity, then redeem recovered DR and retained PT. Preserve reserves for remaining AMM/lost claims. See [feasibility](research/claim-amm-feasibility.md).
-5. **Refresh the submission package.** Export annual pitch wording in a new deck version, synchronize narration with user review, capture only working functionality and verify the actual submission form/deadline.
+## Next: wallet and issuer integration
+
+1. **Connect the product at high effort.** Use wallet-signed transactions and actual receipts from the accepted SDK/program, while preserving the local preview as a fallback. A complete annual lifecycle uses explicitly controlled test time; a public test network does not fast-forward its clock for a demo.
+2. **Add operational issuer evidence.** Readers join official ex-dates, classification, revisions and complete-period coverage in the background. A shared token profile or historical factor is not a live annual feed.
+3. **Prove one AMM round trip.** Target Raydium CPMM on devnet with a specific annual DR and a clearly labeled private test quote token: add liquidity, swap, withdraw liquidity, then redeem eligible recovered claims. Preserve reserves for remaining AMM/lost claims. See [feasibility](research/claim-amm-feasibility.md).
+4. **Refresh the submission package.** Export annual pitch wording in a new deck version, synchronize narration with user review, capture only working functionality and verify the actual submission form/deadline.
 
 No redesign, wider issuer audit, custom AMM, bridge or reward token is required for this next phase.
+
+The [roadmap](roadmap.md) records early next-year listings, rolling DR vaults, demand-led quarterly terms and perpetual-product research. None changes the annual settlement primitive or adds scope to the current program.
 
 ## Dependencies and operating notes
 

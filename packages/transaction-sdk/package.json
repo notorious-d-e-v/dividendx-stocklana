@@ -1,0 +1,39 @@
+{
+  "name": "@dividendx/transaction-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./idl": "./idl/dividendx.json"
+  },
+  "files": [
+    "dist",
+    "idl",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test dist/test/*.test.js && npm run test:package",
+    "test:package": "node --input-type=module -e \"const sdk = await import('@dividendx/transaction-sdk'); if (typeof sdk.DividendXInstructions !== 'function') throw new Error('package export failed')\"",
+    "smoke:local": "npm run build && node dist/smoke/local-validator.js",
+    "sync:idl": "node scripts/sync-idl.mjs",
+    "vectors": "npm run sync:idl && npm run build && node dist/scripts/generate-vectors.js"
+  },
+  "dependencies": {
+    "@anchor-lang/core": "1.2.0",
+    "@solana/spl-token": "0.4.14",
+    "@solana/web3.js": "1.98.4"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.3",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

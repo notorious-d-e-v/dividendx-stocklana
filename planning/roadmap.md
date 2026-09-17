@@ -1,0 +1,17 @@
+# Roadmap: fixed terms, transferable claims, rolling products
+
+17 September 2026. The user supplied a side-chat discussion and explicitly deferred its additional products. This records direction, not implemented features or a change to the current annual program scope.
+
+**Fixed-term protocol, transferable tokens, rolling user experience.** Annual issuer/mint/year series remain the settlement foundation. PT and DR can move between holders without changing their term or backing. Wallet and AMM integrations are the next application phase after the program and transaction SDK.
+
+| Later item | Purpose | Conditions before implementation |
+|---|---|---|
+| Following-year series listed early | Give holders a clear next term when current-year deposits have closed | Reviewed pre-year corporate actions, opening/listing policy, useful liquidity and clear year selection; not midyear minting into the current term |
+| Rolling DR vault | Let users hold one strategy share while the vault owns and trades annual vintages | NAV and entry/exit rules, execution limits, fees, late-finalization handling and available next-year liquidity; keep backing and rights separate from the annual vault |
+| Direct vintage choice | Keep individual annual PT/DR available beside a rolling product | Clear balances, prices and risk by exact issuer/mint/year |
+| Quarterly series | Offer shorter exposure where demand supports it | Evidence of enough trading depth to justify additional markets; explicit new term rules |
+| Perpetual claim research | Explore an indefinite dividend product | Reliable event/revision feeds, fair entry/exit pricing, correction reserves, corporate-action recovery and sustained liquidity; no automatic migration of existing annual holders |
+
+A rolling vault must purchase the next vintage or receive new capital under stated rules. Redemption of this year's DR does not grant next year's dividends for free. It also inherits the timing and price risks of the stock-token payouts and may need to hold overlapping years while old records finalize. This is a separately specified strategy product, not an exception to annual cutoff or redemption rights.
+
+Current scope stays [annual program v1](../spec/program-v1.md). No rolling vault, quarterly series, perpetual token, reward token or bridge is implemented in this phase.

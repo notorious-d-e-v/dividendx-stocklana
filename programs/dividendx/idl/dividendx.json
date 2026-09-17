@@ -1,0 +1,2101 @@
+{
+  "address": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "metadata": {
+    "name": "dividendx",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "DividendX annual Solana collateral and claim program"
+  },
+  "instructions": [
+    {
+      "name": "abort_finalization",
+      "discriminator": [
+        15,
+        193,
+        211,
+        168,
+        63,
+        228,
+        29,
+        67
+      ],
+      "accounts": [
+        {
+          "name": "attestor",
+          "signer": true,
+          "relations": [
+            "asset_policy"
+          ]
+        },
+        {
+          "name": "asset_policy",
+          "relations": [
+            "series"
+          ]
+        },
+        {
+          "name": "series",
+          "writable": true,
+          "relations": [
+            "accumulator"
+          ]
+        },
+        {
+          "name": "accumulator",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  117,
+                  109,
+                  117,
+                  108,
+                  97,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "series"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "reason_digest",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "accumulate_event",
+      "discriminator": [
+        45,
+        230,
+        145,
+        33,
+        150,
+        93,
+        57,
+        94
+      ],
+      "accounts": [
+        {
+          "name": "keeper",
+          "signer": true
+        },
+        {
+          "name": "series",
+          "writable": true,
+          "relations": [
+            "accumulator"
+          ]
+        },
+        {
+          "name": "accumulator",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  117,
+                  109,
+                  117,
+                  108,
+                  97,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "series"
+              }
+            ]
+          }
+        },
+        {
+          "name": "event_head"
+        },
+        {
+          "name": "revision"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "begin_finalization",
+      "discriminator": [
+        192,
+        82,
+        215,
+        53,
+        157,
+        136,
+        87,
+        104
+      ],
+      "accounts": [
+        {
+          "name": "attestor",
+          "signer": true,
+          "relations": [
+            "asset_policy"
+          ]
+        },
+        {
+          "name": "asset_policy",
+          "relations": [
+            "series"
+          ]
+        },
+        {
+          "name": "series",
+          "writable": true,
+          "relations": [
+            "accumulator"
+          ]
+        },
+        {
+          "name": "accumulator",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  117,
+                  109,
+                  117,
+                  108,
+                  97,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "series"
+              }
+            ]
+          }
+        },
+        {
+          "name": "collateral_mint"
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "pt_mint"
+        },
+        {
+          "name": "dr_mint"
+        }
+      ],
+      "args": [
+        {
+          "name": "expected_journal_version",
+          "type": "u64"
+        },
+        {
+          "name": "expected_journal_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "coverage_digest",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "complete_finalization",
+      "discriminator": [
+        123,
+        230,
+        213,
+        122,
+        161,
+        82,
+        252,
+        157
+      ],
+      "accounts": [
+        {
+          "name": "keeper",
+          "signer": true
+        },
+        {
+          "name": "asset_policy",
+          "relations": [
+            "series"
+          ]
+        },
+        {
+          "name": "series",
+          "writable": true,
+          "relations": [
+            "accumulator"
+          ]
+        },
+        {
+          "name": "accumulator",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  117,
+                  109,
+                  117,
+                  108,
+                  97,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "series"
+              }
+            ]
+          }
+        },
+        {
+          "name": "collateral_mint"
+        },
+        {
+          "name": "vault"
+        },
+        {
+          "name": "pt_mint",
+          "writable": true
+        },
+        {
+          "name": "dr_mint",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_series",
+      "discriminator": [
+        181,
+        9,
+        52,
+        120,
+        197,
+        221,
+        42,
+        142
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "asset_policy",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  115,
+                  115,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "asset_policy.issuer_id",
+                "account": "AssetPolicy"
+              },
+              {
+                "kind": "account",
+                "path": "collateral_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "series",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  114,
+                  105,
+                  101,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "asset_policy"
+              },
+              {
+                "kind": "arg",
+                "path": "year"
+              }
+            ]
+          }
+        },
+        {
+          "name": "accumulator",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  117,
+                  109,
+                  117,
+                  108,
+                  97,
+                  116,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "series"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pt_mint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "series"
+              }
+            ]
+          }
+        },
+        {
+          "name": "dr_mint",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "series"
+              }
+            ]
+          }
+        },
+        {
+          "name": "collateral_mint"
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "series"
+              },
+              {
+                "kind": "account",
+                "path": "collateral_token_program"
+              },
+              {
+                "kind": "account",
+                "path": "collateral_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "collateral_token_program",
+          "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "year",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "deposit",
+      "discriminator": [
+        242,
+        35,
+        198,
+        137,
+        82,
+        225,
+        242,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "holder",
+          "signer": true
+        },
+        {
+          "name": "asset_policy",
+          "relations": [
+            "series"
+          ]
+        },
+        {
+          "name": "series",
+          "writable": true
+        },
+        {
+          "name": "collateral_mint"
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "holder_collateral",
+          "writable": true
+        },
+        {
+          "name": "pt_mint",
+          "writable": true
+        },
+        {
+          "name": "dr_mint",
+          "writable": true
+        },
+        {
+          "name": "holder_pt",
+          "writable": true
+        },
+        {
+          "name": "holder_dr",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "collateral_token_program",
+          "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "guard",
+          "type": {
+            "defined": {
+              "name": "Guard"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize_config",
+      "discriminator": [
+        208,
+        127,
+        21,
+        1,
+        194,
+        190,
+        196,
+        70
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "program",
+          "address": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE"
+        },
+        {
+          "name": "program_data"
+        },
+        {
+          "name": "upgrade_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "domain",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "recombine",
+      "discriminator": [
+        227,
+        145,
+        0,
+        29,
+        75,
+        181,
+        20,
+        2
+      ],
+      "accounts": [
+        {
+          "name": "holder",
+          "signer": true
+        },
+        {
+          "name": "asset_policy",
+          "relations": [
+            "series"
+          ]
+        },
+        {
+          "name": "series",
+          "writable": true
+        },
+        {
+          "name": "collateral_mint"
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "holder_collateral",
+          "writable": true
+        },
+        {
+          "name": "pt_mint",
+          "writable": true
+        },
+        {
+          "name": "dr_mint",
+          "writable": true
+        },
+        {
+          "name": "holder_pt",
+          "writable": true
+        },
+        {
+          "name": "holder_dr",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "collateral_token_program",
+          "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "guard",
+          "type": {
+            "defined": {
+              "name": "Guard"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "redeem",
+      "discriminator": [
+        184,
+        12,
+        86,
+        149,
+        70,
+        196,
+        97,
+        225
+      ],
+      "accounts": [
+        {
+          "name": "holder",
+          "signer": true
+        },
+        {
+          "name": "asset_policy",
+          "relations": [
+            "series"
+          ]
+        },
+        {
+          "name": "series",
+          "writable": true
+        },
+        {
+          "name": "collateral_mint"
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "holder_collateral",
+          "writable": true
+        },
+        {
+          "name": "claim_mint",
+          "writable": true
+        },
+        {
+          "name": "holder_claim",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "collateral_token_program",
+          "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+        }
+      ],
+      "args": [
+        {
+          "name": "side",
+          "type": {
+            "defined": {
+              "name": "RedeemSide"
+            }
+          }
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "allow_zero",
+          "type": "bool"
+        },
+        {
+          "name": "guard",
+          "type": {
+            "defined": {
+              "name": "Guard"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "refresh_observation",
+      "discriminator": [
+        241,
+        116,
+        249,
+        211,
+        83,
+        216,
+        154,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "attestor",
+          "signer": true,
+          "relations": [
+            "asset_policy"
+          ]
+        },
+        {
+          "name": "asset_policy",
+          "writable": true
+        },
+        {
+          "name": "collateral_mint"
+        }
+      ],
+      "args": [
+        {
+          "name": "evidence_digest",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "valid_until",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "register_asset",
+      "discriminator": [
+        21,
+        80,
+        155,
+        149,
+        117,
+        207,
+        235,
+        16
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "collateral_mint"
+        },
+        {
+          "name": "asset_policy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  115,
+                  115,
+                  101,
+                  116
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "issuer_id"
+              },
+              {
+                "kind": "account",
+                "path": "collateral_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "issuer_id",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "name": "attestor",
+          "type": "pubkey"
+        },
+        {
+          "name": "policy_digest",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_asset_admission",
+      "discriminator": [
+        116,
+        2,
+        140,
+        82,
+        146,
+        125,
+        166,
+        43
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          },
+          "relations": [
+            "asset_policy"
+          ]
+        },
+        {
+          "name": "admin",
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "asset_policy",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "upsert_event",
+      "discriminator": [
+        48,
+        78,
+        134,
+        177,
+        143,
+        3,
+        213,
+        25
+      ],
+      "accounts": [
+        {
+          "name": "attestor",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "asset_policy"
+          ]
+        },
+        {
+          "name": "asset_policy",
+          "relations": [
+            "series"
+          ]
+        },
+        {
+          "name": "series",
+          "writable": true
+        },
+        {
+          "name": "event_head",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  118,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "series"
+              },
+              {
+                "kind": "arg",
+                "path": "input.event_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "revision",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  118,
+                  105,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_head"
+              },
+              {
+                "kind": "arg",
+                "path": "input.revision"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "input",
+          "type": {
+            "defined": {
+              "name": "EventInput"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Accumulator",
+      "discriminator": [
+        164,
+        66,
+        91,
+        139,
+        158,
+        26,
+        63,
+        105
+      ]
+    },
+    {
+      "name": "AssetPolicy",
+      "discriminator": [
+        126,
+        207,
+        10,
+        101,
+        214,
+        78,
+        108,
+        8
+      ]
+    },
+    {
+      "name": "Config",
+      "discriminator": [
+        155,
+        12,
+        170,
+        224,
+        30,
+        250,
+        204,
+        130
+      ]
+    },
+    {
+      "name": "EventHead",
+      "discriminator": [
+        37,
+        11,
+        132,
+        63,
+        167,
+        35,
+        126,
+        136
+      ]
+    },
+    {
+      "name": "EventRevision",
+      "discriminator": [
+        100,
+        30,
+        9,
+        58,
+        151,
+        75,
+        217,
+        254
+      ]
+    },
+    {
+      "name": "Series",
+      "discriminator": [
+        240,
+        97,
+        8,
+        183,
+        139,
+        77,
+        250,
+        162
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "ZeroDeploymentDomain",
+      "msg": "the deployment domain must be nonzero"
+    },
+    {
+      "code": 6001,
+      "name": "ZeroPolicyDigest",
+      "msg": "the policy digest must be nonzero"
+    },
+    {
+      "code": 6002,
+      "name": "ZeroEvidenceDigest",
+      "msg": "the evidence digest must be nonzero"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidSymbol",
+      "msg": "invalid asset symbol"
+    },
+    {
+      "code": 6004,
+      "name": "UnsupportedDecimals",
+      "msg": "unsupported collateral decimals"
+    },
+    {
+      "code": 6005,
+      "name": "UnsupportedMintExtension",
+      "msg": "unsupported Token-2022 mint extension"
+    },
+    {
+      "code": 6006,
+      "name": "MissingScaledUiAmount",
+      "msg": "ScaledUiAmount is required"
+    },
+    {
+      "code": 6007,
+      "name": "MintNotInitialized",
+      "msg": "the collateral mint is not initialized"
+    },
+    {
+      "code": 6008,
+      "name": "DefaultAccountStateNotInitialized",
+      "msg": "default account state must be initialized"
+    },
+    {
+      "code": 6009,
+      "name": "ActiveTransferHook",
+      "msg": "the transfer hook program must be null"
+    },
+    {
+      "code": 6010,
+      "name": "MintPaused",
+      "msg": "the collateral mint is paused"
+    },
+    {
+      "code": 6011,
+      "name": "InvalidMultiplier",
+      "msg": "invalid multiplier bits"
+    },
+    {
+      "code": 6012,
+      "name": "InvalidObservationExpiry",
+      "msg": "observation expiry is invalid"
+    },
+    {
+      "code": 6013,
+      "name": "AdmissionDisabled",
+      "msg": "asset admission is disabled"
+    },
+    {
+      "code": 6014,
+      "name": "ObservationStale",
+      "msg": "the reviewed observation is absent or stale"
+    },
+    {
+      "code": 6015,
+      "name": "ScaleTupleChanged",
+      "msg": "the mint scale tuple differs from the reviewed observation"
+    },
+    {
+      "code": 6016,
+      "name": "ActiveScaleChanged",
+      "msg": "the effective multiplier differs from the reviewed observation"
+    },
+    {
+      "code": 6017,
+      "name": "ControlsChanged",
+      "msg": "the mint control fingerprint differs from the reviewed observation"
+    },
+    {
+      "code": 6018,
+      "name": "InvalidYear",
+      "msg": "year is outside 2020 through 2100"
+    },
+    {
+      "code": 6019,
+      "name": "DepositsClosed",
+      "msg": "deposits and series creation are closed"
+    },
+    {
+      "code": 6020,
+      "name": "ZeroAmount",
+      "msg": "amount must be positive"
+    },
+    {
+      "code": 6021,
+      "name": "GuardVersionMismatch",
+      "msg": "guard state version does not match"
+    },
+    {
+      "code": 6022,
+      "name": "GuardExpired",
+      "msg": "guard has expired"
+    },
+    {
+      "code": 6023,
+      "name": "MinimumOutputNotMet",
+      "msg": "minimum output guard failed"
+    },
+    {
+      "code": 6024,
+      "name": "InvalidPhase",
+      "msg": "series phase does not permit this operation"
+    },
+    {
+      "code": 6025,
+      "name": "SeriesJournalStarted",
+      "msg": "the series journal state does not permit deposits"
+    },
+    {
+      "code": 6026,
+      "name": "InvalidTokenOwner",
+      "msg": "token account owner does not match the signer"
+    },
+    {
+      "code": 6027,
+      "name": "InvalidTokenMint",
+      "msg": "token account mint does not match"
+    },
+    {
+      "code": 6028,
+      "name": "InvalidTokenProgram",
+      "msg": "token account or mint is owned by the wrong token program"
+    },
+    {
+      "code": 6029,
+      "name": "AccountsNotDistinct",
+      "msg": "relevant accounts must be distinct"
+    },
+    {
+      "code": 6030,
+      "name": "UnsafeVaultAuthority",
+      "msg": "vault has a delegate or alternate close authority"
+    },
+    {
+      "code": 6031,
+      "name": "UnsafeVaultState",
+      "msg": "vault is not initialized or is frozen"
+    },
+    {
+      "code": 6032,
+      "name": "CustodyDeficit",
+      "msg": "vault custody is below total outstanding obligations"
+    },
+    {
+      "code": 6033,
+      "name": "AmountExceedsBacking",
+      "msg": "amount exceeds nominal backing"
+    },
+    {
+      "code": 6034,
+      "name": "InvalidRevision",
+      "msg": "event revision must be positive"
+    },
+    {
+      "code": 6035,
+      "name": "InvalidEventStatus",
+      "msg": "event status is invalid"
+    },
+    {
+      "code": 6036,
+      "name": "InvalidCivilDate",
+      "msg": "event date is invalid"
+    },
+    {
+      "code": 6037,
+      "name": "EventUnresolved",
+      "msg": "event remains unresolved"
+    },
+    {
+      "code": 6038,
+      "name": "FutureEventData",
+      "msg": "qualified event data is from the future"
+    },
+    {
+      "code": 6039,
+      "name": "UnexpectedEventFactor",
+      "msg": "non-qualified event factors must be zero"
+    },
+    {
+      "code": 6040,
+      "name": "EventLimitReached",
+      "msg": "event record limit reached"
+    },
+    {
+      "code": 6041,
+      "name": "LowerRevision",
+      "msg": "event revision is lower than the accepted revision"
+    },
+    {
+      "code": 6042,
+      "name": "RevisionConflict",
+      "msg": "same revision contains different data"
+    },
+    {
+      "code": 6043,
+      "name": "InvalidEventRelationship",
+      "msg": "event account relationship is invalid"
+    },
+    {
+      "code": 6044,
+      "name": "JournalMismatch",
+      "msg": "journal version or hash does not match"
+    },
+    {
+      "code": 6045,
+      "name": "UnresolvedJournal",
+      "msg": "journal has unresolved records"
+    },
+    {
+      "code": 6046,
+      "name": "NotMature",
+      "msg": "series has not reached maturity"
+    },
+    {
+      "code": 6047,
+      "name": "InvalidAccumulatorCursor",
+      "msg": "accumulation cursor or event index is invalid"
+    },
+    {
+      "code": 6048,
+      "name": "ArithmeticBoundExceeded",
+      "msg": "bounded exact arithmetic exceeded 8192 bits"
+    },
+    {
+      "code": 6049,
+      "name": "ArithmeticOverflow",
+      "msg": "arithmetic overflow"
+    },
+    {
+      "code": 6050,
+      "name": "AccumulationIncomplete",
+      "msg": "accumulation is incomplete"
+    },
+    {
+      "code": 6051,
+      "name": "InvalidClaimMintAuthority",
+      "msg": "claim mint authority is invalid"
+    },
+    {
+      "code": 6052,
+      "name": "InvalidClaimFreezeAuthority",
+      "msg": "claim mint freeze authority must be null"
+    },
+    {
+      "code": 6053,
+      "name": "RedemptionExceedsSupply",
+      "msg": "redemption amount exceeds the frozen nominal denominator"
+    },
+    {
+      "code": 6054,
+      "name": "ZeroOutputConsentRequired",
+      "msg": "zero-output redemption requires explicit consent"
+    },
+    {
+      "code": 6055,
+      "name": "InvalidAccountData",
+      "msg": "account data could not be decoded"
+    }
+  ],
+  "types": [
+    {
+      "name": "Accumulator",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "series",
+            "type": "pubkey"
+          },
+          {
+            "name": "cursor",
+            "type": "u8"
+          },
+          {
+            "name": "numerator",
+            "type": "bytes"
+          },
+          {
+            "name": "denominator",
+            "type": "bytes"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AssetPolicy",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "config",
+            "type": "pubkey"
+          },
+          {
+            "name": "issuer_id",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "collateral_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "symbol",
+            "type": "string"
+          },
+          {
+            "name": "decimals",
+            "type": "u8"
+          },
+          {
+            "name": "attestor",
+            "type": "pubkey"
+          },
+          {
+            "name": "policy_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "extensions_mask",
+            "type": "u64"
+          },
+          {
+            "name": "admission_enabled",
+            "type": "bool"
+          },
+          {
+            "name": "reviewed_current_multiplier_bits",
+            "type": "u64"
+          },
+          {
+            "name": "reviewed_new_multiplier_bits",
+            "type": "u64"
+          },
+          {
+            "name": "reviewed_new_multiplier_effective_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "reviewed_active_multiplier_bits",
+            "type": "u64"
+          },
+          {
+            "name": "reviewed_controls_fingerprint",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "observed_slot",
+            "type": "u64"
+          },
+          {
+            "name": "observation_valid_until",
+            "type": "i64"
+          },
+          {
+            "name": "observation_evidence_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "deployment_domain",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EventHead",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "series",
+            "type": "pubkey"
+          },
+          {
+            "name": "event_id",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "index",
+            "type": "u8"
+          },
+          {
+            "name": "latest_revision",
+            "type": "u64"
+          },
+          {
+            "name": "latest_record_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "latest_resolved",
+            "type": "bool"
+          },
+          {
+            "name": "latest_in_year_qualified",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EventInput",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "event_id",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "revision",
+            "type": "u64"
+          },
+          {
+            "name": "ex_date",
+            "type": "u32"
+          },
+          {
+            "name": "status",
+            "type": "u8"
+          },
+          {
+            "name": "m0_bits",
+            "type": "u64"
+          },
+          {
+            "name": "m1_bits",
+            "type": "u64"
+          },
+          {
+            "name": "source_final",
+            "type": "bool"
+          },
+          {
+            "name": "original_effective_time",
+            "type": "i64"
+          },
+          {
+            "name": "source_payment_date",
+            "type": "u32"
+          },
+          {
+            "name": "observed_slot",
+            "type": "u64"
+          },
+          {
+            "name": "evidence_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "EventRevision",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "event_head",
+            "type": "pubkey"
+          },
+          {
+            "name": "event_id",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "revision",
+            "type": "u64"
+          },
+          {
+            "name": "ex_date",
+            "type": "u32"
+          },
+          {
+            "name": "status",
+            "type": "u8"
+          },
+          {
+            "name": "m0_bits",
+            "type": "u64"
+          },
+          {
+            "name": "m1_bits",
+            "type": "u64"
+          },
+          {
+            "name": "source_final",
+            "type": "bool"
+          },
+          {
+            "name": "original_effective_time",
+            "type": "i64"
+          },
+          {
+            "name": "source_payment_date",
+            "type": "u32"
+          },
+          {
+            "name": "observed_slot",
+            "type": "u64"
+          },
+          {
+            "name": "evidence_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "previous_revision_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "record_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Guard",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "expected_state_version",
+            "type": "u64"
+          },
+          {
+            "name": "expiry_unix_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "minimum_raw_output",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RedeemSide",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pt"
+          },
+          {
+            "name": "Dr"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Series",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "asset_policy",
+            "type": "pubkey"
+          },
+          {
+            "name": "policy_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "year",
+            "type": "u16"
+          },
+          {
+            "name": "start_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "maturity_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "collateral_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "pt_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "dr_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "decimals",
+            "type": "u8"
+          },
+          {
+            "name": "phase",
+            "type": {
+              "defined": {
+                "name": "SeriesPhase"
+              }
+            }
+          },
+          {
+            "name": "nominal_backing",
+            "type": "u64"
+          },
+          {
+            "name": "event_count",
+            "type": "u8"
+          },
+          {
+            "name": "unresolved_count",
+            "type": "u8"
+          },
+          {
+            "name": "in_year_qualified_count",
+            "type": "u8"
+          },
+          {
+            "name": "journal_version",
+            "type": "u64"
+          },
+          {
+            "name": "journal_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "state_version",
+            "type": "u64"
+          },
+          {
+            "name": "sealed_journal_version",
+            "type": "u64"
+          },
+          {
+            "name": "sealed_journal_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "sealed_coverage_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "sealed_event_count",
+            "type": "u8"
+          },
+          {
+            "name": "sealed_current_multiplier_bits",
+            "type": "u64"
+          },
+          {
+            "name": "sealed_new_multiplier_bits",
+            "type": "u64"
+          },
+          {
+            "name": "sealed_new_multiplier_effective_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "sealed_active_multiplier_bits",
+            "type": "u64"
+          },
+          {
+            "name": "sealed_controls_fingerprint",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "finalization_slot",
+            "type": "u64"
+          },
+          {
+            "name": "final_supply",
+            "type": "u64"
+          },
+          {
+            "name": "pt_pool",
+            "type": "u64"
+          },
+          {
+            "name": "dr_pool",
+            "type": "u64"
+          },
+          {
+            "name": "pt_redeemed_nominal",
+            "type": "u64"
+          },
+          {
+            "name": "dr_redeemed_nominal",
+            "type": "u64"
+          },
+          {
+            "name": "pt_paid",
+            "type": "u64"
+          },
+          {
+            "name": "dr_paid",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "pt_mint_bump",
+            "type": "u8"
+          },
+          {
+            "name": "dr_mint_bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SeriesPhase",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Open"
+          },
+          {
+            "name": "Sealing"
+          },
+          {
+            "name": "Finalized"
+          }
+        ]
+      }
+    }
+  ]
+}

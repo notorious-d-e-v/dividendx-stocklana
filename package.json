@@ -11,7 +11,11 @@
     "build": "tsc -b && vite build --config apps/web/vite.config.ts",
     "typecheck": "tsc -b",
     "test": "node packages/demo-fixtures/verify.mjs && npm --prefix packages/sdk test",
-    "test:browser": "playwright test --config apps/web/playwright.config.ts"
+    "test:browser": "playwright test --config apps/web/playwright.config.ts",
+    "test:transactions": "npm --prefix packages/transaction-sdk test",
+    "build:program": "sh scripts/protocol/build-sbf.sh",
+    "build:idl": "scripts/protocol/toolchain.sh exec cargo run --locked -p dividendx --example build_idl",
+    "test:program": "scripts/protocol/toolchain.sh exec cargo test --locked -p dividendx -p dividendx-protocol-tests"
   },
   "dependencies": {
     "react": "19.3.0",
