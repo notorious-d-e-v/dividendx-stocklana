@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      '@anchor-lang/core': fileURLToPath(new URL('./src/wallet/anchor-core-shim.ts', import.meta.url)),
       '@dividendx/sdk': fileURLToPath(new URL('../../packages/sdk/src/index.ts', import.meta.url)),
       '@fixtures': fileURLToPath(new URL('../../packages/demo-fixtures', import.meta.url)),
       '@tokens': fileURLToPath(new URL('../../packages/design-tokens', import.meta.url)),
@@ -19,6 +20,7 @@ export default defineConfig({
       input: {
         product: fileURLToPath(new URL('./index.html', import.meta.url)),
         rehearsal: fileURLToPath(new URL('./rehearsal/index.html', import.meta.url)),
+        wallet: fileURLToPath(new URL('./app/index.html', import.meta.url)),
       },
     },
   },

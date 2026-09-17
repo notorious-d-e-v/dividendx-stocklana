@@ -4,7 +4,7 @@ Updated 17 September 2026. This map identifies the current review surfaces, sour
 
 ## Start here
 
-- [README](../README.md) — run the local product preview and its checks; it clearly labels the app as an in-memory simulation.
+- [README](../README.md) — run the real local wallet application, preserved previews and their checks.
 - [Current plan](../planning/plan.md) — current scope, completed work and next implementation phase.
 - [Architecture decision](../planning/adapter-decision.md) and [issuer synthesis](../planning/solana-issuer-synthesis.md) — the selected xStocks, Backpack/Trek and Ondo design, its evidence boundary and unresolved dependencies.
 - [Annual product specification](../spec/annual-product.md) — annual Market / Split / Redeem flow at `/`, extending the approved visual design.
@@ -16,14 +16,16 @@ Updated 17 September 2026. This map identifies the current review surfaces, sour
 | Artifact | Role | Status boundary |
 |---|---|---|
 | [`apps/web/src/ProductApp.tsx`](../apps/web/src/ProductApp.tsx) | Main local product flow | In-memory preview; no wallet, vault or network transaction |
+| [`apps/web/src/wallet/`](../apps/web/src/wallet/) | `/app/` wallet flow | Real local test transactions; temporary browser wallet and Wallet Standard interface |
+| [`packages/local-runtime/`](../packages/local-runtime/) | Offline Surfpool test network | Disposable test profiles and synthetic annual journal; no real issuer assets |
 | [`apps/web/src/App.tsx`](../apps/web/src/App.tsx) | Detailed rehearsal | Local accounting demonstration and fallback |
 | [`packages/sdk/src/annual-reference.ts`](../packages/sdk/src/annual-reference.ts) | Multi-event annual accounting and lifecycle reference | Preserved decimal-rational trusted-input model; program arithmetic instead uses exact onchain multiplier bits |
 | [`programs/dividendx/`](../programs/dividendx/) | Annual custody and settlement program, generated IDL | Controlled SBF/local-validator execution; no live issuer admission claim |
-| [`packages/transaction-sdk/`](../packages/transaction-sdk/) | Actual instruction builders, snapshots, quotes and signing helpers | Separate from the simulated web client; caller supplies signers |
+| [`packages/transaction-sdk/`](../packages/transaction-sdk/) | Actual instruction builders, snapshots, quotes and signing helpers | Used by `/app/`; caller supplies signers |
 | [`tests/protocol/`](../tests/protocol/) | Independent oracle and compiled-SBF conformance | Controlled mints, clocks and attestations; preserves source fixture provenance |
 | [`packages/sdk/src/index.ts`](../packages/sdk/src/index.ts) | Preserved single-event rehearsal SDK | Legacy behavior, not the annual program contract |
 | [`packages/demo-fixtures/`](../packages/demo-fixtures/) | Frozen catalog, events, digests and verifier | Reproducible historical fixtures; not live availability |
-| [`apps/web/qa/README.md`](../apps/web/qa/README.md) | UI review record and reproduction commands | Browser evidence for the preview only |
+| [`apps/web/qa/README.md`](../apps/web/qa/README.md) | UI review record and reproduction commands | Distinguishes simulated previews from actual local wallet execution |
 | [`design/design-system.md`](../design/design-system.md) | Approved product visual language | Design rules, not operational capability |
 | [`design/illustrations/illustration-guide.md`](../design/illustrations/illustration-guide.md) | Approved illustration system | Metaphors and communication rules; pictures do not prove integrations |
 
@@ -59,6 +61,7 @@ The evidence directory is archival source material and should remain tracked eve
 - [AMM feasibility](../planning/research/claim-amm-feasibility.md) — devnet integration decision and remaining prerequisites; no pool or deployed DividendX program is claimed.
 - [Annual dividend research](../planning/research/annual-dividend-series.md) — exchange period/ex-date conventions, revisions and actual fixture gaps.
 - [Prior-art decision review](../planning/research/prior-art-review.md) — dated single-event architecture review with reusable lessons; annual specifications supersede its term design.
+- [Wallet acceptance](../planning/wallet-review.md) and [three-profile transaction evidence](../planning/evidence/wallet-runtime-smoke-2026-09-17.json) — actual local SBF lifecycle, transfers and redemption; not public consensus or a live issuer feed.
 - [Mechanics audit](../planning/mechanics-audit.md) and [market evidence](../planning/market-evidence.md) — accounting and market-claim review.
 
 ## Preserved history

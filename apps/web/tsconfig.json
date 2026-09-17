@@ -22,5 +22,5 @@
     "jsx": "react-jsx",
     "types": ["vite/client", "node", "@playwright/test"]
   },
-  "include": ["src", "vite.config.ts", "playwright.config.ts", "tests"]
+  "include": ["src", "app", "vite.config.ts", "playwright.config.ts", "tests"]
 }

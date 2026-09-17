@@ -1,0 +1,38 @@
+{
+  "recordedAt": "2026-09-17",
+  "host": "macOS-arm64",
+  "node": "24.12.0",
+  "surfpool": "1.5.0",
+  "surfpoolRpcApi": "4.1.2",
+  "offline": true,
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "loader": "BPFLoaderUpgradeab1e11111111111111111111111",
+  "programData": "3bFr9kqnuA8sioNd6efWcy9yrwgTujc2A8ZBKKUYeyu3",
+  "elf": {
+    "bytes": 706504,
+    "sha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070"
+  },
+  "idlSha256": "d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4",
+  "checks": {
+    "canonicalSplTokenExecutable": true,
+    "canonicalToken2022Executable": true,
+    "canonicalAssociatedTokenExecutable": true,
+    "upgradeAuthoritySetInProgramData": true,
+    "signedInitializeConfigConfirmed": true,
+    "scaledUiToken2022MintCreatedByInstructions": true,
+    "walletSignedDepositConfirmed": true,
+    "missingHolderSignatureRejected": true,
+    "balancesRetainedAcrossTimestampTravel": true,
+    "daemonEventBufferDrainRequired": true,
+    "threeHundredStateReadsAndIdleFollowupPassed": true,
+    "forcedFailureExitCode": 1
+  },
+  "depositBalancesRaw": {
+    "holderCollateral": "999000",
+    "holderPt": "1000",
+    "holderDr": "1000",
+    "vault": "1000"
+  },
+  "timeTravelTargetUnixTimestamp": "1830384000",
+  "scope": "Disposable feasibility run plus the long-running daemon read-saturation regression. Surfpool simnet events must be drained to prevent its bounded native buffer from blocking state RPC. Full three-asset lifecycle receipts are produced by the wallet-runtime smoke driver."
+}

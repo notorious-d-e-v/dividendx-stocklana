@@ -1,5 +1,27 @@
 # Product and rehearsal verification
 
+## Wallet application — 17 September 2026
+
+Actual transaction app: [http://127.0.0.1:4174/app/](http://127.0.0.1:4174/app/). Start Vite and the [local runtime](../../../packages/local-runtime/README.md) first. The original preview/rehearsal below remain preserved.
+
+The full browser runner passes **27/27** checks: the existing 20 plus seven wallet/error/utility cases. Type checks, production build, fixture verification, 33 reference/legacy tests and 22 transaction-SDK tests pass. Mocked wallet cases cover connection rejection/disconnect, identity/account mismatch, partial faucet response handling, confirmation levels, bounded transport and exact binary formatting. They are not proof of custody.
+
+On a fresh runtime, run the independent actual browser acceptance:
+
+```sh
+node apps/web/qa/wallet-app-review.mjs
+```
+
+It signs through two memory-only browser wallets, executes split, partial recombination, both claim transfers, four test dividends, maturity/finalization and independent redemption. It independently checks RPC balances, zero claim supplies, an empty vault and all 33 displayed signatures as confirmed/finalized. It also verifies explicit zero-output consent, stale/read-timeout recovery, key loss on reload, keyboard entry and no overflow at 390/768/1024/1440 px. No normal-flow console/page errors occurred. The deliberate stalled RPC is an explicitly expected error condition.
+
+Evidence: [browser receipts and balances](../../../planning/evidence/wallet-browser-review-2026-09-17.json), [three-profile RPC acceptance](../../../planning/evidence/wallet-runtime-smoke-2026-09-17.json) and [review boundaries](../../../planning/wallet-review.md).
+
+The production bundle also passes [wallet-production-review.mjs](wallet-production-review.mjs), a read-only Chrome check of real runtime discovery, temporary wallet creation and all three asset snapshots. After `npm run build`, stop the development server and run `npm exec vite preview -- --config apps/web/vite.config.ts --host 127.0.0.1 --port 4174 --strictPort`, then `node apps/web/qa/wallet-production-review.mjs` in another terminal. No requests are mocked. Stop preview before running the ordinary browser suite, which expects Vite's development server.
+
+Astra reviewed [Market desktop](wallet-market-1440.png), [Market mobile](wallet-market-390.png), [Split desktop](wallet-split-1440.png), [Split mobile](wallet-split-390.png), [Redeem desktop](wallet-redeem-1440.png) and [Redeem mobile](wallet-redeem-390.png). These show disposable local test assets. Installed extension wallets, live issuer feeds and AMM execution are unverified.
+
+Each runtime driver consumes the annual lifecycle. Restart the runtime between drivers and once more before a new user demonstration. Reloading a browser discards its temporary key, while restarting the runtime discards the entire local ledger.
+
 Reviewed 16 September 2026. Product preview: http://127.0.0.1:4174/. Preserved rehearsal: http://127.0.0.1:4174/rehearsal/.
 
 ## Product revision

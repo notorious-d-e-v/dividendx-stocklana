@@ -37,7 +37,7 @@ function ProductHeader({ tab, setTab }: { tab: ProductTab; setTab: (tab: Product
       <nav aria-label="Primary">{(['market', 'split', 'redeem'] as ProductTab[]).map((item) => <button key={item} className={tab === item ? 'active' : ''} onClick={() => setTab(item)}>{item[0].toUpperCase() + item.slice(1)}</button>)}</nav>
       <span className="balance-label">Your test balance</span>
     </header>
-    <div className="preview-banner"><b>Annual reference · in-memory</b><span>No wallet, program, issuer reader, or venue is connected.</span><a href="/rehearsal/">Open legacy event rehearsal →</a></div>
+    <div className="preview-banner"><b>Annual reference · in-memory</b><span>No wallet, program, issuer reader, or venue is connected.</span><a href="/app/" aria-label="Open local wallet app">App →</a><a href="/rehearsal/">Open legacy event rehearsal →</a></div>
   </>;
 }
 

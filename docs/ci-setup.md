@@ -17,4 +17,4 @@ git commit -m "Enable verified GitHub Actions workflow"
 git push
 ```
 
-The workflow installs from the lockfile on Node 24, checks fixtures/accounting, builds both entry points, installs Chromium and runs the browser suite. It needs only `contents: read` at runtime. Issuer keys, wallet keys and mainnet funds are not required.
+The workflow installs the root and transaction-SDK lockfiles on Node 24, checks fixtures/accounting and the transaction SDK, builds all three entry points, installs Chromium and runs the browser suite. It needs only `contents: read` at runtime. The real runtime/browser acceptance drivers are separate local checks; this template does not run them. Issuer keys, wallet keys and mainnet funds are not required.

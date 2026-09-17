@@ -1,6 +1,6 @@
 # Current status
 
-Updated 17 September 2026 after acceptance of the actual annual Solana program and transaction SDK for local integration. Deposits still close at year-start.
+Updated 17 September 2026 after acceptance of the wallet application and real local annual lifecycle. Deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -16,11 +16,13 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Transaction SDK | [Separate package](../packages/transaction-sdk/README.md) with generated-IDL builders, coherent reads, raw-unit quotes and caller-supplied signing |
 | Program contract | [Frozen implementation contract](../spec/program-v1.md), [toolchain](../docs/program-toolchain.md) and [acceptance review](program-review.md) |
 | Product | Annual Market / Split / Redeem at `/`, with isolated 2027/2028 series and distinct collecting, year-ended and finalized states |
+| Wallet app | `/app/`: actual local wallet signing, custody, PT/DR transfers, recombination and independent redemption; [acceptance](wallet-review.md) |
+| Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
 | Fallback | Original single-event SDK and technical rehearsal at `/rehearsal/`, preserved |
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; historical KOx and Backpack MU factors |
 | Research | [Annual conventions and fixture gaps](research/annual-dividend-series.md), extending the [prior-art review](research/prior-art-review.md) |
 
-The web preview remains local and simulated. The separate program tests execute actual token custody and PT/DR minting through the compiled SBF program. No public deployment, wallet UI, live issuer reader or AMM pool is claimed. Finality/completeness inputs in controlled tests are not authenticated issuer evidence; the program trusts its configured attestor for classification and complete-period coverage.
+The two previews remain simulated. The separate `/app/` wallet application executes actual custody, PT/DR minting, transfers and redemption through the compiled SBF program on an offline local network. The temporary wallet signs in browser memory; installed extension wallets have not been verified. No public deployment, live issuer reader or AMM pool is claimed. Controlled journal inputs are synthetic; the program trusts its configured attestor for classification and complete-period coverage.
 
 ## Annual decisions
 
@@ -37,14 +39,15 @@ The preview clearly labels historical factors with synthetic term dates. Neither
 
 The program build, generated IDL, **46 Rust tests** (including 16 compiled-SBF integration tests), **22 transaction-SDK tests** and package import passed. Signed local-validator transactions proved deposit, recombination and rollback of prior successful token CPIs after a later instruction failed. Exact artifacts and proof boundaries are in the [acceptance review](program-review.md).
 
-The fixture verifier and all **33 reference/legacy SDK tests**, type checking and the production build also passed. The previous **20 browser tests** and visual review remain the preserved UI baseline; this phase does not change the frontend. See [web QA](../apps/web/qa/README.md).
+Current wallet acceptance adds **104 confirmed/finalized receipts** across three decimal profiles and a separate two-wallet browser flow with **33 displayed confirmed receipts**, exact custody conservation and four-event finalization. Sustained/idle RPC reads, explicit zero-output consent, stale-state recovery and disposable-key reload behavior pass. Program/IDL hashes are unchanged.
 
-## Next: wallet and issuer integration
+The fixture verifier and all **33 reference/legacy SDK tests**, **22 transaction-SDK tests**, **27 browser-runner tests**, type checking and the production build pass. Desktop/mobile wallet captures and the exact proof boundaries are in [wallet acceptance](wallet-review.md) and [web QA](../apps/web/qa/README.md).
 
-1. **Connect the product at high effort.** Use wallet-signed transactions and actual receipts from the accepted SDK/program, while preserving the local preview as a fallback. A complete annual lifecycle uses explicitly controlled test time; a public test network does not fast-forward its clock for a demo.
-2. **Add operational issuer evidence.** Readers join official ex-dates, classification, revisions and complete-period coverage in the background. A shared token profile or historical factor is not a live annual feed.
-3. **Prove one AMM round trip.** Target Raydium CPMM on devnet with a specific annual DR and a clearly labeled private test quote token: add liquidity, swap, withdraw liquidity, then redeem eligible recovered claims. Preserve reserves for remaining AMM/lost claims. See [feasibility](research/claim-amm-feasibility.md).
-4. **Refresh the submission package.** Export annual pitch wording in a new deck version, synchronize narration with user review, capture only working functionality and verify the actual submission form/deadline.
+## Next: issuer evidence and liquidity
+
+1. **Add operational issuer evidence.** Readers join official ex-dates, classification, revisions and complete-period coverage in the background. A shared token profile or historical factor is not a live annual feed. Keep missing source data visible.
+2. **Prove one AMM round trip.** Target Raydium CPMM on devnet with a specific annual DR and a clearly labeled private test quote token: add liquidity, swap, withdraw liquidity, then redeem eligible recovered claims. Preserve reserves for remaining AMM/lost claims. See [feasibility](research/claim-amm-feasibility.md). A public network cannot fast-forward annual maturity; keep its execution evidence distinct from controlled local time.
+3. **Refresh the submission package.** Export annual pitch wording in a new deck version, synchronize narration with user review, capture only working functionality and verify the actual submission form/deadline.
 
 No redesign, wider issuer audit, custom AMM, bridge or reward token is required for this next phase.
 

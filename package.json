@@ -7,17 +7,30 @@
     "node": ">=24"
   },
   "scripts": {
+    "build:transactions": "npm --prefix packages/transaction-sdk run build",
+    "predev": "npm run build:transactions",
     "dev": "vite --config apps/web/vite.config.ts --host 127.0.0.1 --port 4174",
+    "prebuild": "npm run build:transactions",
     "build": "tsc -b && vite build --config apps/web/vite.config.ts",
+    "pretypecheck": "npm run build:transactions",
     "typecheck": "tsc -b",
     "test": "node packages/demo-fixtures/verify.mjs && npm --prefix packages/sdk test",
     "test:browser": "playwright test --config apps/web/playwright.config.ts",
+    "test:wallet": "playwright test --config apps/web/playwright.config.ts wallet",
     "test:transactions": "npm --prefix packages/transaction-sdk test",
     "build:program": "sh scripts/protocol/build-sbf.sh",
     "build:idl": "scripts/protocol/toolchain.sh exec cargo run --locked -p dividendx --example build_idl",
     "test:program": "scripts/protocol/toolchain.sh exec cargo test --locked -p dividendx -p dividendx-protocol-tests"
   },
   "dependencies": {
+    "@dividendx/transaction-sdk": "file:packages/transaction-sdk",
+    "@solana/spl-token": "0.4.14",
+    "@solana/wallet-standard-features": "1.3.0",
+    "@solana/web3.js": "1.98.4",
+    "@wallet-standard/app": "1.1.0",
+    "@wallet-standard/base": "1.1.0",
+    "@wallet-standard/features": "1.1.0",
+    "buffer": "6.0.3",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
