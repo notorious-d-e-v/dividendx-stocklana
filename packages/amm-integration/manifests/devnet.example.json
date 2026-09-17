@@ -1,0 +1,13 @@
+{
+  "schema": "dividendx-raydium-cpmm-v1",
+  "mode": "devnet",
+  "rpcUrl": "https://api.devnet.solana.com",
+  "expectedGenesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "expectedDividendXUpgradeAuthority": "DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv",
+  "deploymentDomainHex": "ce59db5080fc2c6d3bcf7ca90712d3c2e5e6c28f27f0dfbb9953bdb0894c03ab",
+  "expectedDividendXElfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+  "expectedRaydiumElfSha256": "87ef84634086209fc2c29b4163bbe5209a1e9383aff5c429781f5fff270d75fd",
+  "maxCreatePoolFeeLamports": "250000000",
+  "maxRunSpendLamports": "1500000000",
+  "expectedYear": 2027
+}

@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-09-17T09:27:18.748Z",
+  "rpc": "https://api.devnet.solana.com",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "deployer": "DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv",
+  "balanceLamports": 0,
+  "programDataRentLamports": 3589919160,
+  "airdropRequestedLamports": 2000000000,
+  "airdropError": "429 Too Many Requests:  {\"jsonrpc\":\"2.0\",\"error\":{\"code\": 429, \"message\":\"You've either reached your airdrop limit today or the airdrop faucet has run dry. Please visit https://faucet.solana.com for alternate sources of test SOL\"}, \"id\": \"f6c86699-3ca5-45ea-ad3b-a211f5622c21\" } \r\n",
+  "resolution": {
+    "source": "User confirmed funding of the dedicated devnet wallet",
+    "verifiedAt": "2026-09-17T09:32:28.804Z",
+    "balanceLamports": 10000000000,
+    "deploymentEvidence": "dividendx-devnet-deployment-2026-09-17.json"
+  }
+}

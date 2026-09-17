@@ -2,7 +2,7 @@
 
 DividendX separates a tokenized-stock position into annual claims: principal tokens (PT) for the remaining stock exposure and dividend-right tokens (DR) for the year's qualified dividend allocation. For example, `PT-KOx-2027` and `DR-KOx-2027` belong to the Coca-Cola KOx 2027 series. Deposits close when the year starts. Matching PT and DR can recombine before finalization; afterward each side redeems independently, without an expiry or forfeiture deadline.
 
-The repository contains the annual Solana program, transaction SDK, wallet application, compiled-program tests and preserved accounting previews. `/app/` executes real signed transactions in a disposable local SBF sandbox. Live issuer feeds, public deployment and AMM liquidity remain later work.
+The repository contains the annual Solana program, transaction SDK, wallet application, compiled-program tests, issuer readers, an isolated Raydium integration and preserved accounting previews. `/app/` executes real signed transactions in a disposable local SBF sandbox. The same accepted program ELF is deployed on devnet, where the separate Node CLI completed a finalized test-only Raydium CPMM round trip. That public flow is not exposed in the running web app and does not enable live issuer settlement.
 
 ## Current demo
 
@@ -10,6 +10,7 @@ The repository contains the annual Solana program, transaction SDK, wallet appli
 - `/` is the annual Market / Split / Redeem preview, with separate 2027 and 2028 series, cumulative allocation and distinct year-end/finalization states.
 - `/rehearsal/` preserves the original single-event two-account walkthrough.
 - The catalog contains 15 observed Solana stock-token candidates across xStocks, Backpack/Trek, and Ondo.
+- The isolated AMM CLI deposited 100 units of synthetic test stock into a 2027 series, created a DR/worthless-test-quote Raydium CPMM pool, added liquidity, swapped, withdrew every user-held LP token and recombined the recovered claims on public devnet. All assets are test-only and the seeded ratio is artificial.
 - Coca-Cola KOx and Backpack Micron MU supply historical dividend factors. The annual preview maps them to **synthetic term dates**: neither fixture includes a verified ex-date. One example is not a complete annual payout or a future forecast.
 - Ondo token profiles are present, but an authoritative dividend event fixture is still pending.
 - In the two previews, balances, offers, lifecycle controls and test USDC are simulated and reset on refresh. An optional second dividend is explicitly synthetic.
@@ -71,6 +72,20 @@ npm run test:issuers
 
 Ondo uses the external `ONDO_API_KEY` credential file described in the reader README. The command prints a summary of identity checks, counts and missing evidence; credentials and authenticated response bodies stay outside Git and the browser. These observations do not authorize annual settlement. The package does not change the running app or test network.
 
+## Run the Raydium integration
+
+The isolated [AMM package](packages/amm-integration/README.md) pins Raydium SDK v2, validates the exact devnet program/config/fee receiver and DividendX ELF, simulates every transaction, and records raw-unit conservation. Install its additional dependencies only when running this integration:
+
+```sh
+npm ci --prefix packages/amm-integration
+npm run test:amm
+npm run amm:preflight -- --manifest /absolute/path/to/manifest.json
+npm run amm:local -- --manifest /absolute/path/to/manifest.json --admin-signer /absolute/path/to/admin.json --state-dir /absolute/path/to/repo/.local-tools/amm-local-run --receipt /absolute/path/to/repo/.local-tools/amm-local-run/receipt.json
+npm run amm:devnet -- --manifest /absolute/path/to/manifest.json --admin-signer /absolute/path/to/admin.json --state-dir /absolute/path/to/repo/.local-tools/amm-devnet-run --receipt /absolute/path/to/repo/.local-tools/amm-devnet-run/receipt.json
+```
+
+Each execution requires a fresh, distinct state directory that is a direct child of the repository's ignored `.local-tools/` directory. The public receipt contains 15 finalized devnet transactions. The earlier isolated-validator receipt contains 14 transactions against captured genuine Raydium devnet bytecode. Both use the same test quantities: 40 DR / 80 quote for the seed, 60 DR / 120 quote added, and 20 quote spent for `9.07024323` DR. See the [AMM review](planning/amm-review.md) and [public evidence](planning/evidence/amm-devnet-roundtrip-2026-09-17.json). Public chain time leaves the 2027 series open, so the flow ends with paired recombination; independent post-maturity redemption remains a separate local proof.
+
 ## Program and transaction SDK
 
 Use the pinned Rust/Agave setup in [program toolchain](docs/program-toolchain.md), then run:
@@ -96,6 +111,8 @@ The SBF suite advances a controlled test clock to cover the annual lifecycle. Th
 | [`programs/dividendx/`](programs/dividendx/) | Annual custody program and generated Anchor IDL |
 | [`packages/transaction-sdk/`](packages/transaction-sdk/) | Instruction builders, coherent account reads, quotes and signing helpers |
 | [`packages/local-runtime/`](packages/local-runtime/) | Disposable offline SBF network, test faucet and controlled annual lifecycle |
+| [`packages/issuer-readers/`](packages/issuer-readers/) | Server-side observations with explicit evidence and qualification gaps |
+| [`packages/amm-integration/`](packages/amm-integration/) | Isolated Raydium CPMM preflight and local/public test-only execution CLI |
 | [`tests/protocol/`](tests/protocol/) | Independent arithmetic oracle and compiled-SBF conformance |
 | [`packages/demo-fixtures/`](packages/demo-fixtures/) | Frozen catalog and historical event fixtures |
 | [`planning/evidence/`](planning/evidence/) | Dated source snapshots and verification records |
@@ -112,4 +129,4 @@ Ondo read-only API access is verified. Run `node scripts/issuers/ondo-readonly.m
 
 The [annual research](planning/research/annual-dividend-series.md) extends the [prior-art review](planning/research/prior-art-review.md). Calendar-year periods are our choice; traditional exchange dividend contracts do not all use those exact dates. Membership uses the reference share's official ex-date, including late-paid dividends; maturity stops new eligible dates, while finalization waits for a complete resolved journal. The model replaces corrected events and compounds accepted factors before rounding once. It does not sum separately rounded event payouts.
 
-Next are operational issuer evidence and one verified AMM round trip. The program uses bounded exact multiplier-bit arithmetic and staged settlement; its attestor still supplies trusted event classification and complete-period coverage. Local fixtures do not prove live issuer finality. Rolling vaults, quarterly terms and perpetual-product research remain on the [roadmap](planning/roadmap.md).
+Next are exposing the validated liquidity flow in the wallet app, completing issuer qualification, and refreshing the submission package. The public AMM proof does not turn source observations into settlement attestations: the program still needs trusted event classification, authoritative ex-dates and complete-period coverage for a live issuer. The separate guided walkthrough remains deferred. Rolling vaults, quarterly terms and perpetual-product research remain on the [roadmap](planning/roadmap.md).

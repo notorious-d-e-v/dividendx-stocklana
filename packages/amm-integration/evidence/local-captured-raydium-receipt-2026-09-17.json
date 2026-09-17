@@ -1,0 +1,718 @@
+{
+  "schema": "dividendx-raydium-cpmm-receipt-v1",
+  "boundary": "local-captured-devnet-bytecode",
+  "generatedAt": "2026-09-17T10:01:43.782Z",
+  "preflight": {
+    "mode": "local-clone",
+    "rpcUrl": "http://127.0.0.1:18899",
+    "genesisHash": "4kTmvywC7KeQjJFVmjwNmcwhZZuPmKznX9qAB3NJUVmG",
+    "contextSlot": 1151,
+    "dividendX": {
+      "address": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+      "owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "executable": true,
+      "programData": "3bFr9kqnuA8sioNd6efWcy9yrwgTujc2A8ZBKKUYeyu3",
+      "deploySlot": "0",
+      "upgradeAuthority": "9pgiSEmWnSEB2eXDQqVWs8KaVhTn1XjEdrZs2RWZR96T",
+      "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070"
+    },
+    "raydium": {
+      "address": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+      "owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "executable": true,
+      "programData": "3KvTa2fYhMxMZNfHho5oX34yLQLwRauoU2JScBkugvXF",
+      "deploySlot": "0",
+      "upgradeAuthority": "11111111111111111111111111111111",
+      "elfSha256": "87ef84634086209fc2c29b4163bbe5209a1e9383aff5c429781f5fff270d75fd"
+    },
+    "config": {
+      "address": "5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy",
+      "bump": 253,
+      "disableCreatePool": false,
+      "index": 0,
+      "tradeFeeRate": "2500",
+      "protocolFeeRate": "120000",
+      "fundFeeRate": "40000",
+      "createPoolFee": "150000000",
+      "protocolOwner": "DRay33UmULQCeawH3dVpJfN3uqLj6Qtq4ymSRx2pAgGK",
+      "fundOwner": "DRay33UmULQCeawH3dVpJfN3uqLj6Qtq4ymSRx2pAgGK",
+      "creatorFeeRate": "2500"
+    },
+    "feeReceiver": {
+      "address": "3oE58BKVt8KuYkGxx8zBojugnymWmBiyafWgMrnb6eYy",
+      "mint": "So11111111111111111111111111111111111111112",
+      "tokenOwner": "DRayEuvQMUDHNsHLzNhzQsKnhCPPpbFqrau8L54XqGyW",
+      "amountRaw": "1779280010000",
+      "isNative": true
+    }
+  },
+  "identities": {
+    "admin": "9pgiSEmWnSEB2eXDQqVWs8KaVhTn1XjEdrZs2RWZR96T",
+    "attestor": "9C2EwnYyntJNJF7Uw27fR8HUqPy9F9Z7ij83ezsWZiZs",
+    "provider": "2kzPeKMqsfryCUYytNWNeefRp4NVYjR1ciVhV4bUoezi",
+    "buyer": "5jK59h9u4ELLvRWrGtpq9nKEjpYGtKAj2EYoCdz3yDdG",
+    "collateralMint": "CvfiqmYR8SPc54cRC829FRUdfPhxgPM9NrCFwEvqeqSA",
+    "ptMint": "FuCwDnZ9Wid84QV8QEYRj6JMDW4GSwpm3i299jWx8xzH",
+    "drMint": "9ZeoHDtePK2D7jSHMuv2GwktTs7x9MhVdmjAfNXwFtES",
+    "testQuoteMint": "DePxigZqTmXiAKEJzDdiaxbDMpWno4Q2uwriytuSDp8h",
+    "collateralTokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+    "claimTokenProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "testQuoteTokenProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "pool": "E9mNSkACbDuqqoFJZiD8vsyE9E3JSUWxcf3cz1iGkxrQ",
+    "lpMint": "2A6nFUoJrGVnhbcB2X7DDg5CDF1u5EE6HAiv9wFYwmRi"
+  },
+  "amounts": {
+    "collateralDepositRaw": "10000000000",
+    "seedDrRaw": "4000000000",
+    "seedQuoteRaw": "80000000",
+    "addDrRaw": "6000000000",
+    "addQuoteRaw": "120000000",
+    "buyerQuoteRaw": "20000000",
+    "slippageBps": 50,
+    "recombinedRaw": "9092975034"
+  },
+  "transactions": [
+    {
+      "name": "fund_test_participants",
+      "signature": "3dP7L3WiN7ahZa2utvoAZ3SL7kNENHifWoK9XDNf8axui58x72v3SHH4sZN7CBBEPM6QdDF8SQ5og3MQ6gVg3Se",
+      "slot": 1143,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 450,
+      "simulationLogs": [
+        "Program 11111111111111111111111111111111 invoke [1]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 11111111111111111111111111111111 invoke [1]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 11111111111111111111111111111111 invoke [1]",
+        "Program 11111111111111111111111111111111 success"
+      ]
+    },
+    {
+      "name": "create_test_collateral_mint",
+      "signature": "21fRwDeLihCfqDC3Tav5WtoKRbt8GNhvnNh3bK32G49GiQS4KiBpFh8w7Fzvwf2cWrSHnb4kmdjVzqYDxmRJEJEN",
+      "slot": 1144,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 2877,
+      "simulationLogs": [
+        "Program 11111111111111111111111111111111 invoke [1]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [1]",
+        "Program log: Instruction: ScaledUiAmountExtension",
+        "Program log: ScaledUiAmountMintInstruction::Initialize",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 937 of 402850 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [1]",
+        "Program log: Instruction: InitializeMint",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 1790 of 401913 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success"
+      ]
+    },
+    {
+      "name": "create_worthless_test_quote_mint",
+      "signature": "2bUbhZpTHH1CuFFJz26SreRmZb2Ts3g27mTtyTLrcceE4FJgqm7K3mnFSQVgijDePaLkZMvSvBvQWxRoqMfRJe9N",
+      "slot": 1145,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 236,
+      "simulationLogs": [
+        "Program 11111111111111111111111111111111 invoke [1]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 86 of 202850 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+      ]
+    },
+    {
+      "name": "register_test_asset",
+      "signature": "4v72mq7UFQuhdCEJEY2RkTqxpJp3hDVnUi5hLmfiGzCGn8PW1UtrsLQuSeMTeUkpnfo3aVPV9ebbAm3AKtRBT1oo",
+      "slot": 1146,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 13353,
+      "simulationLogs": [
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+        "Program log: Instruction: RegisterAsset",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 13353 of 200000 compute units",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE success"
+      ]
+    },
+    {
+      "name": "refresh_test_asset_observation",
+      "signature": "wdeb1wLirh8Njfpw26yZmQYMSkGR3ez8paKKewSK14Q6JRjEZZfqRYpRkLSU337jfa4sP8RLVDmZbwMuKWL9Qjw",
+      "slot": 1147,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 5046,
+      "simulationLogs": [
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+        "Program log: Instruction: RefreshObservation",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 5046 of 200000 compute units",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE success"
+      ]
+    },
+    {
+      "name": "create_2027_series",
+      "signature": "NHYSEz7zLvCZCpry3gjdBdLnBfzi5yea7jPvuR2kAU6oC5KK8L3SjfzbBTFA7p5As1ML9jH7R3ELWpnugY778Gq",
+      "slot": 1148,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 63657,
+      "simulationLogs": [
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+        "Program log: Instruction: CreateSeries",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 202 of 174356 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 202 of 167773 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [2]",
+        "Program log: Create",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [3]",
+        "Program log: Instruction: GetAccountDataSize",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 1380 of 154893 compute units",
+        "Program return: TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb qgAAAAAAAAA=",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program 11111111111111111111111111111111 invoke [3]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [3]",
+        "Program log: Instruction: InitializeImmutableOwner",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 674 of 148691 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [3]",
+        "Program log: Instruction: InitializeAccount3",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 1855 of 145681 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 18204 of 161726 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 63657 of 200000 compute units",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE success"
+      ]
+    },
+    {
+      "name": "create_provider_token_accounts",
+      "signature": "ESd4wsKtkygAujf1ZWpE4cGStwTqqdeMwRA85YHQScQCZicpYYQmZruKEjAGxWJUZtPKCeFCLnQRBht2ba45CA7",
+      "slot": 1149,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 61899,
+      "simulationLogs": [
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+        "Program log: CreateIdempotent",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [2]",
+        "Program log: Instruction: GetAccountDataSize",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 1380 of 1194661 compute units",
+        "Program return: TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb qgAAAAAAAAA=",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [2]",
+        "Program log: Instruction: InitializeImmutableOwner",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 674 of 1188459 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [2]",
+        "Program log: Instruction: InitializeAccount3",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 1855 of 1185450 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 16709 of 1200000 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+        "Program log: CreateIdempotent",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 179 of 1174862 compute units",
+        "Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 37 of 1169773 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 233 of 1167310 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 16518 of 1183291 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+        "Program log: CreateIdempotent",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 179 of 1161344 compute units",
+        "Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 37 of 1156255 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 233 of 1153792 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 13518 of 1166773 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+        "Program log: CreateIdempotent",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 179 of 1147828 compute units",
+        "Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 37 of 1142739 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 233 of 1140277 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 13515 of 1153255 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [1]",
+        "Program log: Instruction: MintToChecked",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 1486 of 1139740 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 153 of 1138254 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+      ]
+    },
+    {
+      "name": "create_buyer_token_accounts",
+      "signature": "2y8qKLAkPf8BM2M9Pcamu2v5fzPnJTyG9eZFBcg4vxSqhtRVPeYj9dp6NgfpQ9YQz85eHffU6LByu6B1USSqUPrx",
+      "slot": 1150,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 30186,
+      "simulationLogs": [
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+        "Program log: CreateIdempotent",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 179 of 594571 compute units",
+        "Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 37 of 589482 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 233 of 587019 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 13518 of 600000 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+        "Program log: CreateIdempotent",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 179 of 578055 compute units",
+        "Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 37 of 572966 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 233 of 570504 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 16515 of 586482 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 153 of 569967 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+      ]
+    },
+    {
+      "name": "deposit_100_test_stock",
+      "signature": "2B8uKqNdZw4K3xgaboGEwNfZuBVrEgdiqEUTRk3Xe8tPRbvPDcSXZRHWL1ViCqrjHSL4ommv6sLiFX1NVXGbndC",
+      "slot": 1151,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 25201,
+      "simulationLogs": [
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+        "Program log: Instruction: Deposit",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [2]",
+        "Program log: Instruction: TransferChecked",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 2259 of 183122 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 120 of 179116 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 120 of 177277 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 25201 of 200000 compute units",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE success"
+      ]
+    },
+    {
+      "name": "create_cpmm_pool",
+      "signature": "n6NzL13htwgUQDvEh9FbRw77egE8RfoTmM3zeyTuhVMgfnqFXnqBAnEKAqtWBJj1AdtL8Ag5dH2xfcC15oYndYz",
+      "slot": 1152,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 82527,
+      "simulationLogs": [
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb invoke [1]",
+        "Program log: Instruction: Initialize",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 202 of 186114 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [2]",
+        "Program log: Create",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 179 of 176136 compute units",
+        "Program return: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA pQAAAAAAAAA=",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [3]",
+        "Program 11111111111111111111111111111111 success",
+        "Program log: Initialize the associated token account",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 37 of 171047 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 233 of 168586 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 13409 of 181479 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 233 of 147727 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 233 of 142664 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 130801 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 128659 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program log: liquidity:565685424, lock_lp_amount:100, vault_0_amount:4000000000,vault_1_amount:80000000",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 120 of 122230 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program 11111111111111111111111111111111 invoke [2]",
+        "Program 11111111111111111111111111111111 success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 201 of 119162 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb consumed 82527 of 200000 compute units",
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb success"
+      ]
+    },
+    {
+      "name": "add_cpmm_liquidity",
+      "signature": "4Jvr7iwENQPXW9JXRHXTb1ueK1kL6ztemNi1bH5CheYvkyyCWMKp5Y5YvZn6vEJ1HRcyRkQsHKeCcnV6hggAmfEj",
+      "slot": 1153,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 22007,
+      "simulationLogs": [
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb invoke [1]",
+        "Program log: Instruction: Deposit",
+        "Program data: eaPNyTnadTzDZr7aXppVdQy6meSMBko5UnX7qUzE46Tn/DI8YvgqtbCstyEAAAAAAChr7gAAAAAAtMQEAAAAAAC8oGUBAAAAAA4nBwAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 183314 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 181100 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 120 of 179096 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb consumed 22007 of 200000 compute units",
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb success"
+      ]
+    },
+    {
+      "name": "buyer_swap_quote_for_dr",
+      "signature": "4E43izhB2ha9VoRuyfjkhaTmRLXpBqbePsT7ZKVtPUQQkaqNj89TD985JGhXqsDW7pZxFCyjq8ipkEf7hBRoXaBJ",
+      "slot": 1154,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 21144,
+      "simulationLogs": [
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb invoke [1]",
+        "Program log: Instruction: SwapBaseInput",
+        "Program data: QMbN6CYIceLDZr7aXppVdQy6meSMBko5UnX7qUzE46Tn/DI8YvgqtQDC6wsAAAAAAOQLVAIAAAAALTEBAAAAAMMXEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAG74LHb0WpWv4rMB77O+YobwpP7OE11FSRyzemDSFHmCn860c4rC5tEbi6qshs7OeTCfhXcRkTwGHHvAuNui8jHUMMAAAAAAAAAAAAAAAAAAAE=",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 182400 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 180232 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb consumed 21144 of 200000 compute units",
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb success"
+      ]
+    },
+    {
+      "name": "withdraw_all_provider_lp",
+      "signature": "5qnK7Y9Fsp5aqhhpCyw9iM13UApbY4xZyowbbJfMSdTr6B8SzYv8a4KLMwecAJqGxyrp9go6gj976nzkgWG8VcPu",
+      "slot": 1155,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 22219,
+      "simulationLogs": [
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb invoke [1]",
+        "Program log: Instruction: Withdraw",
+        "Program data: eaPNyTnadTzDZr7aXppVdQy6meSMBko5UnX7qUzE46Tn/DI8YvgqtbgvS1QAAAAAPcz7HQIAAADAzxwNAAAAALrJ+x0CAAAAsM8cDQAAAAAAAAAAAAAAAAAAAAAAAAAAAQ==",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 131 of 183412 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 181159 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 178921 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb consumed 22219 of 200000 compute units",
+        "Program DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb success"
+      ]
+    },
+    {
+      "name": "recombine_recovered_dr_with_pt",
+      "signature": "45dzfWAZyufMdTw1YRZGQUJETwzRG1YEghEtw8BvKLs8YYNtV82K6vQNMjpmz9eE5anDXu3pHba4vp5UFbtyUHtT",
+      "slot": 1156,
+      "confirmationStatus": "confirmed",
+      "simulationUnitsConsumed": 24957,
+      "simulationLogs": [
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+        "Program log: Instruction: Recombine",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 131 of 183512 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 131 of 181678 compute units",
+        "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [2]",
+        "Program log: Instruction: TransferChecked",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 2259 of 179663 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 24957 of 200000 compute units",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE success"
+      ]
+    }
+  ],
+  "checkpoints": {
+    "seeded": {
+      "collateral": {
+        "provider": "0",
+        "vault": "10000000000",
+        "supply": "10000000000"
+      },
+      "pt": {
+        "provider": "10000000000",
+        "otherKnown": "0",
+        "supply": "10000000000"
+      },
+      "dr": {
+        "provider": "6000000000",
+        "buyer": "0",
+        "poolVault": "4000000000",
+        "poolProtocolFees": "0",
+        "poolFundFees": "0",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "10000000000"
+      },
+      "testQuote": {
+        "provider": "120000000",
+        "buyer": "20000000",
+        "poolVault": "80000000",
+        "poolProtocolFees": "0",
+        "poolFundFees": "0",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "220000000"
+      },
+      "lp": {
+        "provider": "565685324",
+        "mintSupply": "565685324",
+        "internalPoolLpAmount": "565685424"
+      }
+    },
+    "added": {
+      "collateral": {
+        "provider": "0",
+        "vault": "10000000000",
+        "supply": "10000000000"
+      },
+      "pt": {
+        "provider": "10000000000",
+        "otherKnown": "0",
+        "supply": "10000000000"
+      },
+      "dr": {
+        "provider": "0",
+        "buyer": "0",
+        "poolVault": "10000000000",
+        "poolProtocolFees": "0",
+        "poolFundFees": "0",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "10000000000"
+      },
+      "testQuote": {
+        "provider": "0",
+        "buyer": "20000000",
+        "poolVault": "200000000",
+        "poolProtocolFees": "0",
+        "poolFundFees": "0",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "220000000"
+      },
+      "lp": {
+        "provider": "1414213460",
+        "mintSupply": "1414213460",
+        "internalPoolLpAmount": "1414213560"
+      }
+    },
+    "swapped": {
+      "collateral": {
+        "provider": "0",
+        "vault": "10000000000",
+        "supply": "10000000000"
+      },
+      "pt": {
+        "provider": "10000000000",
+        "otherKnown": "0",
+        "supply": "10000000000"
+      },
+      "dr": {
+        "provider": "0",
+        "buyer": "907024323",
+        "poolVault": "9092975677",
+        "poolProtocolFees": "0",
+        "poolFundFees": "0",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "10000000000"
+      },
+      "testQuote": {
+        "provider": "0",
+        "buyer": "0",
+        "poolVault": "220000000",
+        "poolProtocolFees": "6000",
+        "poolFundFees": "2000",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "220000000"
+      },
+      "lp": {
+        "provider": "1414213460",
+        "mintSupply": "1414213460",
+        "internalPoolLpAmount": "1414213560"
+      }
+    },
+    "withdrawn": {
+      "collateral": {
+        "provider": "0",
+        "vault": "10000000000",
+        "supply": "10000000000"
+      },
+      "pt": {
+        "provider": "10000000000",
+        "otherKnown": "0",
+        "supply": "10000000000"
+      },
+      "dr": {
+        "provider": "9092975034",
+        "buyer": "907024323",
+        "poolVault": "643",
+        "poolProtocolFees": "0",
+        "poolFundFees": "0",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "10000000000"
+      },
+      "testQuote": {
+        "provider": "219991984",
+        "buyer": "0",
+        "poolVault": "8016",
+        "poolProtocolFees": "6000",
+        "poolFundFees": "2000",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "220000000"
+      },
+      "lp": {
+        "provider": "0",
+        "mintSupply": "0",
+        "internalPoolLpAmount": "100"
+      }
+    },
+    "recombined": {
+      "collateral": {
+        "provider": "9092975034",
+        "vault": "907024966",
+        "supply": "10000000000"
+      },
+      "pt": {
+        "provider": "907024966",
+        "otherKnown": "0",
+        "supply": "907024966"
+      },
+      "dr": {
+        "provider": "0",
+        "buyer": "907024323",
+        "poolVault": "643",
+        "poolProtocolFees": "0",
+        "poolFundFees": "0",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "907024966"
+      },
+      "testQuote": {
+        "provider": "219991984",
+        "buyer": "0",
+        "poolVault": "8016",
+        "poolProtocolFees": "6000",
+        "poolFundFees": "2000",
+        "poolCreatorFees": "0",
+        "otherKnown": "0",
+        "supply": "220000000"
+      },
+      "lp": {
+        "provider": "0",
+        "mintSupply": "0",
+        "internalPoolLpAmount": "100"
+      }
+    }
+  },
+  "exactSwap": {
+    "quoteInputRaw": "20000000",
+    "quotedDrOutputRaw": "907024323",
+    "minimumDrOutputRaw": "902489201",
+    "actualDrOutputRaw": "907024323",
+    "tradeFeeRaw": "50000",
+    "protocolFeeRaw": "6000",
+    "fundFeeRaw": "2000",
+    "creatorFeeRaw": "0"
+  },
+  "captureProvenance": {
+    "sourceCluster": "devnet",
+    "sourceProgramData": "3KvTa2fYhMxMZNfHho5oX34yLQLwRauoU2JScBkugvXF",
+    "sourceProgramDeploySlot": 498629438,
+    "sourceConfigObservationSlot": 499748702,
+    "capturedLoaderPayloadSha256": "87ef84634086209fc2c29b4163bbe5209a1e9383aff5c429781f5fff270d75fd"
+  },
+  "limits": [
+    "Artificial DR/test-quote ratio; test quote has no value or redemption right.",
+    "No Raydium website or indexer listing is claimed.",
+    "Public 2027 claims cannot mature during this run; independent redemption is outside this receipt."
+  ]
+}

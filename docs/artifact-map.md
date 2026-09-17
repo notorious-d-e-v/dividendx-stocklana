@@ -1,10 +1,11 @@
 # DividendX artifact map
 
-Updated 17 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. Local program execution does not establish a public deployment or live issuer integration.
+Updated 17 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. The accepted program ELF and a test-only Raydium round trip are now proven on public devnet; this does not establish live issuer integration.
 
 ## Start here
 
 - [README](../README.md) — run the real local wallet application, preserved previews and their checks.
+- [AMM review](../planning/amm-review.md) — finalized public devnet round trip and separate captured-bytecode local proof.
 - [Current plan](../planning/plan.md) — current scope, completed work and next implementation phase.
 - [Architecture decision](../planning/adapter-decision.md) and [issuer synthesis](../planning/solana-issuer-synthesis.md) — the selected xStocks, Backpack/Trek and Ondo design, its evidence boundary and unresolved dependencies.
 - [Annual product specification](../spec/annual-product.md) — annual Market / Split / Redeem flow at `/`, extending the approved visual design.
@@ -19,9 +20,10 @@ Updated 17 September 2026. This map identifies the current review surfaces, sour
 | [`apps/web/src/wallet/`](../apps/web/src/wallet/) | `/app/` wallet flow | Real local test transactions; temporary browser wallet and Wallet Standard interface |
 | [`packages/local-runtime/`](../packages/local-runtime/) | Offline Surfpool test network | Disposable test profiles and synthetic annual journal; no real issuer assets |
 | [`packages/issuer-readers/`](../packages/issuer-readers/) | Server-side issuer observations | Selected registry identities and available source records; explicit gaps, private snapshots, no settlement writer |
+| [`packages/amm-integration/`](../packages/amm-integration/) | Raydium CPMM execution package | Isolated Node CLI; finalized public devnet test flow and captured-bytecode local fallback, not wired into `/app/` |
 | [`apps/web/src/App.tsx`](../apps/web/src/App.tsx) | Detailed rehearsal | Local accounting demonstration and fallback |
 | [`packages/sdk/src/annual-reference.ts`](../packages/sdk/src/annual-reference.ts) | Multi-event annual accounting and lifecycle reference | Preserved decimal-rational trusted-input model; program arithmetic instead uses exact onchain multiplier bits |
-| [`programs/dividendx/`](../programs/dividendx/) | Annual custody and settlement program, generated IDL | Controlled SBF/local-validator execution; no live issuer admission claim |
+| [`programs/dividendx/`](../programs/dividendx/) | Annual custody and settlement program, generated IDL | Controlled local execution plus exact accepted ELF deployed on devnet; no live issuer admission claim |
 | [`packages/transaction-sdk/`](../packages/transaction-sdk/) | Actual instruction builders, snapshots, quotes and signing helpers | Used by `/app/`; caller supplies signers |
 | [`tests/protocol/`](../tests/protocol/) | Independent oracle and compiled-SBF conformance | Controlled mints, clocks and attestations; preserves source fixture provenance |
 | [`packages/sdk/src/index.ts`](../packages/sdk/src/index.ts) | Preserved single-event rehearsal SDK | Legacy behavior, not the annual program contract |
@@ -61,7 +63,7 @@ The evidence directory is archival source material and should remain tracked eve
 - [Ondo report](../planning/research/ondo-solana.md) and [Ondo evidence](../planning/evidence/ondo-solana-2026-09-16.json) — research snapshot; no source-complete Ondo event is claimed.
 - [Authenticated Ondo access](../planning/research/ondo-api-access-2026-09-17.md) — verified read-only endpoints and six matching mint identities; raw responses and credentials stay outside Git, historical settlement gaps remain.
 - [Issuer reader contract](../spec/issuer-readers-v1.md) and [public source schemas](../planning/research/issuer-reader-source-contracts-2026-09-17.md) — typed observation boundaries, exact identity checks, source revisions and incomplete-history handling.
-- [AMM feasibility](../planning/research/claim-amm-feasibility.md) — devnet integration decision and remaining prerequisites; no pool or deployed DividendX program is claimed.
+- [AMM feasibility](../planning/research/claim-amm-feasibility.md), [acceptance review](../planning/amm-review.md), [public receipt](../planning/evidence/amm-devnet-roundtrip-2026-09-17.json) and [local captured-bytecode receipt](../packages/amm-integration/evidence/local-captured-raydium-receipt-2026-09-17.json) — exact execution boundaries, identities and residual accounting. The public proof has 15 finalized transactions; the local proof has 14.
 - [Annual dividend research](../planning/research/annual-dividend-series.md) — exchange period/ex-date conventions, revisions and actual fixture gaps.
 - [Prior-art decision review](../planning/research/prior-art-review.md) — dated single-event architecture review with reusable lessons; annual specifications supersede its term design.
 - [Wallet acceptance](../planning/wallet-review.md) and [three-profile transaction evidence](../planning/evidence/wallet-runtime-smoke-2026-09-17.json) — actual local SBF lifecycle, transfers and redemption; not public consensus or a live issuer feed.

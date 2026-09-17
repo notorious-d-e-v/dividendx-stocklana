@@ -1,0 +1,57 @@
+{
+  "preflight": {
+    "checkedAt": "2026-09-17T09:32:28.804Z",
+    "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+    "deployer": "DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv",
+    "balanceLamports": 10000000000,
+    "program": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+    "programExists": false,
+    "elfBytes": 706504,
+    "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+    "buffer": "63gJZceNyaB6bTdeGmpFArCvckYM5fbU5TTypmPnW8bG",
+    "maxProgramDataBytes": 706504
+  },
+  "firstUploadAttempt": {
+    "completedAt": "2026-09-17T09:39:50.058Z",
+    "result": "Data writes failed: max retries exceeded on public RPC",
+    "contextSlot": 499752090,
+    "accounts": [
+      {
+        "address": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+        "exists": false
+      },
+      {
+        "address": "63gJZceNyaB6bTdeGmpFArCvckYM5fbU5TTypmPnW8bG",
+        "exists": true,
+        "bytes": 706541,
+        "lamports": 3589919160,
+        "executable": false
+      },
+      {
+        "address": "DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv",
+        "exists": true,
+        "bytes": 0,
+        "lamports": 6409925840,
+        "executable": false
+      }
+    ],
+    "bufferDifferingBytes": 272851
+  },
+  "deployment": {
+    "verifiedAt": "2026-09-17T09:42:23.388Z",
+    "transport": "CLI validator TPU transport, resumed same buffer",
+    "signature": "3tvKSCUYu4d4yAnVAPmaxcCCsMMoAhKbL7bxQUnXBQo436VVBbLoZKL65hK8tKphC81bHZGuZTYewCW5DKTBPWhG",
+    "signatureSlot": 499752455,
+    "confirmationStatus": "finalized",
+    "verifiedAtSlot": 499753009,
+    "program": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+    "programData": "3bFr9kqnuA8sioNd6efWcy9yrwgTujc2A8ZBKKUYeyu3",
+    "programDataDeploymentSlot": "499752455",
+    "upgradeAuthority": "DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv",
+    "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+    "deployedBytesMatch": true,
+    "programDataBytes": 706549,
+    "deployerBalanceLamports": 6405732720,
+    "bufferClosed": true
+  }
+}

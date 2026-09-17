@@ -1,6 +1,6 @@
 # Current status
 
-Updated 17 September 2026 after acceptance of the wallet application and server-side issuer observation readers. Deposits still close at year-start.
+Updated 17 September 2026 after the wallet, issuer-reader and Raydium CPMM slices. Deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -12,18 +12,19 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Pitch | Approved [illustrated v2](../presentation/output/DividendX-illustrated-v2.pptx) and [user narration](../presentation/narration.md), preserved; annual wording recorded for the next versioned export |
 | Annual contract | [Accounting](../spec/annual-series-accounting.md), [SDK](../spec/annual-series-sdk.md), [acceptance matrix](../spec/annual-series-tests.md) and [product copy](../spec/annual-product.md) |
 | Reference | Exact bigint [annual model](../packages/sdk/src/annual-reference.ts): multiple events, revisions/cancellations, cumulative rounding, paired exits and independent final redemption |
-| Program | [Anchor program](../programs/dividendx/README.md) with Token-2022 custody, ordinary SPL PT/DR mints, immutable event revisions, staged exact settlement and independent redemption |
+| Program | [Anchor program](../programs/dividendx/README.md) with Token-2022 custody, ordinary SPL PT/DR mints, immutable event revisions, staged exact settlement and independent redemption; the accepted ELF is deployed unchanged on devnet at `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE` |
 | Transaction SDK | [Separate package](../packages/transaction-sdk/README.md) with generated-IDL builders, coherent reads, raw-unit quotes and caller-supplied signing |
 | Program contract | [Frozen implementation contract](../spec/program-v1.md), [toolchain](../docs/program-toolchain.md) and [acceptance review](program-review.md) |
 | Product | Annual Market / Split / Redeem at `/`, with isolated 2027/2028 series and distinct collecting, year-ended and finalized states |
 | Wallet app | `/app/`: actual local wallet signing, custody, PT/DR transfers, recombination and independent redemption; [acceptance](wallet-review.md) |
 | Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
 | Issuer readers | Typed observations across the selected 15 identities, exact source records, private snapshots and explicit data gaps; [acceptance](issuer-reader-review.md) |
+| AMM integration | Isolated [Node CLI](../packages/amm-integration/README.md) with a 15-transaction finalized public devnet Raydium CPMM round trip and a separate 14-transaction captured-bytecode local proof; [acceptance](amm-review.md) |
 | Fallback | Original single-event SDK and technical rehearsal at `/rehearsal/`, preserved |
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; historical KOx and Backpack MU factors |
 | Research | [Annual conventions and fixture gaps](research/annual-dividend-series.md), extending the [prior-art review](research/prior-art-review.md) |
 
-The two previews remain simulated. The separate `/app/` wallet application executes actual custody, PT/DR minting, transfers and redemption through the compiled SBF program on an offline local network. The temporary wallet signs in browser memory; installed extension wallets have not been verified. No public deployment, live issuer reader or AMM pool is claimed. Controlled journal inputs are synthetic; the program trusts its configured attestor for classification and complete-period coverage.
+The two previews remain simulated. The separate `/app/` wallet application executes actual custody, PT/DR minting, transfers and redemption through the compiled SBF program on an offline local network. The temporary wallet signs in browser memory; installed extension wallets have not been verified. Public devnet now has the exact accepted DividendX ELF and the test-only Raydium pool `2yhUcyx6jawJo9z5YMqFQgmxmvvE6Qz1g1zmDQjVH5Cm`, but that flow runs through the isolated CLI and is not in the web app. The existing web app on port 4174 and local runtime on port 4180 are unchanged. Controlled journal inputs and every AMM asset are synthetic; issuer observations do not produce settlement attestations.
 
 ## Annual decisions
 
@@ -46,11 +47,13 @@ The fixture verifier and all **33 reference/legacy SDK tests**, **22 transaction
 
 The server-only reader slice adds **22 reader tests** and **16 reviewed Ondo transport tests** to the root checks. Live reads matched all 15 selected identities and retained 23 xStocks corporate-action records plus 34 Ondo multiplier observations. A bounded Backpack size-limit issue was corrected and retested. Root type/build checks pass; the running demo was not restarted. See [reader acceptance](issuer-reader-review.md).
 
-## Next: liquidity and qualified issuer evidence
+The AMM package adds **11 tests** plus self-import and package checks. The existing root **71 tests**, type check and production build pass without changing the running web app. Its public receipt records **15 finalized devnet transactions** from slots 499760641–499761026, independently rechecked at finalized slot 499762083. The flow deposited 100 synthetic test-stock units, seeded 40 DR / 80 quote, added 60 DR / 120 quote, spent 20 quote for `907024323` DR raw (`9.07024323`), withdrew all user LP, and recombined `9092975034` raw paired claims (`90.92975034`). Provider LP and LP mint supply are zero; Raydium retains 100 internal LP and 643 DR raw. Final PT supply, DR supply and vault backing each equal `907024966` raw (`9.07024966`). See [AMM acceptance](amm-review.md) and the [public receipt](evidence/amm-devnet-roundtrip-2026-09-17.json).
 
-1. **Prove one AMM round trip.** Target Raydium CPMM on devnet with a future annual DR and a clearly labeled private test quote token: add liquidity, swap, withdraw liquidity, then recombine recovered DR with matching PT. Preserve reserves for remaining AMM/buyer claims. Public time cannot fast-forward an annual maturity; keep independent post-maturity redemption as a separate local proof. See [feasibility](research/claim-amm-feasibility.md).
+## Next: product exposure and qualified issuer evidence
+
+1. **Expose the validated liquidity flow in the wallet app.** Keep the isolated CLI and receipts as the execution source, and add the wallet experience as a separate slice without changing the preserved preview routes. The separate guided walkthrough page remains deferred.
 2. **Complete issuer qualification.** Observation readers now work across the selected package. Authoritative ex-date joins, classified event/factor binding, correction/finality rules, full annual coverage and live custody admission still need evidence. Keep these gaps visible; the readers do not produce settlement attestations.
-3. **Refresh the submission package.** Export annual pitch wording in a new deck version, synchronize narration with user review, capture only working functionality and verify the actual submission form/deadline.
+3. **Refresh the submission package.** Capture the working wallet and public test-only AMM proof, synchronize copy with user review, and verify the actual submission form/deadline. Do not revise the approved slides or narration in this documentation sync.
 
 No redesign, wider issuer audit, custom AMM, bridge or reward token is required for this next phase.
 
@@ -60,6 +63,6 @@ The [roadmap](roadmap.md) records early next-year listings, rolling DR vaults, d
 
 Every live issuer needs authoritative ex-date joins, complete annual history, revision/finality rules and qualified ordinary vault custody. Ondo read-only API access is now [verified](research/ondo-api-access-2026-09-17.md); its historical classified event/factor joins and annual coverage/finality still need evidence. Backpack needs a durable ledger beyond the MU reconstruction. [Data requests](issuer-data-requests.md) distinguish those gaps from already public discovery. These dependencies do not block controlled program tests.
 
-Astra owns decisions and acceptance; Sol receives bounded work under [AGENTS.md](../AGENTS.md) and the [work orders](phase-work-orders.md). Verification supersedes plans through the [decision log](decision-log.md). Keep credentials outside the repository and browser bundle. Existing authorization covers public Git backup, not real-fund deployment, outreach or submission.
+Astra owns decisions and acceptance; Sol receives bounded work under [AGENTS.md](../AGENTS.md) and the [work orders](phase-work-orders.md). Verification supersedes plans through the [decision log](decision-log.md). Keep credentials outside the repository and browser bundle. The completed public work used dedicated devnet SOL and worthless test assets; real assets, mainnet deployment, outreach and submission remain unauthorized.
 
 The GitHub OAuth login lacks `workflow` scope, so [CI remains an inactive template](../docs/ci-setup.md); no remote CI run is claimed. The [artifact map](../docs/artifact-map.md) identifies preserved history and current entry points.

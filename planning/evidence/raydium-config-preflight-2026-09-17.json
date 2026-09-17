@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "kind": "raydium-devnet-cpmm-read-only-preflight",
+  "observedAt": "2026-09-17T09:34:00Z",
+  "rpc": {
+    "url": "https://api.devnet.solana.com",
+    "commitment": "finalized",
+    "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+    "slot": 499748702,
+    "transactionsSubmitted": false,
+    "walletAccessed": false
+  },
+  "sdk": {
+    "package": "@raydium-io/raydium-sdk-v2",
+    "version": "0.2.64-alpha",
+    "tarballSha256": "d790e56ac6bb6d3af369b55fd35fcdb6d46c47eb1c2aff89caf35e0996d9c8e0",
+    "npmShasum": "9c859e01219987981fc282d077ce7f7d0ad18b99",
+    "sourceInspected": true
+  },
+  "program": {
+    "address": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+    "owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+    "executable": true,
+    "programDataAddress": "3KvTa2fYhMxMZNfHho5oX34yLQLwRauoU2JScBkugvXF",
+    "deploySlot": 498629438,
+    "dumpedElfBytes": 742640,
+    "dumpedElfSha256": "87ef84634086209fc2c29b4163bbe5209a1e9383aff5c429781f5fff270d75fd",
+    "publicSourceCommit": "59fb845a9e5bb569c8b2f3415f13b0c0ebcc6b92",
+    "sourceToBinaryEquivalenceEstablished": false
+  },
+  "config": {
+    "address": "5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy",
+    "owner": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+    "dataLength": 236,
+    "bump": 253,
+    "disableCreatePool": false,
+    "index": 0,
+    "tradeFeeRate": "2500",
+    "protocolFeeRate": "120000",
+    "fundFeeRate": "40000",
+    "creatorFeeRate": "2500",
+    "feeRateDenominator": "1000000",
+    "createPoolFeeLamports": "150000000",
+    "protocolOwner": "DRay33UmULQCeawH3dVpJfN3uqLj6Qtq4ymSRx2pAgGK",
+    "fundOwner": "DRay33UmULQCeawH3dVpJfN3uqLj6Qtq4ymSRx2pAgGK"
+  },
+  "feeReceiver": {
+    "address": "3oE58BKVt8KuYkGxx8zBojugnymWmBiyafWgMrnb6eYy",
+    "ownerProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "dataLength": 165,
+    "mint": "So11111111111111111111111111111111111111112",
+    "tokenOwner": "DRayEuvQMUDHNsHLzNhzQsKnhCPPpbFqrau8L54XqGyW",
+    "initialized": true,
+    "native": true
+  },
+  "rentLamportsAtCheck": {
+    "programAccount36": "833120",
+    "classicMint82": "1066800",
+    "classicTokenAccount165": "1488440",
+    "ammConfig236": "1849120",
+    "poolState637": "3886200",
+    "observation4075": "21351240",
+    "dividendxElf706504": "3589690560",
+    "dividendxBuffer706541": "3589878520",
+    "dividendxProgramData706549": "3589919160"
+  },
+  "costEstimatesLamports": {
+    "cpmmNewAccountRent": "30769560",
+    "cpmmCreationFee": "150000000",
+    "cpmmKnownMinimumBeforeTransactionFees": "180769560",
+    "freshDividendxFinalProgramRent": "3590752280",
+    "freshDividendxPeakProgramAndBufferRent": "7180630800"
+  },
+  "limitations": [
+    "All rates and rent values are mutable and must be read again immediately before execution.",
+    "The ordinary permissionless Initialize path disables creator fees even though the config stores a nonzero creatorFeeRate.",
+    "No transaction, airdrop, signature, pool creation, or source-to-deployed-binary reproduction occurred in this preflight."
+  ]
+}
