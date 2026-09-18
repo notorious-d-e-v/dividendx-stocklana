@@ -1,6 +1,6 @@
 # Hosting operations
 
-This runbook covers the production site at [dividendx-stocklana.vercel.app](https://dividendx-stocklana.vercel.app), Vercel project `payai/dividendx-stocklana`. Use the canonical hostname in public links. Deployment IDs are release evidence, not stable configuration; resolve the current and known-good deployments when operating.
+This runbook covers the production site at [dividendx.payai.network](https://dividendx.payai.network), Vercel project `payai/dividendx-stocklana`. Use the custom domain in public links. The original `https://dividendx-stocklana.vercel.app` address remains supported; both exact HTTPS origins are allowed in production. Visitor cookies and sandbox sessions are hostname-specific, so start a new session when switching domains. Deployment IDs are release evidence, not stable configuration; resolve the current and known-good deployments when operating.
 
 The governing boundaries are the [hosting release review](../planning/hosting-release-review.md), [hosted-session specification](../spec/hosted-sessions-v1.md), and [hosted-devnet specification](../spec/hosted-devnet-services-v1.md).
 
@@ -109,6 +109,8 @@ Confirm that no `.env*`, keypair, `.local-tools`, evidence, user ledger, or exis
 
 ## Deploy and verify
 
+The existing project is connected to the GitHub repository. Pushes to the production branch publish automatically; use branches and reviewed merges for subsequent code changes. Git deployment updates the site and Functions, but does not rebuild the Sandbox snapshot or deploy the Solana program. Origin-environment changes require a new deployment to take effect.
+
 1. Review `git status --short`, the candidate revision, lockfile changes, frozen registry, runtime snapshot manifest, and `vercel.json`. Confirm the canonical project link names `payai/dividendx-stocklana`, and record the current known-good production deployment for rollback.
 2. Check configuration names without copying their values: `vercel env list production --scope payai`. Run the local checks and dry run above.
 3. A preview deployment can prove build completion, static files, and read-only behavior:
@@ -119,8 +121,8 @@ Confirm that no `.env*`, keypair, `.local-tools`, evidence, user ledger, or exis
    vercel inspect <preview-url> --logs --scope payai
    ```
 
-   Production currently allows only the canonical `DIVIDENDX_SITE_ORIGIN`. A browser on an immutable preview hostname therefore receives 403 for session/faucet mutations, so do not call that a full smoke test or promote it on that basis. Full preview testing requires a separately reviewed preview origin and complete preview configuration; never add a temporary preview hostname to the production origin list.
-4. With the canonical-only configuration, release to production and save the returned deployment URL:
+   Production `DIVIDENDX_SITE_ORIGIN` contains exactly `https://dividendx.payai.network,https://dividendx-stocklana.vercel.app`. A browser on an immutable preview hostname therefore receives 403 for session/faucet mutations, so do not call that a full smoke test or promote it on that basis. Full preview testing requires a separately reviewed preview origin and complete preview configuration; never add a temporary preview hostname to the production origin list.
+4. With the production-origin configuration, release to production and save the returned deployment URL:
 
    ```sh
    vercel deploy --prod --scope payai --yes
