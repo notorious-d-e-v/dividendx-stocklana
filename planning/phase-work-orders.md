@@ -1,6 +1,6 @@
 # DividendX phase work orders
 
-Updated 17 September 2026. Workspace `/Users/node/workspace/dividendx-stocklana`. The visual system and illustrated pitch are approved. Scope is the selected asset package across xStocks, Backpack/Trek and Ondo. Permissioned holder/approved-vault products, onboarding and catalog UI are excluded. The annual model/product and preserved rehearsal remain local references. The annual program, transaction SDK, local wallet, observation readers and isolated Raydium CPMM test integration are accepted. The separate guided liquidity/redemption page is also accepted; qualified issuer settlement and submission refresh remain next. This supersedes the archived broader and xStocks-only work orders.
+Updated 18 September 2026. Workspace `/Users/node/workspace/dividendx-stocklana`. The visual system and illustrated pitch are approved. Scope is the selected asset package across xStocks, Backpack/Trek and Ondo. Permissioned holder/approved-vault products, onboarding and catalog UI are excluded. The annual model/product and preserved rehearsal remain local references. The annual program, transaction SDK, local wallet, observation readers and isolated Raydium CPMM test integration are accepted. The separate guided liquidity/redemption page and captured-mint custody proof are also accepted. Public app/hosting is next, followed by evidence-dependent issuer settlement and submission refresh. This supersedes the archived broader and xStocks-only work orders.
 
 ## Delegation contract
 
@@ -90,7 +90,7 @@ Show multi-issuer observation and qualified execution clearly. Keep observation-
 
 **Accepted qualification slice (18 September):** Sol high implemented [unsigned dossier v1](../spec/issuer-qualification-v1.md). Astra verified real saved inputs, current mint bytes, private output and all 85 root tests plus type/build checks; see [acceptance](issuer-qualification-review.md). It validates observations, identities, revisions, candidate dates and current-mint consistency while keeping every dossier blocked and unsigned. This replaces the earlier approval-capable proposal: issuer semantics remain unresolved. Existing readers, program/SDK and running demos are preserved.
 
-Next, resolve the source questions recorded in the [follow-up](research/issuer-qualification-followup-2026-09-18.md): issuer event/ex-date binding, historical transitions, revisions/cancellations, finality and period coverage. Review exact ordinary custody separately. Only a later, explicitly reviewed policy may connect qualified inputs to staged settlement. Never infer ex-date from payment/activation or generate completeness from empty results/pagination.
+Remaining issuer work resolves the source questions recorded in the [follow-up](research/issuer-qualification-followup-2026-09-18.md): issuer event/ex-date binding, historical transitions, revisions/cancellations, finality and period coverage. Review exact ordinary custody separately. Only a later, explicitly reviewed policy may connect qualified inputs to staged settlement. Never infer ex-date from payment/activation or generate completeness from empty results/pagination.
 
 **Accepted captured-custody slice (18 September):** Sol high implemented the bounded public snapshot/verifier and compiled-program tests in disjoint paths under [custody conformance v1](../spec/issuer-custody-conformance-v1.md). Astra independently checked raw bytes, SDK/Rust profile agreement and cumulative payouts, then verified 95 root tests and 47 Rust tests. All 15 captured configurations execute deposit, stale paired exit, synthetic multi-event finalization and independent redemption. See [acceptance](issuer-custody-review.md). No program, SDK or live-status change; the [source check](research/issuer-public-policy-check-2026-09-18.md) still leaves external policy/history questions unresolved.
 
@@ -98,4 +98,16 @@ Refresh submission materials around functionality actually completed. Preserve t
 
 ## Source-access work alongside production
 
+The user will contact Ondo/Backpack after the public site and devnet app are usable. Follow the hosting work order below first; do not send outreach.
+
 Use `planning/issuer-data-requests.md` to identify missing issuer data. Drafts are available for the user to send; do not send messages. Prioritize official civil ex-date joins, complete eligible-period ledgers, revisions and finality/completeness rules for each selected source. A single event can unlock a factor regression, but only complete period evidence can support annual finalization.
+
+## Next work order: public app and hosting
+
+Follow [public devnet and hosted sandbox](hosting-plan.md). Astra owns the hosting decision and acceptance. Sol **high** receives bounded implementation slices with explicit paths: (1) Linux runtime/artifact feasibility, (2) devnet wallet configuration and bounded test funding, (3) isolated hosted sessions and restricted RPC, then (4) release/browser verification. Keep shared routing and configuration edits sequential.
+
+Public devnet uses the unchanged annual program and consensus clock. Do not implement a shortened term or expose advance controls. The online sandbox retains synthetic annual events and lets each visitor advance a separate disposable network. Preserve core Split/Redeem, separate guided demos, current local defaults, approved previews and running processes. No new DeFi venue, program upgrade or live issuer writer belongs in this work order.
+
+First prove Node 24 with the shipped linux-x64-gnu Surfpool addon and exact accepted program artifact. Record startup/peak memory and real signed flow results before choosing provider capacity. The Vercel-first recommendation remains conditional until its Sandbox image executes successfully; Cloudflare Containers is the fallback. No provider has been provisioned in the planning pass.
+
+Acceptance requires public devnet wallet transactions and receipts, two independent hosted visitor sessions, full sandbox annual redemption, private administrative RPC, expiry/reset handling, bounded funding, no secrets in browser/container artifacts, and clear separation of public test assets from sandbox balances. Public maturity and qualified settlement remain real lifecycle gates; the user should not have to operate a manual time-control service.

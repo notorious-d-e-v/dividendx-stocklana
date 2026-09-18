@@ -1,6 +1,6 @@
 # Current status
 
-Updated 18 September 2026 after captured-mint local custody conformance was accepted for all 15 selected assets. Live issuer settlement remains incomplete; deposits still close at year-start.
+Updated 18 September 2026 after captured-mint custody acceptance and the user's public-hosting decision. Next: a real-calendar devnet app plus an online accelerated sandbox. Live issuer settlement remains incomplete; deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -60,11 +60,15 @@ The offline qualification slice adds **14 tests**, bringing the issuer package t
 
 The captured-mint conformance slice passes **all 15 local journeys**, with identical SDK/Rust fingerprints and exact custody conservation. Current checks are **95 root tests**, **47 Rust tests**, type checking and an isolated build. Captured mint supply/authority/scale bytes are unchanged; holder funding and annual records remain synthetic. See [custody acceptance](issuer-custody-review.md).
 
-## Next: qualified issuer evidence and settlement
+## Next: public devnet and hosted sandbox
 
-1. **Resolve the remaining source semantics.** The user has deferred all additional DeFi integrations. Establish authoritative event/ex-date/factor joins, historical transitions, correction/finality and complete-period policy. The [public-source check](research/issuer-public-policy-check-2026-09-18.md) narrows the remaining issuer questions. Local custody passes all 15 captured configurations, while live custody admission remains separate. August MSFTx has a matching configured factor pair; that does not complete historical qualification.
-2. **Prepare settlement from qualified evidence.** The [unsigned review tool](issuer-qualification-review.md) is complete and keeps every dossier blocked. A later reviewed issuer policy must establish an attestor decision and mapping to the existing staged settlement instructions. Event qualification and annual coverage remain separate; year-end alone never authorizes finalization.
-3. **Refresh the submission package.** Capture the working wallet and public test-only AMM proof, synchronize copy with user review, and verify the actual submission form/deadline. Do not revise the approved slides or narration in this documentation sync.
+The user chose **real-calendar public devnet plus an online accelerated sandbox**, with no shortened devnet term or time override. The [hosting plan](hosting-plan.md) recommends trying Vercel website + Vercel Sandbox first, with Cloudflare Containers as fallback. This recommendation has not yet been proved by a Linux deployment.
+
+1. **Prove the hosted runtime.** Package the pinned program/SDK/captures for Node 24 on x86_64 glibc Linux. Measure startup and memory, then verify the full guided flow. Each visitor needs a separate disposable network; current singleton runtimes cannot simply be exposed publicly.
+2. **Connect the wallet app to public devnet.** Add network configuration, tested extension-wallet signing, persistent test manifests, bounded faucet funding and the existing Raydium flow. Use clearly labeled test collateral. A 2027 series closes deposits on 1 January 2027 and matures on 1 January 2028; public flows currently end with paired recombination.
+3. **Host the accelerated experience.** Preserve core Split/Redeem and separate guided demos. Add isolated sessions, controlled RPC, progress, expiry/reset and honest network labels. Visitors can advance their own synthetic year and redeem both sides without affecting anyone else.
+4. **Publish and verify.** Check desktop/mobile, clean-browser wallet flows, public receipts, sandbox redemption and failure recovery; address the existing CI scope blocker. The user plans issuer outreach after a usable live site exists.
+5. **Continue qualified settlement and submission work.** Resolve the [remaining source semantics](research/issuer-public-policy-check-2026-09-18.md), then specify an automated attestor under a reviewed policy. The [unsigned review tool](issuer-qualification-review.md) stays blocked; year-end alone never authorizes finalization. Refresh versioned submission materials around actual functionality and verify the submission form/deadline.
 
 No redesign, wider issuer audit, custom AMM, bridge or reward token is required for this next phase.
 

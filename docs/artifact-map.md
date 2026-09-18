@@ -10,6 +10,7 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 - [Test USDC overlay](../spec/guided-usdc-v1.md) and [acceptance review](../planning/usdc-demo-review.md) — v2 quote identity, local funding boundary, browser, RPC and exact-conservation review.
 - [Preserved generic-quote acceptance](../planning/guided-demo-review.md) — historical 37-transaction guided proof.
 - [Current plan](../planning/plan.md) — current scope, completed work and next implementation phase.
+- [Hosting plan](../planning/hosting-plan.md) — approved real-calendar devnet/accelerated sandbox modes, provider recommendation and remaining deployment checks.
 - [Architecture decision](../planning/adapter-decision.md) and [issuer synthesis](../planning/solana-issuer-synthesis.md) — the selected xStocks, Backpack/Trek and Ondo design, its evidence boundary and unresolved dependencies.
 - [Annual product specification](../spec/annual-product.md) — annual Market / Split / Redeem flow at `/`, extending the approved visual design.
 - [Detailed rehearsal specification](../spec/frontend-rehearsal.md) — preserved two-account accounting walkthrough at `/rehearsal/`.
