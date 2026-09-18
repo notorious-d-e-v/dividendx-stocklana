@@ -15,16 +15,28 @@ export class DemoHttpError extends Error {
   }
 }
 
-async function boundedFetch(path: string, init: RequestInit = {}, timeoutMs = READ_TIMEOUT_MS): Promise<Response> {
+export interface GuidedClient {
+  runtimeUrl: string;
+  hosted: boolean;
+  expectedRuntimeId?: string;
+  readState: () => Promise<DemoState>;
+  start: (body: DemoStartRequest) => Promise<void>;
+  runStep: (body: DemoStepRequest) => Promise<void>;
+  readReceipt: () => Promise<unknown>;
+}
+
+async function boundedFetch(runtimeUrl: string, path: string, init: RequestInit = {}, timeoutMs = READ_TIMEOUT_MS, onExpired?: (message?: string) => void): Promise<Response> {
   const controller = new AbortController();
   const timeout = globalThis.setTimeout(() => controller.abort(), timeoutMs);
   try {
-    return await globalThis.fetch(`${GUIDED_RUNTIME_URL}${path}`, {
+    const response = await globalThis.fetch(`${runtimeUrl}${path}`, {
       ...init,
       cache: 'no-store',
       signal: controller.signal,
       headers: { Accept: 'application/json', ...init.headers },
     });
+    if (response.status === 410) onExpired?.('This guided sandbox expired or was replaced. Its action controls were cleared.');
+    return response;
   } catch (error) {
     if (controller.signal.aborted) throw new Error('The guided demo runtime did not respond in time.');
     throw error;
@@ -44,7 +56,7 @@ async function errorMessage(response: Response): Promise<string> {
   return response.statusText || `Request failed (${response.status}).`;
 }
 
-function assertState(value: unknown): DemoState {
+export function assertState(value: unknown, expectedRuntimeId?: string): DemoState {
   if (!value || typeof value !== 'object') throw new Error('The guided runtime returned an invalid state.');
   if ((value as Record<string, unknown>).schemaVersion !== 2) {
     throw new Error('This page requires guided runtime v2 with pinned Test USDC. Update and restart npm run demo:guided.');
@@ -93,39 +105,43 @@ function assertState(value: unknown): DemoState {
     || !(state.sessionId === null || typeof state.sessionId === 'string') || !(state.error === null || typeof state.error === 'string')) {
     throw new Error('The guided runtime returned an unsupported state.');
   }
+  if (expectedRuntimeId && state.runtimeId !== expectedRuntimeId) throw new Error('The guided runtime ID does not match this hosted session.');
   return value as DemoState;
 }
 
-export async function readDemoState(): Promise<DemoState> {
-  const response = await boundedFetch('/state');
-  if (!response.ok) throw new DemoHttpError(await errorMessage(response), response.status);
-  return assertState(await response.json());
+export function createGuidedClient(runtimeUrl = GUIDED_RUNTIME_URL, options: { expectedRuntimeId?: string; onExpired?: (message?: string) => void; hosted?: boolean } = {}): GuidedClient {
+  const base = runtimeUrl.replace(/\/$/, '');
+  const request = (path: string, init?: RequestInit, timeoutMs?: number) => boundedFetch(base, path, init, timeoutMs, options.onExpired);
+  const mutate = async (path: '/start' | '/step', body: DemoStartRequest | DemoStepRequest): Promise<void> => {
+    const response = await request(path, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'X-DividendX-Demo': '1' }, body: JSON.stringify(body),
+    }, MUTATION_TIMEOUT_MS);
+    if (!response.ok) throw new DemoHttpError(await errorMessage(response), response.status);
+    if (response.status !== 202) throw new DemoHttpError('The guided runtime did not accept the action.', response.status);
+  };
+  return {
+    runtimeUrl: base,
+    hosted: options.hosted === true,
+    expectedRuntimeId: options.expectedRuntimeId,
+    readState: async () => {
+      const response = await request('/state');
+      if (!response.ok) throw new DemoHttpError(await errorMessage(response), response.status);
+      return assertState(await response.json(), options.expectedRuntimeId);
+    },
+    start: (body) => mutate('/start', body),
+    runStep: (body) => mutate('/step', body),
+    readReceipt: async () => {
+      const response = await request('/receipt');
+      if (!response.ok) throw new DemoHttpError(await errorMessage(response), response.status);
+      const receipt = await response.json() as unknown;
+      if (!receipt || typeof receipt !== 'object' || (receipt as Record<string, unknown>).schemaVersion !== 2) throw new Error('The guided runtime returned an unsupported Test USDC receipt.');
+      return receipt;
+    },
+  };
 }
 
-async function mutate(path: '/start' | '/step', body: DemoStartRequest | DemoStepRequest): Promise<void> {
-  const response = await boundedFetch(path, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-DividendX-Demo': '1' },
-    body: JSON.stringify(body),
-  }, MUTATION_TIMEOUT_MS);
-  if (!response.ok) throw new DemoHttpError(await errorMessage(response), response.status);
-  if (response.status !== 202) throw new DemoHttpError('The guided runtime did not accept the action.', response.status);
-}
-
-export function startDemo(body: DemoStartRequest): Promise<void> {
-  return mutate('/start', body);
-}
-
-export function runDemoStep(body: DemoStepRequest): Promise<void> {
-  return mutate('/step', body);
-}
-
-export async function readDemoReceipt(): Promise<unknown> {
-  const response = await boundedFetch('/receipt');
-  if (!response.ok) throw new DemoHttpError(await errorMessage(response), response.status);
-  const receipt = await response.json() as unknown;
-  if (!receipt || typeof receipt !== 'object' || (receipt as Record<string, unknown>).schemaVersion !== 2) {
-    throw new Error('The guided runtime returned an unsupported Test USDC receipt.');
-  }
-  return receipt;
-}
+const defaultClient = createGuidedClient();
+export const readDemoState = defaultClient.readState;
+export const startDemo = defaultClient.start;
+export const runDemoStep = defaultClient.runStep;
+export const readDemoReceipt = defaultClient.readReceipt;

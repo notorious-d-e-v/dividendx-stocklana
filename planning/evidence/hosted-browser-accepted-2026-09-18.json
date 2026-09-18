@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-18T05:11:28.917Z",
+  "completedAt": "2026-09-18T05:11:39.483Z",
+  "targetOrigin": "https://dividendx-stocklana.vercel.app",
+  "requestedFlow": "all",
+  "status": "failed",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-18T05:11:29.198Z",
+      "name": "browser launched",
+      "flows": [
+        "sandbox",
+        "guided",
+        "devnet",
+        "isolation"
+      ]
+    },
+    {
+      "at": "2026-09-18T05:11:29.205Z",
+      "name": "sandbox: create isolated visitor session"
+    },
+    {
+      "at": "2026-09-18T05:11:38.358Z",
+      "name": "sandbox: fund temporary wallet once",
+      "sessionId": "8f4453eca53a03bfb3707fee5c06d7c3"
+    }
+  ],
+  "flows": {
+    "sandbox": {
+      "status": "running",
+      "session": {
+        "schemaVersion": 1,
+        "kind": "wallet",
+        "status": "ready",
+        "sessionId": "8f4453eca53a03bfb3707fee5c06d7c3",
+        "runtimeId": "0f981ca0-a1bf-4983-9692-630b501a73e5",
+        "expiresAt": "2026-09-18T05:26:32.774Z",
+        "runtimeUrl": "/api/sandbox/wallet/8f4453eca53a03bfb3707fee5c06d7c3",
+        "error": null
+      },
+      "manifest": {
+        "schemaVersion": 1,
+        "kind": "surfnet",
+        "genesisHash": "3rCfbqZtZiLwhLEZEBtepYSnthZdPdLAcdKLumHv4pDf",
+        "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+        "deploymentDomainHex": "6b1767f4ecaae4ba5017ba1819e40999f6f5b53bcb19ff583e840b9838a3aa88",
+        "runtimeId": "0f981ca0-a1bf-4983-9692-630b501a73e5",
+        "clockControl": true,
+        "assets": [
+          {
+            "id": "xstocks-test-kox",
+            "company": "Coca-Cola",
+            "symbol": "TestKOx",
+            "issuerLabel": "xStocks test profile",
+            "issuerIdHex": "18d3d58d0dbc033637c9d6960e5cba41408851ee64c3b69999d9a25bd9d1f5f2",
+            "decimals": 8,
+            "collateralMint": "AvPEmTGrs13Xk1TBqSRLAWNQzhMCgcsDNCScU5sCbrNt",
+            "assetPolicy": "DTe8Qu4N9HycyexjBW2mpGBR6nMiGugik5Ltt4Rnd5bL",
+            "series": [
+              {
+                "year": 2027,
+                "address": "FPK7ZR7483qHzdv2FVsLPZS7YCRJtq84tq8AWmJ6Heme",
+                "accumulator": "7R9ZZMfvyioJ5DoRyZPNE7MV2tBzzZi2J7PjHQ5vqTpL",
+                "ptMint": "HdnDogQd1oJTcpyLmX153Sk9LKEfhnXC9X2ATjfr8pPH",
+                "drMint": "DZrJocc8K1zxTPUdb1J4mghuLgUFosAGYGAU3C3t7Y69",
+                "vault": "DiDcanpdjuyvZNhYXjcZmgdQ2sDzfGUZxEsdPyjyPGSU"
+              }
+            ]
+          },
+          {
+            "id": "backpack-test-mu",
+            "company": "Micron",
+            "symbol": "TestMU",
+            "issuerLabel": "Backpack/Trek test profile",
+            "issuerIdHex": "4a194d3bb01772809644c074e7794b640fbb9ff0ec194de99bd206153f7145e9",
+            "decimals": 6,
+            "collateralMint": "CiCzLMPZpm5U8mEnWHJCMAW2yafC4gWYz22vuJZwg6f7",
+            "assetPolicy": "JAbY89CQDvDa8FeQURyMeRk9gXYV9B8DFrHPaov6pmWj",
+            "series": [
+              {
+                "year": 2027,
+                "address": "3QvxS6uTXjeoscKPeCXmiSpdenSFHq5GydhhU2EzMVdt",
+                "accumulator": "A5QsAbZFBSA8qCHtQ4hqYgMaeP187tWx58gVhheRBm8q",
+                "ptMint": "2YTPkhEKecsMnDvfnYVKRCEcuu9mBRhw9dUmzLMetB7k",
+                "drMint": "9PDQmCaxxcL5YXgxrgidbH29kNvyLU1Nu6w2ARdpEVEG",
+                "vault": "AhZiEYHkdrzAzCzHcHe8T925iJy8ohGTEodnfRGnFmxN"
+              }
+            ]
+          },
+          {
+            "id": "ondo-test-ibm",
+            "company": "IBM",
+            "symbol": "TestIBMon",
+            "issuerLabel": "Ondo test profile",
+            "issuerIdHex": "ce9d00376fdbb9adbfb80aa637e4defa5634dd859637e15d4dbeab2ee85f50fe",
+            "decimals": 9,
+            "collateralMint": "J6DC5pMrpJV9aobQTMSsNJVMPMSdTeZjzs6ndfBetkGy",
+            "assetPolicy": "3ny2PBSsqZmy7iTF6GmPufBNznqCX2pZjQK6imzC1sY2",
+            "series": [
+              {
+                "year": 2027,
+                "address": "J5sBqe8199FmW36nyJkmHFQbHd4joLQzVCbvPco5rpQZ",
+                "accumulator": "GxNsEMF4akaicBeuG2SdT9svFmGoekVEvdqvDLWk18St",
+                "ptMint": "6xSijkDZjmujrgZDsZwhYn2E5BGNuAU8EaFAM713LmRV",
+                "drMint": "G4iesi27EG9Py8pzUK9PTWd47ReD2XWkfQ5d4ZDyDXM7",
+                "vault": "9f7sMLLPjUjKW6aPHbiYZUi3pKSZ4W7szwwJsSPGGbCz"
+              }
+            ]
+          }
+        ],
+        "hostedSessionId": "8f4453eca53a03bfb3707fee5c06d7c3",
+        "expiresAt": "2026-09-18T05:26:32.774Z",
+        "rpcUrl": "/api/sandbox/wallet/8f4453eca53a03bfb3707fee5c06d7c3/rpc"
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "flow": "sandbox",
+      "failure": true,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-accepted-2026-09-18-sandbox-failure.png"
+    }
+  ],
+  "failureArtifacts": [
+    {
+      "at": "2026-09-18T05:11:39.438Z",
+      "flow": "sandbox",
+      "stage": "sandbox: fund temporary wallet once",
+      "message": "sandbox faucet stopped with a visible error: 503 : {\"error\":\"Session service is temporarily unavailable.\"}",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "alerts": [
+        "503 : {\"error\":\"Session service is temporarily unavailable.\"}"
+      ],
+      "bodyText": "Skip to content\nDividendX\nMarket\nSplit\nRedeem\n7Wvi…o6oT\nPrivate 15-minute sandbox · synthetic network\nAccelerated dates and balances exist only inside this isolated test network. Reload loses a temporary wallet key.\nGuided demos →\nPublic devnet →\nReset sandbox\nOpen annual reference →\nVerified private SBF sandbox\nConnected to your isolated synthetic network\n\nWALLET\n\nDividendX temporary test wallet\n\n7WviKgkiZfv1PNntLbeJXGowLChDdK4odi6PuJxoo6oT · reload loses this disposable key\n\nDisconnect\nRequesting bounded local test assets…\n503 : {\"error\":\"Session service is temporarily unavailable.\"}\nEXACT SANDBOX STOCK TOKEN\nCoca-Cola · TestKOx · xStocks test profile\nMicron · TestMU · Backpack/Trek test profile\nIBM · TestIBMon · Ondo test profile\nANNUAL SERIES\n2027\nRefresh balances\nRequest test SOL + TestKOx\nNetwork-wide test dates\nDividendX local transaction application · TestKOx · 2027\nHistorical rehearsal",
+      "screenshot": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-accepted-2026-09-18-sandbox-failure.png"
+    }
+  ],
+  "browserErrors": [
+    {
+      "at": "2026-09-18T05:11:39.284Z",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 503 ()"
+    },
+    {
+      "at": "2026-09-18T05:11:39.317Z",
+      "type": "http",
+      "status": 503,
+      "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/8f4453eca53a03bfb3707fee5c06d7c3/rpc",
+      "rpcMethods": [
+        "getMultipleAccounts"
+      ],
+      "message": "Session service is temporarily unavailable."
+    }
+  ],
+  "errors": [
+    {
+      "at": "2026-09-18T05:11:39.437Z",
+      "type": "ui-alert",
+      "stage": "sandbox: fund temporary wallet once",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "label": "sandbox faucet",
+      "message": "503 : {\"error\":\"Session service is temporarily unavailable.\"}"
+    },
+    {
+      "at": "2026-09-18T05:11:39.483Z",
+      "stage": "sandbox: fund temporary wallet once",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "message": "sandbox faucet stopped with a visible error: 503 : {\"error\":\"Session service is temporarily unavailable.\"}"
+    }
+  ],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}

@@ -3,7 +3,7 @@ import { PublicKey } from '@solana/web3.js';
 import { DIVIDENDX_IDL, DIVIDENDX_PROGRAM_ID, configPda } from '@dividendx/transaction-sdk';
 import { formatStock, parseStockAmount } from '../src/wallet/amounts';
 import { confirmedRuntimeSignatures } from '../src/wallet/chain';
-import { createBoundedRpcFetch, createDevnetRpcFetch, createLocalConnection, resolveRuntimeConfig, RuntimeRequestError, runtimePost, validateManifestShape } from '../src/wallet/runtime';
+import { createBoundedRpcFetch, createDevnetRpcFetch, createLocalConnection, RequestScheduler, resolveRuntimeConfig, RuntimeRequestError, runtimePost, validateManifestShape } from '../src/wallet/runtime';
 import type { LocalManifest } from '../src/wallet/types';
 
 const domain = new Uint8Array(32).fill(7);
@@ -189,7 +189,7 @@ test('devnet RPC retries only transient responses with the identical request bod
   };
   try {
     const body = '{"jsonrpc":"2.0","method":"getGenesisHash"}';
-    const recovered = await createDevnetRpcFetch(3_000)('https://api.devnet.solana.com', { method: 'POST', body });
+    const recovered = await createDevnetRpcFetch(3_000, new RequestScheduler(2))('https://api.devnet.solana.com', { method: 'POST', body });
     expect(recovered.status).toBe(200);
     expect(requestCount).toBe(3);
     expect(bodies).toEqual([body, body, body]);
@@ -197,7 +197,7 @@ test('devnet RPC retries only transient responses with the identical request bod
 
     requestCount = 0;
     globalThis.fetch = async () => { requestCount += 1; return new Response('bad request', { status: 400 }); };
-    const notRetried = await createDevnetRpcFetch(1_000)('https://api.devnet.solana.com', { method: 'POST', body });
+    const notRetried = await createDevnetRpcFetch(1_000, new RequestScheduler(2))('https://api.devnet.solana.com', { method: 'POST', body });
     expect(notRetried.status).toBe(400);
     expect(requestCount).toBe(1);
   } finally { globalThis.fetch = originalFetch; }
@@ -208,12 +208,12 @@ test('devnet RPC bounds retry exhaustion and preserves caller aborts', async () 
   let requestCount = 0;
   globalThis.fetch = async () => { requestCount += 1; return new Response('limited', { status: 429, headers: { 'Retry-After': '1' } }); };
   try {
-    await expect(createDevnetRpcFetch(20)('https://api.devnet.solana.com', { method: 'POST', body: '{}' })).rejects.toThrow('Devnet RPC request timed out');
+    await expect(createDevnetRpcFetch(20, new RequestScheduler(2))('https://api.devnet.solana.com', { method: 'POST', body: '{}' })).rejects.toThrow('Devnet RPC request timed out');
     expect(requestCount).toBe(1);
 
     requestCount = 0;
     const caller = new AbortController();
-    const pending = createDevnetRpcFetch(2_000)('https://api.devnet.solana.com', { method: 'POST', body: '{}', signal: caller.signal });
+    const pending = createDevnetRpcFetch(2_000, new RequestScheduler(2))('https://api.devnet.solana.com', { method: 'POST', body: '{}', signal: caller.signal });
     await new Promise((resolve) => setTimeout(resolve, 0));
     caller.abort(new Error('caller cancelled devnet request'));
     await expect(pending).rejects.toThrow('caller cancelled devnet request');
@@ -221,27 +221,30 @@ test('devnet RPC bounds retry exhaustion and preserves caller aborts', async () 
 
     requestCount = 0;
     globalThis.fetch = async () => { requestCount += 1; return new Response('still limited', { status: 503 }); };
-    const exhausted = await createDevnetRpcFetch(5_000)('https://api.devnet.solana.com', { method: 'POST', body: '{}' });
+    const exhausted = await createDevnetRpcFetch(5_000, new RequestScheduler(2))('https://api.devnet.solana.com', { method: 'POST', body: '{}' });
     expect(exhausted.status).toBe(503);
     expect(exhausted.bodyUsed).toBe(false);
     expect(requestCount).toBe(4);
   } finally { globalThis.fetch = originalFetch; }
 });
 
-test('devnet RPC scheduler limits shared connection fetches to two', async () => {
+test('devnet RPC scheduler paces shared connection starts and limits concurrency to two', async () => {
   const originalFetch = globalThis.fetch;
   let active = 0;
   let maximum = 0;
+  const starts: number[] = [];
   globalThis.fetch = async () => {
+    starts.push(Date.now());
     active += 1;
     maximum = Math.max(maximum, active);
-    await new Promise((resolve) => setTimeout(resolve, 20));
+    await new Promise((resolve) => setTimeout(resolve, 900));
     active -= 1;
     return new Response('{}', { status: 200 });
   };
   try {
-    const firstConnectionFetch = createDevnetRpcFetch(1_000);
-    const secondConnectionFetch = createDevnetRpcFetch(1_000);
+    const scheduler = new RequestScheduler(2, 400);
+    const firstConnectionFetch = createDevnetRpcFetch(4_000, scheduler);
+    const secondConnectionFetch = createDevnetRpcFetch(4_000, scheduler);
     await Promise.all([
       firstConnectionFetch('https://api.devnet.solana.com', {}),
       firstConnectionFetch('https://api.devnet.solana.com', {}),
@@ -249,6 +252,32 @@ test('devnet RPC scheduler limits shared connection fetches to two', async () =>
       secondConnectionFetch('https://api.devnet.solana.com', {}),
     ]);
     expect(maximum).toBe(2);
+    expect(starts).toHaveLength(4);
+    for (let index = 1; index < starts.length; index += 1) expect(starts[index]! - starts[index - 1]!).toBeGreaterThanOrEqual(350);
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test('devnet RPC scheduler holds queued requests through Retry-After cooldown', async () => {
+  const originalFetch = globalThis.fetch;
+  const starts: number[] = [];
+  let requestCount = 0;
+  globalThis.fetch = async () => {
+    starts.push(Date.now());
+    requestCount += 1;
+    if (requestCount === 1) return new Response('limited', { status: 429, headers: { 'Retry-After': '1' } });
+    return new Response('{}', { status: 200 });
+  };
+  try {
+    const scheduler = new RequestScheduler(2, 400);
+    const fetchRpc = createDevnetRpcFetch(4_000, scheduler);
+    const responses = await Promise.all([
+      fetchRpc('https://api.devnet.solana.com', { method: 'POST', body: '{}' }),
+      fetchRpc('https://api.devnet.solana.com', { method: 'POST', body: '{}' }),
+    ]);
+    expect(responses.every((response) => response.status === 200)).toBe(true);
+    expect(starts).toHaveLength(3);
+    expect(starts[1]! - starts[0]!).toBeGreaterThanOrEqual(900);
+    expect(starts[2]! - starts[1]!).toBeGreaterThanOrEqual(350);
   } finally { globalThis.fetch = originalFetch; }
 });
 

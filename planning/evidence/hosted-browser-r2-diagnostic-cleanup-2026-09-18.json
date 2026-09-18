@@ -1,0 +1,12 @@
+{
+  "at": "2026-09-18T04:36:13.863Z",
+  "sessionId": "ae600adef528d831362258c9cdc5a522",
+  "providerStatus": "running",
+  "rpc": {
+    "status": 200,
+    "bytes": 282,
+    "dataBytes": 36
+  },
+  "providerAfter": "missing",
+  "ledgerAfter": "failed"
+}

@@ -3,8 +3,8 @@ import { PublicKey, type Connection } from '@solana/web3.js';
 import { quoteRedemption } from '@dividendx/transaction-sdk';
 import type { WalletAccount } from '@wallet-standard/base';
 import { formatClaim, formatStock, parseRawAmount, parseStockAmount, shortAddress } from './amounts';
-import { confirmedRuntimeSignatures, executeHolderAction, fetchWalletSeries } from './chain';
-import { loadManifest, RUNTIME_CONFIG, RuntimeRequestError, runtimePost, verifyRuntimeIdentity } from './runtime';
+import { confirmedRuntimeSignatures, executeHolderAction, fetchWalletSeries, waitForRuntimeSignatures } from './chain';
+import { loadManifest, RUNTIME_CONFIG, RuntimeRequestError, runtimePost, type RuntimeConfig, verifyRuntimeIdentity } from './runtime';
 import {
   compatibleAccount,
   connectWallet,
@@ -125,7 +125,7 @@ function RedemptionCard({ side, snapshot, asset, disabled, onRedeem }: {
   </article>;
 }
 
-export function WalletApp() {
+export function WalletApp({ runtimeConfig = RUNTIME_CONFIG, onReset }: { runtimeConfig?: RuntimeConfig; onReset?: () => Promise<void> }) {
   const [runtime, setRuntime] = useState<RuntimeState>({ kind: 'loading' });
   const [wallets, setWallets] = useState<CompatibleWallet[]>([]);
   const [connected, setConnected] = useState<ConnectedWallet>();
@@ -146,7 +146,10 @@ export function WalletApp() {
   const readGeneration = useRef(0);
   const pendingRead = useRef<{ key: string; generation: number } | undefined>(undefined);
   const snapshotPresent = useRef(false);
-  const network = RUNTIME_CONFIG.network;
+  const lifetimeAbort = useRef(new AbortController());
+  const network = runtimeConfig.network;
+  const sandbox = network === 'sandbox';
+  const signingNetwork = sandbox ? 'local' : network;
 
   const manifest = runtime.kind === 'ready' ? runtime.manifest : undefined;
   const connection = runtime.kind === 'ready' ? runtime.connection : undefined;
@@ -160,21 +163,25 @@ export function WalletApp() {
     const generation = ++bootGeneration.current;
     setRuntime({ kind: 'loading' }); setError('');
     try {
-      const nextManifest = await loadManifest();
-      const nextConnection = await verifyRuntimeIdentity(nextManifest);
+      const nextManifest = await loadManifest(runtimeConfig);
+      const nextConnection = await verifyRuntimeIdentity(nextManifest, runtimeConfig);
       if (bootGeneration.current !== generation) return;
       setRuntime({ kind: 'ready', manifest: nextManifest, connection: nextConnection });
       setAssetId((current) => current || nextManifest.assets[0]!.id);
       setYear((current) => current ?? nextManifest.assets[0]!.series[0]?.year);
     } catch (cause) { if (bootGeneration.current === generation) setRuntime({ kind: 'error', message: message(cause) }); }
-  }, []);
+  }, [runtimeConfig]);
 
   useEffect(() => { void boot(); }, [boot]);
   useEffect(() => {
-    const refresh = () => setWallets(discoverWallets(network));
+    lifetimeAbort.current = new AbortController();
+    return () => lifetimeAbort.current.abort(new Error('The wallet app was closed or its sandbox session changed.'));
+  }, []);
+  useEffect(() => {
+    const refresh = () => setWallets(sandbox ? [] : discoverWallets(signingNetwork));
     refresh();
-    return subscribeWalletRegistry(refresh);
-  }, [network]);
+    return sandbox ? undefined : subscribeWalletRegistry(refresh);
+  }, [sandbox, signingNetwork]);
   useEffect(() => {
     if (!connected || connected.temporary) return;
     return watchWallet(connected.wallet, ({ accounts, chains, features }) => {
@@ -182,7 +189,7 @@ export function WalletApp() {
       setWalletRevision((value) => value + 1);
       if (chains || features) {
         setSnapshot(undefined);
-        if (!isCompatibleWallet(connected.wallet, network)) {
+        if (!isCompatibleWallet(connected.wallet, signingNetwork)) {
           setConnected(undefined);
           setNotice('Wallet capabilities changed. Connect again to continue.');
           return;
@@ -190,11 +197,11 @@ export function WalletApp() {
       }
       if (!accounts) return;
       const sameAddress = accounts.filter((candidate) => candidate.address === connected.account.address);
-      const account = compatibleAccount(sameAddress, network) ?? compatibleAccount(accounts, network);
+      const account = compatibleAccount(sameAddress, signingNetwork) ?? compatibleAccount(accounts, signingNetwork);
       if (!account) { setConnected(undefined); setNotice('Wallet disconnected or changed to an incompatible account.'); return; }
       setConnected({ ...connected, account });
     });
-  }, [connected?.wallet, connected?.account.address, connected?.temporary, network]);
+  }, [connected?.wallet, connected?.account.address, connected?.temporary, signingNetwork]);
 
   const refreshSnapshot = useCallback(async (background = false) => {
     if (!manifest || !connection || !asset || !series) return;
@@ -235,10 +242,10 @@ export function WalletApp() {
   };
   const connect = async (wallet: CompatibleWallet, temporary = false) => {
     setError('');
-    try { const account = await connectWallet(wallet, network); setConnected({ wallet, account, temporary }); setNotice(`${wallet.name} connected for ${network === 'devnet' ? 'Solana devnet' : 'local'} signing.`); }
+    try { const account = await connectWallet(wallet, signingNetwork); setConnected({ wallet, account, temporary }); setNotice(`${wallet.name} connected for ${network === 'devnet' ? 'Solana devnet' : sandbox ? 'this private sandbox' : 'local'} signing.`); }
     catch (cause) { setError(message(cause)); }
   };
-  const addReceipt = (label: string, receipt: { signature: string; slot: number; confirmationStatus: string }) => {
+  const addReceipt = (label: string, receipt: { signature: string; slot: number | null; confirmationStatus: string }) => {
     setReceipts((current) => [{ label, signature: receipt.signature, slot: receipt.slot, status: receipt.confirmationStatus }, ...current].slice(0, 8));
   };
 
@@ -248,7 +255,7 @@ export function WalletApp() {
     const captured = key;
     submitting.current = true; setBusy(true); setError(''); setNotice('Waiting for wallet signature…');
     try {
-      const receipt = await executeHolderAction({ action, manifest, asset, series, connected, amountRaw: raw, ...options, isCurrent: () => activeKey.current === captured });
+      const receipt = await executeHolderAction({ action, manifest, asset, series, connected, amountRaw: raw, ...options, runtimeConfig, signal: lifetimeAbort.current.signal, isCurrent: () => activeKey.current === captured });
       if (activeKey.current !== captured) return;
       addReceipt(action, receipt); setNotice(`Confirmed in slot ${receipt.slot}.`);
       await refreshSnapshot();
@@ -261,16 +268,17 @@ export function WalletApp() {
     const captured = key; submitting.current = true; setBusy(true); setError(''); setNotice(`Requesting bounded ${network === 'devnet' ? 'devnet' : 'local'} test assets…`);
     let verified: Connection | undefined;
     try {
-      verified = await verifyRuntimeIdentity(manifest);
-      const result = await runtimePost<{ signatures: string[] }>(manifest, '/faucet', { owner: connected.account.address, assetId: asset.id });
-      const confirmed = await confirmedRuntimeSignatures(verified, result.signatures);
+      verified = await verifyRuntimeIdentity(manifest, runtimeConfig);
+      const result = await runtimePost<{ signatures: string[]; status?: string; message?: string }>(manifest, '/faucet', { owner: connected.account.address, assetId: asset.id }, runtimeConfig);
+      const confirmed = result.status === 'pending' ? await waitForRuntimeSignatures(verified, result.signatures) : await confirmedRuntimeSignatures(verified, result.signatures);
       if (activeKey.current !== captured) return;
       confirmed.forEach((receipt) => addReceipt('test faucet', receipt));
       setNotice(`${confirmed.length} ${network === 'devnet' ? 'devnet' : 'local'} faucet transaction${confirmed.length === 1 ? '' : 's'} confirmed.`);
       await refreshSnapshot();
     } catch (cause) {
       if (activeKey.current === captured) {
-        const partial = cause instanceof RuntimeRequestError ? cause.result as { signatures?: string[] } | undefined : undefined;
+        const partial = cause instanceof RuntimeRequestError ? cause.result as { signatures?: string[]; pending?: boolean } | undefined : undefined;
+        if (partial?.pending && partial.signatures?.length) partial.signatures.forEach((signature) => addReceipt('test faucet pending', { signature, slot: null, confirmationStatus: 'pending' }));
         if (verified && partial?.signatures?.length) {
           try {
             const confirmed = await confirmedRuntimeSignatures(verified, partial.signatures);
@@ -289,8 +297,8 @@ export function WalletApp() {
     const captured = key; submitting.current = true; setBusy(true); setError(''); setNotice('Applying a network-wide test date step…');
     let verified: Connection | undefined;
     try {
-      verified = await verifyRuntimeIdentity(manifest);
-      const result = await runtimePost<{ signatures: string[]; message: string }>(manifest, '/advance', { step, assetId: asset.id });
+      verified = await verifyRuntimeIdentity(manifest, runtimeConfig);
+      const result = await runtimePost<{ signatures: string[]; message: string }>(manifest, '/advance', { step, assetId: asset.id }, runtimeConfig);
       const confirmed = await confirmedRuntimeSignatures(verified, result.signatures);
       if (activeKey.current !== captured) return;
       confirmed.forEach((receipt) => addReceipt(`date control: ${step}`, receipt)); setNotice(result.message);
@@ -311,30 +319,37 @@ export function WalletApp() {
     finally { submitting.current = false; setBusy(false); }
   };
 
-  if (runtime.kind === 'loading') return <main className="wallet-gate"><Mark /><h1>Connecting to the {network === 'devnet' ? 'Solana devnet service' : 'local runtime'}…</h1><p>Verifying genesis, program and deployment identity.</p></main>;
-  if (runtime.kind === 'error') return <main className="wallet-gate" data-testid="runtime-error"><Mark /><p className="eyebrow">Runtime unavailable</p><h1>The {network === 'devnet' ? 'devnet service' : 'local runtime'} could not be verified.</h1><p>{network === 'devnet' ? 'DividendX could not reach or verify the required public test service. Retry checks the same configured service again.' : 'DividendX could not reach or verify the required localhost service. Retry checks it again; it does not start the service.'}</p><div className="wallet-runtime-error"><b>Runtime check failed</b><p>{runtime.message}</p></div>{network === 'local' && <><p>From the project root, start the runtime and wait until it reports ready:</p><code className="wallet-runtime-command">npm --prefix packages/local-runtime start</code></>}<div className="wallet-gate-actions"><button className="p-primary" onClick={boot}>Retry {network === 'devnet' ? 'devnet service' : 'localhost runtime'}</button><a href="/demos/">Open guided demos</a><a href="/">Return to annual reference</a></div></main>;
+  const resetSandbox = async () => {
+    if (!onReset || busy) return;
+    setBusy(true); setError(''); setNotice('Stopping this sandbox and requesting a fresh isolated network…');
+    try { await onReset(); }
+    catch (cause) { setError(message(cause)); setNotice(''); setBusy(false); }
+  };
+
+  if (runtime.kind === 'loading') return <main className="wallet-gate"><Mark /><h1>Connecting to the {network === 'devnet' ? 'Solana devnet service' : sandbox ? 'private sandbox' : 'local runtime'}…</h1><p>Verifying genesis, program and deployment identity.</p></main>;
+  if (runtime.kind === 'error') return <main className="wallet-gate" data-testid="runtime-error"><Mark /><p className="eyebrow">Runtime unavailable</p><h1>The {network === 'devnet' ? 'devnet service' : sandbox ? 'private sandbox' : 'local runtime'} could not be verified.</h1><p>{network === 'devnet' ? 'DividendX could not reach or verify the required public test service. Retry checks the same configured service again.' : sandbox ? 'DividendX could not verify this session-bound sandbox. Retry checks the same session; it never creates another one.' : 'DividendX could not reach or verify the required localhost service. Retry checks it again; it does not start the service.'}</p><div className="wallet-runtime-error"><b>Runtime check failed</b><p>{runtime.message}</p></div>{network === 'local' && <><p>From the project root, start the runtime and wait until it reports ready:</p><code className="wallet-runtime-command">npm --prefix packages/local-runtime start</code></>}<div className="wallet-gate-actions"><button className="p-primary" onClick={boot}>Retry {network === 'devnet' ? 'devnet service' : sandbox ? 'private sandbox' : 'localhost runtime'}</button><a href="/demos/">Open guided demos</a><a href="/">Return to annual reference</a></div></main>;
 
   const verifiedManifest = runtime.manifest;
   const activeBits = snapshot?.quote.mintProfile.scale.activeBits;
   const holder = connected?.account.address;
   const devnet = verifiedManifest.kind === 'devnet';
-  const runtimeLabel = devnet ? 'Solana devnet' : verifiedManifest.kind === 'surfnet' ? 'Local SBF sandbox' : 'Local validator';
+  const runtimeLabel = devnet ? 'Solana devnet' : sandbox ? 'private SBF sandbox' : verifiedManifest.kind === 'surfnet' ? 'Local SBF sandbox' : 'Local validator';
   const faucetEnabled = devnet ? verifiedManifest.faucetEnabled === true : verifiedManifest.faucetEnabled !== false;
   const seriesName = asset && series ? `${asset.symbol} · ${series.year}` : 'No series';
 
   return <><a className="p-skip" href="#wallet-main">Skip to content</a>
     <header className="p-header wallet-header"><a className="p-brand" href="/"><Mark />DividendX</a><nav aria-label="Primary">{(['market', 'split', 'redeem'] as Tab[]).map((item) => <button key={item} className={tab === item ? 'active' : ''} onClick={() => setTab(item)}>{item[0]!.toUpperCase() + item.slice(1)}</button>)}</nav><span className="balance-label">{holder ? shortAddress(holder) : 'Wallet disconnected'}</span></header>
-    <div className="preview-banner wallet-banner"><b>{devnet ? 'Public devnet · test assets' : 'Local demo · test tokens'}</b><span>{devnet ? 'Deposits close 1 Jan 2027 and maturity is 1 Jan 2028. Public time cannot be advanced; no qualified issuer payouts are available.' : `Real program transactions in a local Solana sandbox. Date controls are ${verifiedManifest.clockControl ? 'available' : 'unavailable'}.`}</span><a href="/demos/">Guided demos →</a><a href="/">Open annual reference →</a></div>
+    <div className="preview-banner wallet-banner"><b>{devnet ? 'Public devnet · test assets' : sandbox ? 'Private 15-minute sandbox · synthetic network' : 'Local demo · test tokens'}</b><span>{devnet ? 'Deposits close 1 Jan 2027 and maturity is 1 Jan 2028. Public time cannot be advanced; no qualified issuer payouts are available.' : sandbox ? 'Accelerated dates and balances exist only inside this isolated test network. Reload loses a temporary wallet key.' : `Real program transactions in a local Solana sandbox. Date controls are ${verifiedManifest.clockControl ? 'available' : 'unavailable'}.`}</span><a href="/demos/">Guided demos →</a>{sandbox ? <><a href="/app/">Public devnet →</a><button className="wallet-reset-link" disabled={busy} onClick={() => void resetSandbox()}>Reset sandbox</button></> : runtimeConfig.hostedSite ? <a href="/sandbox/">Private sandbox →</a> : null}<a href="/">Open annual reference →</a></div>
     <main id="wallet-main" className="p-page wallet-page">
-      <section className="wallet-network" aria-label="Verified runtime"><div><span className="online-dot" />Verified {runtimeLabel}</div><span>{devnet ? 'Test assets on public Solana devnet' : 'Connected to the local demo network'}</span></section>
+      <section className="wallet-network" aria-label="Verified runtime"><div><span className="online-dot" />Verified {runtimeLabel}</div><span>{devnet ? 'Test assets on public Solana devnet' : sandbox ? 'Connected to your isolated synthetic network' : 'Connected to the local demo network'}</span></section>
 
-      <section className="wallet-connect"><div><p className="eyebrow">Wallet</p><h2>{connected ? connected.wallet.name : 'Connect your wallet or create a test wallet.'}</h2>{connected ? <p><code>{connected.account.address}</code>{connected.temporary && ' · reload loses this disposable key'}</p> : <p>Use a wallet to try the {devnet ? 'public devnet' : 'local'} flow. The temporary wallet exists only in this browser tab.</p>}</div><div className="wallet-buttons">{connected ? <button onClick={() => { setConnected(undefined); setNotice('Wallet disconnected.'); }}>Disconnect</button> : <>{wallets.map((wallet) => <button key={wallet.name} onClick={() => void connect(wallet)}>{wallet.name}</button>)}<button data-testid="temporary-wallet" onClick={() => void connect(createTemporaryWallet(network), true)}>Create temporary test wallet</button>{wallets.length === 0 && <small>No compatible {devnet ? 'devnet ' : ''}installed wallet found.</small>}</>}</div></section>
+      <section className="wallet-connect"><div><p className="eyebrow">Wallet</p><h2>{connected ? connected.wallet.name : sandbox ? 'Create an in-memory sandbox wallet.' : 'Connect your wallet or create a test wallet.'}</h2>{connected ? <p><code>{connected.account.address}</code>{connected.temporary && ' · reload loses this disposable key'}</p> : <p>{sandbox ? 'Hosted sandboxes use only a temporary in-memory wallet. Its key is never stored and disappears on reload or reset.' : `Use a wallet to try the ${devnet ? 'public devnet' : 'local'} flow. The temporary wallet exists only in this browser tab.`}</p>}</div><div className="wallet-buttons">{connected ? <button onClick={() => { setConnected(undefined); setNotice('Wallet disconnected.'); }}>Disconnect</button> : <>{wallets.map((wallet) => <button key={wallet.name} onClick={() => void connect(wallet)}>{wallet.name}</button>)}<button data-testid="temporary-wallet" onClick={() => void connect(createTemporaryWallet(signingNetwork), true)}>Create temporary test wallet</button>{!sandbox && wallets.length === 0 && <small>No compatible {devnet ? 'devnet ' : ''}installed wallet found.</small>}</>}</div></section>
 
       {notice && <div className="p-success" role="status">{notice}</div>}
       {error && <div className="p-error" role="alert">{error}</div>}
       {snapshotStale && <div className="p-error" role="status" data-testid="stale-balances">Balances may be out of date because the {devnet ? 'devnet' : 'local'} RPC stopped responding. Refresh before continuing.</div>}
 
-      <section className="wallet-selector"><label><span>Exact {devnet ? 'devnet' : 'local'} stock token</span><select value={asset?.id ?? ''} onChange={(event) => chooseAsset(event.target.value)}>{verifiedManifest.assets.map((candidate) => <option key={candidate.id} value={candidate.id}>{candidate.company} · {candidate.symbol} · {candidate.issuerLabel}</option>)}</select></label><label><span>Annual series</span><select value={series?.year ?? ''} onChange={(event) => setYear(Number(event.target.value))}>{asset?.series.map((candidate) => <option key={candidate.year} value={candidate.year}>{candidate.year}</option>)}</select></label><div className="wallet-selector-actions"><button disabled={loadingSnapshot} onClick={() => void refreshSnapshot()}>Refresh balances</button>{faucetEnabled ? <button disabled={busy || !holder} onClick={faucet}>Request test SOL + {asset?.symbol}</button> : <small>Test faucet unavailable for this deployment.</small>}</div></section>
+      <section className="wallet-selector"><label><span>Exact {devnet ? 'devnet' : sandbox ? 'sandbox' : 'local'} stock token</span><select value={asset?.id ?? ''} onChange={(event) => chooseAsset(event.target.value)}>{verifiedManifest.assets.map((candidate) => <option key={candidate.id} value={candidate.id}>{candidate.company} · {candidate.symbol} · {candidate.issuerLabel}</option>)}</select></label><label><span>Annual series</span><select value={series?.year ?? ''} onChange={(event) => setYear(Number(event.target.value))}>{asset?.series.map((candidate) => <option key={candidate.year} value={candidate.year}>{candidate.year}</option>)}</select></label><div className="wallet-selector-actions"><button disabled={loadingSnapshot} onClick={() => void refreshSnapshot()}>Refresh balances</button>{faucetEnabled ? <button disabled={busy || !holder} onClick={faucet}>Request test SOL + {asset?.symbol}</button> : <small>Test faucet unavailable for this deployment.</small>}</div></section>
 
       {loadingSnapshot && <p className="wallet-loading">Updating your balances…</p>}
       {snapshot && asset && series && <>
@@ -351,7 +366,7 @@ export function WalletApp() {
 
       {!devnet && <details className="clock-controls"><summary>Network-wide test dates</summary><div className="clock-layout"><div><p className="eyebrow">Controlled annual lifecycle</p><h2>Annual lifecycle controls</h2>{verifiedManifest.clockControl ? <p>These steps change the shared local network and submit real program transactions.</p> : <p>Faithful clock control is unavailable in this runtime. Finalized claims may be inspected only when already present onchain.</p>}</div><div>{['start-year', 'record-dividends', 'end-year', 'finalize'].map((step) => <button key={step} disabled={!verifiedManifest.clockControl || busy} onClick={() => void advance(step)}>{step.replace('-', ' ')}</button>)}</div></div></details>}
 
-      {receipts.length > 0 && <section className="wallet-receipts"><p className="eyebrow">Confirmed receipts</p>{receipts.map((receipt) => <article key={`${receipt.signature}-${receipt.label}`}><div><b>{receipt.label}</b><span>Slot {receipt.slot} · {receipt.status}</span></div>{devnet ? <a href={`https://explorer.solana.com/tx/${encodeURIComponent(receipt.signature)}?cluster=devnet`} target="_blank" rel="noreferrer"><code>{receipt.signature}</code><span className="sr-only"> Open in Solana Explorer</span></a> : <code>{receipt.signature}</code>}</article>)}</section>}
+      {receipts.length > 0 && <section className="wallet-receipts"><p className="eyebrow">Transaction receipts</p>{receipts.map((receipt) => <article key={`${receipt.signature}-${receipt.label}`}><div><b>{receipt.label}</b><span>{receipt.slot === null ? 'Slot pending' : `Slot ${receipt.slot}`} · {receipt.status}</span></div>{devnet ? <a href={`https://explorer.solana.com/tx/${encodeURIComponent(receipt.signature)}?cluster=devnet`} target="_blank" rel="noreferrer"><code>{receipt.signature}</code><span className="sr-only"> Open in Solana Explorer</span></a> : <code>{receipt.signature}</code>}</article>)}</section>}
     </main><footer className="p-footer wallet-footer"><div><Mark /><span>DividendX {devnet ? 'devnet' : 'local'} transaction application · {seriesName}</span></div><a href="/rehearsal/">Historical rehearsal</a></footer>
   </>;
 }

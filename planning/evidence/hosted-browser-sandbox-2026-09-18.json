@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-18T04:44:09.233Z",
+  "completedAt": "2026-09-18T04:45:24.252Z",
+  "targetOrigin": "https://dividendx-stocklana.vercel.app",
+  "requestedFlow": "sandbox",
+  "status": "failed",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-18T04:44:09.378Z",
+      "name": "browser launched",
+      "flows": [
+        "sandbox"
+      ]
+    },
+    {
+      "at": "2026-09-18T04:44:09.379Z",
+      "name": "sandbox: create isolated visitor session"
+    },
+    {
+      "at": "2026-09-18T04:44:18.510Z",
+      "name": "sandbox: fund temporary wallet once",
+      "sessionId": "5e06839a41ca65ce5b8d9b8b71ca2a4b"
+    },
+    {
+      "at": "2026-09-18T04:44:24.176Z",
+      "name": "sandbox: split stock into PT and DR"
+    }
+  ],
+  "flows": {
+    "sandbox": {
+      "status": "running",
+      "session": {
+        "schemaVersion": 1,
+        "kind": "wallet",
+        "status": "ready",
+        "sessionId": "5e06839a41ca65ce5b8d9b8b71ca2a4b",
+        "runtimeId": "192e31d8-ec4d-48a1-9210-a10da77e7b1c",
+        "expiresAt": "2026-09-18T04:59:12.654Z",
+        "runtimeUrl": "/api/sandbox/wallet/5e06839a41ca65ce5b8d9b8b71ca2a4b",
+        "error": null
+      },
+      "manifest": {
+        "schemaVersion": 1,
+        "kind": "surfnet",
+        "genesisHash": "EszRxeYPeLMhVA3637sGRJnjKnv4ffAwJ4E6WVf377bP",
+        "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+        "deploymentDomainHex": "0071830ec5bc604711faa4c6e38d9749a023468e2a8fa8d2f81fbaeac0e86eb7",
+        "runtimeId": "192e31d8-ec4d-48a1-9210-a10da77e7b1c",
+        "clockControl": true,
+        "assets": [
+          {
+            "id": "xstocks-test-kox",
+            "company": "Coca-Cola",
+            "symbol": "TestKOx",
+            "issuerLabel": "xStocks test profile",
+            "issuerIdHex": "6f89a23d66c59b263700504e9a40005bcef7066e61db3b18a7597a1c433c86f6",
+            "decimals": 8,
+            "collateralMint": "L9dUWR6RX8dbjQ4ZzjuGcCiHnThKCb7qUnET3FVw3Si",
+            "assetPolicy": "62CvjBkmdyjDToWbHyQQqKXfWEALyHABPjjKdUV7w1Kk",
+            "series": [
+              {
+                "year": 2027,
+                "address": "4YgKGyjcf93MvVEaP9fFV7Jux5F2JC5UMNAo3AwSiRVp",
+                "accumulator": "9iU3kjk3yJ1g757mFDwzFN8Hwxs2tWLKpajK9S1abzPR",
+                "ptMint": "C3ppZysxtknUBSUTef51VCwLZGfo5W9hGjNStC3ZW2QE",
+                "drMint": "77AwAQVqwdLZsRMj7Beajx9zSmk7CDerjwH8UYqGu5Nw",
+                "vault": "BUbCx7A8hdBKT4T6gYy6wnDFRZQsmVV59x54VcfUJJjh"
+              }
+            ]
+          },
+          {
+            "id": "backpack-test-mu",
+            "company": "Micron",
+            "symbol": "TestMU",
+            "issuerLabel": "Backpack/Trek test profile",
+            "issuerIdHex": "1707ba36fceea6efcde6b6b35dbe11a794d3d5fdd5e975528c6950c9c170e62b",
+            "decimals": 6,
+            "collateralMint": "FQau8chNb9R8Tczm2fzotzjHu9bbQ1EENvWSZFM4BGDy",
+            "assetPolicy": "AaMBkAT9m1nkNbgAAyh1RYF4nMHCEUrnDTDeLbJSteGt",
+            "series": [
+              {
+                "year": 2027,
+                "address": "GzKvFdLzHdB7JHTS4d8pPPqvLRLNg2WpBGPqrAdFyP19",
+                "accumulator": "9D7vyuQ5HnYBmxqQQJeVuPuzUjYpmNPiz64wP52XrG8r",
+                "ptMint": "8AqfSeDQDFSywZyJUgXU5Y9nWAS1NA438Ej6sV9aGX9B",
+                "drMint": "3HHhQ9nwqab25DZxewZau5C55D1eJoMPw2AKxkUX9x4L",
+                "vault": "4683UrNefWM4fyNTAwUNj3piQZXUxVvRD1KTQdVHYcpP"
+              }
+            ]
+          },
+          {
+            "id": "ondo-test-ibm",
+            "company": "IBM",
+            "symbol": "TestIBMon",
+            "issuerLabel": "Ondo test profile",
+            "issuerIdHex": "685f538996efeddd96e1b32cbfae679faf80024971de3388870dd9311293806a",
+            "decimals": 9,
+            "collateralMint": "3CYpigNN6urbKr6zDmbQ58vmD7b5Lt4BhFEyRNdAHjdz",
+            "assetPolicy": "2L45UsjytywkfWonVeZ1NgEcjaSq9URs13PZAHsm2mzE",
+            "series": [
+              {
+                "year": 2027,
+                "address": "21RJwiawJZuYou9sY4ixhxmt8TSNyzy8nguytuiwDEAz",
+                "accumulator": "2iZ3GrQWgc7tqNDPGgUbaYfr651sHnr7p84z8Gu5Dpfr",
+                "ptMint": "kJcRBCnbV8jMM71wdxE52meoCj9cF2AUW99sNZRSX5G",
+                "drMint": "24Jm5TAowxYRSNf6KgMJ3fTNsme3LdtxKqP7i6iME1h9",
+                "vault": "3Zqpc56iNYzMnhBFB3BGgG5MMKgV2Nm7xYDYo6FvDt6x"
+              }
+            ]
+          }
+        ],
+        "hostedSessionId": "5e06839a41ca65ce5b8d9b8b71ca2a4b",
+        "expiresAt": "2026-09-18T04:59:12.654Z",
+        "rpcUrl": "/api/sandbox/wallet/5e06839a41ca65ce5b8d9b8b71ca2a4b/rpc"
+      }
+    }
+  },
+  "screenshots": [],
+  "browserErrors": [],
+  "errors": [
+    {
+      "at": "2026-09-18T04:45:24.252Z",
+      "stage": "sandbox: split stock into PT and DR",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "message": "page.waitForFunction: Timeout 60000ms exceeded."
+    }
+  ],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}

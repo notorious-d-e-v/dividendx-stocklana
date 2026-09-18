@@ -1,0 +1,11 @@
+{
+  "schema": "dividendx-private-blob-cas-probe-v1",
+  "at": "2026-09-18T03:34:32.174Z",
+  "storeId": "store_HwInrQjHFXMVbBLI",
+  "status": "passed",
+  "probeDeleted": true,
+  "duplicateCreateRejected": true,
+  "concurrentCasWinners": 1,
+  "staleCasRejected": true,
+  "consistentFinalRevision": 2
+}

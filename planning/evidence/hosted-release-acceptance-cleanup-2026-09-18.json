@@ -1,0 +1,26 @@
+{
+  "at": "2026-09-18T05:37:18.012Z",
+  "scope": "only four owned acceptance VMs; shared store and snapshot preserved",
+  "results": [
+    {
+      "sessionId": "8fe425b3c5467697a34e72f6070b7eaa",
+      "providerAfter": "missing",
+      "ledgerAfter": "failed"
+    },
+    {
+      "sessionId": "2c024c2092cb2edebf667635296e73b4",
+      "providerAfter": "missing",
+      "ledgerAfter": "failed"
+    },
+    {
+      "sessionId": "b6a60433e374e34727e2f912d6b9cd44",
+      "providerAfter": "missing",
+      "ledgerAfter": "failed"
+    },
+    {
+      "sessionId": "04abb22db0301805c7a55ee9331e81b4",
+      "providerAfter": "missing",
+      "ledgerAfter": "failed"
+    }
+  ]
+}

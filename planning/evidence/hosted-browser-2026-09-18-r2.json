@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-18T04:29:56.396Z",
+  "completedAt": "2026-09-18T04:31:04.680Z",
+  "targetOrigin": "https://dividendx-stocklana.vercel.app",
+  "requestedFlow": "all",
+  "status": "failed",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-18T04:29:56.742Z",
+      "name": "browser launched",
+      "flows": [
+        "sandbox",
+        "guided",
+        "devnet",
+        "isolation"
+      ]
+    },
+    {
+      "at": "2026-09-18T04:29:56.744Z",
+      "name": "sandbox: create isolated visitor session"
+    }
+  ],
+  "flows": {},
+  "screenshots": [],
+  "browserErrors": [
+    {
+      "at": "2026-09-18T04:29:58.599Z",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "at": "2026-09-18T04:30:04.172Z",
+      "type": "http",
+      "status": 503,
+      "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/ae600adef528d831362258c9cdc5a522/rpc"
+    },
+    {
+      "at": "2026-09-18T04:30:04.172Z",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 503 ()"
+    }
+  ],
+  "errors": [
+    {
+      "at": "2026-09-18T04:31:04.680Z",
+      "stage": "sandbox: create isolated visitor session",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "message": "locator.selectOption: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.wallet-selector select').first()\u001b[22m\n"
+    }
+  ],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}

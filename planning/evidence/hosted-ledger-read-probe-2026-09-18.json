@@ -1,0 +1,109 @@
+{
+  "schema": "dividendx-hosted-ledger-read-probe-v1",
+  "at": "2026-09-18T05:16:29.041Z",
+  "scope": "read-only existing session ledger; local OIDC credential",
+  "concurrency": 4,
+  "requests": 20,
+  "results": [
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 506
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 508
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 462
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 485
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 344
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 342
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 351
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 387
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 327
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 325
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 334
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 326
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 342
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 322
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 318
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 337
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 290
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 324
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 330
+    },
+    {
+      "ok": true,
+      "revision": 76,
+      "ms": 338
+    }
+  ]
+}

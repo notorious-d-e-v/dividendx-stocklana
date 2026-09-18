@@ -1,0 +1,42 @@
+{
+  "schema": "dividendx-hosted-devnet-finality-v1",
+  "at": "2026-09-18T05:14:08.442Z",
+  "source": "hosted-browser-devnet-2026-09-18-r3.json",
+  "rpc": "https://api.devnet.solana.com",
+  "context": {
+    "apiVersion": "4.3.0-rc.0",
+    "slot": 500177772
+  },
+  "transactions": [
+    {
+      "signature": "2Jjca3hcetq4BVHSGe6cEJUYRLBrnWJRnskM3rSnjBLccst1HLuJwy6oEsEqyNxAurj2EJvLKAHU3BjfLwE2HV2f",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 500177389,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "2Q7aCWLaYFPD5jiDZep847AMgfuPUkNzZAcUCDZhU9yJDf1DnWHDZgEbWQ35MX4AsKbGsTKufvz1i19sKX5xhzs5",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 500177447,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "EKVu6SXQYCQKDzwfTmrGxt1VVPqWfDATEQeci3TYGUcdJk63Atf4oKNtvfSWEKUdhkxtzoASMFQeqdX61PEytzc",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 500177493,
+      "status": {
+        "Ok": null
+      }
+    }
+  ]
+}

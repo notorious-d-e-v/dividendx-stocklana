@@ -1,0 +1,17 @@
+{
+  "schema": "dividendx-vercel-source-review-v1",
+  "at": "2026-09-18T03:57:31.889Z",
+  "fileCount": 449,
+  "totalSize": 25342062,
+  "framework": {
+    "name": "Vite",
+    "slug": "vite"
+  },
+  "forbiddenPathCount": 0,
+  "checks": [
+    "No .env or local signers",
+    "No private runtime ledgers",
+    "No local node_modules, target, or dist"
+  ],
+  "sourceManifest": "/tmp/dividendx-vercel-upload-20260918.json"
+}

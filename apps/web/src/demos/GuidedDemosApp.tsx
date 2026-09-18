@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { DemoSnapshot, DemoState, DemoStep, DemoWallet } from '../../../../packages/guided-runtime/src/contract';
 import { amountContext, displayBalance, displayDelta, type BalanceKey } from './amounts';
-import { DemoHttpError, readDemoReceipt, readDemoState, runDemoStep, startDemo } from './client';
+import { createGuidedClient, DemoHttpError, type GuidedClient } from './client';
 import { DEMO_STEPS, stepCopy } from './steps';
 
 type WalletRole = 'provider' | 'buyer';
@@ -86,24 +86,25 @@ function Progress({ state }: { state: DemoState | null }) {
   </ol>;
 }
 
-function CurrentAction({ state, unavailable, pending, onAction, onReconnect }: {
+function CurrentAction({ state, unavailable, pending, hosted, onAction, onReconnect }: {
   state: DemoState | null;
   unavailable: boolean;
   pending: boolean;
+  hosted: boolean;
   onAction: () => void;
   onReconnect: () => void;
 }) {
   if (unavailable) return <section className="current-action unavailable" aria-labelledby="current-action-title">
-    <p className="demo-kicker">Local runtime</p><h2 id="current-action-title">The guided demo is unavailable.</h2>
-    <p>In a terminal, run <code className="startup-command">npm run demo:guided</code>, then check again. {state ? 'The last received balances may be out of date.' : 'No wallet extension is needed.'}</p>
-    <button className="demo-primary" onClick={onReconnect}>Check runtime again</button>
+    <p className="demo-kicker">{hosted ? 'Private sandbox' : 'Local runtime'}</p><h2 id="current-action-title">The guided demo is unavailable.</h2>
+    <p>{hosted ? 'This session-bound sandbox could not be reached. Check the same sandbox again; no action is repeated.' : <>In a terminal, run <code className="startup-command">npm run demo:guided</code>, then check again.</>} {state ? 'The last received balances may be out of date.' : 'No wallet extension is needed.'}</p>
+    <button className="demo-primary" onClick={onReconnect}>Check {hosted ? 'sandbox' : 'runtime'} again</button>
   </section>;
 
-  if (!state) return <section className="current-action" aria-busy="true"><p className="demo-kicker">Local runtime</p><h2>Connecting to the guided demo…</h2></section>;
+  if (!state) return <section className="current-action" aria-busy="true"><p className="demo-kicker">{hosted ? 'Private sandbox' : 'Local runtime'}</p><h2>Connecting to the guided demo…</h2></section>;
 
   if (state.status === 'idle') return <section className="current-action" aria-labelledby="current-action-title">
-    <p className="demo-kicker">Start the local journey</p><h2 id="current-action-title">Prepare two disposable test wallets.</h2>
-    <p>The test service creates a fresh local network, two test wallets and synthetic local Test USDC balances. No wallet extension or private key is needed.</p>
+    <p className="demo-kicker">Start the {hosted ? 'sandbox' : 'local'} journey</p><h2 id="current-action-title">Prepare two disposable test wallets.</h2>
+    <p>{hosted ? 'The test service creates two test wallets and synthetic Test USDC balances inside this isolated network.' : 'The test service creates a fresh local network, two test wallets and synthetic local Test USDC balances.'} No wallet extension or private key is needed.</p>
     <button className="demo-primary" disabled={pending} onClick={onAction}>{pending ? 'Preparing…' : 'Prepare demo wallets'}</button>
   </section>;
 
@@ -137,11 +138,12 @@ function RawBalances({ snapshot }: { snapshot: DemoSnapshot }) {
   </div>;
 }
 
-function Evidence({ state, receipt, receiptError, receiptLoading, onOpen }: {
+function Evidence({ state, receipt, receiptError, receiptLoading, hosted, onOpen }: {
   state: DemoState | null;
   receipt: unknown;
   receiptError: string;
   receiptLoading: boolean;
+  hosted: boolean;
   onOpen: (open: boolean) => void;
 }) {
   return <details className="demo-evidence" onToggle={(event) => onOpen(event.currentTarget.open)}>
@@ -153,12 +155,14 @@ function Evidence({ state, receipt, receiptError, receiptLoading, onOpen }: {
         <div className="identity-list"><p><span>Stock holder</span><code>{state.snapshot.provider.address}</code></p><p><span>Dividend buyer</span><code>{state.snapshot.buyer.address}</code></p><p><span>Test USDC provenance</span><b>Circle devnet mint copied locally · synthetic local balances</b></p><p><span>Canonical Circle devnet mint</span><code>{state.snapshot.quoteAsset.canonicalMint}</code></p><p><span>Observed local quote mint</span><code>{state.snapshot.mints.quote}</code></p><p><span>DividendX program</span><code>{state.snapshot.dividendXProgram}</code></p><p><span>Raydium program</span><code>{state.snapshot.raydiumProgram}</code></p><p><span>Series</span><code>{state.snapshot.series}</code></p>{state.snapshot.pool && <p><span>Local Raydium pool</span><code>{state.snapshot.pool.address}</code></p>}</div>
       </> : <p>No chain snapshot exists yet.</p>}
       <section className="transaction-list"><h3>Submitted transaction records</h3>{state?.transactions.length ? state.transactions.map((transaction, index) => <article key={`${transaction.signature}-${index}`}><div><b>{transaction.name}</b><span>{transaction.step} · {transaction.status}{transaction.slot === null ? '' : ` · slot ${transaction.slot}`}</span></div><code>{transaction.signature}</code></article>) : <p>No transaction has been submitted.</p>}</section>
-      <section className="receipt-record"><h3>Runtime receipt record</h3>{receiptLoading ? <p>Loading receipt…</p> : receiptError ? <p className="inline-error">{receiptError}</p> : receipt ? <pre>{JSON.stringify(receipt, null, 2)}</pre> : <p>Open this after a run starts to load its public provenance record.</p>}</section>
+      <section className="receipt-record"><h3>{hosted ? 'Synthetic private sandbox receipt' : 'Runtime receipt record'}</h3>{receiptLoading ? <p>Loading receipt…</p> : receiptError ? <p className="inline-error">{receiptError}</p> : receipt ? <pre>{JSON.stringify(receipt, null, 2)}</pre> : <p>Open this after a run starts to load its public provenance record.</p>}</section>
     </div>
   </details>;
 }
 
-export function GuidedDemosApp() {
+const localGuidedClient = createGuidedClient();
+
+export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { client?: GuidedClient; onHostedReset?: () => Promise<void> }) {
   const [state, setState] = useState<DemoState | null>(null);
   const [connectionError, setConnectionError] = useState('');
   const [notice, setNotice] = useState('Connecting to the guided runtime.');
@@ -206,7 +210,7 @@ export function GuidedDemosApp() {
   const refresh = useCallback(async (announce = false) => {
     const requestSequence = ++requestSequenceRef.current;
     try {
-      const next = await readDemoState();
+      const next = await client.readState();
       if (requestSequence < appliedSequenceRef.current) return null;
       appliedSequenceRef.current = requestSequence;
       acceptState(next);
@@ -220,7 +224,7 @@ export function GuidedDemosApp() {
       if (announce) setNotice(message);
       return null;
     }
-  }, [acceptState]);
+  }, [acceptState, client]);
 
   useEffect(() => { void refresh(); }, [refresh]);
   useEffect(() => {
@@ -238,8 +242,12 @@ export function GuidedDemosApp() {
     expectedRef.current = { revision: current.revision, snapshot: current.snapshot };
     setPending(true); setConnectionError(''); setNotice(isStart ? 'Preparing a fresh local demo.' : `Submitting ${stepCopy(step)?.title ?? step}`);
     try {
-      if (isStart) await startDemo({ runtimeId: current.runtimeId, expectedRevision: current.revision });
-      else await runDemoStep({ runtimeId: current.runtimeId, sessionId: current.sessionId!, expectedRevision: current.revision, step: step! });
+      if (isStart && client.hosted && (current.status === 'failed' || current.status === 'complete')) {
+        await onHostedReset?.();
+        return;
+      }
+      if (isStart) await client.start({ runtimeId: current.runtimeId, expectedRevision: current.revision });
+      else await client.runStep({ runtimeId: current.runtimeId, sessionId: current.sessionId!, expectedRevision: current.revision, step: step! });
       setNotice('Action accepted. Waiting for confirmed local state.');
       await refresh();
     } catch (error) {
@@ -250,7 +258,7 @@ export function GuidedDemosApp() {
         expectedRef.current = null; setPending(false);
       }
     }
-  }, [pending, refresh]);
+  }, [client, onHostedReset, pending, refresh]);
 
   const reconnect = useCallback(async () => {
     const expected = expectedRef.current;
@@ -268,7 +276,7 @@ export function GuidedDemosApp() {
     if (!key || receiptLoading || receiptKeyRef.current === key) return;
     receiptKeyRef.current = key; setReceiptLoading(true); setReceiptError('');
     try {
-      const value = await readDemoReceipt();
+      const value = await client.readReceipt();
       const latest = stateRef.current;
       if (latest?.sessionId && `${latest.sessionId}:${latest.revision}` === key) setReceipt(value);
     }
@@ -279,31 +287,33 @@ export function GuidedDemosApp() {
       }
     }
     finally { setReceiptLoading(false); }
-  }, [receiptLoading]);
+  }, [client, receiptLoading]);
 
   useEffect(() => { if (evidenceOpen) void loadReceipt(); }, [evidenceOpen, loadReceipt, state?.revision]);
 
   const snapshot = state?.snapshot ?? null;
   const activeActor = actorFor(state);
   const runtimeUnavailable = Boolean(connectionError);
-  const boundaryDetail = useMemo(() => 'The accepted DividendX program and captured genuine Raydium devnet bytecode execute on an isolated local chain. Test USDC uses an exact copy of Circle’s devnet mint account, but its balances are created only inside this local test network. They are not faucet funds or a claim of dollar value. A separate public devnet run also verified trading with faucet-funded Test USDC.', []);
+  const boundaryDetail = useMemo(() => client.hosted
+    ? 'The accepted DividendX program and captured genuine Raydium devnet bytecode execute in an isolated private sandbox. Test USDC uses an exact copy of Circle’s devnet mint account, but its balances are synthetic and exist only inside this test network. They are not faucet funds or a claim of dollar value. A separate public devnet run also verified trading with faucet-funded Test USDC.'
+    : 'The accepted DividendX program and captured genuine Raydium devnet bytecode execute on an isolated local chain. Test USDC uses an exact copy of Circle’s devnet mint account, but its balances are created only inside this local test network. They are not faucet funds or a claim of dollar value. A separate public devnet run also verified trading with faucet-funded Test USDC.', [client.hosted]);
 
   return <div className="demo-shell">
     <a className="skip-link" href="#demo-main">Skip to demo</a>
     <header className="demo-header">
       <a className="demo-brand" href="/app/"><Mark /><span>DividendX</span></a>
-      <nav aria-label="Primary"><a href="/app/">Wallet app</a><a href="/demos/" aria-current="page">Guided demos</a></nav>
+      <nav aria-label="Primary">{client.hosted ? <><a href="/app/">Public devnet</a><a href="/sandbox/">Wallet sandbox</a></> : <a href="/app/">Wallet app</a>}<a href="/demos/" aria-current="page">Guided demos</a></nav>
       <span className={`runtime-status ${runtimeUnavailable ? 'unavailable' : state?.status ?? ''}`}><i />{statusLabel(state, runtimeUnavailable)}</span>
     </header>
-    <aside className="boundary-bar"><strong>Local transactions · Test assets · Accelerated test year</strong><details><summary>What this means</summary><p>{boundaryDetail}</p></details></aside>
+    <aside className="boundary-bar"><strong>{client.hosted ? 'Private 15-minute sandbox' : 'Local transactions'} · Test assets · Accelerated test year</strong><details><summary>What this means</summary><p>{boundaryDetail}</p></details></aside>
 
     <main id="demo-main">
       <section className="demo-hero">
-        <div><p className="demo-kicker">Guided DeFi demo · Raydium</p><h1>Sell dividend rights <span>through a market.</span></h1><p>Follow two test wallets through nine signed actions using local Test USDC. Every balance and receipt comes from the local test network.</p><div className="hero-proof"><p>Public devnet · Test USDC</p><a href="https://explorer.solana.com/address/Fi94TtWky2e9SnSFAUzoPAcKKNV1WziEmLtZZ3FTi65S?cluster=devnet" target="_blank" rel="noreferrer">Verified DR / Test USDC pool ↗</a><small>This walkthrough uses a local copy of the Circle devnet mint with synthetic local balances.</small></div></div>
-        <CurrentAction state={state} unavailable={runtimeUnavailable} pending={pending} onAction={() => void action()} onReconnect={() => void reconnect()} />
+        <div><p className="demo-kicker">Guided DeFi demo · Raydium</p><h1>Sell dividend rights <span>through a market.</span></h1><p>{client.hosted ? 'Follow two test wallets through nine signed actions using synthetic Test USDC. Every balance and receipt comes from this isolated test network.' : 'Follow two test wallets through nine signed actions using local Test USDC. Every balance and receipt comes from the local test network.'}</p><div className="hero-proof"><p>Public devnet · Test USDC</p><a href="https://explorer.solana.com/address/Fi94TtWky2e9SnSFAUzoPAcKKNV1WziEmLtZZ3FTi65S?cluster=devnet" target="_blank" rel="noreferrer">Verified DR / Test USDC pool ↗</a><small>{client.hosted ? 'This walkthrough uses a copy of the Circle devnet mint with synthetic sandbox balances.' : 'This walkthrough uses a local copy of the Circle devnet mint with synthetic local balances.'}</small></div></div>
+        <CurrentAction state={state} unavailable={runtimeUnavailable} pending={pending} hosted={client.hosted} onAction={() => void action()} onReconnect={() => void reconnect()} />
       </section>
 
-      {connectionError && <div className="connection-alert" role="alert"><b>Local runtime connection</b><span>{connectionError} {state ? 'The last received snapshot may be stale.' : ''}</span></div>}
+      {connectionError && <div className="connection-alert" role="alert"><b>{client.hosted ? 'Sandbox connection' : 'Local runtime connection'}</b><span>{connectionError} {state ? 'The last received snapshot may be stale.' : ''}</span></div>}
       <p className="sr-status" role="status" aria-live="polite">{notice}</p>
 
       <section className="wallet-section" aria-labelledby="wallet-heading">
@@ -320,7 +330,7 @@ export function GuidedDemosApp() {
 
       {snapshot?.pool && state?.completedSteps.includes('remove-liquidity') && <aside className="pool-note"><div><p className="demo-kicker">Residual pool custody</p><h2>Raydium’s locked claims remain backed.</h2></div><p>The pool currently holds <b>{displayBalance(snapshot.pool.drRaw, 'drRaw', amountContext(snapshot))} DR</b> and <b>{displayBalance(snapshot.pool.lockedLpRaw, 'lpRaw', amountContext(snapshot))} locked LP</b>. Those DR claims are still part of supply and remain backed after both wallets finish.</p></aside>}
 
-      <Evidence state={state} receipt={receipt} receiptError={receiptError} receiptLoading={receiptLoading} onOpen={setEvidenceOpen} />
+      <Evidence state={state} receipt={receipt} receiptError={receiptError} receiptLoading={receiptLoading} hosted={client.hosted} onOpen={setEvidenceOpen} />
 
       <section className="future-demos" aria-labelledby="future-heading">
         <div>

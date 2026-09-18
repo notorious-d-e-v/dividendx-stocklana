@@ -1,0 +1,91 @@
+{
+  "schema": "dividendx-hosted-provider-probe-v1",
+  "at": "2026-09-18T03:57:51.056Z",
+  "storeId": "store_HwInrQjHFXMVbBLI",
+  "snapshotId": "snap_cwWXbrpD6HwniFIXD0cB8mzWGrwh",
+  "deadlineMs": 120000,
+  "status": "passed",
+  "phase": "complete",
+  "stages": [
+    {
+      "name": "wallet_start",
+      "status": "passed"
+    },
+    {
+      "name": "guided_start",
+      "status": "passed"
+    },
+    {
+      "name": "wallet_proxy",
+      "status": "passed"
+    },
+    {
+      "name": "guided_proxy",
+      "status": "passed"
+    },
+    {
+      "name": "gateway_auth",
+      "status": "passed"
+    }
+  ],
+  "checks": {
+    "exactProviderCount": 2,
+    "walletReady": true,
+    "guidedReady": true,
+    "distinctRuntimeIds": true,
+    "walletManifestRewritten": true,
+    "walletWebSocketOmitted": true,
+    "walletRpcGenesisMatched": true,
+    "publicGenesisRejected": true,
+    "crossVisitorDenied": true,
+    "guidedStateSanitized": true,
+    "unauthenticatedGatewayDenied": true
+  },
+  "sessions": [
+    {
+      "kind": "wallet",
+      "providerName": "dx-9c0f5841bc4c2afd891a4a0b8c6471a7",
+      "runtimeId": "e4cebac6-7e4d-465a-9f9c-336fe0b29bcf",
+      "providerStatus": "running"
+    },
+    {
+      "kind": "guided",
+      "providerName": "dx-27b77855423a9ecf267ce62de9f18273",
+      "runtimeId": "af6da79c-745f-4adf-95c7-014fc41af695",
+      "providerStatus": "running"
+    }
+  ],
+  "diagnostics": {
+    "records": [
+      {
+        "kind": "wallet",
+        "providerName": "dx-9c0f5841bc4c2afd891a4a0b8c6471a7",
+        "status": "ready",
+        "providerStatus": "running",
+        "errorCode": null
+      },
+      {
+        "kind": "guided",
+        "providerName": "dx-27b77855423a9ecf267ce62de9f18273",
+        "status": "ready",
+        "providerStatus": "running",
+        "errorCode": null
+      }
+    ]
+  },
+  "cleanup": {
+    "providers": [
+      {
+        "providerName": "dx-9c0f5841bc4c2afd891a4a0b8c6471a7",
+        "stoppedAndDeleted": true
+      },
+      {
+        "providerName": "dx-27b77855423a9ecf267ce62de9f18273",
+        "stoppedAndDeleted": true
+      }
+    ],
+    "lookupErrors": [],
+    "blobDeleted": true
+  },
+  "elapsedMs": 33182
+}

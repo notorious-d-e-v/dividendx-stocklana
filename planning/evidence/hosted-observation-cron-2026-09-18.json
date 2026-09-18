@@ -1,0 +1,14 @@
+{
+  "at": "2026-09-18T04:18:58.834Z",
+  "scope": "Synthetic devnet observation refresh; no issuer event settlement",
+  "records": [
+    {
+      "status": 503,
+      "body": {
+        "status": "failed",
+        "error": "UNAVAILABLE",
+        "message": "The devnet test service is temporarily unavailable."
+      }
+    }
+  ]
+}

@@ -1,0 +1,377 @@
+{
+  "schema": "dividendx-hosted-guided-chain-verification-v1",
+  "at": "2026-09-18T05:30:43.261Z",
+  "sessionId": "2c024c2092cb2edebf667635296e73b4",
+  "boundary": "read-only RPC queries inside the owned isolated VM; synthetic chain, no public consensus",
+  "runtimeId": "dea5d0a2-580d-474c-802f-a6896f4b459e",
+  "genesisHash": "CF2NQHZxufXx175XBGmM1BhzCmGzgfga4K9MmLdFG2jh",
+  "transactions": [
+    {
+      "signature": "2AH2cyrNjyj12bEjsDEejLzanB2LaLWNrZQnh2xqKoi6uUiF2GEypL6r16337m5xBYAmLYmraL5Q1d86M7zR89Yp",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882723,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "z2MnzEYVhKGJLdftSX7aLPn5xyLi7ANAVzTTWm8CvrSXctDNWMsF3NJia2xupgRSo1HkyUWvsQKif8yJG8CBEUy",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882725,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "2M7qbQfH51aLMQVuvxbjQNyP7vZZR435iHHNipKApSra8kbnZRiXdNMuwHQUJSePor9sCgzMXKoSNip16hcMFHuq",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882727,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "5uuc5WzDTa8CwMTpiQ5dwzDVDLayNMkrxBU5jNuxArkaNr6UE5Rth4Aop6pvDA1T6fZzCmeAAgieYvUvMDdd5PGi",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882728,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "4qNqEDq1iDTXcTXmLgzLcG4XTz12uZhUMJQUR5HSeAcHY9Q8FZ1q2GQCv4JcCGbTEmzuUzAJVcF1pjvt1vi45kS",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882729,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "248by7zbUzhLRCqF9jQ2ZJwH8cWBWhEorUfvfw7U8pE8u5ArBBoYpHH1aD5DTHA4ZBYaWud9W4Z3ks2sRKfMjWXK",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882731,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "2nhZyZez1bhGg2A7YTLBDKmVfLiHUk2SZ1fL9fpGHpTzp2SXR2BzCfyDfqjTY8eQeFBmZZ8dAS1DQyiw3WBfz8UY",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882732,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "Kx6h2VfkMvbGphmUxbMfwF2kn4twChHqa5UMokdBdLHxuuY19aY7anzgwpLa2sutQR2PvuE8XEYL6ENT1RUk3ZK",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882733,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "4trGmhxA8HcKJJ6EtpjcJunuBNakEkALS9NCCydVRjXJpzsaRsMM5QnvwQsYhFveLdrSKVf1PmUCceHuNzDRNVh5",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882771,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "Zz5pXwiHoQHEHcnJGkLC9xSnMDMqUgALi9FwEJYh1itQKUAQL6fj9tBn4ZoeoHqPqwUycub13vTzaekMdaxp3Qe",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626882822,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "4xYoj4ufuaUfmWYNg4LShSGogSMo8RpsKkiNis4kA77kNiDuXZmDPMS1p9hJn4jvNSizExTtKo7AFHJYKPZ4CHwd",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626530029,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "37BHVNszKwFDj5vpiW7Nu4JWGRTDZivfNQFZjbhaeEAphSB1F8S7x7tXgqdhiksGU42BJp2qi5jyVqkBKqSvMgGF",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626530046,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "67i643N248oU5YcD3ruddNzm4x9pjv1YuPGNeHbMBLGgEtQUj2BBLhVR2ma2nkkH9wS2x82vU5qftZhH6HFqwQr8",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626530086,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "Qz2466oow4xbDKapfwtfHDMZ7nHiqRyAD45jL2AeKcraFQLXQu2ddFdhLJrdDA2V83ZXkofNR8ptWK3Y2kVq2ux",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 7626530100,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "2KVmY9iWKg5eBTiaWyVZB9BrPXEdKu9Jk4nL379DuSfZVC1BXFJgVwmWxHH8EFb1mif32LdTYeHzsHy1m1kZUpZK",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 9181725878,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "2nVWcRJKthMXmfStRpeuKXyG7swBnsm1YTJzAa1S5WjJ2GtVuasEg1DNpJ7bafGMai8tgiAtDxCurkMovWgLaQV4",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 15402096999,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "61fiuWYaxQ2osRBYkpB11mSyerJUt46qFU3NABg5GPeWpe37FcQ7cdeD6hC7Naxsf3Tp3c3jqLCTwVq6ghsKX1eU",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 15402097001,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "3Trg1LVY1HkDex7vp4sEP1PAqkbSYuwWMyUfTbM862p8UhZo29ALXDPNL84fMtJPaQ5uYHrz2aALWSyALVedmAJp",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 15402097002,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "ftrCJbitVpoVxJD6D8DevExuE74WcBPuBnpUugQk1WrQxzLPW8PSit729AEMtM7iKJDu3P4AWG9XetZZcc3W3ip",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 23350895995,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "NR4dpGE4AyzM6crytJ92EE5x9PirvAwUUyL4p1rj41xcURPEb8JHqmpAkwefK34Kh9wdjSwnnUaDL1mbYQcs1Nm",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 23350895997,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "3XTfZit6RkP3vCet16Gk2skum7odumAh8PNKqp9hYJBKwmT336Uvq6F9CkM8GYP63xF2ECHeZwfpZwn76htjFkX3",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 23350895998,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "TMKce2VY5WN6zPSZbeEm1x15j5KSj3wjZzaSfgNSRbxnejj2LugFnEBxSKxPdvCz6Pki1QpSzgT6z9jGaUSmWpw",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 31299263995,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "2W1S7mGg83Dpy6CaAEQnDTxSkiu7ik8EQ6ZSgD1zrhHzmhzU8gr8S1rnaLLeQpEzYbNTQbRQ34keu3tdW6MjSpxr",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 31299263996,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "3xPAvoHMvk9RhWAX3zvMdJTXa4GV3FbHbBzaampHx4RHwBgabGyoovcvJLAk5GVcEJUZ2eJjjictjfaAyFMKwhfz",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 31299263998,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "213BeE6WWYjur3QE5PABXsp7E1j82ruHL1SNzENTWc51o4e32nKu1dXY9QpSdzYQ7CdDXGv8rszVvWApaMuykWSS",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 39161231995,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "vKmXDsX9YwbJYd9FPntccsVr66k3aKu3zbiHogj1tsquKdznRVKD9yscjfwZDgJWXQr4ipVaHbXekGuFwoCpEyv",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 39161231996,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "5HKWfRRj7MfCe16vL6fwcMmQZr6Bj7EthgdqeFs9Jx2dBDN6umS6h1u5RpxQWHi6SpeSuGnXEu9U6jJg8RNm6xEu",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 39161231998,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "3TNnbWWGUzqRNDwmswnnmQqSBDenxUxqrSQW8ExV2oJLXjJkvsHPQbz6ubZS26iTnnDkfA5LWu6GvtgVaU5FAvsw",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715998996,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "QRR8W5p24cnHRvg6CCCWJhG1pKQD7FyMhCmNTBWLmte5Mrzgud9b1ixsJzn3LiwX2GQX8V7soruR6ooeT4qUwwN",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715998998,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "2oEEDWahziEU8Fkcq49WwJu2E2pnoi3NNLYhbSK3tRAjqrMxtDF838twys8jXo8cKS4bse8hGgadiymByNcMDar3",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715999000,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "261PTB6CSenqAKyoNH4R2KJoKpsvNNvDxaAZgsSTrgxkcX5g5ynyA21BRGTR8vz79Xo6DbL75UPWRkCc8gT2M6Ce",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715999001,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "5N3UJ7ZzJoyGgeHpE95ibQHQQaiSqTJq6dKop4XrjiztAvVebMgV7ybt1k6SdRRxWE36xYT33dW4NMcW7TY3PPx4",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715999003,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "4bbkzG2ZKUTQeAbKnnLXeWdLgntq1kNt6ZNBB4AU6J5HAgZ9XGUqWr4FmUFtXeAu8SuuN7CBAYuYamhbGU6EjR58",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715999005,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "2FXJXH8wh71U6UEVb3LfSNzMq3MEMvuYuCRyNp1tybsNvw2QBvkJKogC1j5CSGXgerqrUY8YNsSXtGeLFU1oQD1T",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715999006,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "o9SP7ozcQudqj8AbDZzdovZfKc39n9b5fr3ukgHeMqfSmSaftoC2Nv1ggf1ZVLFu8zLyQ28HhfChPP5MrmQPA1f",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715999044,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "signature": "hwo48eN5uMxWWyoFAM4YDfMLfXEFsSeXYZ7pqE7Lvcv8DW327FGcexvBGy2QHBxudcpzRXanaYW4P5om88edUPs",
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 40715999090,
+      "status": {
+        "Ok": null
+      }
+    }
+  ],
+  "actual": {
+    "ptSupplyRaw": "0",
+    "drSupplyRaw": "2876",
+    "vaultRaw": "111",
+    "poolDrRaw": "2876",
+    "providerLpRaw": "0"
+  }
+}

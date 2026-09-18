@@ -1,0 +1,137 @@
+{
+  "schema": "dividendx-private-blob-cas-probe-v2",
+  "at": "2026-09-18T04:01:51.294Z",
+  "storeId": "store_HwInrQjHFXMVbBLI",
+  "payloadBytes": 4141,
+  "status": "passed",
+  "phase": "complete",
+  "probeDeleted": true,
+  "etags": {
+    "put": {
+      "sha256": "6bb5aba8b377582b4d8c2195c7d240c862940f2c533fdefefe8b2df6085a2f1a",
+      "length": 34,
+      "weak": false,
+      "quoted": true
+    },
+    "identityGet": {
+      "sha256": "6bb5aba8b377582b4d8c2195c7d240c862940f2c533fdefefe8b2df6085a2f1a",
+      "length": 34,
+      "weak": false,
+      "quoted": true
+    },
+    "head": {
+      "sha256": "6bb5aba8b377582b4d8c2195c7d240c862940f2c533fdefefe8b2df6085a2f1a",
+      "length": 34,
+      "weak": false,
+      "quoted": true
+    },
+    "putMatchesIdentityGet": true,
+    "putMatchesHead": true
+  },
+  "sequential": {
+    "operationMs": [
+      806.6,
+      746.8,
+      674.5,
+      703.9,
+      762.8,
+      721.7,
+      664.8,
+      717.6,
+      789.9,
+      687.7
+    ],
+    "readMs": [
+      450.9,
+      359.4,
+      340.4,
+      350,
+      390.7,
+      341.6,
+      309.8,
+      348.7,
+      380,
+      341.6
+    ],
+    "casMs": [
+      355,
+      387.4,
+      334.1,
+      353.8,
+      371.8,
+      379.9,
+      354.8,
+      368.8,
+      409.8,
+      345.9
+    ],
+    "casConflicts": 0,
+    "revisions": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "concurrent": {
+    "operationMs": [
+      714,
+      1702,
+      2385.8,
+      3281.6
+    ],
+    "readMs": [
+      375.5,
+      476.9,
+      502.9,
+      510.9,
+      354.7,
+      337.1,
+      368.8,
+      353.8,
+      339.9,
+      367
+    ],
+    "casMs": [
+      338.3,
+      425.2,
+      439.5,
+      468.7,
+      352.6,
+      420.7,
+      439.4,
+      361.2,
+      403.4,
+      343.6
+    ],
+    "casConflicts": 6,
+    "revisions": [
+      13,
+      14,
+      15,
+      16
+    ]
+  },
+  "createMs": 558.2,
+  "identityContentEncoding": null,
+  "putReturnedEtagCas": {
+    "accepted": true,
+    "latencyMs": 474.1
+  },
+  "identityGetEtagCas": {
+    "accepted": true,
+    "latencyMs": 345.9
+  },
+  "duplicateCreate": {
+    "rejected": true,
+    "latencyMs": 702.1
+  },
+  "finalRevision": 16,
+  "finishedAt": "2026-09-18T04:02:05.778Z"
+}

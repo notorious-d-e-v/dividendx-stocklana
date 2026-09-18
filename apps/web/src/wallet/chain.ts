@@ -6,7 +6,7 @@ import {
   getAssociatedTokenAddressSync,
   unpackMint,
 } from '@solana/spl-token';
-import { Connection, PublicKey, type TransactionInstruction } from '@solana/web3.js';
+import { Connection, PublicKey, type Transaction, type TransactionInstruction } from '@solana/web3.js';
 import {
   DIVIDENDX_IDL,
   DIVIDENDX_PROGRAM_ID,
@@ -24,7 +24,7 @@ import {
 } from '@dividendx/transaction-sdk';
 import type { WalletAccount } from '@wallet-standard/base';
 import type { ConnectedWallet, LocalAssetManifest, LocalManifest, LocalSeriesManifest, WalletSeriesSnapshot } from './types';
-import { bytesFromHex, verifyRuntimeIdentity } from './runtime';
+import { bytesFromHex, RUNTIME_CONFIG, RuntimeRequestError, type RuntimeConfig, verifyRuntimeIdentity } from './runtime';
 import { signLegacyTransaction } from './wallet-standard';
 
 const builders = new DividendXInstructions(DIVIDENDX_IDL);
@@ -35,6 +35,14 @@ function key(value: string, label: string): PublicKey {
 
 function sameBytes(left: Uint8Array, right: Uint8Array): boolean {
   return left.length === right.length && left.every((byte, index) => byte === right[index]);
+}
+
+export function validateWalletSignedTransaction(unsigned: Transaction, signed: Transaction): Transaction {
+  const expectedMessage = unsigned.serializeMessage();
+  const signedMessage = signed.serializeMessage();
+  if (!sameBytes(signedMessage, expectedMessage)) throw new Error('Wallet changed the transaction message. Nothing was submitted.');
+  signed.lastValidBlockHeight = unsigned.lastValidBlockHeight;
+  return signed;
 }
 
 function assertDerived(manifest: LocalManifest, asset: LocalAssetManifest, series: LocalSeriesManifest) {
@@ -123,10 +131,55 @@ export interface HolderActionRequest {
   allowZero?: boolean;
   recipient?: PublicKey;
   isCurrent: () => boolean;
+  runtimeConfig?: RuntimeConfig;
+  signal?: AbortSignal;
+}
+
+const HTTP_CONFIRM_TIMEOUT_MS = 30_000;
+
+function confirmationDelay(ms: number, signal?: AbortSignal): Promise<void> {
+  if (signal?.aborted) return Promise.reject(signal.reason);
+  return new Promise((resolve, reject) => {
+    const timer = globalThis.setTimeout(done, ms);
+    function done() { signal?.removeEventListener('abort', aborted); resolve(); }
+    function aborted() { globalThis.clearTimeout(timer); reject(signal?.reason); }
+    signal?.addEventListener('abort', aborted, { once: true });
+  });
+}
+
+export async function submitAndConfirmOverHttp(
+  connection: Connection,
+  transaction: Transaction,
+  isCurrent: () => boolean,
+  timeoutMs = HTTP_CONFIRM_TIMEOUT_MS,
+  signal?: AbortSignal,
+): Promise<ConfirmedTransactionReceipt> {
+  if (!transaction.recentBlockhash || transaction.lastValidBlockHeight === undefined) throw new Error('Transaction needs a recent blockhash and last-valid block height.');
+  if (signal?.aborted) throw signal.reason;
+  if (!isCurrent()) throw new Error('Wallet or sandbox session changed before submission. The signed transaction was discarded.');
+  const signature = await connection.sendRawTransaction(transaction.serialize());
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (signal?.aborted) throw signal.reason;
+    if (!isCurrent()) throw new Error('Wallet or sandbox session changed while confirming the transaction.');
+    const [statusResult, blockHeight] = await Promise.all([
+      connection.getSignatureStatuses([signature], { searchTransactionHistory: true }),
+      connection.getBlockHeight('confirmed'),
+    ]);
+    const status = statusResult.value[0];
+    if (status?.err) throw new Error(`Transaction ${signature} failed: ${JSON.stringify(status.err)}`);
+    if (status && (status.confirmationStatus === 'confirmed' || status.confirmationStatus === 'finalized')) {
+      return { signature, slot: status.slot, confirmationStatus: status.confirmationStatus, err: null };
+    }
+    if (blockHeight > transaction.lastValidBlockHeight) throw new Error(`Transaction ${signature} expired before confirmation.`);
+    await confirmationDelay(400, signal);
+  }
+  throw new Error(`Transaction ${signature} was not confirmed before the HTTP confirmation deadline.`);
 }
 
 export async function executeHolderAction(request: HolderActionRequest): Promise<ConfirmedTransactionReceipt> {
-  const connection = await verifyRuntimeIdentity(request.manifest);
+  const runtimeConfig = request.runtimeConfig ?? RUNTIME_CONFIG;
+  const connection = await verifyRuntimeIdentity(request.manifest, runtimeConfig);
   if (!request.isCurrent()) throw new Error('Wallet or annual series changed while preparing the transaction.');
   const holder = new PublicKey(request.connected.account.publicKey);
   const current = await fetchWalletSeries(connection, request.manifest, request.asset, request.series, holder);
@@ -195,18 +248,16 @@ export async function executeHolderAction(request: HolderActionRequest): Promise
     );
   }
   const unsigned = await buildRecentUnsignedTransaction(connection, holder, instructions);
-  return signSubmitAndConfirm(connection, unsigned, async (transaction) => {
+  const sign = async (transaction: Transaction) => {
     if (!request.isCurrent()) throw new Error('Wallet or annual series changed before the wallet prompt.');
-    const expectedMessage = transaction.serializeMessage();
-    const signed = await signLegacyTransaction(request.connected.wallet, request.connected.account, transaction, request.manifest.kind === 'devnet' ? 'devnet' : 'local');
-    const signedMessage = signed.serializeMessage();
-    if (signedMessage.length !== expectedMessage.length || !signedMessage.every((byte, index) => byte === expectedMessage[index])) {
-      throw new Error('Wallet changed the transaction message. Nothing was submitted.');
-    }
-    await verifyRuntimeIdentity(request.manifest);
+    const signed = validateWalletSignedTransaction(transaction,
+      await signLegacyTransaction(request.connected.wallet, request.connected.account, transaction, runtimeConfig.network === 'devnet' ? 'devnet' : 'local'));
+    await verifyRuntimeIdentity(request.manifest, runtimeConfig);
     if (!request.isCurrent()) throw new Error('Wallet or annual series changed before submission. The signed transaction was discarded.');
     return signed;
-  });
+  };
+  if (runtimeConfig.network === 'sandbox') return submitAndConfirmOverHttp(connection, await sign(unsigned), request.isCurrent, HTTP_CONFIRM_TIMEOUT_MS, request.signal);
+  return signSubmitAndConfirm(connection, unsigned, sign);
 }
 
 export async function confirmedRuntimeSignatures(connection: Connection, signatures: readonly string[]): Promise<ConfirmedTransactionReceipt[]> {
@@ -218,4 +269,23 @@ export async function confirmedRuntimeSignatures(connection: Connection, signatu
     }
     return { signature, slot: status.slot, confirmationStatus: status.confirmationStatus, err: null };
   });
+}
+
+export async function waitForRuntimeSignatures(connection: Connection, signatures: readonly string[], timeoutMs = 30_000): Promise<ConfirmedTransactionReceipt[]> {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    const statuses = (await connection.getSignatureStatuses([...signatures], { searchTransactionHistory: true })).value;
+    const failed = statuses.find((status) => status?.err);
+    if (failed?.err) throw new Error(`A recorded faucet transaction failed: ${JSON.stringify(failed.err)}`);
+    if (statuses.every((status) => status && (status.confirmationStatus === 'confirmed' || status.confirmationStatus === 'finalized'))) {
+      return signatures.map((signature, index) => ({
+        signature,
+        slot: statuses[index]!.slot,
+        confirmationStatus: statuses[index]!.confirmationStatus!,
+        err: null,
+      }));
+    }
+    await confirmationDelay(750);
+  }
+  throw new RuntimeRequestError('The faucet transaction was recorded but is still pending. Refresh balances before requesting again; the same request is idempotent.', { signatures, pending: true });
 }

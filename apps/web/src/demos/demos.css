@@ -157,6 +157,7 @@ footer a { margin-left: auto; color: var(--dx-ink); font-weight: 760; }
 @media (max-width: 620px) {
   .demo-header { padding-inline: 14px; }
   .demo-header nav { left: 14px; right: 14px; }
+  .demo-header nav a { padding-inline: 7px; font-size: 10px; }
   .demo-brand { font-size: 18px; }
   .runtime-status { max-width: 110px; text-align: right; font-size: 9px; }
   .boundary-bar { align-items: flex-start; justify-content: space-between; padding-inline: 14px; }

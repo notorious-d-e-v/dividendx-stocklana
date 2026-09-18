@@ -1,0 +1,64 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm ci --ignore-scripts",
+  "buildCommand": "sh scripts/hosting/build-site.sh",
+  "outputDirectory": "apps/web/dist",
+  "regions": [
+    "iad1"
+  ],
+  "rewrites": [
+    {
+      "source": "/api/sandbox/(.*)",
+      "destination": "/api/sandbox"
+    },
+    {
+      "source": "/api/devnet/(.*)",
+      "destination": "/api/devnet"
+    }
+  ],
+  "functions": {
+    "api/**/*.ts": {
+      "maxDuration": 60,
+      "includeFiles": "packages/devnet-runtime/manifest.devnet.json"
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/refresh-observations",
+      "schedule": "0 */6 * * *"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ]
+}

@@ -31,15 +31,18 @@ actual_idl=$(sha256sum "$REPOSITORY_ROOT/packages/transaction-sdk/idl/dividendx.
 mkdir -p \
   "$CONTEXT/deploy/runtime" \
   "$CONTEXT/scripts/protocol" \
+  "$CONTEXT/scripts/hosting" \
   "$CONTEXT/target/deploy" \
   "$CONTEXT/packages/transaction-sdk" \
   "$CONTEXT/packages/amm-integration" \
   "$CONTEXT/packages/guided-runtime" \
-  "$CONTEXT/packages/local-runtime"
+  "$CONTEXT/packages/local-runtime" \
+  "$CONTEXT/packages/hosted-gateway"
 
 cp "$REPOSITORY_ROOT/package.json" "$REPOSITORY_ROOT/package-lock.json" "$CONTEXT/"
 cp "$REPOSITORY_ROOT/deploy/runtime/Dockerfile" "$REPOSITORY_ROOT/deploy/runtime/probe.mjs" "$CONTEXT/deploy/runtime/"
 cp "$REPOSITORY_ROOT/scripts/protocol/wallet-runtime-smoke.mjs" "$CONTEXT/scripts/protocol/"
+cp "$REPOSITORY_ROOT/scripts/hosting/build-staged-runtime.sh" "$CONTEXT/scripts/hosting/"
 cp "$REPOSITORY_ROOT/target/deploy/dividendx.so" "$CONTEXT/target/deploy/"
 
 for package in transaction-sdk amm-integration guided-runtime; do
@@ -57,6 +60,8 @@ cp "$REPOSITORY_ROOT/packages/local-runtime/package.json" \
    "$REPOSITORY_ROOT/packages/local-runtime/package-lock.json" \
    "$CONTEXT/packages/local-runtime/"
 cp -R "$REPOSITORY_ROOT/packages/local-runtime/src" "$CONTEXT/packages/local-runtime/src"
+cp "$REPOSITORY_ROOT/packages/hosted-gateway/package.json" "$CONTEXT/packages/hosted-gateway/"
+cp -R "$REPOSITORY_ROOT/packages/hosted-gateway/src" "$CONTEXT/packages/hosted-gateway/src"
 
 cat > "$CONTEXT/.dockerignore" <<'EOF'
 .git
@@ -86,7 +91,8 @@ EOF
     packages/transaction-sdk/package-lock.json \
     packages/amm-integration/package-lock.json \
     packages/guided-runtime/package-lock.json \
-    packages/local-runtime/package-lock.json > ARTIFACTS.sha256
+    packages/local-runtime/package-lock.json \
+    packages/hosted-gateway/package.json packages/hosted-gateway/src/*.mjs > ARTIFACTS.sha256
 )
 
 if find "$CONTEXT" -type d \( -name .git -o -name .local-tools -o -name node_modules \) -print -quit | grep -q .; then

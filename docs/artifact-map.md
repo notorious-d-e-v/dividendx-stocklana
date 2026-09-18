@@ -1,6 +1,6 @@
 # DividendX artifact map
 
-Updated 18 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. The accepted program ELF and a test-only Raydium round trip are now proven on public devnet; this does not establish live issuer integration.
+Updated 18 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. The accepted canonical Vercel test site has production-browser devnet, accelerated wallet, guided, simultaneous two-visitor reset/isolation and natural-expiry evidence against the unchanged accepted ELF. This does not establish live issuer integration.
 
 ## Start here
 
@@ -10,8 +10,8 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 - [Test USDC overlay](../spec/guided-usdc-v1.md) and [acceptance review](../planning/usdc-demo-review.md) — v2 quote identity, local funding boundary, browser, RPC and exact-conservation review.
 - [Preserved generic-quote acceptance](../planning/guided-demo-review.md) — historical 37-transaction guided proof.
 - [Current plan](../planning/plan.md) — current scope, completed work and next implementation phase.
-- [Hosting plan](../planning/hosting-plan.md) — approved real-calendar devnet/accelerated sandbox modes, provider recommendation and remaining deployment checks.
-- [Hosting foundation review](../planning/hosting-foundation-review.md) — native Vercel/Docker execution, persistent 2027 devnet registry, public receipts and remaining release gates.
+- [Hosting acceptance](../planning/hosting-release-review.md), [aggregate evidence](../planning/evidence/hosted-release-2026-09-18.json), [hosting plan](../planning/hosting-plan.md) and [operations](hosting-operations.md) — accepted real-calendar devnet/accelerated sandbox modes, proof index, quotas and rollback.
+- [Hosting foundation review](../planning/hosting-foundation-review.md) — historical native Vercel/Docker execution, persistent 2027 devnet registry and then-remaining release gates.
 - [Architecture decision](../planning/adapter-decision.md) and [issuer synthesis](../planning/solana-issuer-synthesis.md) — the selected xStocks, Backpack/Trek and Ondo design, its evidence boundary and unresolved dependencies.
 - [Annual product specification](../spec/annual-product.md) — annual Market / Split / Redeem flow at `/`, extending the approved visual design.
 - [Detailed rehearsal specification](../spec/frontend-rehearsal.md) — preserved two-account accounting walkthrough at `/rehearsal/`.
@@ -25,8 +25,10 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 | [`apps/web/src/wallet/`](../apps/web/src/wallet/) | `/app/` wallet flow | Real local test transactions; temporary browser wallet and Wallet Standard interface |
 | [`apps/web/src/demos/`](../apps/web/src/demos/) | `/demos/` guided DeFi flow | Two server-managed test wallets; nine fixed actions and real local receipts using Test USDC v2, with no extension wallet or caller-supplied transaction data |
 | [`packages/local-runtime/`](../packages/local-runtime/) | Offline Surfpool test network | Disposable test profiles and synthetic annual journal; no real issuer assets |
-| [`packages/devnet-runtime/`](../packages/devnet-runtime/) | Persistent real-calendar devnet registry and operator tools | Synthetic 2027 assets, separate test authorities and read-only manifest service; public faucet disabled |
-| [`deploy/runtime/`](../deploy/runtime/) and [`scripts/hosting/`](../scripts/hosting/) | Allowlisted Linux packaging and execution probes | Exact accepted artifacts pass Docker and native Vercel; visitor-facing session service remains next |
+| [`packages/devnet-runtime/`](../packages/devnet-runtime/) | Persistent real-calendar devnet registry and operator tools | Synthetic 2027 assets, separate test authorities and read-only manifest; local operator HTTP faucet disabled |
+| [`packages/hosted-devnet/`](../packages/hosted-devnet/) | Public devnet wrapper | Durable finite test faucet and six-hour frozen-profile observation refresh; no issuer events, finalization or clock control |
+| [`packages/hosted-broker/`](../packages/hosted-broker/) and [`packages/hosted-gateway/`](../packages/hosted-gateway/) | Hosted session control and restricted VM ingress | Accepted immutable cookie-bound 15-minute wallet/guided sessions, durable quotas, same-origin routes, two-visitor reset isolation and natural expiry |
+| [`deploy/runtime/`](../deploy/runtime/) and [`scripts/hosting/`](../scripts/hosting/) | Allowlisted Linux packaging, execution probes and opt-in production smoke | Exact accepted artifacts pass Docker/native Vercel; actual production runs never mock manifest, broker or RPC |
 | [`packages/guided-runtime/`](../packages/guided-runtime/) | Separate guided runtime on port 4181 | Accepted DividendX ELF, captured genuine Raydium devnet binary/config and an exact local copy of the Circle devnet USDC mint account; synthetic 10 + 1 Test USDC funding and accelerated test year |
 | [`packages/issuer-readers/`](../packages/issuer-readers/) | Server-side issuer observations | Selected registry identities and available source records; explicit gaps, private snapshots, no settlement writer |
 | [`packages/amm-integration/`](../packages/amm-integration/) | Raydium CPMM execution package | Isolated Node CLI; finalized public devnet test flow and captured-bytecode local fallback, not wired into `/app/` |
@@ -73,6 +75,12 @@ The evidence directory is archival source material and should remain tracked eve
 - [Authenticated Ondo access](../planning/research/ondo-api-access-2026-09-17.md) — verified read-only endpoints and six matching mint identities; raw responses and credentials stay outside Git, historical settlement gaps remain.
 - [Unsigned qualification contract](../spec/issuer-qualification-v1.md), [acceptance](../planning/issuer-qualification-review.md) and [source follow-up](../planning/research/issuer-qualification-followup-2026-09-18.md) — implemented offline review of saved observations, candidate dates and current mint evidence; no signing or approval path.
 - [Captured mint custody acceptance](../planning/issuer-custody-review.md), [contract](../spec/issuer-custody-conformance-v1.md) and [snapshot](../tests/protocol/fixtures/issuer-mints-2026-09-18.json) — 15 captured configurations execute through the unchanged compiled program locally; synthetic balances/events, no mainnet custody or settlement admission.
+- [Hosted public devnet browser evidence](../planning/evidence/hosted-browser-devnet-2026-09-18-r3.json) and [independent finality](../planning/evidence/hosted-browser-devnet-finalized-2026-09-18.json) — exactly 10 TestKOx funded, one split/recombined and all three signatures finalized.
+- [Hosted wallet sandbox evidence](../planning/evidence/hosted-browser-sandbox-2026-09-18-r3.json) — funding, split, four synthetic annual steps and separate PT/DR redemption with 30 confirmed/finalized signatures and zero final vault/claim supply.
+- [Hosted guided evidence](../planning/evidence/hosted-browser-guided-2026-09-18.json) — nine fixed actions and 36 confirmed transactions in a private guided VM using synthetic local Test USDC.
+- [Hosted guided chain verification](../planning/evidence/hosted-guided-chain-verification-2026-09-18.json) — independent read-only RPC proof of all 36 statuses and exact residual PT/DR/vault/pool/LP state.
+- [Natural hosted expiry](../planning/evidence/hosted-session-natural-expiry-2026-09-18.json) — provider stopped without an operator stop, broker retained the same expired session ID and the old manifest returned 410; [operator cleanup](../planning/evidence/hosted-release-acceptance-cleanup-2026-09-18.json) later removed the four stopped owned acceptance VMs and reconciled their ledger records.
+- [Hosted two-visitor isolation](../planning/evidence/hosted-browser-isolation-2026-09-18-r3.json) — distinct runtime/deployment/account identities, visitor-A-only clock advance and reset, unchanged visitor-B clock/balances, expected stale-path 410 and no unexpected browser errors.
 - [Issuer qualification research](../planning/research/issuer-settlement-qualification-2026-09-17.md) — current priority, sanitized refresh, explicit Microsoft dates and candidate MSFTx joins; no live settlement approval.
 - [Future DeFi demos](../planning/research/defi-demo-sequence.md) — deferred Streamflow/Jupiter Lock and other candidates on the guided page.
 - [Issuer reader contract](../spec/issuer-readers-v1.md) and [public source schemas](../planning/research/issuer-reader-source-contracts-2026-09-17.md) — typed observation boundaries, exact identity checks, source revisions and incomplete-history handling.

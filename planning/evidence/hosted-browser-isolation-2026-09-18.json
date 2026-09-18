@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-18T05:27:17.341Z",
+  "completedAt": "2026-09-18T05:27:27.228Z",
+  "targetOrigin": "https://dividendx-stocklana.vercel.app",
+  "requestedFlow": "isolation",
+  "status": "failed",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-18T05:27:17.626Z",
+      "name": "browser launched",
+      "flows": [
+        "isolation"
+      ]
+    },
+    {
+      "at": "2026-09-18T05:27:17.627Z",
+      "name": "isolation: start two simultaneous cookie visitors"
+    }
+  ],
+  "flows": {
+    "isolation": {
+      "status": "running",
+      "visitorA": {
+        "session": {
+          "schemaVersion": 1,
+          "kind": "wallet",
+          "status": "ready",
+          "sessionId": "749d142ca6b1b2b4fa4b13f35e4ded50",
+          "runtimeId": "51216da3-60e6-4ae4-9c18-383092909100",
+          "expiresAt": "2026-09-18T05:42:19.566Z",
+          "runtimeUrl": "/api/sandbox/wallet/749d142ca6b1b2b4fa4b13f35e4ded50",
+          "error": null
+        },
+        "manifest": {
+          "schemaVersion": 1,
+          "kind": "surfnet",
+          "genesisHash": "Tkf6D3Z7bFFMHfPkwN29z8sF6aWHHzjU9XqYbWtbxQC",
+          "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+          "deploymentDomainHex": "aad6344da48ea3677e19e8a717a489c4b1baad59c5df8d5d93c4cb8e6b8d6e10",
+          "runtimeId": "51216da3-60e6-4ae4-9c18-383092909100",
+          "clockControl": true,
+          "assets": [
+            {
+              "id": "xstocks-test-kox",
+              "company": "Coca-Cola",
+              "symbol": "TestKOx",
+              "issuerLabel": "xStocks test profile",
+              "issuerIdHex": "b2609d575675ca7744112d8972cb83f0c8628b60d32f9b905687b2526a995b58",
+              "decimals": 8,
+              "collateralMint": "EKxSiaALBhWf1BucEdqx9mScSATdNSTEJPUcbpxtz8am",
+              "assetPolicy": "7WnU57LK3Phx7SKnMEs3TSamBUZ6i1yPBdToRMirWkKb",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "57WvCkaCFTjgD9Me4Xz5Vztvy3RWQja2QbMjPRKwkEDq",
+                  "accumulator": "2niRe4nkTES3Xd8UQDtwGcj7RBcsRGCgN2NRGvxF74m2",
+                  "ptMint": "bUAc8yHUEbW79S6tyxaNZkQ5Er8tKVr6chPvWYV2E45",
+                  "drMint": "5AtjSdaCB14GeXWty2tVNMyuoNpKKx599A5J1VCegAuh",
+                  "vault": "9trpW9UHAf68tq32pVnBrzJdkcPRg8Du2nQZWJQUVJih"
+                }
+              ]
+            },
+            {
+              "id": "backpack-test-mu",
+              "company": "Micron",
+              "symbol": "TestMU",
+              "issuerLabel": "Backpack/Trek test profile",
+              "issuerIdHex": "01f981df1e13d9804488265e78718892856aa7a797aab7f6c175c200989510d7",
+              "decimals": 6,
+              "collateralMint": "2AYqat227RYVKyQ7iUbwcXFERm75Z7AxabA5g49Eh8i2",
+              "assetPolicy": "CYea5sx1r3Y83spRfNKwtqBDYNZ91SbnAst75XyCdGC2",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "HqKF4ggj9aFPcqdbnqLVZgzSf8HSR8NGjhfuLeQ4JLen",
+                  "accumulator": "8Ksq81zcNCiyv39tUb8Aw7Kig9NdqLJgDhsRzG4HA6uZ",
+                  "ptMint": "HN4UxDAtHx5srPdq5VgkmZuGjkGDSLEaNemuWDvCm4pB",
+                  "drMint": "5BhGacM65tEZFMT2Pr1yPFhZwUqB65HCWFGPjEV21zQG",
+                  "vault": "4KMtHAHMmRjHvQuMiZ3f7sVUGgnJGy4Xqoddfb97wd4B"
+                }
+              ]
+            },
+            {
+              "id": "ondo-test-ibm",
+              "company": "IBM",
+              "symbol": "TestIBMon",
+              "issuerLabel": "Ondo test profile",
+              "issuerIdHex": "226daffff6cc8ceed20fe2a2df1a153323f68e2387455f98ae00a4e326b3d7b5",
+              "decimals": 9,
+              "collateralMint": "CFMvCz347tneU9ZzThdyVe63qMCGKnachqY3KaKYsZr1",
+              "assetPolicy": "7pg2VQsuKzNWyXFQkcotwicRFUiEfD2mJGTbSMfKN1NW",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "BTAgcToASZgzk7U4C9FGBj3e3ksNmgPgn7V3CRubN9uj",
+                  "accumulator": "4zWqV9Ss8x2ZBNAVqPh8C5ig6ssuHghMKH383em3Ba3E",
+                  "ptMint": "9yJEFzPC9qm8wAHzpN5C5fFB5PQqarz9E4QiZyzCEFcW",
+                  "drMint": "3un9nHm9T1ZhJnatW8i9rnBhe2ycyh5y9rfzSj2jNXxT",
+                  "vault": "C7Qxi6et9LmjKDWNg9kNorTg51Nd29H1C5mdswDU7WLm"
+                }
+              ]
+            }
+          ],
+          "hostedSessionId": "749d142ca6b1b2b4fa4b13f35e4ded50",
+          "expiresAt": "2026-09-18T05:42:19.566Z",
+          "rpcUrl": "/api/sandbox/wallet/749d142ca6b1b2b4fa4b13f35e4ded50/rpc"
+        }
+      },
+      "visitorB": {
+        "session": {
+          "schemaVersion": 1,
+          "kind": "wallet",
+          "status": "ready",
+          "sessionId": "26728589cc1b8f4a96655d128695102c",
+          "runtimeId": "3d1e275d-ef88-4a6d-8a47-5c3e34fc62ef",
+          "expiresAt": "2026-09-18T05:42:19.463Z",
+          "runtimeUrl": "/api/sandbox/wallet/26728589cc1b8f4a96655d128695102c",
+          "error": null
+        },
+        "manifest": {
+          "schemaVersion": 1,
+          "kind": "surfnet",
+          "genesisHash": "Tkf6D3Z7bFFMHfPkwN29z8sF6aWHHzjU9XqYbWtbxQC",
+          "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+          "deploymentDomainHex": "8a2b72a5f4c7b8bd83d24b737403fed0e1eaedb671a9fc33e1c7892a59ec1de7",
+          "runtimeId": "3d1e275d-ef88-4a6d-8a47-5c3e34fc62ef",
+          "clockControl": true,
+          "assets": [
+            {
+              "id": "xstocks-test-kox",
+              "company": "Coca-Cola",
+              "symbol": "TestKOx",
+              "issuerLabel": "xStocks test profile",
+              "issuerIdHex": "a97f3dc3611f7e39709ebcd3336b52c24d8699deb61f50fe89eab131736feece",
+              "decimals": 8,
+              "collateralMint": "BtnGLqiJHHArwcPVcDLLiU3BRrJXyKLQgFQZDT2t91tW",
+              "assetPolicy": "FsRqtpqivADaUuuA89ivG6QHLQkdZPjBfLVsdHSTQfcn",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "2YK2EpHz5qKWQo2x1mUTyTm9VtJcRxcWw2dTCpi44rnQ",
+                  "accumulator": "FatnPmmhGdMmasPNannyc4k87SVH1xYp63qkxmr7j6ZC",
+                  "ptMint": "rhSGE6DxGmYpSefMKzCUjZfxrin76TKwt5F21PLjbfj",
+                  "drMint": "2dies6nFDaYSxCRRiG77Me9rXmyEnWtiQZenHWurvuZz",
+                  "vault": "AqcnxpaFP7sGgQXKemuUCbFBKbuuepk6kSVyxxP2yxhU"
+                }
+              ]
+            },
+            {
+              "id": "backpack-test-mu",
+              "company": "Micron",
+              "symbol": "TestMU",
+              "issuerLabel": "Backpack/Trek test profile",
+              "issuerIdHex": "c948d1b988c72f31556405fcf2c095eb10e4bc7de91509642d21702f36257edf",
+              "decimals": 6,
+              "collateralMint": "ApES2NfMm86CxAiahGbpcyWKvZe75CF63ZctGskKEWxe",
+              "assetPolicy": "21tg18qPTsv664oazbBLVeSQAXmdbYLCj7ndm36hBFVT",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "4vFuVzjfbh4QQWVDZaWxSaiHmacUMdxnWubF3brLfrT2",
+                  "accumulator": "31DN5XCNTm8LzU3i6gnT59DCTyLhVw4wHsLZPQRXjqVH",
+                  "ptMint": "Fs1tkUb9ftgsn1AWUH52udRJUUy2Gtw33jKFKnNMw1yX",
+                  "drMint": "AuQLdYbTNgi6qaKcKQzbbhsm2vww8YVj8vgDeMZrfhNa",
+                  "vault": "DMXmDsMJKZgAmZLVG8QGzw3GCKXN5i8mRt3AG4Nm3rxW"
+                }
+              ]
+            },
+            {
+              "id": "ondo-test-ibm",
+              "company": "IBM",
+              "symbol": "TestIBMon",
+              "issuerLabel": "Ondo test profile",
+              "issuerIdHex": "85b8032e5a597243d78056c683aff464ababbf632a08bb78dbefeefa00e7bc12",
+              "decimals": 9,
+              "collateralMint": "D6Wti7kETCYw4nEjdR7kgVHUo4dZQw7mMTsNwcXgp23Q",
+              "assetPolicy": "85VXqDLtqeEXKfmFswshTM7gvh49TQt1GCptvwmJu59Z",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "3u6HLcmrpqbtitdRyedH4U4uCD8B27X4KcsXWAoHPcJF",
+                  "accumulator": "EYTqcaHHsdBNipHRb5fatC1f3t3k1K2nKVZxNMxb146o",
+                  "ptMint": "5rvz9idxua5RfWRsSrPJLm8MxhVh4sdEWU2tn12gP7FF",
+                  "drMint": "2mr38tG91i6x5P6f3XPKX1RSLzdWsWg4ikSs1MdK8rWb",
+                  "vault": "DvjDfjMqJWsYfAVPvKxrx6EYNF7E6A84vPb55k8KsFS2"
+                }
+              ]
+            }
+          ],
+          "hostedSessionId": "26728589cc1b8f4a96655d128695102c",
+          "expiresAt": "2026-09-18T05:42:19.463Z",
+          "rpcUrl": "/api/sandbox/wallet/26728589cc1b8f4a96655d128695102c/rpc"
+        }
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "flow": "isolation-visitor-a",
+      "failure": true,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-isolation-2026-09-18-isolation-visitor-a-failure.png"
+    },
+    {
+      "flow": "isolation-visitor-b",
+      "failure": true,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-isolation-2026-09-18-isolation-visitor-b-failure.png"
+    }
+  ],
+  "failureArtifacts": [
+    {
+      "at": "2026-09-18T05:27:27.056Z",
+      "flow": "isolation-visitor-a",
+      "stage": "isolation: start two simultaneous cookie visitors",
+      "message": "Expected \"actual\" to be strictly unequal to:\n\n'Tkf6D3Z7bFFMHfPkwN29z8sF6aWHHzjU9XqYbWtbxQC'",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "alerts": [],
+      "bodyText": "Skip to content\nDividendX\nMarket\nSplit\nRedeem\nWallet disconnected\nPrivate 15-minute sandbox · synthetic network\nAccelerated dates and balances exist only inside this isolated test network. Reload loses a temporary wallet key.\nGuided demos →\nPublic devnet →\nReset sandbox\nOpen annual reference →\nVerified private SBF sandbox\nConnected to your isolated synthetic network\n\nWALLET\n\nCreate an in-memory sandbox wallet.\n\nHosted sandboxes use only a temporary in-memory wallet. Its key is never stored and disappears on reload or reset.\n\nCreate temporary test wallet\nEXACT SANDBOX STOCK TOKEN\nCoca-Cola · TestKOx · xStocks test profile\nMicron · TestMU · Backpack/Trek test profile\nIBM · TestIBMon · Ondo test profile\nANNUAL SERIES\n2027\nRefresh balances\nRequest test SOL + TestKOx\n\nVERIFIED ANNUAL SERIES\n\nCoca-Cola2027\n\nTestKOx · xStocks test profile · 8 decimals\n\nDeposits open\nStock token\n0\nTestKOx\nStock exposure\n0\nPT-TestKOx-2027\nDividend rights\n0\nDR-TestKOx-2027\n\nMARKET\n\nChoose a company and its exact stock token.\n\nEach token shows its test issuer profile and decimals.\n\nCoca-Cola\nTestKOx\nxStocks test profile · 8 decimals\nMicron\nTestMU\nBackpack/Trek test profile · 6 decimals\nIBM\nTestIBMon\nOndo test profile · 9 decimals\nAMM trading unavailable in this app\nNo venue or cash price is connected here. The guided route is a separate test flow.\nVerified account details\nNetwork-wide test dates\nDividendX local transaction application · TestKOx · 2027\nHistorical rehearsal",
+      "screenshot": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-isolation-2026-09-18-isolation-visitor-a-failure.png"
+    },
+    {
+      "at": "2026-09-18T05:27:27.155Z",
+      "flow": "isolation-visitor-b",
+      "stage": "isolation: start two simultaneous cookie visitors",
+      "message": "Expected \"actual\" to be strictly unequal to:\n\n'Tkf6D3Z7bFFMHfPkwN29z8sF6aWHHzjU9XqYbWtbxQC'",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "alerts": [],
+      "bodyText": "Skip to content\nDividendX\nMarket\nSplit\nRedeem\nWallet disconnected\nPrivate 15-minute sandbox · synthetic network\nAccelerated dates and balances exist only inside this isolated test network. Reload loses a temporary wallet key.\nGuided demos →\nPublic devnet →\nReset sandbox\nOpen annual reference →\nVerified private SBF sandbox\nConnected to your isolated synthetic network\n\nWALLET\n\nCreate an in-memory sandbox wallet.\n\nHosted sandboxes use only a temporary in-memory wallet. Its key is never stored and disappears on reload or reset.\n\nCreate temporary test wallet\nEXACT SANDBOX STOCK TOKEN\nCoca-Cola · TestKOx · xStocks test profile\nMicron · TestMU · Backpack/Trek test profile\nIBM · TestIBMon · Ondo test profile\nANNUAL SERIES\n2027\nRefresh balances\nRequest test SOL + TestKOx\n\nVERIFIED ANNUAL SERIES\n\nCoca-Cola2027\n\nTestKOx · xStocks test profile · 8 decimals\n\nDeposits open\nStock token\n0\nTestKOx\nStock exposure\n0\nPT-TestKOx-2027\nDividend rights\n0\nDR-TestKOx-2027\n\nMARKET\n\nChoose a company and its exact stock token.\n\nEach token shows its test issuer profile and decimals.\n\nCoca-Cola\nTestKOx\nxStocks test profile · 8 decimals\nMicron\nTestMU\nBackpack/Trek test profile · 6 decimals\nIBM\nTestIBMon\nOndo test profile · 9 decimals\nAMM trading unavailable in this app\nNo venue or cash price is connected here. The guided route is a separate test flow.\nVerified account details\nNetwork-wide test dates\nDividendX local transaction application · TestKOx · 2027\nHistorical rehearsal",
+      "screenshot": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-isolation-2026-09-18-isolation-visitor-b-failure.png"
+    }
+  ],
+  "browserErrors": [],
+  "errors": [
+    {
+      "at": "2026-09-18T05:27:27.228Z",
+      "stage": "isolation: start two simultaneous cookie visitors",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "message": "Expected \"actual\" to be strictly unequal to:\n\n'Tkf6D3Z7bFFMHfPkwN29z8sF6aWHHzjU9XqYbWtbxQC'"
+    }
+  ],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}

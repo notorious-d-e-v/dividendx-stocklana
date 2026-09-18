@@ -1,0 +1,758 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-18T05:25:01.923Z",
+  "completedAt": "2026-09-18T05:26:08.486Z",
+  "targetOrigin": "https://dividendx-stocklana.vercel.app",
+  "requestedFlow": "sandbox",
+  "status": "pass",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-18T05:25:02.292Z",
+      "name": "browser launched",
+      "flows": [
+        "sandbox"
+      ]
+    },
+    {
+      "at": "2026-09-18T05:25:02.295Z",
+      "name": "sandbox: create isolated visitor session"
+    },
+    {
+      "at": "2026-09-18T05:25:14.405Z",
+      "name": "sandbox: fund temporary wallet once",
+      "sessionId": "8fe425b3c5467697a34e72f6070b7eaa"
+    },
+    {
+      "at": "2026-09-18T05:25:20.836Z",
+      "name": "sandbox: split stock into PT and DR"
+    },
+    {
+      "at": "2026-09-18T05:25:29.595Z",
+      "name": "sandbox: advance through four events and finalization"
+    },
+    {
+      "at": "2026-09-18T05:25:49.635Z",
+      "name": "sandbox: redeem PT and DR independently"
+    },
+    {
+      "at": "2026-09-18T05:26:08.486Z",
+      "name": "all requested flows passed"
+    }
+  ],
+  "flows": {
+    "sandbox": {
+      "status": "pass",
+      "session": {
+        "schemaVersion": 1,
+        "kind": "wallet",
+        "status": "ready",
+        "sessionId": "8fe425b3c5467697a34e72f6070b7eaa",
+        "runtimeId": "05594b97-71de-4028-8985-32792407a9d0",
+        "expiresAt": "2026-09-18T05:40:06.912Z",
+        "runtimeUrl": "/api/sandbox/wallet/8fe425b3c5467697a34e72f6070b7eaa",
+        "error": null
+      },
+      "manifest": {
+        "schemaVersion": 1,
+        "kind": "surfnet",
+        "genesisHash": "FF2Ki8oNd3JDX5j54CSgpEdqz69bDvyc6ddSGCM7BLuc",
+        "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+        "deploymentDomainHex": "a846c1d69057f71539e9b682462c0f60e3c4d02ab1d3359402ee77404cb6abe3",
+        "runtimeId": "05594b97-71de-4028-8985-32792407a9d0",
+        "clockControl": true,
+        "assets": [
+          {
+            "id": "xstocks-test-kox",
+            "company": "Coca-Cola",
+            "symbol": "TestKOx",
+            "issuerLabel": "xStocks test profile",
+            "issuerIdHex": "02f70637190b30de49dff2ee689e2e091df45a35a1903cb3640ddeddba446f91",
+            "decimals": 8,
+            "collateralMint": "ERossepMmsguaP9k27zJV99ovmpJAdevLAL5uDJRyhb7",
+            "assetPolicy": "ECokBrgofcuLXfENYu7xEpNnqmAgch5636fGGgXcHmHa",
+            "series": [
+              {
+                "year": 2027,
+                "address": "4RsRNsPuZJaL1FR24yQjr8qPTNYgpwKvRyefwbmqgyFE",
+                "accumulator": "CcjoW7AiECe1uSF3wWC5WyHsQ2FHDBWH7P5uwbvmECEK",
+                "ptMint": "BaxXTeNe4nTNfhYoGFWz9UsHcMsvvofvDpPXZKNBYhgL",
+                "drMint": "J3eowo1c4cH4Ka8yBnsbqewHe7jwkzWti7V3nwNPtPty",
+                "vault": "8HnD7yp7kZqbKMbPCsooF7ZPrzMvjoD2UW1YawdBm1Q7"
+              }
+            ]
+          },
+          {
+            "id": "backpack-test-mu",
+            "company": "Micron",
+            "symbol": "TestMU",
+            "issuerLabel": "Backpack/Trek test profile",
+            "issuerIdHex": "a3d24b372fbac2ff7ef79ccd7adf37d0d3dcccf52e048ea813e8d75af197a917",
+            "decimals": 6,
+            "collateralMint": "2oAYKikLiYfSyTuyczUGjxh7UpQi8aoQVnJ8UNi4X9pH",
+            "assetPolicy": "53ucLZZs3RkEV8fmaPebFKcVW3xVfWNnDZ9aRkJUyDuf",
+            "series": [
+              {
+                "year": 2027,
+                "address": "9FnbQQp86Sm5PGv4MNhdjDqvLhPKKohjyTZ3Ry1n6tWE",
+                "accumulator": "3cFBJJnGaqbBmc7HUo6Hq1kq97WfLMH1HiUkWg2js1vc",
+                "ptMint": "HEfqdZqByzPd3YFVBxejjFBvXv1K4cz7VXaSRiXjFU8c",
+                "drMint": "42GD9pF2VDriGJ1BYkKsZHShSERfQoxzcgTz9KA2fyNa",
+                "vault": "4uM63XeV5mFywrLsk8wgoFueVaYQjntMFJZRBTw5E9th"
+              }
+            ]
+          },
+          {
+            "id": "ondo-test-ibm",
+            "company": "IBM",
+            "symbol": "TestIBMon",
+            "issuerLabel": "Ondo test profile",
+            "issuerIdHex": "8bf0d999ce710b007734e91724ff43ee3a2480fe7de9383078c5c28265c9d261",
+            "decimals": 9,
+            "collateralMint": "Hny5w4yHp87aC4UqmgDoS2b4vRqsBfwn3pLZa8a79q3Z",
+            "assetPolicy": "5Y87ZoWkRCF5uVVid6NLDe1oMW4jMF1E1XFw9zAUnx1x",
+            "series": [
+              {
+                "year": 2027,
+                "address": "8CfUSuqu1KJ4u53woSggwFYMqTkriAwpCv6UYQYWZQpp",
+                "accumulator": "935ZKfH5sUyHqEmLQxWb1hfxSAbDXpT6CGwE4FCNCWt9",
+                "ptMint": "7MfPeexFqakQEqyHjj2f6GExJPtiSbks9GXFWb2sYbVJ",
+                "drMint": "5xxwnWasnCkNjVXXwACwyEpXa3rY2fopVwd3AmGJRq5D",
+                "vault": "BxoGEwimHRBuBEcEi9ySCBbaLwYMUMRT32xrnrtf9YFr"
+              }
+            ]
+          }
+        ],
+        "hostedSessionId": "8fe425b3c5467697a34e72f6070b7eaa",
+        "expiresAt": "2026-09-18T05:40:06.912Z",
+        "rpcUrl": "/api/sandbox/wallet/8fe425b3c5467697a34e72f6070b7eaa/rpc"
+      },
+      "wallet": "876StRENKKb4sEaWBSfEioeyGbeYiqjdkXRUZYeUvAwh",
+      "assetId": "xstocks-test-kox",
+      "balances": [
+        "104",
+        "0",
+        "0"
+      ],
+      "seriesBalances": {
+        "vaultRaw": "0",
+        "ptSupplyRaw": "0",
+        "drSupplyRaw": "0"
+      },
+      "actions": [
+        {
+          "label": "sandbox faucet",
+          "signatures": [
+            "2MgFsQ5sxrRfHeH36Ma7QTS4brPJy72uzCcyRya4RqGFaFaLZiabohpfPawxsRk6W2BKvGB8T5k9uDFTbF6ZYEDB",
+            "3V2a5G5YRyxmgsKqxKLScqwhjhHZqQ9uJHw5DFUtXrSLYqXZxKme8aB3FRYuUDNV1zpK28fhQSJCeAScwwnNAjDP"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "test faucet",
+              "detail": "Slot 7626889957 · confirmed",
+              "signature": "2MgFsQ5sxrRfHeH36Ma7QTS4brPJy72uzCcyRya4RqGFaFaLZiabohpfPawxsRk6W2BKvGB8T5k9uDFTbF6ZYEDB",
+              "explorer": null
+            },
+            {
+              "label": "test faucet",
+              "detail": "Slot 7626889956 · confirmed",
+              "signature": "3V2a5G5YRyxmgsKqxKLScqwhjhHZqQ9uJHw5DFUtXrSLYqXZxKme8aB3FRYuUDNV1zpK28fhQSJCeAScwwnNAjDP",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        },
+        {
+          "label": "sandbox split",
+          "signatures": [
+            "CBG1fnLusQHwNmrx7TQswZLnCW1qjsobSj9Y2LkUVaRA8pHGyPaggNKG4PgNSNpdmHhgzwrwmRBGXoMgB5eessM"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "deposit",
+              "detail": "Slot 7626890069 · confirmed",
+              "signature": "CBG1fnLusQHwNmrx7TQswZLnCW1qjsobSj9Y2LkUVaRA8pHGyPaggNKG4PgNSNpdmHhgzwrwmRBGXoMgB5eessM",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        },
+        {
+          "label": "sandbox start year",
+          "signatures": [
+            "2VcGrDbCcovo1v4bNRsDtmGYNUdut3LtQ3PCRXN9cYCXhEUctpGshk4tkwN433GgtQ4eem3Khrdc2p2HJufvzndR",
+            "5dd32eRgKcXZXWxnozy8r3ipSVQMN4PwDFW21Dy48XAgh3bK6xt62YEkrg4GNLV1egQFtdHnt7abzRXNJ2ZffNTZ",
+            "2PJ64ezNUnYYFMvPALMtpT8h3etLBaTsDKdKfdKTonCHdi8aZYcRkP5cQC8syfkfV9XEsoxhbVfhXsqri1zGhVDP"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "date control: start-year",
+              "detail": "Slot 9181727703 · confirmed",
+              "signature": "2VcGrDbCcovo1v4bNRsDtmGYNUdut3LtQ3PCRXN9cYCXhEUctpGshk4tkwN433GgtQ4eem3Khrdc2p2HJufvzndR",
+              "explorer": null
+            },
+            {
+              "label": "date control: start-year",
+              "detail": "Slot 9181727701 · confirmed",
+              "signature": "5dd32eRgKcXZXWxnozy8r3ipSVQMN4PwDFW21Dy48XAgh3bK6xt62YEkrg4GNLV1egQFtdHnt7abzRXNJ2ZffNTZ",
+              "explorer": null
+            },
+            {
+              "label": "date control: start-year",
+              "detail": "Slot 9181727700 · confirmed",
+              "signature": "2PJ64ezNUnYYFMvPALMtpT8h3etLBaTsDKdKfdKTonCHdi8aZYcRkP5cQC8syfkfV9XEsoxhbVfhXsqri1zGhVDP",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        },
+        {
+          "label": "sandbox record dividends",
+          "signatures": [
+            "4rmafvL4wXJoj56BTcMmgM6oNTwzBdEvnRsoxpLp5LVCdaLzJibc1xeP2SqfSU2AjuYitZCLAFLfK76GMSVCuBTk",
+            "4vPsyZQg7HV9c71NYt5mTb7okqR1Mm1Ew6wJ2eh7FXn1qFSSY1jxzb5dN3J78aN7HXA7gaz5HNUk98UgEx1xJ8jx",
+            "HgmdqQ9QAbyENmdqj7rAPYu2TUNQMdh6xmqT46FmNZ6eqtMg8kun69DAJUw3vAouhTGSHnypUrNwoNPLbRYgxQE",
+            "5LDDgD88qgiqWRwvURjyxYJtY22LLCFuXnEtQ4sx1U8PKM7q7s7frcQymeLodoA4zTxpXNUxyutWW1Rt8gAYZcdg",
+            "2WwxBaxNvGiW14AacC3unsHhhfxNCHxwF6XGSaeDRKRxCEN2pd9Sm8dAAVHJTjcKiV4QP6ZCUHcT5fivSUZgFrUi",
+            "52VE53pPeBTe1fT6iXM47UzP8jufBAHFMXyK2JBoAakKuKsDSYPT1HeCA9SSrBD3naRwi7msKbz4J15fne5PPV12",
+            "5gp7yCC6wo21CKQNpy9bYo1ir1BghfkpGDcp1V6298LYD9V4MpGzUYKKJZGGys5SLRC763WSJaUxzRbJcxbmTQ7a",
+            "PgAK8HMdcCRpdckvEhNs8tEmRTPJAoYvvi6fdAvFoZUCprzXvDsRiWAhCuWsTP8KyVKiyQPpZok61uyzLr6WYc6",
+            "5nwdnHZnoBp46tW1YzxBzvqZ87syDwtzFq9aDFx6RWCDs1qRvFZCgX9J4VU6K6hsfDRzbCRQ3gAMkAdKUuhHx4j5",
+            "2um4Z3GrdRBq11k5HXEZx58MjbA3cdirXQPn42TzDvxWqztXLVR6bd8WY1WsLamwPHYRTaPmoHWNN9voDiCkvCLS",
+            "5mnCeV7F37yPSoNQQjwSQVAPUCA2BSp4o1D6nwT3R8XdQRYdvkYzizHPr6T4H53n3MKg14sebKniLsRPr1UKfgmX",
+            "2deRaejt6T7Nt7YQvmKEBFZr4j2ePYijkzqhz13jk432AgAssaDrRumgXmJz1EVo9okfz2EbNLYkUe3hxDVAUysK"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "date control: record-dividends",
+              "detail": "Slot 39161231999 · confirmed",
+              "signature": "4rmafvL4wXJoj56BTcMmgM6oNTwzBdEvnRsoxpLp5LVCdaLzJibc1xeP2SqfSU2AjuYitZCLAFLfK76GMSVCuBTk",
+              "explorer": null
+            },
+            {
+              "label": "date control: record-dividends",
+              "detail": "Slot 39161231998 · confirmed",
+              "signature": "4vPsyZQg7HV9c71NYt5mTb7okqR1Mm1Ew6wJ2eh7FXn1qFSSY1jxzb5dN3J78aN7HXA7gaz5HNUk98UgEx1xJ8jx",
+              "explorer": null
+            },
+            {
+              "label": "date control: record-dividends",
+              "detail": "Slot 39161231996 · confirmed",
+              "signature": "HgmdqQ9QAbyENmdqj7rAPYu2TUNQMdh6xmqT46FmNZ6eqtMg8kun69DAJUw3vAouhTGSHnypUrNwoNPLbRYgxQE",
+              "explorer": null
+            },
+            {
+              "label": "date control: record-dividends",
+              "detail": "Slot 31299263998 · finalized",
+              "signature": "5LDDgD88qgiqWRwvURjyxYJtY22LLCFuXnEtQ4sx1U8PKM7q7s7frcQymeLodoA4zTxpXNUxyutWW1Rt8gAYZcdg",
+              "explorer": null
+            },
+            {
+              "label": "date control: record-dividends",
+              "detail": "Slot 31299263997 · finalized",
+              "signature": "2WwxBaxNvGiW14AacC3unsHhhfxNCHxwF6XGSaeDRKRxCEN2pd9Sm8dAAVHJTjcKiV4QP6ZCUHcT5fivSUZgFrUi",
+              "explorer": null
+            },
+            {
+              "label": "date control: record-dividends",
+              "detail": "Slot 31299263995 · finalized",
+              "signature": "52VE53pPeBTe1fT6iXM47UzP8jufBAHFMXyK2JBoAakKuKsDSYPT1HeCA9SSrBD3naRwi7msKbz4J15fne5PPV12",
+              "explorer": null
+            },
+            {
+              "label": "date control: record-dividends",
+              "detail": "Slot 23350896000 · finalized",
+              "signature": "5gp7yCC6wo21CKQNpy9bYo1ir1BghfkpGDcp1V6298LYD9V4MpGzUYKKJZGGys5SLRC763WSJaUxzRbJcxbmTQ7a",
+              "explorer": null
+            },
+            {
+              "label": "date control: record-dividends",
+              "detail": "Slot 23350895998 · finalized",
+              "signature": "PgAK8HMdcCRpdckvEhNs8tEmRTPJAoYvvi6fdAvFoZUCprzXvDsRiWAhCuWsTP8KyVKiyQPpZok61uyzLr6WYc6",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        },
+        {
+          "label": "sandbox end year",
+          "signatures": [
+            "2bgxiC7QzH7byUYSLTMm4wbh5CHhJ9N2YoCwAZY7PyKAFjw3avs8aR8LpBmpUGiD5BGgUYksEjJj8SAUgvQ54MLS",
+            "2bRxnFkQicxns5YAJsnfGVz3wv2kRhmcJSesNvX8AHPUjzD45rtiCppwadBx7LaMVYKA38NqfRCRh2vbVfrQtXQR",
+            "3y7yuahFzfTC4seoFngaurRE8TnSdYUqmuEjd8g8jnEeBkkrBWUM3PGvXJL5dto62x41tq8V4YaJEHusoZgroE3U"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "date control: end-year",
+              "detail": "Slot 40715998931 · confirmed",
+              "signature": "2bgxiC7QzH7byUYSLTMm4wbh5CHhJ9N2YoCwAZY7PyKAFjw3avs8aR8LpBmpUGiD5BGgUYksEjJj8SAUgvQ54MLS",
+              "explorer": null
+            },
+            {
+              "label": "date control: end-year",
+              "detail": "Slot 40715998930 · confirmed",
+              "signature": "2bRxnFkQicxns5YAJsnfGVz3wv2kRhmcJSesNvX8AHPUjzD45rtiCppwadBx7LaMVYKA38NqfRCRh2vbVfrQtXQR",
+              "explorer": null
+            },
+            {
+              "label": "date control: end-year",
+              "detail": "Slot 40715998928 · confirmed",
+              "signature": "3y7yuahFzfTC4seoFngaurRE8TnSdYUqmuEjd8g8jnEeBkkrBWUM3PGvXJL5dto62x41tq8V4YaJEHusoZgroE3U",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        },
+        {
+          "label": "sandbox finalize",
+          "signatures": [
+            "rvyPcEDHreLDRAfadAcdTDQBLK6qJAFubRPC5gYMHP11vESGs1ibBBBJE9zSVourUZka1pEf4PAg9YQjVssZBdT",
+            "42BKTpYmxX4AGyevwECJh1FC3kfg7NPPCYGjRLG8qhibpyKyw6J5Znie7z5iDD1ojRyYb4HLPDi38gSJ5eRsqpoe",
+            "2XYtYUuDujqN9MTiE6YBGaNjmWyLEbXo1UC8dgiKMH1NEUi5DifELP5wZQkrnuA9JFtD6aemQowX7LZo4R3MSbBU",
+            "3xhSprDk4UqcEPQzZtw79LX7ZXMAd5wMra57aqQpUxcQwotMKu9ofMhufcWXzJKg39GKB6ZxCs5xFC2CBtDPjcXV",
+            "Lfa2AEyNjR7dxLLmErifpTSZjzfUUCniWViBXqoGsPMhaesDD81szYF9mpzWWMPT5PBP5bvBnniVHv7GYwA5avp",
+            "3MAUtq3w98fKXWLSrrheQ2kdamBTNux1p5ckqwSqNHeCyhNmMkCFxsNDyTxPgwe4VCqTJDdyzGmnK685tt2UxQao",
+            "5hP171rJjxqVXPySS7mwx6dkaNJ6VarZzqUTzeMTNgNuknTFTJqXpyBCUUJDvSpRXnT36iHjJUGd6Kfoe4hVxrLw"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "date control: finalize",
+              "detail": "Slot 40715999000 · confirmed",
+              "signature": "rvyPcEDHreLDRAfadAcdTDQBLK6qJAFubRPC5gYMHP11vESGs1ibBBBJE9zSVourUZka1pEf4PAg9YQjVssZBdT",
+              "explorer": null
+            },
+            {
+              "label": "date control: finalize",
+              "detail": "Slot 40715998998 · confirmed",
+              "signature": "42BKTpYmxX4AGyevwECJh1FC3kfg7NPPCYGjRLG8qhibpyKyw6J5Znie7z5iDD1ojRyYb4HLPDi38gSJ5eRsqpoe",
+              "explorer": null
+            },
+            {
+              "label": "date control: finalize",
+              "detail": "Slot 40715998997 · confirmed",
+              "signature": "2XYtYUuDujqN9MTiE6YBGaNjmWyLEbXo1UC8dgiKMH1NEUi5DifELP5wZQkrnuA9JFtD6aemQowX7LZo4R3MSbBU",
+              "explorer": null
+            },
+            {
+              "label": "date control: finalize",
+              "detail": "Slot 40715998996 · confirmed",
+              "signature": "3xhSprDk4UqcEPQzZtw79LX7ZXMAd5wMra57aqQpUxcQwotMKu9ofMhufcWXzJKg39GKB6ZxCs5xFC2CBtDPjcXV",
+              "explorer": null
+            },
+            {
+              "label": "date control: finalize",
+              "detail": "Slot 40715998995 · confirmed",
+              "signature": "Lfa2AEyNjR7dxLLmErifpTSZjzfUUCniWViBXqoGsPMhaesDD81szYF9mpzWWMPT5PBP5bvBnniVHv7GYwA5avp",
+              "explorer": null
+            },
+            {
+              "label": "date control: finalize",
+              "detail": "Slot 40715998993 · confirmed",
+              "signature": "3MAUtq3w98fKXWLSrrheQ2kdamBTNux1p5ckqwSqNHeCyhNmMkCFxsNDyTxPgwe4VCqTJDdyzGmnK685tt2UxQao",
+              "explorer": null
+            },
+            {
+              "label": "date control: finalize",
+              "detail": "Slot 40715998991 · confirmed",
+              "signature": "5hP171rJjxqVXPySS7mwx6dkaNJ6VarZzqUTzeMTNgNuknTFTJqXpyBCUUJDvSpRXnT36iHjJUGd6Kfoe4hVxrLw",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        },
+        {
+          "label": "sandbox Redeem PT",
+          "signatures": [
+            "5AVVvMjecXhU3aFj38WXUPQKZB8ztN7JJdgh6t9oke69FumGoxxSvdQfE4S6zvvSn8wWeFx2fCzgyzpucdUckXxD"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "redeem-pt",
+              "detail": "Slot 40715999112 · confirmed",
+              "signature": "5AVVvMjecXhU3aFj38WXUPQKZB8ztN7JJdgh6t9oke69FumGoxxSvdQfE4S6zvvSn8wWeFx2fCzgyzpucdUckXxD",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        },
+        {
+          "label": "sandbox Redeem DR",
+          "signatures": [
+            "3iv512y1sqaHY12rgcJQQCatXfTE7GZRGSsm4xhA7rReFPBjzMAgaQmmeZipnByQZMFx2gm6v4eG6qPSkWTgMv9s"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "redeem-dr",
+              "detail": "Slot 40715999225 · confirmed",
+              "signature": "3iv512y1sqaHY12rgcJQQCatXfTE7GZRGSsm4xhA7rReFPBjzMAgaQmmeZipnByQZMFx2gm6v4eG6qPSkWTgMv9s",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        }
+      ],
+      "displayedReceiptsAtEnd": [
+        {
+          "label": "redeem-dr",
+          "detail": "Slot 40715999225 · confirmed",
+          "signature": "3iv512y1sqaHY12rgcJQQCatXfTE7GZRGSsm4xhA7rReFPBjzMAgaQmmeZipnByQZMFx2gm6v4eG6qPSkWTgMv9s",
+          "explorer": null
+        },
+        {
+          "label": "redeem-pt",
+          "detail": "Slot 40715999112 · confirmed",
+          "signature": "5AVVvMjecXhU3aFj38WXUPQKZB8ztN7JJdgh6t9oke69FumGoxxSvdQfE4S6zvvSn8wWeFx2fCzgyzpucdUckXxD",
+          "explorer": null
+        },
+        {
+          "label": "date control: finalize",
+          "detail": "Slot 40715999000 · confirmed",
+          "signature": "rvyPcEDHreLDRAfadAcdTDQBLK6qJAFubRPC5gYMHP11vESGs1ibBBBJE9zSVourUZka1pEf4PAg9YQjVssZBdT",
+          "explorer": null
+        },
+        {
+          "label": "date control: finalize",
+          "detail": "Slot 40715998998 · confirmed",
+          "signature": "42BKTpYmxX4AGyevwECJh1FC3kfg7NPPCYGjRLG8qhibpyKyw6J5Znie7z5iDD1ojRyYb4HLPDi38gSJ5eRsqpoe",
+          "explorer": null
+        },
+        {
+          "label": "date control: finalize",
+          "detail": "Slot 40715998997 · confirmed",
+          "signature": "2XYtYUuDujqN9MTiE6YBGaNjmWyLEbXo1UC8dgiKMH1NEUi5DifELP5wZQkrnuA9JFtD6aemQowX7LZo4R3MSbBU",
+          "explorer": null
+        },
+        {
+          "label": "date control: finalize",
+          "detail": "Slot 40715998996 · confirmed",
+          "signature": "3xhSprDk4UqcEPQzZtw79LX7ZXMAd5wMra57aqQpUxcQwotMKu9ofMhufcWXzJKg39GKB6ZxCs5xFC2CBtDPjcXV",
+          "explorer": null
+        },
+        {
+          "label": "date control: finalize",
+          "detail": "Slot 40715998995 · confirmed",
+          "signature": "Lfa2AEyNjR7dxLLmErifpTSZjzfUUCniWViBXqoGsPMhaesDD81szYF9mpzWWMPT5PBP5bvBnniVHv7GYwA5avp",
+          "explorer": null
+        },
+        {
+          "label": "date control: finalize",
+          "detail": "Slot 40715998993 · confirmed",
+          "signature": "3MAUtq3w98fKXWLSrrheQ2kdamBTNux1p5ckqwSqNHeCyhNmMkCFxsNDyTxPgwe4VCqTJDdyzGmnK685tt2UxQao",
+          "explorer": null
+        }
+      ],
+      "displayedReceiptLimit": 8,
+      "rpcStatuses": [
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 7626889957,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 7626889956,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 7626890069,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 9181727703,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 9181727701,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 9181727700,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 39161231999,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 39161231998,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 39161231996,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 31299263998,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 31299263997,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 31299263995,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 23350896000,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 23350895998,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 15402096932,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 15402096933,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 15402096935,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 23350895997,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998931,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998930,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998928,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715999000,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998998,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998997,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998996,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998995,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998993,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715998991,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715999112,
+          "status": {
+            "Ok": null
+          }
+        },
+        {
+          "confirmationStatus": "finalized",
+          "confirmations": null,
+          "err": null,
+          "slot": 40715999225,
+          "status": {
+            "Ok": null
+          }
+        }
+      ],
+      "layout": [
+        {
+          "width": 1440,
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "overflow": false
+        }
+      ],
+      "browserErrors": []
+    }
+  },
+  "screenshots": [
+    {
+      "flow": "sandbox",
+      "width": 1440,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-sandbox-2026-09-18-r3-sandbox-1440.png",
+      "overflow": false
+    },
+    {
+      "flow": "sandbox",
+      "width": 390,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-sandbox-2026-09-18-r3-sandbox-390.png",
+      "overflow": false
+    }
+  ],
+  "failureArtifacts": [],
+  "browserErrors": [],
+  "errors": [],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "at": "2026-09-18T04:27:38.835Z",
+  "scope": "Synthetic devnet observation refresh; no issuer event settlement",
+  "deployment": "dpl_D1JQHkwVJTcDntNh3CUGBp2GzFna",
+  "records": [
+    {
+      "status": 503,
+      "body": {
+        "status": "failed",
+        "error": "UNAVAILABLE",
+        "message": "The devnet test service is temporarily unavailable."
+      }
+    }
+  ]
+}

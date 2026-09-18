@@ -1,0 +1,31 @@
+{
+  "at": "2026-09-18T04:36:56.081Z",
+  "deployment": "dpl_CcRYJ7VrxaN63NwHtqbytvvgzEVD",
+  "status": 202,
+  "body": {
+    "status": "pending",
+    "results": [
+      {
+        "signatures": [
+          "2nmcia7s1yF9aNxDYcRs6k4oVfVWJ83vofWcjomAV8dxKnHG2WqY7gbb8bRAKUz1uY4noAUMAVsmmTAU1CNv5sPs"
+        ],
+        "status": "confirmed",
+        "message": "Synthetic observation refreshed."
+      },
+      {
+        "signatures": [
+          "KJfdqtFPbZRgWsFQ2h8a2FMuHPeeER4Ao9QfNwF2EmQAyXQWkSmerNrxsaADyokT9KMXe2XeZo5sBDM6ZQwifP9"
+        ],
+        "status": "confirmed",
+        "message": "Synthetic observation refreshed."
+      },
+      {
+        "signatures": [
+          "2rc2GRdLptqEzb5153muKDhp9qvtJq4zyaPnA1BEtJyGBrGCbeZGdZ3HdJZLwSSuEVFNBWXSbrVT6WUC2p7kF7BG"
+        ],
+        "status": "pending",
+        "message": "The recorded devnet operation is pending confirmation."
+      }
+    ]
+  }
+}

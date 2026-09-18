@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-18T05:33:27.746Z",
+  "completedAt": "2026-09-18T05:34:13.831Z",
+  "targetOrigin": "https://dividendx-stocklana.vercel.app",
+  "requestedFlow": "isolation",
+  "status": "pass",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-18T05:33:28.098Z",
+      "name": "browser launched",
+      "flows": [
+        "isolation"
+      ]
+    },
+    {
+      "at": "2026-09-18T05:33:28.101Z",
+      "name": "isolation: start two simultaneous cookie visitors"
+    },
+    {
+      "at": "2026-09-18T05:33:38.108Z",
+      "name": "isolation: advance only visitor A"
+    },
+    {
+      "at": "2026-09-18T05:33:44.685Z",
+      "name": "isolation: wait for mandatory reset cooldown",
+      "milliseconds": 18602
+    },
+    {
+      "at": "2026-09-18T05:34:03.289Z",
+      "name": "isolation: reset visitor A exactly once"
+    },
+    {
+      "at": "2026-09-18T05:34:13.831Z",
+      "name": "all requested flows passed"
+    }
+  ],
+  "flows": {
+    "isolation": {
+      "status": "pass",
+      "accountIsolation": {
+        "visitorA": [
+          true,
+          false
+        ],
+        "visitorB": [
+          false,
+          true
+        ],
+        "sameGenesisHash": false
+      },
+      "visitorA": {
+        "initialSession": {
+          "schemaVersion": 1,
+          "kind": "wallet",
+          "status": "ready",
+          "sessionId": "9a5488874ddc48a6c3952f473cb2c7ed",
+          "runtimeId": "9e6c1b37-db52-4887-b826-47665342a818",
+          "expiresAt": "2026-09-18T05:48:29.792Z",
+          "runtimeUrl": "/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed",
+          "error": null
+        },
+        "initialManifest": {
+          "schemaVersion": 1,
+          "kind": "surfnet",
+          "genesisHash": "EffWCfh8ndY7Z4qnbujKZw5W5kN6Y2vi2TxTjTwgcPZY",
+          "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+          "deploymentDomainHex": "7072fef087d89a426a56388ac7741fb215120d36a54536c1bdd7120e2ad220be",
+          "runtimeId": "9e6c1b37-db52-4887-b826-47665342a818",
+          "clockControl": true,
+          "assets": [
+            {
+              "id": "xstocks-test-kox",
+              "company": "Coca-Cola",
+              "symbol": "TestKOx",
+              "issuerLabel": "xStocks test profile",
+              "issuerIdHex": "9bfa57072ed4cb76c227a587977b98dccd4c0656b8cb48f8ecd3058e6e77e793",
+              "decimals": 8,
+              "collateralMint": "EbKR3gseD78YDVvU4fWq7NZx4UmSqCX4eTMsgfMV6pY1",
+              "assetPolicy": "6n5g4WFLmqEr37ozUZUg6omSrNMRLc2AfBt5zXnPqspu",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "AoCcUo3vzNWxNAzkBqD8xRCSw7ga6B9NuPLxZLehPoKZ",
+                  "accumulator": "GZuYK4yjtHNLQWNpzUunvH45QMgqnED1RAbmBSjHTjrF",
+                  "ptMint": "DgejL4z74umQEdYsD3x6fr7qTufDNXppEemzVPvCC44a",
+                  "drMint": "7LhR68RnDH5LGSnUedNkUnuCie84cjTaVNbBCjBeeeQS",
+                  "vault": "7bKqAwn62fX9AFZNhxB75NUvhci7q6qENQqHjgrbBtCs"
+                }
+              ]
+            },
+            {
+              "id": "backpack-test-mu",
+              "company": "Micron",
+              "symbol": "TestMU",
+              "issuerLabel": "Backpack/Trek test profile",
+              "issuerIdHex": "a2ae3a3794e56e0a23a8477318adafc616ea460951bc5f1c4c6d1f053ac02c82",
+              "decimals": 6,
+              "collateralMint": "ADdCq6aMvy7rucmdmBMdKsvdgdqdzE6bPLecjJAGbUgj",
+              "assetPolicy": "BNnMA1NsB19HF5YRW1sk7bkUmRXVXUpXbCSYMLRFXTzt",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "4dVgPVNndDGqeSMuJeZ1AMwwrQTMCHema4D49L1DkAGd",
+                  "accumulator": "CpebEvpLqXooruy5wzHEijYvsL4vHekbmE1XmzDY2Vxz",
+                  "ptMint": "2rdBss8GuFvu7ZYAmNapRqo1XeKPRrjdhQARxkE4sbAo",
+                  "drMint": "5HrrbWUS5ncxng7786HLLGQ9DydFSBiTpTp7ayyNHiYh",
+                  "vault": "GGpLJFCm2NKFb6aVFRUjHpdyqC7Zodz6GQzWMboHhciF"
+                }
+              ]
+            },
+            {
+              "id": "ondo-test-ibm",
+              "company": "IBM",
+              "symbol": "TestIBMon",
+              "issuerLabel": "Ondo test profile",
+              "issuerIdHex": "37fc503da129332bd6bfd034830ff7cee11754dc37e2dd8c683ff504701966d8",
+              "decimals": 9,
+              "collateralMint": "4iarc3hwixZk4f79VJx3PAnRPKnuc2kui5medgVbS7Am",
+              "assetPolicy": "AygYXuWuoe9ncjcqX2EkB8YC41G9YiaoXSgDkaZn1fX",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "EPyD1TEFXXrz2wqVcvtNScVAgSEbGTK3NikscsZi7yBd",
+                  "accumulator": "Dgav2RGqNYwcTLJnLpj9Vtv2ry1creoE5Span2FHEzpA",
+                  "ptMint": "3H1dUAtgcQ53TnsTwfxUoDvCZf8XNa5KS5PTGEUw6kv2",
+                  "drMint": "5RXbmWqnmJRC9E7irndJdcnZX92dLLQY9rskky3d4thM",
+                  "vault": "DeyRF77pQ2UFagA3aXrk8TsJbHWuwBZEtVi2VmFh2Ffn"
+                }
+              ]
+            }
+          ],
+          "hostedSessionId": "9a5488874ddc48a6c3952f473cb2c7ed",
+          "expiresAt": "2026-09-18T05:48:29.792Z",
+          "rpcUrl": "/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc"
+        },
+        "advanceAction": {
+          "label": "visitor A start year",
+          "signatures": [
+            "66p58FL9HrHcjGCX5Q1X3ni4R2kQJHdcYN34VAzkEHeptwp62nQqz66Mp8iqjFJJMPcJPAWQXCg5725MZuE3Xg3a",
+            "3s6SgL8vjv9rmxj2XjBCb3wjBYfWEdeQGtaZdHmWJAeZfgGn3wM4qEMvSNum9BNFfKE256NEbpdtMTCqfJW1scqK",
+            "2iW2hno34Kdpb6x1LT2FToVT7ZrcqPRYjmLadCWGYWSWFu1JdC1j1Nfvc96df5N3ZJhcWZnxnJTZD6sbT2A5rmvE"
+          ],
+          "displayedReceipts": [
+            {
+              "label": "date control: start-year",
+              "detail": "Slot 9181295879 · confirmed",
+              "signature": "66p58FL9HrHcjGCX5Q1X3ni4R2kQJHdcYN34VAzkEHeptwp62nQqz66Mp8iqjFJJMPcJPAWQXCg5725MZuE3Xg3a",
+              "explorer": null
+            },
+            {
+              "label": "date control: start-year",
+              "detail": "Slot 9181295878 · confirmed",
+              "signature": "3s6SgL8vjv9rmxj2XjBCb3wjBYfWEdeQGtaZdHmWJAeZfgGn3wM4qEMvSNum9BNFfKE256NEbpdtMTCqfJW1scqK",
+              "explorer": null
+            },
+            {
+              "label": "date control: start-year",
+              "detail": "Slot 9181295876 · confirmed",
+              "signature": "2iW2hno34Kdpb6x1LT2FToVT7ZrcqPRYjmLadCWGYWSWFu1JdC1j1Nfvc96df5N3ZJhcWZnxnJTZD6sbT2A5rmvE",
+              "explorer": null
+            }
+          ],
+          "uiReceiptLimit": 8
+        },
+        "advanceStatuses": [
+          {
+            "confirmationStatus": "finalized",
+            "confirmations": null,
+            "err": null,
+            "slot": 9181295879,
+            "status": {
+              "Ok": null
+            }
+          },
+          {
+            "confirmationStatus": "finalized",
+            "confirmations": null,
+            "err": null,
+            "slot": 9181295878,
+            "status": {
+              "Ok": null
+            }
+          },
+          {
+            "confirmationStatus": "finalized",
+            "confirmations": null,
+            "err": null,
+            "slot": 9181295876,
+            "status": {
+              "Ok": null
+            }
+          }
+        ],
+        "replacementSession": {
+          "schemaVersion": 1,
+          "kind": "wallet",
+          "status": "ready",
+          "sessionId": "b6a60433e374e34727e2f912d6b9cd44",
+          "runtimeId": "bdca6fb1-4baa-48e0-9c78-58beef97947e",
+          "expiresAt": "2026-09-18T05:49:05.580Z",
+          "runtimeUrl": "/api/sandbox/wallet/b6a60433e374e34727e2f912d6b9cd44",
+          "error": null
+        },
+        "replacementManifest": {
+          "schemaVersion": 1,
+          "kind": "surfnet",
+          "genesisHash": "Dde1ARoRRs1gUKuG3CQ3S2ViSNGL1QLCER8UUvwkUZ3F",
+          "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+          "deploymentDomainHex": "cf9b92d3a01f3f1eb1e1f5d3685b0e68026cdb8cfbe26e460b5cd51f6df5de81",
+          "runtimeId": "bdca6fb1-4baa-48e0-9c78-58beef97947e",
+          "clockControl": true,
+          "assets": [
+            {
+              "id": "xstocks-test-kox",
+              "company": "Coca-Cola",
+              "symbol": "TestKOx",
+              "issuerLabel": "xStocks test profile",
+              "issuerIdHex": "4e7a7b8568f0db084161f2c35e85cfa33450b41ac6540dc940e2c5323613a4d1",
+              "decimals": 8,
+              "collateralMint": "GREUKUZWmgSgBvvp9EP79z9FAZqBtVx5BmPCTtk1jBYt",
+              "assetPolicy": "75Au47EVhzypDT38dyQkwdRizyzGrBpbgkRzMGunBmfQ",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "72YDCJ6wP9UzUTDEq4QHxk3GE5SsNs9iznSJWEMKudr",
+                  "accumulator": "HF46CD6frNXnbJdFwh5KhCeJh6KN98FCwFFC9WsW7pg1",
+                  "ptMint": "32AdcErowutZQGMxZHKfwLvSB52RXEJ8rRGj7oECMKxg",
+                  "drMint": "3DkvSrkdKVbmckEeXbnJR28qeotGwuWRmYtZoKN1DU5q",
+                  "vault": "CWoknEZsFCeY1c9y3D1kGVioCiMpNng8EyUmcho8Z3ga"
+                }
+              ]
+            },
+            {
+              "id": "backpack-test-mu",
+              "company": "Micron",
+              "symbol": "TestMU",
+              "issuerLabel": "Backpack/Trek test profile",
+              "issuerIdHex": "5c536ef9bbeb132939e7e6b433783e66752396c4925dd97f0e1c58783fb26cf3",
+              "decimals": 6,
+              "collateralMint": "GFHAWpTbnZfBn8iUKYTvSABzrAuSEWwy9wJZegeFmKEx",
+              "assetPolicy": "BAdE7pQZxS9vDyRp5aeLbtgqETiYeYeMm8kQKqkAFsax",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "E5pY2uaDS9Gf3nXrL3dYazea5t8ACxy7oVAaDUgGrMxc",
+                  "accumulator": "Em41jFDpZxxqtMu5kk3ePcN7UVo9P6yJVqqRzMC5grUE",
+                  "ptMint": "43Hsh2RoUhuyHgTDoCFfR4hnC2ehNMrLcwZGfVVcSH4r",
+                  "drMint": "B7wtjdUnBkeaScAX9dMBqZHhY9zjRhVECZRmW8LdJ7kw",
+                  "vault": "BFtEbgcW5n25ke2QLzeabUXUbCs2CK4YohgGYj4mJRo"
+                }
+              ]
+            },
+            {
+              "id": "ondo-test-ibm",
+              "company": "IBM",
+              "symbol": "TestIBMon",
+              "issuerLabel": "Ondo test profile",
+              "issuerIdHex": "372e026be2c5066900e9c8be99759c5df38a98b95d30274f5f779773f7f26446",
+              "decimals": 9,
+              "collateralMint": "3JwmAxLihDWzKa4rCmt4ymKW6MD4RncoAa8R2JAW5DvF",
+              "assetPolicy": "AqGvMeph2b8kzJmjrVfFGdcXMJxjWzhWFiyLffaJtGAS",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "43sabiKxiokB4awYF58vjD2ArQjCAntzt1aKYgbFdbxm",
+                  "accumulator": "FACqEgdQheJgUoi5R2bNjdxW72URUihKM8rzLBdD7fbT",
+                  "ptMint": "6PL8CbDuSgptUCj63tuFMWu3VCbgnT2WiZKkdynNYmAC",
+                  "drMint": "2XhSr4tcfvyoLfEdvWFND7XyBLAVEbNVgbHxqT85wEfk",
+                  "vault": "2MABvenyfuK2UUsYfnsgBvg9AzJqSDWGyR67nMHTsvc4"
+                }
+              ]
+            }
+          ],
+          "hostedSessionId": "b6a60433e374e34727e2f912d6b9cd44",
+          "expiresAt": "2026-09-18T05:49:05.580Z",
+          "rpcUrl": "/api/sandbox/wallet/b6a60433e374e34727e2f912d6b9cd44/rpc"
+        },
+        "staleEndpointStatus": 410
+      },
+      "visitorB": {
+        "session": {
+          "schemaVersion": 1,
+          "kind": "wallet",
+          "status": "ready",
+          "sessionId": "04abb22db0301805c7a55ee9331e81b4",
+          "runtimeId": "c7603aee-852e-483b-bc96-4ce5a1c69527",
+          "expiresAt": "2026-09-18T05:48:29.945Z",
+          "runtimeUrl": "/api/sandbox/wallet/04abb22db0301805c7a55ee9331e81b4",
+          "error": null
+        },
+        "manifest": {
+          "schemaVersion": 1,
+          "kind": "surfnet",
+          "genesisHash": "23Q69E8mxparyoF3UGDMY9MuHhZRLsXHun7hB6PT5zSD",
+          "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+          "deploymentDomainHex": "c9de1358d1d3b9bf109f415cd127f9680d3699b647e42ea42596de413accf15c",
+          "runtimeId": "c7603aee-852e-483b-bc96-4ce5a1c69527",
+          "clockControl": true,
+          "assets": [
+            {
+              "id": "xstocks-test-kox",
+              "company": "Coca-Cola",
+              "symbol": "TestKOx",
+              "issuerLabel": "xStocks test profile",
+              "issuerIdHex": "2240d4cf18bf5469f91faca6fc1d1988992d33161671ec88ccb98394623d63ec",
+              "decimals": 8,
+              "collateralMint": "WgMDLbzTFp4KiKy2CBoq6o4anjc59TeCL2Wkty56bzD",
+              "assetPolicy": "HQBCHssWefaNRi3MP9vUGduUfowzCJcou2vtRZAcTZX9",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "9DZkWwdWEKqWykstAffs6XFcixaym72A9RcLrb8VmVAU",
+                  "accumulator": "4prKFsPwh6CszqjpYFX4yAziTJMk75boDYzNZLsKA5Kd",
+                  "ptMint": "ANrD5vVuBVRYNnhUV6LDVHT6vEjE198ckH71eshcnZU",
+                  "drMint": "2KjSpTWAKXR4Z9PYPULFEpSsukgQviWg5FT7cQwYU7df",
+                  "vault": "2uqFg3xRg7TgtjKMaAeEE1jiGUiVexPD8BXH5DkcMZAx"
+                }
+              ]
+            },
+            {
+              "id": "backpack-test-mu",
+              "company": "Micron",
+              "symbol": "TestMU",
+              "issuerLabel": "Backpack/Trek test profile",
+              "issuerIdHex": "6e35f153542773c47621fa15a414deecda94bf4f2afe05cb8064d6cb5c3d11ad",
+              "decimals": 6,
+              "collateralMint": "DXjJkujaityLtSCTrEf5uqsKPwm94syyTgUYrqyHPyjG",
+              "assetPolicy": "4zunyyvpvwTksUti2iq661D7VjK27RgqzaMK1p1Agc1F",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "HBDg3vGhTnM69q8bjrTw2xXtovxGFNiDBoMqQBRWYZpr",
+                  "accumulator": "C3kddPjRUWWcvou53mf8jr1rU7j3UwddYVZzepBEEXSQ",
+                  "ptMint": "36ePvVGfoRQr6SV7yzXkEv23wZpQjH8pEj963wVM2qcS",
+                  "drMint": "C8xXVtrUfChskiNwLLrzAphRzV1KiazreWasNP5irigM",
+                  "vault": "3aj6YqJahaWSRax4gMWAw6x9Zvc795Beytpp6DzsTmx1"
+                }
+              ]
+            },
+            {
+              "id": "ondo-test-ibm",
+              "company": "IBM",
+              "symbol": "TestIBMon",
+              "issuerLabel": "Ondo test profile",
+              "issuerIdHex": "dee721c23fc119e75450fb8f67ea2ef359b5bd4da209f9d2d71d045194c96d8b",
+              "decimals": 9,
+              "collateralMint": "8wwBKPzVHpu8LXr3XDDQVB19uQfFxK4SjD4noKxruXwi",
+              "assetPolicy": "8qWZ8PNaLMYQU35RLtdUd3fi8Rp1aCSDFfwyXw2p7KB2",
+              "series": [
+                {
+                  "year": 2027,
+                  "address": "qtbMNt6Hw4E43MeHNLHeqGJLnE7UCPkMCrbmMtfSqw2",
+                  "accumulator": "AAsaoSmagDsnHx56FjRyzABAUd5TgxdZQF89Jre9h3DB",
+                  "ptMint": "8YbqN6zPbjN4C48hoWCbrqGrwYXy2NVsihrDiMu7SjtN",
+                  "drMint": "6d3MeHd2ELMA6bSCugGmgBza7f22sdxfXNfURnJLAB8G",
+                  "vault": "5KFT93NLWTp2mQJyfVz5YhZ71k9pTdMufLE4XES61Yg5"
+                }
+              ]
+            }
+          ],
+          "hostedSessionId": "04abb22db0301805c7a55ee9331e81b4",
+          "expiresAt": "2026-09-18T05:48:29.945Z",
+          "rpcUrl": "/api/sandbox/wallet/04abb22db0301805c7a55ee9331e81b4/rpc"
+        },
+        "phaseBefore": "Deposits open",
+        "phaseAfter": "Deposits open",
+        "balancesBefore": [
+          "0",
+          "0",
+          "0"
+        ],
+        "balancesAfter": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "layout": [
+        {
+          "width": 1440,
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "overflow": false
+        }
+      ],
+      "expectedStaleSessionResponses": [
+        {
+          "at": "2026-09-18T05:34:04.170Z",
+          "type": "console",
+          "message": "Failed to load resource: the server responded with a status of 410 ()",
+          "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc"
+        },
+        {
+          "at": "2026-09-18T05:34:04.207Z",
+          "type": "console",
+          "message": "Failed to load resource: the server responded with a status of 410 ()",
+          "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc"
+        },
+        {
+          "at": "2026-09-18T05:34:04.207Z",
+          "type": "http",
+          "status": 410,
+          "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc",
+          "rpcMethods": [
+            "getGenesisHash"
+          ],
+          "message": "Sandbox session has expired."
+        },
+        {
+          "at": "2026-09-18T05:34:04.208Z",
+          "type": "http",
+          "status": 410,
+          "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc",
+          "rpcMethods": [
+            "getAccountInfo"
+          ],
+          "message": "Sandbox session has expired."
+        }
+      ],
+      "browserErrors": []
+    }
+  },
+  "screenshots": [
+    {
+      "flow": "isolation",
+      "width": 1440,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-isolation-2026-09-18-r3-isolation-1440.png",
+      "overflow": false
+    },
+    {
+      "flow": "isolation",
+      "width": 390,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-browser-isolation-2026-09-18-r3-isolation-390.png",
+      "overflow": false
+    }
+  ],
+  "failureArtifacts": [],
+  "browserErrors": [
+    {
+      "at": "2026-09-18T05:34:04.170Z",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 410 ()",
+      "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc"
+    },
+    {
+      "at": "2026-09-18T05:34:04.207Z",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 410 ()",
+      "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc"
+    },
+    {
+      "at": "2026-09-18T05:34:04.207Z",
+      "type": "http",
+      "status": 410,
+      "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc",
+      "rpcMethods": [
+        "getGenesisHash"
+      ],
+      "message": "Sandbox session has expired."
+    },
+    {
+      "at": "2026-09-18T05:34:04.208Z",
+      "type": "http",
+      "status": 410,
+      "url": "https://dividendx-stocklana.vercel.app/api/sandbox/wallet/9a5488874ddc48a6c3952f473cb2c7ed/rpc",
+      "rpcMethods": [
+        "getAccountInfo"
+      ],
+      "message": "Sandbox session has expired."
+    }
+  ],
+  "errors": [],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}

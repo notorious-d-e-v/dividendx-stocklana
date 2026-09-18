@@ -1,0 +1,34 @@
+{
+  "schema": "dividendx-hosted-release-v1",
+  "at": "2026-09-18T05:37:33.270Z",
+  "origin": "https://dividendx-stocklana.vercel.app",
+  "deploymentId": "dpl_5W46MCQ7Fq3FngxgNB9GN9ZEwF9o",
+  "immutableUrl": "https://dividendx-stocklana-aujgzoxf0-payai.vercel.app",
+  "sandboxSnapshotId": "snap_cwWXbrpD6HwniFIXD0cB8mzWGrwh",
+  "proofs": {
+    "devnet": "hosted-browser-devnet-2026-09-18-r3.json",
+    "sandbox": "hosted-browser-sandbox-2026-09-18-r3.json",
+    "guided": "hosted-browser-guided-2026-09-18.json",
+    "isolation": "hosted-browser-isolation-2026-09-18-r3.json"
+  },
+  "devnetFinality": "hosted-browser-devnet-finalized-2026-09-18.json",
+  "guidedRpc": "hosted-guided-chain-verification-2026-09-18.json",
+  "expiry": "hosted-session-natural-expiry-2026-09-18.json",
+  "checks": {
+    "rootTests": 95,
+    "browserTests": 60,
+    "brokerTests": 17,
+    "gatewayTests": 17,
+    "hostedDevnetTests": 36,
+    "typecheck": "passed",
+    "productionBuild": "passed"
+  },
+  "boundaries": [
+    "synthetic test collateral only",
+    "public devnet uses real 2027 calendar",
+    "separate isolated 15-minute sandbox chains",
+    "temporary-wallet browser acceptance; installed extensions unverified",
+    "qualified issuer settlement blocked",
+    "scheduled fresh cron bucket remains follow-through"
+  ]
+}

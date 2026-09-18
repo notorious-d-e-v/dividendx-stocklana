@@ -1,0 +1,12 @@
+{
+  "schema": "dividendx-natural-hosted-expiry-v1",
+  "at": "2026-09-18T05:27:18.494Z",
+  "sessionId": "8f4453eca53a03bfb3707fee5c06d7c3",
+  "expiresAt": "2026-09-18T05:26:32.774Z",
+  "providerBeforeCleanup": "stopped",
+  "brokerStatus": "expired",
+  "sameSessionId": true,
+  "oldManifestStatus": 410,
+  "providerAfterCleanup": "missing",
+  "boundary": "real provider hard expiry, authenticated operator broker read; no new chain created"
+}

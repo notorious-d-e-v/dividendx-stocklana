@@ -1,0 +1,78 @@
+{
+  "at": "2026-09-18T04:38:52.895Z",
+  "deployment": "dpl_CcRYJ7VrxaN63NwHtqbytvvgzEVD",
+  "status": 200,
+  "body": {
+    "status": "confirmed",
+    "results": [
+      {
+        "signatures": [
+          "2nmcia7s1yF9aNxDYcRs6k4oVfVWJ83vofWcjomAV8dxKnHG2WqY7gbb8bRAKUz1uY4noAUMAVsmmTAU1CNv5sPs"
+        ],
+        "status": "confirmed",
+        "message": "Synthetic observation refreshed."
+      },
+      {
+        "signatures": [
+          "KJfdqtFPbZRgWsFQ2h8a2FMuHPeeER4Ao9QfNwF2EmQAyXQWkSmerNrxsaADyokT9KMXe2XeZo5sBDM6ZQwifP9"
+        ],
+        "status": "confirmed",
+        "message": "Synthetic observation refreshed."
+      },
+      {
+        "signatures": [
+          "2rc2GRdLptqEzb5153muKDhp9qvtJq4zyaPnA1BEtJyGBrGCbeZGdZ3HdJZLwSSuEVFNBWXSbrVT6WUC2p7kF7BG"
+        ],
+        "status": "confirmed",
+        "message": "Synthetic observation refreshed."
+      }
+    ]
+  },
+  "identicalRepeat": true,
+  "statuses": [
+    {
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 500157786,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 500160927,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 500164277,
+      "status": {
+        "Ok": null
+      }
+    }
+  ],
+  "policies": [
+    {
+      "symbol": "TestKOx",
+      "assetPolicy": "5JJ1VkpHgoht79SxHw2Q8Q6hhLyDpoerWGPABkJrzj9d",
+      "observationValidUntil": "1789748337"
+    },
+    {
+      "symbol": "TestMU",
+      "assetPolicy": "13pb6kztsvThPUqJZVUhRVMCyxHvetzQnXDobtifS8FJ",
+      "observationValidUntil": "1789748856"
+    },
+    {
+      "symbol": "TestIBMon",
+      "assetPolicy": "8g7stFdZekmk2GPcpgyFMmwdPnCynnF6bQrzDmxFpbn4",
+      "observationValidUntil": "1789749414"
+    }
+  ]
+}

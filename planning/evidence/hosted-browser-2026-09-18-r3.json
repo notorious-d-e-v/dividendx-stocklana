@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-18T04:36:56.723Z",
+  "completedAt": "2026-09-18T04:37:05.578Z",
+  "targetOrigin": "https://dividendx-stocklana.vercel.app",
+  "requestedFlow": "all",
+  "status": "failed",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-18T04:36:57.028Z",
+      "name": "browser launched",
+      "flows": [
+        "sandbox",
+        "guided",
+        "devnet",
+        "isolation"
+      ]
+    },
+    {
+      "at": "2026-09-18T04:36:57.029Z",
+      "name": "sandbox: create isolated visitor session"
+    }
+  ],
+  "flows": {
+    "sandbox": {
+      "status": "running",
+      "session": {
+        "schemaVersion": 1,
+        "kind": "wallet",
+        "status": "ready",
+        "sessionId": "dbb8ac01323da8b5c8accd95b15ef707",
+        "runtimeId": "3aaa9046-f0f2-4c18-af4d-f13099ee4a3c",
+        "expiresAt": "2026-09-18T04:52:01.547Z",
+        "runtimeUrl": "/api/sandbox/wallet/dbb8ac01323da8b5c8accd95b15ef707",
+        "error": null
+      }
+    }
+  },
+  "screenshots": [],
+  "browserErrors": [],
+  "errors": [
+    {
+      "at": "2026-09-18T04:37:05.578Z",
+      "stage": "sandbox: create isolated visitor session",
+      "url": "https://dividendx-stocklana.vercel.app/sandbox/",
+      "message": "RPC getGenesisHash returned HTTP 503: Session service is temporarily unavailable."
+    }
+  ],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}

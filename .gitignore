@@ -25,3 +25,6 @@ presentation/build/rendered/
 presentation/build/rendered-v*/
 presentation/build/contact-sheet.png
 presentation/build/**/finalizer/*.inspect.ndjson
+
+# Vercel project linkage and deployment cache are machine-local.
+.vercel/

@@ -1,0 +1,27 @@
+# Upload source and reviewed public fixtures only. Runtime images use a separate
+# allowlisted staging script; no local toolchain, signer or ledger belongs here.
+.git
+.local-tools
+.local-ledger
+.agents
+.codex
+node_modules
+**/node_modules
+**/dist
+**/coverage
+**/test-results
+**/playwright-report
+target
+.env
+.env.*
+**/.env
+**/.env.*
+.secrets
+secrets
+**/*-keypair.json
+**/*.pem
+**/*.key
+**/*.log
+apps/web/qa
+planning/evidence
+presentation/build

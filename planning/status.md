@@ -1,6 +1,6 @@
 # Current status
 
-Updated 18 September 2026 after the [hosting foundation](hosting-foundation-review.md): complete native Vercel execution, a persistent 2027 devnet registry and devnet-aware wallet configuration. Next: isolated visitor sessions, durable faucet quotas and public release verification. Live issuer settlement remains incomplete; deposits still close at year-start.
+Updated 18 September 2026 after [public hosting acceptance](hosting-release-review.md) at [dividendx-stocklana.vercel.app](https://dividendx-stocklana.vercel.app). Real-calendar devnet, private accelerated wallet sandboxes and separate guided sandboxes are live. Actual temporary-wallet devnet, full annual sandbox redemption, nine-action guided, simultaneous two-visitor isolation/reset and natural-expiry journeys pass. Live issuer settlement remains incomplete; deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -18,8 +18,8 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Product | Annual Market / Split / Redeem at `/`, with isolated 2027/2028 series and distinct collecting, year-ended and finalized states |
 | Wallet app | `/app/`: actual local wallet signing, custody, PT/DR transfers, recombination and independent redemption; [acceptance](wallet-review.md) |
 | Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
-| Hosting foundation | Native Vercel and Docker execution pass: 104 wallet receipts and 36 guided transactions; portable clean build context; public session service still pending |
-| Persistent devnet | Three synthetic 2027 profiles, separate test authorities, finalized setup and CLI split/recombine proof; read-only manifest service and disabled HTTP faucet |
+| Public hosting | Canonical Vercel site accepted with real-calendar `/app/`, isolated 15-minute `/sandbox/` and separately isolated `/demos/`; devnet, both single-session journeys, two-visitor reset/isolation and natural expiry pass |
+| Persistent devnet | Three synthetic 2027 profiles, separate test authorities, finalized setup and public temporary-wallet grant/split/recombine proof; durable bounded hosted faucet enabled |
 | Issuer readers | Typed observations across the selected 15 identities, exact source records, private snapshots and explicit data gaps; [acceptance](issuer-reader-review.md) |
 | Issuer qualification | Offline unsigned dossiers check identities, revisions, candidate dates and current mint evidence; every dossier retains unresolved settlement gates; [acceptance](issuer-qualification-review.md) |
 | Captured mint custody | Unchanged compiled program passes all 15 actual mint configurations locally with synthetic funding/events; [acceptance](issuer-custody-review.md) |
@@ -29,7 +29,7 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; historical KOx and Backpack MU factors |
 | Research | [Annual conventions and fixture gaps](research/annual-dividend-series.md), extending the [prior-art review](research/prior-art-review.md) |
 
-The two previews remain simulated. The separate `/app/` wallet application executes actual custody, PT/DR minting, transfers and redemption through the compiled SBF program on an offline local network. The temporary wallet signs in browser memory; installed extension wallets have not been verified. Public devnet now has the exact accepted DividendX ELF and the test-only Raydium pool `2yhUcyx6jawJo9z5YMqFQgmxmvvE6Qz1g1zmDQjVH5Cm`, and that public flow remains an isolated CLI proof. The separate `/demos/` page now executes liquidity, purchase, withdrawal and independent redemption on its own offline chain through port 4181. Core Split/Redeem and the running wallet runtime on port 4180 are preserved. Controlled journal inputs and every AMM asset are synthetic; issuer observations do not produce settlement attestations.
+The two previews remain simulated. On localhost, `/app/` executes actual custody, PT/DR minting, transfers and redemption through the compiled SBF program on an offline network, while `/demos/` uses its separate port-4181 runtime. On the public site, `/app/` uses the unchanged ELF on real-calendar devnet; `/sandbox/` and `/demos/` each create a separate private 15-minute VM. Temporary wallet keys stay in browser memory, and installed extension wallets have not been verified. Core Split/Redeem and both local runtimes are preserved. Controlled journal inputs, hosted balances and every AMM asset are synthetic; issuer observations do not produce settlement attestations.
 
 ## Annual decisions
 
@@ -62,15 +62,16 @@ The offline qualification slice adds **14 tests**, bringing the issuer package t
 
 The captured-mint conformance slice passes **all 15 local journeys**, with identical SDK/Rust fingerprints and exact custody conservation. Current checks are **95 root tests**, **47 Rust tests**, type checking and an isolated build. Captured mint supply/authority/scale bytes are unchanged; holder funding and annual records remain synthetic. See [custody acceptance](issuer-custody-review.md).
 
-## Next: public devnet and hosted sandbox
+The hosted release retains the same core ELF and passes the production build, **95 root tests**, **60 browser tests**, **36 hosted-devnet tests**, **17 broker tests** and **17 gateway tests**. Actual production evidence records three independently finalized devnet transactions for a 10-TestKOx grant, one-unit split and recombination; 30 confirmed/finalized sandbox signatures across funding, split, four annual steps and separate PT/DR redemption, ending with zero vault/PT/DR supply; and all nine guided actions with 36 confirmed transactions. A simultaneous two-visitor run proves distinct runtime/deployment/account identities, visitor-A-only clock advance, unchanged visitor-B clock/balances, visitor-A replacement on reset and expected stale-path 410 without unexpected errors. Natural expiry stopped the provider without an operator stop, retained the same expired broker session ID and returned 410 from the old manifest; operator cleanup later removed the stopped test VM. These runs use Chromium temporary wallets and synthetic test assets, not installed-wallet, issuer-custody or mainnet proof.
 
-The user chose **real-calendar public devnet plus an online accelerated sandbox**, with no shortened devnet term or time override. Native Vercel feasibility is now verified under the [hosting foundation review](hosting-foundation-review.md). The Vercel project exists, and probe resources were removed after evidence capture; the public site is not yet released.
+## Next: release follow-through and qualified settlement
 
-1. **Host isolated visitor sessions.** Preserve the now-proven portable runtime and exact artifacts. Add a same-origin session broker, restricted RPC, creation limits, progress and expiry/reset. Verify two independent visitors; current singleton runtimes cannot simply be exposed publicly.
-2. **Finish public devnet services.** Network configuration and the persistent three-profile registry exist. Temporary-wallet production-browser acceptance passes; complete installed-extension acceptance, durable public faucet quotas and automatic synthetic profile-observation refresh. Use clearly labeled test collateral. A 2027 series closes deposits on 1 January 2027 and matures on 1 January 2028; public flows end with paired recombination.
-3. **Connect the accelerated experience.** Preserve core Split/Redeem and separate guided demos. Visitors can advance their own synthetic year and redeem both sides without affecting anyone else. A stopped chain stays expired until the visitor explicitly starts a new one.
-4. **Publish and verify.** Check desktop/mobile, clean-browser wallet flows, public receipts, sandbox redemption and failure recovery; address the existing CI scope blocker. The user plans issuer outreach after a usable live site exists.
-5. **Continue qualified settlement and submission work.** Resolve the [remaining source semantics](research/issuer-public-policy-check-2026-09-18.md), then specify an automated attestor under a reviewed policy. The [unsigned review tool](issuer-qualification-review.md) stays blocked; year-end alone never authorizes finalization. Refresh versioned submission materials around actual functionality and verify the submission form/deadline.
+The canonical site now delivers **real-calendar public devnet plus online accelerated sandboxes**, with no shortened devnet term or public time override. The session broker, restricted same-origin gateway, durable quotas, bounded public faucet and synthetic observation refresh are implemented. Operational limits are four active VM reservations, 100 starts per UTC day, six per visitor, 30 per observed IP and a 30-second creation cooldown; each VM hard-expires after 15 minutes. The hosted faucet has a finite 1 SOL lifetime endowment, and the six-hour cron refreshes only frozen synthetic profiles.
+
+1. **Run visitor testing and outreach preparation.** Review the live copy and flows with outside users, confirm public support/rollback procedures and keep test-asset boundaries explicit.
+2. **Check an installed wallet.** Current production acceptance uses fresh in-memory temporary wallets. Verify one supported installed Wallet Standard extension separately without using a default or valuable key.
+3. **Continue qualified settlement work.** Obtain external answers from Ondo/Backpack and resolve the [remaining source semantics](research/issuer-public-policy-check-2026-09-18.md). The [unsigned review tool](issuer-qualification-review.md) stays blocked; year-end alone never authorizes finalization.
+4. **Refresh versioned submission materials.** Update the deck/video/submission copy around verified public behavior and recheck the signed-in submission form and deadline. The GitHub OAuth `workflow`-scope blocker still leaves CI as an inactive template.
 
 No redesign, wider issuer audit, custom AMM, bridge or reward token is required for this next phase.
 

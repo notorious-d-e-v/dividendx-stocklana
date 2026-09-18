@@ -18,15 +18,25 @@ export interface RuntimeConfig {
   runtimeUrl: string;
   manifestUrl: string;
   rpcUrl?: string;
+  hostedSessionId?: string;
+  expectedRuntimeId?: string;
+  expiresAt?: string;
+  onExpired?: (message?: string) => void;
+  hostedSite?: boolean;
 }
 
 export class RuntimeRequestError extends Error {
   constructor(message: string, readonly result?: unknown) { super(message); this.name = 'RuntimeRequestError'; }
 }
 
+function serviceLabel(config: RuntimeConfig): string {
+  return config.network === 'devnet' ? 'Devnet service' : config.network === 'sandbox' ? 'Hosted sandbox' : 'Local runtime';
+}
+
 interface RpcFetchOptions {
   retryTransient?: boolean;
   scheduler?: RequestScheduler;
+  onExpired?: (message?: string) => void;
 }
 
 interface SlotWaiter {
@@ -36,18 +46,21 @@ interface SlotWaiter {
   abort: () => void;
 }
 
-class RequestScheduler {
+export class RequestScheduler {
   private active = 0;
   private readonly waiters: SlotWaiter[] = [];
+  private nextStartAt = 0;
+  private cooldownUntil = 0;
+  private timer: ReturnType<typeof globalThis.setTimeout> | undefined;
 
-  constructor(private readonly limit: number) {}
+  constructor(private readonly limit: number, private readonly minimumStartIntervalMs = 0) {
+    if (!Number.isInteger(limit) || limit < 1 || !Number.isFinite(minimumStartIntervalMs) || minimumStartIntervalMs < 0) {
+      throw new Error('Request scheduler limits are invalid.');
+    }
+  }
 
   acquire(signal: AbortSignal): Promise<() => void> {
     if (signal.aborted) return Promise.reject(signal.reason);
-    if (this.active < this.limit) {
-      this.active += 1;
-      return Promise.resolve(this.releaseOnce());
-    }
     return new Promise((resolve, reject) => {
       const waiter: SlotWaiter = {
         signal, resolve, reject,
@@ -55,11 +68,19 @@ class RequestScheduler {
           const index = this.waiters.indexOf(waiter);
           if (index >= 0) this.waiters.splice(index, 1);
           reject(signal.reason);
+          this.advance();
         },
       };
       signal.addEventListener('abort', waiter.abort, { once: true });
       this.waiters.push(waiter);
+      this.advance();
     });
+  }
+
+  defer(delayMs: number): void {
+    if (!Number.isFinite(delayMs) || delayMs <= 0) return;
+    this.cooldownUntil = Math.max(this.cooldownUntil, Date.now() + delayMs);
+    this.advance();
   }
 
   private releaseOnce(): () => void {
@@ -73,17 +94,24 @@ class RequestScheduler {
   }
 
   private advance(): void {
+    if (this.timer !== undefined) { globalThis.clearTimeout(this.timer); this.timer = undefined; }
     while (this.active < this.limit && this.waiters.length > 0) {
+      const waitMs = Math.max(this.nextStartAt, this.cooldownUntil) - Date.now();
+      if (waitMs > 0) {
+        this.timer = globalThis.setTimeout(() => { this.timer = undefined; this.advance(); }, waitMs);
+        return;
+      }
       const waiter = this.waiters.shift()!;
       waiter.signal.removeEventListener('abort', waiter.abort);
       if (waiter.signal.aborted) { waiter.reject(waiter.signal.reason); continue; }
       this.active += 1;
+      this.nextStartAt = Date.now() + this.minimumStartIntervalMs;
       waiter.resolve(this.releaseOnce());
     }
   }
 }
 
-const devnetRequestScheduler = new RequestScheduler(2);
+const devnetRequestScheduler = new RequestScheduler(2, 400);
 
 function abortableDelay(delayMs: number, signal: AbortSignal): Promise<void> {
   if (signal.aborted) return Promise.reject(signal.reason);
@@ -100,6 +128,16 @@ async function drainRejectedResponse(response: Response): Promise<void> {
   catch { try { await response.body?.cancel(); } catch { /* The deadline may already have aborted the body. */ } }
 }
 
+function retryDelayMs(response: Response, attempt: number): number {
+  const header = response.headers.get('retry-after');
+  if (header) {
+    if (/^\d+(?:\.\d+)?$/.test(header.trim())) return Number(header) * 1_000;
+    const date = Date.parse(header);
+    if (Number.isFinite(date)) return Math.max(0, date - Date.now());
+  }
+  return 250 * 2 ** attempt;
+}
+
 export function createBoundedRpcFetch(timeoutMs = RPC_TIMEOUT_MS, label = 'Local RPC', options: RpcFetchOptions = {}): FetchFn {
   return (async (input, init) => {
     const controller = new AbortController();
@@ -114,17 +152,22 @@ export function createBoundedRpcFetch(timeoutMs = RPC_TIMEOUT_MS, label = 'Local
         const release = options.scheduler ? await options.scheduler.acquire(controller.signal) : () => undefined;
         let response: Response;
         let retry = false;
+        let backoffMs = 0;
         try {
           response = await globalThis.fetch(input, { ...init, signal: controller.signal });
-          retry = Boolean(options.retryTransient && (response.status === 429 || response.status === 503) && attempt + 1 < attempts);
-          if (retry) await drainRejectedResponse(response);
+          if (response.status === 410) options.onExpired?.('This sandbox expired or was replaced. Transaction controls were cleared.');
+          const transient = Boolean(options.retryTransient && (response.status === 429 || response.status === 503));
+          retry = transient && attempt + 1 < attempts;
+          if (transient) {
+            backoffMs = retryDelayMs(response, attempt);
+            options.scheduler?.defer(backoffMs);
+          }
+          if (retry) {
+            await drainRejectedResponse(response);
+          }
         }
         finally { release(); }
         if (!retry) return response;
-        const retryAfter = Number(response.headers.get('retry-after'));
-        const backoffMs = Number.isFinite(retryAfter) && retryAfter > 0
-          ? retryAfter * 1_000
-          : 250 * 2 ** attempt;
         await abortableDelay(backoffMs, controller.signal);
       }
       throw new Error(`${label} request exhausted its retry attempts.`);
@@ -138,17 +181,18 @@ export function createBoundedRpcFetch(timeoutMs = RPC_TIMEOUT_MS, label = 'Local
   }) as FetchFn;
 }
 
-export function createDevnetRpcFetch(timeoutMs = RPC_TIMEOUT_MS): FetchFn {
-  return createBoundedRpcFetch(timeoutMs, 'Devnet RPC', { retryTransient: true, scheduler: devnetRequestScheduler });
+export function createDevnetRpcFetch(timeoutMs = RPC_TIMEOUT_MS, scheduler = devnetRequestScheduler): FetchFn {
+  return createBoundedRpcFetch(timeoutMs, 'Devnet RPC', { retryTransient: true, scheduler });
 }
 
 export function createNetworkConnection(rpcUrl: string, network: WalletNetwork, wsUrl?: string): Connection {
   if (network === 'local') localHttpUrl(rpcUrl);
-  else devnetRpcUrl(rpcUrl);
-  return new Connection(rpcUrl, {
+  else if (network === 'devnet') devnetRpcUrl(rpcUrl);
+  const endpoint = network === 'sandbox' ? new URL(rpcUrl, globalThis.location?.origin ?? 'http://localhost').toString() : rpcUrl;
+  return new Connection(endpoint, {
     commitment: 'confirmed',
     ...(network === 'local' && wsUrl ? { wsEndpoint: localWsUrl(wsUrl, rpcUrl).toString() } : {}),
-    fetch: network === 'devnet' ? createDevnetRpcFetch() : createBoundedRpcFetch(),
+    fetch: network === 'devnet' ? createDevnetRpcFetch() : createBoundedRpcFetch(RPC_TIMEOUT_MS, network === 'sandbox' ? 'Hosted sandbox RPC' : 'Local RPC'),
     confirmTransactionInitialTimeout: RPC_TIMEOUT_MS,
     disableRetryOnRateLimit: true,
   });
@@ -223,6 +267,22 @@ export function resolveRuntimeConfig(env: Record<string, string | boolean | unde
   return { network, runtimeUrl, manifestUrl: `${runtimeUrl}/manifest`, rpcUrl };
 }
 
+export function hostedRuntimeConfig(session: { sessionId: string; runtimeId: string; runtimeUrl: string; expiresAt: string }, onExpired?: (message?: string) => void): RuntimeConfig {
+  const expectedBase = `/api/sandbox/wallet/${session.sessionId}`;
+  if (!/^[0-9a-f]{32}$/.test(session.sessionId) || session.runtimeUrl !== expectedBase) throw new Error('Hosted wallet session identity is invalid.');
+  return {
+    network: 'sandbox',
+    runtimeUrl: expectedBase,
+    manifestUrl: `${expectedBase}/manifest`,
+    rpcUrl: `${expectedBase}/rpc`,
+    hostedSessionId: session.sessionId,
+    expectedRuntimeId: session.runtimeId,
+    expiresAt: session.expiresAt,
+    onExpired,
+    hostedSite: true,
+  };
+}
+
 export const RUNTIME_CONFIG = resolveRuntimeConfig(import.meta.env ?? {});
 export const RUNTIME_URL = RUNTIME_CONFIG.runtimeUrl;
 
@@ -248,7 +308,7 @@ export function validateManifestShape(value: unknown, config = RUNTIME_CONFIG): 
       if (typeof manifest.wsUrl !== 'string') throw new Error('Local WebSocket URL is malformed.');
       localWsUrl(manifest.wsUrl, manifest.rpcUrl);
     }
-  } else {
+  } else if (config.network === 'devnet') {
     if (manifest.kind !== 'devnet') throw new Error('Runtime is not the configured Solana devnet deployment.');
     if (manifest.wsUrl !== undefined) throw new Error('Devnet manifests cannot configure a WebSocket endpoint.');
     const manifestRpc = devnetRpcUrl(manifest.rpcUrl).toString();
@@ -257,26 +317,44 @@ export function validateManifestShape(value: unknown, config = RUNTIME_CONFIG): 
     if (manifest.programId !== DIVIDENDX_PROGRAM_ID.toBase58()) throw new Error('Devnet manifest program identity does not match DividendX.');
     if (manifest.deploymentDomainHex.toLowerCase() !== DEVNET_DEPLOYMENT_DOMAIN_HEX) throw new Error('Devnet manifest deployment domain does not match the pinned deployment.');
     if (manifest.clockControl !== false) throw new Error('Public devnet cannot expose clock control.');
+  } else {
+    const expectedRpc = `${config.runtimeUrl}/rpc`;
+    if (manifest.kind !== 'surfnet') throw new Error('Hosted sandbox manifest must identify a Surfnet runtime.');
+    if (!config.hostedSessionId || manifest.hostedSessionId !== config.hostedSessionId) throw new Error('Hosted sandbox manifest session ID does not match this page.');
+    if (!config.expectedRuntimeId || manifest.runtimeId !== config.expectedRuntimeId) throw new Error('Hosted sandbox runtime ID does not match this session.');
+    if (!config.expiresAt || manifest.expiresAt !== config.expiresAt || Date.parse(manifest.expiresAt) <= Date.now()) throw new Error('Hosted sandbox expiry does not match this session.');
+    if (manifest.rpcUrl !== expectedRpc || manifest.rpcUrl !== config.rpcUrl) throw new Error('Hosted sandbox RPC path does not match this session.');
+    if (manifest.wsUrl !== undefined) throw new Error('Hosted sandbox manifests cannot configure a WebSocket endpoint.');
+    if (manifest.genesisHash === DEVNET_GENESIS_HASH) throw new Error('Hosted sandbox cannot use the public Solana devnet genesis.');
   }
   return manifest;
 }
 
 export async function loadManifest(config = RUNTIME_CONFIG): Promise<LocalManifest> {
   const response = await fetch(config.manifestUrl, { headers: { Accept: 'application/json' }, redirect: 'error', signal: AbortSignal.timeout(5_000) });
-  if (!response.ok) throw new Error(`${config.network === 'devnet' ? 'Devnet service' : 'Local runtime'} returned HTTP ${response.status}.`);
+  if (response.status === 410) config.onExpired?.('This sandbox expired or was replaced. Transaction controls were cleared.');
+  if (!response.ok) throw new Error(`${serviceLabel(config)} returned HTTP ${response.status}.`);
   return validateManifestShape(await response.json(), config);
 }
 
 export async function verifyRuntimeIdentity(manifest: LocalManifest, config = RUNTIME_CONFIG): Promise<Connection> {
   validateManifestShape(manifest, config);
   if (manifest.programId !== DIVIDENDX_PROGRAM_ID.toBase58()) throw new Error('Runtime program identity does not match DividendX.');
-  const connection = createNetworkConnection(manifest.rpcUrl, config.network, manifest.wsUrl);
+  const connection = config.network === 'sandbox'
+    ? new Connection(new URL(manifest.rpcUrl, globalThis.location?.origin ?? 'http://localhost').toString(), {
+      commitment: 'confirmed',
+      fetch: createBoundedRpcFetch(RPC_TIMEOUT_MS, 'Hosted sandbox RPC', { onExpired: config.onExpired }),
+      confirmTransactionInitialTimeout: RPC_TIMEOUT_MS,
+      disableRetryOnRateLimit: true,
+    })
+    : createNetworkConnection(manifest.rpcUrl, config.network, manifest.wsUrl);
   const [genesisHash, programInfo] = await Promise.all([
     connection.getGenesisHash(),
     connection.getAccountInfo(DIVIDENDX_PROGRAM_ID, 'confirmed'),
   ]);
   if (genesisHash !== manifest.genesisHash) throw new Error('RPC genesis does not match the runtime manifest.');
   if (config.network === 'devnet' && genesisHash !== DEVNET_GENESIS_HASH) throw new Error('RPC is not the pinned Solana devnet network.');
+  if (config.network === 'sandbox' && genesisHash === DEVNET_GENESIS_HASH) throw new Error('RPC is the public Solana devnet, not this private sandbox.');
   if (!programInfo?.executable) throw new Error('DividendX program is missing or not executable on this runtime.');
   const configAddress = configPda().address;
   const decoded = await fetchProgramAccountsCoherently(connection, DIVIDENDX_IDL, [{ address: configAddress, accountName: 'config' }]);
@@ -299,18 +377,19 @@ export async function runtimePost<T>(manifest: LocalManifest, path: '/faucet' | 
       redirect: 'error',
       signal: AbortSignal.timeout(path === '/advance' ? 120_000 : 30_000),
     });
+    if (response.status === 410) config.onExpired?.('This sandbox expired or was replaced. Transaction controls were cleared.');
   } catch (cause) {
     const suffix = path === '/advance'
       ? ' Some annual steps may have completed; refresh balances before retrying.'
       : ' Some faucet transactions may have completed; refresh balances before retrying.';
-    throw new RuntimeRequestError(`${config.network === 'devnet' ? 'Devnet service' : 'Local runtime'} request did not finish.${suffix}`, cause);
+    throw new RuntimeRequestError(`${serviceLabel(config)} request did not finish.${suffix}`, cause);
   }
   const value = await response.json().catch(() => null) as T | { error?: string } | null;
   if (!response.ok) {
     const suffix = path === '/advance'
       ? ' Some annual steps may have completed; refresh balances before retrying.'
       : ' Some faucet transactions may have completed; refresh balances before retrying.';
-    throw new RuntimeRequestError(`${(value as { error?: string } | null)?.error || `${config.network === 'devnet' ? 'Devnet service' : 'Local runtime'} returned HTTP ${response.status}.`}${suffix}`, value);
+    throw new RuntimeRequestError(`${(value as { error?: string } | null)?.error || `${serviceLabel(config)} returned HTTP ${response.status}.`}${suffix}`, value);
   }
   return value as T;
 }

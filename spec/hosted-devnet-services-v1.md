@@ -1,0 +1,33 @@
+# Hosted devnet test services v1
+
+18 September 2026. Extends [devnet runtime v1](devnet-runtime-v1.md) and [hosted sessions](hosted-sessions-v1.md). These services distribute synthetic test collateral on the persistent real-calendar devnet registry. No live stock, issuer key, administrative signer, event publication or clock change.
+
+## HTTP and authority boundaries
+
+`GET /api/devnet/manifest` returns the frozen public registry, `clockControl:false`, and `faucetEnabled:true` only when the configured bounded service is available. It may issue the same opaque visitor cookie as the sandbox broker but never creates compute. The registry and deployment identity remain independently pinned in the browser. The browser's RPC remains its configured public devnet endpoint for this first release; do not substitute an arbitrary request URL or claim unmeasured capacity.
+
+`POST /api/devnet/faucet` accepts only `{owner,assetId,runtimeId,genesisHash}` at the configured same-origin endpoint, JSON body <=2 KiB. Bind the existing HttpOnly visitor cookie; reject missing/wrong Origin and stale runtime/genesis. Validate a canonical on-curve recipient and one of the three exact synthetic mints. No caller-supplied amount, instruction, destination mint, signer, URL or transaction bytes. A repeat request for the same wallet/asset/UTC day returns its existing operation and signature; it never mints again.
+
+The server has only the separate test-mint faucet signer and separate synthetic-profile attestor signer, configured as encrypted server environment values. Check their exact public identities and distinctness on startup. Never load the program admin/default wallet, private bootstrap state or issuer credential. Signers and provider credentials never enter frontend bundles or sandbox snapshots. An empty or mismatched signer/config disables writes.
+
+## Durable funding and accounting
+
+Maintain one dedicated private Blob CAS ledger, separate from sandbox traffic, using the same consistent-read/conditional-write adapter. Reserve quota before RPC work. Defaults: 10 test units per grant; at most one grant per wallet/asset per UTC day, three grants per visitor/day, 12 per observed IP/day, 30 grants globally/day, and maximum 0.27 test SOL reserved globally/day. Lifetime service budget is 1 test SOL unless a later explicit configuration/review increases it. Maximum debit reserved per grant is 0.009 SOL, covering a top-up to 0.006 SOL, collateral ATA rent and transaction fee. Failed/uncertain grants conservatively retain their reservation. These are worthless devnet funds, separate from the completed bootstrap budget.
+
+A single durable preparation lease serializes faucet preparations. Owner balance, ATA and authority checks are performed under that lease. Construct a single transaction: optional bounded SOL top-up, idempotent canonical collateral ATA creation and mint exactly 10 synthetic units. Verify devnet genesis, exact accepted program ELF/authority/domain and synthetic mint/policy identities before signing; reserve the maximum before doing so. Simulate the signed transaction, verify the faucet debit is within its reservation and that no unexpected authority/profile change occurred.
+
+Persist exact signed bytes, signature, blockhash, last-valid block height and intended recipient/mint/amount with CAS before submission. Then only those bytes may be sent/retried. No Function retry, timeout, process crash or missing status may generate a second signed transaction for that operation. On ambiguous send, return 202 with the recorded signature and bounded progress; subsequent same request reconciles/polls it. Confirmed/finalized success returns `{signatures:[signature],message}` compatible with the wallet UI. Transaction failure or expired unresolved status remains charged and explicit; never silently issue a replacement. A failure before signing may be retried only under a new preparation lease for the same reservation, with a fencing token checked at persistence and before send. The old worker cannot publish after losing its lease.
+
+Store signed bytes only in private storage; they are not keys, but should not appear in browser responses/logs. Public responses expose sanitized status/error and signatures. On chain success requires the expected token-account owner/mint and a successful signature; external spending after success must not trigger a regrant. The quota ledger, not a mutable balance, determines whether a grant already happened. Public GET reads do not sign or fund. Disable faucet automatically on insufficient balance, ledger failure or a pinned identity mismatch.
+
+## Synthetic observation refresh
+
+A separate authenticated `GET /api/cron/refresh-observations` runs every six hours on the existing Vercel account, protected by exact `Authorization: Bearer <CRON_SECRET>`. The only permitted instruction is `refreshObservation` for the three synthetic policies and their exact configured attestor. Default validity is 12 hours and never exceeds the existing 24-hour cap. Verify current mint profile and fixed synthetic policy digest; never classify or publish dividends, finalize a journal, mint claims, change authority or alter clock.
+
+Use a durable lease and per-asset signed-transaction journal with the same persist-before-send/no-duplicate rules. Duplicate delivery reconciles the current operation; missed delivery may catch up when invoked again. A stale observation simply blocks new splitting until refreshed; recombination remains governed by the existing program. GET manifest must not hide stale observations or claim qualified issuer data. Refresh fees have a separate 0.01 test SOL lifetime cap, conservatively reserved before signing.
+
+## Acceptance and release
+
+Tests cover concurrent grant and lease races, cookie/IP/global limits, daily rollover and lifetime caps, canonical destinations, wrong genesis/profile/authorities, store failure before send, crash after persist/after submission, duplicate receipt retrieval, expiry without duplicate, failed simulation and insufficient funds. Verify no admin key import or issuer-event builder is reachable. Run the service against public devnet, repeat the same grant without a second transaction, then complete browser split/recombine with exact balance verification. Confirm an actual hosted cron-authenticated observation refresh and repeat delivery. Review deployed manifests/configuration and keep the HTTP faucet disabled until these checks pass.
+
+The existing operator CLI remains separate and unchanged. Hosting does not qualify live issuer dividends; public independent redemption still waits for actual annual maturity and valid finalization.

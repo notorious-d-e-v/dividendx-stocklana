@@ -36,10 +36,12 @@ export interface LocalManifest {
   runtimeId: string;
   clockControl: boolean;
   faucetEnabled?: boolean;
+  hostedSessionId?: string;
+  expiresAt?: string;
   assets: LocalAssetManifest[];
 }
 
-export type WalletNetwork = 'local' | 'devnet';
+export type WalletNetwork = 'local' | 'devnet' | 'sandbox';
 
 export type CompatibleWallet = WalletWithFeatures<StandardConnectFeature & StandardEventsFeature & SolanaSignTransactionFeature>;
 
@@ -67,6 +69,6 @@ export interface WalletSeriesSnapshot {
 export interface UiReceipt {
   label: string;
   signature: string;
-  slot: number;
+  slot: number | null;
   status: string;
 }

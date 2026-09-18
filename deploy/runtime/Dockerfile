@@ -54,6 +54,7 @@ COPY --from=build --chown=node:node /opt/dividendx/packages/guided-runtime/packa
 COPY --from=build --chown=node:node /opt/dividendx/packages/guided-runtime/dist ./packages/guided-runtime/dist
 COPY --from=build --chown=node:node /opt/dividendx/packages/guided-runtime/fixtures ./packages/guided-runtime/fixtures
 COPY --from=build --chown=node:node /opt/dividendx/packages/guided-runtime/node_modules ./packages/guided-runtime/node_modules
+COPY --from=build --chown=node:node /opt/dividendx/packages/hosted-gateway ./packages/hosted-gateway
 COPY --from=build --chown=node:node /opt/dividendx/packages/local-runtime/package.json ./packages/local-runtime/package.json
 COPY --from=build --chown=node:node /opt/dividendx/packages/local-runtime/package-lock.json ./packages/local-runtime/package-lock.json
 COPY --from=build --chown=node:node /opt/dividendx/packages/local-runtime/src ./packages/local-runtime/src

@@ -1,0 +1,42 @@
+{
+  "schema": "dividendx-hosted-provider-probe-v1",
+  "at": "2026-09-18T03:50:29.717Z",
+  "storeId": "store_HwInrQjHFXMVbBLI",
+  "snapshotId": "snap_cwWXbrpD6HwniFIXD0cB8mzWGrwh",
+  "deadlineMs": 120000,
+  "status": "failed",
+  "phase": "wallet_start",
+  "stages": [
+    {
+      "name": "wallet_start",
+      "status": "failed"
+    }
+  ],
+  "checks": {},
+  "sessions": [],
+  "diagnostics": {
+    "records": [
+      {
+        "kind": "wallet",
+        "providerName": "dx-49cfd2b8ded10eaafb3c0d9c51d0a123",
+        "status": "starting",
+        "providerStatus": null,
+        "errorCode": null
+      }
+    ]
+  },
+  "cleanup": {
+    "providers": [
+      {
+        "providerName": "dx-49cfd2b8ded10eaafb3c0d9c51d0a123",
+        "stoppedAndDeleted": true
+      }
+    ],
+    "lookupErrors": [],
+    "blobDeleted": true
+  },
+  "errorType": "LedgerFailure",
+  "errorCode": "busy",
+  "errorMessage": "Session service is busy. Try again.",
+  "elapsedMs": 10238
+}

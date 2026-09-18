@@ -1,0 +1,23 @@
+{
+  "schema": "dividendx-blob-etag-diagnostic-v1",
+  "at": "2026-09-18T03:53:05.579Z",
+  "checks": [
+    {
+      "encoding": "default",
+      "contentEncoding": "br",
+      "putEtag": "\"82c9fc82a4b0ed2fa68cbcb0e7cd0bc2\"",
+      "readEtag": "W/\"82c9fc82a4b0ed2fa68cbcb0e7cd0bc2\"",
+      "revision": 1,
+      "cas": "BlobPreconditionFailedError"
+    },
+    {
+      "encoding": "identity",
+      "contentEncoding": null,
+      "putEtag": "\"82c9fc82a4b0ed2fa68cbcb0e7cd0bc2\"",
+      "readEtag": "\"82c9fc82a4b0ed2fa68cbcb0e7cd0bc2\"",
+      "revision": 1,
+      "cas": "passed"
+    }
+  ],
+  "deleted": true
+}

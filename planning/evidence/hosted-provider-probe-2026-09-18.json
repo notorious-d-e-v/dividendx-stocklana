@@ -1,0 +1,23 @@
+{
+  "schema": "dividendx-hosted-provider-probe-v1",
+  "at": "2026-09-18T03:45:55.928Z",
+  "storeId": "store_HwInrQjHFXMVbBLI",
+  "snapshotId": "snap_cwWXbrpD6HwniFIXD0cB8mzWGrwh",
+  "deadlineMs": 120000,
+  "status": "failed",
+  "phase": "wallet_start",
+  "checks": {},
+  "sessions": [],
+  "cleanup": {
+    "providers": [
+      {
+        "providerName": "dx-85d31443ea128ca227c6f497f6063850",
+        "stoppedAndDeleted": true
+      }
+    ],
+    "lookupErrors": [],
+    "blobDeleted": true
+  },
+  "errorType": "LedgerFailure",
+  "elapsedMs": 11022
+}

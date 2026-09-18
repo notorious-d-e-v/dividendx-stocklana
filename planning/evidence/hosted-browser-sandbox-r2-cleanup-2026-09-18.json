@@ -1,0 +1,7 @@
+{
+  "schema": "dividendx-owned-probe-cleanup-v1",
+  "at": "2026-09-18T05:22:22.527Z",
+  "sessionId": "3dad0740a61abfe41d40441ef66ecca7",
+  "providerAfter": "missing",
+  "ledgerAfter": "failed"
+}

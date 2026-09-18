@@ -1,0 +1,28 @@
+{
+  "schema": "dividendx-public-devnet-faucet-endowment-receipt-v1",
+  "operationScope": "public-devnet-faucet-endowment-separate-from-closed-bootstrap-budget",
+  "rpcUrl": "https://api.devnet.solana.com",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "admin": "DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv",
+  "faucet": "C6U91C2a2CxKfiDNTaTHvbQe41CdRwtjsr47ip6zKyVb",
+  "targetLamports": 1000000000,
+  "maxTransferLamports": 1000000000,
+  "maxFeeLamports": 10000,
+  "attestorFunded": false,
+  "status": "finalized",
+  "confirmationStatus": "finalized",
+  "signature": "3JMK1qvDCLiDQvuRd7LZh267UN2coPDRrgaFFk3J99HNtrzSWEULx4ZN9dEPSytCyQ6kRKvJbEcu9SNwPJ8n54M7",
+  "depositLamports": 989113040,
+  "feeLamports": 5000,
+  "publicBefore": {
+    "adminLamports": 4805128560,
+    "faucetLamports": 10886960
+  },
+  "publicAfter": {
+    "adminLamports": 3816010520,
+    "faucetLamports": 1000000000
+  },
+  "slot": 500148884,
+  "error": null,
+  "completedAt": "2026-09-18T03:54:29.762Z"
+}

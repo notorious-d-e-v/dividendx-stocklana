@@ -1,0 +1,15 @@
+.hosted-gate { width: min(720px, calc(100% - 32px)); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; margin: 0 auto; padding: 64px 0; color: var(--dx-ink); font-family: var(--dx-font-sans); }
+.hosted-mark { display: inline-flex; width: 42px; height: 42px; align-items: center; margin-bottom: 30px; }
+.hosted-mark i,.hosted-mark b { width: 20px; height: 29px; border-radius: 4px; transform: rotate(45deg); }
+.hosted-mark i { margin-right: -7px; background: var(--dx-stock); }.hosted-mark b { background: var(--dx-dividend); }
+.hosted-eyebrow { margin: 0 0 12px; color: var(--dx-ink-muted); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.hosted-gate h1 { max-width: 680px; margin: 0; font-size: clamp(42px, 7vw, 76px); line-height: .98; letter-spacing: -.055em; }
+.hosted-gate > p:not(.hosted-eyebrow) { max-width: 620px; margin: 24px 0 0; color: var(--dx-ink-muted); font-size: 15px; line-height: 1.6; }
+.hosted-gate .hosted-warning { padding-left: 15px; border-left: 3px solid var(--dx-dividend); color: var(--dx-ink); font-size: 13px; }
+.hosted-progress,.hosted-error { max-width: 620px; margin-top: 24px; padding: 15px 17px; border: 1px solid var(--dx-line); border-radius: var(--dx-radius-sm); font-size: 12px; line-height: 1.5; }
+.hosted-progress { display: flex; align-items: center; gap: 10px; background: var(--dx-surface); }.hosted-progress i { width: 9px; height: 9px; border-radius: 50%; background: var(--dx-dividend); box-shadow: 0 0 0 5px var(--dx-dividend-soft); }
+.hosted-error { border-color: #d9b3ae; color: #781f18; background: var(--dx-danger-soft); }
+.hosted-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 30px; }
+.hosted-actions button { min-height: 48px; padding: 12px 20px; border: 0; border-radius: var(--dx-radius-sm); color: #fff; background: var(--dx-stock); font: 800 13px var(--dx-font-sans); cursor: pointer; }.hosted-actions button:disabled { opacity: .65; cursor: wait; }
+.hosted-actions a { color: var(--dx-ink); font-size: 12px; font-weight: 750; }
+@media (max-width: 520px) { .hosted-gate { width: min(100% - 28px, 720px); padding: 44px 0; }.hosted-gate h1 { font-size: 43px; }.hosted-actions { align-items: stretch; flex-direction: column; }.hosted-actions button { width: 100%; }.hosted-actions a { padding: 5px 0; } }
