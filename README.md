@@ -58,9 +58,15 @@ Wait for the runtime's ready message, then open [the wallet app](http://127.0.0.
 
 Keep the runtime terminal open while testing. If the app cannot connect, check that this service is still running; from the project root, `npm --prefix packages/local-runtime start` starts it. **Retry localhost runtime** checks the connection again after the ready message; it cannot launch the service. Restarting the runtime creates an empty test network.
 
-All keys and tokens are disposable. The server uses pinned Surfpool 1.5.0 offline; its native runtime was verified on macOS arm64. Wallet Standard signing is implemented, but installed browser extensions have not been verified. See [runtime setup](packages/local-runtime/README.md), [wallet contract](spec/wallet-integration-v1.md) and [acceptance evidence](planning/wallet-review.md).
+All keys and tokens are disposable. The server uses pinned Surfpool 1.5.0 offline; its native runtime is verified on macOS arm64 and Linux x64, including Vercel Sandbox. Wallet Standard signing is implemented, but installed browser extensions have not been verified. See [runtime setup](packages/local-runtime/README.md), [wallet contract](spec/wallet-integration-v1.md) and [acceptance evidence](planning/wallet-review.md).
 
 On a fresh runtime, `node scripts/protocol/wallet-runtime-smoke.mjs` checks all three assets. Restart it before `node apps/web/qa/wallet-app-review.mjs`, which exercises the actual app with two browser wallets. Both checks consume the annual test lifecycle; restart again for a fresh demonstration.
+
+## Public devnet and hosting
+
+The [hosting foundation](planning/hosting-foundation-review.md) verifies both full runtime journeys on native Vercel Linux and records a persistent [2027 devnet registry](packages/devnet-runtime/manifest.devnet.json). Local mode remains the default. See [frontend configuration](apps/web/.env.example) for devnet builds and the [devnet operator README](packages/devnet-runtime/README.md) for preflight, manifest serving and bounded test funding.
+
+Devnet uses the real calendar and synthetic test assets. Its HTTP faucet remains disabled until durable quotas are implemented. Visitor-isolated hosted sandboxes and a public site release are still next; neither this registry nor the Linux proof establishes live issuer settlement.
 
 ## Run the guided DeFi demo
 

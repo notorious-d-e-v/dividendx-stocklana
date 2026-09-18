@@ -1,0 +1,72 @@
+{
+  "schema": "dividendx-devnet-browser-smoke-v1",
+  "boundary": "public-devnet-synthetic-test-assets-temporary-browser-wallet",
+  "status": "complete",
+  "stage": "complete",
+  "startedAt": "2026-09-18T02:38:03.680Z",
+  "updatedAt": "2026-09-18T02:38:37.553Z",
+  "manifestTransport": "playwright-route-single-same-origin-manifest-endpoint",
+  "frontendTransport": "isolated-production-build-preview-no-HMR",
+  "rpcTransport": "genuine-solana-devnet-no-rpc-interception; harness proof reads retry only HTTP 429/503 inside a shared 15s deadline",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "deploymentDomainHex": "ce59db5080fc2c6d3bcf7ca90712d3c2e5e6c28f27f0dfbb9953bdb0894c03ab",
+  "assetId": "xstocks-test-kox",
+  "symbol": "TestKOx",
+  "amountRaw": "100000000",
+  "funding": {
+    "requestedTokenRaw": "1000000000",
+    "requestedSolLamports": 6000000,
+    "attempts": 1,
+    "confirmedTokenRaw": "1000000000",
+    "confirmedSolLamports": 6000000
+  },
+  "transactions": {
+    "fund": {
+      "signature": "2aE8orKKDq8icACfFNe7SxjiHGqSwLEA8CcHDtTVPUoAepteK3e5guXf4gVmMAxVxM8qFBusAcLkGJE63kmVGsxp",
+      "slot": 500121269,
+      "confirmationStatus": "confirmed",
+      "blockTime": 1789699087,
+      "feeLamports": 5000,
+      "dividendXInvokeObserved": false
+    },
+    "split": {
+      "signature": "QVoQ89nfAfsC7GBAEaTuXKFuHEjv84umiveBhqiCZiVYGVRBK3C8TePiEhXqypq4Qd8CYhc6JyP5JEc4xeiRmva",
+      "slot": 500121358,
+      "confirmationStatus": "confirmed",
+      "blockTime": 1789699101,
+      "feeLamports": 5000,
+      "dividendXInvokeObserved": true
+    },
+    "recombine": {
+      "signature": "22uaJSq1dRX2bUNo9Mwa7ecyXnNuWs3zGvXTcriTR9A7m5mmG9C9r9MEmGQnePm7c5KoDycJbaFC8MzaSXTiVrJM",
+      "slot": 500121446,
+      "confirmationStatus": "confirmed",
+      "blockTime": 1789699115,
+      "feeLamports": 5000,
+      "dividendXInvokeObserved": true
+    }
+  },
+  "owner": "AnWEMnXjbH1AcGiZVRHRg6eQd6fAgZZZL9nr4HLkYEhK",
+  "assertions": {
+    "noClockControls": true,
+    "faucetUiAbsent": true,
+    "devnetExplorerLinks": true,
+    "exactRpcBalances": true,
+    "browserPageErrors": 0
+  },
+  "afterSplit": {
+    "collateralRaw": "900000000",
+    "ptRaw": "100000000",
+    "drRaw": "100000000",
+    "solLamports": 3018120
+  },
+  "completedAt": "2026-09-18T02:38:37.553Z",
+  "final": {
+    "collateralRaw": "1000000000",
+    "ptRaw": "0",
+    "drRaw": "0",
+    "solLamports": 3013120
+  }
+}

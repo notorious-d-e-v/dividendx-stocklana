@@ -65,6 +65,20 @@ function loopbackUrl(value, label) {
   return url;
 }
 
+function loopbackWsUrl(value, label, rpcUrl) {
+  const url = new URL(value);
+  const rpc = new URL(rpcUrl);
+  assert.equal(url.protocol, 'ws:', `${label} must use WS`);
+  assert.ok(['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname), `${label} must be loopback`);
+  assert.equal(url.hostname, rpc.hostname, `${label} must use the RPC host`);
+  assert.notEqual(url.port, '', `${label} must specify a port`);
+  assert.equal(url.username, '', `${label} must not contain credentials`);
+  assert.equal(url.password, '', `${label} must not contain credentials`);
+  assert.equal(url.search, '', `${label} must not contain a query`);
+  assert.equal(url.hash, '', `${label} must not contain a fragment`);
+  return url;
+}
+
 function key(value, label) {
   try {
     return new PublicKey(value);
@@ -83,8 +97,12 @@ function sameBytes(left, right) {
 }
 
 function asPublicKey(value, label) {
-  assert.ok(value instanceof PublicKey, `${label} is not a public key`);
-  return value;
+  assert.ok(value && typeof value === 'object' && typeof value.toBase58 === 'function', `${label} is not a public key`);
+  const encoded = value.toBase58();
+  assert.equal(typeof encoded, 'string', `${label} did not encode as a public key`);
+  const normalized = new PublicKey(encoded);
+  assert.equal(normalized.toBase58(), encoded, `${label} is not canonically encoded`);
+  return normalized;
 }
 
 function asBytes(value, label) {
@@ -151,6 +169,7 @@ async function loadManifest() {
   assert.equal(manifest.programId, DIVIDENDX_PROGRAM_ID.toBase58(), 'runtime program ID mismatch');
   bytesFromHex(manifest.deploymentDomainHex, 'deployment domain');
   loopbackUrl(manifest.rpcUrl, 'RPC URL');
+  loopbackWsUrl(manifest.wsUrl, 'WebSocket URL', manifest.rpcUrl);
   assert.equal(manifest.clockControl, true, 'runtime does not provide the controlled clock required by this acceptance test');
   assert.ok(Array.isArray(manifest.assets), 'manifest assets are missing');
   const byDecimals = new Map();
@@ -501,6 +520,7 @@ async function main() {
   const { manifest, assets } = await loadManifest();
   const connection = new Connection(manifest.rpcUrl, {
     commitment: 'confirmed',
+    wsEndpoint: manifest.wsUrl,
     confirmTransactionInitialTimeout: REQUEST_TIMEOUT_MS,
     fetch: boundedRpcFetch,
   });
@@ -515,6 +535,7 @@ async function main() {
       kind: manifest.kind,
       scope: 'offline local SBF sandbox; not a public validator or network',
       rpcUrl: manifest.rpcUrl,
+      wsUrl: manifest.wsUrl,
       genesisHash: identity.genesisHash,
       runtimeId: manifest.runtimeId,
       programId: manifest.programId,

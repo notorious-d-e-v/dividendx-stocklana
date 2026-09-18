@@ -1,6 +1,6 @@
 # Current status
 
-Updated 18 September 2026 after captured-mint custody acceptance and the user's public-hosting decision. Next: a real-calendar devnet app plus an online accelerated sandbox. Live issuer settlement remains incomplete; deposits still close at year-start.
+Updated 18 September 2026 after the [hosting foundation](hosting-foundation-review.md): complete native Vercel execution, a persistent 2027 devnet registry and devnet-aware wallet configuration. Next: isolated visitor sessions, durable faucet quotas and public release verification. Live issuer settlement remains incomplete; deposits still close at year-start.
 
 Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
 
@@ -18,6 +18,8 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Product | Annual Market / Split / Redeem at `/`, with isolated 2027/2028 series and distinct collecting, year-ended and finalized states |
 | Wallet app | `/app/`: actual local wallet signing, custody, PT/DR transfers, recombination and independent redemption; [acceptance](wallet-review.md) |
 | Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
+| Hosting foundation | Native Vercel and Docker execution pass: 104 wallet receipts and 36 guided transactions; portable clean build context; public session service still pending |
+| Persistent devnet | Three synthetic 2027 profiles, separate test authorities, finalized setup and CLI split/recombine proof; read-only manifest service and disabled HTTP faucet |
 | Issuer readers | Typed observations across the selected 15 identities, exact source records, private snapshots and explicit data gaps; [acceptance](issuer-reader-review.md) |
 | Issuer qualification | Offline unsigned dossiers check identities, revisions, candidate dates and current mint evidence; every dossier retains unresolved settlement gates; [acceptance](issuer-qualification-review.md) |
 | Captured mint custody | Unchanged compiled program passes all 15 actual mint configurations locally with synthetic funding/events; [acceptance](issuer-custody-review.md) |
@@ -62,11 +64,11 @@ The captured-mint conformance slice passes **all 15 local journeys**, with ident
 
 ## Next: public devnet and hosted sandbox
 
-The user chose **real-calendar public devnet plus an online accelerated sandbox**, with no shortened devnet term or time override. The [hosting plan](hosting-plan.md) recommends trying Vercel website + Vercel Sandbox first, with Cloudflare Containers as fallback. This recommendation has not yet been proved by a Linux deployment.
+The user chose **real-calendar public devnet plus an online accelerated sandbox**, with no shortened devnet term or time override. Native Vercel feasibility is now verified under the [hosting foundation review](hosting-foundation-review.md). The Vercel project exists, and probe resources were removed after evidence capture; the public site is not yet released.
 
-1. **Prove the hosted runtime.** Package the pinned program/SDK/captures for Node 24 on x86_64 glibc Linux. Measure startup and memory, then verify the full guided flow. Each visitor needs a separate disposable network; current singleton runtimes cannot simply be exposed publicly.
-2. **Connect the wallet app to public devnet.** Add network configuration, tested extension-wallet signing, persistent test manifests, bounded faucet funding and the existing Raydium flow. Use clearly labeled test collateral. A 2027 series closes deposits on 1 January 2027 and matures on 1 January 2028; public flows currently end with paired recombination.
-3. **Host the accelerated experience.** Preserve core Split/Redeem and separate guided demos. Add isolated sessions, controlled RPC, progress, expiry/reset and honest network labels. Visitors can advance their own synthetic year and redeem both sides without affecting anyone else.
+1. **Host isolated visitor sessions.** Preserve the now-proven portable runtime and exact artifacts. Add a same-origin session broker, restricted RPC, creation limits, progress and expiry/reset. Verify two independent visitors; current singleton runtimes cannot simply be exposed publicly.
+2. **Finish public devnet services.** Network configuration and the persistent three-profile registry exist. Temporary-wallet production-browser acceptance passes; complete installed-extension acceptance, durable public faucet quotas and automatic synthetic profile-observation refresh. Use clearly labeled test collateral. A 2027 series closes deposits on 1 January 2027 and matures on 1 January 2028; public flows end with paired recombination.
+3. **Connect the accelerated experience.** Preserve core Split/Redeem and separate guided demos. Visitors can advance their own synthetic year and redeem both sides without affecting anyone else. A stopped chain stays expired until the visitor explicitly starts a new one.
 4. **Publish and verify.** Check desktop/mobile, clean-browser wallet flows, public receipts, sandbox redemption and failure recovery; address the existing CI scope blocker. The user plans issuer outreach after a usable live site exists.
 5. **Continue qualified settlement and submission work.** Resolve the [remaining source semantics](research/issuer-public-policy-check-2026-09-18.md), then specify an automated attestor under a reviewed policy. The [unsigned review tool](issuer-qualification-review.md) stays blocked; year-end alone never authorizes finalization. Refresh versioned submission materials around actual functionality and verify the submission form/deadline.
 

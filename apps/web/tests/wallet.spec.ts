@@ -3,7 +3,7 @@ import { PublicKey } from '@solana/web3.js';
 import { DIVIDENDX_IDL, DIVIDENDX_PROGRAM_ID, configPda } from '@dividendx/transaction-sdk';
 import { formatStock, parseStockAmount } from '../src/wallet/amounts';
 import { confirmedRuntimeSignatures } from '../src/wallet/chain';
-import { createBoundedRpcFetch, RuntimeRequestError, runtimePost } from '../src/wallet/runtime';
+import { createBoundedRpcFetch, createDevnetRpcFetch, createLocalConnection, resolveRuntimeConfig, RuntimeRequestError, runtimePost, validateManifestShape } from '../src/wallet/runtime';
 import type { LocalManifest } from '../src/wallet/types';
 
 const domain = new Uint8Array(32).fill(7);
@@ -170,6 +170,96 @@ test('local RPC transport times out and preserves caller aborts', async () => {
     caller.abort(new Error('caller stopped'));
     await expect(pending).rejects.toThrow('caller stopped');
   } finally { globalThis.fetch = originalFetch; }
+});
+
+test('devnet RPC retries only transient responses with the identical request body', async () => {
+  const originalFetch = globalThis.fetch;
+  const bodies: (BodyInit | null | undefined)[] = [];
+  const rejected: Response[] = [];
+  let requestCount = 0;
+  globalThis.fetch = async (_input, init) => {
+    requestCount += 1;
+    bodies.push(init?.body);
+    if (requestCount < 3) {
+      const response = new Response(`limited-${requestCount}`, { status: requestCount === 1 ? 429 : 503 });
+      rejected.push(response);
+      return response;
+    }
+    return new Response('{"jsonrpc":"2.0","result":"ok"}', { status: 200 });
+  };
+  try {
+    const body = '{"jsonrpc":"2.0","method":"getGenesisHash"}';
+    const recovered = await createDevnetRpcFetch(3_000)('https://api.devnet.solana.com', { method: 'POST', body });
+    expect(recovered.status).toBe(200);
+    expect(requestCount).toBe(3);
+    expect(bodies).toEqual([body, body, body]);
+    expect(rejected.every((response) => response.bodyUsed)).toBe(true);
+
+    requestCount = 0;
+    globalThis.fetch = async () => { requestCount += 1; return new Response('bad request', { status: 400 }); };
+    const notRetried = await createDevnetRpcFetch(1_000)('https://api.devnet.solana.com', { method: 'POST', body });
+    expect(notRetried.status).toBe(400);
+    expect(requestCount).toBe(1);
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test('devnet RPC bounds retry exhaustion and preserves caller aborts', async () => {
+  const originalFetch = globalThis.fetch;
+  let requestCount = 0;
+  globalThis.fetch = async () => { requestCount += 1; return new Response('limited', { status: 429, headers: { 'Retry-After': '1' } }); };
+  try {
+    await expect(createDevnetRpcFetch(20)('https://api.devnet.solana.com', { method: 'POST', body: '{}' })).rejects.toThrow('Devnet RPC request timed out');
+    expect(requestCount).toBe(1);
+
+    requestCount = 0;
+    const caller = new AbortController();
+    const pending = createDevnetRpcFetch(2_000)('https://api.devnet.solana.com', { method: 'POST', body: '{}', signal: caller.signal });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    caller.abort(new Error('caller cancelled devnet request'));
+    await expect(pending).rejects.toThrow('caller cancelled devnet request');
+    expect(requestCount).toBe(1);
+
+    requestCount = 0;
+    globalThis.fetch = async () => { requestCount += 1; return new Response('still limited', { status: 503 }); };
+    const exhausted = await createDevnetRpcFetch(5_000)('https://api.devnet.solana.com', { method: 'POST', body: '{}' });
+    expect(exhausted.status).toBe(503);
+    expect(exhausted.bodyUsed).toBe(false);
+    expect(requestCount).toBe(4);
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test('devnet RPC scheduler limits shared connection fetches to two', async () => {
+  const originalFetch = globalThis.fetch;
+  let active = 0;
+  let maximum = 0;
+  globalThis.fetch = async () => {
+    active += 1;
+    maximum = Math.max(maximum, active);
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    active -= 1;
+    return new Response('{}', { status: 200 });
+  };
+  try {
+    const firstConnectionFetch = createDevnetRpcFetch(1_000);
+    const secondConnectionFetch = createDevnetRpcFetch(1_000);
+    await Promise.all([
+      firstConnectionFetch('https://api.devnet.solana.com', {}),
+      firstConnectionFetch('https://api.devnet.solana.com', {}),
+      secondConnectionFetch('https://api.devnet.solana.com', {}),
+      secondConnectionFetch('https://api.devnet.solana.com', {}),
+    ]);
+    expect(maximum).toBe(2);
+  } finally { globalThis.fetch = originalFetch; }
+});
+
+test('local manifest preserves a nonconsecutive explicit WebSocket endpoint', () => {
+  const localConfig = resolveRuntimeConfig({ VITE_DIVIDENDX_NETWORK: 'local' });
+  const withWebSocket = { ...manifest(), wsUrl: 'ws://127.0.0.1:54321' };
+  expect(validateManifestShape(withWebSocket, localConfig).wsUrl).toBe('ws://127.0.0.1:54321');
+  const connection = createLocalConnection(withWebSocket.rpcUrl, withWebSocket.wsUrl);
+  expect((connection as unknown as { _rpcWsEndpoint: string })._rpcWsEndpoint).toBe('ws://127.0.0.1:54321/');
+  expect(() => validateManifestShape({ ...withWebSocket, wsUrl: 'ws://localhost:54321' }, localConfig)).toThrow('RPC loopback hostname');
+  expect(() => validateManifestShape({ ...withWebSocket, wsUrl: 'ws://127.0.0.1' }, localConfig)).toThrow('explicit valid port');
 });
 
 test('binary multiplier formatting stays exact for inputs, tiny positives and wide exit scales', () => {

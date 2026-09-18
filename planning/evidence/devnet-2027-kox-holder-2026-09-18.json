@@ -1,0 +1,26 @@
+{
+  "schema": "dividendx-devnet-holder-smoke-v1",
+  "boundary": "public-devnet-synthetic-test-asset",
+  "generatedAt": "2026-09-18T01:48:23.332Z",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "assetId": "xstocks-test-kox",
+  "symbol": "TestKOx",
+  "holder": "6aS6i4KohcgMN9cwBHrDXcJ6mZxZzA1nLJZBNhtmSRE1",
+  "amountRaw": "100000000",
+  "transactions": {
+    "fund": "2YtzodQDyEomd4gQbTcq6w4FvW5whoui38EvrfUzhVmAyLFt7WrFX1EGnswz45t2xTFmjdRZnebQbNPAeu51F6cv",
+    "createAccounts": "2xNR4NpYTbK8tbKCeVkFCj2PBD3TPEfDkTVWeDdqCcYFrN11dhz3MtHHfxgc56zRMyGpBDpT5U7NXaXpTDEuXQWg",
+    "split": "2hUXx1oVwyLaD2Tjtkdd6zeMWFvdG44SisKDAbsnhS9aWtcHcG6WuxdATK6GpckNECGHqEgF7AHVuk3Ef36nEqSX",
+    "recombine": "2z5vsHNYbk3VDkhzgATaLpibsCqLfn8TFmeX1684qvcBQz5nvy9EdcSeQKXFyUkxvJekyR4DbUkAvbTTQVtgEMsE"
+  },
+  "conservation": {
+    "collateralStartRaw": "100000000",
+    "collateralAfterSplitRaw": "0",
+    "collateralFinalRaw": "100000000",
+    "ptAfterSplitRaw": "100000000",
+    "drAfterSplitRaw": "100000000",
+    "ptFinalRaw": "0",
+    "drFinalRaw": "0"
+  }
+}

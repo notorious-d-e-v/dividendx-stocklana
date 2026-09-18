@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "hashes": {
+    "dividendXElfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+    "transactionIdlSha256": "d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4"
+  },
+  "mode": "wallet",
+  "startupMs": 1269,
+  "idleCgroupMemoryBytes": 479817728,
+  "journeyMs": 5802,
+  "runtimeId": "4b373dc2-2ecc-4664-a312-232b0783252a",
+  "genesisHash": "F1xECcWEVujbLs9E5xAEamCjnXKFeiid5Vbc8momk9tG",
+  "smoke": {
+    "ok": true,
+    "evidencePath": "/opt/dividendx/planning/evidence/wallet-runtime-smoke-2026-09-17.json",
+    "runtimeId": "4b373dc2-2ecc-4664-a312-232b0783252a",
+    "genesisHash": "F1xECcWEVujbLs9E5xAEamCjnXKFeiid5Vbc8momk9tG",
+    "assets": [
+      "backpack-test-mu",
+      "xstocks-test-kox",
+      "ondo-test-ibm"
+    ]
+  },
+  "peakCgroupMemoryBytes": 725577728
+}

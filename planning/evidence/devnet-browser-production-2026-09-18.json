@@ -1,0 +1,47 @@
+{
+  "schema": "dividendx-devnet-browser-smoke-v1",
+  "boundary": "public-devnet-synthetic-test-assets-temporary-browser-wallet",
+  "status": "failed",
+  "stage": "funding-confirmed",
+  "startedAt": "2026-09-18T02:32:52.774Z",
+  "updatedAt": "2026-09-18T02:33:58.637Z",
+  "manifestTransport": "playwright-route-single-same-origin-manifest-endpoint",
+  "frontendTransport": "isolated-production-build-preview-no-HMR",
+  "rpcTransport": "genuine-solana-devnet-no-rpc-interception; harness proof reads retry only HTTP 429/503 inside a shared 15s deadline",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "deploymentDomainHex": "ce59db5080fc2c6d3bcf7ca90712d3c2e5e6c28f27f0dfbb9953bdb0894c03ab",
+  "assetId": "xstocks-test-kox",
+  "symbol": "TestKOx",
+  "amountRaw": "100000000",
+  "funding": {
+    "requestedTokenRaw": "1000000000",
+    "requestedSolLamports": 6000000,
+    "attempts": 1,
+    "confirmedTokenRaw": "1000000000",
+    "confirmedSolLamports": 6000000
+  },
+  "transactions": {
+    "fund": {
+      "signature": "5SD29XGjJBAUGX4AUUFsGR2CbWT5bHcWicdHEaMxcKBpTcDaHKw1oxm2TJKURGwek2UCUJ9SrsrKuJeiyEod4QAF",
+      "slot": 500119397,
+      "confirmationStatus": "confirmed",
+      "blockTime": 1789698776,
+      "feeLamports": 5000,
+      "dividendXInvokeObserved": false
+    }
+  },
+  "owner": "B1cbntpCGebdgqzaCtMAD6eeMdeqizJZuh6WrYn27xjd",
+  "assertions": {
+    "noClockControls": true,
+    "faucetUiAbsent": true
+  },
+  "failedAt": "2026-09-18T02:33:58.637Z",
+  "failure": {
+    "message": "expect(locator).toContainText(expected) failed\n\nLocator: locator('.wallet-receipts article').first()\nExpected substring: \"deposit\"\nTimeout: 60000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toContainText\" locator('.wallet-receipts article').first() with timeout 60000ms\n  - waiting for locator('.wallet-receipts article').first()\n",
+    "uiText": "Skip to content\nDividendX\nMarket\nSplit\nRedeem\nB1cb…7xjd\nPublic devnet · test assets\nDeposits close 1 Jan 2027 and maturity is 1 Jan 2028. Public time cannot be advanced; no qualified issuer payouts are available.\nGuided demos →\nOpen annual reference →\nVerified Solana devnet\nTest assets on public Solana devnet\n\nWALLET\n\nDividendX temporary test wallet\n\nB1cbntpCGebdgqzaCtMAD6eeMdeqizJZuh6WrYn27xjd · reload loses this disposable key\n\nDisconnect\n429 : {\"jsonrpc\":\"2.0\",\"error\":{\"code\": 429, \"message\":\"Connection rate limits exceeded\"}, \"id\": \"07abe77a-05cd-4673-be96-caa009e80041\" }\nEXACT DEVNET STOCK TOKEN\nCoca-Cola · TestKOx · xStocks test profile\nMicron · TestMU · Backpack/Trek test profile\nIBM · TestIBMon · Ondo test profile\nANNUAL SERIES\n2027\nRefresh balances\nTest faucet unavailable for this deployment.\n\nVERIFIED ANNUAL SERIES\n\nCoca-Cola2027\n\nTestKOx · xStocks test profile · 8 decimals\n\nDeposits open\nStock token\n10\nTestKOx\nStock exposure\n0\nPT-TestKOx-2027\nDividend rights\n0\nDR-TestKOx-2027\n\nSPLIT\n\nOne stock. Two annual tokens.\n\nDeposit stock tokens and get two assets: stock exposure and this year's dividend rights.\n\nDEPOSIT TESTKOX\ntokens\nAvailable · 10\nMax\n\nYou receive · 1 PT + 1 DR\n\n429 : {\"jsonrpc\":\"2.0\",\"error\":{\"code\": 429, \"message\":\"Connection rate limits exceeded\"}, \"id\": \"07abe77a-05cd-4673-be96-caa009e80041\" }\n\nSplit into PT + DR\n→\nVerified account details\nDividendX devnet transaction application · TestKOx · 2027\nHistorical rehearsal",
+    "browserScreenshot": "devnet-browser-production-2026-09-18.json.failure.png",
+    "screenshotBoundary": "Browser app viewport only; no terminal or private state rendered."
+  }
+}

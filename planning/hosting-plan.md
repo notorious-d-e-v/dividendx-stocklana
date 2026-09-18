@@ -1,6 +1,6 @@
 # Public devnet and hosted sandbox
 
-18 September 2026. Product direction is approved by the user; the hosting recommendation below is pending a Linux runtime probe. No hosting resources have been provisioned or site deployed by this planning pass.
+18 September 2026. The [hosting foundation](hosting-foundation-review.md) now passes Docker and native Vercel Linux execution. The persistent 2027 devnet registry is created. A Vercel project exists; temporary probes were removed. The public website and visitor-session layer are not released yet.
 
 ## Two modes
 
@@ -17,7 +17,7 @@ Chain time advances automatically, but dividend classification and settlement do
 
 ## Hosting recommendation
 
-**Try Vercel for both the static website and isolated sandbox compute first.** This is an engineering recommendation based on the current platform capabilities and the user's existing account, not a tested deployment claim.
+**Use Vercel for the static website and isolated sandbox compute.** Both complete runtime flows now execute on native Vercel Linux. The remaining work is the visitor-facing session/faucet layer and release verification; Cloudflare stays a fallback if those reveal a material blocker.
 
 - Build the existing Vite frontend as static assets. Small server endpoints manage sandbox sessions and bounded devnet services.
 - Use **Vercel Sandbox**, a separate compute product, for long-running Surfpool processes. Its current documentation supports Linux microVMs, custom images and exposed application ports. Normal Vercel Functions should manage requests, not own an in-memory chain between requests. See [Sandbox overview](https://vercel.com/docs/sandbox), [images](https://vercel.com/docs/sandbox/concepts/images) and [SDK](https://vercel.com/docs/sandbox/sdk-reference).
@@ -32,17 +32,17 @@ Read-only review of `packages/local-runtime`, `packages/guided-runtime` and thei
 
 - **Node 24, Linux x86_64 and glibc.** This Surfpool release ships `linux-x64-gnu`; its generic loader branches do not prove ARM or Alpine/musl support. Verify the selected image and native addon in the target environment.
 - **Pinned program artifacts.** `target/deploy/dividendx.so` is ignored by Git. Supply the accepted hash-verified ELF as a build artifact, or reproduce and verify it in a pinned build stage. Include the tracked Raydium/config/USDC captures and built SDK packages. Keep toolchains out of the final runtime image.
-- **Configurable HTTPS endpoints.** Servers and frontend currently enforce localhost. Add explicit environment-specific configuration and a public application port; keep Surfpool's dynamically allocated native RPC ports private.
+- **Configurable HTTPS endpoints.** The wallet frontend now supports explicit devnet configuration; local/sandbox servers still bind localhost. Add hosted-session configuration and a public application gateway; keep Surfpool's dynamically allocated native RPC and WebSocket ports private.
 - **Session isolation.** Both servers currently own a singleton runtime. Guided Start replaces its current network; session IDs alone do not isolate visitors. Allocate a process/microVM per active visitor flow with a private mutation queue, opaque authorization, revision checks and expiry.
 - **Controlled RPC.** The wallet sandbox needs a session-scoped proxy allowing only the standard methods it actually uses. Unknown methods are denied; administrative Surfpool methods stay private. Guided actions use the existing bounded HTTP interface. Prefer bounded HTTP confirmation polling if it avoids an unnecessary public WebSocket proxy.
 - **Honest restart behavior.** A process restart destroys the chain and keys. Saved receipt JSON is historical evidence, not a resumable network. Show expired/reset status, discard stale manifests and obtain explicit user action before starting a fresh session.
 
-No Linux execution or capacity measurement has been performed yet. Native artifact sizes are not RAM estimates. Measure startup, idle and full-flow peak memory plus concurrent visitor isolation before choosing capacity. Existing local startup can take roughly a minute, so session creation needs asynchronous progress and a sufficient startup allowance.
+The [native probe](hosting-foundation-review.md) measures 1.269-second wallet startup, 104 wallet receipts and the full 36-transaction guided journey. Cgroup peaks were approximately 726 MB and 559 MB respectively, including probe/cache effects. These are single-session observations, not capacity guarantees. Concurrent visitor isolation and load still need verification; session creation must show asynchronous progress and explicit expiry.
 
 ## Delivery order and acceptance
 
-1. **Linux feasibility:** build a portable, pinned runtime image and run a real signed split/recombine plus the full guided annual journey. Verify native loading, exact ELF identity, startup and memory. Then test the image in Vercel Sandbox; use Cloudflare Containers if a material blocker remains.
-2. **Public devnet app:** add explicit network configuration, verified devnet genesis/program/domain, real Wallet Standard devnet signing, persistent test-asset/series manifests and a bounded test faucet. Separate any faucet authority from the program upgrade/settlement authorities. Test user rejection, retries and receipts on public devnet. Reuse the accepted Raydium integration; no additional venue.
+1. **Linux feasibility — complete:** portable hash-verified image, native module load, signed wallet flow and full guided annual journey pass in Docker and Vercel Sandbox. Preserve the artifact identities and [acceptance evidence](hosting-foundation-review.md).
+2. **Public devnet app — foundation implemented:** explicit network configuration, pinned identities, devnet signing and a persistent synthetic registry exist. Temporary-wallet production-browser acceptance passes. Finish installed-extension acceptance, durable public faucet quotas and automated synthetic profile-observation refresh. Authorities are separate; the current HTTP faucet remains disabled. Reuse the accepted Raydium integration; no additional venue.
 3. **Hosted sandbox:** connect isolated visitor sessions to the existing app and guided page; add progress, expiry/reset and restricted RPC. Verify that one visitor's advance/reset cannot affect another, and that no provider credentials or devnet signers enter a sandbox or frontend bundle.
 4. **Public release:** verify clean-browser desktop/mobile flows, installation-wallet behavior, real devnet receipts, sandbox full redemption, refresh/failure recovery, funding limits and release rollback. Activate CI or record the existing OAuth `workflow`-scope blocker. Keep the exact tested program artifact with the release.
 5. **Issuer follow-up and submission:** the user contacts Ondo/Backpack after the site is usable. Continue qualified source policy and automated settlement only when evidence allows; refresh versioned pitch/video/submission materials around verified behavior. Additional DeFi demos remain roadmap-only.

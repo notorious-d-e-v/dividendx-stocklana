@@ -1,0 +1,10 @@
+{
+  "schema": "dividendx-devnet-qa-reserve-v1",
+  "boundary": "test-only-devnet-SOL",
+  "generatedAt": "2026-09-18T02:37:20.521Z",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "lamports": "10000000",
+  "destination": "C6U91C2a2CxKfiDNTaTHvbQe41CdRwtjsr47ip6zKyVb",
+  "signature": "4mpeX9A7Hd8uLHP6EpN7f4P4JviDHyGgjadqy4SJPpnx6JTFLh86ffsmLUcfmREJ8icBPMmaT55HN1s5RpXcfVx2",
+  "purpose": "Final production browser QA; cumulative admin spend remains within 0.15 devnet SOL."
+}

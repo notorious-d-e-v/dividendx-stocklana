@@ -11,6 +11,7 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 - [Preserved generic-quote acceptance](../planning/guided-demo-review.md) — historical 37-transaction guided proof.
 - [Current plan](../planning/plan.md) — current scope, completed work and next implementation phase.
 - [Hosting plan](../planning/hosting-plan.md) — approved real-calendar devnet/accelerated sandbox modes, provider recommendation and remaining deployment checks.
+- [Hosting foundation review](../planning/hosting-foundation-review.md) — native Vercel/Docker execution, persistent 2027 devnet registry, public receipts and remaining release gates.
 - [Architecture decision](../planning/adapter-decision.md) and [issuer synthesis](../planning/solana-issuer-synthesis.md) — the selected xStocks, Backpack/Trek and Ondo design, its evidence boundary and unresolved dependencies.
 - [Annual product specification](../spec/annual-product.md) — annual Market / Split / Redeem flow at `/`, extending the approved visual design.
 - [Detailed rehearsal specification](../spec/frontend-rehearsal.md) — preserved two-account accounting walkthrough at `/rehearsal/`.
@@ -24,6 +25,8 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 | [`apps/web/src/wallet/`](../apps/web/src/wallet/) | `/app/` wallet flow | Real local test transactions; temporary browser wallet and Wallet Standard interface |
 | [`apps/web/src/demos/`](../apps/web/src/demos/) | `/demos/` guided DeFi flow | Two server-managed test wallets; nine fixed actions and real local receipts using Test USDC v2, with no extension wallet or caller-supplied transaction data |
 | [`packages/local-runtime/`](../packages/local-runtime/) | Offline Surfpool test network | Disposable test profiles and synthetic annual journal; no real issuer assets |
+| [`packages/devnet-runtime/`](../packages/devnet-runtime/) | Persistent real-calendar devnet registry and operator tools | Synthetic 2027 assets, separate test authorities and read-only manifest service; public faucet disabled |
+| [`deploy/runtime/`](../deploy/runtime/) and [`scripts/hosting/`](../scripts/hosting/) | Allowlisted Linux packaging and execution probes | Exact accepted artifacts pass Docker and native Vercel; visitor-facing session service remains next |
 | [`packages/guided-runtime/`](../packages/guided-runtime/) | Separate guided runtime on port 4181 | Accepted DividendX ELF, captured genuine Raydium devnet binary/config and an exact local copy of the Circle devnet USDC mint account; synthetic 10 + 1 Test USDC funding and accelerated test year |
 | [`packages/issuer-readers/`](../packages/issuer-readers/) | Server-side issuer observations | Selected registry identities and available source records; explicit gaps, private snapshots, no settlement writer |
 | [`packages/amm-integration/`](../packages/amm-integration/) | Raydium CPMM execution package | Isolated Node CLI; finalized public devnet test flow and captured-bytecode local fallback, not wired into `/app/` |

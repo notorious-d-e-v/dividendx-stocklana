@@ -76,6 +76,11 @@ function digest(value) {
   return new Uint8Array(createHash('sha256').update(value).digest());
 }
 
+function sdkPublicKey(address) {
+  const SdkPublicKey = DIVIDENDX_PROGRAM_ID.constructor;
+  return new SdkPublicKey(address.toBytes());
+}
+
 function f64Bits(value) {
   const bytes = new ArrayBuffer(8);
   const view = new DataView(bytes);
@@ -143,7 +148,10 @@ class LocalRuntime {
       try { this.surfnet.drainEvents(); } catch {}
     }, 50);
     this.eventDrain.unref();
-    this.connection = new Connection(this.surfnet.rpcUrl, 'confirmed');
+    this.connection = new Connection(this.surfnet.rpcUrl, {
+      commitment: 'confirmed',
+      wsEndpoint: this.surfnet.wsUrl,
+    });
     this.builders = new DividendXInstructions(this.idl);
     this.surfnet.deploy({ programId: PROGRAM_ID.toBase58(), soBytes: this.elf });
     await rawRpc(this.surfnet.rpcUrl, 'surfnet_setProgramAuthority', [PROGRAM_ID.toBase58(), this.admin.publicKey.toBase58()]);
@@ -168,6 +176,7 @@ class LocalRuntime {
       schemaVersion: 1,
       kind: 'surfnet',
       rpcUrl: this.surfnet.rpcUrl,
+      wsUrl: this.surfnet.wsUrl,
       genesisHash: this.genesisHash,
       programId: PROGRAM_ID.toBase58(),
       deploymentDomainHex: Buffer.from(this.deploymentDomain).toString('hex'),
@@ -211,7 +220,7 @@ class LocalRuntime {
       collateralMint: mint.publicKey,
       assetPolicy: policy,
       systemProgram: SystemProgram.programId,
-    }, { issuerId, symbol: profile.symbol, attestor: this.attestor.publicKey, policyDigest: digest(`test-policy:${profile.id}`) })], [this.admin]);
+    }, { issuerId, symbol: profile.symbol, attestor: sdkPublicKey(this.attestor.publicKey), policyDigest: digest(`test-policy:${profile.id}`) })], [this.admin]);
     await this.refreshObservation({ profile, mint, policy }, `bootstrap:${profile.id}`);
     const series = annualSeriesAddresses(issuerId, mint.publicKey, 2027);
     await this.send([this.builders.permissionless.createSeries({
@@ -513,5 +522,5 @@ async function main() {
 main().catch((error) => {
   try { activeRuntime?.stop(); } catch {}
   console.error(`Local runtime failed: ${error.stack ?? error.message}`);
-  process.exitCode = 1;
+  process.exit(1);
 });

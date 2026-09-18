@@ -1,0 +1,114 @@
+{
+  "schema": "dividendx-devnet-bootstrap-proof-v1",
+  "boundary": "public-devnet-synthetic-test-assets",
+  "verifiedAt": "2026-09-18T01:53:02.292Z",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "adminSpendLamports": "106328520",
+  "bootstrap": [
+    {
+      "name": "fund_separated_test_authorities",
+      "signature": "2QNajKBZ4JL2Anu2Q7EKUdMknqNxshbCNkDi3PQ16kBw58ufLf13SakHEq8bLbp9JHFzxQ3ySG5hfXcdvx82NNzk",
+      "slot": 500101580,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "create_mint_xstocks-test-kox",
+      "signature": "38U6gt8s8SN85BD7G9XfagiSd9uvjWmTRHWfx9hdDjcufD9hDqNN7AfTRP5Jf4cNsAsaSFqKxxfAfNF1bX5YAAeG",
+      "slot": 500101598,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "register_policy_xstocks-test-kox",
+      "signature": "4kECr1BcfkKBNeifkhh2cjBh7JFHuZZzEv9utti6WWTNzsTuU7vusKpGPCmzN1t8hNWEc1pBVnprHBtyeR6iimFS",
+      "slot": 500102741,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "observe_profile_xstocks-test-kox",
+      "signature": "wnCygmpzojJsqfqGAZF1ubqS2wS4BFmEyG7YgN6LNTiKxqvSgxqMYrzueGNu1yRoiBcn27zQhQTj8DTa4cWioF9",
+      "slot": 500102763,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "create_series_xstocks-test-kox",
+      "signature": "32MpJ4AaqNsofPqKfnJBFpDdyKkyB9pGczh8hVtPXRnu1rP3Jnz8yb4p6Gnq4nwGRbfM9NmBih1GEDq9Hm63jSfH",
+      "slot": 500102781,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "create_mint_backpack-test-mu",
+      "signature": "51QrcXC7Cd9aado5Mf93NX1xQ3NecLtVGVyXC6qdSwNz9vERbkgrnegLhbHWf3UmtDufAZbzoCe1WEMGdQFr9GvM",
+      "slot": 500102798,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "register_policy_backpack-test-mu",
+      "signature": "4RiFS346mUFUzXVKXG8p5Yngfak7HcGzYvJ1Ti2spD9WnMngL7LDBkmYfHr5r6TUdmVkE1zgZHrpzerHt97wdPCu",
+      "slot": 500102815,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "observe_profile_backpack-test-mu",
+      "signature": "46abGMfVVvAdTFTAaHSnRjgxFXAM5hoo47LtbtWMJrKtSYbZNDqhSmMvhMQbeXM7BE3fk4HaKpcyXn9hZqKPYBve",
+      "slot": 500102833,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "create_series_backpack-test-mu",
+      "signature": "2fm7PESZHo9uqBXgMZdm8pYkEKvG2Xubv2NvL35cCjt2sia1y8hKeYdCVrW1uQpTHStB8N1U5iQxZGpqPXvrCZvV",
+      "slot": 500102850,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "create_mint_ondo-test-ibm",
+      "signature": "fk4g6syauryn19J2p85MQCabP1BXjTtVFqBU9Bo6AogtodwQLFG1bHxRmZJQ23RPVEXKkrbLEnBomELm8t2SE3m",
+      "slot": 500102867,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "register_policy_ondo-test-ibm",
+      "signature": "3jJy3W3onY3LJmsuzbTjAACXJVvodiJQcPWho5F7bcke267Ggz3vyFngZoDHrvvmW1873HK23WJs4D1rjEojVirj",
+      "slot": 500102882,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "observe_profile_ondo-test-ibm",
+      "signature": "5vBu6E3ZK7oZENX5bMQk3GJXaxKYDTx4LTvKuSSPDvg3VKhrPxGMSh43cqUbDUGPEUgaPdbirHw6HCRR6RHSiKJn",
+      "slot": 500102901,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "name": "create_series_ondo-test-ibm",
+      "signature": "3inM77HS6LyagNK4avqo8ug3oZRYndJL9Vf1dV3YBF5uiEQbkzQctFL3qge6uSQ8du1MLzr1antZ7PdjuW81GHDU",
+      "slot": 500102921,
+      "confirmationStatus": "finalized"
+    }
+  ],
+  "holder": [
+    {
+      "action": "fund",
+      "signature": "2YtzodQDyEomd4gQbTcq6w4FvW5whoui38EvrfUzhVmAyLFt7WrFX1EGnswz45t2xTFmjdRZnebQbNPAeu51F6cv",
+      "slot": 500103246,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "action": "createAccounts",
+      "signature": "2xNR4NpYTbK8tbKCeVkFCj2PBD3TPEfDkTVWeDdqCcYFrN11dhz3MtHHfxgc56zRMyGpBDpT5U7NXaXpTDEuXQWg",
+      "slot": 500103260,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "action": "split",
+      "signature": "2hUXx1oVwyLaD2Tjtkdd6zeMWFvdG44SisKDAbsnhS9aWtcHcG6WuxdATK6GpckNECGHqEgF7AHVuk3Ef36nEqSX",
+      "slot": 500103275,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "action": "recombine",
+      "signature": "2z5vsHNYbk3VDkhzgATaLpibsCqLfn8TFmeX1684qvcBQz5nvy9EdcSeQKXFyUkxvJekyR4DbUkAvbTTQVtgEMsE",
+      "slot": 500103289,
+      "confirmationStatus": "finalized"
+    }
+  ]
+}

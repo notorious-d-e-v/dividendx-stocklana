@@ -1,0 +1,1672 @@
+{
+  "schemaVersion": 1,
+  "kind": "wallet-runtime-acceptance",
+  "checkedAt": "2026-09-18T02:24:45.816Z",
+  "runtime": {
+    "kind": "surfnet",
+    "scope": "offline local SBF sandbox; not a public validator or network",
+    "rpcUrl": "http://127.0.0.1:39985",
+    "wsUrl": "ws://127.0.0.1:45343",
+    "genesisHash": "F1xECcWEVujbLs9E5xAEamCjnXKFeiid5Vbc8momk9tG",
+    "runtimeId": "4b373dc2-2ecc-4664-a312-232b0783252a",
+    "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+    "deploymentDomainHex": "f5168e507977cb98ca6f94bf4302e5a0f6432d62b7c4d5cc908f3524c916862c",
+    "config": "6C5yLG1wJHkfT6drh2DtMjZkcY5pdM2WHNo5FcReVxyA",
+    "year": 2027
+  },
+  "disposableOwners": {
+    "a": "FrCJNTaVTGN2N6ZVRhL6yarhMvspxPfPXiPNgsBGBxKc",
+    "b": "aAJBYk35yBJ5aNPCJKHErQZgCVPnQzEhyc9ndX7Rj67"
+  },
+  "controls": [
+    {
+      "step": "start-year",
+      "assetId": "backpack-test-mu",
+      "beforeUnixTimestamp": "1797336000",
+      "afterUnixTimestamp": "1798891200",
+      "message": "Chain Clock advanced into the 2027 test year.",
+      "receipts": [
+        {
+          "signature": "K28eDpD8gJk8csTVY9A28d6MoDufY6rmr4Pd7QGRKE7xG3wp98HmjpTJKrDAngrqKy4X8F6p1bficurKkEzLyju",
+          "slot": 9192527917,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1798891,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5115,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "38hLJ3Xqd35yGnGZnrbm4octaKuYU2oyXZ8n1PTUG5FA9VRavhubbWDnbH4dwZu2zJjKKedZ8YZkz86qaCRtAUQr",
+          "slot": 9192527919,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1798891,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5101,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "2uPM1HRg6jzeJfmbyDUHiqMm8VRk5dCu4dSisMvjyMiEXXEYp2gTWVkCv9uBVbhVfNuWjFC16HZyjxpseC17MHEP",
+          "slot": 9192527920,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1798891,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5108,
+          "dividendXInvokeObserved": true
+        }
+      ]
+    },
+    {
+      "step": "record-dividends",
+      "assetId": "backpack-test-mu",
+      "beforeUnixTimestamp": "1798891200",
+      "afterUnixTimestamp": "1828872001",
+      "eventCount": 4,
+      "qualifiedCount": 4,
+      "message": "Four test dividends are recorded for this 2027 test asset.",
+      "receipts": [
+        {
+          "signature": "2sT2TDKZ1EwdbxzvxzfFCbzQMHVa3cYeqJQFNdaTdauoCBzen33e4hpzWjHp9mcBW4QR881QYndBgcruMya8Bq3x",
+          "slot": 15412896995,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1805112,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "57YXxVVq9koMy8PFbSv1inmapjPvbxPTAyjwFUsx35ZZN4MF2ahg8DRSGUAhW6x8BtzB3xxhx4vncHo9YusT5RCn",
+          "slot": 15412896996,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1805112,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5101,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "3mri9UZeGohnTHgF98N1KRU9E4QYy5BjQKVPrkVdJ3aLAXzSBx2tk1wwh49FHNAFc14ghjpeck4DVQSXrFH4vpzB",
+          "slot": 15412896997,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1805112,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 24324,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "58V2Bje8wcjpVT7xWrcbetsceC7ZRSkPe6j4JnKwPGHXzoTk6Z79Pc6SVQiQs9jdwPLLA8nEoMaYcf16GNStS5m9",
+          "slot": 23361695996,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1813060,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "hed2XKTCDmyon7TBYtkrAmKU2dZbvSQrduir96kctPUDf8Dk16ptnAULL2T2XyPM47fQNg32CW9UXDmudH6W8UK",
+          "slot": 23361695997,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1813060,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5101,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "AdWc29WASf82A1wgFm8HDPfTzHAXmXQiC745xi5DcG7F9B6ew2xTNPsWVjzE8LCc13FWzgLmERRA7SbX69eeex9",
+          "slot": 23361695999,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1813060,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 36330,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4g7kAPRJ2vaPxinbAAPHiwMPFgWVAHExTbTNiRWSWCQVjwNSSNrDEw8QVTxgQTa1Wah2sjZUg7JHBbj2kpCCNrgx",
+          "slot": 31310063996,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1821009,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "4JUU2wN2xUWSbPPVGZd19WRRkCehKV1dVu5Kcb5av5KkBE8LjtBGSWGyUqPZAdbLVmjFxcWhFYt9jbaeVZm1jf3r",
+          "slot": 31310063998,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1821009,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5101,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "bBXotMXH958dtwxuUQPv1KZmCxGgHPYrJeE3tS8hm7TV4y1VQnry9c8WEhD4urXSUxaWE9ekBX8awQbBfqzcjaQ",
+          "slot": 31310063999,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "blockTime": 1821009,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 21330,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4TrdRMJGwDAXjvUH74NJnAgJwFjCDum87eSpr2venMyp7W2vz5oUYdEwrN5c4GqYNgPpvo8o1LAYRP5PK6QUGMef",
+          "slot": 39172031996,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "LBcmaBpBBAEzyFzb3P2qRLd6nnJ82ePTZYbKjgYyMgTVy3C6MFjar47Nd3sk2BLfCL8XtNCHbjkBS3QKFC5vwoV",
+          "slot": 39172031997,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5101,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "3ADQuhHuuwYXTN3JiyPqzuznnAW4gXa2JiLeyRjXF4NmEM78RCMDLJoyBpxYQ21qb4mfopn5ru13oPqZTsxwk1Tg",
+          "slot": 39172031999,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 24324,
+          "dividendXInvokeObserved": true
+        }
+      ]
+    },
+    {
+      "step": "record-dividends",
+      "assetId": "xstocks-test-kox",
+      "beforeUnixTimestamp": "1828872001",
+      "afterUnixTimestamp": "1828872001",
+      "eventCount": 4,
+      "qualifiedCount": 4,
+      "message": "Four test dividends are recorded for this 2027 test asset.",
+      "receipts": [
+        {
+          "signature": "5MRzRPcixg2auJ5zd6k9SUtE22rbmaghe8aSA3fNsNamf8BCCp1axq2fgrTzi8Qy33DptrBHsv83gujNbBoKekyf",
+          "slot": 39172032000,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "3B8b49MmcN5qXmXjiKGh4u2bCoL34qc7xZPkv3DH3c1pMethm2SiQHEGi2NZifK1vYYamKC8qeke7p7EwmjsqKMH",
+          "slot": 39172032002,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5115,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5RpttGvDb37FQor3nPsQhbbHk5EGwSjYbZ3EDyEFgyyt2DW8Gomk4RYQ32KS5GnAieoCxtYdTXXwXqjwYhpDTgSj",
+          "slot": 39172032003,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 28859,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "2ittHi7fc5vm9wQVxxHfij1xLzb2xZG5q8XgWdjSjaWUnCcTXwWqgXsD4rLBoqmHmndxxqarpPmq1yCr1YsfdKBy",
+          "slot": 39172032004,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "Ln9xAbSJH1XP7Bbmht7iUxjTHwinPpDyFGs3aVSvKSALe4cSRfMbZazsjgNLPzQgXziMPL1Tz2sGhhgELmoYLq9",
+          "slot": 39172032006,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5115,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "3JPN6FcFdfVYQJWHrKvbWuDujLJ6sVqb7NuTJ7SKn9Ff1kh3WDNWMg928btTcNhF1B6pXTfQ6Cbh9NCuorqym1ZZ",
+          "slot": 39172032007,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 28861,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "67LxzdNp9LbDW2Nhqa1YckJYgpjUEofCfY5hbjth3s8h6gCEDhLnjvpN98whM5xXxW34eSQ1MUtj8mR2Pd2gHB1F",
+          "slot": 39172032009,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "3bYs3Tw8WhyyZmA1P4F75J1fmM6LC5JDWX2XwM4J64noArTvHh1J9snFn6vw9ui9Qe5me6BkfS5ALXcZTYbNkf41",
+          "slot": 39172032010,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5115,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "3Dmjb1YZ1PPr1VrKqVmC4dTz2n8NKo3vhJwjnWvqqJFQnTx9QgQYuX83dFrCc7r1qtb1Co1gtzU8Hq4uKNwFvj5D",
+          "slot": 39172032011,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 22844,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "2geB3ph32amqaZ3MQUCEPMVRjkRgDPrqgAiaUL2PnkmexmG1iVmg35TmMHzaqnJGsiX5j8H16Fz3dGbeWwBq66Ku",
+          "slot": 39172032013,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "4C12s1FK5sZcbsnwDksaGKH3a8AStKzxBq4QuGjjPoRQDcmMvz3MmAEXNYmtTckpBZGrkWpKmRKgeyQ6YAd6nb8P",
+          "slot": 39172032014,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5115,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "9C8LiZcoZSRuaesZufaJgRQTdH6gudEr5D2wxJwcBVKQTLzCgbpHTbg3SQTMZD7CYukVnfQk4QRG5VwfnqiA8uE",
+          "slot": 39172032016,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 21338,
+          "dividendXInvokeObserved": true
+        }
+      ]
+    },
+    {
+      "step": "record-dividends",
+      "assetId": "ondo-test-ibm",
+      "beforeUnixTimestamp": "1828872001",
+      "afterUnixTimestamp": "1828872001",
+      "eventCount": 4,
+      "qualifiedCount": 4,
+      "message": "Four test dividends are recorded for this 2027 test asset.",
+      "receipts": [
+        {
+          "signature": "2CYrK3t4WUaUR3W5zFvikGirJMSWCdQ1zm1TM1YErgLizcVdvmwSabdrrT9kT6SyzAcTK2pvyhWGGbZwE9BPoRZV",
+          "slot": 39172032018,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "Fxpc8Q37iDw5zfkNSXhVMMbopcsmFthddum9F7LJj4cEUbFrLP6cDpkxLYzZmH35fcY2w6wyZftp1LuVs1B7vC7",
+          "slot": 39172032019,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5108,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5RvNeBgHumHpZNF2Eawrma7mmf7AMvV1QD6KEqfe7dBJBGzE6yg7HKyz6ymVobKbD9NzjWYMNnEEtEjxehVrRT3S",
+          "slot": 39172032020,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 21331,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "wLKkL82yucMfmf1brHzHjR9bHSmz3ucMKdFq7JxGzKr5bkaEpJSbA9RyP5GKXiTn9HS7gXfcmnRzitx884KdBpX",
+          "slot": 39172032022,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "62umuEnW9rZn4aVXknqYxe7H5EVzUcjyozXWUjDoL3bkCoskLjVHWCEUYnmLRiU2XQUQjRXyD15vv4vRXhUXBhqx",
+          "slot": 39172032023,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5108,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4R12MGD1r7tciMQVbkb7JTXJTn2k4ciwt2narSczThLnBKeofM1e8Vs7ntQ5vfWnp1NwZesqgRWiwgxYnmF98QqL",
+          "slot": 39172032024,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 21337,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5rtDRxhhzDDYQT7EVXM7E6MkJ3gBA8H35oTcwLNckway2abD14LCoczjJryc7tNaqLRSNVPUNCFfErDviTTMqMhn",
+          "slot": 39172032026,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "2SrUqcyFG5z6D7ckKhP127vvhGKYaFTTsFnBk9WBXxs7DWy3ihv2mjUcLsUnDnnHUjATpMWrbmu63LSPigdV6dMb",
+          "slot": 39172032027,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5108,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4Fm4xbwrrRqT3pgE5tSWoj4bbm9N7Jnz9rNuEQ2adFK97TLSjU2NG7A68WL1RQzeBQjMRatMtCDSi89DtaXJSGib",
+          "slot": 39172032029,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 27337,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "3njXRkLMoXKh11NsjjdaJoPfK8oC9wXfLDoSfqDUkTGnLMPS6g3Ynmaugn4Gyu2czeZ7yTP4bLYus7FPngTt2EwU",
+          "slot": 39172032030,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 1370,
+          "dividendXInvokeObserved": false
+        },
+        {
+          "signature": "2GNwt4TM8nZWPKDyqpuQo7UaixgHot5BzbY4uz2GLZYDaTs2ASwM8KoMeYMQtfDPZf1xUjB4gQtudSeVD5VRBfEh",
+          "slot": 39172032031,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5108,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5xrzRRPD45EwQpZPGjqz7tcLUhzHzLzmPqZtbXEUSCD23iP6LLnmJHNAAsmsbgSnDUkfz8ou5pvBch7cYF3KgcRr",
+          "slot": 39172032033,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1828872,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 22831,
+          "dividendXInvokeObserved": true
+        }
+      ]
+    },
+    {
+      "step": "end-year",
+      "assetId": "backpack-test-mu",
+      "beforeUnixTimestamp": "1828872001",
+      "afterUnixTimestamp": "1830427200",
+      "message": "Chain Clock advanced past 2027 maturity; the series remains unfinalized.",
+      "receipts": [
+        {
+          "signature": "4DVQij4No2HA7ypW4YxDEEMcy7YQSCbBDz1nSAWeLfVQdXtFcqQVfmwkw3cNQXVyo4sB6JuzS4GQaCHbgHbvay5D",
+          "slot": 40726798961,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5115,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5d4RGLBNbmZoNSUuxUDWTCfhSwmhodPt61g6iFnCq5QajfSTpebkiSzMnm9GrBXXraRrZ4YyNqTvR1xJfJucCssB",
+          "slot": 40726798963,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5101,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4PubE73zGy3DX9sU1VfTTH32y2LJRDftM63NpEebxvwBuatsHFX8hs9LYNGq2bHvSuoHVuEKZ5KMzMGyKwsR6a74",
+          "slot": 40726798964,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5108,
+          "dividendXInvokeObserved": true
+        }
+      ]
+    },
+    {
+      "step": "finalize",
+      "assetId": "backpack-test-mu",
+      "eventCount": 4,
+      "accumulatorCursor": 4,
+      "finalPtPoolRaw": "76923077",
+      "finalDrPoolRaw": "3076923",
+      "beforeUnixTimestamp": "1830427200",
+      "afterUnixTimestamp": "1830427200",
+      "message": "Series finalized from four test dividend records.",
+      "receipts": [
+        {
+          "signature": "3QYhvhnwWVci3mXeZpLU1gj18GyJm1xWUSzwV4v6NWSEkE6dqLmZMmho1QBWxUxnnKnb2CHmL5KRengzG8EWc82r",
+          "slot": 40726798968,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5101,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "3vpanarfLaavteedzGquLVYjWbfS1xtgbaf3eD1VyKxtKUaNkHVb6nytUz8UH94Q2tW9uMuxwAJCuQgWs9URnZvc",
+          "slot": 40726798969,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 13207,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4PrVjR8BnitrNo1q4sRLJk2wV7bdS8LRT3tekXdyVtbciw4WRKShTW281vjcXtxTG2QiWQRgfH55T6tJSPKEGRvw",
+          "slot": 40726798971,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 10131,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4Gdp8Hq5us4Qq7nnksMb8yc45YcMAZdWi6EUxRAjUejig52ELsDaYwd5QfvsbZ78u9gj2bg92z2rfHRW3arEXcHR",
+          "slot": 40726798972,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 10714,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "QvtqucCSVWxXDwzQgqMe4CUq3PEUtEmTwNyf4LZ8Fk9284LCJE6QbdXaEivYFaK75kGcRMfJLmGhComPxyRKdXN",
+          "slot": 40726798974,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 11166,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "3xDVQYoQUmeaUqq9H4CbqH7j79Ri2wfDwuWpndjuFD2U5VUyaz2UozdRbWF6t5Jjsg8HSgQ7d5wbmtX54GXLPWi4",
+          "slot": 40726798975,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 11628,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4Jg3Y8ErdizkFYQ3wdxUym263zT7DeXcVAXvaHEjfUJmizSot3u3v26w4A1YNhgVZkMFy8wkm4bNKjhaV352u7zV",
+          "slot": 40726798976,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 21288,
+          "dividendXInvokeObserved": true
+        }
+      ]
+    },
+    {
+      "step": "finalize",
+      "assetId": "xstocks-test-kox",
+      "eventCount": 4,
+      "accumulatorCursor": 4,
+      "finalPtPoolRaw": "7692307693",
+      "finalDrPoolRaw": "307692307",
+      "beforeUnixTimestamp": "1830427200",
+      "afterUnixTimestamp": "1830427200",
+      "message": "Series finalized from four test dividend records.",
+      "receipts": [
+        {
+          "signature": "2iMj7R9JgRi5CfjJ3ogfMdJMbS3PGcWc1t1bG8Y5E8qQzJmYXsxPf9CPKBFuqRNGAVPcvFYg7hF5mBRUyqQnFSrA",
+          "slot": 40726798978,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5115,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5Vg71Kq4Qa1RXaZx4J5eByTER77E7RisqsYxS2bK3mMEKK3qB872C364awoJHDXAhFyMZt4gdM4EfayKCps91oeh",
+          "slot": 40726798979,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 13221,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5hcTxfAq6Pewdreoj9Xft3zLa4zFZ7GYeorbJSGMLDKwUyjgmACf6cSgm7KwYz4AWMPLmVhKcKknhT6RKnvRTax5",
+          "slot": 40726798981,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 10131,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "32hJmsEzeJyv4SMa5v9BoRybtEdNHieMMCj5caP8BBkk1MdNi7zEyXhteeZGWAyiZahvJA6x35VjACLmFQfcDQvx",
+          "slot": 40726798982,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 10714,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "hPLSiWUAmJ388pD4ZaPMTEtWnvf1XJnFi3kmeHF1q6rCeq7e6bua8g7NhAQ5M7kdt3tk21aS5dMmagdViLzoynU",
+          "slot": 40726798984,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 11166,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5exhve5LPrR2UupUXfmFvHiftmvKtufpcur7vUBT9yR9iwULFua8MX8ETmaV7jsQr44dUJWgYSctCt8cAwgKpyZM",
+          "slot": 40726798985,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 11628,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "42qnQk6BLFwm95FpynLRnSYUqxFAj25THFjudrauvt2QtMLaRKiJ5bGiyEmWFKTU834hjeu8KCYRsvqPzxASDLTm",
+          "slot": 40726798987,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 21341,
+          "dividendXInvokeObserved": true
+        }
+      ]
+    },
+    {
+      "step": "finalize",
+      "assetId": "ondo-test-ibm",
+      "eventCount": 4,
+      "accumulatorCursor": 4,
+      "finalPtPoolRaw": "76923076924",
+      "finalDrPoolRaw": "3076923076",
+      "beforeUnixTimestamp": "1830427200",
+      "afterUnixTimestamp": "1830427200",
+      "message": "Series finalized from four test dividend records.",
+      "receipts": [
+        {
+          "signature": "21UXMsohQjuCNo6px78tUStx2ZCJV5MMWcELx6zj84xC3uDdx5pLSGcmAghuUHJJH46Kpkm4qupbToBNWwj8MXJj",
+          "slot": 40726798988,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 5108,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "2cZJPmFEbGU2UEPqRR4ufEgmeBR1WDUXA5yhwwPtwCQXzd8yMZck3e4KLGg8QW3GS8UymcXmWrCu2MjtBLXhifnP",
+          "slot": 40726798990,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 13214,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "5VG6GyVAK9b6Cw3azHrVfPrzhDxfq2z2yw4LHpeoV9hT7dxK5eWpzjPK8HeUwEADqDLp8T4ER9NVVrS59yNZJNKy",
+          "slot": 40726798991,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 10131,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "2eGSch4hF53VnivUFVYk21vC5VDaHxK8sGvmm9Hp5r6UTREDeCKRR98LvhQ2yMbxijYpjH9tdvrTq4gJjwXoAsBv",
+          "slot": 40726798992,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 10714,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "KH7wmSdQhUNe4dVxW6zsK8aNVoSCEqw3Fv9mMdwJ2GKyhHMoZivLXvAy8PVwQDVnEAJY8kVnxFYiygDn3djo79E",
+          "slot": 40726798994,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 11166,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4B3oW8FNQB2Yxc26NAQXKNKWY7MsBmqrcohkAFwn1s3dLgxvyvFDUq4BfWxp75S2noDG3ZzkAjmxLV2A8GuZpHHD",
+          "slot": 40726798995,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 11628,
+          "dividendXInvokeObserved": true
+        },
+        {
+          "signature": "4itNShHiFvzznBhrPhDGwoP4dv2zBMacPRdGYvPzWcqNSQgHZxgovuqHCzt9tbGvVUEcuCfyLmWkfQwFjCsLyPqg",
+          "slot": 40726798997,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1830427,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 21321,
+          "dividendXInvokeObserved": true
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "assetId": "backpack-test-mu",
+      "company": "Micron",
+      "symbol": "TestMU",
+      "issuerLabel": "Backpack/Trek test profile",
+      "decimals": 6,
+      "collateralMint": "AtZ5vu49vQ53tv6RdaTkAZbUozNm7YDYrN6MU6ueih1h",
+      "series": "BLyh1zK3R2ukw46yHS3Nk81VuywjHEdXi8XGZGTZZMFZ",
+      "ptMint": "9spsgmwbVxj8JspaAkd5XEX1McZTo3oEb3DjwCeLLFGs",
+      "drMint": "GKy9m6sZsU5kLRTEmnQkxtT8xLetiWFP62poXVuwa4Sh",
+      "vault": "7z29fxNwecBDZiAQyiJkVMct2DGHBHbSyA7Jn7Gzbh3H",
+      "discoveryId": "580a9da216197c0728111e3d5e34d78c56eda37b95085a645e7711c4352fc4ca",
+      "amounts": {
+        "unit": "1000000",
+        "depositRaw": "100000000",
+        "ptTransferRaw": "40000000",
+        "drTransferRaw": "60000000",
+        "recombineRaw": "20000000",
+        "donationRaw": "7",
+        "burnPtRaw": "1"
+      },
+      "faucet": {
+        "a": {
+          "message": "",
+          "receipts": [
+            {
+              "signature": "2LWPtujw99rgovEekGr9dM6qGpya5WJULDgmHD7kEpHojXsKhEhsuAyP9K71FBqLMmfeEqKE945MQGfQRzv7MWzi",
+              "slot": 7637716577,
+              "confirmationStatus": "confirmed",
+              "err": null,
+              "blockTime": 1797336,
+              "feeLamports": 5000,
+              "computeUnitsConsumed": 150,
+              "dividendXInvokeObserved": false
+            },
+            {
+              "signature": "26bdRg9x8uQRyvAEfLWfFgAhSAdgjfsovAhw9XCDSzLoUmt3vkYcm4F1VdKrWJXVojfMisLKjm8shPj4vELkVKfq",
+              "slot": 7637716578,
+              "confirmationStatus": "confirmed",
+              "err": null,
+              "blockTime": 1797336,
+              "feeLamports": 5000,
+              "computeUnitsConsumed": 18475,
+              "dividendXInvokeObserved": false
+            }
+          ]
+        },
+        "b": {
+          "message": "",
+          "receipts": [
+            {
+              "signature": "2hHo3CEeXFuGYpj7AweE9vxGhwJzQ9UNccENb2cQTqNVpyVZb2eDfsdg31TXuRwA8GRCNuxkx2ZPhEF4NcfA8g9K",
+              "slot": 7637716580,
+              "confirmationStatus": "confirmed",
+              "err": null,
+              "blockTime": 1797336,
+              "feeLamports": 5000,
+              "computeUnitsConsumed": 150,
+              "dividendXInvokeObserved": false
+            },
+            {
+              "signature": "2MCfXMbJA6nCNpppAh8TvFDRHUBNafuHe6KPBsQdoPJoijFSkQsFCgt7RTekRLCivynMKFupxrAZyFtTMvPegig4",
+              "slot": 7637716582,
+              "confirmationStatus": "confirmed",
+              "err": null,
+              "blockTime": 1797336,
+              "feeLamports": 5000,
+              "computeUnitsConsumed": 24475,
+              "dividendXInvokeObserved": false
+            }
+          ]
+        }
+      },
+      "holderTransactions": {
+        "deposit": {
+          "label": "backpack-test-mu deposit",
+          "signature": "4BE8qzQuCetSTs3LqGRtgQGVhdp2Ws5qE8GyDVjmpQkCLZTAg6Q5msmd82k9ViVXWW3yAS9zDv8pLWsiqcHeVUkN",
+          "slot": 7637716590,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 53675,
+          "dividendXInvokeObserved": true
+        },
+        "transferPt": {
+          "label": "backpack-test-mu transfer PT (not a sale)",
+          "signature": "2ZKFpLZjk1k5xhTk8h5sZKoky7PjLjMuX5sD2dXT4PwJXCmFRhsCSFMyS3Trw3Tqmi2YLsn9GEiEw8TnobaRixFL",
+          "slot": 7637716592,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 16630,
+          "dividendXInvokeObserved": false
+        },
+        "transferDr": {
+          "label": "backpack-test-mu transfer DR (not a sale)",
+          "signature": "4U4fafaAngPCk78aBxjCPEVKj2DPYLRe1Sw1sm1DZSJSgMVA1Ku61VMCE53g8vcngHbf9B6UoFafpoFKxaTXqNSJ",
+          "slot": 7637716594,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 15130,
+          "dividendXInvokeObserved": false
+        },
+        "recombine": {
+          "label": "backpack-test-mu partial paired recombination",
+          "signature": "P3bLrkKNzxxhPjByEYPNNf1jDyxmfVkLePQxJqz9ZZVhGZBMxbGM4MNF22FzPMsehQoNxcSUBXRiFfLZ4uwZze3",
+          "slot": 7637716595,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 25075,
+          "dividendXInvokeObserved": true
+        },
+        "donation": {
+          "label": "backpack-test-mu unsolicited vault donation",
+          "signature": "5da1fdBDwc5nxhCmdXm9BF5ZbZWDjRr3LDusMBVi1GdFDt3mcnGf2fEQJmdZtFQvsznftD6mZbJF8fxdJe1w2Vfp",
+          "slot": 7637716597,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 2330,
+          "dividendXInvokeObserved": false
+        },
+        "externalPtBurn": {
+          "label": "backpack-test-mu external PT burn",
+          "signature": "UrsoFXzkzQGWuF7wUfp9nXh8LowQ1EVbhcX5TpuLvMRuSDxSmRNuVLFWW4c2Cq6kRipBvyHSBryxtgLpPHYTxnT",
+          "slot": 7637716598,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 126,
+          "dividendXInvokeObserved": false
+        }
+      },
+      "preparedState": {
+        "contextSlot": 7637716600,
+        "clockUnixTimestamp": "1797336000",
+        "phase": "open",
+        "stateVersion": "2",
+        "accountableRaw": "80000000",
+        "eventCount": 0,
+        "unresolvedCount": 0,
+        "inYearQualifiedCount": 0,
+        "accumulatorCursor": 0,
+        "finalSupplyRaw": "0",
+        "finalPtPoolRaw": "0",
+        "finalDrPoolRaw": "0",
+        "redeemedPtClaimsRaw": "0",
+        "redeemedDrClaimsRaw": "0",
+        "ptPaidRaw": "0",
+        "drPaidRaw": "0",
+        "vaultRaw": "80000007",
+        "requiredRaw": "80000000",
+        "aCollateralRaw": "0",
+        "aPtRaw": "59999999",
+        "aDrRaw": "40000000",
+        "bCollateralRaw": "119999993",
+        "bPtRaw": "20000000",
+        "bDrRaw": "40000000",
+        "ptSupplyRaw": "79999999",
+        "drSupplyRaw": "80000000",
+        "collateralSupplyRaw": "200000000"
+      },
+      "finalizedState": {
+        "phase": "finalized",
+        "finalSupplyRaw": "80000000",
+        "finalPtPoolRaw": "76923077",
+        "finalDrPoolRaw": "3076923"
+      },
+      "redemptions": [
+        {
+          "side": "pt",
+          "owner": "FrCJNTaVTGN2N6ZVRhL6yarhMvspxPfPXiPNgsBGBxKc",
+          "amountRaw": "59999999",
+          "outputRaw": "57692306",
+          "allowZero": false,
+          "receipt": {
+            "label": "backpack-test-mu redeem PT",
+            "signature": "4V7VVoKfKnV9dSELqh3kmL1JS9kF3sv8wf6K5r3x1oKW6tftXFjpUWN7RjWE23po6YhYrAzWDgrZg7g1XnAKaxvZ",
+            "slot": 40726799003,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21584,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "dr",
+          "owner": "aAJBYk35yBJ5aNPCJKHErQZgCVPnQzEhyc9ndX7Rj67",
+          "amountRaw": "40000000",
+          "outputRaw": "1538461",
+          "allowZero": false,
+          "receipt": {
+            "label": "backpack-test-mu redeem DR",
+            "signature": "2yFyoh9rnu1vSGSkJvCw5Qj8eXmHJ52bHgqd7sd3jakr8foX2KiqRpjo7vzRSRtxMuUYmR8SfUQik5X4UFfPmd9k",
+            "slot": 40726799005,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21581,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "dr",
+          "owner": "FrCJNTaVTGN2N6ZVRhL6yarhMvspxPfPXiPNgsBGBxKc",
+          "amountRaw": "40000000",
+          "outputRaw": "1538462",
+          "allowZero": false,
+          "receipt": {
+            "label": "backpack-test-mu redeem DR",
+            "signature": "3Bjt7CvrdhKgMkfYyrr9jrtHLf4tHuAyVxykPPTsc4RZ5QGawaYZcfYRbfqVFjmo5Kw41kDsDHZPcdarZYUFbDiz",
+            "slot": 40726799007,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21580,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "pt",
+          "owner": "aAJBYk35yBJ5aNPCJKHErQZgCVPnQzEhyc9ndX7Rj67",
+          "amountRaw": "20000000",
+          "outputRaw": "19230770",
+          "allowZero": false,
+          "receipt": {
+            "label": "backpack-test-mu redeem PT",
+            "signature": "3Sn62Pwhxm1kQ2HM8Hi3EbJBSBLEtGPMvtLNURAt5L7chNuh9qe7wyEMSupskEXam6PcLGZZCzib4ZhXJDuLn8u7",
+            "slot": 40726799009,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21583,
+            "dividendXInvokeObserved": true
+          }
+        }
+      ],
+      "finalState": {
+        "contextSlot": 40726799010,
+        "clockUnixTimestamp": "1830427200",
+        "phase": "finalized",
+        "stateVersion": "16",
+        "accountableRaw": "80000000",
+        "eventCount": 4,
+        "unresolvedCount": 0,
+        "inYearQualifiedCount": 4,
+        "accumulatorCursor": 4,
+        "finalSupplyRaw": "80000000",
+        "finalPtPoolRaw": "76923077",
+        "finalDrPoolRaw": "3076923",
+        "redeemedPtClaimsRaw": "79999999",
+        "redeemedDrClaimsRaw": "80000000",
+        "ptPaidRaw": "76923076",
+        "drPaidRaw": "3076923",
+        "vaultRaw": "8",
+        "requiredRaw": "1",
+        "aCollateralRaw": "59230768",
+        "aPtRaw": "0",
+        "aDrRaw": "0",
+        "bCollateralRaw": "140769224",
+        "bPtRaw": "0",
+        "bDrRaw": "0",
+        "ptSupplyRaw": "0",
+        "drSupplyRaw": "0",
+        "collateralSupplyRaw": "200000000"
+      },
+      "conservation": {
+        "initialTrackedCollateralRaw": "200000000",
+        "finalTrackedCollateralRaw": "200000000",
+        "remainingProtocolObligationsRaw": "1",
+        "preservedDonationRaw": "7"
+      }
+    },
+    {
+      "assetId": "xstocks-test-kox",
+      "company": "Coca-Cola",
+      "symbol": "TestKOx",
+      "issuerLabel": "xStocks test profile",
+      "decimals": 8,
+      "collateralMint": "3ntxYx5zP8mf9EnvEwFgNd1jgzBwPcFuLF87UeSNVcen",
+      "series": "4sY1rgSKVi2miiK9oRXhpZtVE9Xyk1CoQNMfHeuNfaN2",
+      "ptMint": "BjxGZc9MFwDXsLDbNhNYbGkANvR1dCen8m2DSJ7kzTqV",
+      "drMint": "4e2WXc2Uv6FbNZVktcQsGqpVGQDSnfQZitpdWVwCXw9E",
+      "vault": "t9gzdV2Z54tbqGWjmPEhRqKh8EJjuA48mWDVMTqQ93E",
+      "discoveryId": "cc83d5ec1011a4c7cc6078f29b99a96b57eb31b2198e64a13da8ce96fb581c26",
+      "amounts": {
+        "unit": "100000000",
+        "depositRaw": "10000000000",
+        "ptTransferRaw": "4000000000",
+        "drTransferRaw": "6000000000",
+        "recombineRaw": "2000000000",
+        "donationRaw": "7",
+        "burnPtRaw": "1"
+      },
+      "faucet": {
+        "a": {
+          "message": "",
+          "receipts": [
+            {
+              "signature": "5cuFfLorMUp4D5ByE3551a9B9GaajttsBV2hV7MkXoK9S65w7dQGDWesu31X7HhFttBDw8umSNq5RXk583eaEWbA",
+              "slot": 7637716584,
+              "confirmationStatus": "confirmed",
+              "err": null,
+              "blockTime": 1797336,
+              "feeLamports": 5000,
+              "computeUnitsConsumed": 18475,
+              "dividendXInvokeObserved": false
+            }
+          ]
+        },
+        "b": {
+          "message": "",
+          "receipts": [
+            {
+              "signature": "2BUpjxUYWs2CJSeRbgHxEcrVfUpaxzu528kHzU78dNZ2XLtxcc62gu15af12UPtaDY8y6esjXdHCdWZJLs7y68m6",
+              "slot": 7637716585,
+              "confirmationStatus": "confirmed",
+              "err": null,
+              "blockTime": 1797336,
+              "feeLamports": 5000,
+              "computeUnitsConsumed": 18475,
+              "dividendXInvokeObserved": false
+            }
+          ]
+        }
+      },
+      "holderTransactions": {
+        "deposit": {
+          "label": "xstocks-test-kox deposit",
+          "signature": "5EbEqzRjacqsfGy8XPRjzZhymzaHHyceBqe3wWNLsdmbirTyHJ6KTqJ17FYZPmhB1AFxup82QTwRy4HYo53o6Yfa",
+          "slot": 7637716600,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 53710,
+          "dividendXInvokeObserved": true
+        },
+        "transferPt": {
+          "label": "xstocks-test-kox transfer PT (not a sale)",
+          "signature": "U12n8KaNhVK8gx7GzZBFTLAYutxVyiDek3dWRDioNKmUAHubRBX3Sxt4Jnbhh7dwSQAx6Gh4ciVzpJEQKA3zQYS",
+          "slot": 7637716602,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 19630,
+          "dividendXInvokeObserved": false
+        },
+        "transferDr": {
+          "label": "xstocks-test-kox transfer DR (not a sale)",
+          "signature": "8Rs4GMjBeLnpo42ZRH3Jxnut9NgeHvJwcLiTgkStnwdgqT4QYjnbnGeV2S8TnamKr6bHnyfiMDwHUyfjFskDizB",
+          "slot": 7637716603,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 15130,
+          "dividendXInvokeObserved": false
+        },
+        "recombine": {
+          "label": "xstocks-test-kox partial paired recombination",
+          "signature": "33G8QLjZPboCMeHtMbsW4r6LZKiraSXWBvmNSbULaJeCWiMXyiTo3HFoQ1rMMM7gi8ZLXQWRST8skRcXEiakSYCx",
+          "slot": 7637716604,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 25110,
+          "dividendXInvokeObserved": true
+        },
+        "donation": {
+          "label": "xstocks-test-kox unsolicited vault donation",
+          "signature": "37qnufrtjgPoTwNqwprmKDSYhAtEV3ffJsxim8Cy3BtHvJXYNNaugT3o5cKN4ggieTuHj7yANwmqQeyHMb53BCDF",
+          "slot": 7637716606,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 2330,
+          "dividendXInvokeObserved": false
+        },
+        "externalPtBurn": {
+          "label": "xstocks-test-kox external PT burn",
+          "signature": "3JzXx9B5frBQvUMiafrxLX8mi1mSSJcess2iNRCNXUB4hhHxk65yNWYqxEntCbm8ssJWVhdVfYufPvWFEKb65qzt",
+          "slot": 7637716607,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 126,
+          "dividendXInvokeObserved": false
+        }
+      },
+      "preparedState": {
+        "contextSlot": 7637716609,
+        "clockUnixTimestamp": "1797336000",
+        "phase": "open",
+        "stateVersion": "2",
+        "accountableRaw": "8000000000",
+        "eventCount": 0,
+        "unresolvedCount": 0,
+        "inYearQualifiedCount": 0,
+        "accumulatorCursor": 0,
+        "finalSupplyRaw": "0",
+        "finalPtPoolRaw": "0",
+        "finalDrPoolRaw": "0",
+        "redeemedPtClaimsRaw": "0",
+        "redeemedDrClaimsRaw": "0",
+        "ptPaidRaw": "0",
+        "drPaidRaw": "0",
+        "vaultRaw": "8000000007",
+        "requiredRaw": "8000000000",
+        "aCollateralRaw": "0",
+        "aPtRaw": "5999999999",
+        "aDrRaw": "4000000000",
+        "bCollateralRaw": "11999999993",
+        "bPtRaw": "2000000000",
+        "bDrRaw": "4000000000",
+        "ptSupplyRaw": "7999999999",
+        "drSupplyRaw": "8000000000",
+        "collateralSupplyRaw": "20000000000"
+      },
+      "finalizedState": {
+        "phase": "finalized",
+        "finalSupplyRaw": "8000000000",
+        "finalPtPoolRaw": "7692307693",
+        "finalDrPoolRaw": "307692307"
+      },
+      "redemptions": [
+        {
+          "side": "pt",
+          "owner": "FrCJNTaVTGN2N6ZVRhL6yarhMvspxPfPXiPNgsBGBxKc",
+          "amountRaw": "5999999999",
+          "outputRaw": "5769230768",
+          "allowZero": false,
+          "receipt": {
+            "label": "xstocks-test-kox redeem PT",
+            "signature": "2yKK9zGKFS1GugDmuAEkpmoF4vLygSfRncWhMpxir3mYz34Y1CAfdzNxFWyyqVFiXfLX9YRNY3AueT6WBEyPXaK1",
+            "slot": 40726799010,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21853,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "dr",
+          "owner": "aAJBYk35yBJ5aNPCJKHErQZgCVPnQzEhyc9ndX7Rj67",
+          "amountRaw": "4000000000",
+          "outputRaw": "153846153",
+          "allowZero": false,
+          "receipt": {
+            "label": "xstocks-test-kox redeem DR",
+            "signature": "61yj8YpMgPHCTck7sNQyYdKk237AtvjDw2cvYMSKuDJMicCF4TYQedmHdq9d66JBjFkLfXKtpctMTZBctYBQNhYq",
+            "slot": 40726799012,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21595,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "dr",
+          "owner": "FrCJNTaVTGN2N6ZVRhL6yarhMvspxPfPXiPNgsBGBxKc",
+          "amountRaw": "4000000000",
+          "outputRaw": "153846154",
+          "allowZero": false,
+          "receipt": {
+            "label": "xstocks-test-kox redeem DR",
+            "signature": "2EXh12zHfDid8FmfWrBfqsvbJ3h4ELtGc5D2gYr1WS1gTs9aLuQfkWUmbZZMrT3ZMEd5nEvLVnwpYckH9C13u5ir",
+            "slot": 40726799013,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21594,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "pt",
+          "owner": "aAJBYk35yBJ5aNPCJKHErQZgCVPnQzEhyc9ndX7Rj67",
+          "amountRaw": "2000000000",
+          "outputRaw": "1923076924",
+          "allowZero": false,
+          "receipt": {
+            "label": "xstocks-test-kox redeem PT",
+            "signature": "2Nsge67EcSKMH9LowzXA6H43EiKctFxG35onQ2eNp4HmcEeB8MCB4RZFR5mNKx3g4r1X5VdibMdhtcuZENoUgQxE",
+            "slot": 40726799015,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 22106,
+            "dividendXInvokeObserved": true
+          }
+        }
+      ],
+      "finalState": {
+        "contextSlot": 40726799017,
+        "clockUnixTimestamp": "1830427200",
+        "phase": "finalized",
+        "stateVersion": "16",
+        "accountableRaw": "8000000000",
+        "eventCount": 4,
+        "unresolvedCount": 0,
+        "inYearQualifiedCount": 4,
+        "accumulatorCursor": 4,
+        "finalSupplyRaw": "8000000000",
+        "finalPtPoolRaw": "7692307693",
+        "finalDrPoolRaw": "307692307",
+        "redeemedPtClaimsRaw": "7999999999",
+        "redeemedDrClaimsRaw": "8000000000",
+        "ptPaidRaw": "7692307692",
+        "drPaidRaw": "307692307",
+        "vaultRaw": "8",
+        "requiredRaw": "1",
+        "aCollateralRaw": "5923076922",
+        "aPtRaw": "0",
+        "aDrRaw": "0",
+        "bCollateralRaw": "14076923070",
+        "bPtRaw": "0",
+        "bDrRaw": "0",
+        "ptSupplyRaw": "0",
+        "drSupplyRaw": "0",
+        "collateralSupplyRaw": "20000000000"
+      },
+      "conservation": {
+        "initialTrackedCollateralRaw": "20000000000",
+        "finalTrackedCollateralRaw": "20000000000",
+        "remainingProtocolObligationsRaw": "1",
+        "preservedDonationRaw": "7"
+      }
+    },
+    {
+      "assetId": "ondo-test-ibm",
+      "company": "IBM",
+      "symbol": "TestIBMon",
+      "issuerLabel": "Ondo test profile",
+      "decimals": 9,
+      "collateralMint": "5Jcbxt6kJivpBSspbpKzpPtKEAmnDNBpoXotyDCffPt1",
+      "series": "DmuMmthQRm1LTDsBbiBsxiej9nabJi8BEySHnok5ADcj",
+      "ptMint": "B3f5N7vDyGKgK3gWoKHBjLTempdCJBv16FkXDNv4GB1G",
+      "drMint": "5TW38o4D5H9JYWJxyDCrq4rvHV9BtgZxe72WJN4hTnWm",
+      "vault": "DNExX2ERvjZE42SNB3ucEpxu7CrY2HjrBroJcUtkjG1s",
+      "discoveryId": "3a5392038c2d278cbd36c039e264020039fa01912ff69fa288052c5e8469f8c4",
+      "amounts": {
+        "unit": "1000000000",
+        "depositRaw": "100000000000",
+        "ptTransferRaw": "40000000000",
+        "drTransferRaw": "60000000000",
+        "recombineRaw": "20000000000",
+        "donationRaw": "7",
+        "burnPtRaw": "1"
+      },
+      "faucet": {
+        "a": {
+          "message": "",
+          "receipts": [
+            {
+              "signature": "3EC3neFf7KDzg9JVRHEDTLN168WdRPg4QZhtAoWzZF9WZUcfAjD7r4dEqrXFYftbpENmQCpUTrkw5x5r9Qf4d9ey",
+              "slot": 7637716586,
+              "confirmationStatus": "confirmed",
+              "err": null,
+              "blockTime": 1797336,
+              "feeLamports": 5000,
+              "computeUnitsConsumed": 24475,
+              "dividendXInvokeObserved": false
+            }
+          ]
+        },
+        "b": {
+          "message": "",
+          "receipts": [
+            {
+              "signature": "rsbpmVN8DrmWsd2rrJVSShvVov7P5zduNLByv1SZHtrApvPuDhBmqRRZPLV7pBTtHrVXZ91wrTKFFJqZWxebvBA",
+              "slot": 7637716588,
+              "confirmationStatus": "confirmed",
+              "err": null,
+              "blockTime": 1797336,
+              "feeLamports": 5000,
+              "computeUnitsConsumed": 18475,
+              "dividendXInvokeObserved": false
+            }
+          ]
+        }
+      },
+      "holderTransactions": {
+        "deposit": {
+          "label": "ondo-test-ibm deposit",
+          "signature": "Gmtth8mLL4myuXmjrYVFuG9kQujAPYACghvQT95PxhUKV9AuAAa8icmLeDD4oroPXGQbu8orU8dvjeofj4ZbpCz",
+          "slot": 7637716609,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 52182,
+          "dividendXInvokeObserved": true
+        },
+        "transferPt": {
+          "label": "ondo-test-ibm transfer PT (not a sale)",
+          "signature": "4ehB4gK9cd4oy5uRWkyyYqyqkMVs6avLjTxg6hDbXxHXTHX4whJ5ZFJWrJNLZnAyEVZf8qw9vhjeooXKkEHmCivE",
+          "slot": 7637716610,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 18130,
+          "dividendXInvokeObserved": false
+        },
+        "transferDr": {
+          "label": "ondo-test-ibm transfer DR (not a sale)",
+          "signature": "YrkdSDJEUaixd8o2T6NAbR8f1jBB8bEXqwxcD5ivfjpgExNqTrDthRDyTPYS3EyGxNQGj24cXrm9SYgA854t3uF",
+          "slot": 7637716612,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 13630,
+          "dividendXInvokeObserved": false
+        },
+        "recombine": {
+          "label": "ondo-test-ibm partial paired recombination",
+          "signature": "4ZHt4BRaqYfWbSd2P6JtQjkBFbfyAGE1Wfz2bhRrc1kV3DbREwuV75k2uT1GydyGLfJbSnRjBKjGDupgXRK7fVxH",
+          "slot": 7637716614,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 25082,
+          "dividendXInvokeObserved": true
+        },
+        "donation": {
+          "label": "ondo-test-ibm unsolicited vault donation",
+          "signature": "4Q5zLws4GHzFGGUvej9oCBmi1SAqKFGP2p1GCtEL5RhMkNnHXYWzdmgFmvi9Byx8SJnvK8z29NJLCUSUySuHS229",
+          "slot": 7637716615,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 2330,
+          "dividendXInvokeObserved": false
+        },
+        "externalPtBurn": {
+          "label": "ondo-test-ibm external PT burn",
+          "signature": "3QpHRSn76wXZM7qb71qe4X6Qw4t5GiqDL8HCCckRCNg89g6kSqDKc3UTMitDayhwHFCYqfcixR6HvTT8M14Y2B8G",
+          "slot": 7637716616,
+          "confirmationStatus": "confirmed",
+          "err": null,
+          "blockTime": 1797336,
+          "feeLamports": 5000,
+          "computeUnitsConsumed": 126,
+          "dividendXInvokeObserved": false
+        }
+      },
+      "preparedState": {
+        "contextSlot": 7637716618,
+        "clockUnixTimestamp": "1797336000",
+        "phase": "open",
+        "stateVersion": "2",
+        "accountableRaw": "80000000000",
+        "eventCount": 0,
+        "unresolvedCount": 0,
+        "inYearQualifiedCount": 0,
+        "accumulatorCursor": 0,
+        "finalSupplyRaw": "0",
+        "finalPtPoolRaw": "0",
+        "finalDrPoolRaw": "0",
+        "redeemedPtClaimsRaw": "0",
+        "redeemedDrClaimsRaw": "0",
+        "ptPaidRaw": "0",
+        "drPaidRaw": "0",
+        "vaultRaw": "80000000007",
+        "requiredRaw": "80000000000",
+        "aCollateralRaw": "0",
+        "aPtRaw": "59999999999",
+        "aDrRaw": "40000000000",
+        "bCollateralRaw": "119999999993",
+        "bPtRaw": "20000000000",
+        "bDrRaw": "40000000000",
+        "ptSupplyRaw": "79999999999",
+        "drSupplyRaw": "80000000000",
+        "collateralSupplyRaw": "200000000000"
+      },
+      "finalizedState": {
+        "phase": "finalized",
+        "finalSupplyRaw": "80000000000",
+        "finalPtPoolRaw": "76923076924",
+        "finalDrPoolRaw": "3076923076"
+      },
+      "redemptions": [
+        {
+          "side": "pt",
+          "owner": "FrCJNTaVTGN2N6ZVRhL6yarhMvspxPfPXiPNgsBGBxKc",
+          "amountRaw": "59999999999",
+          "outputRaw": "57692307692",
+          "allowZero": false,
+          "receipt": {
+            "label": "ondo-test-ibm redeem PT",
+            "signature": "4j2tF3W2EC6UGwfD3m3BDLRZ4yGmmw3jb8rRvCvh1Adubej9Zry2MkvgZboNbU7Tx5SdDFarveqqWs7LWL8dEy22",
+            "slot": 40726799018,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21845,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "dr",
+          "owner": "aAJBYk35yBJ5aNPCJKHErQZgCVPnQzEhyc9ndX7Rj67",
+          "amountRaw": "40000000000",
+          "outputRaw": "1538461538",
+          "allowZero": false,
+          "receipt": {
+            "label": "ondo-test-ibm redeem DR",
+            "signature": "5GqiGGpPvaS54ZfRY5wvSWcvL8VtcustnFg5MwtCwF5xTVYp6pDeu6b4XK9E9oKxbXn8sa1TpbT1zpmAcKQZcnDa",
+            "slot": 40726799019,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21769,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "dr",
+          "owner": "FrCJNTaVTGN2N6ZVRhL6yarhMvspxPfPXiPNgsBGBxKc",
+          "amountRaw": "40000000000",
+          "outputRaw": "1538461538",
+          "allowZero": false,
+          "receipt": {
+            "label": "ondo-test-ibm redeem DR",
+            "signature": "54TZWTdVzNoKP9PL8VKo1qtDNjhMJNJnhR3Lsk59Py6w5g1zTRRLsavVAfSJ1AoAZTutrVtextstPjWYe6qhBdcy",
+            "slot": 40726799021,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 21947,
+            "dividendXInvokeObserved": true
+          }
+        },
+        {
+          "side": "pt",
+          "owner": "aAJBYk35yBJ5aNPCJKHErQZgCVPnQzEhyc9ndX7Rj67",
+          "amountRaw": "20000000000",
+          "outputRaw": "19230769231",
+          "allowZero": false,
+          "receipt": {
+            "label": "ondo-test-ibm redeem PT",
+            "signature": "29vioHLqt8hPDC1F3iGw26a8GoKpUZo8wzVeeT3gAwiXeL2vJBDkPQqAT25YrvUzoE81BBE1263zJM6C8SRjkyA5",
+            "slot": 40726799022,
+            "confirmationStatus": "confirmed",
+            "err": null,
+            "blockTime": 1830427,
+            "feeLamports": 5000,
+            "computeUnitsConsumed": 22100,
+            "dividendXInvokeObserved": true
+          }
+        }
+      ],
+      "finalState": {
+        "contextSlot": 40726799024,
+        "clockUnixTimestamp": "1830427200",
+        "phase": "finalized",
+        "stateVersion": "16",
+        "accountableRaw": "80000000000",
+        "eventCount": 4,
+        "unresolvedCount": 0,
+        "inYearQualifiedCount": 4,
+        "accumulatorCursor": 4,
+        "finalSupplyRaw": "80000000000",
+        "finalPtPoolRaw": "76923076924",
+        "finalDrPoolRaw": "3076923076",
+        "redeemedPtClaimsRaw": "79999999999",
+        "redeemedDrClaimsRaw": "80000000000",
+        "ptPaidRaw": "76923076923",
+        "drPaidRaw": "3076923076",
+        "vaultRaw": "8",
+        "requiredRaw": "1",
+        "aCollateralRaw": "59230769230",
+        "aPtRaw": "0",
+        "aDrRaw": "0",
+        "bCollateralRaw": "140769230762",
+        "bPtRaw": "0",
+        "bDrRaw": "0",
+        "ptSupplyRaw": "0",
+        "drSupplyRaw": "0",
+        "collateralSupplyRaw": "200000000000"
+      },
+      "conservation": {
+        "initialTrackedCollateralRaw": "200000000000",
+        "finalTrackedCollateralRaw": "200000000000",
+        "remainingProtocolObligationsRaw": "1",
+        "preservedDonationRaw": "7"
+      }
+    }
+  ],
+  "maturityOnlyRedemptionRejection": {
+    "label": "backpack-test-mu redemption before finalization",
+    "signature": "6vDCQRJQzVYmRCHUPn1MjiKEUxLZjqC6VNPyzesxar2fstwUng8R6oCMNrwEBfiSkc3zNuXhvLDzjp2n6MY7ymE",
+    "slot": 40726798966,
+    "confirmationStatus": "confirmed",
+    "err": {
+      "InstructionError": [
+        0,
+        {
+          "Custom": 6024
+        }
+      ]
+    },
+    "blockTime": 1830427,
+    "feeLamports": 5000,
+    "computeUnitsConsumed": 12782,
+    "dividendXInvokeObserved": true,
+    "logs": [
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+      "Program log: Instruction: Redeem",
+      "Program log: AnchorError thrown in programs/dividendx/src/instructions/handlers.rs:525. Error Code: InvalidPhase. Error Number: 6024. Error Message: series phase does not permit this operation.",
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 12782 of 200000 compute units",
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE failed: custom program error: 0x1788"
+    ],
+    "confirmationDiagnostic": "[object Object]"
+  },
+  "minimumOutputRejection": {
+    "quotedOutputRaw": "57692306",
+    "requestedMinimumRaw": "57692307",
+    "label": "backpack-test-mu excessive minimum-output redemption",
+    "signature": "5ziBYWyrWmStwupbTJdhoNxkUGNDgpsUAHXnW5MvpJmxhdixuPACCpT8U1eHczPfUNa4Jbsaq7coG7WgahgPu7NK",
+    "slot": 40726798999,
+    "confirmationStatus": "confirmed",
+    "err": {
+      "InstructionError": [
+        0,
+        {
+          "Custom": 6023
+        }
+      ]
+    },
+    "blockTime": 1830427,
+    "feeLamports": 5000,
+    "computeUnitsConsumed": 14965,
+    "dividendXInvokeObserved": true,
+    "logs": [
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+      "Program log: Instruction: Redeem",
+      "Program log: AnchorError thrown in programs/dividendx/src/instructions/handlers.rs:660. Error Code: MinimumOutputNotMet. Error Number: 6023. Error Message: minimum output guard failed.",
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 14965 of 200000 compute units",
+      "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE failed: custom program error: 0x1787"
+    ],
+    "confirmationDiagnostic": "[object Object]"
+  },
+  "zeroOutputGuard": {
+    "supportedByObservedAllocation": true,
+    "scope": "SDK quote rejection and actual local SBF program rejection",
+    "assetId": "backpack-test-mu",
+    "side": "dr",
+    "amountRaw": "1",
+    "outputRaw": "0",
+    "sdkRejection": "DividendXSdkError: zero-output redemption requires explicit consent",
+    "programRejection": {
+      "label": "backpack-test-mu zero-output redemption without consent",
+      "signature": "64KNZn8xBFYxMy4w49hXronYqvkHuU1L12V1MHQAoMahuCRh1sKXosx5gG3ijqYnDw8jL5Xuii9ajcfnY6v6bagD",
+      "slot": 40726799001,
+      "confirmationStatus": "confirmed",
+      "err": {
+        "InstructionError": [
+          0,
+          {
+            "Custom": 6054
+          }
+        ]
+      },
+      "blockTime": 1830427,
+      "feeLamports": 5000,
+      "computeUnitsConsumed": 14994,
+      "dividendXInvokeObserved": true,
+      "logs": [
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE invoke [1]",
+        "Program log: Instruction: Redeem",
+        "Program log: AnchorError thrown in programs/dividendx/src/instructions/handlers.rs:557. Error Code: ZeroOutputConsentRequired. Error Number: 6054. Error Message: zero-output redemption requires explicit consent.",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE consumed 14994 of 200000 compute units",
+        "Program 2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE failed: custom program error: 0x17a6"
+      ],
+      "confirmationDiagnostic": "[object Object]"
+    }
+  },
+  "artifacts": {
+    "idlSha256": "d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4",
+    "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070"
+  },
+  "assertions": {
+    "actualLocalRpcExecution": true,
+    "publicNetwork": false,
+    "freshInMemorySigners": true,
+    "exactRawUnits": true,
+    "allThreeDecimalProfiles": [
+      6,
+      8,
+      9
+    ],
+    "transfersAreNotSales": true,
+    "fourQualifiedEventsPerAsset": true,
+    "maturityDoesNotFinalize": true,
+    "independentWalletRedemptions": true,
+    "externalBurnAndDonationDoNotDrainCustody": true
+  }
+}

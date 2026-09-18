@@ -198,7 +198,7 @@ export async function executeHolderAction(request: HolderActionRequest): Promise
   return signSubmitAndConfirm(connection, unsigned, async (transaction) => {
     if (!request.isCurrent()) throw new Error('Wallet or annual series changed before the wallet prompt.');
     const expectedMessage = transaction.serializeMessage();
-    const signed = await signLegacyTransaction(request.connected.wallet, request.connected.account, transaction);
+    const signed = await signLegacyTransaction(request.connected.wallet, request.connected.account, transaction, request.manifest.kind === 'devnet' ? 'devnet' : 'local');
     const signedMessage = signed.serializeMessage();
     if (signedMessage.length !== expectedMessage.length || !signedMessage.every((byte, index) => byte === expectedMessage[index])) {
       throw new Error('Wallet changed the transaction message. Nothing was submitted.');

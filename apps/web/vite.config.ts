@@ -6,6 +6,9 @@ export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
   plugins: [react()],
   resolve: {
+    // Linked SDK and Anchor packages must share one PublicKey constructor in
+    // both development and production bundles.
+    dedupe: ['@solana/web3.js'],
     alias: {
       '@anchor-lang/core': fileURLToPath(new URL('./src/wallet/anchor-core-shim.ts', import.meta.url)),
       '@dividendx/sdk': fileURLToPath(new URL('../../packages/sdk/src/index.ts', import.meta.url)),

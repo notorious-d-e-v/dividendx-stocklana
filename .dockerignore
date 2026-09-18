@@ -1,0 +1,5 @@
+# The Linux runtime image is built only from the allowlisted context produced by
+# scripts/hosting/stage-linux-runtime.sh. Refuse accidental repository-root
+# contexts, which can contain ignored ELFs, local keys, credentials and host
+# dependencies.
+**

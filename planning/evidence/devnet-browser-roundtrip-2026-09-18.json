@@ -1,0 +1,31 @@
+{
+  "schema": "dividendx-devnet-browser-smoke-v1",
+  "boundary": "public-devnet-synthetic-test-assets-temporary-browser-wallet",
+  "status": "failed",
+  "stage": "manifest-validated",
+  "startedAt": "2026-09-18T02:30:41.796Z",
+  "updatedAt": "2026-09-18T02:31:42.809Z",
+  "manifestTransport": "playwright-route-single-same-origin-manifest-endpoint",
+  "frontendTransport": "isolated-production-build-preview-no-HMR",
+  "rpcTransport": "genuine-solana-devnet-no-rpc-interception; harness proof reads retry only HTTP 429/503 inside a shared 15s deadline",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "deploymentDomainHex": "ce59db5080fc2c6d3bcf7ca90712d3c2e5e6c28f27f0dfbb9953bdb0894c03ab",
+  "assetId": "xstocks-test-kox",
+  "symbol": "TestKOx",
+  "amountRaw": "100000000",
+  "funding": {
+    "requestedTokenRaw": "1000000000",
+    "requestedSolLamports": 6000000,
+    "attempts": 0
+  },
+  "transactions": {},
+  "failedAt": "2026-09-18T02:31:42.809Z",
+  "failure": {
+    "message": "expect(locator).toContainText(expected) failed\n\nLocator: getByLabel('Verified runtime')\nExpected substring: \"Verified Solana devnet\"\nTimeout: 60000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toContainText\" getByLabel('Verified runtime') with timeout 60000ms\n  - waiting for getByLabel('Verified runtime')\n",
+    "uiText": "RUNTIME UNAVAILABLE\n\nThe devnet service could not be verified.\n\nDividendX could not reach or verify the required public test service. Retry checks the same configured service again.\n\nRuntime check failed\n\nadmin is not a public key\n\nRetry devnet service\nOpen guided demos\nReturn to annual reference",
+    "browserScreenshot": "devnet-browser-roundtrip-2026-09-18.json.failure.png",
+    "screenshotBoundary": "Browser app viewport only; no terminal or private state rendered."
+  }
+}

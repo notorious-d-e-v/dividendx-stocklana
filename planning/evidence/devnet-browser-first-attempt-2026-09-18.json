@@ -1,0 +1,27 @@
+{
+  "schema": "dividendx-devnet-browser-incomplete-probe-v1",
+  "boundary": "public-devnet-test-assets",
+  "reason": "Browser test expected recombine receipt within default five-second assertion timeout; browser closed before UI confirmation verification.",
+  "depositSignature": "5kJmn3YH7WV4Ba3ewQ1uHuLhoiYvjtQ5SKMqpSVncdD9V9D7Ts6Y4toewTcZX45kXfLj6qVXrc5zy3ouJFT6TcGP",
+  "owner": "2VvN52Y9ThC9NiH7nRNLFgqHjwquxzitXQYB7P3jYuSk",
+  "history": [
+    {
+      "blockTime": 1789696495,
+      "confirmationStatus": "finalized",
+      "err": null,
+      "memo": null,
+      "signature": "5kJmn3YH7WV4Ba3ewQ1uHuLhoiYvjtQ5SKMqpSVncdD9V9D7Ts6Y4toewTcZX45kXfLj6qVXrc5zy3ouJFT6TcGP",
+      "slot": 500105654,
+      "transactionIndex": 10
+    },
+    {
+      "blockTime": 1789696489,
+      "confirmationStatus": "finalized",
+      "err": null,
+      "memo": null,
+      "signature": "JtFVy7ydrbKwVHLkghyLxCptZtDeGBuQwiiY7sZrqZ7s5UWhwKf374PRQXGaGk8zseXDgRYBfoTGTb9W8znaobB",
+      "slot": 500105620,
+      "transactionIndex": 19
+    }
+  ]
+}

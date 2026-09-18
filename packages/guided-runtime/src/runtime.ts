@@ -267,7 +267,8 @@ export class GuidedDemoRuntime {
       return fetch(input, { ...init, signal });
     };
     const connection = this.connection = new Connection(surfnet.rpcUrl, {
-      commitment: 'confirmed', confirmTransactionInitialTimeout: 15_000, disableRetryOnRateLimit: true, fetch: boundedFetch,
+      commitment: 'confirmed', wsEndpoint: surfnet.wsUrl,
+      confirmTransactionInitialTimeout: 15_000, disableRetryOnRateLimit: true, fetch: boundedFetch,
     });
     const genesisHash = await connection.getGenesisHash();
     if (PUBLIC_CLUSTER_GENESIS_HASHES.has(genesisHash)) throw new Error('LOCAL_USDC_FUNDING_REQUIRES_NON_PUBLIC_GENESIS');

@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "hashes": {
+    "dividendXElfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+    "transactionIdlSha256": "d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4"
+  },
+  "mode": "guided",
+  "journeyMs": 4051,
+  "smoke": {
+    "ok": true,
+    "runtimeId": "f95069b6-cae4-4c35-867d-fc28674871c5",
+    "sessionId": "9538592b-5747-4e1d-a915-ef8e0dbdb5cd",
+    "revision": 92,
+    "transactions": 36,
+    "finalSnapshot": {
+      "observedAt": "2026-09-18T02:19:42.960Z",
+      "slot": 40727231009,
+      "unixTimestamp": "1830427200",
+      "genesisHash": "259BKgt2Gf8QdcEBGF2MXyRNFJMSjCtpnaRYmac1rV3U",
+      "rpcUrl": "http://127.0.0.1:38129",
+      "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+      "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+      "series": "Ci4MmuXhd93mLMmwYtDXwBPvJ9RMHnN3CaRERwT8QRG7",
+      "year": 2027,
+      "phase": "finalized",
+      "eventCount": 4,
+      "stockDecimals": 8,
+      "quoteDecimals": 6,
+      "quoteAsset": {
+        "symbol": "USDC",
+        "provenance": "local-circle-devnet-clone",
+        "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+      },
+      "lpDecimals": 9,
+      "stockMultiplierBits": "4607362562785112228",
+      "provider": {
+        "address": "FCnh9RA1xukg4kaPamS1MGPU24VYgSP6ypQmDnmB5Eej",
+        "stockRaw": "9965114339",
+        "ptRaw": "0",
+        "drRaw": "0",
+        "quoteRaw": "10999596",
+        "lpRaw": "0"
+      },
+      "buyer": {
+        "address": "33qaaCLBN5Kk12QTyARo1bAs1TUTaccbzScH9y7FMdRM",
+        "stockRaw": "34885550",
+        "ptRaw": "0",
+        "drRaw": "0",
+        "quoteRaw": "0",
+        "lpRaw": "0"
+      },
+      "mints": {
+        "stock": "Cw1ybV2fJKwuLC7TtxYXGK22aEn6jnAgcsJpQP8zH4Pu",
+        "pt": "8dxVRNorLDPNuuEZotHqoHjToafsSjEHxEtMrRqFYjjQ",
+        "dr": "GV16RwCNEF4xBJWPUArcrN4gxGFMkqpLcFA1PjV1xWeV",
+        "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+        "lp": "2ToZRSVgjModvPpkvNMZPiEgQxgVNyUAtSyg2axnKZns"
+      },
+      "pool": {
+        "address": "9h8qHZJ8ELXwzNW1KWPjXXr81QiXUtYzHD5xz8AxdXc3",
+        "drRaw": "2876",
+        "quoteRaw": "404",
+        "lockedLpRaw": "100"
+      },
+      "vaultRaw": "111",
+      "ptSupplyRaw": "0",
+      "drSupplyRaw": "2876",
+      "backingVerified": true,
+      "swap": {
+        "inputQuoteRaw": "1000000",
+        "outputDrRaw": "907024323",
+        "minimumDrRaw": "902489201"
+      }
+    },
+    "evidenceFile": ".local-tools/guided-runtime/9538592b-5747-4e1d-a915-ef8e0dbdb5cd.json"
+  },
+  "peakCgroupMemoryBytes": 558735360
+}

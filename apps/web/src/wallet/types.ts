@@ -27,15 +27,19 @@ export interface LocalAssetManifest {
 
 export interface LocalManifest {
   schemaVersion: 1;
-  kind: 'surfnet' | 'local-validator';
+  kind: 'surfnet' | 'local-validator' | 'devnet';
   rpcUrl: string;
+  wsUrl?: string;
   genesisHash: string;
   programId: string;
   deploymentDomainHex: string;
   runtimeId: string;
   clockControl: boolean;
+  faucetEnabled?: boolean;
   assets: LocalAssetManifest[];
 }
+
+export type WalletNetwork = 'local' | 'devnet';
 
 export type CompatibleWallet = WalletWithFeatures<StandardConnectFeature & StandardEventsFeature & SolanaSignTransactionFeature>;
 

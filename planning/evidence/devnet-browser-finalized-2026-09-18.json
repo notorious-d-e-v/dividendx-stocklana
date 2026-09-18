@@ -1,0 +1,67 @@
+{
+  "schema": "dividendx-devnet-browser-finalized-proof-v1",
+  "boundary": "public-devnet-synthetic-test-assets",
+  "verifiedAt": "2026-09-18T02:52:36.771Z",
+  "environment": {
+    "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+    "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+    "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+    "upgradeAuthority": "DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv",
+    "deploymentDomainHex": "ce59db5080fc2c6d3bcf7ca90712d3c2e5e6c28f27f0dfbb9953bdb0894c03ab",
+    "contextSlot": 500126510
+  },
+  "transactions": [
+    {
+      "signature": "2aE8orKKDq8icACfFNe7SxjiHGqSwLEA8CcHDtTVPUoAepteK3e5guXf4gVmMAxVxM8qFBusAcLkGJE63kmVGsxp",
+      "slot": 500121269,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "signature": "QVoQ89nfAfsC7GBAEaTuXKFuHEjv84umiveBhqiCZiVYGVRBK3C8TePiEhXqypq4Qd8CYhc6JyP5JEc4xeiRmva",
+      "slot": 500121358,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "signature": "22uaJSq1dRX2bUNo9Mwa7ecyXnNuWs3zGvXTcriTR9A7m5mmG9C9r9MEmGQnePm7c5KoDycJbaFC8MzaSXTiVrJM",
+      "slot": 500121446,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "signature": "3QbFjcsFUbx2gxwsNm4PMnGfmP1DM1pMLkyudsW7TrKnr2pwngt6mJEXbczVtaUr12rQXXAdHV1TEMbo4qhEaYrR",
+      "slot": 500116048,
+      "confirmationStatus": "finalized"
+    },
+    {
+      "signature": "4mpeX9A7Hd8uLHP6EpN7f4P4JviDHyGgjadqy4SJPpnx6JTFLh86ffsmLUcfmREJ8icBPMmaT55HN1s5RpXcfVx2",
+      "slot": 500120987,
+      "confirmationStatus": "finalized"
+    }
+  ],
+  "browserOwner": "AnWEMnXjbH1AcGiZVRHRg6eQd6fAgZZZL9nr4HLkYEhK",
+  "browserFinalBalances": {
+    "stock": "1000000000",
+    "pt": "0",
+    "dr": "0"
+  },
+  "registryBacking": [
+    {
+      "assetId": "xstocks-test-kox",
+      "vaultRaw": "100000000",
+      "ptSupplyRaw": "100000000",
+      "drSupplyRaw": "100000000"
+    },
+    {
+      "assetId": "backpack-test-mu",
+      "vaultRaw": "0",
+      "ptSupplyRaw": "0",
+      "drSupplyRaw": "0"
+    },
+    {
+      "assetId": "ondo-test-ibm",
+      "vaultRaw": "0",
+      "ptSupplyRaw": "0",
+      "drSupplyRaw": "0"
+    }
+  ],
+  "totalAdminSpendLamports": "136338520"
+}
