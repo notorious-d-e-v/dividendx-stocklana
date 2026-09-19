@@ -1,5 +1,4 @@
-import type {
-  DemoStartRequest,
+import { DEMO_ASSETS, type DemoAsset, type DemoSnapshot, type DemoStartRequest,
   DemoState,
   DemoStepRequest,
 } from '../../../../packages/guided-runtime/src/contract';
@@ -58,12 +57,18 @@ async function errorMessage(response: Response): Promise<string> {
 
 export function assertState(value: unknown, expectedRuntimeId?: string): DemoState {
   if (!value || typeof value !== 'object') throw new Error('The guided runtime returned an invalid state.');
-  if ((value as Record<string, unknown>).schemaVersion !== 2) {
-    throw new Error('This page requires guided runtime v2 with pinned Test USDC. Update and restart npm run demo:guided.');
+  if ((value as Record<string, unknown>).schemaVersion !== 4) {
+    throw new Error('This page requires guided runtime v4 with sample quarterly dividends. Update and restart npm run demo:guided.');
   }
   const state = value as Partial<DemoState>;
   const statuses = ['idle', 'preparing', 'ready', 'running', 'failed', 'complete'];
-  const steps = ['split', 'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity', 'recombine', 'settle-year', 'redeem-buyer', 'redeem-provider'];
+  const steps = ['core-split', 'core-recombine-partial', 'core-recombine-rest', 'dividend-split', 'dividend-quarter-one', 'dividend-quarter-two', 'dividend-recombine', 'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity', 'recombine', 'settle-year', 'redeem-buyer', 'redeem-provider'];
+  const validAsset = (value: unknown): value is DemoAsset => {
+    if (!value || typeof value !== 'object') return false;
+    const asset = value as Record<string, unknown>;
+    return Object.values(DEMO_ASSETS).some((profile) => profile.id === asset.id && profile.company === asset.company
+      && profile.symbol === asset.symbol && profile.issuerLabel === asset.issuerLabel && profile.decimals === asset.decimals);
+  };
   const validStep = (step: unknown, setup = false) => step === null || steps.includes(String(step)) || (setup && step === 'setup');
   const validTransaction = (transaction: unknown) => {
     if (!transaction || typeof transaction !== 'object') return false;
@@ -87,10 +92,11 @@ export function assertState(value: unknown, expectedRuntimeId?: string): DemoSta
     const swap = item.swap as Record<string, unknown> | null;
     const validPool = pool === null || (Boolean(pool) && typeof pool?.address === 'string' && ['drRaw', 'quoteRaw', 'lockedLpRaw'].every((key) => typeof pool?.[key] === 'string' && /^\d+$/.test(pool[key] as string)));
     const validSwap = swap === null || (Boolean(swap) && ['inputQuoteRaw', 'outputDrRaw', 'minimumDrRaw'].every((key) => typeof swap?.[key] === 'string' && /^\d+$/.test(swap[key] as string)));
-    return validWallet(item.provider) && validWallet(item.buyer)
+    return validAsset(item.asset) && validWallet(item.provider) && validWallet(item.buyer)
       && ['observedAt', 'unixTimestamp', 'genesisHash', 'rpcUrl', 'dividendXProgram', 'raydiumProgram', 'series'].every((key) => typeof item[key] === 'string')
       && ['stockMultiplierBits', 'vaultRaw', 'ptSupplyRaw', 'drSupplyRaw'].every((key) => typeof item[key] === 'string' && /^\d+$/.test(item[key] as string))
-      && ['slot', 'eventCount', 'stockDecimals', 'quoteDecimals', 'lpDecimals'].every((key) => Number.isSafeInteger(item[key]) && Number(item[key]) >= 0)
+      && ['slot', 'eventCount', 'stockDecimals', 'claimDecimals', 'quoteDecimals', 'lpDecimals'].every((key) => Number.isSafeInteger(item[key]) && Number(item[key]) >= 0)
+      && item.stockDecimals === (item.asset as DemoAsset).decimals && item.claimDecimals === (item.asset as DemoAsset).decimals
       && item.year === 2027 && ['open', 'sealing', 'finalized'].includes(String(item.phase)) && typeof item.backingVerified === 'boolean'
       && Boolean(mints) && ['stock', 'pt', 'dr', 'quote'].every((key) => typeof mints?.[key] === 'string')
       && (mints?.lp === null || typeof mints?.lp === 'string')
@@ -98,10 +104,11 @@ export function assertState(value: unknown, expectedRuntimeId?: string): DemoSta
       && quoteAsset?.provenance === 'local-circle-devnet-clone' && quoteAsset?.canonicalMint === CIRCLE_DEVNET_USDC_MINT
       && mints?.quote === CIRCLE_DEVNET_USDC_MINT && validPool && validSwap;
   })();
-  if (state.schemaVersion !== 2 || typeof state.runtimeId !== 'string' || typeof state.revision !== 'number'
+  if (state.schemaVersion !== 4 || typeof state.runtimeId !== 'string' || typeof state.revision !== 'number'
     || !statuses.includes(String(state.status)) || !validStep(state.activeStep, true) || !validStep(state.nextStep)
     || !Array.isArray(state.completedSteps) || !state.completedSteps.every((step) => validStep(step) && step !== null)
     || !Array.isArray(state.transactions) || !state.transactions.every(validTransaction) || !validSnapshot
+    || !(state.asset === null || validAsset(state.asset)) || (snapshot !== null && state.asset?.id !== (snapshot as DemoSnapshot).asset.id)
     || !(state.sessionId === null || typeof state.sessionId === 'string') || !(state.error === null || typeof state.error === 'string')) {
     throw new Error('The guided runtime returned an unsupported state.');
   }
@@ -134,7 +141,7 @@ export function createGuidedClient(runtimeUrl = GUIDED_RUNTIME_URL, options: { e
       const response = await request('/receipt');
       if (!response.ok) throw new DemoHttpError(await errorMessage(response), response.status);
       const receipt = await response.json() as unknown;
-      if (!receipt || typeof receipt !== 'object' || (receipt as Record<string, unknown>).schemaVersion !== 2) throw new Error('The guided runtime returned an unsupported Test USDC receipt.');
+      if (!receipt || typeof receipt !== 'object' || (receipt as Record<string, unknown>).schemaVersion !== 4) throw new Error('The guided runtime returned an unsupported Test USDC receipt.');
       return receipt;
     },
   };

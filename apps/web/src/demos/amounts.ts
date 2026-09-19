@@ -4,6 +4,7 @@ export type BalanceKey = keyof Pick<DemoWallet, 'stockRaw' | 'ptRaw' | 'drRaw' |
 
 export interface AmountContext {
   stockDecimals: number;
+  claimDecimals: number;
   quoteDecimals: number;
   lpDecimals: number;
   stockMultiplierBits: bigint;
@@ -51,6 +52,7 @@ function formatStock(raw: bigint, decimals: number, multiplierBits: bigint, plac
 export function amountContext(snapshot: DemoSnapshot): AmountContext {
   return {
     stockDecimals: snapshot.stockDecimals,
+    claimDecimals: snapshot.claimDecimals,
     quoteDecimals: snapshot.quoteDecimals,
     lpDecimals: snapshot.lpDecimals,
     stockMultiplierBits: BigInt(snapshot.stockMultiplierBits),
@@ -62,7 +64,7 @@ export function displayBalance(raw: string, key: BalanceKey, context: AmountCont
   if (key === 'stockRaw') return formatStock(value, context.stockDecimals, context.stockMultiplierBits, 9);
   if (key === 'quoteRaw') return formatClaim(value, context.quoteDecimals, context.quoteDecimals);
   if (key === 'lpRaw') return formatClaim(value, context.lpDecimals, context.lpDecimals);
-  return formatClaim(value, 8, 8);
+  return formatClaim(value, context.claimDecimals, context.claimDecimals);
 }
 
 export function displayDelta(before: string, after: string, key: BalanceKey, context: AmountContext): string | null {

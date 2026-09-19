@@ -127,8 +127,6 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 32px 80px; }
 .future-demos article span { color: var(--dx-ink-muted); font-size: 9px; font-weight: 760; text-transform: uppercase; }
 .future-demos article h3 { margin: 0; font-size: 15px; }
 .future-demos article p { margin: 0; color: var(--dx-ink-muted); font-size: 11px; line-height: 1.5; }
-.future-demos article.future-demo-later { padding-block: 14px; }
-.future-demos article.future-demo-later h3,.future-demos article.future-demo-later p { font-size: 10px; }
 footer { min-height: 84px; display: flex; align-items: center; gap: 10px; padding: 20px 32px; border-top: 1px solid var(--dx-line); color: var(--dx-ink-muted); background: var(--dx-surface); font-size: 10px; }
 footer .demo-mark { width: 19px; height: 19px; } footer .demo-mark i { width: 9px; height: 14px; } footer .demo-mark i:first-child { margin-right: -3px; }
 footer a { margin-left: auto; color: var(--dx-ink); font-weight: 760; }
@@ -194,3 +192,127 @@ footer a { margin-left: auto; color: var(--dx-ink); font-weight: 760; }
 }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Guided tour: keep all chapter styling local to this route. */
+.demo-shell .demo-hero { grid-template-columns: minmax(0, 1.08fr) minmax(360px, .82fr); gap: clamp(40px, 6vw, 90px); min-height: 670px; }
+.demo-shell .demo-hero h1 { font-size: clamp(58px, 7.1vw, 108px); line-height: .94; }
+.demo-shell .demo-hero h1 span { color: var(--dx-stock); }
+.demo-shell .demo-hero > div:first-child > p:not(.demo-kicker) { max-width: 570px; margin: 30px 0 0; color: var(--dx-ink-muted); font-size: 18px; line-height: 1.5; }
+.demo-shell .hero-cta { width: auto; min-width: 208px; margin-top: 34px; padding-inline: 23px; }
+.demo-shell .hero-cta span { margin-left: 30px; }
+.demo-shell .hero-explainer { min-width: 0; padding: clamp(26px, 3vw, 42px); border: 1px solid var(--dx-line); border-radius: var(--dx-radius-lg); background: var(--dx-surface); box-shadow: 0 18px 40px rgba(16,24,32,.05); }
+.demo-shell .hero-stock { display: flex; align-items: center; justify-content: space-between; padding: 19px 22px; border: 1px solid var(--dx-ink); border-radius: 14px; background: var(--dx-canvas); }
+.demo-shell .hero-stock span { font-size: 10px; font-weight: 800; letter-spacing: .1em; }
+.demo-shell .hero-stock b { font-size: 32px; font-variant-numeric: tabular-nums; }
+.demo-shell .hero-branch { height: 36px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding-inline: 16%; }
+.demo-shell .hero-branch i { width: 1px; height: 36px; justify-self: center; background: var(--dx-line-strong); }
+.demo-shell .hero-claims { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.demo-shell .hero-claims > div { min-height: 104px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; padding: 17px; border-radius: 12px; }
+.demo-shell .hero-claims > div:first-child { color: var(--dx-stock-ink); background: var(--dx-stock-soft); }
+.demo-shell .hero-claims > div:last-child { color: var(--dx-dividend-ink); background: var(--dx-dividend-soft); }
+.demo-shell .hero-claims span { font-size: 28px; font-weight: 820; letter-spacing: -.06em; }
+.demo-shell .hero-claims b { font-size: 12px; }
+.demo-shell .hero-explainer h2 { margin: 31px 0 9px; font-size: clamp(26px, 2.4vw, 35px); line-height: 1.04; letter-spacing: -.045em; }
+.demo-shell .hero-explainer > p:last-child { max-width: 410px; margin: 0; color: var(--dx-ink-muted); font-size: 13px; line-height: 1.55; }
+.demo-shell .tour-chapter { padding: 78px 0 72px; border-bottom: 1px solid var(--dx-line); scroll-margin-top: 24px; }
+.demo-shell .chapter-heading { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(250px, .8fr); column-gap: 70px; align-items: end; margin-bottom: 49px; }
+.demo-shell .chapter-heading .demo-kicker { grid-column: 1 / -1; }
+.demo-shell .chapter-heading h2 { max-width: 820px; margin: 0; font-size: clamp(43px, 5vw, 73px); line-height: .99; letter-spacing: -.055em; }
+.demo-shell .chapter-heading > p:last-child { max-width: 470px; margin: 0 0 5px; color: var(--dx-ink-muted); font-size: 15px; line-height: 1.55; }
+.demo-shell .chapter-layout { display: grid; grid-template-columns: minmax(0, .88fr) minmax(360px, 1.12fr); gap: clamp(48px, 7vw, 112px); align-items: start; }
+.demo-shell .chapter-story { padding-top: 13px; }
+.demo-shell .chapter-number { padding-bottom: 20px; border-bottom: 1px solid var(--dx-line); color: var(--dx-ink); font-size: 62px; font-weight: 760; line-height: 1; letter-spacing: -.07em; }
+.demo-shell .chapter-number span { color: var(--dx-line-strong); font-size: 24px; letter-spacing: 0; }
+.demo-shell .chapter-story h3 { max-width: 500px; margin: 35px 0 15px; font-size: clamp(30px, 3vw, 44px); line-height: 1.04; letter-spacing: -.045em; }
+.demo-shell .chapter-story > p { max-width: 520px; color: var(--dx-ink-muted); font-size: 15px; line-height: 1.65; }
+.demo-shell .core-points { max-width: 520px; margin: 0; padding-left: 21px; color: var(--dx-ink-muted); font-size: 15px; line-height: 1.65; }
+.demo-shell .core-points li + li { margin-top: 5px; }
+.demo-shell .claim-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 36px 0 19px; }
+.demo-shell .claim-card { min-height: 172px; display: flex; flex-direction: column; padding: 19px; border: 1px solid currentColor; border-radius: 14px; }
+.demo-shell .claim-card.pt { color: var(--dx-stock-ink); background: var(--dx-stock-soft); }
+.demo-shell .claim-card.dr { color: var(--dx-dividend-ink); background: var(--dx-dividend-soft); }
+.demo-shell .claim-card span { font-size: 42px; font-weight: 820; letter-spacing: -.07em; }
+.demo-shell .claim-card b { margin-top: auto; font-size: 14px; }
+.demo-shell .claim-card small { margin-top: 4px; font-size: 11px; }
+.demo-shell .chapter-story .chapter-hint { max-width: 520px; padding-left: 16px; border-left: 2px solid var(--dx-line-strong); font-size: 12px; }
+.demo-shell .current-action { min-height: 0; padding: 34px; }
+.demo-shell .current-action h2 { font-size: clamp(32px, 3.3vw, 49px); }
+.demo-shell .current-action > p:not(.demo-kicker):not(.action-signer) { font-size: 13px; }
+.demo-shell .asset-choices { display: grid; gap: 8px; margin-top: 25px; }
+.demo-shell .asset-choice { width: 100%; display: grid; grid-template-columns: 75px minmax(0, 1fr) 20px; gap: 12px; align-items: center; padding: 12px; border: 1px solid #59636c; border-radius: 10px; color: white; background: #1e2a33; text-align: left; cursor: pointer; }
+.demo-shell .asset-choice:hover:not(:disabled),.demo-shell .asset-choice.selected { border-color: #a9bcff; background: #263b58; }
+.demo-shell .asset-choice-symbol { min-width: 0; overflow-wrap: anywhere; font-size: 13px; font-weight: 850; }
+.demo-shell .asset-choice strong,.demo-shell .asset-choice small { display: block; }
+.demo-shell .asset-choice strong { font-size: 13px; }
+.demo-shell .asset-choice small { margin-top: 3px; color: #b9c2ca; font-size: 10px; }
+.demo-shell .asset-choice-check { color: #b7c6ff; text-align: right; font-size: 15px; }
+.demo-shell .action-note { display: block; margin-top: 13px; color: #b9c2ca; font-size: 10px; line-height: 1.5; }
+.demo-shell .demo-progress { margin-top: 25px; }
+.demo-shell .demo-progress li { min-height: 70px; }
+.demo-shell .demo-progress li:not(.complete):not(.current) { opacity: .58; }
+.demo-shell .chapter-balances { margin-top: 28px; }
+.demo-shell .chapter-balances > .demo-kicker { margin-bottom: 12px; }
+.demo-shell .chapter-balances .demo-wallet { border: 1px solid var(--dx-line); border-radius: 18px; background: var(--dx-surface); }
+.demo-shell .chapter-complete { display: flex; align-items: center; gap: 18px; margin-top: 45px; padding: 23px 26px; border: 1px solid #a9c9b9; border-radius: 17px; background: #eaf5ee; }
+.demo-shell .chapter-complete > span { width: 35px; height: 35px; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--dx-positive); font-weight: 800; }
+.demo-shell .chapter-complete div { flex: 1; }
+.demo-shell .chapter-complete b { font-size: 16px; }
+.demo-shell .chapter-complete p { margin: 3px 0 0; color: var(--dx-ink-muted); font-size: 12px; }
+.demo-shell .chapter-complete button { min-height: 43px; padding: 9px 15px; border: 0; border-radius: 10px; color: white; background: var(--dx-ink); font-size: 12px; font-weight: 780; cursor: pointer; }
+.demo-shell .chapter-complete button span { margin-left: 15px; }
+.demo-shell .defi-chapter { background: linear-gradient(90deg, transparent, rgba(233,238,255,.24)); }
+.demo-shell .chapter-locked .chapter-heading { margin-bottom: 0; }
+.demo-shell .chapter-preview { display: flex; align-items: center; gap: 24px; margin-top: 37px; padding: 30px; border: 1px solid var(--dx-line); border-radius: 17px; background: var(--dx-surface); }
+.demo-shell .chapter-preview > span { color: var(--dx-line-strong); font-size: 48px; }
+.demo-shell .chapter-preview h3 { margin: 0; font-size: 22px; letter-spacing: -.03em; }
+.demo-shell .chapter-preview p { margin: 8px 0 0; color: var(--dx-ink-muted); font-size: 13px; }
+.demo-shell .defi-stages { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 28px; }
+.demo-shell .defi-stages span { padding: 8px 10px; border: 1px solid var(--dx-line); border-radius: 20px; font-size: 10px; font-weight: 750; }
+.demo-shell .wallet-section { padding-bottom: 0; border-bottom: 0; }
+.demo-shell .future-demos { border-top: 1px solid var(--dx-line); }
+.demo-shell button:focus-visible,.demo-shell a:focus-visible,.demo-shell summary:focus-visible { outline: 3px solid var(--dx-focus); outline-offset: 3px; }
+@media (max-width: 900px) {
+  .demo-shell .demo-hero,.demo-shell .chapter-layout,.demo-shell .chapter-heading { grid-template-columns: 1fr; }
+  .demo-shell .demo-hero { min-height: 0; gap: 42px; }
+  .demo-shell .chapter-heading { gap: 18px; }
+  .demo-shell .chapter-heading .demo-kicker { grid-column: auto; }
+  .demo-shell .chapter-layout { gap: 35px; }
+  .demo-shell .chapter-story { padding-top: 0; }
+}
+@media (max-width: 620px) {
+  .demo-shell .demo-hero h1 { font-size: clamp(51px, 12vw, 72px); }
+  .demo-shell .hero-explainer { padding: 24px; }
+  .demo-shell .tour-chapter { padding: 56px 0; }
+  .demo-shell .chapter-heading h2 { font-size: 46px; }
+  .demo-shell .claim-card { min-height: 150px; padding: 13px; }
+  .demo-shell .claim-card span { font-size: 36px; }
+  .demo-shell .claim-card b { font-size: 12px; }
+  .demo-shell .claim-card small { font-size: 10px; }
+  .demo-shell .current-action { min-height: 0; padding: 27px 21px; }
+  .demo-shell .current-action h2 { font-size: 36px; }
+  .demo-shell .chapter-complete { align-items: start; flex-wrap: wrap; }
+  .demo-shell .chapter-complete button { width: 100%; }
+  .demo-shell .asset-choice { grid-template-columns: 61px minmax(0, 1fr) 20px; }
+}
+.demo-shell .core-recap { padding: 34px; border: 1px solid var(--dx-line); border-radius: var(--dx-radius-lg); background: var(--dx-surface); }
+.demo-shell .core-recap h3 { margin: 0; font-size: clamp(30px, 3.5vw, 48px); line-height: 1.04; letter-spacing: -.05em; }
+.demo-shell .core-recap > p:not(.demo-kicker) { max-width: 430px; color: var(--dx-ink-muted); font-size: 13px; line-height: 1.55; }
+.demo-shell .core-recap ol { margin: 28px 0 0; padding: 0; border-top: 1px solid var(--dx-line); list-style: none; }
+.demo-shell .core-recap li { display: flex; align-items: center; gap: 15px; min-height: 55px; border-bottom: 1px solid var(--dx-line); font-size: 12px; }
+.demo-shell .core-recap li span { color: var(--dx-ink-muted); font-size: 10px; }
+.demo-shell .core-recap li b { margin-left: auto; color: var(--dx-positive); }
+
+.demo-shell .chapter-blue { color: var(--dx-stock); }
+.demo-shell .boundary-bar details ul { position: absolute; z-index: 10; top: 23px; right: 0; width: min(420px, calc(100vw - 28px)); margin: 0; padding: 17px 18px 17px 34px; border: 1px solid #3d4750; border-radius: 12px; color: #fff; background: var(--dx-ink); line-height: 1.55; box-shadow: var(--dx-shadow-lift); }
+.demo-shell .boundary-bar details li + li { margin-top: 7px; }
+.demo-shell .action-result { margin-top: 22px; padding: 15px 16px; border: 1px solid #5773aa; border-radius: 12px; background: #243955; }
+.demo-shell .action-result b { display: block; color: #c9d8ff; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.demo-shell .action-result p { margin: 7px 0 0; color: white; font-size: 12px; line-height: 1.5; }
+.demo-shell .wallet-jump { display: inline-block; margin-top: 11px; padding: 4px 0; border: 0; color: #d9e3ff; background: none; font-size: 11px; font-weight: 800; text-decoration: underline; cursor: pointer; }
+.demo-shell .return-to-action { display: block; margin: 14px 0 0 auto; padding: 7px 0; border: 0; color: var(--dx-stock-ink); background: none; font-size: 11px; font-weight: 800; text-decoration: underline; cursor: pointer; }
+.demo-shell .chapter-balances,.demo-shell .wallet-section { scroll-margin-top: 24px; }
+.demo-shell .dividend-chapter { background: linear-gradient(90deg, transparent, rgba(245, 220, 174, .15)); }
+.demo-shell .hero-stock span { line-height: 1.35; }
+@media (max-width: 620px) {
+  .demo-shell .boundary-bar details ul { position: fixed; top: 138px; right: 14px; left: 14px; width: auto; }
+}

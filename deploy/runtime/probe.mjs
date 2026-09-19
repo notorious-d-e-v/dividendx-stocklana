@@ -8,7 +8,9 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { spawn } from 'node:child_process';
 
-const ROOT = '/opt/dividendx';
+const ROOT = process.env.DIVIDENDX_PROBE_ROOT ?? '/opt/dividendx';
+assert.ok(['/opt/dividendx', '/vercel/sandbox/dividendx'].includes(ROOT),
+  'DIVIDENDX_PROBE_ROOT must be a reviewed runtime root');
 const EXPECTED_ELF = 'a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070';
 const EXPECTED_IDL = 'd4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4';
 const TIMEOUT_MS = 12 * 60_000;

@@ -24,4 +24,5 @@ secrets
 **/*.log
 apps/web/qa
 planning/evidence
+packages/*/evidence
 presentation/build

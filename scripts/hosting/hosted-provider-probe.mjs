@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { loadEnvFile } from 'node:process';
 
 const STORE_ID = 'store_HwInrQjHFXMVbBLI';
-const SNAPSHOT_ID = 'snap_cwWXbrpD6HwniFIXD0cB8mzWGrwh';
+const GUIDED_SCHEMA_VERSION = 4;
 const PROBE_DEADLINE_MS = 120_000;
 const READINESS_DEADLINE_MS = 45_000;
 
@@ -17,10 +17,13 @@ for (let index = 2; index < process.argv.length; index += 2) {
   assert.equal(args.has(process.argv[index]), false, `duplicate argument ${process.argv[index]}`);
   args.set(process.argv[index], process.argv[index + 1]);
 }
-assert.deepEqual([...args.keys()].sort(), ['--execute', '--output'], 'only --execute and --output are accepted');
+assert.deepEqual([...args.keys()].sort(), ['--execute', '--output', '--snapshot-id'],
+  'only --execute, --output, and --snapshot-id are accepted');
 assert.equal(args.get('--execute'), 'true', 'explicit --execute true is required');
 const outputPath = args.get('--output');
 assert.ok(outputPath && isAbsolute(outputPath), 'a new absolute --output is required');
+const snapshotId = args.get('--snapshot-id');
+assert.match(snapshotId, /^snap_[A-Za-z0-9]+$/, 'an explicit Vercel Sandbox --snapshot-id is required');
 
 try { loadEnvFile(resolve('.env.local')); } catch {}
 assert.equal(process.env.BLOB_STORE_ID, STORE_ID, 'only the dedicated DividendX Blob store is allowed');
@@ -46,7 +49,7 @@ const ipHashes = ['probe-wallet', 'probe-guided'].map((value) => ipHash(secret, 
 const limits = { ...DEFAULT_LIMITS, active: 2 };
 const store = new BlobJsonCasStore();
 const ledger = new SessionLedgerRepository(store, undefined, limits, pathname);
-const provider = new VercelSandboxProvider(SNAPSHOT_ID, 15_000);
+const provider = new VercelSandboxProvider(snapshotId, 15_000);
 const boundedFetch = (input, init = {}) => fetch(input, {
   ...init,
   signal: init.signal ? AbortSignal.any([init.signal, overallAbort]) : overallAbort,
@@ -57,7 +60,8 @@ const receipt = {
   schema: 'dividendx-hosted-provider-probe-v1',
   at: new Date(startedAt).toISOString(),
   storeId: STORE_ID,
-  snapshotId: SNAPSHOT_ID,
+  snapshotId,
+  guidedSchemaVersion: GUIDED_SCHEMA_VERSION,
   deadlineMs: PROBE_DEADLINE_MS,
   status: 'started',
   phase: 'wallet_start',
@@ -143,8 +147,26 @@ try {
 
   beginStage('guided_proxy');
   const guidedResult = await broker.proxy(visitorHashes[1], 'guided', guided.sessionId, 'GET', '/state');
-  assert.equal(guidedResult.status, 200); assert.equal(guidedResult.value?.schemaVersion, 2);
-  assert.equal(guidedResult.value?.runtimeId, guided.runtimeId); assert.equal(containsPrivateRpc(guidedResult.value), false);
+  assert.equal(guidedResult.status, 200);
+  const guidedState = guidedResult.value;
+  assert.equal(guidedState?.schemaVersion, GUIDED_SCHEMA_VERSION, 'snapshot must contain the v4 guided runtime');
+  assert.equal(guidedState.runtimeId, guided.runtimeId);
+  assert.equal(guidedState.status, 'idle');
+  assert.equal(guidedState.revision, 0);
+  assert.equal(guidedState.sessionId, null);
+  assert.equal(guidedState.asset, null);
+  assert.equal(guidedState.activeStep, null);
+  assert.equal(guidedState.nextStep, null);
+  assert.deepEqual(guidedState.completedSteps, []);
+  assert.equal(guidedState.snapshot, null);
+  assert.deepEqual(guidedState.transactions, []);
+  assert.equal(guidedState.error, null);
+  assert.equal(containsPrivateRpc(guidedState), false);
+
+  let crossGuidedVisitorDenied = false;
+  try { await broker.proxy(visitorHashes[0], 'guided', guided.sessionId, 'GET', '/state'); }
+  catch (error) { crossGuidedVisitorDenied = error instanceof HttpFailure && error.status === 404; }
+  assert.equal(crossGuidedVisitorDenied, true, 'another visitor must not access the guided session');
   passStage();
 
   beginStage('gateway_auth');
@@ -167,6 +189,8 @@ try {
     walletRpcGenesisMatched: true,
     publicGenesisRejected: true,
     crossVisitorDenied: true,
+    crossGuidedVisitorDenied: true,
+    guidedV4IdleState: true,
     guidedStateSanitized: true,
     unauthenticatedGatewayDenied: true,
   });

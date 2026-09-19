@@ -103,7 +103,7 @@ function validateWalletManifest(value: unknown, record: SessionRecord): Record<s
 
 function validateGuidedState(value: unknown, record: SessionRecord): Record<string, unknown> {
   const item = object(value);
-  if (item.schemaVersion !== 2 || item.runtimeId !== record.runtimeId) throw new Error('guided runtime identity mismatch');
+  if (item.schemaVersion !== 4 || item.runtimeId !== record.runtimeId) throw new Error('guided runtime identity mismatch');
   const snapshot = item.snapshot;
   if (snapshot && (typeof snapshot !== 'object' || Array.isArray(snapshot))) throw new Error('guided snapshot is invalid');
   const genesis = snapshot ? (snapshot as Record<string, unknown>).genesisHash : undefined;

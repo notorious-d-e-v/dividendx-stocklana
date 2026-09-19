@@ -195,14 +195,15 @@ test('store failure after signing prevents submission and disables the process i
 });
 
 test('store failure after submission returns the persisted signature and later replays exact bytes', async () => {
-  const { service, store, chain, manifest } = fixture();
+  const { service, store, chain, manifest, clock } = fixture();
   chain.sendThrows = true;
   chain.onSend = () => { store.failWrites = true; };
   const first = await service.fund(request(manifest), 'visitor', 'ip');
   assert.equal(first.status, 'pending'); assert.equal(first.signatures.length, 1); assert.equal(chain.sendCount, 1);
   const bytes = chain.sentBytes[0];
   store.failWrites = false; chain.onSend = null; chain.sendThrows = false;
-  const restarted = new HostedDevnetService(store, chain, manifest);
+  clock.value += PREPARATION_LEASE_MS + 1;
+  const restarted = new HostedDevnetService(store, chain, manifest, () => clock.value);
   const second = await restarted.fund(request(manifest), 'visitor', 'ip');
   assert.equal(second.status, 'confirmed'); assert.equal(chain.prepareCount, 1); assert.equal(chain.sentBytes[1], bytes);
 });

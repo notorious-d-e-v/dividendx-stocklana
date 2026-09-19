@@ -53,18 +53,19 @@ function walletUpstream(runtimeId, controls = {}) {
 }
 
 function guidedUpstream(runtimeId) {
-  let state = { schemaVersion: 2, runtimeId, revision: 0, sessionId: null, status: 'idle', activeStep: null, nextStep: null,
+  const asset = { id: 'xstocks-test-kox', company: 'Coca-Cola', symbol: 'TestKOx', issuerLabel: 'xStocks test profile', decimals: 8 };
+  let state = { schemaVersion: 4, runtimeId, revision: 0, sessionId: null, asset: null, status: 'idle', activeStep: null, nextStep: null,
     completedSteps: [], snapshot: null, transactions: [], error: null };
   const calls = [];
   const fetch = async (url, init = {}) => {
     calls.push({ url: String(url), init });
     if (String(url).endsWith('/state')) return Response.json(state);
     if (String(url).endsWith('/start')) {
-      state = { ...state, revision: 1, sessionId: 'flow-1', status: 'preparing', activeStep: 'setup' };
+      state = { ...state, revision: 1, sessionId: 'flow-1', asset, status: 'preparing', activeStep: 'setup' };
       return Response.json(state, { status: 202 });
     }
     if (String(url).endsWith('/step')) return Response.json(state, { status: 202 });
-    if (String(url).endsWith('/receipt')) return Response.json({ schemaVersion: 2, runtimeId, checkpoints: [] });
+    if (String(url).endsWith('/receipt')) return Response.json({ schemaVersion: 4, asset, runtimeId, checkpoints: [] });
     if (String(url) === RPC_URL) {
       const request = JSON.parse(init.body);
       if (request.method === 'getGenesisHash') return Response.json({ jsonrpc: '2.0', id: request.id, result: GENESIS });
@@ -223,14 +224,28 @@ test('guided gateway accepts one start and binds later chain identity', async (t
   const active = await ready('guided', upstream, child);
   t.after(() => active.gateway.close());
   assert.deepEqual(child.calls[0].args, ['packages/guided-runtime/dist/src/server.js']);
-  const init = { method: 'POST', headers: { ...active.headers, 'content-type': 'application/json' }, body: JSON.stringify({ runtimeId: 'guided-a', expectedRevision: 0 }) };
+  const invalid = { method: 'POST', headers: { ...active.headers, 'content-type': 'application/json' },
+    body: JSON.stringify({ runtimeId: 'guided-a', expectedRevision: 0, assetId: 'unlisted' }) };
+  assert.equal((await fetch(`${active.base}/start`, invalid)).status, 400);
+  assert.equal((await fetch(`${active.base}/start`, { ...invalid, body: JSON.stringify({ runtimeId: 'guided-a', expectedRevision: 0 }) })).status, 400);
+  assert.equal(upstream.calls.filter(({ url }) => url.endsWith('/start')).length, 0);
+  const init = { ...invalid, body: JSON.stringify({ runtimeId: 'guided-a', expectedRevision: 0, assetId: 'xstocks-test-kox' }) };
   assert.equal((await fetch(`${active.base}/start`, init)).status, 202);
   assert.equal((await fetch(`${active.base}/start`, init)).status, 409);
-  const snapshot = { genesisHash: GENESIS, rpcUrl: RPC_URL, dividendXProgram: PROGRAM_ID };
+  const snapshot = { asset: upstream.state().asset, genesisHash: GENESIS, rpcUrl: RPC_URL, dividendXProgram: PROGRAM_ID };
   upstream.setState({ ...upstream.state(), status: 'ready', snapshot });
   assert.equal((await fetch(`${active.base}/state`, { headers: active.headers })).status, 200);
   assert.equal(active.gateway.identity.genesisHash, GENESIS);
   upstream.setState({ ...upstream.state(), snapshot: { ...snapshot, genesisHash: '11111111111111111111111111111113' } });
+  assert.equal((await fetch(`${active.base}/state`, { headers: active.headers })).status, 503);
+  assert.equal(active.gateway.phase, 'identity-failed');
+});
+
+test('guided gateway rejects a v3 state after a v4 discovery', async (t) => {
+  const upstream = guidedUpstream('guided-old-schema');
+  const active = await ready('guided', upstream);
+  t.after(() => active.gateway.close());
+  upstream.setState({ ...upstream.state(), schemaVersion: 3 });
   assert.equal((await fetch(`${active.base}/state`, { headers: active.headers })).status, 503);
   assert.equal(active.gateway.phase, 'identity-failed');
 });

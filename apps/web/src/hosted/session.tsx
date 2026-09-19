@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 
 export type HostedSandboxKind = 'wallet' | 'guided';
 export type HostedSessionStatus = 'none' | 'starting' | 'ready' | 'expired' | 'failed';
@@ -108,6 +108,7 @@ export function HostedSessionGate({ kind, children }: {
   const [message, setMessage] = useState('');
   const pollStartedAt = useRef(0);
   const requestGeneration = useRef(0);
+  const scrollAfterReset = useRef(false);
   const [pollEpoch, setPollEpoch] = useState(0);
 
   const accept = useCallback((next: HostedSession) => {
@@ -188,6 +189,7 @@ export function HostedSessionGate({ kind, children }: {
     if (mutating) return;
     const expected = session?.sessionId ?? null;
     const action = expected ? 'reset' : 'start';
+    if (kind === 'guided' && session?.status === 'ready' && action === 'reset') scrollAfterReset.current = true;
     const generation = ++requestGeneration.current;
     setMutating(true); setMessage('');
     try {
@@ -211,10 +213,21 @@ export function HostedSessionGate({ kind, children }: {
           return;
         }
       } catch { /* Preserve the original unknown mutation outcome. */ }
+      scrollAfterReset.current = false;
       throw cause;
     }
     finally { if (requestGeneration.current === generation) setMutating(false); }
-  }, [accept, kind, mutating, session?.sessionId]);
+  }, [accept, kind, mutating, session?.sessionId, session?.status]);
+
+  useLayoutEffect(() => {
+    if (!scrollAfterReset.current || session?.status !== 'ready') return;
+    scrollAfterReset.current = false;
+    document.getElementById('core-heading')?.focus({ preventScroll: true });
+    document.getElementById('tour-core')?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      block: 'start',
+    });
+  }, [session]);
 
   if (session?.status === 'ready') return <>{children(session, expire, startOrReset)}</>;
   const title = kind === 'wallet' ? 'Private wallet sandbox' : 'Private guided sandbox';
@@ -224,7 +237,7 @@ export function HostedSessionGate({ kind, children }: {
     <p className="hosted-eyebrow">{title}</p>
     <h1>{starting ? 'Starting your isolated test network…' : session?.status === 'expired' ? 'This sandbox has expired.' : session?.status === 'failed' ? 'The sandbox stopped.' : 'Try DividendX in a private sandbox.'}</h1>
     <p>Each visitor gets a separate synthetic network for up to 15 minutes. It uses test assets only and does not hold your wallet keys.</p>
-    <p className="hosted-warning">Reloading reconnects to the same network, but a temporary wallet key exists only in this tab and is lost on reload.</p>
+    <p className="hosted-warning">{kind === 'guided' ? 'The tour uses two disposable demo wallets. Reloading reconnects to your progress until this sandbox expires.' : 'Reloading reconnects to the same network, but a temporary wallet key exists only in this tab and is lost on reload.'}</p>
     {starting && <div className="hosted-progress" role="status"><i />Provisioning the runtime and checking its identity. This can take up to 90 seconds.</div>}
     {message && <div className="hosted-error" role="alert">{message}</div>}
     <div className="hosted-actions">

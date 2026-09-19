@@ -8,9 +8,15 @@ import { chromium } from '@playwright/test';
 const SESSION_RE = /^[0-9a-f]{32}$/;
 const FLOWS = ['sandbox', 'guided', 'devnet', 'isolation'];
 const GUIDED_ACTIONS = [
-  ['split', 'Split 100 test stock'],
-  ['create-pool', 'Open market · 40 DR + 4 USDC'],
-  ['add-liquidity', 'Add liquidity · 60 DR + 6 USDC'],
+  ['core-split', 'Split 100 test stocks'],
+  ['core-recombine-partial', 'Recombine 40 pairs'],
+  ['core-recombine-rest', 'Recombine the remaining 60 pairs'],
+  ['dividend-split', 'Split 100 test stocks again'],
+  ['dividend-quarter-one', 'Record first synthetic dividend'],
+  ['dividend-quarter-two', 'Record second synthetic dividend'],
+  ['dividend-recombine', 'Recombine 40 pairs after dividends'],
+  ['create-pool', 'Open market · 24 DR + 4 USDC'],
+  ['add-liquidity', 'Add liquidity · 36 DR + 6 USDC'],
   ['buy-dr', 'Buy DR with 1 Test USDC'],
   ['remove-liquidity', 'Withdraw all LP liquidity'],
   ['recombine', 'Recombine paired PT + DR'],
@@ -18,6 +24,14 @@ const GUIDED_ACTIONS = [
   ['redeem-buyer', 'Redeem buyer DR independently'],
   ['redeem-provider', 'Redeem Stock holder PT independently'],
 ];
+const GUIDED_STEP_IDS = GUIDED_ACTIONS.map(([step]) => step);
+function guidedMultiplier(bits) {
+  const view = new DataView(new ArrayBuffer(8));
+  view.setBigUint64(0, BigInt(bits), false);
+  const multiplier = view.getFloat64(0, false);
+  assert(Number.isFinite(multiplier) && multiplier > 0, 'Invalid observed guided stock multiplier.');
+  return multiplier;
+}
 const READ_TIMEOUT_MS = 90_000;
 const DOM_TIMEOUT_MS = 60_000;
 const POLL_MS = 2_000;
@@ -96,6 +110,9 @@ const failureScreenshotPath = (flow) => `${outputName.dir}/${outputName.name}-${
 await mkdir(dirname(options.output), { recursive: true });
 await mustNotExist(options.output);
 for (const flow of selectedFlows(options.flow)) for (const width of [1440, 390]) await mustNotExist(screenshotPath(flow, width));
+if (selectedFlows(options.flow).includes('guided')) {
+  for (const width of [1440, 390]) await mustNotExist(screenshotPath('guided-dividend', width));
+}
 for (const flow of selectedFlows(options.flow)) {
   const contexts = flow === 'isolation' ? ['isolation-visitor-a', 'isolation-visitor-b'] : [flow];
   for (const context of contexts) await mustNotExist(failureScreenshotPath(context));
@@ -555,31 +572,148 @@ async function runGuided() {
   const errors = [];
   const page = await context.newPage();
   observePage(page, errors);
+  const mutationRequests = [];
+  const brokerMutations = [];
+  page.on('request', (request) => {
+    if (request.method() !== 'POST') return;
+    const path = new URL(request.url()).pathname;
+    if (path === '/api/sandbox/guided/session') {
+      let body = null;
+      try { body = request.postDataJSON(); } catch { /* A malformed request still counts as a mutation. */ }
+      brokerMutations.push({ action: body?.action ?? null, expectedSessionId: body?.expectedSessionId ?? null });
+      return;
+    }
+    if (!/^\/api\/sandbox\/guided\/[0-9a-f]{32}\/(start|step)$/.test(path)) return;
+    let body = null;
+    try { body = request.postDataJSON(); } catch { /* Keep only the path when the body cannot be decoded. */ }
+    mutationRequests.push({ path, step: typeof body?.step === 'string' ? body.step : null,
+      assetId: typeof body?.assetId === 'string' ? body.assetId : null });
+  });
   try {
-    const { session } = await enterSession(page, context, 'guided');
+    const { session, readyAt } = await enterSession(page, context, 'guided');
     report.flows.guided = { status: 'running', session };
     await persist();
     let state = await guidedState(context, session.runtimeUrl);
     report.flows.guided = { status: 'running', session, initialState: state };
     await persist();
     assert.equal(state.runtimeId, session.runtimeId);
+    assert.equal(state.schemaVersion, 4, 'This driver requires the v4 guided runtime snapshot.');
     if (state.status === 'idle') {
-      await stage('guided: prepare two disposable server wallets', { sessionId: session.sessionId });
-      await page.getByRole('button', { name: 'Prepare demo wallets', exact: true }).click();
-      state = await poll('guided setup', () => guidedState(context, session.runtimeUrl), (value) => value.status === 'ready' && value.nextStep === 'split');
+      const heroRevision = state.revision;
+      await page.getByRole('button', { name: 'Start guided tour', exact: true }).click();
+      await page.waitForFunction(() => scrollY > 0 && document.getElementById('tour-core')?.getBoundingClientRect().top < innerHeight);
+      assert.equal((await guidedState(context, session.runtimeUrl)).revision, heroRevision, 'Hero click changed the guided runtime.');
+      await stage('guided: prepare selected test profile', { sessionId: session.sessionId });
+      await page.getByRole('button', { name: /Coca-Cola/ }).click();
+      await page.getByTestId('prepare-guided-profile').click();
+      state = await poll('guided setup', () => guidedState(context, session.runtimeUrl), (value) => value.status === 'ready' && value.nextStep === 'core-split');
     }
+    assert.deepEqual(state.completedSteps, [], 'Guided smoke requires a fresh session.');
+    assert.equal(state.nextStep, GUIDED_STEP_IDS[0]);
+    assert.equal(state.asset?.id, 'xstocks-test-kox');
+    assert.equal(state.snapshot?.asset?.id, 'xstocks-test-kox');
+    assert.equal(state.snapshot?.provider.stockRaw, '10000000000', 'Setup must fund 100 TestKOx stocks.');
+    assert.equal(state.snapshot?.provider.ptRaw, '0');
+    assert.equal(state.snapshot?.provider.drRaw, '0');
+    assert.equal(state.snapshot?.eventCount, 0);
+    assert.deepEqual(mutationRequests.map(({ path }) => path.endsWith('/start') ? 'start' : 'unexpected'), ['start'],
+      'Guided setup must submit exactly one start request.');
     const innerSessionId = state.sessionId;
     const checkpoints = [];
-    for (const [stepId, action] of GUIDED_ACTIONS) {
+    let dividendStockDisplay = null;
+    let previousQuarterTime = null;
+    Object.assign(report.flows.guided, { mutationRequests, checkpoints });
+    await persist();
+    for (const [index, [stepId, action]] of GUIDED_ACTIONS.entries()) {
+      if (stepId === 'dividend-split') {
+        const beforeContinue = state.revision;
+        const continueButton = page.getByTestId('continue-to-dividends');
+        await continueButton.focus();
+        await page.keyboard.press('Enter');
+        await page.waitForFunction(() => document.getElementById('tour-dividends')?.getBoundingClientRect().top < innerHeight);
+        assert.equal((await guidedState(context, session.runtimeUrl)).revision, beforeContinue, 'Part Two continuation changed runtime.');
+      }
+      if (stepId === 'create-pool') {
+        const beforeContinue = state.revision;
+        const continueButton = page.getByTestId('continue-to-defi');
+        await continueButton.focus();
+        await page.keyboard.press('Enter');
+        await page.waitForFunction(() => document.getElementById('tour-defi')?.getBoundingClientRect().top < innerHeight);
+        assert.equal((await guidedState(context, session.runtimeUrl)).revision, beforeContinue, 'Part Three continuation changed runtime.');
+      }
       await stage(`guided: ${stepId}`);
-      const button = page.getByRole('button', { name: action, exact: true });
+      const button = page.locator(`[data-demo-step="${stepId}"]`);
       await button.waitFor({ state: 'visible' });
       assert(await button.isEnabled(), `${action} is disabled.`);
+      const mutationCountBefore = mutationRequests.length;
       await button.click(); // One mutation only; subsequent requests are reads.
-      state = await poll(`guided ${stepId}`, () => guidedState(context, session.runtimeUrl), (value) => value.completedSteps?.includes(stepId) && ['ready', 'complete'].includes(value.status), DOM_TIMEOUT_MS);
+      state = await poll(`guided ${stepId}`, () => guidedState(context, session.runtimeUrl),
+        (value) => value.completedSteps?.length === index + 1 && value.completedSteps[index] === stepId
+          && ['ready', 'complete'].includes(value.status), DOM_TIMEOUT_MS);
       assert.equal(state.runtimeId, session.runtimeId);
       assert.equal(state.sessionId, innerSessionId);
       assert.notEqual(state.status, 'failed', state.error ?? `${stepId} failed`);
+      assert.deepEqual(state.completedSteps, GUIDED_STEP_IDS.slice(0, index + 1));
+      assert.equal(state.nextStep, GUIDED_STEP_IDS[index + 1] ?? null);
+      assert.equal(state.snapshot?.backingVerified, true);
+      assert.deepEqual(mutationRequests.slice(mutationCountBefore).map(({ path, step }) => [path.slice(-4), step]),
+        [['step', stepId]], `${stepId} submitted more than once or bypassed the browser action.`);
+      if (stepId === 'dividend-quarter-one' || stepId === 'dividend-quarter-two') {
+        const quarter = stepId === 'dividend-quarter-one' ? 1 : 2;
+        assert.equal(state.snapshot.eventCount, quarter);
+        assert(Math.abs(guidedMultiplier(state.snapshot.stockMultiplierBits) - (1 + quarter / 100)) < 1e-12);
+        if (quarter === 1) previousQuarterTime = BigInt(state.snapshot.unixTimestamp);
+        else {
+          const currentTime = BigInt(state.snapshot.unixTimestamp);
+          assert(currentTime > previousQuarterTime, 'Second guided quarter did not advance time.');
+          previousQuarterTime = currentTime;
+        }
+      }
+      if (stepId === 'dividend-recombine') {
+        assert.equal(state.snapshot.eventCount, 2);
+        assert.equal(state.snapshot.provider.stockRaw, '4000000000');
+        assert.equal(state.snapshot.provider.ptRaw, '6000000000');
+        assert.equal(state.snapshot.provider.drRaw, '6000000000');
+        const expectedStock = Number(BigInt(state.snapshot.provider.stockRaw))
+          / 10 ** state.snapshot.stockDecimals * guidedMultiplier(state.snapshot.stockMultiplierBits);
+        assert(Math.abs(expectedStock - 40.8) < 1e-8);
+        const result = page.getByTestId('dividend-result-stock');
+        await result.waitFor({ state: 'visible' });
+        const shown = (await result.innerText()).trim();
+        assert(Math.abs(Number(shown) - expectedStock) < 1e-8,
+          `Displayed dividend stock ${shown} differs from observed raw balance × factor ${expectedStock}.`);
+        dividendStockDisplay = { raw: state.snapshot.provider.stockRaw,
+          multiplierBits: state.snapshot.stockMultiplierBits, expected: expectedStock, shown };
+        report.flows.guided.dividendStockDisplay = dividendStockDisplay;
+        await persist();
+        await assertNoOverflowAndCapture(page, 'guided-dividend');
+        await page.setViewportSize({ width: 390, height: 844 });
+        const mobileShown = (await result.innerText()).trim();
+        assert(Math.abs(Number(mobileShown) - expectedStock) < 1e-8,
+          `Mobile dividend stock ${mobileShown} differs from observed raw balance × factor ${expectedStock}.`);
+        dividendStockDisplay.mobileShown = mobileShown;
+        await page.setViewportSize({ width: 1440, height: 1000 });
+      }
+      if (stepId === 'create-pool') {
+        assert.equal(state.snapshot?.pool?.drRaw, '2400000000');
+        assert.equal(state.snapshot?.provider.drRaw, '3600000000');
+        assert.equal(state.snapshot?.pool?.quoteRaw, '4000000');
+        assert.equal(state.snapshot?.provider.quoteRaw, '6000000');
+        assert.equal(state.snapshot?.eventCount, 2);
+      }
+      if (stepId === 'add-liquidity') {
+        assert(state.snapshot?.pool, 'Guided pool disappeared after adding liquidity.');
+        assert.equal(BigInt(state.snapshot.provider.drRaw) + BigInt(state.snapshot.pool.drRaw), 6000000000n,
+          'Native LP rounding must retain 60 DR across holder and pool.');
+        assert.equal(state.snapshot.pool.quoteRaw, '10000000');
+        assert.equal(state.snapshot.provider.quoteRaw, '0');
+        assert.equal(state.snapshot.drSupplyRaw, '6000000000');
+      }
+      if (stepId === 'settle-year') {
+        assert.equal(state.snapshot.eventCount, 4);
+        assert(BigInt(state.snapshot.unixTimestamp) > previousQuarterTime,
+          'Final guided settlement did not follow the two visible quarters.');
+      }
       checkpoints.push({ step: stepId, revision: state.revision, slot: state.snapshot?.slot ?? null, transactions: state.transactions.length });
     }
     assert.equal(state.status, 'complete');
@@ -594,16 +728,77 @@ async function runGuided() {
     assert(BigInt(state.snapshot?.vaultRaw ?? '0') > 0n);
     assert(BigInt(state.snapshot?.drSupplyRaw ?? '0') > 0n);
     assert.equal(state.snapshot?.drSupplyRaw, state.snapshot?.pool?.drRaw);
+    assert.equal(state.transactions.length, 40, 'Expected all 40 guided v4 transactions.');
     assert(state.transactions.every((transaction) => ['confirmed', 'finalized'].includes(transaction.status)));
     const receipt = await contextJson(context, `${session.runtimeUrl}/receipt`, 'guided receipt');
-    assert.equal(receipt.schemaVersion, 2);
+    assert.equal(receipt.schemaVersion, 4);
     assert.equal(receipt.runtimeId, session.runtimeId);
     assert.equal(receipt.sessionId, innerSessionId);
+    assert.equal(receipt.asset?.id, 'xstocks-test-kox');
+    assert.deepEqual(receipt.checkpoints.map(({ step }) => step), ['setup', ...GUIDED_STEP_IDS]);
+    assert.deepEqual(receipt.checkpoints.filter(({ step }) => ['dividend-quarter-one', 'dividend-quarter-two', 'settle-year'].includes(step))
+      .map(({ snapshot }) => snapshot.eventCount), [1, 2, 4]);
+    assert.deepEqual(mutationRequests.map(({ step, path }) => path.endsWith('/start') ? 'setup' : step),
+      ['setup', ...GUIDED_STEP_IDS]);
+    const guidedSignatures = state.transactions.map(({ signature }) => signature);
+    assert.equal(new Set(guidedSignatures).size, guidedSignatures.length, 'Duplicate guided signatures.');
+    const guidedRpcStatuses = await verifySignatures(context, `${session.runtimeUrl}/rpc`, guidedSignatures);
     assert.equal(await page.locator('.transaction-list a').count(), 0, 'Sandbox signatures must not link to Explorer.');
     const layout = await assertNoOverflowAndCapture(page, 'guided');
     await flushPendingResponseReads();
     assert.deepEqual(errors, [], `Guided browser errors: ${JSON.stringify(errors)}`);
-    report.flows.guided = { status: 'pass', session, innerSessionId, finalState: state, receipt, checkpoints, layout, browserErrors: errors };
+    report.flows.guided = { status: 'pass', session, innerSessionId, finalState: state, receipt, checkpoints,
+      dividendStockDisplay, mutationRequests, guidedRpcStatuses, layout, browserErrors: [...errors] };
+    await persist();
+
+    const cooldownRemaining = Math.max(0, 31_000 - (Date.now() - readyAt));
+    if (cooldownRemaining > 0) {
+      await stage('guided: wait for mandatory restart cooldown', { milliseconds: cooldownRemaining });
+      await delay(cooldownRemaining, runAbort.signal);
+    }
+    await stage('guided: restart the completed journey once');
+    report.flows.guided.restart = { status: 'running' };
+    await persist();
+    const brokerMutationsBefore = brokerMutations.length;
+    const innerMutationsBefore = mutationRequests.length;
+    const resetStartedAt = now();
+    await page.getByRole('button', { name: 'Run the journey again', exact: true }).click();
+    const replacement = await poll('replacement guided session', () => readSession(context, 'guided'),
+      (value) => value.status === 'ready' && value.sessionId !== session.sessionId);
+    assert.notEqual(replacement.runtimeId, session.runtimeId, 'Guided restart reused the old runtime.');
+    const replacementState = await poll('replacement guided state', () => guidedState(context, replacement.runtimeUrl),
+      (value) => value.status === 'idle' && value.runtimeId === replacement.runtimeId);
+    assert.equal(replacementState.sessionId, null, 'Restart unexpectedly prepared a new demo profile.');
+    assert.deepEqual(replacementState.completedSteps, []);
+    await page.getByTestId('prepare-guided-profile').waitFor({ state: 'visible', timeout: READ_TIMEOUT_MS });
+    await page.waitForFunction(() => {
+      const core = document.getElementById('tour-core');
+      const rect = core?.getBoundingClientRect();
+      return document.activeElement?.id === 'core-heading' && rect && rect.top >= 0 && rect.top < 50
+        && rect.bottom > 0 && rect.top < innerHeight;
+    }, undefined, { timeout: DOM_TIMEOUT_MS });
+    const coreTop = await page.locator('#tour-core').evaluate((element) => element.getBoundingClientRect().top);
+    assert.deepEqual(brokerMutations.slice(brokerMutationsBefore),
+      [{ action: 'reset', expectedSessionId: session.sessionId }], 'Guided restart did not make exactly one guarded broker reset.');
+    assert.equal(mutationRequests.length, innerMutationsBefore, 'Guided restart unexpectedly started or advanced the new demo.');
+    const staleResponse = await context.request.get(url(`${session.runtimeUrl}/state`),
+      { timeout: READ_TIMEOUT_MS, failOnStatusCode: false });
+    assert.equal(staleResponse.status(), 410, 'The old guided session path must be unavailable after reset.');
+    await flushPendingResponseReads();
+    const expectedOldSessionError = (entry) => entry.at >= resetStartedAt && entry.url?.startsWith(url(`${session.runtimeUrl}/`))
+      && ((entry.type === 'http' && entry.status === 410)
+        || (entry.type === 'console' && /^Failed to load resource: the server responded with a status of 410\b/.test(entry.message)));
+    const unexpectedErrors = errors.filter((entry) => !expectedOldSessionError(entry));
+    assert.deepEqual(unexpectedErrors, [], `Guided restart browser errors: ${JSON.stringify(unexpectedErrors)}`);
+    report.flows.guided.restart = {
+      status: 'pass', oldSessionId: session.sessionId, oldRuntimeId: session.runtimeId,
+      replacementSession: replacement,
+      replacementState: { runtimeId: replacementState.runtimeId, sessionId: replacementState.sessionId,
+        revision: replacementState.revision, status: replacementState.status, completedSteps: replacementState.completedSteps },
+      brokerResetRequests: brokerMutations.slice(brokerMutationsBefore), oldPathStatus: staleResponse.status(),
+      coreHeadingFocused: true, coreTop, innerMutationsAfterReset: mutationRequests.length - innerMutationsBefore,
+      expectedOldSessionErrors: errors.filter(expectedOldSessionError),
+    };
     await persist();
   } catch (error) {
     await captureFailureArtifacts(page, 'guided', error);

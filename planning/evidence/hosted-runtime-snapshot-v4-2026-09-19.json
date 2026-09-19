@@ -1,0 +1,336 @@
+{
+  "schema": "dividendx-hosted-runtime-snapshot-v1",
+  "guidedSchemaVersion": 4,
+  "recordedAt": "2026-09-19T12:13:56.653Z",
+  "provider": "vercel-sandbox",
+  "project": "dividendx-stocklana",
+  "scope": "payai",
+  "snapshotId": "snap_mtdgtBAGmcNu8Ucj1M9kCARBKYvq",
+  "expiration": null,
+  "codeRoot": "/vercel/sandbox/dividendx",
+  "runtime": "node24",
+  "architecture": "linux-x64-glibc",
+  "vcpus": 2,
+  "runtimeStarted": false,
+  "privateSignerFilesPresent": false,
+  "nativeBigintBufferAvailable": false,
+  "surfpoolNativeLoads": true,
+  "boundary": "code-only-build-artifact-not-visitor-acceptance",
+  "sourceFiles": [
+    {
+      "path": ".dockerignore",
+      "sha256": "0fd5d14cf3b17aa14226d4b0f5fd01a02a0a32729d21dde98be589c5c0f27f40",
+      "bytes": 153
+    },
+    {
+      "path": "ARTIFACTS.sha256",
+      "sha256": "f4c3606b40bf7e560d63b0a9a00898dee72826119fe2f5f4b44a30df51e7adde",
+      "bytes": 1555
+    },
+    {
+      "path": "deploy/runtime/Dockerfile",
+      "sha256": "b15c0451cc633d6506ea04356b90579f0eed48f3ae581c191069be19f9abb997",
+      "bytes": 5569
+    },
+    {
+      "path": "deploy/runtime/probe.mjs",
+      "sha256": "50baa90e4afda6ddf7821e691dba81c2c59c355897381f5e0e53e1bad5046033",
+      "bytes": 7267
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "9442ac63c958664c7d9302fd4a788ca06c642952cf705575788a8b6e7c85986a",
+      "bytes": 81894
+    },
+    {
+      "path": "package.json",
+      "sha256": "8c0f590fcf262300eb2792d0533c9ce926cb6e2d7d0a52b28eaec3cd51d4c6ca",
+      "bytes": 3385
+    },
+    {
+      "path": "packages/amm-integration/fixtures/raydium-devnet-2026-09-17/capture.json",
+      "sha256": "1602de476c09c2a96659b0368711ef6a7baca4867325edc5d6237221d90ed11f",
+      "bytes": 2038
+    },
+    {
+      "path": "packages/amm-integration/fixtures/raydium-devnet-2026-09-17/raydium-cpmm.so",
+      "sha256": "87ef84634086209fc2c29b4163bbe5209a1e9383aff5c429781f5fff270d75fd",
+      "bytes": 742640
+    },
+    {
+      "path": "packages/amm-integration/package-lock.json",
+      "sha256": "93cad541fb2704d9c7b4c9d3db2fdf8d42b00c3a529f4c77d866857db1fd476b",
+      "bytes": 64287
+    },
+    {
+      "path": "packages/amm-integration/package.json",
+      "sha256": "970ee5fb12efda0bb90c3d921aea38bb60b7fbeb50b6e8482bb38cd5284628cf",
+      "bytes": 1045
+    },
+    {
+      "path": "packages/amm-integration/src/accounting.ts",
+      "sha256": "0646e4c3badb071d95bc83aa3f087286e03239d359f42723c07279425aa477bc",
+      "bytes": 9116
+    },
+    {
+      "path": "packages/amm-integration/src/cli.ts",
+      "sha256": "fc28c592400a13b0462c83f7c8c74802fa9e5140d86b5f44dc233afb59b8f44f",
+      "bytes": 4695
+    },
+    {
+      "path": "packages/amm-integration/src/constants.ts",
+      "sha256": "36acdb17e7cb3c8ee052648aa8b8958b79d9d35fa996d15e21f9a320a40cb76a",
+      "bytes": 3166
+    },
+    {
+      "path": "packages/amm-integration/src/errors.ts",
+      "sha256": "c5909da1167f087e2e7d55ecefb42a88b3a41171b69351d34ed74906fd8afc82",
+      "bytes": 893
+    },
+    {
+      "path": "packages/amm-integration/src/flow.ts",
+      "sha256": "d943261be4c6893c93d74d7eea971e1ec34ebd2b7cc3527d5dd7bcb96f418722",
+      "bytes": 39223
+    },
+    {
+      "path": "packages/amm-integration/src/guards.ts",
+      "sha256": "a7e707e2e3a3fc9bb7b1f9cb43934fb9d29080e6fab82178bdcdc499193148b2",
+      "bytes": 10601
+    },
+    {
+      "path": "packages/amm-integration/src/index.ts",
+      "sha256": "ca54d7afece39738c4fed6ae0906767e5a8189129f57ca9c3eaf23e0c9c40683",
+      "bytes": 356
+    },
+    {
+      "path": "packages/amm-integration/src/manifest.ts",
+      "sha256": "4672e94ab3b1299992a307d120eafca0430f2dbae567ca38d7e7be7f9b0be0f2",
+      "bytes": 4088
+    },
+    {
+      "path": "packages/amm-integration/src/quote.ts",
+      "sha256": "72978eabc1552a17ffdcfe523cbe0406770be2b895c27c981a5d176f58a5985e",
+      "bytes": 2980
+    },
+    {
+      "path": "packages/amm-integration/src/rpc.ts",
+      "sha256": "b9bb355c96bcb35c8f503249afff6798e25f898a60d4da08d313fdcf360bf38e",
+      "bytes": 1905
+    },
+    {
+      "path": "packages/amm-integration/src/signers.ts",
+      "sha256": "b8bfb2a4bff56005b7a48684643d82c18c504d38f2e95853bb22dbc546a9157e",
+      "bytes": 2002
+    },
+    {
+      "path": "packages/amm-integration/src/state.ts",
+      "sha256": "959e36ea2710f75d15d97782bdf4a425dea661da61d77b3f95d0b72ef828fee1",
+      "bytes": 2671
+    },
+    {
+      "path": "packages/amm-integration/src/transactions.ts",
+      "sha256": "3af9274591b55a3acb47ea93a11962a8d5531f9077eeb17af24b02b7ea4ff652",
+      "bytes": 2608
+    },
+    {
+      "path": "packages/amm-integration/src/types.ts",
+      "sha256": "df3a4bc3b90ee8886e0b48364b4d9a5ce27b61dfb387eb1f06fed80be2c0ea42",
+      "bytes": 2127
+    },
+    {
+      "path": "packages/amm-integration/tsconfig.json",
+      "sha256": "adfccdfe3da7ff711df3c05a8e5c3b10b3501e9a1dd9e74d9697a36aca96b07e",
+      "bytes": 446
+    },
+    {
+      "path": "packages/guided-runtime/fixtures/circle-devnet-usdc-2026-09-17.json",
+      "sha256": "dbb0c9a0caee9c0bdc9eaf6ef99d57761e39bb8b7893ece1067c3edb5aae8dc2",
+      "bytes": 1100
+    },
+    {
+      "path": "packages/guided-runtime/package-lock.json",
+      "sha256": "9c3301fadb6ad9896cb3c7ae0b95915d5c0935a600b99380ba3462bf421636f8",
+      "bytes": 71184
+    },
+    {
+      "path": "packages/guided-runtime/package.json",
+      "sha256": "be28aa7092eef292ed6e4f31a1b1a46104b4023f0a8d3a4f9c2f9376692b3d66",
+      "bytes": 912
+    },
+    {
+      "path": "packages/guided-runtime/scripts/smoke.ts",
+      "sha256": "3a3d2eee0f7ba1a26d4f25a8706e6556437ac6962b7fc63f9d2897f44f647b6d",
+      "bytes": 8619
+    },
+    {
+      "path": "packages/guided-runtime/src/contract.ts",
+      "sha256": "5d05762be0b4695d783bf80c1579ba0f670640d389179a19a1f15b52dee9c930",
+      "bytes": 2861
+    },
+    {
+      "path": "packages/guided-runtime/src/internal.ts",
+      "sha256": "a5b8c180792a02e1fad7b42695c5cb179b1e27bcf7b1505404a2387ad8ef672e",
+      "bytes": 3499
+    },
+    {
+      "path": "packages/guided-runtime/src/runtime.ts",
+      "sha256": "1e640f35a7f5923872ca9f7a0338a6843a4d1ade1e631aff52b6ba3ef67603cb",
+      "bytes": 68367
+    },
+    {
+      "path": "packages/guided-runtime/src/server.ts",
+      "sha256": "8b5d101dc9a82e991deb12cfeb142015345c82f16845d2d041a5d75c2185b278",
+      "bytes": 7075
+    },
+    {
+      "path": "packages/guided-runtime/tsconfig.json",
+      "sha256": "cfd1db0e324412abca452f4ef46ef91257b67a0da13a06eda4f2a672fbc1fcb0",
+      "bytes": 369
+    },
+    {
+      "path": "packages/hosted-gateway/package.json",
+      "sha256": "c9ff6641cd85261a69ff487bfa048c6df9ac10eeda6c391668c312318cdd3c2e",
+      "bytes": 238
+    },
+    {
+      "path": "packages/hosted-gateway/src/main.mjs",
+      "sha256": "5d84f526521bbbc3512d3a0c728d5d1dbd6b61b9cc37cf600828be24e15156f7",
+      "bytes": 493
+    },
+    {
+      "path": "packages/hosted-gateway/src/rpc-policy.mjs",
+      "sha256": "61dc784dd0aa20518b9a8a03477e4b670ed44487ce8dfaccfb1024ca1c0c3775",
+      "bytes": 7712
+    },
+    {
+      "path": "packages/hosted-gateway/src/server.mjs",
+      "sha256": "bab45a8a0b019f1784b02d2387b162a7e239dab5073ffd657f73a4e0e79d75f0",
+      "bytes": 23532
+    },
+    {
+      "path": "packages/local-runtime/package-lock.json",
+      "sha256": "b1d03b49298f048ddf6b52a17835df7ebd051dacc665a8d5208c657844a20d71",
+      "bytes": 48027
+    },
+    {
+      "path": "packages/local-runtime/package.json",
+      "sha256": "c5e96b2d990255141ee19d7c7a4fd0116dec91f3a837646a24489b556187cd87",
+      "bytes": 464
+    },
+    {
+      "path": "packages/local-runtime/src/server.mjs",
+      "sha256": "5c537ff45e134c0733314282d0f1f2818f18983dba2e12b570b009eaaab3b7f8",
+      "bytes": 23947
+    },
+    {
+      "path": "packages/transaction-sdk/idl/dividendx.json",
+      "sha256": "d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4",
+      "bytes": 42638
+    },
+    {
+      "path": "packages/transaction-sdk/package-lock.json",
+      "sha256": "c3f3a723946c2d6cbe9e6a38aec8715b3232fa58863e6e4a94543987b95c9303",
+      "bytes": 48023
+    },
+    {
+      "path": "packages/transaction-sdk/package.json",
+      "sha256": "3c91619124152204791b49e54aac614b98db39041997ba846058cdb6e9de7898",
+      "bytes": 1227
+    },
+    {
+      "path": "packages/transaction-sdk/src/accounts.ts",
+      "sha256": "51a35121088d1d41fddfb65c436845681269135ab43bbe8913d9ba3190324f2b",
+      "bytes": 17969
+    },
+    {
+      "path": "packages/transaction-sdk/src/arithmetic.ts",
+      "sha256": "03de8a348c26b354c7a9ad8bce7fa14fa7b35d93eb344191f7414aff42e0e2e8",
+      "bytes": 6253
+    },
+    {
+      "path": "packages/transaction-sdk/src/bytes.ts",
+      "sha256": "e185f70a63d5dd5c000b67186e725f32fd214bd532624e64d8513aeff9542a9e",
+      "bytes": 3560
+    },
+    {
+      "path": "packages/transaction-sdk/src/constants.ts",
+      "sha256": "3dd65b5f0a06d6660689b9d95eeb730b5b58a668ca03587447e2d81445b2aa36",
+      "bytes": 738
+    },
+    {
+      "path": "packages/transaction-sdk/src/discovery.ts",
+      "sha256": "a58dc0eb212e44794b1ff5c477c43ca220e49d161166f11eefab912b220b0882",
+      "bytes": 1437
+    },
+    {
+      "path": "packages/transaction-sdk/src/errors.ts",
+      "sha256": "24d453e8f092109591c72c4276c94c0ed2a9ff7924122913887c673937d0cc5e",
+      "bytes": 761
+    },
+    {
+      "path": "packages/transaction-sdk/src/identity.ts",
+      "sha256": "ba1d0fa5f572db392d7f5433617c22863775816305e799335e416a6b2122d56a",
+      "bytes": 1575
+    },
+    {
+      "path": "packages/transaction-sdk/src/idl.ts",
+      "sha256": "8685621bf66a974b68cd51224028af359e1ec11afb7a01aac353442a29ea9e37",
+      "bytes": 247
+    },
+    {
+      "path": "packages/transaction-sdk/src/index.ts",
+      "sha256": "713f48de5f8ea045e42bed538c0aafeea8779f11e96369c9e0d7c5daa99895f8",
+      "bytes": 432
+    },
+    {
+      "path": "packages/transaction-sdk/src/instructions.ts",
+      "sha256": "6469c9df37b09178fd369efc11e43bfcc66d8021eab68224a8eec5018ae9cf46",
+      "bytes": 10726
+    },
+    {
+      "path": "packages/transaction-sdk/src/pdas.ts",
+      "sha256": "292cde0b93a2add912f659a464ee1c8fd485219d7a305a3ba1f8ce5902f5121c",
+      "bytes": 3579
+    },
+    {
+      "path": "packages/transaction-sdk/src/quotes.ts",
+      "sha256": "d2e916e75090fe469b7bcbe26db6ff56ee2f9b4e90372a8622f602436ef192bd",
+      "bytes": 10063
+    },
+    {
+      "path": "packages/transaction-sdk/src/token-profile.ts",
+      "sha256": "e837fc6973fefc63763fb21d06f261713bbbd31fcfd3eb3ebaaf6d20921a13cb",
+      "bytes": 5744
+    },
+    {
+      "path": "packages/transaction-sdk/src/transactions.ts",
+      "sha256": "e4e1ccbb7e3fe40d0c298845b503f3c036603530b2003bacb749f1d4a636e6ae",
+      "bytes": 5109
+    },
+    {
+      "path": "packages/transaction-sdk/src/types.ts",
+      "sha256": "57e712b4d79cafe32cf0aebbafe9ebb19283cd343de35aefb45112a8958b7fe4",
+      "bytes": 3522
+    },
+    {
+      "path": "packages/transaction-sdk/tsconfig.json",
+      "sha256": "f32d2449fa456ddfb2ea007363455176ec9334621e6bf09e5e2164c48a0e426c",
+      "bytes": 440
+    },
+    {
+      "path": "scripts/hosting/build-staged-runtime.sh",
+      "sha256": "dae402c0925634d4867041b24e121ea5a0d1fdd945ec3e75a4ebae4401e8e41a",
+      "bytes": 1750
+    },
+    {
+      "path": "scripts/protocol/wallet-runtime-smoke.mjs",
+      "sha256": "4a5c32767ce63443af6f24233e3d61d821b7c878e6a4d16d9dcb0d26924716cd",
+      "bytes": 45585
+    },
+    {
+      "path": "target/deploy/dividendx.so",
+      "sha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+      "bytes": 706504
+    }
+  ]
+}

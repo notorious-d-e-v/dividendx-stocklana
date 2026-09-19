@@ -4,16 +4,22 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { resolve } from 'node:path';
 import { DEMO_STEPS } from '../src/internal.js';
+import { DEMO_ASSETS } from '../src/contract.js';
 import { GuidedDemoRuntime } from '../src/runtime.js';
 
 const ROOT = resolve(import.meta.dirname, '../../../..');
 
 test('frozen action order contains every guided mutation exactly once', () => {
   assert.deepEqual(DEMO_STEPS, [
-    'split', 'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity',
+    'core-split', 'core-recombine-partial', 'core-recombine-rest',
+    'dividend-split', 'dividend-quarter-one', 'dividend-quarter-two', 'dividend-recombine',
+    'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity',
     'recombine', 'settle-year', 'redeem-buyer', 'redeem-provider',
   ]);
   assert.equal(new Set(DEMO_STEPS).size, DEMO_STEPS.length);
+  assert.deepEqual(DEMO_ASSETS.map(({ id, decimals }) => [id, decimals]), [
+    ['xstocks-test-kox', 8], ['backpack-test-mu', 6], ['ondo-test-ibm', 9],
+  ]);
 });
 
 test('captured Raydium program and account fixtures match pinned hashes', async () => {
@@ -47,8 +53,10 @@ test('captured Circle devnet USDC mint is exact and discloses local funding boun
 test('idle runtime rejects stale and out-of-order mutations without creating a chain', async () => {
   const runtime = new GuidedDemoRuntime();
   const initial = runtime.publicState();
-  assert.equal(initial.schemaVersion, 2);
-  await assert.rejects(runtime.beginStart('wrong-runtime', initial.revision), /stale runtime or revision/);
-  await assert.rejects(runtime.beginStep(initial.runtimeId, 'missing', initial.revision, 'split'), /stale runtime, session, or revision/);
+  assert.equal(initial.schemaVersion, 4);
+  assert.equal(initial.asset, null);
+  await assert.rejects(runtime.beginStart('wrong-runtime', initial.revision, 'xstocks-test-kox'), /stale runtime or revision/);
+  await assert.rejects(runtime.beginStart(initial.runtimeId, initial.revision, 'unlisted' as never), /unsupported test stock profile/);
+  await assert.rejects(runtime.beginStep(initial.runtimeId, 'missing', initial.revision, 'dividend-split'), /stale runtime, session, or revision/);
   assert.deepEqual(runtime.publicState(), initial);
 });

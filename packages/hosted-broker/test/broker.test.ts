@@ -51,7 +51,7 @@ class FakeProvider implements SandboxProvider {
 
 function fixture(options: { active?: number } = {}) {
   const clock = new FakeClock(); const store = new MemoryStore(); const provider = new FakeProvider(clock);
-  let failRpc = false; let healthReady = true; let rpcResponse: (() => Response) | null = null;
+  let guidedSchemaVersion = 4; let failRpc = false; let healthReady = true; let rpcResponse: (() => Response) | null = null;
   const fetcher: typeof fetch = async (input, init) => {
     const url = new URL(String(input)); const providerName = url.hostname.split('.')[0]!;
     const record = [...provider.views.values()].find((item) => item.name === providerName)!;
@@ -61,7 +61,7 @@ function fixture(options: { active?: number } = {}) {
     if (url.pathname === '/health') return Response.json({ ready: healthReady, kind, runtimeId, expiresAt });
     if (url.pathname === '/manifest') return Response.json({ schemaVersion: 1, kind: 'surfnet', runtimeId, rpcUrl: 'http://127.0.0.1:8899', wsUrl: 'ws://127.0.0.1:8900',
       genesisHash: `local-${providerName}`, programId: PROGRAM_ID, deploymentDomainHex: 'ab'.repeat(32), clockControl: true, assets: [] });
-    if (url.pathname === '/state') return Response.json({ schemaVersion: 2, runtimeId, revision: 0, sessionId: null, status: 'idle', snapshot: null, transactions: [], completedSteps: [], error: null });
+    if (url.pathname === '/state') return Response.json({ schemaVersion: guidedSchemaVersion, asset: null, runtimeId, revision: 0, sessionId: null, status: 'idle', snapshot: null, transactions: [], completedSteps: [], error: null });
     if (failRpc && url.pathname === '/rpc') throw new Error('unknown submit result');
     if (rpcResponse && url.pathname === '/rpc') return rpcResponse();
     return Response.json({ jsonrpc: '2.0', id: 1, result: 'ok' });
@@ -73,6 +73,7 @@ function fixture(options: { active?: number } = {}) {
   const deps: BrokerDependencies = { clock, provider, secret: Buffer.alloc(32, 7), fetch: fetcher, limits,
     ledger: new SessionLedgerRepository(store, clock, limits) };
   return { broker: new HostedSessionBroker(deps), clock, store, provider, secret: deps.secret, origins: new Set(['https://example.com']),
+    setGuidedSchemaVersion: (value: number) => { guidedSchemaVersion = value; },
     setFailRpc: (value: boolean) => { failRpc = value; }, setHealthReady: (value: boolean) => { healthReady = value; },
     setRpcResponse: (value: () => Response) => { rpcResponse = value; } };
 }
@@ -88,6 +89,19 @@ test('two visitors and two flows receive distinct isolated sessions', async () =
   assert.equal(f.provider.createCount, 3); assert.equal(f.provider.launchCount, 3);
   const duplicate = await f.broker.start('visitor-a', 'ip-a', 'wallet', null);
   assert.equal(duplicate.sessionId, a.sessionId); assert.equal(f.provider.createCount, 3);
+});
+
+test('guided proxy accepts the tour schema and rejects an older runtime snapshot', async () => {
+  const current = fixture();
+  const session = await current.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const result = await current.broker.proxy('visitor-a', 'guided', session.sessionId!, 'GET', '/state');
+  assert.equal((result.value as Record<string, unknown>).schemaVersion, 4);
+  const old = fixture();
+  const olderSession = await old.broker.start('visitor-a', 'ip-a', 'guided', null);
+  old.setGuidedSchemaVersion(3);
+  await assert.rejects(() => old.broker.proxy('visitor-a', 'guided', olderSession.sessionId!, 'GET', '/state'),
+    /Sandbox identity verification failed/);
+  assert.equal((await old.broker.current('visitor-a', 'guided')).status, 'failed');
 });
 
 test('CAS races enforce the global active limit', async () => {

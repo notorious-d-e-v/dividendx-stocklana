@@ -1,10 +1,11 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
+import type { AddressInfo } from 'node:net';
 import { GuidedDemoRuntime } from './runtime.js';
 import { DEMO_STEPS, HttpError } from './internal.js';
+import { DEMO_ASSETS, type DemoAssetId } from './contract.js';
 
 const HOST = '127.0.0.1';
 const PORT = 4181;
-const HOSTS = new Set(['127.0.0.1:4181', 'localhost:4181']);
 const ORIGINS = new Set([
   'http://127.0.0.1:4174', 'http://localhost:4174',
   'http://127.0.0.1:4184', 'http://localhost:4184',
@@ -50,8 +51,9 @@ function mutationHeaders(request: IncomingMessage): string {
   return origin;
 }
 
-export async function startGuidedServer(): Promise<{ runtime: GuidedDemoRuntime; close: () => Promise<void> }> {
+export async function startGuidedServer(port = PORT): Promise<{ runtime: GuidedDemoRuntime; port: number; close: () => Promise<void> }> {
   const runtime = new GuidedDemoRuntime();
+  let allowedHosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`]);
   let mutationTail = Promise.resolve();
   const serialize = async <T>(operation: () => Promise<T>): Promise<T> => {
     const result = mutationTail.then(operation, operation);
@@ -61,7 +63,7 @@ export async function startGuidedServer(): Promise<{ runtime: GuidedDemoRuntime;
   const server = createServer(async (request, response) => {
     const origin = request.headers.origin;
     try {
-      if (!HOSTS.has(request.headers.host ?? '')) throw new HttpError(403, 'invalid Host header');
+      if (!allowedHosts.has(request.headers.host ?? '')) throw new HttpError(403, 'invalid Host header');
       if (origin && !ORIGINS.has(origin)) throw new HttpError(403, 'origin is not allowed');
       const path = new URL(request.url ?? '/', `http://${request.headers.host}`).pathname;
       if (request.method === 'OPTIONS') {
@@ -81,9 +83,10 @@ export async function startGuidedServer(): Promise<{ runtime: GuidedDemoRuntime;
       if (request.method === 'POST' && path === '/start') {
         const allowedOrigin = mutationHeaders(request);
         const value = await body(request);
-        exactKeys(value, ['runtimeId', 'expectedRevision']);
-        if (typeof value.runtimeId !== 'string' || !Number.isSafeInteger(value.expectedRevision) || Number(value.expectedRevision) < 0) throw new HttpError(400, 'invalid start request');
-        await serialize(() => runtime.beginStart(value.runtimeId as string, Number(value.expectedRevision)));
+        exactKeys(value, ['runtimeId', 'expectedRevision', 'assetId']);
+        if (typeof value.runtimeId !== 'string' || !Number.isSafeInteger(value.expectedRevision) || Number(value.expectedRevision) < 0
+          || typeof value.assetId !== 'string' || !DEMO_ASSETS.some((asset) => asset.id === value.assetId)) throw new HttpError(400, 'invalid start request');
+        await serialize(() => runtime.beginStart(value.runtimeId as string, Number(value.expectedRevision), value.assetId as DemoAssetId));
         respond(response, 202, runtime.publicState(), allowedOrigin);
         return;
       }
@@ -108,13 +111,15 @@ export async function startGuidedServer(): Promise<{ runtime: GuidedDemoRuntime;
   });
   await new Promise<void>((resolveListen, rejectListen) => {
     server.once('error', rejectListen);
-    server.listen(PORT, HOST, resolveListen);
+    server.listen(port, HOST, resolveListen);
   });
+  const boundPort = (server.address() as AddressInfo).port;
+  allowedHosts = new Set([`127.0.0.1:${boundPort}`, `localhost:${boundPort}`]);
   const close = async () => {
     await new Promise<void>((resolveClose) => server.close(() => resolveClose()));
     runtime.stop();
   };
-  return { runtime, close };
+  return { runtime, port: boundPort, close };
 }
 
 if (process.argv[1] && new URL(import.meta.url).pathname === process.argv[1]) {

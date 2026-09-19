@@ -15,6 +15,7 @@ const PUBLIC_GENESIS = new Set([
   '4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY',
 ]);
 const KIND = new Set(['wallet', 'guided']);
+const GUIDED_ASSETS = new Set(['xstocks-test-kox', 'backpack-test-mu', 'ondo-test-ibm']);
 const TOKEN = /^[a-f0-9]{64}$/;
 const RUNTIME_ID = /^[A-Za-z0-9._:-]{3,128}$/;
 const HEX_32 = /^[a-f0-9]{64}$/;
@@ -305,16 +306,19 @@ export class HostedGateway {
     const { response, body } = await this.upstream('/state', { headers: { accept: 'application/json', origin: INTERNAL_ORIGIN, 'x-dividendx-demo': '1' } });
     if (!response.ok) throw new Error('state unavailable');
     const state = responseJson(body);
-    if (!plainRecord(state) || state.schemaVersion !== 2 || !RUNTIME_ID.test(state.runtimeId) || state.status !== 'idle' || state.snapshot !== null) throw new Error('initial guided state is invalid');
+    if (!plainRecord(state) || state.schemaVersion !== 4 || !RUNTIME_ID.test(state.runtimeId) || state.status !== 'idle'
+      || state.asset !== null || state.snapshot !== null) throw new Error('initial guided state is invalid');
     this.runtimeId = state.runtimeId;
     this.identity = { runtimeId: state.runtimeId, genesisHash: null, deploymentDomainHex: null, rpcUrl: null };
   }
 
   async validateGuidedState(value) {
-    if (!plainRecord(value) || value.schemaVersion !== 2 || value.runtimeId !== this.runtimeId) throw new Error('guided runtime identity changed');
+    if (!plainRecord(value) || value.schemaVersion !== 4 || value.runtimeId !== this.runtimeId
+      || (value.asset !== null && (!plainRecord(value.asset) || !GUIDED_ASSETS.has(value.asset.id)))) throw new Error('guided runtime identity changed');
     if (value.snapshot === null || value.snapshot === undefined) return;
     const snapshot = value.snapshot;
-    if (!plainRecord(snapshot) || snapshot.dividendXProgram !== PROGRAM_ID || typeof snapshot.genesisHash !== 'string' || PUBLIC_GENESIS.has(snapshot.genesisHash)) throw new Error('guided chain identity is invalid');
+    if (!plainRecord(snapshot) || !plainRecord(snapshot.asset) || snapshot.asset.id !== value.asset?.id
+      || snapshot.dividendXProgram !== PROGRAM_ID || typeof snapshot.genesisHash !== 'string' || PUBLIC_GENESIS.has(snapshot.genesisHash)) throw new Error('guided chain identity is invalid');
     const deploymentDomainHex = base58Bytes(snapshot.genesisHash).toString('hex');
     const rpcUrl = safeRpcUrl(snapshot.rpcUrl);
     if (this.identity.genesisHash !== null && (this.identity.genesisHash !== snapshot.genesisHash || this.identity.deploymentDomainHex !== deploymentDomainHex || this.identity.rpcUrl !== rpcUrl)) throw new Error('guided chain identity changed');
@@ -325,8 +329,10 @@ export class HostedGateway {
   }
 
   async validateGuidedReceipt(value) {
-    if (!plainRecord(value) || value.schemaVersion !== 2 || value.runtimeId !== this.runtimeId) throw new Error('guided receipt identity changed');
-    if (Array.isArray(value.checkpoints)) for (const checkpoint of value.checkpoints) if (plainRecord(checkpoint) && checkpoint.snapshot) await this.validateGuidedState({ schemaVersion: 2, runtimeId: value.runtimeId, snapshot: checkpoint.snapshot });
+    if (!plainRecord(value) || value.schemaVersion !== 4 || value.runtimeId !== this.runtimeId
+      || !plainRecord(value.asset) || !GUIDED_ASSETS.has(value.asset.id)) throw new Error('guided receipt identity changed');
+    if (Array.isArray(value.checkpoints)) for (const checkpoint of value.checkpoints) if (plainRecord(checkpoint) && checkpoint.snapshot)
+      await this.validateGuidedState({ schemaVersion: 4, runtimeId: value.runtimeId, asset: value.asset, snapshot: checkpoint.snapshot });
   }
 
   async handle(request, response) {
@@ -353,6 +359,12 @@ export class HostedGateway {
         const value = parseJson(body);
         if (route === 'rpc') envelope = validateRpcEnvelope(value);
         else if (!plainRecord(value)) throw new HttpError(400, 'request body must be an object');
+        if (this.kind === 'guided' && route === 'start') {
+          const keys = Object.keys(value).sort();
+          if (keys.length !== 3 || keys.join(',') !== 'assetId,expectedRevision,runtimeId'
+            || !RUNTIME_ID.test(value.runtimeId) || !Number.isSafeInteger(value.expectedRevision) || value.expectedRevision < 0
+            || !GUIDED_ASSETS.has(value.assetId)) throw new HttpError(400, 'invalid guided start request');
+        }
       } else if ((request.headers['content-length'] && request.headers['content-length'] !== '0') || request.headers['transfer-encoding']) {
         throw new HttpError(400, 'GET requests cannot contain a body');
       }

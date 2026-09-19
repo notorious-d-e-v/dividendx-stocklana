@@ -5,6 +5,7 @@ import { DIVIDENDX_PROGRAM_ID } from '@dividendx/transaction-sdk';
 import { submitAndConfirmOverHttp, validateWalletSignedTransaction } from '../src/wallet/chain';
 import { DEVNET_GENESIS_HASH, hostedRuntimeConfig, validateManifestShape } from '../src/wallet/runtime';
 import { changeHostedSession, SESSION_MUTATION_TIMEOUT_MS, SESSION_READ_TIMEOUT_MS } from '../src/hosted/session';
+import { DEMO_ASSETS } from '../../../packages/guided-runtime/src/contract';
 
 // These mocked contracts verify browser enforcement only. They are not custody, provider, or onchain proof.
 
@@ -33,14 +34,15 @@ function session(status: 'none' | 'starting' | 'ready' | 'expired' | 'failed', o
 
 function guidedState(status: 'idle' | 'ready' | 'complete' = 'idle', id = runtimeId) {
   return {
-    schemaVersion: 2,
+    schemaVersion: 4,
     runtimeId: id,
-    revision: status === 'complete' ? 10 : 1,
+    revision: status === 'complete' ? 15 : 1,
     sessionId: status === 'idle' ? null : 'inner-guided-session',
+    asset: status === 'idle' ? null : DEMO_ASSETS[0],
     status,
     activeStep: null,
-    nextStep: status === 'ready' ? 'split' : null,
-    completedSteps: status === 'complete' ? ['split', 'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity', 'recombine', 'settle-year', 'redeem-buyer', 'redeem-provider'] : [],
+    nextStep: status === 'ready' ? 'core-split' : null,
+    completedSteps: status === 'complete' ? ['core-split', 'core-recombine-partial', 'core-recombine-rest', 'dividend-split', 'dividend-quarter-one', 'dividend-quarter-two', 'dividend-recombine', 'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity', 'recombine', 'settle-year', 'redeem-buyer', 'redeem-provider'] : [],
     snapshot: null,
     transactions: [],
     error: null,
@@ -143,7 +145,7 @@ test('an unknown start outcome is reconciled by a read without repeating the mut
   await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState()));
   await page.goto(`${origin}/demos/`);
   await page.getByRole('button', { name: 'Start private sandbox' }).click();
-  await expect(page.getByRole('button', { name: 'Prepare demo wallets' })).toBeVisible();
+  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
   expect(posts).toBe(1);
 });
 
@@ -181,10 +183,10 @@ test('a delayed old poll cannot overwrite a reconciled replacement session', asy
     });
   }, { id: sessionId });
   await page.getByRole('button', { name: 'Check progress' }).click();
-  await expect(page.getByRole('button', { name: 'Prepare demo wallets' })).toBeVisible();
+  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
   releaseOld();
   await page.waitForTimeout(100);
-  await expect(page.getByRole('button', { name: 'Prepare demo wallets' })).toBeVisible();
+  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
 });
 
 test('ready session reconnects from its cookie without another broker mutation', async ({ page }) => {
@@ -195,17 +197,19 @@ test('ready session reconnects from its cookie without another broker mutation',
   });
   await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState()));
   await page.goto(`${origin}/demos/`);
-  await expect(page.getByRole('button', { name: 'Prepare demo wallets' })).toBeVisible();
+  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('button', { name: 'Prepare demo wallets' })).toBeVisible();
+  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
   expect(posts).toBe(0);
 });
 
 test('completed hosted journey resets the broker session and remounts on replacement', async ({ page }) => {
   let resetBody: unknown;
+  let resets = 0;
   let current = session('ready');
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
     if (route.request().method() === 'POST') {
+      resets += 1;
       resetBody = route.request().postDataJSON();
       current = session('starting', { sessionId: replacementId, runtimeId: 'replacement-runtime' });
       return fulfill(route, current, 202);
@@ -213,10 +217,19 @@ test('completed hosted journey resets the broker session and remounts on replace
     return fulfill(route, current);
   });
   await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState('complete')));
+  await page.route(`${origin}/api/sandbox/guided/${replacementId}/state`, (route) => fulfill(route, guidedState('idle', 'replacement-runtime')));
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(`${origin}/demos/`);
   await page.getByRole('button', { name: 'Run the journey again' }).click();
   await expect(page.getByRole('heading', { name: 'Starting your isolated test network…' })).toBeVisible();
   expect(resetBody).toEqual({ action: 'reset', expectedSessionId: sessionId });
+  current = session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` });
+  await page.getByRole('button', { name: 'Check progress' }).click();
+  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
+  await expect(page.locator('#core-heading')).toBeFocused();
+  await expect(page.locator('#tour-core')).toBeInViewport();
+  expect(await page.locator('#tour-core').evaluate((element) => element.getBoundingClientRect().top)).toBeLessThan(50);
+  expect(resets).toBe(1);
 });
 
 test('expired session needs an explicit reset', async ({ page }) => {
@@ -237,7 +250,7 @@ test('410 from a stale tab clears the guided transaction controls', async ({ pag
   await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, { error: 'stale session' }, 410));
   await page.goto(`${origin}/demos/`);
   await expect(page.getByRole('heading', { name: 'This sandbox has expired.' })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Prepare demo wallets' })).toHaveCount(0);
+  await expect(page.getByTestId('prepare-guided-profile')).toHaveCount(0);
 });
 
 test('wrong guided runtime identity is rejected', async ({ page }) => {
