@@ -26,7 +26,7 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Issuer qualification | Offline unsigned dossiers check identities, revisions, candidate dates and current mint evidence; every dossier retains unresolved settlement gates; [acceptance](issuer-qualification-review.md) |
 | Captured mint custody | Unchanged compiled program passes all 15 actual mint configurations locally with synthetic funding/events; [acceptance](issuer-custody-review.md) |
 | AMM integration | Isolated [Node CLI](../packages/amm-integration/README.md) with a 15-transaction finalized public devnet Raydium CPMM round trip and a separate 14-transaction captured-bytecode local proof; [acceptance](amm-review.md) |
-| Guided demos | Live v4: 15 actions, two disposable wallets and 40 confirmed local transactions through core recombination, dividend accrual, Raydium and annual redemption; [review](guided-tour-v4-review.md). Public v2 remains the accepted nine-action journey until rollout. |
+| Guided demos | Live v4: 15 actions, two disposable wallets and 40 confirmed local transactions through core recombination, dividend accrual, Raydium and annual redemption; [review](guided-tour-v4-review.md). Production acceptance includes the completed-tour restart. |
 | Fallback | Original single-event SDK and technical rehearsal at `/rehearsal/`, preserved |
 | Evidence | 15 candidate mints across xStocks, Backpack/Trek and Ondo; historical KOx and Backpack MU factors |
 | Research | [Annual conventions and fixture gaps](research/annual-dividend-series.md), extending the [prior-art review](research/prior-art-review.md) |
