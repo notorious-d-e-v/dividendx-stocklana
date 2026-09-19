@@ -1,6 +1,6 @@
-# Guided tour v4 — local acceptance, 19 September 2026
+# Guided tour v4 — acceptance, 19 September 2026
 
-User-approved release candidate at [localhost /demos/](http://127.0.0.1:4174/demos/), following the [three-chapter specification](../spec/guided-tour-v4.md). The public site still serves v2; a new [code-only v4 runtime snapshot](evidence/hosted-runtime-snapshot-v4-2026-09-19.json) has been built for the coordinated rollout tracked in the [release review](guided-tour-v4-release.md). Earlier [v3 evidence](guided-tour-review.md) is preserved.
+Released at [dividendx.payai.network/demos/](https://dividendx.payai.network/demos/), following the [three-chapter specification](../spec/guided-tour-v4.md). The matching [code-only v4 runtime snapshot](evidence/hosted-runtime-snapshot-v4-2026-09-19.json) was published with the site; see the [release review](guided-tour-v4-release.md). Earlier [v3 evidence](guided-tour-review.md) is preserved.
 
 ## Result
 
@@ -25,7 +25,7 @@ Reviewed images: [hero](../apps/web/qa/guided-tour-v4-before-1440.png), [split](
 
 ## Publication boundary
 
-State, receipts, client, broker and gateway now require schema 4. Snapshot `snap_mtdgtBAGmcNu8Ucj1M9kCARBKYvq` was built from a new allowlisted code-only context; its [Linux proof](evidence/linux-runtime-v4-2026-09-19-r2.json) and [provider isolation probe](evidence/hosted-provider-probe-v4-2026-09-19.json) pass. The production snapshot configuration and public v2 snapshot remain untouched pending the coordinated release. No live issuer custody, actual dividend feed, mainnet, new venue or public funding is established by this demo.
+State, receipts, client, broker and gateway now require schema 4. Snapshot `snap_mtdgtBAGmcNu8Ucj1M9kCARBKYvq` was built from a new allowlisted code-only context; its [Linux proof](evidence/linux-runtime-v4-2026-09-19-r2.json) and [provider isolation probe](evidence/hosted-provider-probe-v4-2026-09-19.json) pass. Production and preview now select the v4 snapshot; the original v2 artifact remains available for rollback. No live issuer custody, actual dividend feed, mainnet, new venue or public funding is established by this demo.
 
 ## Follow-up UI polish
 
@@ -37,4 +37,4 @@ Verification: 95 root tests and all 68 browser tests pass; typecheck, isolated p
 
 ## Release candidate update
 
-The final local and hosted-mock browser checks verify that starting another tour after completion returns scroll and keyboard focus to Part One. The candidate passes 69 browser tests, 95 root tests, 36 hosted-devnet tests, 18 broker tests, 18 gateway tests and five guided-runtime tests, plus type checking and an isolated production build. The Linux and provider isolation probes pass; public-browser acceptance remains pending in the [release review](guided-tour-v4-release.md).
+The final local and hosted-mock browser checks verify that starting another tour after completion returns scroll and keyboard focus to Part One. The candidate passes 69 browser tests, 95 root tests, 36 hosted-devnet tests, 18 broker tests, 18 gateway tests and five guided-runtime tests, plus type checking and an isolated production build. The Linux and provider isolation probes pass; the [release review](guided-tour-v4-release.md) records passing production-browser acceptance, including all 40 transactions and the actual restart scroll/focus.

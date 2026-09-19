@@ -4,7 +4,7 @@ This runbook covers the production site at [dividendx.payai.network](https://div
 
 The governing boundaries are the [hosting release review](../planning/hosting-release-review.md), [hosted-session specification](../spec/hosted-sessions-v1.md), and [hosted-devnet specification](../spec/hosted-devnet-services-v1.md).
 
-The user approved [guided tour v4](../planning/guided-tour-v4-review.md) for publication. The [v4 release review](../planning/guided-tour-v4-release.md) tracks its staged snapshot, acceptance and deployment. Until that rollout completes, the production `/demos/` route and configured Sandbox snapshot still serve the accepted v2 journey.
+The production `/demos/` route serves [guided tour v4](../planning/guided-tour-v4-review.md) with its matching schema-4 Sandbox snapshot. The [release review](../planning/guided-tour-v4-release.md) records acceptance, deployment and rollback details.
 
 ## Production surfaces
 
@@ -38,8 +38,8 @@ The Vercel cron runs `/api/cron/refresh-observations` every six hours. It refres
 The server deployment and Sandbox image are separate release artifacts:
 
 - [`packages/devnet-runtime/manifest.devnet.json`](../packages/devnet-runtime/manifest.devnet.json) is the frozen public devnet registry used by `/app/`.
-- The [accepted v2 runtime snapshot manifest](../planning/evidence/hosted-runtime-snapshot-2026-09-18.json) records the current production code-only Linux/Node 24 snapshot, exact source hashes, accepted program ELF, IDL, and captured test fixtures.
-- The new [v4 snapshot manifest](../planning/evidence/hosted-runtime-snapshot-v4-2026-09-19.json) records candidate snapshot `snap_mtdgtBAGmcNu8Ucj1M9kCARBKYvq` and its allowlisted source hashes. Its [Linux](../planning/evidence/linux-runtime-v4-2026-09-19-r2.json) and [provider isolation](../planning/evidence/hosted-provider-probe-v4-2026-09-19.json) proofs pass; select it only as part of the coordinated v4 site release.
+- The [accepted v2 runtime snapshot manifest](../planning/evidence/hosted-runtime-snapshot-2026-09-18.json) records the previous production code-only Linux/Node 24 snapshot, exact source hashes, accepted program ELF, IDL, and captured test fixtures.
+- The current [v4 snapshot manifest](../planning/evidence/hosted-runtime-snapshot-v4-2026-09-19.json) records production snapshot `snap_mtdgtBAGmcNu8Ucj1M9kCARBKYvq` and its allowlisted source hashes. Its [Linux](../planning/evidence/linux-runtime-v4-2026-09-19-r2.json) and [provider isolation](../planning/evidence/hosted-provider-probe-v4-2026-09-19.json) proofs pass. The v4 site and snapshot were released together under [release acceptance](../planning/guided-tour-v4-release.md).
 - [`scripts/hosting/stage-linux-runtime.sh`](../scripts/hosting/stage-linux-runtime.sh) creates an allowlisted context and rejects environment files, keypairs, local tools, Git data, and dependencies.
 - [`.vercelignore`](../.vercelignore) excludes local environment, signer, evidence, runtime-state, dependency, and build directories from the server deployment.
 

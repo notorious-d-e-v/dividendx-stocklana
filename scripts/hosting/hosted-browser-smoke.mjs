@@ -740,15 +740,19 @@ async function runGuided() {
       .map(({ snapshot }) => snapshot.eventCount), [1, 2, 4]);
     assert.deepEqual(mutationRequests.map(({ step, path }) => path.endsWith('/start') ? 'setup' : step),
       ['setup', ...GUIDED_STEP_IDS]);
-    const guidedSignatures = state.transactions.map(({ signature }) => signature);
-    assert.equal(new Set(guidedSignatures).size, guidedSignatures.length, 'Duplicate guided signatures.');
-    const guidedRpcStatuses = await verifySignatures(context, `${session.runtimeUrl}/rpc`, guidedSignatures);
+    assert.equal(receipt.transactions?.length, 40, 'Guided receipt must record all 40 transactions.');
+    assert.deepEqual(receipt.transactions, state.transactions, 'Guided state and runtime receipt transactions differ.');
+    const receiptStatuses = receipt.transactions.map(({ signature, status }) => ({ signature, status }));
+    assert(receiptStatuses.every(({ signature, status }) => typeof signature === 'string' && signature.length > 0
+      && ['confirmed', 'finalized'].includes(status)), 'Guided receipt has a missing or unconfirmed signature.');
+    assert.equal(new Set(receiptStatuses.map(({ signature }) => signature)).size, 40, 'Duplicate guided receipt signatures.');
     assert.equal(await page.locator('.transaction-list a').count(), 0, 'Sandbox signatures must not link to Explorer.');
     const layout = await assertNoOverflowAndCapture(page, 'guided');
     await flushPendingResponseReads();
     assert.deepEqual(errors, [], `Guided browser errors: ${JSON.stringify(errors)}`);
     report.flows.guided = { status: 'pass', session, innerSessionId, finalState: state, receipt, checkpoints,
-      dividendStockDisplay, mutationRequests, guidedRpcStatuses, layout, browserErrors: [...errors] };
+      dividendStockDisplay, mutationRequests, confirmationSource: 'runtime receipts; guided RPC is private',
+      receiptStatuses, layout, browserErrors: [...errors] };
     await persist();
 
     const cooldownRemaining = Math.max(0, 31_000 - (Date.now() - readyAt));
