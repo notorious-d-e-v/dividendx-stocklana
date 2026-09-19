@@ -1,0 +1,37 @@
+{
+  "at": "2026-09-19T12:31:01.308Z",
+  "deploymentId": "dpl_DNG5syh8pbQp9GDWhVh1d61qdpB6",
+  "commit": "db19e1991bf4a46215a3ed1452c7058196db3ddb",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/app/",
+      "status": 200
+    },
+    {
+      "path": "/sandbox/",
+      "status": 200
+    },
+    {
+      "path": "/demos/",
+      "status": 200
+    },
+    {
+      "path": "/api/devnet/manifest",
+      "status": 200,
+      "clockControl": false,
+      "assetCount": 3
+    },
+    {
+      "path": "/api/sandbox/guided/session",
+      "status": 200
+    },
+    {
+      "path": "/api/sandbox/wallet/session",
+      "status": 200
+    }
+  ]
+}

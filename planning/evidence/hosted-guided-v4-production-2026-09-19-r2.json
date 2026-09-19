@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-19T12:30:55.621Z",
+  "completedAt": "2026-09-19T12:32:11.007Z",
+  "targetOrigin": "https://dividendx.payai.network",
+  "requestedFlow": "guided",
+  "status": "failed",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-19T12:30:55.887Z",
+      "name": "browser launched",
+      "flows": [
+        "guided"
+      ]
+    },
+    {
+      "at": "2026-09-19T12:30:55.892Z",
+      "name": "guided: create isolated visitor session"
+    },
+    {
+      "at": "2026-09-19T12:31:08.380Z",
+      "name": "guided: prepare selected test profile",
+      "sessionId": "b65d1c8b5037a38114ae0821b210f6de"
+    },
+    {
+      "at": "2026-09-19T12:31:12.675Z",
+      "name": "guided: core-split"
+    },
+    {
+      "at": "2026-09-19T12:31:16.739Z",
+      "name": "guided: core-recombine-partial"
+    },
+    {
+      "at": "2026-09-19T12:31:17.920Z",
+      "name": "guided: core-recombine-rest"
+    },
+    {
+      "at": "2026-09-19T12:31:23.692Z",
+      "name": "guided: dividend-split"
+    },
+    {
+      "at": "2026-09-19T12:31:27.422Z",
+      "name": "guided: dividend-quarter-one"
+    },
+    {
+      "at": "2026-09-19T12:31:33.406Z",
+      "name": "guided: dividend-quarter-two"
+    },
+    {
+      "at": "2026-09-19T12:31:37.184Z",
+      "name": "guided: dividend-recombine"
+    },
+    {
+      "at": "2026-09-19T12:31:43.288Z",
+      "name": "guided: create-pool"
+    },
+    {
+      "at": "2026-09-19T12:31:47.117Z",
+      "name": "guided: add-liquidity"
+    },
+    {
+      "at": "2026-09-19T12:31:51.184Z",
+      "name": "guided: buy-dr"
+    },
+    {
+      "at": "2026-09-19T12:31:52.398Z",
+      "name": "guided: remove-liquidity"
+    },
+    {
+      "at": "2026-09-19T12:31:54.240Z",
+      "name": "guided: recombine"
+    },
+    {
+      "at": "2026-09-19T12:31:58.908Z",
+      "name": "guided: settle-year"
+    },
+    {
+      "at": "2026-09-19T12:32:02.980Z",
+      "name": "guided: redeem-buyer"
+    },
+    {
+      "at": "2026-09-19T12:32:04.261Z",
+      "name": "guided: redeem-provider"
+    }
+  ],
+  "flows": {
+    "guided": {
+      "status": "running",
+      "session": {
+        "schemaVersion": 1,
+        "kind": "guided",
+        "status": "ready",
+        "sessionId": "b65d1c8b5037a38114ae0821b210f6de",
+        "runtimeId": "61a403b1-8997-48da-b108-cf7d5664bae5",
+        "expiresAt": "2026-09-19T12:46:00.824Z",
+        "runtimeUrl": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de",
+        "error": null
+      },
+      "initialState": {
+        "schemaVersion": 4,
+        "runtimeId": "61a403b1-8997-48da-b108-cf7d5664bae5",
+        "revision": 0,
+        "sessionId": null,
+        "asset": null,
+        "status": "idle",
+        "activeStep": null,
+        "nextStep": null,
+        "completedSteps": [],
+        "snapshot": null,
+        "transactions": [],
+        "error": null
+      },
+      "mutationRequests": [
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/start",
+          "step": null,
+          "assetId": "xstocks-test-kox"
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "core-split",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "core-recombine-partial",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "core-recombine-rest",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "dividend-split",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "dividend-quarter-one",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "dividend-quarter-two",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "dividend-recombine",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "create-pool",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "add-liquidity",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "buy-dr",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "remove-liquidity",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "recombine",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "settle-year",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "redeem-buyer",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/b65d1c8b5037a38114ae0821b210f6de/step",
+          "step": "redeem-provider",
+          "assetId": null
+        }
+      ],
+      "checkpoints": [
+        {
+          "step": "core-split",
+          "revision": 24,
+          "slot": 7514931016,
+          "transactions": 10
+        },
+        {
+          "step": "core-recombine-partial",
+          "revision": 28,
+          "slot": 7514931068,
+          "transactions": 11
+        },
+        {
+          "step": "core-recombine-rest",
+          "revision": 32,
+          "slot": 7514931097,
+          "transactions": 12
+        },
+        {
+          "step": "dividend-split",
+          "revision": 36,
+          "slot": 7514931164,
+          "transactions": 13
+        },
+        {
+          "step": "dividend-quarter-one",
+          "revision": 44,
+          "slot": 15290640741,
+          "transactions": 16
+        },
+        {
+          "step": "dividend-quarter-two",
+          "revision": 52,
+          "slot": 23239439920,
+          "transactions": 19
+        },
+        {
+          "step": "dividend-recombine",
+          "revision": 56,
+          "slot": 23239439968,
+          "transactions": 20
+        },
+        {
+          "step": "create-pool",
+          "revision": 60,
+          "slot": 1999,
+          "transactions": 21
+        },
+        {
+          "step": "add-liquidity",
+          "revision": 64,
+          "slot": 23239010050,
+          "transactions": 22
+        },
+        {
+          "step": "buy-dr",
+          "revision": 68,
+          "slot": 23239010105,
+          "transactions": 23
+        },
+        {
+          "step": "remove-liquidity",
+          "revision": 72,
+          "slot": 23239010131,
+          "transactions": 24
+        },
+        {
+          "step": "recombine",
+          "revision": 76,
+          "slot": 23239010158,
+          "transactions": 25
+        },
+        {
+          "step": "settle-year",
+          "revision": 104,
+          "slot": 40604543006,
+          "transactions": 38
+        },
+        {
+          "step": "redeem-buyer",
+          "revision": 108,
+          "slot": 40604543035,
+          "transactions": 39
+        },
+        {
+          "step": "redeem-provider",
+          "revision": 112,
+          "slot": 40604543066,
+          "transactions": 40
+        }
+      ],
+      "dividendStockDisplay": {
+        "raw": "4000000000",
+        "multiplierBits": "4607272490792564818",
+        "expected": 40.8,
+        "shown": "40.8",
+        "mobileShown": "40.8"
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "flow": "guided-dividend",
+      "width": 1440,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-guided-v4-production-2026-09-19-r2-guided-dividend-1440.png",
+      "overflow": false
+    },
+    {
+      "flow": "guided-dividend",
+      "width": 390,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-guided-v4-production-2026-09-19-r2-guided-dividend-390.png",
+      "overflow": false
+    },
+    {
+      "flow": "guided",
+      "failure": true,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-guided-v4-production-2026-09-19-r2-guided-failure.png"
+    }
+  ],
+  "failureArtifacts": [
+    {
+      "at": "2026-09-19T12:32:10.802Z",
+      "flow": "guided",
+      "stage": "guided: redeem-provider",
+      "message": "RPC getSignatureStatuses returned HTTP 404: route not found",
+      "url": "https://dividendx.payai.network/demos/",
+      "alerts": [],
+      "bodyText": "Skip to demo\nDividendX\nPublic devnet\nWallet sandbox\nGuided demos\nJourney complete\nPrivate sandbox · Demo assets · Fast-forwarded year\nWhat this means\n\nTHE DIVIDENDX GUIDED TOUR\n\nOne tokenized stock. Two separate tokens.\n\nFollow this guided demo to understand how DividendX works.\n\nStart guided tour ↓\n\nTHE IDEA, IN ONE VIEW\n\nTOKENIZED STOCK · Coca-Cola (KOx) EXAMPLE\n100\nPT\nStock exposure\nDR\nDividend rights\nLearn how DividendX works\n\nDividendX separates a tokenized stock into stock exposure and dividend rights. You can put them back together or use the separate tokens in DeFi.\n\nAction accepted. Waiting for confirmed local state.\n\nPART ONE · SPLIT AND RECOMBINE\n\nFrom one stock to two rights. And back.\n01 / 03\nFirst, see the core move.\nPT tracks the stock price side.\nDR represents the dividend rights for the sample year.\nPT\nPrincipal token\nStock exposure\nDR\nDividend token\nDividend rights\n\nA matching PT + DR pair can return stock before final settlement.\n\nPART ONE RESULT · KOX\n\n100 stocks restored.\n\nThe holder split the 100 stocks, then recombined 40 pairs and the remaining 60.\n\n01\nSplit 100 stocks\n✓\n02\nRecombined 40 pairs\n✓\n03\nRecombined 60 pairs\n✓\n✓\nPart one complete.\n\nPart One returned all 100 stocks to the holder wallet.\n\nContinue to Part Two →\n\nPART TWO · SEE DIVIDENDS GROW\n\nWatch the dividend effect.\n\nSplit the returned 100 stocks, advance two sample quarters, then recombine 40 pairs to see the allocation change.\n\n02 / 03\nSame number of rights. More stock per pair.\n\nTwo sample quarterly dividends increase the stock allocation from 1 to 1.02 per matching PT + DR pair. The 100 DR do not become 102 DR. Recombining 40 pairs returns 40.8 stocks and leaves 60 PT plus 60 DR.\n\nThese are sample dividend amounts, not forecasts or actual issuer payments.\n\nPART TWO RESULT · KOX\n\n40 pairs became 40.8 stocks.\n\nTwo sample quarterly dividends changed the stock allocation. The remaining 60 PT and 60 DR carry into Part Three.\n\n01\nSplit 100 returned stocks\n✓\n02\nRecord two sample quarters\n✓\n03\nRecombine 40 pairs\n✓\n✓\nPart two complete.\n\nPart Two left 60 DR for the pool chapter.\n\nContinue to Part Three →\n\nPART THREE · DIVIDEND RIGHTS IN A POOL\n\nPut the remaining rights to work.\n\nUse the 60 DR left from Part Two in a DR / USDC pool. Watch a buyer acquire DR, then follow both wallets through year end.\n\n03 / 03\nTwo owners, different choices.\n\nThe holder supplies 24 DR and 4 USDC, then up to 36 DR with 6 USDC. A buyer swaps USDC for DR. LP tokens represent the holder’s pool share; DR are the dividend rights. The buyer’s DR covers this year’s accrued and remaining dividends.\n\nThe annual deposit cutoff has passed. This chapter uses the 60 DR already created in Part Two.\n\nPool & trade\nWithdraw & recombine\nFast-forward & redeem\n\nALL THREE PARTS COMPLETE\n\nThe claims remained backed through trading and redemption.\n\nThe two demo wallets finished their separate exits. Raydium’s locked residual claims remain in the pool and stay backed.\n\nRun the journey again\n✓\n\nOPEN A MARKET\n\nSeed a DR / USDC pool.\nCOMPLETE\n✓\n\nADD LIQUIDITY\n\nAdd the remaining DR liquidity.\nCOMPLETE\n✓\n\nTRADE THE DIVIDEND RIGHT\n\nA buyer acquires DR through the pool.\nCOMPLETE\n✓\n\nLEAVE THE POOL\n\nWithdraw holder-owned liquidity.\nCOMPLETE\n✓\n\nPAIR RECOVERED CLAIMS\n\nRecombine recovered DR with matching PT.\nCOMPLETE\n✓\n\nFAST-FORWARD THE YEAR\n\nFinish the dividend year.\nCOMPLETE\n✓\n\nBUYER EXIT\n\nBuyer redeems purchased DR.\nCOMPLETE\n✓\n\nHOLDER EXIT\n\nHolder redeems remaining PT.\nCOMPLETE\n\nTWO WALLETS\n\nTwo wallets, two owners.\n\nThe demo manages both wallets. Their balances are separate from yours.\n\nDEMO ACTOR\n\nStock holder\nDemo wallet\n\nArhq4…TaG2Z\nLocal address\n\nCoca-Cola STOCK\n103.782313273\n+5.442168212\nStock exposure PT\n0\n−5.44216821\nDividend rights DR\n0\nUSDC USDC\n10.999595\nRaydium liquidity LP\n0\n\nDEMO ACTOR\n\nDividend buyer\nDemo wallet\n\nEi88S…QKbRf\nLocal address\n\nCoca-Cola STOCK\n0.217685832\nStock exposure PT\n0\nDividend rights DR\n0\nUSDC USDC\n0\nRaydium liquidity LP\n0\nReturn to next action ↑\n\nRESIDUAL POOL CUSTODY\n\nRaydium’s locked claims remain backed.\n\nThe pool currently holds 0.00002228 DR and 0.0000001 locked LP. Those DR claims are still part of supply and remain backed after both wallets finish.\n\nEvidence & exact accounting\n40 transaction records\n\nFUTURE GUIDED DEMOS\n\nThis is just the beginning.\n\nMore ways to use your PT and DR. These demos are planned. We’re focusing next on verified issuer data and dividend settlement.\n\nPLANNED · STREAMFLOW\nFixed-price dividend sale\n\nOffer your dividend rights at a price you choose.\n\nPLANNED · JUPITER LOCK\nToken locks and vesting\n\nGive someone PT or DR tokens that unlock on a schedule.\n\nPLANNED · SQUADS\nShared treasury\n\nHold and manage PT or DR with shared approvals.\n\nPLANNED · METEORA\nLimit orders\n\nSet a target price for a future PT or DR trade.\n\nPLANNED · JUPITER\nRecurring purchases\n\nBuy stock exposure or dividend rights on a schedule.\n\nPLANNED · COMBINED FLOW\nSplit and sell in one step\n\nOr buy the missing dividend rights to put your stock back together.\n\nNEEDS MARKET GROUNDWORK\nBorrow against PT\n\nRequires valuation, liquidation rules and venue admission.\n\nDividendX guided demo\nReturn to the wallet app",
+      "screenshot": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-guided-v4-production-2026-09-19-r2-guided-failure.png"
+    }
+  ],
+  "browserErrors": [],
+  "errors": [
+    {
+      "at": "2026-09-19T12:32:11.007Z",
+      "stage": "guided: redeem-provider",
+      "url": "https://dividendx.payai.network/demos/",
+      "message": "RPC getSignatureStatuses returned HTTP 404: route not found"
+    }
+  ],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}
