@@ -1,8 +1,10 @@
 import type { Keypair, PublicKey } from '@solana/web3.js';
-import type { DemoSnapshot, DemoState, DemoStep, DemoTransaction } from './contract.js';
+import type { DemoAsset, DemoSnapshot, DemoState, DemoStep, DemoTransaction } from './contract.js';
 
 export const DEMO_STEPS: readonly DemoStep[] = [
-  'split', 'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity',
+  'core-split', 'core-recombine-partial', 'core-recombine-rest',
+  'dividend-split', 'dividend-quarter-one', 'dividend-quarter-two', 'dividend-recombine',
+  'create-pool', 'add-liquidity', 'buy-dr', 'remove-liquidity',
   'recombine', 'settle-year', 'redeem-buyer', 'redeem-provider',
 ] as const;
 
@@ -50,7 +52,8 @@ export interface DemoCheckpoint {
 }
 
 export interface PublicReceipt {
-  schemaVersion: 2;
+  schemaVersion: 4;
+  asset: DemoAsset;
   runtimeId: string;
   sessionId: string;
   boundary: 'offline-local-circle-devnet-usdc-clone';

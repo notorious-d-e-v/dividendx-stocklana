@@ -1,5 +1,6 @@
 # Repository operating rules
 
+- The user approved publication of [guided tour v4](spec/guided-tour-v4.md) on 19 September after the restart-scroll fix. Create and merge a reviewed PR, publish the matching code-only sandbox snapshot and site, and verify production. Preserve prior evidence and the known-good deployment for rollback.
 - Astra owns architecture, product decisions, factual review, and final acceptance.
 - When the `astra-sol-delegation` skill is available, use it for bounded implementation in GPT-5.6 Sol with fresh context, explicit effort, disjoint file ownership, and no recursive delegation.
 - Verify claims against current evidence and working code. Plans describe intent; they do not prove implementation.

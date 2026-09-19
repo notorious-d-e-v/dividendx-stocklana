@@ -4,6 +4,8 @@ This runbook covers the production site at [dividendx.payai.network](https://div
 
 The governing boundaries are the [hosting release review](../planning/hosting-release-review.md), [hosted-session specification](../spec/hosted-sessions-v1.md), and [hosted-devnet specification](../spec/hosted-devnet-services-v1.md).
 
+The user approved [guided tour v4](../planning/guided-tour-v4-review.md) for publication. The [v4 release review](../planning/guided-tour-v4-release.md) tracks its staged snapshot, acceptance and deployment. Until that rollout completes, the production `/demos/` route and configured Sandbox snapshot still serve the accepted v2 journey.
+
 ## Production surfaces
 
 | Route | Network and lifetime | Operational boundary |
@@ -36,7 +38,8 @@ The Vercel cron runs `/api/cron/refresh-observations` every six hours. It refres
 The server deployment and Sandbox image are separate release artifacts:
 
 - [`packages/devnet-runtime/manifest.devnet.json`](../packages/devnet-runtime/manifest.devnet.json) is the frozen public devnet registry used by `/app/`.
-- The [runtime snapshot manifest](../planning/evidence/hosted-runtime-snapshot-2026-09-18.json) records the code-only Linux/Node 24 snapshot, exact source hashes, accepted program ELF, IDL, and captured test fixtures.
+- The [accepted v2 runtime snapshot manifest](../planning/evidence/hosted-runtime-snapshot-2026-09-18.json) records the current production code-only Linux/Node 24 snapshot, exact source hashes, accepted program ELF, IDL, and captured test fixtures.
+- The new [v4 snapshot manifest](../planning/evidence/hosted-runtime-snapshot-v4-2026-09-19.json) records candidate snapshot `snap_mtdgtBAGmcNu8Ucj1M9kCARBKYvq` and its allowlisted source hashes. Its [Linux](../planning/evidence/linux-runtime-v4-2026-09-19-r2.json) and [provider isolation](../planning/evidence/hosted-provider-probe-v4-2026-09-19.json) proofs pass; select it only as part of the coordinated v4 site release.
 - [`scripts/hosting/stage-linux-runtime.sh`](../scripts/hosting/stage-linux-runtime.sh) creates an allowlisted context and rejects environment files, keypairs, local tools, Git data, and dependencies.
 - [`.vercelignore`](../.vercelignore) excludes local environment, signer, evidence, runtime-state, dependency, and build directories from the server deployment.
 
@@ -81,6 +84,8 @@ npm run typecheck
 npm --prefix packages/hosted-gateway test
 npm --prefix packages/hosted-broker test
 npm --prefix packages/hosted-devnet test
+npm --prefix packages/guided-runtime test
+npm run test:browser
 ```
 
 The release build deliberately empties `apps/web/dist`. Validate it in a disposable checkout so the approved local preview is not overwritten. This sequence tests committed `HEAD`; first confirm it is the intended release candidate.
@@ -111,7 +116,7 @@ Confirm that no `.env*`, keypair, `.local-tools`, evidence, user ledger, or exis
 
 The existing project is connected to the GitHub repository. Pushes to the production branch publish automatically; use branches and reviewed merges for subsequent code changes. Git deployment updates the site and Functions, but does not rebuild the Sandbox snapshot or deploy the Solana program. Origin-environment changes require a new deployment to take effect.
 
-1. Review `git status --short`, the candidate revision, lockfile changes, frozen registry, runtime snapshot manifest, and `vercel.json`. Confirm the canonical project link names `payai/dividendx-stocklana`, and record the current known-good production deployment for rollback.
+1. Review `git status --short`, the candidate revision, lockfile changes, frozen registry, runtime snapshot manifest, and `vercel.json`. For v4, require the new snapshot's Linux probe and provider isolation proof before selecting it. Confirm the canonical project link names `payai/dividendx-stocklana`, and record the current known-good production deployment and snapshot ID for rollback.
 2. Check configuration names without copying their values: `vercel env list production --scope payai`. Run the local checks and dry run above.
 3. A preview deployment can prove build completion, static files, and read-only behavior:
 

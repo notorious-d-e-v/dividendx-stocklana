@@ -1,0 +1,15 @@
+{
+  "boundary": "UI render check with a preserved local transaction snapshot; no new transactions",
+  "results": [
+    {
+      "width": 1440,
+      "overflow": false,
+      "message": "WHAT CHANGED\n\nThe holder withdrew 10.999595 USDC—0.999595 USDC more than the 10 USDC supplied. After the buyer’s trade, the pool share returns more USDC and fewer DR.\n\nSee wallet changes ↓"
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "message": "WHAT CHANGED\n\nThe holder withdrew 10.999595 USDC—0.999595 USDC more than the 10 USDC supplied. After the buyer’s trade, the pool share returns more USDC and fewer DR.\n\nSee wallet changes ↓"
+    }
+  ]
+}

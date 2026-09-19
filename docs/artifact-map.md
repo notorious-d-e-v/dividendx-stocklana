@@ -4,6 +4,8 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 
 ## Start here
 
+- [Guided tour v4](../spec/guided-tour-v4.md) and [local acceptance](../planning/guided-tour-v4-review.md) — three-part learning flow; [actual browser driver](../scripts/hosting/guided-tour-local-review.mjs) and [three-profile execution evidence](../planning/evidence/guided-tour-v4-profiles-2026-09-19.json). Earlier [v3 acceptance](../planning/guided-tour-review.md) is preserved. Publication and a matching hosted snapshot remain pending user review.
+
 - [README](../README.md) — run the real local wallet application, preserved previews and their checks.
 - [AMM review](../planning/amm-review.md) — finalized public devnet round trip and separate captured-bytecode local proof.
 - [Guided demos specification](../spec/guided-demos-v1.md) — separate `/demos/` product and fixed nine-action local execution contract.

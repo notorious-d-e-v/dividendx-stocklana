@@ -20,7 +20,7 @@ import {
 import {
   CIRCLE_DEVNET_USDC_FREEZE_AUTHORITY, CIRCLE_DEVNET_USDC_MINT, CIRCLE_DEVNET_USDC_MINT_AUTHORITY,
   CIRCLE_USDC_REQUIRED_FUNDING_RAW, CIRCLE_USDC_SOURCE_URL,
-  CLAIM_DECIMALS, COLLATERAL_DECIMALS, DIVIDENDX_ELF_SHA256, DIVIDENDX_PROGRAM_ID,
+  DIVIDENDX_ELF_SHA256, DIVIDENDX_PROGRAM_ID,
   PUBLIC_CLUSTER_GENESIS_HASHES, RAYDIUM_CAPTURED_ELF_SHA256,
   RAYDIUM_CONFIG, RAYDIUM_CPMM_PROGRAM_ID, RAYDIUM_CREATE_POOL_FEE_RECEIVER,
   SERIES_YEAR, TEST_QUOTE_DECIMALS, USDC_FLOW as GUIDED_FLOW,
@@ -37,7 +37,7 @@ import {
   normalizeSeriesAccount, programDataAddress, quoteDeposit, quoteRecombine,
   quoteRedemption, requiredCustodyRaw,
 } from '@dividendx/transaction-sdk';
-import type { DemoSnapshot, DemoState, DemoStep, DemoTransaction } from './contract.js';
+import { DEMO_ASSETS, type DemoAsset, type DemoAssetId, type DemoSnapshot, type DemoState, type DemoStep, type DemoTransaction } from './contract.js';
 import {
   DEMO_STEPS, HttpError, type KnownAddresses, type PoolAddresses, type PublicReceipt,
   type RuntimeSigners,
@@ -58,7 +58,8 @@ const CIRCLE_DEVNET_USDC_CAPTURE_SLOT = 499_830_485;
 const LOCAL_USDC_PROVIDER_RAW = 10_000_000n;
 const LOCAL_USDC_BUYER_RAW = 1_000_000n;
 const PRE_YEAR_MS = Date.UTC(2026, 11, 15, 12);
-const START_YEAR_MS = Date.UTC(2027, 0, 2, 12);
+const POOL_SEED_DR_UNITS = 24;
+const POOL_ADD_DR_UNITS = 36;
 const END_YEAR_MS = Date.UTC(2028, 0, 2, 12);
 const QUARTERS = [
   { month: 2, day: 15, multiplier: 1.01 },
@@ -134,8 +135,9 @@ export class GuidedDemoRuntime {
   private preflight: PreflightResult | null = null;
   private receipt: PublicReceipt | null = null;
   private swap: DemoSnapshot['swap'] = null;
+  private persistenceTail: Promise<void> = Promise.resolve();
   private state: DemoState = {
-    schemaVersion: 2, runtimeId: this.runtimeId, revision: 0, sessionId: null, status: 'idle',
+    schemaVersion: 4, runtimeId: this.runtimeId, revision: 0, sessionId: null, asset: null, status: 'idle',
     activeStep: null, nextStep: null, completedSteps: [], snapshot: null, transactions: [], error: null,
   };
 
@@ -148,9 +150,13 @@ export class GuidedDemoRuntime {
   }
 
   private async persist(): Promise<void> {
-    const value = { savedAt: new Date().toISOString(), state: this.state, receipt: this.receipt };
-    await writePrivateJson(STATE_PATH, value);
-    if (this.state.sessionId) await writePrivateJson(resolve(STATE_DIRECTORY, `${this.state.sessionId}.json`), value);
+    const value = structuredClone({ savedAt: new Date().toISOString(), state: this.state, receipt: this.receipt });
+    const write = this.persistenceTail.then(async () => {
+      await writePrivateJson(STATE_PATH, value);
+      if (value.state.sessionId) await writePrivateJson(resolve(STATE_DIRECTORY, `${value.state.sessionId}.json`), value);
+    });
+    this.persistenceTail = write.catch(() => undefined);
+    await write;
   }
 
   private async update(mutator: () => void): Promise<void> {
@@ -188,15 +194,24 @@ export class GuidedDemoRuntime {
     await this.confirmed(step, name, result.signature, result.slot, result.confirmationStatus);
   }
 
-  async beginStart(expectedRuntimeId: string, expectedRevision: number): Promise<void> {
+  private asset(): DemoAsset {
+    if (!this.state.asset) throw new Error('ASSET_UNAVAILABLE');
+    return this.state.asset;
+  }
+
+  private stockRaw(units: number): bigint { return BigInt(units) * 10n ** BigInt(this.asset().decimals); }
+
+  async beginStart(expectedRuntimeId: string, expectedRevision: number, assetId: DemoAssetId): Promise<void> {
     if (expectedRuntimeId !== this.runtimeId || expectedRevision !== this.state.revision) throw new HttpError(409, 'stale runtime or revision');
     if (!['idle', 'complete', 'failed'].includes(this.state.status)) throw new HttpError(409, 'a demo operation is already active');
+    const asset = DEMO_ASSETS.find((entry) => entry.id === assetId);
+    if (!asset) throw new HttpError(400, 'unsupported test stock profile');
     this.stopSurfnet();
     const sessionId = randomUUID();
     this.connection = null; this.signers = null; this.known = null; this.pool = null; this.manifest = null; this.preflight = null; this.receipt = null; this.swap = null;
     await this.update(() => {
-      this.state = { schemaVersion: 2, runtimeId: this.runtimeId, revision: this.state.revision,
-        sessionId, status: 'preparing', activeStep: 'setup', nextStep: null, completedSteps: [], snapshot: null, transactions: [], error: null };
+      this.state = { schemaVersion: 4, runtimeId: this.runtimeId, revision: this.state.revision,
+        sessionId, asset, status: 'preparing', activeStep: 'setup', nextStep: null, completedSteps: [], snapshot: null, transactions: [], error: null };
     });
     void this.runSetup(sessionId).catch((error) => this.fail(error));
   }
@@ -291,7 +306,7 @@ export class GuidedDemoRuntime {
     const builders = new DividendXInstructions(DIVIDENDX_IDL as Idl);
     const config = configPda().address;
     this.receipt = {
-      schemaVersion: 2, runtimeId: this.runtimeId, sessionId, boundary: 'offline-local-circle-devnet-usdc-clone',
+      schemaVersion: 4, asset: this.asset(), runtimeId: this.runtimeId, sessionId, boundary: 'offline-local-circle-devnet-usdc-clone',
       capture: { sourceCluster: 'devnet', sourceSlot: capture.sourceSlot, raydiumProgramData: capture.program.programData,
         raydiumDeploySlot: capture.program.deploySlot, raydiumElfSha256: RAYDIUM_CAPTURED_ELF_SHA256,
         dividendXElfSha256: DIVIDENDX_ELF_SHA256, configAccountSha256: capture.accounts[0]!.dataSha256,
@@ -314,6 +329,7 @@ export class GuidedDemoRuntime {
       },
       transactions: [], checkpoints: [], failure: null, limits: [
         'Local transactions using test assets and an accelerated test year.',
+        'Selected issuer name is a test profile; this session does not hold an issuer token or establish issuer qualification.',
         'Raydium executes from captured genuine devnet bytecode; these signatures are not public devnet signatures.',
         'Test USDC uses an exact Circle devnet mint clone with synthetic local balances, not faucet transfers or public USDC.',
       ],
@@ -335,15 +351,15 @@ export class GuidedDemoRuntime {
       SystemProgram.createAccount({ fromPubkey: signers.admin.publicKey, newAccountPubkey: signers.collateralMint.publicKey,
         lamports: collateralRent, space: collateralSpace, programId: TOKEN_2022_PROGRAM_ID }),
       createInitializeScaledUiAmountConfigInstruction(signers.collateralMint.publicKey, signers.admin.publicKey, 1, TOKEN_2022_PROGRAM_ID),
-      createInitializeMintInstruction(signers.collateralMint.publicKey, COLLATERAL_DECIMALS, signers.admin.publicKey, null, TOKEN_2022_PROGRAM_ID),
+      createInitializeMintInstruction(signers.collateralMint.publicKey, this.asset().decimals, signers.admin.publicKey, null, TOKEN_2022_PROGRAM_ID),
     ], [signers.collateralMint]);
-    const issuerId = await issuerIdentityHash(`surfnet-guided:${this.runtimeId}:${genesisHash}`, 'dividendx-guided-test-issuer');
+    const issuerId = await issuerIdentityHash(`surfnet-guided:${this.runtimeId}:${genesisHash}:${this.asset().id}`, 'dividendx-guided-test-issuer');
     const assetPolicy = assetPolicyPda(issuerId, signers.collateralMint.publicKey).address;
     const series = annualSeriesAddresses(issuerId, signers.collateralMint.publicKey, SERIES_YEAR);
     await this.send('setup', 'register_test_asset', signers.admin, [builders.admin.registerAsset({
       config, admin: signers.admin.publicKey, collateralMint: signers.collateralMint.publicKey, assetPolicy,
       systemProgram: SystemProgram.programId,
-    }, { issuerId, symbol: 'DXT', attestor: sdkPublicKey(signers.attestor.publicKey), policyDigest: digest('dividendx-guided-test-policy-v1') })]);
+    }, { issuerId, symbol: this.asset().symbol, attestor: sdkPublicKey(signers.attestor.publicKey), policyDigest: digest(`dividendx-guided-test-policy-v3:${this.asset().id}`) })]);
     await this.refreshObservation('setup', 'setup');
     await this.send('setup', 'create_2027_series', signers.admin, [builders.permissionless.createSeries({
       payer: signers.admin.publicKey, assetPolicy, series: series.series, accumulator: series.accumulator,
@@ -367,7 +383,6 @@ export class GuidedDemoRuntime {
     await this.send('setup', 'create_provider_token_accounts', signers.admin, [
       ata(known.providerCollateral, signers.provider.publicKey, signers.collateralMint.publicKey, TOKEN_2022_PROGRAM_ID),
       ata(known.providerPt, signers.provider.publicKey, series.ptMint), ata(known.providerDr, signers.provider.publicKey, series.drMint),
-      createMintToCheckedInstruction(signers.collateralMint.publicKey, known.providerCollateral, signers.admin.publicKey, GUIDED_FLOW.collateralDepositRaw, COLLATERAL_DECIMALS, [], TOKEN_2022_PROGRAM_ID),
     ]);
     await this.send('setup', 'create_buyer_token_accounts', signers.admin, [
       ata(known.buyerCollateral, signers.buyer.publicKey, signers.collateralMint.publicKey, TOKEN_2022_PROGRAM_ID),
@@ -379,10 +394,11 @@ export class GuidedDemoRuntime {
     ids.accounts = { ...ids.accounts, providerStock: known.providerCollateral.toBase58(), providerPt: known.providerPt.toBase58(),
       providerDr: known.providerDr.toBase58(), providerQuote: known.providerQuote.toBase58(), buyerStock: known.buyerCollateral.toBase58(),
       buyerPt: known.buyerPt.toBase58(), buyerDr: known.buyerDr.toBase58(), buyerQuote: known.buyerQuote.toBase58() };
+    await this.fundStock();
     const snapshot = await this.snapshot();
     if (!snapshot.backingVerified) throw new Error('BACKING_VERIFICATION_FAILED');
     this.receipt.checkpoints.push({ step: 'setup', snapshot });
-    await this.update(() => { this.state.status = 'ready'; this.state.activeStep = null; this.state.nextStep = 'split'; this.state.snapshot = snapshot; });
+    await this.update(() => { this.state.status = 'ready'; this.state.activeStep = null; this.state.nextStep = 'core-split'; this.state.snapshot = snapshot; });
   }
 
   private async refreshObservation(step: DemoStep | 'setup', label: string): Promise<void> {
@@ -391,7 +407,7 @@ export class GuidedDemoRuntime {
     if (!connection || !signers) throw new Error('SESSION_UNAVAILABLE');
     const builders = new DividendXInstructions(DIVIDENDX_IDL as Idl);
     const assetPolicy = this.known?.assetPolicy ?? assetPolicyPda(
-      await issuerIdentityHash(`surfnet-guided:${this.runtimeId}:${await connection.getGenesisHash()}`, 'dividendx-guided-test-issuer'), signers.collateralMint.publicKey).address;
+      await issuerIdentityHash(`surfnet-guided:${this.runtimeId}:${await connection.getGenesisHash()}:${this.asset().id}`, 'dividendx-guided-test-issuer'), signers.collateralMint.publicKey).address;
     const clock = await fetchClock(connection);
     await this.send(step, `refresh_test_asset_observation_${label}`, signers.attestor, [builders.attestor.refreshObservation({
       attestor: signers.attestor.publicKey, assetPolicy, collateralMint: signers.collateralMint.publicKey,
@@ -400,7 +416,13 @@ export class GuidedDemoRuntime {
 
   private async runStep(step: DemoStep): Promise<void> {
     switch (step) {
-      case 'split': await this.split(); break;
+      case 'core-split': await this.depositStock('core-split', 'split_100_test_stock'); break;
+      case 'core-recombine-partial': await this.recombineStock('core-recombine-partial', 40); break;
+      case 'core-recombine-rest': await this.recombineStock('core-recombine-rest', 60); break;
+      case 'dividend-split': await this.depositStock('dividend-split', 'split_100_test_stock_for_dividend'); break;
+      case 'dividend-quarter-one': await this.recordQuarter(0, 'dividend-quarter-one'); break;
+      case 'dividend-quarter-two': await this.recordQuarter(1, 'dividend-quarter-two'); break;
+      case 'dividend-recombine': await this.recombineStock('dividend-recombine', 40); break;
       case 'create-pool': await this.createPool(); break;
       case 'add-liquidity': await this.addLiquidity(); break;
       case 'buy-dr': await this.buyDr(); break;
@@ -438,17 +460,66 @@ export class GuidedDemoRuntime {
     };
   }
 
-  private async split(): Promise<void> {
+  private async fundStock(): Promise<void> {
+    const { signers, known } = this.requireSession();
+    const before = await this.readAmmBalances(false);
+    if (before.collateral.supply !== 0n || before.collateral.provider !== 0n || before.pt.supply !== 0n || before.dr.supply !== 0n)
+      throw new Error('FUND_STOCK_INITIAL_BALANCES_INVALID');
+    await this.send('setup', 'mint_100_selected_test_stock', signers.admin, [
+      createMintToCheckedInstruction(signers.collateralMint.publicKey, known.providerCollateral, signers.admin.publicKey,
+        this.stockRaw(100), this.asset().decimals, [], TOKEN_2022_PROGRAM_ID),
+    ]);
+    const after = await this.readAmmBalances(false);
+    if (after.collateral.provider !== this.stockRaw(100) || after.collateral.supply !== this.stockRaw(100)
+      || after.collateral.vault !== 0n || after.pt.supply !== 0n || after.dr.supply !== 0n) throw new Error('FUND_STOCK_DELTA_FAILED');
+  }
+
+  private async depositStock(step: 'core-split' | 'dividend-split', name: string): Promise<void> {
     const { connection, signers, known } = this.requireSession();
     const accounts = this.holderAccounts('provider');
     const snapshot = await fetchQuoteSnapshot(connection, DIVIDENDX_IDL as Idl, { ...accounts, accumulator: known.series.accumulator });
-    const quote = quoteDeposit(snapshot.series, snapshot.policy, snapshot.vaultRaw, GUIDED_FLOW.collateralDepositRaw,
+    const quote = quoteDeposit(snapshot.series, snapshot.policy, snapshot.vaultRaw, this.stockRaw(100),
       snapshot.holderCollateralRaw!, snapshot.clock, snapshot.clock.unixTimestamp + 300n);
     const builders = new DividendXInstructions(DIVIDENDX_IDL as Idl);
-    await this.send('split', 'deposit_100_test_stock', signers.provider, [builders.holder.deposit(accounts, quote.inputRaw, quote.guard)]);
+    await this.send(step, name, signers.provider, [builders.holder.deposit(accounts, quote.inputRaw, quote.guard)]);
     const current = await this.readAmmBalances(false);
-    if (current.collateral.vault !== GUIDED_FLOW.collateralDepositRaw || current.pt.supply !== GUIDED_FLOW.collateralDepositRaw
-      || current.dr.supply !== GUIDED_FLOW.collateralDepositRaw) throw new Error('SPLIT_DELTA_FAILED');
+    if (current.collateral.provider !== 0n || current.collateral.vault !== this.stockRaw(100)
+      || current.pt.supply !== this.stockRaw(100) || current.dr.supply !== this.stockRaw(100)) throw new Error('SPLIT_DELTA_FAILED');
+    assertPrefinalBacking(current);
+  }
+
+  private async recombineStock(step: 'core-recombine-partial' | 'core-recombine-rest' | 'dividend-recombine', units: 40 | 60): Promise<void> {
+    const { connection, signers, known } = this.requireSession();
+    const before = await this.readAmmBalances(false);
+    const amount = this.stockRaw(units);
+    const accounts = this.holderAccounts('provider');
+    const snapshot = await fetchQuoteSnapshot(connection, DIVIDENDX_IDL as Idl, { ...accounts, accumulator: known.series.accumulator });
+    const quote = quoteRecombine(snapshot.series, snapshot.vaultRaw, amount, snapshot.holderPtRaw!, snapshot.holderDrRaw!,
+      snapshot.clock.unixTimestamp, snapshot.clock.unixTimestamp + 300n);
+    const builders = new DividendXInstructions(DIVIDENDX_IDL as Idl);
+    await this.send(step, step === 'dividend-recombine' ? 'recombine_40_pt_dr_after_two_dividends' : units === 40 ? 'recombine_40_pt_dr' : 'recombine_remaining_60_pt_dr', signers.provider,
+      [builders.holder.recombine(accounts, amount, quote.guard)]);
+    const after = await this.readAmmBalances(false);
+    assertRecombineDelta(before, after, amount);
+    assertPrefinalBacking(after);
+    if (after.collateral.provider !== (units === 40 ? this.stockRaw(40) : this.stockRaw(100))
+      || after.collateral.vault !== (units === 40 ? this.stockRaw(60) : 0n)
+      || after.pt.supply !== (units === 40 ? this.stockRaw(60) : 0n)
+      || after.dr.supply !== (units === 40 ? this.stockRaw(60) : 0n)) throw new Error('RECOMBINE_BALANCES_INVALID');
+    if (step === 'dividend-recombine') {
+      const observed = await this.snapshot();
+      if (observed.eventCount !== 2 || observed.stockMultiplierBits !== f64Bits(1.02).toString()
+        || observed.phase !== 'open') throw new Error('DIVIDEND_RECOMBINE_CHECKPOINT_INVALID');
+      const postCutoff = await fetchQuoteSnapshot(connection, DIVIDENDX_IDL as Idl, { ...accounts, accumulator: known.series.accumulator });
+      if (postCutoff.clock.unixTimestamp < BigInt(Date.UTC(2027, 0, 1) / 1_000)) throw new Error('DIVIDEND_CLOCK_BEFORE_CUTOFF');
+      try {
+        quoteDeposit(postCutoff.series, postCutoff.policy, postCutoff.vaultRaw, this.stockRaw(1),
+          postCutoff.holderCollateralRaw!, postCutoff.clock, postCutoff.clock.unixTimestamp + 300n);
+        throw new Error('POST_CUTOFF_DEPOSIT_REOPENED');
+      } catch (error) {
+        if (!(error instanceof Error) || !error.message.includes('series is not eligible for deposits')) throw error;
+      }
+    }
   }
 
   private raydium(owner: Keypair): Promise<Raydium> {
@@ -461,15 +532,15 @@ export class GuidedDemoRuntime {
     const preflight = await verifyExecutionEnvironment(connection, this.manifest!);
     if (stringifySafe(preflight.config) !== stringifySafe(this.preflight!.config)) throw new Error('RAYDIUM_CONFIG_CHANGED');
     const raydium = await this.raydium(signers.provider);
-    const dr = tokenDescriptor(known.series.drMint, CLAIM_DECIMALS);
+    const dr = tokenDescriptor(known.series.drMint, this.asset().decimals);
     const quote = tokenDescriptor(CIRCLE_DEVNET_USDC_MINT, TEST_QUOTE_DECIMALS);
     const drFirst = Buffer.compare(known.series.drMint.toBuffer(), CIRCLE_DEVNET_USDC_MINT.toBuffer()) < 0;
     const mintA = drFirst ? dr : quote;
     const mintB = drFirst ? quote : dr;
     const created = await raydium.cpmm.createPool({
       programId: RAYDIUM_CPMM_PROGRAM_ID, poolFeeAccount: RAYDIUM_CREATE_POOL_FEE_RECEIVER,
-      mintA, mintB, mintAAmount: new BN((drFirst ? GUIDED_FLOW.seedDrRaw : GUIDED_FLOW.seedQuoteRaw).toString()),
-      mintBAmount: new BN((drFirst ? GUIDED_FLOW.seedQuoteRaw : GUIDED_FLOW.seedDrRaw).toString()), startTime: new BN(0),
+      mintA, mintB, mintAAmount: new BN((drFirst ? this.stockRaw(POOL_SEED_DR_UNITS) : GUIDED_FLOW.seedQuoteRaw).toString()),
+      mintBAmount: new BN((drFirst ? GUIDED_FLOW.seedQuoteRaw : this.stockRaw(POOL_SEED_DR_UNITS)).toString()), startTime: new BN(0),
       feeConfig: toFeeConfig(preflight), associatedOnly: true,
       ownerInfo: { feePayer: signers.provider.publicKey, useSOLBalance: false }, txVersion: TxVersion.LEGACY,
     });
@@ -486,9 +557,10 @@ export class GuidedDemoRuntime {
     };
     const openTime = BigInt(poolData.rpcData.openTime.toString());
     const clock = await fetchClock(connection);
-    if (clock.unixTimestamp <= openTime) this.surfnet!.timeTravelToTimestamp(Number(openTime + 1n) * 1_000);
+    if (clock.unixTimestamp <= openTime) await this.travelTo(Number(openTime + 1n) * 1_000);
     const balances = await this.readAmmBalances(true);
-    if (balances.dr.poolVault !== GUIDED_FLOW.seedDrRaw || balances.testQuote.poolVault !== GUIDED_FLOW.seedQuoteRaw) throw new Error('SEED_DELTA_FAILED');
+    if (balances.dr.poolVault !== this.stockRaw(POOL_SEED_DR_UNITS) || balances.testQuote.poolVault !== GUIDED_FLOW.seedQuoteRaw
+      || balances.dr.provider !== this.stockRaw(POOL_ADD_DR_UNITS)) throw new Error('SEED_DELTA_FAILED');
     assertPrefinalBacking(balances);
     const ids = this.receipt!.identities;
     ids.pool = pool.poolId.toBase58(); ids.mints.lp = pool.lpMint.toBase58();
@@ -505,16 +577,28 @@ export class GuidedDemoRuntime {
     const raydium = await this.raydium(signers.provider);
     let info = await raydium.cpmm.getPoolInfoFromRpc(pool.poolId.toBase58());
     const added = await raydium.cpmm.addLiquidity({ poolInfo: info.poolInfo, poolKeys: info.poolKeys,
-      inputAmount: new BN(GUIDED_FLOW.addDrRaw.toString()), baseIn: info.rpcData.mintA.equals(this.known!.series.drMint),
+      inputAmount: new BN(this.stockRaw(POOL_ADD_DR_UNITS).toString()), baseIn: info.rpcData.mintA.equals(this.known!.series.drMint),
       slippage: new Percent(0, 10_000), txVersion: TxVersion.LEGACY });
     await this.sendRaydium('add-liquidity', 'add_cpmm_liquidity', added.transaction as Transaction, [signers.provider, ...added.signers]);
     await raydium.account.fetchWalletTokenAccounts({ forceUpdate: true, commitment: 'confirmed' });
     info = await raydium.cpmm.getPoolInfoFromRpc(pool.poolId.toBase58());
     const after = await this.readAmmBalances(true);
-    if (before.dr.provider - after.dr.provider !== GUIDED_FLOW.addDrRaw
-      || before.testQuote.provider - after.testQuote.provider !== GUIDED_FLOW.addQuoteRaw
-      || after.dr.poolVault - before.dr.poolVault !== GUIDED_FLOW.addDrRaw
-      || after.testQuote.poolVault - before.testQuote.poolVault !== GUIDED_FLOW.addQuoteRaw
+    const mintedLp = after.lp.provider - before.lp.provider;
+    const ceilDiv = (numerator: bigint, denominator: bigint): bigint => (numerator + denominator - 1n) / denominator;
+    if (mintedLp <= 0n || before.lp.internalPoolLpAmount <= 0n) throw new Error('ADD_LIQUIDITY_LP_INVALID');
+    const expectedDr = ceilDiv(mintedLp * before.dr.poolVault, before.lp.internalPoolLpAmount);
+    const expectedQuote = ceilDiv(mintedLp * before.testQuote.poolVault, before.lp.internalPoolLpAmount);
+    const contributedDr = before.dr.provider - after.dr.provider;
+    const rawRoundingDust = after.dr.provider;
+    const oneLpDrQuantum = ceilDiv(before.dr.poolVault, before.lp.internalPoolLpAmount);
+    if (before.dr.provider !== this.stockRaw(POOL_ADD_DR_UNITS)
+      || contributedDr !== expectedDr || contributedDr !== after.dr.poolVault - before.dr.poolVault
+      || rawRoundingDust < 0n || rawRoundingDust >= oneLpDrQuantum
+      || after.dr.poolVault + rawRoundingDust !== this.stockRaw(60)
+      || expectedQuote !== GUIDED_FLOW.addQuoteRaw
+      || before.testQuote.provider - after.testQuote.provider !== expectedQuote
+      || after.testQuote.poolVault - before.testQuote.poolVault !== expectedQuote
+      || after.lp.internalPoolLpAmount - before.lp.internalPoolLpAmount !== mintedLp
       || after.lp.provider <= before.lp.provider) throw new Error('ADD_LIQUIDITY_DELTA_FAILED');
     assertPrefinalBacking(after);
   }
@@ -597,35 +681,55 @@ export class GuidedDemoRuntime {
     };
   }
 
-  private travelTo(timestampMs: number): void {
+  private async travelTo(timestampMs: number): Promise<void> {
     if (!this.surfnet) throw new Error('SESSION_UNAVAILABLE');
+    const current = await fetchClock(this.requireSession().connection);
+    if (BigInt(Math.floor(timestampMs / 1_000)) < current.unixTimestamp) throw new Error('BACKWARD_TEST_CLOCK_FORBIDDEN');
     this.surfnet.timeTravelToTimestamp(timestampMs);
+  }
+
+  private async recordQuarter(index: 0 | 1 | 2 | 3, step: 'dividend-quarter-one' | 'dividend-quarter-two' | 'settle-year'): Promise<void> {
+    const { connection, signers, known } = this.requireSession();
+    const before = await this.readAmmBalances(this.pool !== null);
+    const record = this.event(index);
+    await this.travelTo(record.effectiveMs + 1_000);
+    const tokenSnapshot = await fetchToken2022Snapshot(connection, signers.collateralMint.publicKey);
+    if (tokenSnapshot.scale.activeBits !== record.input.m1Bits) {
+      if (tokenSnapshot.scale.activeBits !== record.input.m0Bits) throw new Error('TEST_MULTIPLIER_SEQUENCE_INVALID');
+      await this.send(step, `update_test_multiplier_q${index + 1}`, signers.admin, [
+        createUpdateMultiplierDataInstruction(signers.collateralMint.publicKey, signers.admin.publicKey,
+          record.multiplier, BigInt(record.effectiveMs / 1_000), [], TOKEN_2022_PROGRAM_ID),
+      ]);
+    }
+    await this.refreshObservation(step, `quarter-${index + 1}`);
+    record.input.observedSlot = (await fetchClock(connection)).slot;
+    const builders = new DividendXInstructions(DIVIDENDX_IDL as Idl);
+    await this.send(step, `record_synthetic_dividend_q${index + 1}`, signers.attestor, [builders.attestor.upsertEvent({
+      attestor: signers.attestor.publicKey, assetPolicy: known.assetPolicy, series: known.series.series,
+      eventHead: record.eventHead, revision: record.eventRevision, systemProgram: SystemProgram.programId,
+    }, record.input)]);
+    const after = await this.readAmmBalances(this.pool !== null);
+    for (const asset of ['collateral', 'pt', 'dr', 'testQuote', 'lp'] as const) {
+      if (stringifySafe(before[asset]) !== stringifySafe(after[asset])) throw new Error('DIVIDEND_EVENT_CHANGED_RAW_BALANCES');
+    }
+    if (index < 2) {
+      if (after.collateral.provider !== 0n || after.collateral.vault !== this.stockRaw(100)
+        || after.pt.provider !== this.stockRaw(100) || after.dr.provider !== this.stockRaw(100))
+        throw new Error('EARLY_DIVIDEND_RAW_BALANCES_INVALID');
+    }
+    const observed = await this.snapshot();
+    if (observed.eventCount !== index + 1 || observed.stockMultiplierBits !== record.input.m1Bits.toString()
+      || observed.phase !== 'open') throw new Error('DIVIDEND_QUARTER_CHECKPOINT_INVALID');
   }
 
   private async settleYear(): Promise<void> {
     const { connection, signers, known } = this.requireSession();
     const builders = new DividendXInstructions(DIVIDENDX_IDL as Idl);
-    this.travelTo(START_YEAR_MS);
-    await this.refreshObservation('settle-year', 'start-year');
-    for (let index = 0; index < QUARTERS.length; index += 1) {
-      const record = this.event(index);
-      this.travelTo(record.effectiveMs + 1_000);
-      const tokenSnapshot = await fetchToken2022Snapshot(connection, signers.collateralMint.publicKey);
-      if (tokenSnapshot.scale.activeBits !== record.input.m1Bits) {
-        if (tokenSnapshot.scale.activeBits !== record.input.m0Bits) throw new Error('TEST_MULTIPLIER_SEQUENCE_INVALID');
-        await this.send('settle-year', `update_test_multiplier_q${index + 1}`, signers.admin, [
-          createUpdateMultiplierDataInstruction(signers.collateralMint.publicKey, signers.admin.publicKey,
-            record.multiplier, BigInt(record.effectiveMs / 1_000), [], TOKEN_2022_PROGRAM_ID),
-        ]);
-      }
-      await this.refreshObservation('settle-year', `quarter-${index + 1}`);
-      record.input.observedSlot = (await fetchClock(connection)).slot;
-      await this.send('settle-year', `record_synthetic_dividend_q${index + 1}`, signers.attestor, [builders.attestor.upsertEvent({
-        attestor: signers.attestor.publicKey, assetPolicy: known.assetPolicy, series: known.series.series,
-        eventHead: record.eventHead, revision: record.eventRevision, systemProgram: SystemProgram.programId,
-      }, record.input)]);
-    }
-    this.travelTo(END_YEAR_MS);
+    const before = await this.snapshot();
+    if (before.eventCount !== 2 || before.stockMultiplierBits !== f64Bits(1.02).toString()
+      || before.phase !== 'open') throw new Error('EARLY_DIVIDEND_CHECKPOINT_MISSING');
+    for (const index of [2, 3] as const) await this.recordQuarter(index, 'settle-year');
+    await this.travelTo(END_YEAR_MS);
     await this.refreshObservation('settle-year', 'end-year');
     let snapshot = await fetchQuoteSnapshot(connection, DIVIDENDX_IDL as Idl, {
       assetPolicy: known.assetPolicy, series: known.series.series, accumulator: known.series.accumulator,
@@ -735,6 +839,9 @@ export class GuidedDemoRuntime {
       || !series.drMint.equals(known.series.drMint) || !series.vault.equals(known.series.vault)
       || !accumulator.series.equals(known.series.series) || !vault.mint.equals(signers.collateralMint.publicKey)
       || !vault.owner.equals(known.series.series)) throw new Error('COHERENT_SNAPSHOT_IDENTITY_MISMATCH');
+    if (stockMint.decimals !== this.asset().decimals || ptMint.decimals !== this.asset().decimals
+      || drMint.decimals !== this.asset().decimals)
+      throw new Error('SELECTED_ASSET_DECIMALS_MISMATCH');
     let poolData: ReturnType<typeof CpmmPoolInfoLayout.decode> | null = null;
     let poolVaultA: ReturnType<typeof unpackAccount> | null = null;
     let poolVaultB: ReturnType<typeof unpackAccount> | null = null;
@@ -817,11 +924,13 @@ export class GuidedDemoRuntime {
     const backingVerified = knownStock === value.stockMint.supply && knownPt === value.ptMint.supply
       && knownDr === value.drMint.supply && knownQuote === CIRCLE_USDC_REQUIRED_FUNDING_RAW && custodyHealthy;
     return {
+      asset: this.asset(),
       observedAt: new Date().toISOString(), slot: Number(value.clock.slot), unixTimestamp: value.clock.unixTimestamp.toString(),
       genesisHash: value.genesisHash, rpcUrl: connection.rpcEndpoint,
       dividendXProgram: DIVIDENDX_PROGRAM_ID.toBase58(), raydiumProgram: RAYDIUM_CPMM_PROGRAM_ID.toBase58(),
       series: known.series.series.toBase58(), year: SERIES_YEAR, phase: value.series.phase,
-      eventCount: value.series.eventCount, stockDecimals: value.stockMint.decimals, quoteDecimals: value.quoteMint.decimals,
+      eventCount: value.series.eventCount, stockDecimals: value.stockMint.decimals,
+      claimDecimals: value.ptMint.decimals, quoteDecimals: value.quoteMint.decimals,
       quoteAsset: { symbol: 'USDC', provenance: 'local-circle-devnet-clone', canonicalMint: CIRCLE_DEVNET_USDC_MINT.toBase58() },
       lpDecimals: value.lpMint?.decimals ?? 9, stockMultiplierBits: value.stockProfile.scale.activeBits.toString(),
       provider: { address: signers.provider.publicKey.toBase58(), stockRaw: value.providerStock.amount.toString(),

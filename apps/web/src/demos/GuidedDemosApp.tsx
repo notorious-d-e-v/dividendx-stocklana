@@ -1,11 +1,20 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { DemoSnapshot, DemoState, DemoStep, DemoWallet } from '../../../../packages/guided-runtime/src/contract';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { MotionConfig, motion, useReducedMotion } from 'motion/react';
+import { DEMO_ASSETS, type DemoAsset, type DemoSnapshot, type DemoState, type DemoWallet } from '../../../../packages/guided-runtime/src/contract';
 import { amountContext, displayBalance, displayDelta, type BalanceKey } from './amounts';
 import { createGuidedClient, DemoHttpError, type GuidedClient } from './client';
 import { DEMO_STEPS, stepCopy } from './steps';
 
 type WalletRole = 'provider' | 'buyer';
 interface ChangeSet { before: DemoSnapshot; after: DemoSnapshot }
+
+const ASSET_LABELS: Record<DemoAsset['id'], { symbol: string; issuer: string }> = {
+  'xstocks-test-kox': { symbol: 'KOx', issuer: 'xStocks' },
+  'backpack-test-mu': { symbol: 'MU', issuer: 'Backpack/Trek' },
+  'ondo-test-ibm': { symbol: 'IBMon', issuer: 'Ondo' },
+};
+
+function assetLabel(asset: DemoAsset) { return ASSET_LABELS[asset.id]; }
 
 function Mark() {
   return <span className="demo-mark" aria-hidden="true"><i /><i /></span>;
@@ -33,36 +42,38 @@ function actorFor(state: DemoState | null): WalletRole | null {
 }
 
 const BALANCES: readonly { key: BalanceKey; label: string; unit: string }[] = [
-  { key: 'stockRaw', label: 'Test stock', unit: 'stock' },
+  { key: 'stockRaw', label: 'Tokenized stock', unit: 'stock' },
   { key: 'ptRaw', label: 'Stock exposure', unit: 'PT' },
   { key: 'drRaw', label: 'Dividend rights', unit: 'DR' },
-  { key: 'quoteRaw', label: 'Test USDC', unit: 'USDC' },
+  { key: 'quoteRaw', label: 'USDC', unit: 'USDC' },
   { key: 'lpRaw', label: 'Raydium liquidity', unit: 'LP' },
 ];
 
-function WalletPanel({ role, wallet, snapshot, active, changes }: {
+function WalletPanel({ role, wallet, snapshot, active, changes, coreOnly = false }: {
   role: WalletRole;
   wallet: DemoWallet | null;
   snapshot: DemoSnapshot | null;
   active: boolean;
   changes: ChangeSet | null;
+  coreOnly?: boolean;
 }) {
   const name = role === 'provider' ? 'Stock holder' : 'Dividend buyer';
+  const stockName = snapshot?.asset.company ?? 'Tokenized stock';
   const context = snapshot ? amountContext(snapshot) : null;
   const beforeWallet = changes?.before[role];
   const afterWallet = changes?.after[role];
   return <article className={`demo-wallet ${active ? 'is-active' : ''}`} data-testid={`wallet-${role}`}>
     <header>
       <div><p className="demo-kicker">Demo actor</p><h3>{name}</h3></div>
-      <span className={active ? 'signer active' : 'signer'}>{active ? 'Signs current action' : 'Server-managed test wallet'}</span>
+      <span className={active ? 'signer active' : 'signer'}>{active ? 'Signs current action' : 'Demo wallet'}</span>
     </header>
     <p className="wallet-address">{wallet ? <><code title={wallet.address}>{shortAddress(wallet.address)}</code><span>Local address</span></> : <span>Created when the demo starts</span>}</p>
     <dl className="balance-list">
-      {BALANCES.map(({ key, label, unit }) => {
+      {BALANCES.filter(({ key }) => !coreOnly || ['stockRaw', 'ptRaw', 'drRaw'].includes(key)).map(({ key, label, unit }) => {
         const delta = context && beforeWallet && afterWallet ? displayDelta(beforeWallet[key], afterWallet[key], key, context) : null;
         return <div key={key}>
-          <dt>{label} <small>{unit}</small></dt>
-          <dd title={wallet ? `${wallet[key]} raw units` : undefined}>{wallet && context ? displayBalance(wallet[key], key, context) : '—'}</dd>
+          <dt>{key === 'stockRaw' ? stockName : label} <small>{unit}</small></dt>
+          <dd title={wallet ? `${wallet[key]} raw units` : undefined}><motion.span key={`${wallet?.address ?? 'empty'}-${key}-${wallet?.[key] ?? ''}`} initial={{ opacity: .45 }} animate={{ opacity: 1 }} transition={{ duration: .24 }}>{wallet && context ? displayBalance(wallet[key], key, context) : '—'}</motion.span></dd>
           {delta && <span className={delta.startsWith('+') ? 'delta positive' : 'delta negative'} aria-label={`Latest change ${delta}`}>{delta}</span>}
         </div>;
       })}
@@ -70,30 +81,40 @@ function WalletPanel({ role, wallet, snapshot, active, changes }: {
   </article>;
 }
 
-function Progress({ state }: { state: DemoState | null }) {
+function Progress({ state, chapter }: { state: DemoState | null; chapter: 1 | 2 | 3 }) {
   const completed = new Set(state?.completedSteps ?? []);
-  return <ol className="demo-progress" aria-label="Demo progress">
-    {DEMO_STEPS.map((step, index) => {
+  const steps = DEMO_STEPS.filter((step) => step.chapter === chapter);
+  const currentIndex = steps.findIndex((step) => step.id === state?.activeStep || step.id === state?.nextStep);
+  return <ol className="demo-progress" aria-label={`Part ${chapter} progress`}>
+    {steps.map((step, index) => {
       const isComplete = completed.has(step.id);
       const isCurrent = state?.activeStep === step.id || state?.nextStep === step.id;
       const isFailed = state?.status === 'failed' && state.activeStep === step.id;
+      if (!isComplete && !isCurrent && index > currentIndex + 1) return null;
       return <li key={step.id} className={`${isComplete ? 'complete' : ''} ${isCurrent ? 'current' : ''} ${isFailed ? 'failed' : ''}`}>
-        <span className="step-index">{isComplete ? '✓' : index + 1}</span>
-        <div><p>{step.eyebrow}</p><h3>{step.title}</h3>{isCurrent && <small>{step.why}</small>}</div>
+        <motion.span key={isComplete ? `${step.id}-done` : `${step.id}-pending`} className="step-index" initial={{ opacity: .5, scale: .9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .2 }}>{isComplete ? '✓' : index + 1}</motion.span>
+        <div><p>{step.eyebrow}</p><h3>{state?.asset && step.id === 'core-split' ? `Split 100 ${state.asset.company} stocks.` : state?.asset && step.id === 'dividend-split' ? `Split the returned 100 ${state.asset.company} stocks.` : step.title}</h3>{isCurrent && <small>{step.why}</small>}</div>
         <span className="step-state">{isComplete ? 'Complete' : isFailed ? 'Stopped' : isCurrent ? state?.status === 'running' ? 'Running' : 'Next' : 'Upcoming'}</span>
       </li>;
     })}
   </ol>;
 }
 
-function CurrentAction({ state, unavailable, pending, hosted, onAction, onReconnect }: {
+function CurrentAction({ state, unavailable, pending, hosted, selectedAssetId, onSelectAsset, onAction, onReconnect, lastResult, onSeeWallet, wiggleStep, reduceMotion }: {
   state: DemoState | null;
   unavailable: boolean;
   pending: boolean;
   hosted: boolean;
+  selectedAssetId: DemoAsset['id'] | null;
+  onSelectAsset: (id: DemoAsset['id']) => void;
   onAction: () => void;
   onReconnect: () => void;
+  lastResult?: string | null;
+  onSeeWallet?: () => void;
+  wiggleStep?: string | null;
+  reduceMotion: boolean | null;
 }) {
+  const selectedAsset = Object.values(DEMO_ASSETS).find((asset) => asset.id === selectedAssetId);
   if (unavailable) return <section className="current-action unavailable" aria-labelledby="current-action-title">
     <p className="demo-kicker">{hosted ? 'Private sandbox' : 'Local runtime'}</p><h2 id="current-action-title">The guided demo is unavailable.</h2>
     <p>{hosted ? 'This session-bound sandbox could not be reached. Check the same sandbox again; no action is repeated.' : <>In a terminal, run <code className="startup-command">npm run demo:guided</code>, then check again.</>} {state ? 'The last received balances may be out of date.' : 'No wallet extension is needed.'}</p>
@@ -103,9 +124,15 @@ function CurrentAction({ state, unavailable, pending, hosted, onAction, onReconn
   if (!state) return <section className="current-action" aria-busy="true"><p className="demo-kicker">{hosted ? 'Private sandbox' : 'Local runtime'}</p><h2>Connecting to the guided demo…</h2></section>;
 
   if (state.status === 'idle') return <section className="current-action" aria-labelledby="current-action-title">
-    <p className="demo-kicker">Start the {hosted ? 'sandbox' : 'local'} journey</p><h2 id="current-action-title">Prepare two disposable test wallets.</h2>
-    <p>{hosted ? 'The test service creates two test wallets and synthetic Test USDC balances inside this isolated network.' : 'The test service creates a fresh local network, two test wallets and synthetic local Test USDC balances.'} No wallet extension or private key is needed.</p>
-    <button className="demo-primary" disabled={pending} onClick={onAction}>{pending ? 'Preparing…' : 'Prepare demo wallets'}</button>
+    <p className="demo-kicker">Part one · choose a company</p><h2 id="current-action-title">Choose a tokenized stock to follow.</h2>
+    <p>Choose a company for this demo. The 100 tokenized stocks appear in your test wallet when you start.</p>
+    <div className="asset-choices" role="group" aria-label="Choose a stock">
+      {Object.values(DEMO_ASSETS).map((asset) => <button key={asset.id} type="button" className={selectedAssetId === asset.id ? 'asset-choice selected' : 'asset-choice'} aria-pressed={selectedAssetId === asset.id} onClick={() => onSelectAsset(asset.id)} disabled={pending}>
+            <span className="asset-choice-symbol">{assetLabel(asset).symbol}</span><span><strong>{asset.company}</strong><small>{assetLabel(asset).issuer}</small></span><span className="asset-choice-check" aria-hidden="true">{selectedAssetId === asset.id ? '✓' : '○'}</span>
+      </button>)}
+    </div>
+    <button className="demo-primary" data-testid="prepare-guided-profile" disabled={pending || !selectedAssetId} onClick={onAction}>{pending ? 'Preparing…' : selectedAsset ? `Get 100 tokenized ${selectedAsset.company}` : 'Choose a company to start'}</button>
+    <small className="action-note">The sandbox supplies sample stock and USDC balances. No real funds or wallet extension are needed.</small>
   </section>;
 
   if (state.status === 'failed') return <section className="current-action failed" aria-labelledby="current-action-title">
@@ -115,19 +142,20 @@ function CurrentAction({ state, unavailable, pending, hosted, onAction, onReconn
   </section>;
 
   if (state.status === 'complete') return <section className="current-action complete" aria-labelledby="current-action-title">
-    <p className="demo-kicker">All nine actions complete</p><h2 id="current-action-title">The claims remained backed through trading and redemption.</h2>
+    <p className="demo-kicker">All three parts complete</p><h2 id="current-action-title">The claims remained backed through trading and redemption.</h2>
     <p>The two demo wallets finished their separate exits. Raydium’s locked residual claims remain in the pool and stay backed.</p>
     <button className="demo-primary" disabled={pending} onClick={onAction}>{pending ? 'Preparing…' : 'Run the journey again'}</button>
   </section>;
 
   const step = stepCopy(state.activeStep === 'setup' ? null : state.activeStep ?? state.nextStep);
   const working = pending || state.status === 'preparing' || state.status === 'running';
-  return <section className="current-action" aria-labelledby="current-action-title" aria-busy={working}>
-    <p className="demo-kicker">{state.activeStep === 'setup' ? 'Preparing the test wallets' : step?.eyebrow ?? 'Current action'}</p>
-    <h2 id="current-action-title">{state.activeStep === 'setup' ? 'Creating test wallets and assets.' : step?.title ?? 'Waiting for the next step.'}</h2>
+  return <section id="current-tour-action" className="current-action" aria-labelledby="current-action-title" aria-busy={working}>
+    <p className="demo-kicker">{state.activeStep === 'setup' ? 'Preparing the wallets' : step?.eyebrow ?? 'Current action'}</p>
+    <h2 id="current-action-title">{state.activeStep === 'setup' ? 'Creating wallets and assets.' : step?.id === 'core-split' && state.asset ? `Split 100 ${state.asset.company} stocks.` : step?.id === 'dividend-split' && state.asset ? `Split the returned 100 ${state.asset.company} stocks.` : step?.title ?? 'Waiting for the next step.'}</h2>
     <p>{state.activeStep === 'setup' ? 'The service is starting its own local network. Wallet keys stay in the test service.' : step?.why}</p>
-    <p className="action-signer"><span>{step?.actor === 'buyer' ? 'Dividend buyer' : step?.actor === 'system' ? 'Demo settlement' : state.activeStep === 'setup' ? 'Test service' : 'Stock holder'}</span>{step ? ' signs this action' : ' · no browser signer'}</p>
-    <button className="demo-primary" disabled={working || !step} onClick={onAction}>{working ? 'Action in progress…' : step?.action ?? 'Waiting…'}</button>
+    <p className="action-signer"><span>{step?.actor === 'buyer' ? 'Dividend buyer' : state.activeStep === 'setup' ? 'Demo service' : step?.actor === 'system' ? 'Demo timeline' : 'Stock holder'}</span>{step?.actor === 'system' || !step ? ' · no browser signer' : ' signs this action'}</p>
+    {lastResult && <div className="action-result" role="status"><b>What changed</b><p>{lastResult}</p>{onSeeWallet && <motion.button type="button" className="wallet-jump" data-wiggle={wiggleStep === state.completedSteps.at(-1) && !reduceMotion ? 'true' : undefined} onClick={onSeeWallet} animate={wiggleStep === state.completedSteps.at(-1) && !reduceMotion ? { x: [0, -2, 2, -1, 0], rotate: [0, -1, 1, 0] } : undefined} transition={{ duration: .45, ease: 'easeInOut' }}>See wallet changes ↓</motion.button>}</div>}
+    <button className="demo-primary" data-demo-step={step?.id} disabled={working || !step} onClick={onAction}>{working ? 'Action in progress…' : step?.id === 'core-split' && state.asset ? `Split 100 ${state.asset.company} stocks` : step?.id === 'dividend-split' && state.asset ? `Split 100 ${state.asset.company} stocks for the year` : step?.action ?? 'Waiting…'}</button>
   </section>;
 }
 
@@ -160,6 +188,37 @@ function Evidence({ state, receipt, receiptError, receiptLoading, hosted, onOpen
   </details>;
 }
 
+function resultCopy(state: DemoState | null): string | null {
+  const snapshot = state?.snapshot;
+  const last = state?.completedSteps.at(-1);
+  if (!snapshot || !last) return null;
+  switch (last) {
+    case 'core-split': return '100 stocks became 100 PT and 100 DR. The holder now owns two separate claims.';
+    case 'core-recombine-partial': return '40 matching pairs returned 40 stocks. 60 PT and 60 DR remain.';
+    case 'core-recombine-rest': return 'The other 60 pairs returned 60 stocks. The holder has 100 stocks again.';
+    case 'dividend-split': return '100 stocks became 100 PT and 100 DR for the sample year.';
+    case 'dividend-quarter-one': return `One sample dividend was recorded. The 100 matching pairs now return ${displayBalance(snapshot.vaultRaw, 'stockRaw', amountContext(snapshot))} stocks; DR count remains 100.`;
+    case 'dividend-quarter-two': return `Two sample dividends were recorded. The 100 matching pairs now return ${displayBalance(snapshot.vaultRaw, 'stockRaw', amountContext(snapshot))} stocks; DR count remains 100.`;
+    case 'dividend-recombine': return `40 pairs returned ${displayBalance(snapshot.provider.stockRaw, 'stockRaw', amountContext(snapshot))} stocks. 60 PT and 60 DR remain for Part Three.`;
+    case 'create-pool': return '24 DR and 4 USDC seeded the pool. The holder received LP tokens.';
+    case 'add-liquidity': return 'The holder added 6 USDC and up to 36 DR. Pool rounding may leave a tiny DR remainder; see the wallet for the exact amount.';
+    case 'buy-dr': return 'The buyer swapped USDC for dividend rights. The actual DR amount is shown in the wallet and receipt.';
+    case 'remove-liquidity': {
+      const returned = BigInt(snapshot.provider.quoteRaw);
+      const supplied = 10_000_000n;
+      const difference = returned - supplied;
+      const format = (raw: bigint) => displayBalance(raw.toString(), 'quoteRaw', amountContext(snapshot));
+      const comparison = difference > 0n ? `${format(difference)} USDC more than` : difference < 0n ? `${format(-difference)} USDC less than` : 'the same amount as';
+      const trade = difference > 0n ? 'After the buyer’s trade, the pool share returns more USDC and fewer DR.' : 'The buyer exchanged USDC for DR, leaving fewer DR in the holder’s pool share.';
+      return `The holder withdrew ${format(returned)} USDC—${comparison} the 10 USDC supplied. ${trade}`;
+    }
+    case 'recombine': return 'Recovered DR and matching PT returned stock before year-end settlement.';
+    case 'settle-year': return 'The last two sample dividends were recorded and the year was finalized.';
+    case 'redeem-buyer': return 'The buyer redeemed its DR for its assigned dividend-derived stock.';
+    case 'redeem-provider': return 'The holder redeemed its remaining PT. The pool residual stays backed.';
+  }
+}
+
 const localGuidedClient = createGuidedClient();
 
 export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { client?: GuidedClient; onHostedReset?: () => Promise<void> }) {
@@ -172,11 +231,18 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
   const [receiptError, setReceiptError] = useState('');
   const [receiptLoading, setReceiptLoading] = useState(false);
   const [evidenceOpen, setEvidenceOpen] = useState(false);
+  const [selectedAssetId, setSelectedAssetId] = useState<DemoAsset['id'] | null>(null);
+  const [wiggleStep, setWiggleStep] = useState<string | null>(null);
+  const reduceMotion = useReducedMotion();
   const stateRef = useRef<DemoState | null>(null);
   const expectedRef = useRef<{ revision: number; snapshot: DemoSnapshot | null } | null>(null);
   const receiptKeyRef = useRef<string | null>(null);
   const requestSequenceRef = useRef(0);
   const appliedSequenceRef = useRef(0);
+  const wiggleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const restartScrollRef = useRef(false);
+
+  useEffect(() => () => { if (wiggleTimeoutRef.current) clearTimeout(wiggleTimeoutRef.current); }, []);
 
   const acceptState = useCallback((next: DemoState) => {
     const previous = stateRef.current;
@@ -185,10 +251,17 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
       expectedRef.current = null;
       setPending(false);
       setChanges(null);
+      setWiggleStep(null);
+      if (wiggleTimeoutRef.current) clearTimeout(wiggleTimeoutRef.current);
     } else if (previous && previous.runtimeId === next.runtimeId && previous.sessionId === next.sessionId && next.revision < previous.revision) {
       return;
     }
     const expected = expectedRef.current;
+    if (previous && !identityChanged && !reduceMotion && next.completedSteps.length > previous.completedSteps.length) {
+      setWiggleStep(next.completedSteps.at(-1) ?? null);
+      if (wiggleTimeoutRef.current) clearTimeout(wiggleTimeoutRef.current);
+      wiggleTimeoutRef.current = setTimeout(() => setWiggleStep(null), 700);
+    }
     if (expected && next.revision > expected.revision) {
       setPending(false);
       if (expected.snapshot && next.snapshot && ['ready', 'failed', 'complete'].includes(next.status)) {
@@ -205,7 +278,14 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
     stateRef.current = next;
     setState(next);
     setConnectionError('');
-  }, []);
+  }, [reduceMotion]);
+
+  useLayoutEffect(() => {
+    if (!restartScrollRef.current || !state || state.status === 'complete') return;
+    restartScrollRef.current = false;
+    document.getElementById('core-heading')?.focus({ preventScroll: true });
+    document.getElementById('tour-core')?.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
+  }, [state, reduceMotion]);
 
   const refresh = useCallback(async (announce = false) => {
     const requestSequence = ++requestSequenceRef.current;
@@ -246,7 +326,12 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
         await onHostedReset?.();
         return;
       }
-      if (isStart) await client.start({ runtimeId: current.runtimeId, expectedRevision: current.revision });
+      if (isStart) {
+        const assetId = current.status === 'idle' ? selectedAssetId : current.asset?.id ?? selectedAssetId;
+        if (!assetId) { expectedRef.current = null; setPending(false); return; }
+        if (current.status === 'complete') restartScrollRef.current = true;
+        await client.start({ runtimeId: current.runtimeId, expectedRevision: current.revision, assetId });
+      }
       else await client.runStep({ runtimeId: current.runtimeId, sessionId: current.sessionId!, expectedRevision: current.revision, step: step! });
       setNotice('Action accepted. Waiting for confirmed local state.');
       await refresh();
@@ -255,10 +340,11 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
       setNotice(stale ? 'The runtime state changed before this action. Refreshed without repeating it.' : 'The action outcome was uncertain. Checking runtime state before allowing another action.');
       const next = await refresh();
       if (stale || (next && next.revision === current.revision)) {
+        restartScrollRef.current = false;
         expectedRef.current = null; setPending(false);
       }
     }
-  }, [client, onHostedReset, pending, refresh]);
+  }, [client, onHostedReset, pending, refresh, selectedAssetId]);
 
   const reconnect = useCallback(async () => {
     const expected = expectedRef.current;
@@ -294,38 +380,54 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
   const snapshot = state?.snapshot ?? null;
   const activeActor = actorFor(state);
   const runtimeUnavailable = Boolean(connectionError);
-  const boundaryDetail = useMemo(() => client.hosted
-    ? 'The accepted DividendX program and captured genuine Raydium devnet bytecode execute in an isolated private sandbox. Test USDC uses an exact copy of Circle’s devnet mint account, but its balances are synthetic and exist only inside this test network. They are not faucet funds or a claim of dollar value. A separate public devnet run also verified trading with faucet-funded Test USDC.'
-    : 'The accepted DividendX program and captured genuine Raydium devnet bytecode execute on an isolated local chain. Test USDC uses an exact copy of Circle’s devnet mint account, but its balances are created only inside this local test network. They are not faucet funds or a claim of dollar value. A separate public devnet run also verified trading with faucet-funded Test USDC.', [client.hosted]);
+  const coreDone = Boolean(state?.completedSteps.includes('core-recombine-rest'));
+  const dividendDone = Boolean(state?.completedSteps.includes('dividend-recombine'));
+  const activeChapter = stepCopy(state?.activeStep === 'setup' ? null : state?.activeStep ?? state?.nextStep ?? null)?.chapter ?? (dividendDone ? 3 : coreDone ? 2 : 1);
+  const lastCompletedStep = state?.completedSteps.at(-1) ?? null;
+  const lastResult = stepCopy(lastCompletedStep)?.chapter === activeChapter ? resultCopy(state) : null;
+  const scrollTo = useCallback((id: string) => document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' }), [reduceMotion]);
 
-  return <div className="demo-shell">
+
+  return <MotionConfig reducedMotion="user"><div className="demo-shell">
     <a className="skip-link" href="#demo-main">Skip to demo</a>
     <header className="demo-header">
       <a className="demo-brand" href="/app/"><Mark /><span>DividendX</span></a>
       <nav aria-label="Primary">{client.hosted ? <><a href="/app/">Public devnet</a><a href="/sandbox/">Wallet sandbox</a></> : <a href="/app/">Wallet app</a>}<a href="/demos/" aria-current="page">Guided demos</a></nav>
       <span className={`runtime-status ${runtimeUnavailable ? 'unavailable' : state?.status ?? ''}`}><i />{statusLabel(state, runtimeUnavailable)}</span>
     </header>
-    <aside className="boundary-bar"><strong>{client.hosted ? 'Private 15-minute sandbox' : 'Local transactions'} · Test assets · Accelerated test year</strong><details><summary>What this means</summary><p>{boundaryDetail}</p></details></aside>
+    <aside className="boundary-bar"><strong>{client.hosted ? 'Private sandbox' : 'Local tour'} · Demo assets · Fast-forwarded year</strong><details><summary>What this means</summary><ul><li>No real funds are involved in this demo.</li><li>Fast-forward through simulated quarterly dividends to explore a full year.</li></ul></details></aside>
 
     <main id="demo-main">
       <section className="demo-hero">
-        <div><p className="demo-kicker">Guided DeFi demo · Raydium</p><h1>Sell dividend rights <span>through a market.</span></h1><p>{client.hosted ? 'Follow two test wallets through nine signed actions using synthetic Test USDC. Every balance and receipt comes from this isolated test network.' : 'Follow two test wallets through nine signed actions using local Test USDC. Every balance and receipt comes from the local test network.'}</p><div className="hero-proof"><p>Public devnet · Test USDC</p><a href="https://explorer.solana.com/address/Fi94TtWky2e9SnSFAUzoPAcKKNV1WziEmLtZZ3FTi65S?cluster=devnet" target="_blank" rel="noreferrer">Verified DR / Test USDC pool ↗</a><small>{client.hosted ? 'This walkthrough uses a copy of the Circle devnet mint with synthetic sandbox balances.' : 'This walkthrough uses a local copy of the Circle devnet mint with synthetic local balances.'}</small></div></div>
-        <CurrentAction state={state} unavailable={runtimeUnavailable} pending={pending} hosted={client.hosted} onAction={() => void action()} onReconnect={() => void reconnect()} />
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .45 }}><p className="demo-kicker">The DividendX guided tour</p><h1>One tokenized stock. <span>Two separate tokens.</span></h1><p>Follow this guided demo to understand how DividendX works.</p><button className="demo-primary hero-cta" type="button" onClick={() => scrollTo('tour-core')}>Start guided tour <span aria-hidden="true">↓</span></button></motion.div>
+        <motion.aside className="hero-explainer" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .45, delay: .08 }} aria-label="Tour overview"><p className="demo-kicker">The idea, in one view</p><div className="hero-stock"><span>TOKENIZED STOCK · {state?.asset?.company ?? 'Coca-Cola'} ({state?.asset ? assetLabel(state.asset).symbol : 'KOx'}) EXAMPLE</span><b>100</b></div><div className="hero-branch" aria-hidden="true"><i /><i /></div><div className="hero-claims"><div><span>PT</span><b>Stock exposure</b></div><div><span>DR</span><b>Dividend rights</b></div></div><h2>Learn how DividendX works</h2><p>DividendX separates a tokenized stock into stock exposure and dividend rights. You can put them back together or use the separate tokens in DeFi.</p></motion.aside>
       </section>
 
       {connectionError && <div className="connection-alert" role="alert"><b>{client.hosted ? 'Sandbox connection' : 'Local runtime connection'}</b><span>{connectionError} {state ? 'The last received snapshot may be stale.' : ''}</span></div>}
       <p className="sr-status" role="status" aria-live="polite">{notice}</p>
 
-      <section className="wallet-section" aria-labelledby="wallet-heading">
-        <header><div><p className="demo-kicker">Two test wallets</p><h2 id="wallet-heading">Two wallets, two owners.</h2></div><p>The test service manages both wallets for this journey. They are separate from your wallet, and no extension is needed.</p></header>
-        <div className="wallet-grid">
-          <WalletPanel role="provider" wallet={snapshot?.provider ?? null} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} />
-          <WalletPanel role="buyer" wallet={snapshot?.buyer ?? null} snapshot={snapshot} active={activeActor === 'buyer'} changes={changes} />
-        </div>
+      <section id="tour-core" className="tour-chapter" aria-labelledby="core-heading">
+        <div className="chapter-heading"><p className="demo-kicker">Part one · Split and recombine</p><h2 id="core-heading" tabIndex={-1}>From one stock to two rights. <span className="chapter-blue">And back.</span></h2></div>
+        <div className="chapter-layout"><div className="chapter-story"><div className="chapter-number">01 <span>/ 03</span></div><h3>First, see the core move.</h3><ul className="core-points"><li>PT tracks the stock price side.</li><li>DR represents the dividend rights for the sample year.</li></ul><div className="claim-cards"><div className="claim-card pt"><span>PT</span><b>Principal token</b><small>Stock exposure</small></div><div className="claim-card dr"><span>DR</span><b>Dividend token</b><small>Dividend rights</small></div></div><p className="chapter-hint">A matching PT + DR pair can return stock before final settlement.</p></div>
+        <div>{coreDone ? <div className="core-recap"><p className="demo-kicker">Part one result · {state?.asset ? assetLabel(state.asset).symbol : ''}</p><h3>100 stocks restored.</h3><p>The holder split the 100 stocks, then recombined 40 pairs and the remaining 60.</p><ol><li><span>01</span> Split 100 stocks <b>✓</b></li><li><span>02</span> Recombined 40 pairs <b>✓</b></li><li><span>03</span> Recombined 60 pairs <b>✓</b></li></ol></div> : <><CurrentAction state={state} unavailable={runtimeUnavailable} pending={pending} hosted={client.hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 1 ? lastResult : null} onSeeWallet={() => scrollTo('core-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={state} chapter={1} /></>}{snapshot && !coreDone && <div id="core-wallet" className="chapter-balances"><p className="demo-kicker">Stock holder wallet · {assetLabel(snapshot.asset).symbol}</p><WalletPanel role="provider" wallet={snapshot.provider} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} coreOnly /><button type="button" className="return-to-action" onClick={() => scrollTo('current-tour-action')}>Return to next action ↑</button></div>}</div></div>
+        {coreDone && <div className="chapter-complete"><span aria-hidden="true">✓</span><div><b>Part one complete.</b><p>Part One returned all 100 stocks to the holder wallet.</p></div><button type="button" data-testid="continue-to-dividends" onClick={() => scrollTo('tour-dividends')}>Continue to Part Two <span aria-hidden="true">→</span></button></div>}
       </section>
 
-      <section className="progress-section">
-        <div className="section-heading"><p className="demo-kicker">The journey</p><h2>Nine simple actions.</h2></div><Progress state={state} />
+      <section id="tour-dividends" className={`tour-chapter dividend-chapter ${coreDone ? '' : 'chapter-locked'}`} aria-labelledby="dividend-heading">
+        <div className="chapter-heading"><p className="demo-kicker">Part two · See dividends grow</p><h2 id="dividend-heading">Watch the dividend effect.</h2><p>Split the returned 100 stocks, advance two sample quarters, then recombine 40 pairs to see the allocation change.</p></div>
+        {!coreDone ? <div className="chapter-preview"><span aria-hidden="true">↗</span><div><h3>Finish Part One to start the sample year.</h3><p>First return all 100 stocks to the holder wallet.</p></div></div> : <>
+          <div className="chapter-layout"><div className="chapter-story"><div className="chapter-number">02 <span>/ 03</span></div><h3>Same number of rights. More stock per pair.</h3><p>Two sample quarterly dividends increase the stock allocation from 1 to 1.02 per matching PT + DR pair. The 100 DR do not become 102 DR. Recombining 40 pairs returns 40.8 stocks and leaves 60 PT plus 60 DR.</p><p className="chapter-hint">These are sample dividend amounts, not forecasts or actual issuer payments.</p></div>
+          <div>{dividendDone ? <div className="core-recap"><p className="demo-kicker">Part two result · {state?.asset ? assetLabel(state.asset).symbol : ''}</p><h3>40 pairs became <span data-testid="dividend-result-stock">{state?.completedSteps.includes('create-pool') || !snapshot ? '40.8' : displayBalance(snapshot.provider.stockRaw, 'stockRaw', amountContext(snapshot))}</span> stocks.</h3><p>Two sample quarterly dividends changed the stock allocation. The remaining 60 PT and 60 DR carry into Part Three.</p><ol><li><span>01</span> Split 100 returned stocks <b>✓</b></li><li><span>02</span> Record two sample quarters <b>✓</b></li><li><span>03</span> Recombine 40 pairs <b>✓</b></li></ol></div> : <><CurrentAction state={state} unavailable={runtimeUnavailable} pending={pending} hosted={client.hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 2 ? lastResult : null} onSeeWallet={() => scrollTo('dividend-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={state} chapter={2} /></>}{snapshot && !dividendDone && <div id="dividend-wallet" className="chapter-balances"><p className="demo-kicker">Stock holder wallet · {assetLabel(snapshot.asset).symbol}</p><WalletPanel role="provider" wallet={snapshot.provider} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} coreOnly /><button type="button" className="return-to-action" onClick={() => scrollTo('current-tour-action')}>Return to next action ↑</button></div>}</div></div>
+          {dividendDone && <div className="chapter-complete"><span aria-hidden="true">✓</span><div><b>Part two complete.</b><p>Part Two left 60 DR for the pool chapter.</p></div><button type="button" data-testid="continue-to-defi" onClick={() => scrollTo('tour-defi')}>Continue to Part Three <span aria-hidden="true">→</span></button></div>}
+        </>}
+      </section>
+
+      <section id="tour-defi" className={`tour-chapter defi-chapter ${dividendDone ? '' : 'chapter-locked'}`} aria-labelledby="defi-heading">
+        <div className="chapter-heading"><p className="demo-kicker">Part three · Dividend rights in a pool</p><h2 id="defi-heading">Put the remaining rights to work.</h2><p>Use the 60 DR left from Part Two in a DR / USDC pool. Watch a buyer acquire DR, then follow both wallets through year end.</p></div>
+        {!dividendDone ? <div className="chapter-preview"><span aria-hidden="true">↗</span><div><h3>Finish Part Two to unlock the pool.</h3><p>Recombine 40 pairs after two sample dividends, leaving 60 DR for this chapter.</p></div></div> : <>
+          <div className="chapter-layout"><div className="chapter-story"><div className="chapter-number">03 <span>/ 03</span></div><h3>Two owners, different choices.</h3><p>The holder supplies 24 DR and 4 USDC, then up to 36 DR with 6 USDC. A buyer swaps USDC for DR. LP tokens represent the holder’s pool share; DR are the dividend rights. The buyer’s DR covers this year’s accrued and remaining dividends.</p><p className="chapter-hint">The annual deposit cutoff has passed. This chapter uses the 60 DR already created in Part Two.</p><div className="defi-stages"><span>Pool & trade</span><span>Withdraw & recombine</span><span>Fast-forward & redeem</span></div></div><div><CurrentAction state={state} unavailable={runtimeUnavailable} pending={pending} hosted={client.hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 3 ? lastResult : null} onSeeWallet={() => scrollTo('defi-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={state} chapter={3} /></div></div>
+          <section id="defi-wallet" className="wallet-section" aria-labelledby="wallet-heading"><header><div><p className="demo-kicker">Two wallets</p><h2 id="wallet-heading">Two wallets, two owners.</h2></div><p>The demo manages both wallets. Their balances are separate from yours.</p></header><div className="wallet-grid"><WalletPanel role="provider" wallet={snapshot?.provider ?? null} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} /><WalletPanel role="buyer" wallet={snapshot?.buyer ?? null} snapshot={snapshot} active={activeActor === 'buyer'} changes={changes} /></div><button type="button" className="return-to-action" onClick={() => scrollTo('current-tour-action')}>Return to next action ↑</button></section>
+        </>}
       </section>
 
       {snapshot?.pool && state?.completedSteps.includes('remove-liquidity') && <aside className="pool-note"><div><p className="demo-kicker">Residual pool custody</p><h2>Raydium’s locked claims remain backed.</h2></div><p>The pool currently holds <b>{displayBalance(snapshot.pool.drRaw, 'drRaw', amountContext(snapshot))} DR</b> and <b>{displayBalance(snapshot.pool.lockedLpRaw, 'lpRaw', amountContext(snapshot))} locked LP</b>. Those DR claims are still part of supply and remain backed after both wallets finish.</p></aside>}
@@ -334,8 +436,8 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
 
       <section className="future-demos" aria-labelledby="future-heading">
         <div>
-          <p className="demo-kicker">Roadmap after settlement</p>
-          <h2 id="future-heading">Future guided demos</h2>
+          <p className="demo-kicker">Future guided demos</p>
+          <h2 id="future-heading">This is just the beginning.</h2>
           <p>More ways to use your PT and DR. These demos are planned. We’re focusing next on verified issuer data and dividend settlement.</p>
         </div>
         <div className="future-demo-list">
@@ -346,10 +448,9 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
           <article><span>Planned · Jupiter</span><h3>Recurring purchases</h3><p>Buy stock exposure or dividend rights on a schedule.</p></article>
           <article><span>Planned · Combined flow</span><h3>Split and sell in one step</h3><p>Or buy the missing dividend rights to put your stock back together.</p></article>
           <article><span>Needs market groundwork</span><h3>Borrow against PT</h3><p>Requires valuation, liquidation rules and venue admission.</p></article>
-          <article className="future-demo-later"><span>Lower priority</span><h3>PT trading</h3><p>Trade stock exposure separately from dividend rights.</p></article>
         </div>
       </section>
     </main>
     <footer><Mark /><span>DividendX guided demo</span><a href="/app/">Return to the wallet app</a></footer>
-  </div>;
+  </div></MotionConfig>;
 }
