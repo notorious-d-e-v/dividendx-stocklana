@@ -12,7 +12,7 @@ import {
   normalizeAssetPolicyAccount,
 } from '@dividendx/transaction-sdk';
 import {
-  DEFAULT_DEVNET_RPC_URL, PROGRAM_ID, assertManifestCurrent, type RegistryAsset, type RegistryManifest,
+  DEFAULT_DEVNET_RPC_URL, PROGRAM_ID, assertManifestAssetCurrent, type RegistryAsset, type RegistryManifest,
 } from '@dividendx/devnet-runtime';
 import {
   ATTESTOR_PUBLIC_KEY, FAUCET_PUBLIC_KEY, GRANT_UNITS, HOLDER_SOL_TARGET_LAMPORTS,
@@ -316,7 +316,7 @@ export class SolanaChainAdapter implements ChainAdapter {
   }
 
   async prepareFaucet(request: FaucetRequest, reservationLamports: number): Promise<PreparedTransaction> {
-    await assertManifestCurrent(this.connection, this.manifest);
+    await assertManifestAssetCurrent(this.connection, this.manifest, request.assetId);
     if (request.runtimeId !== this.manifest.runtimeId || request.genesisHash !== this.manifest.genesisHash) {
       throw new ServiceError(409, 'runtime identity is stale', 'STALE_RUNTIME');
     }
@@ -342,7 +342,7 @@ export class SolanaChainAdapter implements ChainAdapter {
   }
 
   async prepareObservation(assetId: string, reservationLamports: number): Promise<PreparedTransaction> {
-    await assertManifestCurrent(this.connection, this.manifest);
+    await assertManifestAssetCurrent(this.connection, this.manifest, assetId);
     const asset = this.asset(assetId);
     await this.assertObservationAsset(asset);
     const clock = await fetchClock(this.connection);
@@ -358,7 +358,7 @@ export class SolanaChainAdapter implements ChainAdapter {
   }
 
   async verifyPrepared(operation: DurableOperation): Promise<void> {
-    await assertManifestCurrent(this.connection, this.manifest);
+    await assertManifestAssetCurrent(this.connection, this.manifest, operation.assetId);
     const asset = this.asset(operation.assetId);
     if (operation.kind === 'faucet') await this.assertFaucetAsset(asset); else await this.assertObservationAsset(asset);
   }

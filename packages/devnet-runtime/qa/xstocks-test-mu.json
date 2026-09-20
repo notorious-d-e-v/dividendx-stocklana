@@ -1,0 +1,39 @@
+{
+  "schema": "dividendx-devnet-catalog-holder-proof-v1",
+  "boundary": "synthetic-public-devnet",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+  "holder": "AzXyVUoCkyahCejBUVEoV4pcc8d5cLCnT62DEyacLaj6",
+  "assetId": "xstocks-test-mu",
+  "symbol": "TestMUx",
+  "collateralMint": "7YMkbzjZTxaoXgioXd64eNhytdM16nUecJ3GLWvyH1WY",
+  "series": "H4LpLgkasV4Rt15FJEXmvHSZpkpGVHVMb582fcqJzXKi",
+  "amountRaw": "100000000",
+  "signatures": {
+    "createAccounts": "2Z6PdwX7LmKVTuubUCMGzvJ8c486KLxNMfYT6DpQqyAvqNPonTURKp6vWk6ST1yzXhmy2dS2XqZANF7h1iKrAbFW",
+    "mint": "3WArrhuCg1Pe6yecMLEe7BGSmqPvicGJXqKYXRAaGWF46UB6GsWprRCbJRVrFHPw7veZk8A5fzo2FCedFX8jdHxs",
+    "deposit": "zyHAHkLg4Ci7D4KwutubAEaDiApuAWEvusgYi4do2SiEYAcJ3F3vW6sTJX85My7cVtGEmf3VTDUU9DKt84K8XGG",
+    "recombine": "2sLjcauW8AyecshUkrzw3rLgJSHdLxQFehY7QN4aZFFfSxcUWwBGzkMKCxkktYn3C6VPmRMRfhgEurCWHWDaj93T"
+  },
+  "conservation": {
+    "baseline": {
+      "collateral": "0",
+      "pt": "0",
+      "dr": "0",
+      "vault": "0",
+      "accountable": "0",
+      "collateralSupply": "0",
+      "ptSupply": "0",
+      "drSupply": "0"
+    },
+    "final": {
+      "collateral": "100000000",
+      "pt": "0",
+      "dr": "0",
+      "vault": "0",
+      "accountable": "0"
+    }
+  }
+}

@@ -68,6 +68,246 @@
           "vault": "7LrfnfiAutq2fcyF2qLWNVz3SGr9zpftoQbGAC8XkogQ"
         }
       ]
+    },
+    {
+      "id": "xstocks-test-aapl",
+      "company": "Apple",
+      "symbol": "TestAAPLx",
+      "issuerLabel": "xStocks test profile",
+      "issuerIdHex": "6180909b878b70963166613bccc235bfa0723fa51a81a0eb50af7c74d7224361",
+      "decimals": 8,
+      "collateralMint": "7fJuxjt1wUPdHgXxNFvCEQbW5UeBfoRfU7u9r5Xr2UYm",
+      "assetPolicy": "fi6AQjmnqekEuyJJK9kP5ZYqadu8aQBTL5YrhAA5mDj",
+      "series": [
+        {
+          "year": 2027,
+          "address": "31s8MP9viwVkdhAG14nZ78BVAHrcX5QKd4zmLE6uKYxe",
+          "accumulator": "EqxGPdHiet5vcc72526P66BMeQdh7XG8ZpokhbqcNMQ1",
+          "ptMint": "AUDY9tR1qdzgrH21LSmTrczYaJGCMkLdcSASGfdJVSrx",
+          "drMint": "HaK8d3Qdop2rSx5k2wUchjFHyo1z4AKrNYUf6Z5kShtt",
+          "vault": "7YXX9dDcLNb8Gz6aspjw7wjuU9gwE7ofcoaY7LNpvXNK"
+        }
+      ]
+    },
+    {
+      "id": "xstocks-test-msft",
+      "company": "Microsoft",
+      "symbol": "TestMSFTx",
+      "issuerLabel": "xStocks test profile",
+      "issuerIdHex": "f89f49e1768b6436aa808ff1a6320303ec5347d1b84206b3cc445098f1462729",
+      "decimals": 8,
+      "collateralMint": "H5A3Sa7eNE1NEX3AZTZ6geHHbhCeoXPmU5b1mcf34VTD",
+      "assetPolicy": "4ndZsLukrKRgHXnK6f9rFwjNuFcCwJheA5pMArDbgHwH",
+      "series": [
+        {
+          "year": 2027,
+          "address": "3pHDiFgBjUWWd96a5pyWCwQoWYA7dxosiovAtJ5x9ZSo",
+          "accumulator": "6dr2QTWrMawA2yt7AKZrZDBxF8CqCW3NYqp5jBZJfyYo",
+          "ptMint": "Dys3dZsUzvRpbdfg3iN56oztYrQeYeSu3oZb8D6gdzsv",
+          "drMint": "D9y6zSh6mjqknpx2LgsEQjzesxnRBvKRMyhD2PNC97R7",
+          "vault": "CSuC5CQQF8Hwm9R6hSUA7y1Bn2wkAAuctgw31zA2DZPE"
+        }
+      ]
+    },
+    {
+      "id": "xstocks-test-mu",
+      "company": "Micron",
+      "symbol": "TestMUx",
+      "issuerLabel": "xStocks test profile",
+      "issuerIdHex": "272d07b9f09a5a1ff9be3253ddd50c5f1396c65c9368af59ed3a8b988c0049e3",
+      "decimals": 8,
+      "collateralMint": "7YMkbzjZTxaoXgioXd64eNhytdM16nUecJ3GLWvyH1WY",
+      "assetPolicy": "8YBcx6BH7ZVqTYTu9bpTDKxjkKKcZjsYsNtFNt9tFJE6",
+      "series": [
+        {
+          "year": 2027,
+          "address": "H4LpLgkasV4Rt15FJEXmvHSZpkpGVHVMb582fcqJzXKi",
+          "accumulator": "FGPAv77FbKHFKgVD4rihMDAp46Pa7e42w9gSw2YizTbV",
+          "ptMint": "2u4rJHCF7KB1m3uBZBk8QxhjEiEh2ywGUrh3foB2xHaa",
+          "drMint": "9x6rsLXnK9LFfMWaZJBJYwE5pwFDj84i8Qea85Fb2S6j",
+          "vault": "EKVVQNskXBuif7nLEXFFZ6gawrN3PZtYBriN4VV6n1m9"
+        }
+      ]
+    },
+    {
+      "id": "xstocks-test-nke",
+      "company": "Nike",
+      "symbol": "TestNKEx",
+      "issuerLabel": "xStocks test profile",
+      "issuerIdHex": "f2af5ce7068fe46a82492d685ae308289ca341260dde197b496ec3382d421239",
+      "decimals": 8,
+      "collateralMint": "9xvpARwY8XB3cSp3J34n8JXWQvwTgdBJRyhwcAjRJb2B",
+      "assetPolicy": "27hV4GTjfMo2FWpSZJi2JbAW8dsgqUmfeERzx5fGWLaF",
+      "series": [
+        {
+          "year": 2027,
+          "address": "AN2BW4vudmQiCss5z8CUZ2aYosVUFU3pRMrbMX8v13Wj",
+          "accumulator": "61q2u4UqpGUsjanHVBC66u2NJPED3sw5fm1wgyfD9p9s",
+          "ptMint": "8MPgBnmrGNdX5aDRMsMdJ4BoZj8gXxdBXL5WWvStv4T6",
+          "drMint": "ACu9HKFvQTp4EuZ9srMo1ewPzX3CST2Q9uZdjnehmwbg",
+          "vault": "9zShenqRMgb7eZjzrXQ1bmqgkDENQ8ybhWN5B8hYtpVc"
+        }
+      ]
+    },
+    {
+      "id": "xstocks-test-ibm",
+      "company": "IBM",
+      "symbol": "TestIBMx",
+      "issuerLabel": "xStocks test profile",
+      "issuerIdHex": "7d598473bdf473fa3d6e2b234e508914e1e814614c46d6235d5b9b964a190079",
+      "decimals": 8,
+      "collateralMint": "CRAe2SW3NxutkEEq8H3M4mXMmHazZzUCv8sWRVYgqy1",
+      "assetPolicy": "237jzp3mrF18r5H1XumgjcxvipjJRNG1w5urNWmRqFYv",
+      "series": [
+        {
+          "year": 2027,
+          "address": "DX2Et7tcztYdpu4JMrmGRXed9f3s6NjheGFF5CVZNvmM",
+          "accumulator": "J9GTzMrfVUGGzs8MYE8Yty2CQZoFfdd1c9RfWyXhxUqY",
+          "ptMint": "DGtFHBWQiSKk72op4HGk9WLLwytMa5Qme2kGxntTgK4T",
+          "drMint": "BvL4wHPWSzactEzzADPF9yMFwuz5HMPMNS2TgqboeCgn",
+          "vault": "GjRcEpby3kyr7DgZjfK7tkkNvFfQ8hqmMW9baJqdY2cB"
+        }
+      ]
+    },
+    {
+      "id": "backpack-test-nke",
+      "company": "Nike",
+      "symbol": "TestNKE",
+      "issuerLabel": "Backpack/Trek test profile",
+      "issuerIdHex": "5634ded68f11eb40e3b974fe476ff081d671e6f9c74216ee8ec23d845a9b6d93",
+      "decimals": 6,
+      "collateralMint": "AmCXDLu7ryFgdkxxMkwzPX5v3WqJ14u52bddeWXP3dpz",
+      "assetPolicy": "27ot2fVxMcYNzmp11NPPUordkTkSGHzHmNYVvAhvejL7",
+      "series": [
+        {
+          "year": 2027,
+          "address": "Ht3LpXZ8ZNFCSbmttBYuSzjUbozkubLESh34sn86yFjM",
+          "accumulator": "7zGMub4GXcVpMECX6waicoeuKtXjFTJ6ysF1vLKbnCQV",
+          "ptMint": "6cLMGy5YQxafKUmt9vmprKoNadCyjzrcUrDZcB9DaqgY",
+          "drMint": "C72sCkrYHzxoR5eGhSUCX8XETJDwP4YadTZb2rqr2gYM",
+          "vault": "4h54FNddr2S3sx7jBrHUekG77HjB2UGJxYeH5McSa3y7"
+        }
+      ]
+    },
+    {
+      "id": "backpack-test-ibm",
+      "company": "IBM",
+      "symbol": "TestIBM",
+      "issuerLabel": "Backpack/Trek test profile",
+      "issuerIdHex": "9334e786a2fa733a2bf69d370ede48d08c5acd87af4f8eee6e535b550ceb97dc",
+      "decimals": 6,
+      "collateralMint": "FG6t1SkLC9C5x3Ttw51dqCV12R6VsGXR5zG9Lpn7eYvh",
+      "assetPolicy": "fkXQVt3MPsLKVr1MermVfWuDfLUMevNnECY7zDXp12n",
+      "series": [
+        {
+          "year": 2027,
+          "address": "945S2v2rXRQ4VwY87YKsJyjbJSqAvbUxuuJUQvg3G75S",
+          "accumulator": "6wNMVMVzCw46ptbqdvC8rkFUdZAkJ1L9KBzmNpC9hZYK",
+          "ptMint": "F9jUhBaKHj1dDDwJeuKPfmnpwrMvjYa1nmP6SvBCNmvf",
+          "drMint": "DRmoqowb9upPmBzFG1YcjtH6yqi1yKVmY3AZyh8DvaUC",
+          "vault": "GPWEWjtRtJdKRyK4ndQ1DvcPfJBZogK2n7NHScJArdtc"
+        }
+      ]
+    },
+    {
+      "id": "ondo-test-ko",
+      "company": "Coca-Cola",
+      "symbol": "TestKOon",
+      "issuerLabel": "Ondo test profile",
+      "issuerIdHex": "633c07eb417569eb45dd75f3f77fbe72ce84e173b777e444f87eaae514f64402",
+      "decimals": 9,
+      "collateralMint": "EsMcTTvWRPNL7LHsHqVDeDVdVTUwuTwXBwkrCvuhUVbn",
+      "assetPolicy": "42TECVWyzNgsh1Rt2SndM4kbyiiDBFm56hWoRDRpcQZH",
+      "series": [
+        {
+          "year": 2027,
+          "address": "6z2gcZTBbyyjrqpFiz2QH61ufQQRHqggGFBtNe7vGec",
+          "accumulator": "Aun3jpB5HH5judxu6iFUZeaYNvZfbpjjt1xPASYMuiDV",
+          "ptMint": "67e5sBx8wrRnKKX4MPMe78upTX8YFKvXhYbhi3HRNg5Q",
+          "drMint": "CfUDzU3YiS4AtCxFQqovBExJVgdNxrXviQzSAjYc88bt",
+          "vault": "3xAY6oMf1KtU5buy6U3BRRAftZMfji3R18neBmrB15gv"
+        }
+      ]
+    },
+    {
+      "id": "ondo-test-aapl",
+      "company": "Apple",
+      "symbol": "TestAAPLon",
+      "issuerLabel": "Ondo test profile",
+      "issuerIdHex": "1bcdb571a0b943c158f7f6cccb64eefdd1890f287b8b32ccc7e5b01f4d156cd0",
+      "decimals": 9,
+      "collateralMint": "CHUk56SSC2YiTKR1zzoAF2KMfyd9FzDGdhZg7krdV1m7",
+      "assetPolicy": "4CHHkYdioHP5ugi6BiUebhf3Gzqda5ZRk7uuce6vJPgt",
+      "series": [
+        {
+          "year": 2027,
+          "address": "28VqpkaRpFpVkPC3PiLxSUsC1w1Cjpg7qqMBdaT9ke6j",
+          "accumulator": "ENTpdwShRNj2dfaaKsYyggFtJwUvxGFLfzzTxasyVfrc",
+          "ptMint": "3i9fwJahWw9hsUGPv2YhbWr8btTi4t8TSgRZKtE4Muti",
+          "drMint": "Fxg3x159CZK76uocxyStChxTHHGmsyZFemnaZg5WX9rX",
+          "vault": "AzdwodFBNKuDSKofvbHQnNZDaVnXNnNGKHP7iqKooSp2"
+        }
+      ]
+    },
+    {
+      "id": "ondo-test-msft",
+      "company": "Microsoft",
+      "symbol": "TestMSFTon",
+      "issuerLabel": "Ondo test profile",
+      "issuerIdHex": "4a044d5d432707d6cba31d0e82d113c65b7751a55488948fc6072c97d7dac009",
+      "decimals": 9,
+      "collateralMint": "6NzCLuciZES9b2C4wMDCFn1dfEcghMQafXEBfC5ikvKV",
+      "assetPolicy": "DU2WJiZZ4YzzQnaQXejpxe5UGDyGEA8ZeqW59sbsn8yB",
+      "series": [
+        {
+          "year": 2027,
+          "address": "3B5WmQ2AY7WUgkDMhXySq5a1n98bA1VcktUcdyfxiqPr",
+          "accumulator": "DdMhAGSfTN9aJ5DtL1ziwD7mBCY5Q8Ye2nK2PWV8bpbo",
+          "ptMint": "AV2W49p3WJVbK9mLjpk66i8oCMT6sKtnsdV4YhaD3f3",
+          "drMint": "GuAnMPCdEBGV8RPvBpo3Z6JowCmbZ4XuFy5sPpLGfY5y",
+          "vault": "9bmVKhySBVnPKAot1GRnsA2xBAGsa7vgsZdSkuS6fCFM"
+        }
+      ]
+    },
+    {
+      "id": "ondo-test-mu",
+      "company": "Micron",
+      "symbol": "TestMUon",
+      "issuerLabel": "Ondo test profile",
+      "issuerIdHex": "d6f3951e8126c9def7c68614044df2b1902bc81847d9c706c63bdc2df14b0c02",
+      "decimals": 9,
+      "collateralMint": "APfJHnR1baHYsFcsyR2GNt5YmsjrE5NTE3RNsXGDMYXE",
+      "assetPolicy": "25S7Yrcr39b6cSnffPZKzdUyR58JJBWeBciJeXkypt7g",
+      "series": [
+        {
+          "year": 2027,
+          "address": "Mxnz25StxnoMcGvo6mSMbEBZLCACE36ZMf3Tdnp55Hb",
+          "accumulator": "B5i9EnMj7N8LVCL1tPAEtynhkzQCNwN5jfqfZiz5WBRa",
+          "ptMint": "HbtRE17oncoKjHxMG627itm4RNsUSrztQpVeoxLMGDN1",
+          "drMint": "2q4QhJzpWqBBUSVu3No1SYyAysshWrjUZBWQYDyRywDC",
+          "vault": "99K1Ym52Tgf9nU4ygZwX1oMNiHGnhLhy4VMG1raMV78U"
+        }
+      ]
+    },
+    {
+      "id": "ondo-test-nke",
+      "company": "Nike",
+      "symbol": "TestNKEon",
+      "issuerLabel": "Ondo test profile",
+      "issuerIdHex": "4c925f2a463a03b95997448f32f55dae7c8186ad5d1521ab3abba8bc1ee56516",
+      "decimals": 9,
+      "collateralMint": "DKhJQkZyH7tMqBAtXMsoCA9QHxYF8QPPSjnbQ873WV6g",
+      "assetPolicy": "368hMmWr62ayzaJHe21dk4hgiy6U3iQtxkX9Gufv61Am",
+      "series": [
+        {
+          "year": 2027,
+          "address": "8qMzCScs4oHha2VZsBXnqZWkfkmytc4gkx5w6bh9v36A",
+          "accumulator": "AzKyu9tDyt3AGgVzTrzaXuEszAYjESrkdS2du8vMa7ar",
+          "ptMint": "E2HqebYUo2AVBm4cB1EteDVX5AxbzkTFWULUsw4RyVzK",
+          "drMint": "A4n25k2V2KGEy42gJRLpivtcs7tdoB4hiQKg7h3Cz4y9",
+          "vault": "Gi6hjxZkUTZtfBqnT3srWnLyJsLUPx6NgBYbAvZyS11E"
+        }
+      ]
     }
   ]
 }

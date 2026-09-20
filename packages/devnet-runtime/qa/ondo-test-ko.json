@@ -1,0 +1,39 @@
+{
+  "schema": "dividendx-devnet-catalog-holder-proof-v1",
+  "boundary": "synthetic-public-devnet",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+  "holder": "AzXyVUoCkyahCejBUVEoV4pcc8d5cLCnT62DEyacLaj6",
+  "assetId": "ondo-test-ko",
+  "symbol": "TestKOon",
+  "collateralMint": "EsMcTTvWRPNL7LHsHqVDeDVdVTUwuTwXBwkrCvuhUVbn",
+  "series": "6z2gcZTBbyyjrqpFiz2QH61ufQQRHqggGFBtNe7vGec",
+  "amountRaw": "1000000000",
+  "signatures": {
+    "createAccounts": "3KmdUamAdVAb21QhtRtisb7bNrigBr1gc6JVZgBzsf7b1TWPrAZ33N9UiNzWEJju8iRjijCuxqRfyMf2qSEKnMxy",
+    "mint": "243gg9mLcMTRMwFEGDby3wqk8xHLddv1hi3RDk7T6m7sb5LwJzBn8LWKeHeKjLtRB51SrP3zwBEHUpZLUSX49uyP",
+    "deposit": "3hsU2XZGdfzmwc7PM7hKK9JFw3NMTh24PMKxTL3k16GhF1SxJFF2Hwq1pYpLvXRzyCKwaGNS44sK9dnMRv3oXtk7",
+    "recombine": "32aH4g64Aek8it6NxofcQAdsYSgAQ8HXofaHDyuKMoJU9cYctsECyEARo8e1hTnNc5iBhgidAL86XRaYBD2pSyWX"
+  },
+  "conservation": {
+    "baseline": {
+      "collateral": "0",
+      "pt": "0",
+      "dr": "0",
+      "vault": "0",
+      "accountable": "0",
+      "collateralSupply": "0",
+      "ptSupply": "0",
+      "drSupply": "0"
+    },
+    "final": {
+      "collateral": "1000000000",
+      "pt": "0",
+      "dr": "0",
+      "vault": "0",
+      "accountable": "0"
+    }
+  }
+}

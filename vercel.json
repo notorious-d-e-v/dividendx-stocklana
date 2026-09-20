@@ -18,8 +18,12 @@
     }
   ],
   "functions": {
-    "api/**/*.ts": {
+    "api/*.ts": {
       "maxDuration": 60,
+      "includeFiles": "packages/devnet-runtime/manifest.devnet.json"
+    },
+    "api/cron/refresh-observations.ts": {
+      "maxDuration": 300,
       "includeFiles": "packages/devnet-runtime/manifest.devnet.json"
     }
   },

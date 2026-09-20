@@ -1,0 +1,305 @@
+{
+  "schema": "dividendx-devnet-catalog-expansion-v1",
+  "boundary": "synthetic-public-devnet",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "verifiedAt": "2026-09-20T05:09:44.868Z",
+  "contextSlot": 501221503,
+  "originalProfileCount": 3,
+  "newProfileCount": 12,
+  "totalProfileCount": 15,
+  "originalIdentitiesAndHistoryPreserved": true,
+  "adminExpansionSpendLamports": "265294080",
+  "maxExpansionSpendLamports": "300000000",
+  "transactions": [
+    {
+      "name": "create_mint_xstocks-test-aapl",
+      "signature": "3zVLuM4NfY2p3kQoxgqjqu97eHqrvt5rjKkMUdATMvCa6HY6Cw98NX2Zstx2uu7G4Fpo6HeWpDaMr1Q1qDpyVwYi",
+      "slot": 501219072,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_xstocks-test-aapl",
+      "signature": "2GrHdhQvrxTahgFoEUyCXjmB7ngzetJ1CqbHta94W7HFCd8yQohug8d6qQrxgZ3hGoCLfi3QgFXaVWfWcVfCggGa",
+      "slot": 501219100,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_xstocks-test-aapl",
+      "signature": "4fNY1caZMt6Ayv8HhfXvVmgMQrCVmFJqeiRW497wC8uiCFJd7hq5hyjo8Wp27AJ8gMnx8r4xBPuUCgbDRrMhNPBj",
+      "slot": 501219136,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_xstocks-test-aapl",
+      "signature": "2dW3wtLVY1ykWMyMaebnM6RHtFCgvduyTLpsC7WzaYr7CWWuGFrxJNcaG61No5knDXxexyDDoRbALYyMZKrh4hQT",
+      "slot": 501219166,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_xstocks-test-msft",
+      "signature": "1t9cTLGmD2qMeQyAh2rM2xku4MNVvFBnhKPf1dS4oWiB2ZUYZ6K5qjNxzwbx1QxtrxxTgk1oAkuPriPc68gCzpJ",
+      "slot": 501219197,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_xstocks-test-msft",
+      "signature": "57WJthqHUhuRTme7feThN4EDz7srGryYfbwYNFFsqPhxzZyYWPASxjVX6yKZPB36MVfbrgLjSwYxThepu9kcU65c",
+      "slot": 501219227,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_xstocks-test-msft",
+      "signature": "5xaxwQpUrN43fuqviihwGpLtAPBqyjELJjfYm9osHbtRBxkoPUiPB3MGN4GdTtC9gQS8DRmxou87ELXqmmpvWna4",
+      "slot": 501219262,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_xstocks-test-msft",
+      "signature": "4Lb7p3ewuUjKzzMS4pY4JKwpS4e3ELkRYqoDRHzYCTkrc8RsKgEtWyvxiqDhBjoqHKAVUDW7HRK4wfbuokicup4M",
+      "slot": 501219291,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_xstocks-test-mu",
+      "signature": "MxhzUsdCYMyhKGmSnVexCzxX74oSGVpmZHTa8EkAFwbheGGjEQRjUTo5iAEwTaakYujYXtPTmZR9H6pNi7K6WxQ",
+      "slot": 501219322,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_xstocks-test-mu",
+      "signature": "4eTnqn8iH8fd718kLR3RRNcKRiCbg63rJyvR64xEUoEFeugttmn2Tgigzb1NYhv124MNSJ9hK7oNVkXNbGUQVhJX",
+      "slot": 501219350,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_xstocks-test-mu",
+      "signature": "YkDDs8nz7hmJRCrWYdKgnAQiwJiwcfbHnRzKUi23mLqWkvzyYK48Rv3HDR9kU3xtSNmqyhXNepiXYtvN6Fb9NUG",
+      "slot": 501219384,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_xstocks-test-mu",
+      "signature": "4rct4jJ5T9oRou2NYtWCYxotNwKhU8RPyyESnK4doyaK6JBDDnKxgdno8z1b4cWyjAcz4CJZ264W5J4PJy4gwEum",
+      "slot": 501219411,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_xstocks-test-nke",
+      "signature": "4n9P8RFZGw2ar5JEcsMqvzwLhecYBxprcmGUrQb7jqubCPJ4MesEBuZaEBerXzo35TJeQMcRgUSRY3fNWys6UjbZ",
+      "slot": 501219444,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_xstocks-test-nke",
+      "signature": "5zo3281GprxX2XnJxkJp3DfYCuCq9o4Zc2noDnhB7n5ymAvsYM4V3N41R7mTnQ3QXv54Wkk5L2RJ7ycn53NHp9bx",
+      "slot": 501219471,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_xstocks-test-nke",
+      "signature": "DYdHiWxEtmXs8xNUgfPTbCb4UwQW9YZMowfiGVaRL9676g4VBeaxkkxxjaQTu69LFch9k3xqQ6LJ79fX92ayUNE",
+      "slot": 501219505,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_xstocks-test-nke",
+      "signature": "4ybJkXAMpuSihTic4NnpfUSW24hqjt2JYUBCfWeAtSxqkwyPZvv8HzrUWnCDVDF2Sx9AZiuDYEwsVLNjPbp9rj1L",
+      "slot": 501219533,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_xstocks-test-ibm",
+      "signature": "33ZDDGS2s1qYfKntMycYq4oiipTskfk6DqkKbUS5VrRXHZeCzcCTvDEkkGArvbHan93WknVWWfw3G9GWVKnBdTse",
+      "slot": 501219563,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_xstocks-test-ibm",
+      "signature": "3irUjZ1kRJzSGjrzmWAxDQDWiV3iEZytu9mQaT8979xPhWpDXLrpmXSC3uGRzB1MTmq3h4Myf75qPG4QsiNSqQ2g",
+      "slot": 501219592,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_xstocks-test-ibm",
+      "signature": "3TKDTjpvKTZLfvdabhPUDB3eaqsepeMXSoEfeYhJtV6U6g7tN5dNggyFafk5CfdDMd1frqsKwzyQ3wZERqGvPRst",
+      "slot": 501219626,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_xstocks-test-ibm",
+      "signature": "4MgDdjZdLhuiwkbHkpco99zzE9FVTN7ozib9nznGcQp8FgjanjfGU4Y6cPC3Ay9oxzogcpKPxJ9TKC4ruk4gxaD4",
+      "slot": 501219655,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_backpack-test-nke",
+      "signature": "2kxV5BJ3rUYGV9mFGPHCBsS8Y7T1MLdyEJAKuTGvfTGVtFBt8TtJroR51wF4qxvt3FbUmdzDH5TB953JFTeeaZnz",
+      "slot": 501219688,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_backpack-test-nke",
+      "signature": "VPSHeevVWfJcSiroxDptPUcUK6NaDPcpuvAxSuarQUciRXrx9n6SqT3dQaFKuha6gZSE6rHqCCKy7g4Djp3twC1",
+      "slot": 501219714,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_backpack-test-nke",
+      "signature": "2L1jeKY1PDjeN6nhAoPm87FDoBmvCgA2FAeZUk5GnRCUXDHodWdanFAqBoHiHEMWErGSptUKDEYgDqY8RzgvssdL",
+      "slot": 501219750,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_backpack-test-nke",
+      "signature": "4dMYE1yAoRK6Nb3WGqAKoySyMAdCarz2H2beazUUFU7dXYVRk1kCTyJQyN5xFafUCvuaBiH5sUPZCt8zxM61GLVB",
+      "slot": 501219777,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_backpack-test-ibm",
+      "signature": "veSzH16CCDPqLdMRHDVMpx1K5dtxBTf9KsEKVL9uJ2ZZXANhdWwHcRSyg3DfLNvzaU4oz2bFQPhpRYCH3skxoLs",
+      "slot": 501219809,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_backpack-test-ibm",
+      "signature": "2mAzhSsFYaCsyvxXPv6kERpuf3udEwutmD3QpBtmzXUD5qpgfU6E6z1pXv42UyEf9ZrvDqLNJTe14357sZVsaS8Y",
+      "slot": 501219835,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_backpack-test-ibm",
+      "signature": "5bJ4gSzUDiauqzDDzPnfkpFezngXrwxZwMNXKvZdzLU7YEynmdvoscQVmVcZaJ9Q45ZmZE3RrQxuCN5SjdriawEY",
+      "slot": 501219871,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_backpack-test-ibm",
+      "signature": "4AaopeKsAH2Nf18rNiS2n3yEiKvzG7qjVQdS2jPV96XbuRb4JSRX3kdUQofviERpZBHuG4crX8mjyQoSErPqFgXF",
+      "slot": 501219898,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_ondo-test-ko",
+      "signature": "54xiLA8UbBbLyuK6rx69g5uUVgwY9LKaPzoj9fRnzNza5TS2ndtemTxQkCzkmAV5xfrCuU6aQWmgePQoKKqNAhvn",
+      "slot": 501219932,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_ondo-test-ko",
+      "signature": "pGL6BePZeNCXC6TTFy8ZH5oaVyG6Hbv5iQRp71UpKSyAT5RYcrswZzTkFUvCGQ1euqUVkWM7ewhz7m74noC8Th8",
+      "slot": 501219959,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_ondo-test-ko",
+      "signature": "3zoQ7dngFNxgohLL6Dp7y5SC3HsJwK5Jmu2ifpB7dYmm3KGEuP9LijdfKbTL4M5HYikid49P247CLGXSomsP9tm5",
+      "slot": 501219999,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_ondo-test-ko",
+      "signature": "5gw8ZSMfnhYDT4scL3rjAupvWzWRWFGbqc5uwdTm145CRLuJRszECspwy6XFHt8me6VX7B1FzUD3bK4tcgc2g1pQ",
+      "slot": 501220031,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_ondo-test-aapl",
+      "signature": "ybKCuuTzTvP2FY8wjA94aaaBWSaknA971UzUvmK9PEaAgovS3Gh4s8zCg3qYWAu4QtZ9a8L2Uy11zWoSMuvhgEE",
+      "slot": 501220070,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_ondo-test-aapl",
+      "signature": "UYXCpjU5LaGsAWjnbb6xEKjsMJAEzDtiNuuifSCkKoHyqEJVSnWhom2SpMNdiJp1V7SnU5UZqDp6Dk8qF2Eg71o",
+      "slot": 501220113,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_ondo-test-aapl",
+      "signature": "3WUexk7FNAaBo3m51S4vq5dhJqbRzLEpUy47ohEA4FzHvDYNbCWBMXStVXfDawJHeW9W8EMsc1aWEuhdqqgr9C4e",
+      "slot": 501220181,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_ondo-test-aapl",
+      "signature": "D2rC7vvj3UtYWKjNX1KvkUTHZgTMz5UHJNDtLEaHJ44PGWzZatn6HJ2bLp5KXJZ8AzXRCGkKAqNLPSsuHuZYqyz",
+      "slot": 501220212,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_ondo-test-msft",
+      "signature": "3sMTkadiSRawFwFxpLoBKvjftY9Rczn8ScLH52dPxcjq43b67Su3Y94W35oJForLG3H9qCUSuzmM5AhnwvUmK8nk",
+      "slot": 501220265,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_ondo-test-msft",
+      "signature": "2TEw9atPuET6qKKXfT59S2UTBaMhp6hVwtaMKgcVb4HTYhyVRFVmQUQaVwJNAWvFBsUQtipn2sCx7Y5DaYvnoSU2",
+      "slot": 501220294,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_ondo-test-msft",
+      "signature": "63J8buXKjjfkW21uacEeyBMJEz2bLTqecShpZ7mqNchYW2xkrnTynGPgC6ZsPgsAsudWru51CtEFwKAWH2QUBaRP",
+      "slot": 501220341,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_ondo-test-msft",
+      "signature": "3knFJ6x9GhrzDXE9bvVBc2tbPKRgA1Nkm8ABXXE1uf5rj3XdRPDpRTCiRP4g3LHzx1e1MrususXuzpYfSbMSQ7t2",
+      "slot": 501220405,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_ondo-test-mu",
+      "signature": "5KPmWjrhVXYgahdYigEXqPvBMubujscibmAfcccKhdMhUuapqkUrVwtNYF9HXrgGbkspjq49uomLN2j2jJaaSyFj",
+      "slot": 501220436,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_ondo-test-mu",
+      "signature": "4DqhKZTznoZ17uF6xPVmjAQF2sWLTxUhZQLMCbcRiC4JSPrQrHQVDHpeYX853Tz7VMWAvUQeEDgX2Z9Wr1mApTR5",
+      "slot": 501220471,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_ondo-test-mu",
+      "signature": "2hDNhG6WMDp2Jg5YzGPc3vCiqvifnde2HYW2v22jArXLCYKZd4EHPF3QeuUecx1ZDtRHXx4YHHh82JhDfPPwcyh5",
+      "slot": 501220523,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_ondo-test-mu",
+      "signature": "uCoG2m8r1MnphXWTgG5ehGiBYxPATJazpV3MbyB6zj2QcHVLbaoBdyGYMQqqUHPYpzJKDdwiVnUqWhpjDhfR8z9",
+      "slot": 501220552,
+      "status": "finalized"
+    },
+    {
+      "name": "create_mint_ondo-test-nke",
+      "signature": "x42anrPwM7K2e9F3SoDAKRdHNJtZRDL2N8H4RzgJKdoAKTEsReiuKQ1sHeH5VQcK9UuSxBsMVahpZoqXo7khimZ",
+      "slot": 501220582,
+      "status": "finalized"
+    },
+    {
+      "name": "register_policy_ondo-test-nke",
+      "signature": "27HrXhrRf53escjDFC2uNhjy5oSJpoxZCLmMixcm8A1VfBRMf73sdhqqJeBBJVBNht6roQswkPVn6iwqLATM6qQA",
+      "slot": 501220611,
+      "status": "finalized"
+    },
+    {
+      "name": "observe_profile_ondo-test-nke",
+      "signature": "5sjJAwQaagVNBLv3ge9Hs2m6yQaQf13vcwBzyq8CAywAnijBUgsmtfPXfmsq8FiHNSvPR4GnJDpKMVsk8X1z1HrQ",
+      "slot": 501220645,
+      "status": "finalized"
+    },
+    {
+      "name": "create_series_ondo-test-nke",
+      "signature": "3jNbcZYdLBPeQRYFWE5WVXqogNrhbrTqR6FpE8M8D6inNjseHYhUWYy7qZgtWCtf4kNdkA6uo2XhgtZqNSaPhot7",
+      "slot": 501220673,
+      "status": "finalized"
+    }
+  ]
+}

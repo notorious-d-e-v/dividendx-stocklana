@@ -1,8 +1,8 @@
 # DividendX public-devnet runtime foundation
 
-This package prepares and serves the fixed real-calendar DividendX devnet registry. It creates three synthetic Token-2022 ScaledUiAmount assets for the existing 2027 annual program: `TestKOx` (8 decimals), `TestMU` (6), and `TestIBMon` (9). It does not deploy a program, change the existing Config, create a Raydium pool, publish issuer events, finalize a series, advance time, or claim live issuer support.
+This package prepares and serves the fixed real-calendar DividendX devnet registry. The registry now includes 15 synthetic Token-2022 ScaledUiAmount profiles across six companies and three issuer families. The original `bootstrap` creates the first three; `expand-catalog` adds the remaining twelve without changing existing mints or annual series. It does not deploy a program, change the existing Config, create a Raydium pool, publish issuer events, finalize a series, advance time, or claim live issuer support.
 
-The only HTTP data route is `GET /manifest`. `POST /faucet` returns a disabled response and `/advance` does not exist. Holder funding and observation refreshes are explicit operator commands. A public faucet needs durable quotas and rate limiting in a later reviewed slice.
+The only HTTP data route is `GET /manifest`. `POST /faucet` returns a disabled response and `/advance` does not exist. Holder funding and observation refreshes are explicit operator commands. The separate `hosted-devnet` package supplies the public faucet with durable quotas; this operator service does not bypass or replace it.
 
 The service itself binds HTTP for use behind the hosted platform's TLS terminator. Do not expose its port directly to the internet.
 
@@ -35,6 +35,29 @@ npm --prefix packages/devnet-runtime run bootstrap -- \
 ```
 
 The runner generates separate faucet, observation-attestor, and mint account signers in the private directory. It writes each submitted signature before confirmation, reconciles deterministic accounts and signature status before retry, simulates with signature verification, and refuses any transaction whose projected admin balance would exceed the aggregate 0.15 SOL bootstrap ceiling. Existing expected accounts are verified; conflicting accounts fail. The existing Config is only read and verified.
+
+## Additive 15-profile expansion
+
+Use the existing private state and explicitly pinned admin signer:
+
+```sh
+npm --prefix packages/devnet-runtime run expand-catalog -- \
+  --admin-signer /absolute/path/to/.local-tools/keys/dividendx-devnet-deployer-keypair.json \
+  --state-dir /absolute/path/to/.local-tools/dividendx-public-devnet-v1
+```
+
+The migration retains the original runtime, signer identities and transaction history. It records one immutable expansion balance baseline, enforces a separate **0.30 devnet SOL** cap, and resumes saved transaction bytes. It writes the complete 15-profile manifest only after onchain verification. A completed rerun verifies and returns that manifest; it does not recreate profiles or reset the budget. The original bootstrap cap remains 0.15 SOL.
+
+The holder proof uses its own wallet, funded with at most 0.12 devnet SOL plus a 10,000-lamport admin fee allowance. That wallet pays transaction fees and token-account rent; the faucet signs only as mint authority. The private journal prevents duplicate funding or minting on restart.
+
+```sh
+node scripts/devnet/verify-catalog.mjs \
+  --state-dir /absolute/path/to/.local-tools/dividendx-public-devnet-v1 \
+  --admin-signer /absolute/path/to/.local-tools/keys/dividendx-devnet-deployer-keypair.json \
+  --manifest /absolute/path/to/.local-tools/dividendx-public-devnet-v1/manifest.json
+```
+
+Public receipts are written to `packages/devnet-runtime/qa/`. Every profile must pass mint, split and paired recombination with exact holder, vault and claim-supply conservation. This proves synthetic devnet behavior, not issuer settlement or independent redemption before maturity.
 
 ## Read-only service and operator commands
 
