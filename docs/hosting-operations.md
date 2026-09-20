@@ -4,7 +4,7 @@ This runbook covers the production site at [dividendx.payai.network](https://div
 
 The governing boundaries are the [hosting release review](../planning/hosting-release-review.md), [hosted-session specification](../spec/hosted-sessions-v1.md), and [hosted-devnet specification](../spec/hosted-devnet-services-v1.md).
 
-The production `/demos/` route serves [guided tour v4](../planning/guided-tour-v4-review.md) with its matching schema-4 Sandbox snapshot. The [release review](../planning/guided-tour-v4-release.md) records acceptance, deployment and rollback details.
+Production `/` and `/demos/` serve [guided tour v4](../planning/guided-tour-v4-review.md) with its matching schema-4 Sandbox snapshot. The [20 September wallet/navigation release](../planning/wallet-release-2026-09-20.md) records current acceptance and rollback details; the [v4 release review](../planning/guided-tour-v4-release.md) preserves the runtime snapshot's original acceptance. Visible navigation is Public Devnet / Guided Demos; the wallet sandbox and legacy previews remain available by direct link.
 
 ## Production surfaces
 

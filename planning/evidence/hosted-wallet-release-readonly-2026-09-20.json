@@ -1,0 +1,63 @@
+{
+  "checkedAt": "2026-09-20T12:48:59.029038+00:00",
+  "commit": "35b1fd0124a86be1bc7324d39164c320e9183898",
+  "deployment": "https://dividendx-stocklana-a6b3diz7m-payai.vercel.app",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 1315,
+      "sha256": "f95b89c57ed36f986d649253f4683a2db47039c2d2d5f78ce3569ff882eff6a2"
+    },
+    {
+      "path": "/demos/",
+      "status": 200,
+      "bytes": 1315,
+      "sha256": "f95b89c57ed36f986d649253f4683a2db47039c2d2d5f78ce3569ff882eff6a2"
+    },
+    {
+      "path": "/app/",
+      "status": 200,
+      "bytes": 886,
+      "sha256": "d7823d808ebf0eb0fecf50f26edf727cec0a33b29d69f206e9cd25866bebe9b0"
+    },
+    {
+      "path": "/reference/",
+      "status": 200,
+      "bytes": 887,
+      "sha256": "3cbf104740dd433b7d3eb6b74e8d2c747262840d4f0b67437b6d72fcab319b19"
+    },
+    {
+      "path": "/sandbox/",
+      "status": 200,
+      "bytes": 1548,
+      "sha256": "25c94f9e5d642d16acff2713d2b75f5102422715df7d8483a8a4ea6b1269b5ff"
+    },
+    {
+      "path": "/rehearsal/",
+      "status": 200,
+      "bytes": 880,
+      "sha256": "46b6babceaa2c7b514a6b93c6e793d24502c7c5067476ae90c3a320fb49ca3e4"
+    },
+    {
+      "path": "/illustrations/stock-dividend-separation-v2.webp",
+      "status": 200,
+      "bytes": 70994,
+      "sha256": "2645cfafe6ebfc1244e3041a5703df1ed56f6e07aa92fdc208db92fbc0ff8de3"
+    }
+  ],
+  "manifest": {
+    "kind": "devnet",
+    "clockControl": false,
+    "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+    "assetCount": 15
+  },
+  "walletSession": {
+    "kind": "wallet",
+    "status": "none"
+  },
+  "guidedSession": {
+    "kind": "guided",
+    "status": "none"
+  }
+}

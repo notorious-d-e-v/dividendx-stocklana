@@ -1,5 +1,7 @@
 # Current status
 
+20 September release: [PR #4](https://github.com/notorious-d-e-v/dividendx-stocklana/pull/4) publishes the approved navigation, illustrated wallet and balances-first Market on the canonical domain. [Production acceptance](wallet-release-2026-09-20.md) passes the 40-transaction guided tour/restart, real devnet grant/split/recombine, routes and fifteen-profile manifest. The earlier local-review entries below are historical. Wrap-up now follows the [submission packet](hackathon-wrap-up-2026-09-20.md), [mainnet gaps](mainnet-readiness-2026-09-20.md) and [outreach shortlist](ecosystem-outreach-2026-09-20.md); no submission, outreach or mainnet launch has occurred.
+
 20 September Market simplification: [balances-first local review](wallet-market-balances-review-2026-09-20.md) removes the Market picker and selected-series panel. Supported holdings appear beneath the hero; empty wallets go straight to the company catalog. Split/Redeem controls remain intact. Verification is recorded in the linked review; no frontend release is included.
 
 20 September stock-modal follow-up: [local hero, funding modal and split-to-redeem review](wallet-stock-modal-review-2026-09-20.md) adds the brand illustration, company-color dots, balance-aware funding copy and smoother asset switching. An actual two-transaction devnet split/recombine returns the existing QA holder to its starting token balances without a faucet grant. Frontend changes remain local for visual approval.
@@ -25,11 +27,11 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Program | [Anchor program](../programs/dividendx/README.md) with Token-2022 custody, ordinary SPL PT/DR mints, immutable event revisions, staged exact settlement and independent redemption; the accepted ELF is deployed unchanged on devnet at `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE` |
 | Transaction SDK | [Separate package](../packages/transaction-sdk/README.md) with generated-IDL builders, coherent reads, raw-unit quotes and caller-supplied signing |
 | Program contract | [Frozen implementation contract](../spec/program-v1.md), [toolchain](../docs/program-toolchain.md) and [acceptance review](program-review.md) |
-| Product | Annual Market / Split / Redeem at `/`, with isolated 2027/2028 series and distinct collecting, year-ended and finalized states |
+| Product | Preserved annual Market / Split / Redeem at `/reference/`, with isolated 2027/2028 series and distinct collecting, year-ended and finalized states |
 | Wallet app | `/app/`: actual local wallet signing, custody, PT/DR transfers, recombination and independent redemption; [acceptance](wallet-review.md) |
 | Test runtime | Offline Surfpool with three decimal profiles, real compiled program, scoped faucet and four synthetic dividend records per annual series |
 | Public hosting | Canonical Vercel site accepted with real-calendar `/app/`, isolated 15-minute `/sandbox/` and separately isolated `/demos/`; devnet, both single-session journeys, two-visitor reset/isolation and natural expiry pass |
-| Persistent devnet | Three synthetic 2027 profiles, separate test authorities, finalized setup and public temporary-wallet grant/split/recombine proof; durable bounded hosted faucet enabled |
+| Persistent devnet | Fifteen synthetic 2027 profiles, separate test authorities, finalized setup and public temporary-wallet grant/split/recombine proof; durable bounded hosted faucet enabled |
 | Issuer readers | Typed observations across the selected 15 identities, exact source records, private snapshots and explicit data gaps; [acceptance](issuer-reader-review.md) |
 | Issuer qualification | Offline unsigned dossiers check identities, revisions, candidate dates and current mint evidence; every dossier retains unresolved settlement gates; [acceptance](issuer-qualification-review.md) |
 | Captured mint custody | Unchanged compiled program passes all 15 actual mint configurations locally with synthetic funding/events; [acceptance](issuer-custody-review.md) |

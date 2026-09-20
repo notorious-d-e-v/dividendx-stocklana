@@ -456,7 +456,10 @@ async function clickWalletAction(page, button, label) {
   const beforeReceipts = await walletReceipts(page);
   const beforeCaptured = await capturedSignatureSnapshot(page);
   await button.waitFor({ state: 'visible' });
-  assert(await button.isEnabled(), `${label} is disabled.`);
+  await poll(`${label} fresh quote`, async () => {
+    await failForVisibleAlert(page, label);
+    return button.isEnabled();
+  }, (enabled) => enabled, DOM_TIMEOUT_MS);
   await button.click(); // Never repeated after unknown completion.
   return finishWalletAction(page, label, beforeReceipts, beforeCaptured);
 }

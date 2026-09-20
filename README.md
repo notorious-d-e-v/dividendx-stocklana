@@ -8,12 +8,13 @@ The [three-part guided tour v4](spec/guided-tour-v4.md) is live at [dividendx.pa
 
 ## Current demo
 
+- **Hackathon status:** working synthetic-devnet and accelerated-sandbox prototype; **not ready for real assets or mainnet**. Issuer-approved custody, complete dividend-event/finality evidence, the qualified settlement writer, independent security review and production/legal operations remain open. See the [mainnet readiness gates](planning/mainnet-readiness-2026-09-20.md) and [submission packet](planning/hackathon-wrap-up-2026-09-20.md).
 - `/app/` is the wallet application: request test collateral, split into PT/DR, transfer either claim, recombine pairs, and redeem independently after annual finalization. On localhost it needs the local runtime below.
 - On the public site, `/app/` uses real-calendar devnet, `/sandbox/` provides accelerated synthetic dates and balances in an isolated temporary VM, and `/demos/` runs the three-part v4 guided journey in a separate isolated VM.
 - The v4 `/demos/` journey uses two disposable server-managed test wallets for 15 actions and 40 signed local transactions across two split/recombine chapters, quarterly dividend accrual, Raydium liquidity, a DR purchase, four synthetic dividend events and separate DR/PT redemption. It uses a captured Circle devnet USDC mint account with synthetic local balances and listens on port 4181.
-- `/` is the annual Market / Split / Redeem preview, with separate 2027 and 2028 series, cumulative allocation and distinct year-end/finalization states.
+- `/` opens Guided Demos. `/reference/` preserves the annual Market / Split / Redeem preview, with separate 2027 and 2028 series, cumulative allocation and distinct year-end/finalization states.
 - `/rehearsal/` preserves the original single-event two-account walkthrough.
-- The catalog contains 15 observed Solana stock-token candidates across xStocks, Backpack/Trek, and Ondo.
+- The catalog contains 15 observed Solana stock-token candidates across xStocks, Backpack/Trek, and Ondo, with 15 separate synthetic profiles provisioned on devnet. This is a selected scope, not the entire tokenized-stock market or live issuer support.
 - The isolated AMM CLI deposited 100 units of synthetic test stock into a 2027 series, created a DR/worthless-test-quote Raydium CPMM pool, added liquidity, swapped, withdrew every user-held LP token and recombined the recovered claims on public devnet. All assets are test-only and the seeded ratio is artificial.
 - Coca-Cola KOx and Backpack Micron MU supply historical dividend factors. The annual preview maps them to **synthetic term dates**: neither fixture includes a verified ex-date. One example is not a complete annual payout or a future forecast.
 - Ondo token profiles are present, but an authoritative dividend event fixture is still pending.
