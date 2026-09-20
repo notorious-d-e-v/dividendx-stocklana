@@ -1,0 +1,2382 @@
+{
+  "schemaVersion": 1,
+  "kind": "dividendx-hosted-browser-smoke",
+  "boundary": "real production pages and public test assets; no issuer custody or mainnet claim",
+  "startedAt": "2026-09-20T12:48:50.503Z",
+  "completedAt": "2026-09-20T12:49:58.355Z",
+  "targetOrigin": "https://dividendx.payai.network",
+  "requestedFlow": "guided",
+  "status": "pass",
+  "browser": "Chromium; temporary in-memory wallets only; installed wallets not used",
+  "stages": [
+    {
+      "at": "2026-09-20T12:48:50.839Z",
+      "name": "browser launched",
+      "flows": [
+        "guided"
+      ]
+    },
+    {
+      "at": "2026-09-20T12:48:50.843Z",
+      "name": "guided: create isolated visitor session"
+    },
+    {
+      "at": "2026-09-20T12:49:00.826Z",
+      "name": "guided: prepare selected test profile",
+      "sessionId": "d1341ada556c32318aac15f55811762b"
+    },
+    {
+      "at": "2026-09-20T12:49:03.830Z",
+      "name": "guided: core-split"
+    },
+    {
+      "at": "2026-09-20T12:49:06.989Z",
+      "name": "guided: core-recombine-partial"
+    },
+    {
+      "at": "2026-09-20T12:49:10.264Z",
+      "name": "guided: core-recombine-rest"
+    },
+    {
+      "at": "2026-09-20T12:49:14.283Z",
+      "name": "guided: dividend-split"
+    },
+    {
+      "at": "2026-09-20T12:49:15.037Z",
+      "name": "guided: dividend-quarter-one"
+    },
+    {
+      "at": "2026-09-20T12:49:18.296Z",
+      "name": "guided: dividend-quarter-two"
+    },
+    {
+      "at": "2026-09-20T12:49:18.965Z",
+      "name": "guided: dividend-recombine"
+    },
+    {
+      "at": "2026-09-20T12:49:24.647Z",
+      "name": "guided: create-pool"
+    },
+    {
+      "at": "2026-09-20T12:49:27.779Z",
+      "name": "guided: add-liquidity"
+    },
+    {
+      "at": "2026-09-20T12:49:30.882Z",
+      "name": "guided: buy-dr"
+    },
+    {
+      "at": "2026-09-20T12:49:34.199Z",
+      "name": "guided: remove-liquidity"
+    },
+    {
+      "at": "2026-09-20T12:49:37.200Z",
+      "name": "guided: recombine"
+    },
+    {
+      "at": "2026-09-20T12:49:40.260Z",
+      "name": "guided: settle-year"
+    },
+    {
+      "at": "2026-09-20T12:49:43.454Z",
+      "name": "guided: redeem-buyer"
+    },
+    {
+      "at": "2026-09-20T12:49:46.607Z",
+      "name": "guided: redeem-provider"
+    },
+    {
+      "at": "2026-09-20T12:49:51.522Z",
+      "name": "guided: restart the completed journey once"
+    },
+    {
+      "at": "2026-09-20T12:49:58.355Z",
+      "name": "all requested flows passed"
+    }
+  ],
+  "flows": {
+    "guided": {
+      "status": "pass",
+      "session": {
+        "schemaVersion": 1,
+        "kind": "guided",
+        "status": "ready",
+        "sessionId": "d1341ada556c32318aac15f55811762b",
+        "runtimeId": "522eeb7e-76ee-4cfb-943b-95300806dbb9",
+        "expiresAt": "2026-09-20T13:03:55.304Z",
+        "runtimeUrl": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b",
+        "error": null
+      },
+      "innerSessionId": "bb75bfba-24b2-4ce3-8644-6b16d4f0be81",
+      "finalState": {
+        "schemaVersion": 4,
+        "runtimeId": "522eeb7e-76ee-4cfb-943b-95300806dbb9",
+        "revision": 112,
+        "sessionId": "bb75bfba-24b2-4ce3-8644-6b16d4f0be81",
+        "asset": {
+          "id": "xstocks-test-kox",
+          "company": "Coca-Cola",
+          "symbol": "TestKOx",
+          "issuerLabel": "xStocks test profile",
+          "decimals": 8
+        },
+        "status": "complete",
+        "activeStep": null,
+        "nextStep": null,
+        "completedSteps": [
+          "core-split",
+          "core-recombine-partial",
+          "core-recombine-rest",
+          "dividend-split",
+          "dividend-quarter-one",
+          "dividend-quarter-two",
+          "dividend-recombine",
+          "create-pool",
+          "add-liquidity",
+          "buy-dr",
+          "remove-liquidity",
+          "recombine",
+          "settle-year",
+          "redeem-buyer",
+          "redeem-provider"
+        ],
+        "snapshot": {
+          "asset": {
+            "id": "xstocks-test-kox",
+            "company": "Coca-Cola",
+            "symbol": "TestKOx",
+            "issuerLabel": "xStocks test profile",
+            "decimals": 8
+          },
+          "observedAt": "2026-09-20T12:49:47.456Z",
+          "slot": 40517279086,
+          "unixTimestamp": "1830427200",
+          "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+          "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+          "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+          "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+          "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+          "year": 2027,
+          "phase": "finalized",
+          "eventCount": 4,
+          "stockDecimals": 8,
+          "claimDecimals": 8,
+          "quoteDecimals": 6,
+          "quoteAsset": {
+            "symbol": "USDC",
+            "provenance": "local-circle-devnet-clone",
+            "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+          },
+          "lpDecimals": 9,
+          "stockMultiplierBits": "4607362562785112228",
+          "provider": {
+            "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+            "stockRaw": "9979068584",
+            "ptRaw": "0",
+            "drRaw": "0",
+            "quoteRaw": "10999595",
+            "lpRaw": "0"
+          },
+          "buyer": {
+            "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+            "stockRaw": "20931330",
+            "ptRaw": "0",
+            "drRaw": "0",
+            "quoteRaw": "0",
+            "lpRaw": "0"
+          },
+          "mints": {
+            "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+            "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+            "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+            "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+            "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+          },
+          "pool": {
+            "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+            "drRaw": "2228",
+            "quoteRaw": "405",
+            "lockedLpRaw": "100"
+          },
+          "vaultRaw": "86",
+          "ptSupplyRaw": "0",
+          "drSupplyRaw": "2228",
+          "backingVerified": true,
+          "swap": {
+            "inputQuoteRaw": "1000000",
+            "outputDrRaw": "544214593",
+            "minimumDrRaw": "541493520"
+          }
+        },
+        "transactions": [
+          {
+            "step": "setup",
+            "name": "initialize_dividendx_config",
+            "signature": "vw9rkyUtcbsWFAijym4DKPukNoYZkKRhhQLWSatasRJzbybiHCuiZa2CxF8S5gEaDVUqLahEXZNESkda6d2TGsx",
+            "status": "confirmed",
+            "slot": 7427458064
+          },
+          {
+            "step": "setup",
+            "name": "fund_test_participants",
+            "signature": "5xhjgrCpn4mkLi99Ci6PUrdiuBQ3saotE7iXrA6KDs9VnpNMVZwrzDuffkbTqmcgNnzTNsjnb4SFdY1oLN45fZjz",
+            "status": "confirmed",
+            "slot": 7427458066
+          },
+          {
+            "step": "setup",
+            "name": "create_test_collateral_mint",
+            "signature": "3DDGFVYiuip5U25V3dNWcdq7WrnfVAippq1ePkuXPFnRmQyBFg4U9pDKC8hj2aWEHAusG4DVeDZyYqEKpQ2GqpYS",
+            "status": "confirmed",
+            "slot": 7427458067
+          },
+          {
+            "step": "setup",
+            "name": "register_test_asset",
+            "signature": "3SfqUKGdLfrWubCiFusxEznJk6v6FXjGh2GAUWTftowu6xsD9cTgEKYVUs5Gvj6UbuyuYzSx9NmvK3WF93hcwAao",
+            "status": "confirmed",
+            "slot": 7427458069
+          },
+          {
+            "step": "setup",
+            "name": "refresh_test_asset_observation_setup",
+            "signature": "4NUQEHYq7Php1MZSi3VwbU18Rxz8DRgRsuDspWJ9REfnYyVHka2xqqasB5zG23RtEf7hsVfXGzQ5SK574CqqAQcz",
+            "status": "confirmed",
+            "slot": 7427458071
+          },
+          {
+            "step": "setup",
+            "name": "create_2027_series",
+            "signature": "49MvPWqszENR8wHaSPKKSJp1nuohhKX61JHGb3HVmXfmEFMKP4ZAhhCbM2HiMEhVEQ89dRovxfRay2rZkuDAU6oZ",
+            "status": "confirmed",
+            "slot": 7427458072
+          },
+          {
+            "step": "setup",
+            "name": "create_provider_token_accounts",
+            "signature": "3T3WoBJnSd4kHj5s25nQzdNoWDtq82pZfyhy3vQofTcX4LKPvbp5zshkAEdT6gbKte2KARmpQo9E2sRh9rMhP8y",
+            "status": "confirmed",
+            "slot": 7427458074
+          },
+          {
+            "step": "setup",
+            "name": "create_buyer_token_accounts",
+            "signature": "26uanj9JQQym9KKSzF8yzeJ7zymj95tkhhUAZwkC9zBUjZ4N9VYqzdQnSVy51mQRfptPFy2B6jUapK9CXPkmR9gx",
+            "status": "confirmed",
+            "slot": 7427458076
+          },
+          {
+            "step": "setup",
+            "name": "mint_100_selected_test_stock",
+            "signature": "B6KsgURC7VvU26LFcQxe1XBgDhqpL4A8RJoBj6PAZUKf37RMYQMbSDpV7sxufyvWCE8byERr5uVDfcppBio5Xy5",
+            "status": "confirmed",
+            "slot": 7427458077
+          },
+          {
+            "step": "core-split",
+            "name": "split_100_test_stock",
+            "signature": "5d2X3xyPvbxqAEuXYCYe12iPoD8BNhAtcnuhhcKgvQLtM2T6UANxoct46Q2tnScReu4LUPUBA6w5DUhDxGo9fDbv",
+            "status": "confirmed",
+            "slot": 7427458105
+          },
+          {
+            "step": "core-recombine-partial",
+            "name": "recombine_40_pt_dr",
+            "signature": "5ffQ7Dqy5kBcSR2Sv9as1n8CQkyjcWrP6giJaGLyxktkfBmyoiN3TZw8bA94cKNhw7KZsH6VsndK3vufW5nRPQdK",
+            "status": "confirmed",
+            "slot": 7427458145
+          },
+          {
+            "step": "core-recombine-rest",
+            "name": "recombine_remaining_60_pt_dr",
+            "signature": "4DExTd6PT7tZfoeVMZGa5QwYaEJMoDHord8BXNAwEJYM3VcWSmRp9vqULaVZH7eqTXtUXfVUGg9s1N7qvnhgBtEq",
+            "status": "confirmed",
+            "slot": 7427458191
+          },
+          {
+            "step": "dividend-split",
+            "name": "split_100_test_stock_for_dividend",
+            "signature": "26G4aMdCDxnNYAgcvnSSMRNPFQVwsaYU7nxbAbTeTLYamkpPhcVgqZd2KZhJGFpXGrX6WTPmLe2Hwqub84pH3Fr4",
+            "status": "confirmed",
+            "slot": 7427458240
+          },
+          {
+            "step": "dividend-quarter-one",
+            "name": "update_test_multiplier_q1",
+            "signature": "65GwYXVss2Zio4rbQ1wiNxGFnhutT1Zw1NbZTdhCaaBYeHqnFHjYbnXPZBgULCtys8ePxrg1WSqTTR2T3XJDoefd",
+            "status": "confirmed",
+            "slot": 15203376806
+          },
+          {
+            "step": "dividend-quarter-one",
+            "name": "refresh_test_asset_observation_quarter-1",
+            "signature": "4camvCUcTHn4G4vzkHX2n7c1DT7Te7eA6caqZCgNy9QMsc5XcaqUugcpRrMbsB2313BStvgY1ne8mSvvsLhXCWRj",
+            "status": "confirmed",
+            "slot": 15203376807
+          },
+          {
+            "step": "dividend-quarter-one",
+            "name": "record_synthetic_dividend_q1",
+            "signature": "3ZEXRTEKSi12CwcEEmUFU8b2365CL6fYaynUtDsECUCSBMfNia59eBadnj6ARKJNXRFfWLnUh1RvkqtxHSSgpBux",
+            "status": "confirmed",
+            "slot": 15203376809
+          },
+          {
+            "step": "dividend-quarter-two",
+            "name": "update_test_multiplier_q2",
+            "signature": "26LhFCZCitNCA2r9o8grCwutawkJTSxTGRc5AYojrJ8wQRHNDBMYKzVjJ7pjSfv5HBF32a5mKqtrnK2t3UgdaytM",
+            "status": "confirmed",
+            "slot": 23152175961
+          },
+          {
+            "step": "dividend-quarter-two",
+            "name": "refresh_test_asset_observation_quarter-2",
+            "signature": "4SHSfusXcfeUHADbCB2AnmM2GUw8vRBv6tbU4q1zQU9rfC6Z165Ar322XvWZbjzwFi3EEoMrpK5sd8mMHr6eHe3n",
+            "status": "confirmed",
+            "slot": 23152175963
+          },
+          {
+            "step": "dividend-quarter-two",
+            "name": "record_synthetic_dividend_q2",
+            "signature": "5on4hEwqARvnC8pASg5PuUkUxyBN7BoGxBtwDyCbDLNorHHq36Fpt9JvefmMonorPdoVSCDpTFQ3P6fqGvmqVEon",
+            "status": "confirmed",
+            "slot": 23152175965
+          },
+          {
+            "step": "dividend-recombine",
+            "name": "recombine_40_pt_dr_after_two_dividends",
+            "signature": "2YdgMDF2QfP1ZvHhFWztpmHR4HgsEUAPdenCLSGUrwBNcuCcyfdJ2k36G2BnxQs2oZd1C3aL9FyA8VyNT5KaSux6",
+            "status": "confirmed",
+            "slot": 23152175987
+          },
+          {
+            "step": "create-pool",
+            "name": "create_cpmm_pool",
+            "signature": "PnAQzNoBmxFy8PC11ugc2DzrKQTcS1tBYqW3Z6Jqtj8ADe19DrZTx9q7DGWkZQ5L4oYHLL3JaiZCYxJ5cU9XzPs",
+            "status": "confirmed",
+            "slot": 23152176061
+          },
+          {
+            "step": "add-liquidity",
+            "name": "add_cpmm_liquidity",
+            "signature": "3o2NM6LBGfrhLjevP6tSBgRyByjgpqbWoQt9t8xS3d42X1zLsXvJFeKJXQejXj46EM5Nw9MExLkmsBLTswJwEYzw",
+            "status": "confirmed",
+            "slot": 23151746032
+          },
+          {
+            "step": "buy-dr",
+            "name": "buyer_swap_quote_for_dr",
+            "signature": "2Rq9JVUTc3mQrTkRbm5Tvs1tezsCJ19ALhrhbh5Dc7iZm68wZHCCEFUgd7gHNRxPngwz676kw4tMWE13QsEMPSy9",
+            "status": "confirmed",
+            "slot": 23151746072
+          },
+          {
+            "step": "remove-liquidity",
+            "name": "withdraw_all_provider_lp",
+            "signature": "2x6z3tXMaSacVeU7o8ZyyKc9ngZxtkc2rziWPqWSC49gr9y2MYkSQgk4kVFEgRVNjAvtae85JEVDwVumTi3Nq2tB",
+            "status": "confirmed",
+            "slot": 23151746118
+          },
+          {
+            "step": "recombine",
+            "name": "recombine_recovered_dr_with_pt",
+            "signature": "5T3wX94meo6QEiNYVfWZFRAmojd4MD9148zwBGoX2f9qQ3fhvqJp6X4w4BABsbu5U3VMBmbqC4E5e25gb7QzmMXP",
+            "status": "confirmed",
+            "slot": 23151746158
+          },
+          {
+            "step": "settle-year",
+            "name": "update_test_multiplier_q3",
+            "signature": "rcXN1R5cr5iojsT1sG7ahxqn4ujy4MDTtMbLZQZzvHDDU8npz8rMboxkYXFe9WYBwwXAWcivw7NkctMDyHRcsP9",
+            "status": "confirmed",
+            "slot": 31100541800
+          },
+          {
+            "step": "settle-year",
+            "name": "refresh_test_asset_observation_quarter-3",
+            "signature": "3gjVzVznbqXJrLwgxu4DhpJPWjQxVsSY5KDuaueZZqHuhwTYapCC4Q6DqMmT2Dp9kvd6bB13k2o2XvbYWhYigBvQ",
+            "status": "confirmed",
+            "slot": 31100541801
+          },
+          {
+            "step": "settle-year",
+            "name": "record_synthetic_dividend_q3",
+            "signature": "rXX4B2eSapBnW194riVAgT2At1BCdogeJpnBXzvtwF62RT8G59B2pjHQVkRufT18VvufwFZc5srh94ETnLBcVbh",
+            "status": "confirmed",
+            "slot": 31100541803
+          },
+          {
+            "step": "settle-year",
+            "name": "update_test_multiplier_q4",
+            "signature": "5BC9PFMJg8NYGprJXqkHW23nrwGQr7hNrohUn2qorUYNpC8dciYv1ZBfMtPcXyX1BamehqiHKLmF4Mw2QkcBS8Ft",
+            "status": "confirmed",
+            "slot": 38962511995
+          },
+          {
+            "step": "settle-year",
+            "name": "refresh_test_asset_observation_quarter-4",
+            "signature": "5mw9tErVBYgyQTuo4FHz4m8XVTraDtmLxd7ik6qqqobkYprPVKquvGFhcQC5oJB7MbEgUFLJR1huksSmGVQsxWwg",
+            "status": "confirmed",
+            "slot": 38962511997
+          },
+          {
+            "step": "settle-year",
+            "name": "record_synthetic_dividend_q4",
+            "signature": "359Cb722D3yyTMC4c4nTPw2cMeBtE1HqFCN1QP9gW8m7t3uSuQgMjJy5StALzTKnVJ6ePo26we2Edp9FuoJwu8e4",
+            "status": "confirmed",
+            "slot": 38962511998
+          },
+          {
+            "step": "settle-year",
+            "name": "refresh_test_asset_observation_end-year",
+            "signature": "4oFrqFJqeA4b8AYaQ9Txn9ArEYF6pSrea7Pd8ovWKzmCtzMetRcThEAgjwnc1NMMCT9DJVqaBLhx3nR4KTajAWHg",
+            "status": "confirmed",
+            "slot": 40517278995
+          },
+          {
+            "step": "settle-year",
+            "name": "begin_annual_finalization",
+            "signature": "UdgcoiP8C8iyDbVJd6i9bNQJEVZXQYDfK66Vy1Zo6rhpawUS4Yu9gCjPgxTpXKTr7bKLbF93PuVaLUcATXz32dQ",
+            "status": "confirmed",
+            "slot": 40517278997
+          },
+          {
+            "step": "settle-year",
+            "name": "accumulate_synthetic_dividend_q1",
+            "signature": "634yVkK8pE4eVZXdXbj4BeGXFnPxxbBEW82PfxJH39L7neuLgjDqbr2ZA663Vi5pimwjTFvbMqbwTUme5gBExbNR",
+            "status": "confirmed",
+            "slot": 40517278999
+          },
+          {
+            "step": "settle-year",
+            "name": "accumulate_synthetic_dividend_q2",
+            "signature": "3Zau2WmkPYMWcJ7LTNvHeiNC7AE1AhcdBrTnUwP4g7say5b5mzHZWM51BAyWBQVEFKPzGCTJpukpvy8cYEDgaNKZ",
+            "status": "confirmed",
+            "slot": 40517279000
+          },
+          {
+            "step": "settle-year",
+            "name": "accumulate_synthetic_dividend_q3",
+            "signature": "5fqydgpP3Se166yn12TkLrv6vH5XG6THjmML5LuBX3umJ5rSjTEPTJ9SbgMaM3ov9MHAzFq8u6dg6TtKQWKcjYqL",
+            "status": "confirmed",
+            "slot": 40517279001
+          },
+          {
+            "step": "settle-year",
+            "name": "accumulate_synthetic_dividend_q4",
+            "signature": "4dWPWaCUQzEiB1iGGTrZvrWRkfZgEF2F9qQbaEA9FmwWsSc55v63wnT8pedwMZVnC3iMScuFSAUAzkzBFP7ZG9Uv",
+            "status": "confirmed",
+            "slot": 40517279003
+          },
+          {
+            "step": "settle-year",
+            "name": "complete_annual_finalization",
+            "signature": "4UYL7m4AtnvotUigeSnZJMUCpku63GVC8U4DvWQe26be7Kj79f5sNbC42qB1nAJEzxL2kyUeZD7NvabrzXCtu1DT",
+            "status": "confirmed",
+            "slot": 40517279005
+          },
+          {
+            "step": "redeem-buyer",
+            "name": "buyer_redeem_purchased_dr",
+            "signature": "2WHynWt3ZWNUJ7zviH9XSV1jELSVPsvzfEhGr8BJoEzRtMQN39EGHg2x8CnZK4JtLdQjc61HCsHkXY8dPcxcg4Ab",
+            "status": "confirmed",
+            "slot": 40517279041
+          },
+          {
+            "step": "redeem-provider",
+            "name": "provider_redeem_remaining_pt",
+            "signature": "65fyZjYvQMppyh8vTWUVaqtWmF5CVvX7vcM7VXjRKQF5P13fQVT2RERXHkBqS9abMh8sVhbMqDFpCNzw1VnYM7gd",
+            "status": "confirmed",
+            "slot": 40517279084
+          }
+        ],
+        "error": null
+      },
+      "receipt": {
+        "schemaVersion": 4,
+        "asset": {
+          "id": "xstocks-test-kox",
+          "company": "Coca-Cola",
+          "symbol": "TestKOx",
+          "issuerLabel": "xStocks test profile",
+          "decimals": 8
+        },
+        "runtimeId": "522eeb7e-76ee-4cfb-943b-95300806dbb9",
+        "sessionId": "bb75bfba-24b2-4ce3-8644-6b16d4f0be81",
+        "boundary": "offline-local-circle-devnet-usdc-clone",
+        "capture": {
+          "sourceCluster": "devnet",
+          "sourceSlot": 499784549,
+          "raydiumProgramData": "3KvTa2fYhMxMZNfHho5oX34yLQLwRauoU2JScBkugvXF",
+          "raydiumDeploySlot": 498629438,
+          "raydiumElfSha256": "87ef84634086209fc2c29b4163bbe5209a1e9383aff5c429781f5fff270d75fd",
+          "dividendXElfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+          "configAccountSha256": "3b5ca2f3187261cc048e2353789242067c3aff19cab67168f86dbbd29d99f21c",
+          "feeAccountSha256": "c8c0238152ce9c374de300598a8513b59018396b39f603cdc2eba44bca357464",
+          "circleUsdc": {
+            "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+            "sourceCluster": "devnet",
+            "sourceGenesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+            "sourceSlot": 499830485,
+            "mint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+            "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "dataSha256": "3c8a2c7c49c355902bf2b2cb4b5bded7772a7971bb7e8168b0873d2f9d2b42b6",
+            "supplyRaw": "16286784303000596319",
+            "decimals": 6,
+            "mintAuthority": "GrNg1XM2ctzeE2mXxXCfhcTUbejM8Z4z4wNVTy2FjMEz",
+            "freezeAuthority": "CJtyoKSLrktozQzjERTiK3btQtiTK3nN4QrqGHLidyCT"
+          }
+        },
+        "localFunding": {
+          "method": "surfpool-set-account",
+          "providerRaw": "10000000",
+          "buyerRaw": "1000000",
+          "totalRaw": "11000000",
+          "publicFaucetTransfer": false
+        },
+        "identities": {
+          "programs": {
+            "dividendX": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+            "raydium": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+            "raydiumConfig": "5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy",
+            "raydiumFeeReceiver": "3oE58BKVt8KuYkGxx8zBojugnymWmBiyafWgMrnb6eYy"
+          },
+          "wallets": {
+            "provider": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+            "buyer": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ"
+          },
+          "mints": {
+            "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+            "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+            "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+            "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+            "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+          },
+          "dividendX": {
+            "assetPolicy": "A4PzupCwsfRm8h5FuC4oRi72tcD5y6tUJiHGHwC1LY9Y",
+            "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+            "accumulator": "9y3wWMpEuys3XyUyYhCcnp2mgePvCa511fyTXnvwDTnd",
+            "vault": "FtAY3xvCLXcpTemqYV849xgLzJFVmF8AF9EBXmFUtxAA"
+          },
+          "accounts": {
+            "providerStock": "BeSfxenhQdLcfyU6dyemFmBNo4hWQEctTwv125Xsw2Qv",
+            "providerPt": "D34Y2psmVs4riCD6mUVeKrLP1b359J72vJrrDcX4tpQp",
+            "providerDr": "9pYAWVDWeCWcqUKmtirvkjvpMm1bnZAwyAtKRRnKUsME",
+            "providerQuote": "CKbFMEBcGhZ5NCsqiFVu1mWg5kXpKkL3wzxP9KNQZmqE",
+            "providerLp": "ATujGd82yBZ7yhbwKyk175TGx3xNsqHMXwitwS5gBCkz",
+            "buyerStock": "42KjLvbELrhAQFvJ6mdqmWpaG6WGJYb2bo7KfwBfwkog",
+            "buyerPt": "7sqvgycKKw1xg2vEa4TR4RXjk2Dhi73r8UMKppF8k7f",
+            "buyerDr": "2UcmQp74LVqyP2RPtM7Bmxu8W5oDnjMtqTf2hj6rWVzH",
+            "buyerQuote": "5WwYQ1eTt3dTJkZPnwAs83FAudrdUqSU3NxsTVh96eWD",
+            "poolVaultA": "6Efup6RJAcUnEdyk64SkzGG3YdyRZsRRdxmtF3QKoxex",
+            "poolVaultB": "CFSTyrfYYqm1yb1Xky1SkR4vqLk5HoCjqz1fmKttMzYh",
+            "poolDrVault": "6Efup6RJAcUnEdyk64SkzGG3YdyRZsRRdxmtF3QKoxex",
+            "poolQuoteVault": "CFSTyrfYYqm1yb1Xky1SkR4vqLk5HoCjqz1fmKttMzYh"
+          },
+          "pool": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q"
+        },
+        "transactions": [
+          {
+            "step": "setup",
+            "name": "initialize_dividendx_config",
+            "signature": "vw9rkyUtcbsWFAijym4DKPukNoYZkKRhhQLWSatasRJzbybiHCuiZa2CxF8S5gEaDVUqLahEXZNESkda6d2TGsx",
+            "status": "confirmed",
+            "slot": 7427458064
+          },
+          {
+            "step": "setup",
+            "name": "fund_test_participants",
+            "signature": "5xhjgrCpn4mkLi99Ci6PUrdiuBQ3saotE7iXrA6KDs9VnpNMVZwrzDuffkbTqmcgNnzTNsjnb4SFdY1oLN45fZjz",
+            "status": "confirmed",
+            "slot": 7427458066
+          },
+          {
+            "step": "setup",
+            "name": "create_test_collateral_mint",
+            "signature": "3DDGFVYiuip5U25V3dNWcdq7WrnfVAippq1ePkuXPFnRmQyBFg4U9pDKC8hj2aWEHAusG4DVeDZyYqEKpQ2GqpYS",
+            "status": "confirmed",
+            "slot": 7427458067
+          },
+          {
+            "step": "setup",
+            "name": "register_test_asset",
+            "signature": "3SfqUKGdLfrWubCiFusxEznJk6v6FXjGh2GAUWTftowu6xsD9cTgEKYVUs5Gvj6UbuyuYzSx9NmvK3WF93hcwAao",
+            "status": "confirmed",
+            "slot": 7427458069
+          },
+          {
+            "step": "setup",
+            "name": "refresh_test_asset_observation_setup",
+            "signature": "4NUQEHYq7Php1MZSi3VwbU18Rxz8DRgRsuDspWJ9REfnYyVHka2xqqasB5zG23RtEf7hsVfXGzQ5SK574CqqAQcz",
+            "status": "confirmed",
+            "slot": 7427458071
+          },
+          {
+            "step": "setup",
+            "name": "create_2027_series",
+            "signature": "49MvPWqszENR8wHaSPKKSJp1nuohhKX61JHGb3HVmXfmEFMKP4ZAhhCbM2HiMEhVEQ89dRovxfRay2rZkuDAU6oZ",
+            "status": "confirmed",
+            "slot": 7427458072
+          },
+          {
+            "step": "setup",
+            "name": "create_provider_token_accounts",
+            "signature": "3T3WoBJnSd4kHj5s25nQzdNoWDtq82pZfyhy3vQofTcX4LKPvbp5zshkAEdT6gbKte2KARmpQo9E2sRh9rMhP8y",
+            "status": "confirmed",
+            "slot": 7427458074
+          },
+          {
+            "step": "setup",
+            "name": "create_buyer_token_accounts",
+            "signature": "26uanj9JQQym9KKSzF8yzeJ7zymj95tkhhUAZwkC9zBUjZ4N9VYqzdQnSVy51mQRfptPFy2B6jUapK9CXPkmR9gx",
+            "status": "confirmed",
+            "slot": 7427458076
+          },
+          {
+            "step": "setup",
+            "name": "mint_100_selected_test_stock",
+            "signature": "B6KsgURC7VvU26LFcQxe1XBgDhqpL4A8RJoBj6PAZUKf37RMYQMbSDpV7sxufyvWCE8byERr5uVDfcppBio5Xy5",
+            "status": "confirmed",
+            "slot": 7427458077
+          },
+          {
+            "step": "core-split",
+            "name": "split_100_test_stock",
+            "signature": "5d2X3xyPvbxqAEuXYCYe12iPoD8BNhAtcnuhhcKgvQLtM2T6UANxoct46Q2tnScReu4LUPUBA6w5DUhDxGo9fDbv",
+            "status": "confirmed",
+            "slot": 7427458105
+          },
+          {
+            "step": "core-recombine-partial",
+            "name": "recombine_40_pt_dr",
+            "signature": "5ffQ7Dqy5kBcSR2Sv9as1n8CQkyjcWrP6giJaGLyxktkfBmyoiN3TZw8bA94cKNhw7KZsH6VsndK3vufW5nRPQdK",
+            "status": "confirmed",
+            "slot": 7427458145
+          },
+          {
+            "step": "core-recombine-rest",
+            "name": "recombine_remaining_60_pt_dr",
+            "signature": "4DExTd6PT7tZfoeVMZGa5QwYaEJMoDHord8BXNAwEJYM3VcWSmRp9vqULaVZH7eqTXtUXfVUGg9s1N7qvnhgBtEq",
+            "status": "confirmed",
+            "slot": 7427458191
+          },
+          {
+            "step": "dividend-split",
+            "name": "split_100_test_stock_for_dividend",
+            "signature": "26G4aMdCDxnNYAgcvnSSMRNPFQVwsaYU7nxbAbTeTLYamkpPhcVgqZd2KZhJGFpXGrX6WTPmLe2Hwqub84pH3Fr4",
+            "status": "confirmed",
+            "slot": 7427458240
+          },
+          {
+            "step": "dividend-quarter-one",
+            "name": "update_test_multiplier_q1",
+            "signature": "65GwYXVss2Zio4rbQ1wiNxGFnhutT1Zw1NbZTdhCaaBYeHqnFHjYbnXPZBgULCtys8ePxrg1WSqTTR2T3XJDoefd",
+            "status": "confirmed",
+            "slot": 15203376806
+          },
+          {
+            "step": "dividend-quarter-one",
+            "name": "refresh_test_asset_observation_quarter-1",
+            "signature": "4camvCUcTHn4G4vzkHX2n7c1DT7Te7eA6caqZCgNy9QMsc5XcaqUugcpRrMbsB2313BStvgY1ne8mSvvsLhXCWRj",
+            "status": "confirmed",
+            "slot": 15203376807
+          },
+          {
+            "step": "dividend-quarter-one",
+            "name": "record_synthetic_dividend_q1",
+            "signature": "3ZEXRTEKSi12CwcEEmUFU8b2365CL6fYaynUtDsECUCSBMfNia59eBadnj6ARKJNXRFfWLnUh1RvkqtxHSSgpBux",
+            "status": "confirmed",
+            "slot": 15203376809
+          },
+          {
+            "step": "dividend-quarter-two",
+            "name": "update_test_multiplier_q2",
+            "signature": "26LhFCZCitNCA2r9o8grCwutawkJTSxTGRc5AYojrJ8wQRHNDBMYKzVjJ7pjSfv5HBF32a5mKqtrnK2t3UgdaytM",
+            "status": "confirmed",
+            "slot": 23152175961
+          },
+          {
+            "step": "dividend-quarter-two",
+            "name": "refresh_test_asset_observation_quarter-2",
+            "signature": "4SHSfusXcfeUHADbCB2AnmM2GUw8vRBv6tbU4q1zQU9rfC6Z165Ar322XvWZbjzwFi3EEoMrpK5sd8mMHr6eHe3n",
+            "status": "confirmed",
+            "slot": 23152175963
+          },
+          {
+            "step": "dividend-quarter-two",
+            "name": "record_synthetic_dividend_q2",
+            "signature": "5on4hEwqARvnC8pASg5PuUkUxyBN7BoGxBtwDyCbDLNorHHq36Fpt9JvefmMonorPdoVSCDpTFQ3P6fqGvmqVEon",
+            "status": "confirmed",
+            "slot": 23152175965
+          },
+          {
+            "step": "dividend-recombine",
+            "name": "recombine_40_pt_dr_after_two_dividends",
+            "signature": "2YdgMDF2QfP1ZvHhFWztpmHR4HgsEUAPdenCLSGUrwBNcuCcyfdJ2k36G2BnxQs2oZd1C3aL9FyA8VyNT5KaSux6",
+            "status": "confirmed",
+            "slot": 23152175987
+          },
+          {
+            "step": "create-pool",
+            "name": "create_cpmm_pool",
+            "signature": "PnAQzNoBmxFy8PC11ugc2DzrKQTcS1tBYqW3Z6Jqtj8ADe19DrZTx9q7DGWkZQ5L4oYHLL3JaiZCYxJ5cU9XzPs",
+            "status": "confirmed",
+            "slot": 23152176061
+          },
+          {
+            "step": "add-liquidity",
+            "name": "add_cpmm_liquidity",
+            "signature": "3o2NM6LBGfrhLjevP6tSBgRyByjgpqbWoQt9t8xS3d42X1zLsXvJFeKJXQejXj46EM5Nw9MExLkmsBLTswJwEYzw",
+            "status": "confirmed",
+            "slot": 23151746032
+          },
+          {
+            "step": "buy-dr",
+            "name": "buyer_swap_quote_for_dr",
+            "signature": "2Rq9JVUTc3mQrTkRbm5Tvs1tezsCJ19ALhrhbh5Dc7iZm68wZHCCEFUgd7gHNRxPngwz676kw4tMWE13QsEMPSy9",
+            "status": "confirmed",
+            "slot": 23151746072
+          },
+          {
+            "step": "remove-liquidity",
+            "name": "withdraw_all_provider_lp",
+            "signature": "2x6z3tXMaSacVeU7o8ZyyKc9ngZxtkc2rziWPqWSC49gr9y2MYkSQgk4kVFEgRVNjAvtae85JEVDwVumTi3Nq2tB",
+            "status": "confirmed",
+            "slot": 23151746118
+          },
+          {
+            "step": "recombine",
+            "name": "recombine_recovered_dr_with_pt",
+            "signature": "5T3wX94meo6QEiNYVfWZFRAmojd4MD9148zwBGoX2f9qQ3fhvqJp6X4w4BABsbu5U3VMBmbqC4E5e25gb7QzmMXP",
+            "status": "confirmed",
+            "slot": 23151746158
+          },
+          {
+            "step": "settle-year",
+            "name": "update_test_multiplier_q3",
+            "signature": "rcXN1R5cr5iojsT1sG7ahxqn4ujy4MDTtMbLZQZzvHDDU8npz8rMboxkYXFe9WYBwwXAWcivw7NkctMDyHRcsP9",
+            "status": "confirmed",
+            "slot": 31100541800
+          },
+          {
+            "step": "settle-year",
+            "name": "refresh_test_asset_observation_quarter-3",
+            "signature": "3gjVzVznbqXJrLwgxu4DhpJPWjQxVsSY5KDuaueZZqHuhwTYapCC4Q6DqMmT2Dp9kvd6bB13k2o2XvbYWhYigBvQ",
+            "status": "confirmed",
+            "slot": 31100541801
+          },
+          {
+            "step": "settle-year",
+            "name": "record_synthetic_dividend_q3",
+            "signature": "rXX4B2eSapBnW194riVAgT2At1BCdogeJpnBXzvtwF62RT8G59B2pjHQVkRufT18VvufwFZc5srh94ETnLBcVbh",
+            "status": "confirmed",
+            "slot": 31100541803
+          },
+          {
+            "step": "settle-year",
+            "name": "update_test_multiplier_q4",
+            "signature": "5BC9PFMJg8NYGprJXqkHW23nrwGQr7hNrohUn2qorUYNpC8dciYv1ZBfMtPcXyX1BamehqiHKLmF4Mw2QkcBS8Ft",
+            "status": "confirmed",
+            "slot": 38962511995
+          },
+          {
+            "step": "settle-year",
+            "name": "refresh_test_asset_observation_quarter-4",
+            "signature": "5mw9tErVBYgyQTuo4FHz4m8XVTraDtmLxd7ik6qqqobkYprPVKquvGFhcQC5oJB7MbEgUFLJR1huksSmGVQsxWwg",
+            "status": "confirmed",
+            "slot": 38962511997
+          },
+          {
+            "step": "settle-year",
+            "name": "record_synthetic_dividend_q4",
+            "signature": "359Cb722D3yyTMC4c4nTPw2cMeBtE1HqFCN1QP9gW8m7t3uSuQgMjJy5StALzTKnVJ6ePo26we2Edp9FuoJwu8e4",
+            "status": "confirmed",
+            "slot": 38962511998
+          },
+          {
+            "step": "settle-year",
+            "name": "refresh_test_asset_observation_end-year",
+            "signature": "4oFrqFJqeA4b8AYaQ9Txn9ArEYF6pSrea7Pd8ovWKzmCtzMetRcThEAgjwnc1NMMCT9DJVqaBLhx3nR4KTajAWHg",
+            "status": "confirmed",
+            "slot": 40517278995
+          },
+          {
+            "step": "settle-year",
+            "name": "begin_annual_finalization",
+            "signature": "UdgcoiP8C8iyDbVJd6i9bNQJEVZXQYDfK66Vy1Zo6rhpawUS4Yu9gCjPgxTpXKTr7bKLbF93PuVaLUcATXz32dQ",
+            "status": "confirmed",
+            "slot": 40517278997
+          },
+          {
+            "step": "settle-year",
+            "name": "accumulate_synthetic_dividend_q1",
+            "signature": "634yVkK8pE4eVZXdXbj4BeGXFnPxxbBEW82PfxJH39L7neuLgjDqbr2ZA663Vi5pimwjTFvbMqbwTUme5gBExbNR",
+            "status": "confirmed",
+            "slot": 40517278999
+          },
+          {
+            "step": "settle-year",
+            "name": "accumulate_synthetic_dividend_q2",
+            "signature": "3Zau2WmkPYMWcJ7LTNvHeiNC7AE1AhcdBrTnUwP4g7say5b5mzHZWM51BAyWBQVEFKPzGCTJpukpvy8cYEDgaNKZ",
+            "status": "confirmed",
+            "slot": 40517279000
+          },
+          {
+            "step": "settle-year",
+            "name": "accumulate_synthetic_dividend_q3",
+            "signature": "5fqydgpP3Se166yn12TkLrv6vH5XG6THjmML5LuBX3umJ5rSjTEPTJ9SbgMaM3ov9MHAzFq8u6dg6TtKQWKcjYqL",
+            "status": "confirmed",
+            "slot": 40517279001
+          },
+          {
+            "step": "settle-year",
+            "name": "accumulate_synthetic_dividend_q4",
+            "signature": "4dWPWaCUQzEiB1iGGTrZvrWRkfZgEF2F9qQbaEA9FmwWsSc55v63wnT8pedwMZVnC3iMScuFSAUAzkzBFP7ZG9Uv",
+            "status": "confirmed",
+            "slot": 40517279003
+          },
+          {
+            "step": "settle-year",
+            "name": "complete_annual_finalization",
+            "signature": "4UYL7m4AtnvotUigeSnZJMUCpku63GVC8U4DvWQe26be7Kj79f5sNbC42qB1nAJEzxL2kyUeZD7NvabrzXCtu1DT",
+            "status": "confirmed",
+            "slot": 40517279005
+          },
+          {
+            "step": "redeem-buyer",
+            "name": "buyer_redeem_purchased_dr",
+            "signature": "2WHynWt3ZWNUJ7zviH9XSV1jELSVPsvzfEhGr8BJoEzRtMQN39EGHg2x8CnZK4JtLdQjc61HCsHkXY8dPcxcg4Ab",
+            "status": "confirmed",
+            "slot": 40517279041
+          },
+          {
+            "step": "redeem-provider",
+            "name": "provider_redeem_remaining_pt",
+            "signature": "65fyZjYvQMppyh8vTWUVaqtWmF5CVvX7vcM7VXjRKQF5P13fQVT2RERXHkBqS9abMh8sVhbMqDFpCNzw1VnYM7gd",
+            "status": "confirmed",
+            "slot": 40517279084
+          }
+        ],
+        "checkpoints": [
+          {
+            "step": "setup",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:03.027Z",
+              "slot": 7427458079,
+              "unixTimestamp": "1797336000",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 0,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607182418800017408",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "10000000000",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "10000000",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": null
+              },
+              "pool": null,
+              "vaultRaw": "0",
+              "ptSupplyRaw": "0",
+              "drSupplyRaw": "0",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "core-split",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:05.008Z",
+              "slot": 7427458106,
+              "unixTimestamp": "1797336000",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 0,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607182418800017408",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "0",
+                "ptRaw": "10000000000",
+                "drRaw": "10000000000",
+                "quoteRaw": "10000000",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": null
+              },
+              "pool": null,
+              "vaultRaw": "10000000000",
+              "ptSupplyRaw": "10000000000",
+              "drSupplyRaw": "10000000000",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "core-recombine-partial",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:08.001Z",
+              "slot": 7427458147,
+              "unixTimestamp": "1797336000",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 0,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607182418800017408",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "4000000000",
+                "ptRaw": "6000000000",
+                "drRaw": "6000000000",
+                "quoteRaw": "10000000",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": null
+              },
+              "pool": null,
+              "vaultRaw": "6000000000",
+              "ptSupplyRaw": "6000000000",
+              "drSupplyRaw": "6000000000",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "core-recombine-rest",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:11.373Z",
+              "slot": 7427458193,
+              "unixTimestamp": "1797336000",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 0,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607182418800017408",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "10000000000",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "10000000",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": null
+              },
+              "pool": null,
+              "vaultRaw": "0",
+              "ptSupplyRaw": "0",
+              "drSupplyRaw": "0",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "dividend-split",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:14.949Z",
+              "slot": 7427458241,
+              "unixTimestamp": "1797336000",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 0,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607182418800017408",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "0",
+                "ptRaw": "10000000000",
+                "drRaw": "10000000000",
+                "quoteRaw": "10000000",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": null
+              },
+              "pool": null,
+              "vaultRaw": "10000000000",
+              "ptSupplyRaw": "10000000000",
+              "drSupplyRaw": "10000000000",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "dividend-quarter-one",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:16.349Z",
+              "slot": 15203376810,
+              "unixTimestamp": "1805112001",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 1,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607227454796291113",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "0",
+                "ptRaw": "10000000000",
+                "drRaw": "10000000000",
+                "quoteRaw": "10000000",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": null
+              },
+              "pool": null,
+              "vaultRaw": "10000000000",
+              "ptSupplyRaw": "10000000000",
+              "drSupplyRaw": "10000000000",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "dividend-quarter-two",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:19.036Z",
+              "slot": 23152175966,
+              "unixTimestamp": "1813060801",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 2,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607272490792564818",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "0",
+                "ptRaw": "10000000000",
+                "drRaw": "10000000000",
+                "quoteRaw": "10000000",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": null
+              },
+              "pool": null,
+              "vaultRaw": "10000000000",
+              "ptSupplyRaw": "10000000000",
+              "drSupplyRaw": "10000000000",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "dividend-recombine",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:20.682Z",
+              "slot": 23152175989,
+              "unixTimestamp": "1813060801",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 2,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607272490792564818",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "4000000000",
+                "ptRaw": "6000000000",
+                "drRaw": "6000000000",
+                "quoteRaw": "10000000",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": null
+              },
+              "pool": null,
+              "vaultRaw": "6000000000",
+              "ptSupplyRaw": "6000000000",
+              "drSupplyRaw": "6000000000",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "create-pool",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:26.187Z",
+              "slot": 1999,
+              "unixTimestamp": "1813060803",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 2,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607272490792564818",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "4000000000",
+                "ptRaw": "6000000000",
+                "drRaw": "3600000000",
+                "quoteRaw": "6000000",
+                "lpRaw": "97979489"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+              },
+              "pool": {
+                "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+                "drRaw": "2400000000",
+                "quoteRaw": "4000000",
+                "lockedLpRaw": "100"
+              },
+              "vaultRaw": "6000000000",
+              "ptSupplyRaw": "6000000000",
+              "drSupplyRaw": "6000000000",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "add-liquidity",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:28.671Z",
+              "slot": 23151746033,
+              "unixTimestamp": "1813060803",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 2,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607272490792564818",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "4000000000",
+                "ptRaw": "6000000000",
+                "drRaw": "12",
+                "quoteRaw": "0",
+                "lpRaw": "244948872"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "1000000",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+              },
+              "pool": {
+                "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+                "drRaw": "5999999988",
+                "quoteRaw": "10000000",
+                "lockedLpRaw": "100"
+              },
+              "vaultRaw": "6000000000",
+              "ptSupplyRaw": "6000000000",
+              "drSupplyRaw": "6000000000",
+              "backingVerified": true,
+              "swap": null
+            }
+          },
+          {
+            "step": "buy-dr",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:31.710Z",
+              "slot": 23151746074,
+              "unixTimestamp": "1813060803",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 2,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607272490792564818",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "4000000000",
+                "ptRaw": "6000000000",
+                "drRaw": "12",
+                "quoteRaw": "0",
+                "lpRaw": "244948872"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "544214593",
+                "quoteRaw": "0",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+              },
+              "pool": {
+                "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+                "drRaw": "5455785395",
+                "quoteRaw": "11000000",
+                "lockedLpRaw": "100"
+              },
+              "vaultRaw": "6000000000",
+              "ptSupplyRaw": "6000000000",
+              "drSupplyRaw": "6000000000",
+              "backingVerified": true,
+              "swap": {
+                "inputQuoteRaw": "1000000",
+                "outputDrRaw": "544214593",
+                "minimumDrRaw": "541493520"
+              }
+            }
+          },
+          {
+            "step": "remove-liquidity",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:35.124Z",
+              "slot": 23151746121,
+              "unixTimestamp": "1813060803",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 2,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607272490792564818",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "4000000000",
+                "ptRaw": "6000000000",
+                "drRaw": "5455783179",
+                "quoteRaw": "10999595",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "544214593",
+                "quoteRaw": "0",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+              },
+              "pool": {
+                "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+                "drRaw": "2228",
+                "quoteRaw": "405",
+                "lockedLpRaw": "100"
+              },
+              "vaultRaw": "6000000000",
+              "ptSupplyRaw": "6000000000",
+              "drSupplyRaw": "6000000000",
+              "backingVerified": true,
+              "swap": {
+                "inputQuoteRaw": "1000000",
+                "outputDrRaw": "544214593",
+                "minimumDrRaw": "541493520"
+              }
+            }
+          },
+          {
+            "step": "recombine",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:38.020Z",
+              "slot": 23151746160,
+              "unixTimestamp": "1813060803",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "open",
+              "eventCount": 2,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607272490792564818",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "9455783179",
+                "ptRaw": "544216821",
+                "drRaw": "0",
+                "quoteRaw": "10999595",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "544214593",
+                "quoteRaw": "0",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+              },
+              "pool": {
+                "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+                "drRaw": "2228",
+                "quoteRaw": "405",
+                "lockedLpRaw": "100"
+              },
+              "vaultRaw": "544216821",
+              "ptSupplyRaw": "544216821",
+              "drSupplyRaw": "544216821",
+              "backingVerified": true,
+              "swap": {
+                "inputQuoteRaw": "1000000",
+                "outputDrRaw": "544214593",
+                "minimumDrRaw": "541493520"
+              }
+            }
+          },
+          {
+            "step": "settle-year",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:41.636Z",
+              "slot": 40517279007,
+              "unixTimestamp": "1830427200",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "finalized",
+              "eventCount": 4,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607362562785112228",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "9455783179",
+                "ptRaw": "544216821",
+                "drRaw": "0",
+                "quoteRaw": "10999595",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "0",
+                "ptRaw": "0",
+                "drRaw": "544214593",
+                "quoteRaw": "0",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+              },
+              "pool": {
+                "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+                "drRaw": "2228",
+                "quoteRaw": "405",
+                "lockedLpRaw": "100"
+              },
+              "vaultRaw": "544216821",
+              "ptSupplyRaw": "544216821",
+              "drSupplyRaw": "544216821",
+              "backingVerified": true,
+              "swap": {
+                "inputQuoteRaw": "1000000",
+                "outputDrRaw": "544214593",
+                "minimumDrRaw": "541493520"
+              }
+            }
+          },
+          {
+            "step": "redeem-buyer",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:44.233Z",
+              "slot": 40517279042,
+              "unixTimestamp": "1830427200",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "finalized",
+              "eventCount": 4,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607362562785112228",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "9455783179",
+                "ptRaw": "544216821",
+                "drRaw": "0",
+                "quoteRaw": "10999595",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "20931330",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "0",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+              },
+              "pool": {
+                "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+                "drRaw": "2228",
+                "quoteRaw": "405",
+                "lockedLpRaw": "100"
+              },
+              "vaultRaw": "523285491",
+              "ptSupplyRaw": "544216821",
+              "drSupplyRaw": "2228",
+              "backingVerified": true,
+              "swap": {
+                "inputQuoteRaw": "1000000",
+                "outputDrRaw": "544214593",
+                "minimumDrRaw": "541493520"
+              }
+            }
+          },
+          {
+            "step": "redeem-provider",
+            "snapshot": {
+              "asset": {
+                "id": "xstocks-test-kox",
+                "company": "Coca-Cola",
+                "symbol": "TestKOx",
+                "issuerLabel": "xStocks test profile",
+                "decimals": 8
+              },
+              "observedAt": "2026-09-20T12:49:47.456Z",
+              "slot": 40517279086,
+              "unixTimestamp": "1830427200",
+              "genesisHash": "35sSrpRJQFdGy6xCAhaQF9XdF6ukCLyL1sYNQ72YdThQ",
+              "rpcUrl": "sandbox:d1341ada556c32318aac15f55811762b",
+              "dividendXProgram": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+              "raydiumProgram": "DRaycpLY18LhpbydsBWbVJtxpNv9oXPgjRSfpF2bWpYb",
+              "series": "85Xqx3kr1nY13do1DQPfLJKQCypg4Mod9ptzFKvhFxMq",
+              "year": 2027,
+              "phase": "finalized",
+              "eventCount": 4,
+              "stockDecimals": 8,
+              "claimDecimals": 8,
+              "quoteDecimals": 6,
+              "quoteAsset": {
+                "symbol": "USDC",
+                "provenance": "local-circle-devnet-clone",
+                "canonicalMint": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU"
+              },
+              "lpDecimals": 9,
+              "stockMultiplierBits": "4607362562785112228",
+              "provider": {
+                "address": "6GRDMKbLr6twZkYpwGTRfVPhYQB4AHdpCKUrZxNYidtj",
+                "stockRaw": "9979068584",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "10999595",
+                "lpRaw": "0"
+              },
+              "buyer": {
+                "address": "9EWjHWy4HX7YDGSYTqipKQvKbWNUrYB94GmapcJC5HFZ",
+                "stockRaw": "20931330",
+                "ptRaw": "0",
+                "drRaw": "0",
+                "quoteRaw": "0",
+                "lpRaw": "0"
+              },
+              "mints": {
+                "stock": "C1LobYnyDNsEsgeHcoFURRyh4YwvmKc8oGDz5bSuh1TN",
+                "pt": "DyWD3okRfv8UPAaNvJXueggEqQX3rpop3A13M7jYppfu",
+                "dr": "2kKFdWWDq7TT7c6LYpDL94wtNCTSu92jqM5WeAKdWSBT",
+                "quote": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+                "lp": "DhgTqhmxuWcZKKaNnnTLpeLBw68wPSTfnFuMWtiPu71r"
+              },
+              "pool": {
+                "address": "5p5iW7apfFgQvaH7TWTFnmDZP3EGyqNhAwa8zWgFcA5Q",
+                "drRaw": "2228",
+                "quoteRaw": "405",
+                "lockedLpRaw": "100"
+              },
+              "vaultRaw": "86",
+              "ptSupplyRaw": "0",
+              "drSupplyRaw": "2228",
+              "backingVerified": true,
+              "swap": {
+                "inputQuoteRaw": "1000000",
+                "outputDrRaw": "544214593",
+                "minimumDrRaw": "541493520"
+              }
+            }
+          }
+        ],
+        "failure": null,
+        "limits": [
+          "Local transactions using test assets and an accelerated test year.",
+          "Selected issuer name is a test profile; this session does not hold an issuer token or establish issuer qualification.",
+          "Raydium executes from captured genuine devnet bytecode; these signatures are not public devnet signatures.",
+          "Test USDC uses an exact Circle devnet mint clone with synthetic local balances, not faucet transfers or public USDC."
+        ]
+      },
+      "checkpoints": [
+        {
+          "step": "core-split",
+          "revision": 24,
+          "slot": 7427458106,
+          "transactions": 10
+        },
+        {
+          "step": "core-recombine-partial",
+          "revision": 28,
+          "slot": 7427458147,
+          "transactions": 11
+        },
+        {
+          "step": "core-recombine-rest",
+          "revision": 32,
+          "slot": 7427458193,
+          "transactions": 12
+        },
+        {
+          "step": "dividend-split",
+          "revision": 36,
+          "slot": 7427458241,
+          "transactions": 13
+        },
+        {
+          "step": "dividend-quarter-one",
+          "revision": 44,
+          "slot": 15203376810,
+          "transactions": 16
+        },
+        {
+          "step": "dividend-quarter-two",
+          "revision": 52,
+          "slot": 23152175966,
+          "transactions": 19
+        },
+        {
+          "step": "dividend-recombine",
+          "revision": 56,
+          "slot": 23152175989,
+          "transactions": 20
+        },
+        {
+          "step": "create-pool",
+          "revision": 60,
+          "slot": 1999,
+          "transactions": 21
+        },
+        {
+          "step": "add-liquidity",
+          "revision": 64,
+          "slot": 23151746033,
+          "transactions": 22
+        },
+        {
+          "step": "buy-dr",
+          "revision": 68,
+          "slot": 23151746074,
+          "transactions": 23
+        },
+        {
+          "step": "remove-liquidity",
+          "revision": 72,
+          "slot": 23151746121,
+          "transactions": 24
+        },
+        {
+          "step": "recombine",
+          "revision": 76,
+          "slot": 23151746160,
+          "transactions": 25
+        },
+        {
+          "step": "settle-year",
+          "revision": 104,
+          "slot": 40517279007,
+          "transactions": 38
+        },
+        {
+          "step": "redeem-buyer",
+          "revision": 108,
+          "slot": 40517279042,
+          "transactions": 39
+        },
+        {
+          "step": "redeem-provider",
+          "revision": 112,
+          "slot": 40517279086,
+          "transactions": 40
+        }
+      ],
+      "dividendStockDisplay": {
+        "raw": "4000000000",
+        "multiplierBits": "4607272490792564818",
+        "expected": 40.8,
+        "shown": "40.8",
+        "mobileShown": "40.8"
+      },
+      "mutationRequests": [
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/start",
+          "step": null,
+          "assetId": "xstocks-test-kox"
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "core-split",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "core-recombine-partial",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "core-recombine-rest",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "dividend-split",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "dividend-quarter-one",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "dividend-quarter-two",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "dividend-recombine",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "create-pool",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "add-liquidity",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "buy-dr",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "remove-liquidity",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "recombine",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "settle-year",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "redeem-buyer",
+          "assetId": null
+        },
+        {
+          "path": "/api/sandbox/guided/d1341ada556c32318aac15f55811762b/step",
+          "step": "redeem-provider",
+          "assetId": null
+        }
+      ],
+      "confirmationSource": "runtime receipts; guided RPC is private",
+      "receiptStatuses": [
+        {
+          "signature": "vw9rkyUtcbsWFAijym4DKPukNoYZkKRhhQLWSatasRJzbybiHCuiZa2CxF8S5gEaDVUqLahEXZNESkda6d2TGsx",
+          "status": "confirmed"
+        },
+        {
+          "signature": "5xhjgrCpn4mkLi99Ci6PUrdiuBQ3saotE7iXrA6KDs9VnpNMVZwrzDuffkbTqmcgNnzTNsjnb4SFdY1oLN45fZjz",
+          "status": "confirmed"
+        },
+        {
+          "signature": "3DDGFVYiuip5U25V3dNWcdq7WrnfVAippq1ePkuXPFnRmQyBFg4U9pDKC8hj2aWEHAusG4DVeDZyYqEKpQ2GqpYS",
+          "status": "confirmed"
+        },
+        {
+          "signature": "3SfqUKGdLfrWubCiFusxEznJk6v6FXjGh2GAUWTftowu6xsD9cTgEKYVUs5Gvj6UbuyuYzSx9NmvK3WF93hcwAao",
+          "status": "confirmed"
+        },
+        {
+          "signature": "4NUQEHYq7Php1MZSi3VwbU18Rxz8DRgRsuDspWJ9REfnYyVHka2xqqasB5zG23RtEf7hsVfXGzQ5SK574CqqAQcz",
+          "status": "confirmed"
+        },
+        {
+          "signature": "49MvPWqszENR8wHaSPKKSJp1nuohhKX61JHGb3HVmXfmEFMKP4ZAhhCbM2HiMEhVEQ89dRovxfRay2rZkuDAU6oZ",
+          "status": "confirmed"
+        },
+        {
+          "signature": "3T3WoBJnSd4kHj5s25nQzdNoWDtq82pZfyhy3vQofTcX4LKPvbp5zshkAEdT6gbKte2KARmpQo9E2sRh9rMhP8y",
+          "status": "confirmed"
+        },
+        {
+          "signature": "26uanj9JQQym9KKSzF8yzeJ7zymj95tkhhUAZwkC9zBUjZ4N9VYqzdQnSVy51mQRfptPFy2B6jUapK9CXPkmR9gx",
+          "status": "confirmed"
+        },
+        {
+          "signature": "B6KsgURC7VvU26LFcQxe1XBgDhqpL4A8RJoBj6PAZUKf37RMYQMbSDpV7sxufyvWCE8byERr5uVDfcppBio5Xy5",
+          "status": "confirmed"
+        },
+        {
+          "signature": "5d2X3xyPvbxqAEuXYCYe12iPoD8BNhAtcnuhhcKgvQLtM2T6UANxoct46Q2tnScReu4LUPUBA6w5DUhDxGo9fDbv",
+          "status": "confirmed"
+        },
+        {
+          "signature": "5ffQ7Dqy5kBcSR2Sv9as1n8CQkyjcWrP6giJaGLyxktkfBmyoiN3TZw8bA94cKNhw7KZsH6VsndK3vufW5nRPQdK",
+          "status": "confirmed"
+        },
+        {
+          "signature": "4DExTd6PT7tZfoeVMZGa5QwYaEJMoDHord8BXNAwEJYM3VcWSmRp9vqULaVZH7eqTXtUXfVUGg9s1N7qvnhgBtEq",
+          "status": "confirmed"
+        },
+        {
+          "signature": "26G4aMdCDxnNYAgcvnSSMRNPFQVwsaYU7nxbAbTeTLYamkpPhcVgqZd2KZhJGFpXGrX6WTPmLe2Hwqub84pH3Fr4",
+          "status": "confirmed"
+        },
+        {
+          "signature": "65GwYXVss2Zio4rbQ1wiNxGFnhutT1Zw1NbZTdhCaaBYeHqnFHjYbnXPZBgULCtys8ePxrg1WSqTTR2T3XJDoefd",
+          "status": "confirmed"
+        },
+        {
+          "signature": "4camvCUcTHn4G4vzkHX2n7c1DT7Te7eA6caqZCgNy9QMsc5XcaqUugcpRrMbsB2313BStvgY1ne8mSvvsLhXCWRj",
+          "status": "confirmed"
+        },
+        {
+          "signature": "3ZEXRTEKSi12CwcEEmUFU8b2365CL6fYaynUtDsECUCSBMfNia59eBadnj6ARKJNXRFfWLnUh1RvkqtxHSSgpBux",
+          "status": "confirmed"
+        },
+        {
+          "signature": "26LhFCZCitNCA2r9o8grCwutawkJTSxTGRc5AYojrJ8wQRHNDBMYKzVjJ7pjSfv5HBF32a5mKqtrnK2t3UgdaytM",
+          "status": "confirmed"
+        },
+        {
+          "signature": "4SHSfusXcfeUHADbCB2AnmM2GUw8vRBv6tbU4q1zQU9rfC6Z165Ar322XvWZbjzwFi3EEoMrpK5sd8mMHr6eHe3n",
+          "status": "confirmed"
+        },
+        {
+          "signature": "5on4hEwqARvnC8pASg5PuUkUxyBN7BoGxBtwDyCbDLNorHHq36Fpt9JvefmMonorPdoVSCDpTFQ3P6fqGvmqVEon",
+          "status": "confirmed"
+        },
+        {
+          "signature": "2YdgMDF2QfP1ZvHhFWztpmHR4HgsEUAPdenCLSGUrwBNcuCcyfdJ2k36G2BnxQs2oZd1C3aL9FyA8VyNT5KaSux6",
+          "status": "confirmed"
+        },
+        {
+          "signature": "PnAQzNoBmxFy8PC11ugc2DzrKQTcS1tBYqW3Z6Jqtj8ADe19DrZTx9q7DGWkZQ5L4oYHLL3JaiZCYxJ5cU9XzPs",
+          "status": "confirmed"
+        },
+        {
+          "signature": "3o2NM6LBGfrhLjevP6tSBgRyByjgpqbWoQt9t8xS3d42X1zLsXvJFeKJXQejXj46EM5Nw9MExLkmsBLTswJwEYzw",
+          "status": "confirmed"
+        },
+        {
+          "signature": "2Rq9JVUTc3mQrTkRbm5Tvs1tezsCJ19ALhrhbh5Dc7iZm68wZHCCEFUgd7gHNRxPngwz676kw4tMWE13QsEMPSy9",
+          "status": "confirmed"
+        },
+        {
+          "signature": "2x6z3tXMaSacVeU7o8ZyyKc9ngZxtkc2rziWPqWSC49gr9y2MYkSQgk4kVFEgRVNjAvtae85JEVDwVumTi3Nq2tB",
+          "status": "confirmed"
+        },
+        {
+          "signature": "5T3wX94meo6QEiNYVfWZFRAmojd4MD9148zwBGoX2f9qQ3fhvqJp6X4w4BABsbu5U3VMBmbqC4E5e25gb7QzmMXP",
+          "status": "confirmed"
+        },
+        {
+          "signature": "rcXN1R5cr5iojsT1sG7ahxqn4ujy4MDTtMbLZQZzvHDDU8npz8rMboxkYXFe9WYBwwXAWcivw7NkctMDyHRcsP9",
+          "status": "confirmed"
+        },
+        {
+          "signature": "3gjVzVznbqXJrLwgxu4DhpJPWjQxVsSY5KDuaueZZqHuhwTYapCC4Q6DqMmT2Dp9kvd6bB13k2o2XvbYWhYigBvQ",
+          "status": "confirmed"
+        },
+        {
+          "signature": "rXX4B2eSapBnW194riVAgT2At1BCdogeJpnBXzvtwF62RT8G59B2pjHQVkRufT18VvufwFZc5srh94ETnLBcVbh",
+          "status": "confirmed"
+        },
+        {
+          "signature": "5BC9PFMJg8NYGprJXqkHW23nrwGQr7hNrohUn2qorUYNpC8dciYv1ZBfMtPcXyX1BamehqiHKLmF4Mw2QkcBS8Ft",
+          "status": "confirmed"
+        },
+        {
+          "signature": "5mw9tErVBYgyQTuo4FHz4m8XVTraDtmLxd7ik6qqqobkYprPVKquvGFhcQC5oJB7MbEgUFLJR1huksSmGVQsxWwg",
+          "status": "confirmed"
+        },
+        {
+          "signature": "359Cb722D3yyTMC4c4nTPw2cMeBtE1HqFCN1QP9gW8m7t3uSuQgMjJy5StALzTKnVJ6ePo26we2Edp9FuoJwu8e4",
+          "status": "confirmed"
+        },
+        {
+          "signature": "4oFrqFJqeA4b8AYaQ9Txn9ArEYF6pSrea7Pd8ovWKzmCtzMetRcThEAgjwnc1NMMCT9DJVqaBLhx3nR4KTajAWHg",
+          "status": "confirmed"
+        },
+        {
+          "signature": "UdgcoiP8C8iyDbVJd6i9bNQJEVZXQYDfK66Vy1Zo6rhpawUS4Yu9gCjPgxTpXKTr7bKLbF93PuVaLUcATXz32dQ",
+          "status": "confirmed"
+        },
+        {
+          "signature": "634yVkK8pE4eVZXdXbj4BeGXFnPxxbBEW82PfxJH39L7neuLgjDqbr2ZA663Vi5pimwjTFvbMqbwTUme5gBExbNR",
+          "status": "confirmed"
+        },
+        {
+          "signature": "3Zau2WmkPYMWcJ7LTNvHeiNC7AE1AhcdBrTnUwP4g7say5b5mzHZWM51BAyWBQVEFKPzGCTJpukpvy8cYEDgaNKZ",
+          "status": "confirmed"
+        },
+        {
+          "signature": "5fqydgpP3Se166yn12TkLrv6vH5XG6THjmML5LuBX3umJ5rSjTEPTJ9SbgMaM3ov9MHAzFq8u6dg6TtKQWKcjYqL",
+          "status": "confirmed"
+        },
+        {
+          "signature": "4dWPWaCUQzEiB1iGGTrZvrWRkfZgEF2F9qQbaEA9FmwWsSc55v63wnT8pedwMZVnC3iMScuFSAUAzkzBFP7ZG9Uv",
+          "status": "confirmed"
+        },
+        {
+          "signature": "4UYL7m4AtnvotUigeSnZJMUCpku63GVC8U4DvWQe26be7Kj79f5sNbC42qB1nAJEzxL2kyUeZD7NvabrzXCtu1DT",
+          "status": "confirmed"
+        },
+        {
+          "signature": "2WHynWt3ZWNUJ7zviH9XSV1jELSVPsvzfEhGr8BJoEzRtMQN39EGHg2x8CnZK4JtLdQjc61HCsHkXY8dPcxcg4Ab",
+          "status": "confirmed"
+        },
+        {
+          "signature": "65fyZjYvQMppyh8vTWUVaqtWmF5CVvX7vcM7VXjRKQF5P13fQVT2RERXHkBqS9abMh8sVhbMqDFpCNzw1VnYM7gd",
+          "status": "confirmed"
+        }
+      ],
+      "layout": [
+        {
+          "width": 1440,
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "overflow": false
+        }
+      ],
+      "browserErrors": [],
+      "restart": {
+        "status": "pass",
+        "oldSessionId": "d1341ada556c32318aac15f55811762b",
+        "oldRuntimeId": "522eeb7e-76ee-4cfb-943b-95300806dbb9",
+        "replacementSession": {
+          "schemaVersion": 1,
+          "kind": "guided",
+          "status": "ready",
+          "sessionId": "61bd33de7b4636e7348641c06888b880",
+          "runtimeId": "1902595d-751e-4ec9-9cba-85d7c1689637",
+          "expiresAt": "2026-09-20T13:04:53.881Z",
+          "runtimeUrl": "/api/sandbox/guided/61bd33de7b4636e7348641c06888b880",
+          "error": null
+        },
+        "replacementState": {
+          "runtimeId": "1902595d-751e-4ec9-9cba-85d7c1689637",
+          "sessionId": null,
+          "revision": 0,
+          "status": "idle",
+          "completedSteps": []
+        },
+        "brokerResetRequests": [
+          {
+            "action": "reset",
+            "expectedSessionId": "d1341ada556c32318aac15f55811762b"
+          }
+        ],
+        "oldPathStatus": 410,
+        "coreHeadingFocused": true,
+        "coreTop": 24,
+        "innerMutationsAfterReset": 0,
+        "expectedOldSessionErrors": [
+          {
+            "at": "2026-09-20T12:49:52.816Z",
+            "type": "console",
+            "message": "Failed to load resource: the server responded with a status of 410 ()",
+            "url": "https://dividendx.payai.network/api/sandbox/guided/d1341ada556c32318aac15f55811762b/state"
+          },
+          {
+            "at": "2026-09-20T12:49:52.818Z",
+            "type": "http",
+            "status": 410,
+            "url": "https://dividendx.payai.network/api/sandbox/guided/d1341ada556c32318aac15f55811762b/state",
+            "message": "Sandbox session has expired."
+          }
+        ]
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "flow": "guided-dividend",
+      "width": 1440,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-wallet-release-guided-2026-09-20-guided-dividend-1440.png",
+      "overflow": false
+    },
+    {
+      "flow": "guided-dividend",
+      "width": 390,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-wallet-release-guided-2026-09-20-guided-dividend-390.png",
+      "overflow": false
+    },
+    {
+      "flow": "guided",
+      "width": 1440,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-wallet-release-guided-2026-09-20-guided-1440.png",
+      "overflow": false
+    },
+    {
+      "flow": "guided",
+      "width": 390,
+      "path": "/Users/node/workspace/dividendx-stocklana/planning/evidence/hosted-wallet-release-guided-2026-09-20-guided-390.png",
+      "overflow": false
+    }
+  ],
+  "failureArtifacts": [],
+  "browserErrors": [
+    {
+      "at": "2026-09-20T12:49:52.816Z",
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 410 ()",
+      "url": "https://dividendx.payai.network/api/sandbox/guided/d1341ada556c32318aac15f55811762b/state"
+    },
+    {
+      "at": "2026-09-20T12:49:52.818Z",
+      "type": "http",
+      "status": 410,
+      "url": "https://dividendx.payai.network/api/sandbox/guided/d1341ada556c32318aac15f55811762b/state",
+      "message": "Sandbox session has expired."
+    }
+  ],
+  "errors": [],
+  "limits": {
+    "sessionLifetime": "15 minutes hard limit",
+    "transactionWaitSeconds": 60,
+    "requestWaitSeconds": 90,
+    "mutationRetry": false,
+    "intentionalFaucetReplay": "One identical request after confirmation checks idempotence; no new grant is expected.",
+    "activeVmMaximumForAllFlow": 4,
+    "cleanup": "No hidden delete; isolation performs the one specified reset and other VMs hard-expire."
+  }
+}

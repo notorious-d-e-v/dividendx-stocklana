@@ -4,6 +4,8 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 
 ## Start here
 
+- [Hackathon submission packet](../planning/hackathon-wrap-up-2026-09-20.md), [mainnet readiness](../planning/mainnet-readiness-2026-09-20.md), and [ecosystem outreach](../planning/ecosystem-outreach-2026-09-20.md) — current deadline, draft entry, recording outline, known gaps and prioritized partner prospects; no submission or outreach sent.
+- [20 September wallet release](../planning/wallet-release-2026-09-20.md) — approved navigation and wallet publication, checks and rollback identity.
 - [Market balances review](../planning/wallet-market-balances-review-2026-09-20.md) — local landing page shows owned stock/PT/DR positions or goes directly to the company catalog; annual claims remain distinct.
 - [Stock modal and wallet-flow review](../planning/wallet-stock-modal-review-2026-09-20.md) — local illustration variant, company-color dots, balance-aware funding modal, stable asset switching and split-to-redeem nudge; faucet capacity audit and actual devnet round trip.
 - [Wallet and asset-discovery review](../planning/wallet-polish-review-2026-09-20.md) — local header wallet modal, concise Market hero, supported balances and devnet faucet access.
