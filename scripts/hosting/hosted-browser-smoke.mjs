@@ -462,11 +462,17 @@ async function clickWalletAction(page, button, label) {
 }
 async function displayedBalances(page) { return page.locator('.wallet-balances > div b').allTextContents(); }
 async function connectTemporaryWallet(page) {
+  await page.getByTestId('wallet-trigger').click();
   const button = page.getByTestId('temporary-wallet');
   await button.waitFor({ state: 'visible' });
   await button.click();
-  await page.locator('.wallet-connect code').waitFor({ state: 'visible' });
-  return (await page.locator('.wallet-connect code').textContent()).trim();
+  await page.getByRole('dialog').waitFor({ state: 'hidden' });
+  await page.getByTestId('wallet-trigger').click();
+  const address = page.locator('.wallet-connected-address code');
+  await address.waitFor({ state: 'visible' });
+  const wallet = (await address.textContent()).trim();
+  await page.getByRole('button', { name: 'Close wallet dialog', exact: true }).click();
+  return wallet;
 }
 async function verifySignatures(context, rpcUrl, signatures) {
   const statuses = [];
@@ -520,6 +526,7 @@ async function runSandbox() {
     await persist();
     const asset = manifest.assets.find((item) => item.symbol === 'TestKOx') ?? manifest.assets[0];
     const actions = [];
+    await page.getByRole('button', { name: 'Split', exact: true }).click();
     await page.locator('.wallet-selector select').first().selectOption(asset.id);
     const wallet = await connectTemporaryWallet(page);
     await stage('sandbox: fund temporary wallet once', { sessionId: session.sessionId });
@@ -532,7 +539,7 @@ async function runSandbox() {
     await page.getByText('Network-wide test dates', { exact: true }).click();
     for (const name of ['start year', 'record dividends', 'end year', 'finalize']) {
       actions.push(await clickWalletAction(page, page.getByRole('button', { name, exact: true }), `sandbox ${name}`));
-      if (name === 'record dividends') assert.match(await page.getByRole('status').textContent(), /four|4/i);
+      if (name === 'record dividends') assert.match(await page.locator('.p-success[role="status"]').textContent(), /four|4/i);
     }
     assert.equal((await page.locator('.wallet-phase').textContent()).trim(), 'Ready to redeem');
     await page.getByRole('button', { name: 'Redeem', exact: true }).click();
@@ -837,6 +844,7 @@ async function runDevnet() {
     assert.equal(await page.getByText('Network-wide test dates', { exact: true }).count(), 0);
     const asset = manifest.assets.find((item) => item.symbol === 'TestKOx') ?? manifest.assets[0];
     const actions = [];
+    await page.getByRole('button', { name: 'Split', exact: true }).click();
     await page.locator('.wallet-selector select').first().selectOption(asset.id);
     const wallet = await connectTemporaryWallet(page);
     await stage('devnet: request the bounded ten-token grant once');
@@ -871,7 +879,7 @@ async function runDevnet() {
     }, undefined, { timeout: DOM_TIMEOUT_MS });
     const receipts = await walletReceipts(page);
     assert(receipts.length >= 2);
-    assert(receipts.every((item) => item.explorer?.startsWith('https://explorer.solana.com/tx/')), 'Every public devnet receipt must link to Explorer.');
+    assert(receipts.every((item) => item.explorer?.startsWith('https://solscan.io/tx/') && new URL(item.explorer).searchParams.get('cluster') === 'devnet'), 'Every public devnet receipt must link to Explorer.');
     const signatures = [...new Set(actions.flatMap((action) => action.signatures))];
     const rpcStatuses = await verifySignatures(context, manifest.rpcUrl, signatures);
     const balances = await displayedBalances(page);
