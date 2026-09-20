@@ -9,14 +9,16 @@ import { Keypair, SystemProgram, Transaction, type Connection } from '@solana/we
 import {
   DIVIDENDX_IDL, DIVIDENDX_PROGRAM_ID as SDK_PROGRAM_ID, DividendXInstructions,
 } from '@dividendx/transaction-sdk';
-import { assertSeparatedAuthorities, toSdkPublicKey } from '../src/bootstrap.js';
+import { assertCatalogExpansionState, assertSeparatedAuthorities, toSdkPublicKey } from '../src/bootstrap.js';
 import { boundedFetch, parseDevnetRpcUrl } from '../src/config.js';
 import {
   ACCEPTED_ELF_SHA256, ADMIN_ID, DEPLOYMENT_DOMAIN_HEX, DEVNET_GENESIS_HASH, HOLDER_SOL_CAP_LAMPORTS,
-  HOLDER_TOKEN_CAP_UI, MAINNET_GENESIS_HASH, PROGRAM_ID, PROFILES,
+  HOLDER_TOKEN_CAP_UI, LEGACY_PROFILES, MAINNET_GENESIS_HASH, MAX_CATALOG_EXPANSION_SPEND_LAMPORTS,
+  NEW_PROFILES, PROGRAM_ID, PROFILES,
 } from '../src/constants.js';
 import { verifyDevnetEnvironment } from '../src/environment.js';
 import { assertProductionManifestRedacted, parseRegistryManifest } from '../src/manifest.js';
+import { loadOrCreateStateSigner } from '../src/private-state.js';
 import { routeManifestRequest } from '../src/service.js';
 import { assertBootstrapBudget, executeResumableStep, persistedStepConfirmed } from '../src/transactions.js';
 import type { PrivateRuntimeState, RegistryManifest } from '../src/types.js';
@@ -82,6 +84,14 @@ test('mainnet is rejected before any program or config account read', async () =
 test('registry rejects stale identities and keeps the exact public schema redacted', () => {
   const current = manifest();
   assert.equal(parseRegistryManifest(current).assets[0]!.symbol, 'TestKOx');
+  const legacy = { ...current, assets: current.assets.slice(0, LEGACY_PROFILES.length) };
+  assert.equal(parseRegistryManifest(legacy).assets.length, 3);
+  assert.equal(parseRegistryManifest(current).assets.length, 15);
+  assert.throws(() => parseRegistryManifest({ ...current, assets: current.assets.slice(0, 14) }), /MANIFEST_ASSETS_INVALID/);
+  assert.throws(() => parseRegistryManifest({ ...current,
+    assets: [current.assets[1], current.assets[0], ...current.assets.slice(2)] }), /MANIFEST_ASSETS_INVALID/);
+  assert.throws(() => parseRegistryManifest({ ...legacy,
+    assets: [legacy.assets[0], legacy.assets[0], legacy.assets[2]] }), /MANIFEST_ASSETS_INVALID/);
   assert.throws(() => parseRegistryManifest({ ...current, genesisHash: 'stale' }), /MANIFEST_IDENTITY_INVALID/);
   assert.doesNotThrow(() => assertProductionManifestRedacted(current));
   assert.throws(() => assertProductionManifestRedacted({ ...current, stateDir: '/Users/example/.local-tools' } as never));
@@ -113,6 +123,64 @@ test('bootstrap spend guard enforces the 0.15 SOL aggregate ceiling', () => {
   assert.doesNotThrow(() => assertBootstrapBudget(1_000_000_000n, 850_000_000n));
   assert.throws(() => assertBootstrapBudget(1_000_000_000n, 849_999_999n), /BOOTSTRAP_BUDGET_EXCEEDED/);
   assert.throws(() => assertBootstrapBudget(1n, 2n), /BOOTSTRAP_BUDGET_EXCEEDED/);
+});
+
+test('catalog expansion has distinct profiles and a separately bounded spend baseline', () => {
+  assert.equal(LEGACY_PROFILES.length, 3);
+  assert.equal(NEW_PROFILES.length, 12);
+  assert.equal(new Set(PROFILES.map(({ id }) => id)).size, 15);
+  assert.equal(new Set(PROFILES.map(({ symbol }) => symbol)).size, 15);
+  assert.doesNotThrow(() => assertBootstrapBudget(1_000_000_000n, 700_000_000n,
+    MAX_CATALOG_EXPANSION_SPEND_LAMPORTS));
+  assert.throws(() => assertBootstrapBudget(1_000_000_000n, 699_999_999n,
+    MAX_CATALOG_EXPANSION_SPEND_LAMPORTS), /BOOTSTRAP_BUDGET_EXCEEDED/);
+});
+
+test('catalog expansion state preserves original identities and never rebaselines on resume', () => {
+  const rpcUrl = 'https://api.devnet.solana.com';
+  const legacyKeys = { faucet: 'faucet-old', attestor: 'attestor-old',
+    'mint-kox': 'mint-kox-old', 'mint-mu': 'mint-mu-old', 'mint-ibm': 'mint-ibm-old' };
+  const expandedKeys = { ...legacyKeys, 'mint-xstocks-aapl': 'mint-aapl-new' };
+  const state: PrivateRuntimeState = {
+    schema: 'dividendx-devnet-private-state-v1', runtimeId: 'existing-runtime', rpcUrl,
+    genesisHash: DEVNET_GENESIS_HASH, programId: PROGRAM_ID.toBase58(), deploymentDomainHex: DEPLOYMENT_DOMAIN_HEX,
+    initialAdminLamports: '4000000000', publicKeys: { ...legacyKeys }, steps: {},
+  };
+  assert.equal(assertCatalogExpansionState(state, rpcUrl, legacyKeys, expandedKeys), 'begin');
+  state.publicKeys = expandedKeys;
+  state.catalogExpansion = { initialAdminLamports: '3816010520', maxSpendLamports: '300000000' };
+  assert.equal(assertCatalogExpansionState(state, rpcUrl, legacyKeys, expandedKeys), 'resume');
+  assert.equal(state.initialAdminLamports, '4000000000');
+  assert.equal(state.catalogExpansion.initialAdminLamports, '3816010520');
+  assert.deepEqual(Object.fromEntries(Object.entries(state.publicKeys).filter(([name]) => name in legacyKeys)), legacyKeys);
+  assert.throws(() => assertCatalogExpansionState({ ...state, publicKeys: { ...expandedKeys, 'mint-kox': 'changed' } },
+    rpcUrl, legacyKeys, expandedKeys), /STATE_SIGNERS_MISMATCH/);
+  assert.throws(() => assertCatalogExpansionState({ ...state,
+    catalogExpansion: { ...state.catalogExpansion!, initialAdminLamports: '3816010521' },
+    publicKeys: { ...expandedKeys, unknown: 'key' } }, rpcUrl, legacyKeys, expandedKeys), /STATE_SIGNERS_MISMATCH/);
+  assert.throws(() => assertCatalogExpansionState({ ...state,
+    catalogExpansion: { ...state.catalogExpansion!, maxSpendLamports: '1' as '300000000' } },
+    rpcUrl, legacyKeys, expandedKeys), /EXPANSION_BUDGET_INVALID/);
+});
+
+test('new mint signer names do not replace existing private signers', async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), 'devnet-runtime-signers-'));
+  await chmod(directory, 0o700);
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const legacy = await Promise.all(['mint-kox', 'mint-mu', 'mint-ibm'].map((name) =>
+    loadOrCreateStateSigner(directory, name)));
+  const before = await Promise.all(['mint-kox', 'mint-mu', 'mint-ibm'].map((name) =>
+    readFile(join(directory, `${name}.json`), 'utf8')));
+  const names = NEW_PROFILES.map((profile) => `mint-${profile.id.replace('-test-', '-')}`);
+  assert.equal(new Set(names).size, 12);
+  assert.equal(names.some((name) => ['mint-kox', 'mint-mu', 'mint-ibm'].includes(name)), false);
+  await Promise.all(names.map((name) => loadOrCreateStateSigner(directory, name)));
+  const reread = await Promise.all(['mint-kox', 'mint-mu', 'mint-ibm'].map((name) =>
+    loadOrCreateStateSigner(directory, name)));
+  assert.deepEqual(reread.map((signer) => signer.publicKey.toBase58()),
+    legacy.map((signer) => signer.publicKey.toBase58()));
+  assert.deepEqual(await Promise.all(['mint-kox', 'mint-mu', 'mint-ibm'].map((name) =>
+    readFile(join(directory, `${name}.json`), 'utf8'))), before);
 });
 
 test('CLI holder funding has fixed reviewed token and SOL caps', () => {

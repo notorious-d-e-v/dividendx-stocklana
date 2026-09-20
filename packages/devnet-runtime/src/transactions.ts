@@ -29,11 +29,13 @@ export interface StepContext {
   state: PrivateRuntimeState;
   statePath: string;
   adminAddress: string;
+  budget?: { initialLamports: bigint; maxSpendLamports: bigint };
 }
 
-export function assertBootstrapBudget(initialLamports: bigint, projectedLamports: bigint): void {
+export function assertBootstrapBudget(initialLamports: bigint, projectedLamports: bigint,
+  maxSpendLamports = MAX_BOOTSTRAP_SPEND_LAMPORTS): void {
   invariant(initialLamports >= projectedLamports
-    && initialLamports - projectedLamports <= MAX_BOOTSTRAP_SPEND_LAMPORTS, 'BOOTSTRAP_BUDGET_EXCEEDED');
+    && initialLamports - projectedLamports <= maxSpendLamports, 'BOOTSTRAP_BUDGET_EXCEEDED');
 }
 
 export async function persistedStepConfirmed(context: StepContext, name: string): Promise<boolean> {
@@ -120,9 +122,9 @@ export async function executeResumableStep(
     `${name}: ${JSON.stringify(simulation.value.err)}; ${(simulation.value.logs ?? []).slice(-10).join(' | ')}`);
   const projectedAdmin = simulation.value.accounts?.[0]?.lamports;
   invariant(typeof projectedAdmin === 'number' && Number.isSafeInteger(projectedAdmin), 'BUDGET_SIMULATION_MISSING');
-  const initial = BigInt(context.state.initialAdminLamports ?? '-1');
+  const initial = context.budget?.initialLamports ?? BigInt(context.state.initialAdminLamports ?? '-1');
   invariant(initial >= 0n, 'BOOTSTRAP_BUDGET_MISSING');
-  assertBootstrapBudget(initial, BigInt(projectedAdmin));
+  assertBootstrapBudget(initial, BigInt(projectedAdmin), context.budget?.maxSpendLamports);
 
   const raw = signed.serialize();
   const signature = base58Encode(signed.signatures[0]!);

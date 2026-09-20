@@ -2,7 +2,7 @@
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ADMIN_ID } from './constants.js';
-import { bootstrapDevnet } from './bootstrap.js';
+import { bootstrapDevnet, expandDevnetCatalog } from './bootstrap.js';
 import { connectionForRpc, parseDevnetRpcUrl } from './config.js';
 import { safeError, invariant } from './errors.js';
 import { verifyDevnetEnvironment } from './environment.js';
@@ -13,7 +13,8 @@ import { createManifestServer, listen } from './service.js';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const repositoryRoot = resolve(packageRoot, '../..');
-const commands = new Set(['preflight', 'bootstrap', 'serve', 'fund-holder', 'refresh-test-observations', 'smoke-holder']);
+const commands = new Set(['preflight', 'bootstrap', 'expand-catalog', 'serve', 'fund-holder',
+  'refresh-test-observations', 'smoke-holder']);
 
 function parseArgs(args: string[]): { command: string; flags: Map<string, string> } {
   const [command, ...rest] = args;
@@ -46,11 +47,14 @@ async function main(): Promise<void> {
     output(await verifyDevnetEnvironment(connectionForRpc(rpcUrl)));
     return;
   }
-  if (command === 'bootstrap') {
+  if (command === 'bootstrap' || command === 'expand-catalog') {
     const rpcUrl = parseDevnetRpcUrl(flags.get('rpc-url'));
     const stateDirectory = await ensurePrivateStateDirectory(resolve(required(flags, 'state-dir')), repositoryRoot);
     const admin = await loadExplicitSigner(resolve(required(flags, 'admin-signer')), ADMIN_ID.toBase58());
-    const manifest = await bootstrapDevnet(connectionForRpc(rpcUrl), rpcUrl, stateDirectory, admin);
+    const connection = connectionForRpc(rpcUrl);
+    const manifest = command === 'bootstrap'
+      ? await bootstrapDevnet(connection, rpcUrl, stateDirectory, admin)
+      : await expandDevnetCatalog(connection, rpcUrl, stateDirectory, admin);
     output({ ok: true, runtimeId: manifest.runtimeId, manifest: join(stateDirectory, 'manifest.json'),
       assets: manifest.assets.map(({ id, symbol }) => ({ id, symbol })) });
     return;

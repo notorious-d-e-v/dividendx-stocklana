@@ -62,15 +62,16 @@ test('an already-aborted caller signal does not start an RPC request', async () 
   assert.equal(called, false);
 });
 
-test('shared scheduler spaces starts and the 100-request pacing budget is below the cron limit', async () => {
+test('shared scheduler spaces starts and a 300-request pacing budget is below the cron limit', async () => {
   const starts: number[] = [];
   const scheduler = new RpcStartScheduler(20);
   const rpcFetch = boundedRpcFetch(500, (async () => { starts.push(Date.now()); return Response.json({}); }) as typeof fetch, scheduler);
   await Promise.all(Array.from({ length: 4 }, () => rpcFetch('https://rpc.example.test')));
   assert.equal(starts.length, 4);
   for (let index = 1; index < starts.length; index += 1) assert.ok(starts[index]! - starts[index - 1]! >= 15);
-  assert.equal(99 * RPC_MIN_START_INTERVAL_MS, 39_600);
-  assert.ok(99 * RPC_MIN_START_INTERVAL_MS < 60_000);
+  const pacedStarts = 300;
+  assert.equal((pacedStarts - 1) * RPC_MIN_START_INTERVAL_MS, 119_600);
+  assert.ok((pacedStarts - 1) * RPC_MIN_START_INTERVAL_MS < 300_000);
 });
 
 test('queued RPC work observes cancellation and its original deadline', async () => {

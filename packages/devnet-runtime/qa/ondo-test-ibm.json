@@ -1,0 +1,39 @@
+{
+  "schema": "dividendx-devnet-catalog-holder-proof-v1",
+  "boundary": "synthetic-public-devnet",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "programId": "2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE",
+  "elfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+  "holder": "AzXyVUoCkyahCejBUVEoV4pcc8d5cLCnT62DEyacLaj6",
+  "assetId": "ondo-test-ibm",
+  "symbol": "TestIBMon",
+  "collateralMint": "AgFBbj61rpJ4uYAzmxJr4yBc7sAZ4hoiwMJim7LSrvm3",
+  "series": "4UtRMM2Rx9BunxEP5EHS9Fhv38LwCj28bE5oDXLc6uA9",
+  "amountRaw": "1000000000",
+  "signatures": {
+    "createAccounts": "2ZDnxFrpjNEWVPfYWPug9jTvBYFVJQRtjHiFjvEBam53eabZ5VajpzgEyEv2YpNq3RBK485Ae5iLSopamYe6AiCq",
+    "mint": "3baPtMUFrn3z6m56Q5sViVtNWX7DkgxhUdgD5p7Lb7ZLYQaE32DxXMjhhqtkChPZ69rDJ3RBD379yKapSgXKdqC8",
+    "deposit": "44Ah8sG3EUWtmWkNrTPHzDRnzc8XEyGuPAgynRYFA9DBYrq4N326rWAu6dmCDFbdVou7pae2AexfdMrs5n1J1djZ",
+    "recombine": "43BQ2j6FzeN8F8HHVvGXGKnv5no3B8Jcdi5V8S4fWgeECvRD4buD1q1TRKk9GpAVRW63xscVv9RtF8DWbogH8qFW"
+  },
+  "conservation": {
+    "baseline": {
+      "collateral": "0",
+      "pt": "0",
+      "dr": "0",
+      "vault": "0",
+      "accountable": "0",
+      "collateralSupply": "0",
+      "ptSupply": "0",
+      "drSupply": "0"
+    },
+    "final": {
+      "collateral": "1000000000",
+      "pt": "0",
+      "dr": "0",
+      "vault": "0",
+      "accountable": "0"
+    }
+  }
+}

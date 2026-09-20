@@ -49,6 +49,7 @@ export interface PrivateRuntimeState {
   programId: string;
   deploymentDomainHex: string;
   initialAdminLamports: string | null;
+  catalogExpansion?: { initialAdminLamports: string; maxSpendLamports: '300000000' };
   publicKeys: Record<string, string>;
   steps: Record<string, { attempts: StoredAttempt[] }>;
 }

@@ -14,18 +14,20 @@ import {
 } from '@dividendx/transaction-sdk';
 import {
   ADMIN_ID, ATTESTOR_BOOTSTRAP_LAMPORTS, DEPLOYMENT_DOMAIN_HEX, DEVNET_GENESIS_HASH,
-  FAUCET_BOOTSTRAP_LAMPORTS, MAX_BOOTSTRAP_SPEND_LAMPORTS, PROGRAM_ID, PROFILES, SERIES_YEAR, type Profile,
+  FAUCET_BOOTSTRAP_LAMPORTS, LEGACY_PROFILES, MAX_BOOTSTRAP_SPEND_LAMPORTS,
+  MAX_CATALOG_EXPANSION_SPEND_LAMPORTS, NEW_PROFILES, PROGRAM_ID, PROFILES, SERIES_YEAR, type Profile,
 } from './constants.js';
 import { invariant } from './errors.js';
 import { verifyDevnetEnvironment } from './environment.js';
-import { assertProductionManifestRedacted } from './manifest.js';
-import { loadOrCreateStateSigner, readPrivateState, writePrivateJson } from './private-state.js';
-import { executeResumableStep, persistedStepConfirmed, type StepContext } from './transactions.js';
+import { assertManifestCurrent, assertProductionManifestRedacted, loadRegistryManifest } from './manifest.js';
+import { loadExplicitSigner, loadOrCreateStateSigner, readPrivateState, writePrivateJson } from './private-state.js';
+import { assertBootstrapBudget, executeResumableStep, persistedStepConfirmed, type StepContext } from './transactions.js';
 import type { PrivateRuntimeState, RegistryAsset, RegistryManifest } from './types.js';
 
 const IDL = DIVIDENDX_IDL as Idl;
 const builders = new DividendXInstructions(IDL);
 const signerNames = ['mint-kox', 'mint-mu', 'mint-ibm'] as const;
+const expansionSignerNames = NEW_PROFILES.map((profile) => `mint-${profile.id.replace('-test-', '-')}`);
 
 function digest(value: string): Uint8Array {
   return new Uint8Array(createHash('sha256').update(value).digest());
@@ -67,8 +69,8 @@ interface DerivedAsset {
   series: ReturnType<typeof annualSeriesAddresses>;
 }
 
-async function deriveAssets(signers: BootstrapSigners): Promise<DerivedAsset[]> {
-  return Promise.all(PROFILES.map(async (profile, index) => {
+async function deriveAssets(signers: BootstrapSigners, profiles: readonly Profile[]): Promise<DerivedAsset[]> {
+  return Promise.all(profiles.map(async (profile, index) => {
     const mint = signers.mints[index]!;
     const issuerId = await issuerIdentityHash(`devnet:${DEVNET_GENESIS_HASH}`, profile.id);
     return { profile, mint, issuerId, policy: assetPolicyPda(issuerId, mint.publicKey).address,
@@ -173,49 +175,8 @@ export async function loadBootstrapSigners(stateDirectory: string): Promise<Boot
   };
 }
 
-export async function bootstrapDevnet(
-  connection: Connection,
-  rpcUrl: string,
-  stateDirectory: string,
-  admin: Keypair,
-): Promise<RegistryManifest> {
-  invariant(admin.publicKey.equals(ADMIN_ID), 'ADMIN_IDENTITY_MISMATCH');
-  await verifyDevnetEnvironment(connection);
-  const signers = await loadBootstrapSigners(stateDirectory);
-  assertSeparatedAuthorities([admin.publicKey, signers.faucet.publicKey, signers.attestor.publicKey,
-    ...signers.mints.map((mint) => mint.publicKey)]);
-  const assets = await deriveAssets(signers);
-  const stored = await loadOrInitializeState(stateDirectory, rpcUrl, signers);
-  if (stored.created) {
-    const known = assets.flatMap((asset) => [asset.mint.publicKey, asset.policy, asset.series.series]);
-    invariant((await connection.getMultipleAccountsInfo(known, 'confirmed')).every((info) => info === null),
-      'STATE_REQUIRED_FOR_EXISTING_ASSETS');
-  }
-  if (stored.state.initialAdminLamports === null) {
-    stored.state.initialAdminLamports = String(await connection.getBalance(admin.publicKey, 'confirmed'));
-    await writePrivateJson(stored.path, stored.state);
-  }
-  const context: StepContext = {
-    connection, state: stored.state, statePath: stored.path, adminAddress: admin.publicKey.toBase58(),
-  };
-  const [faucetBalance, attestorBalance] = await Promise.all([
-    connection.getBalance(signers.faucet.publicKey, 'confirmed'),
-    connection.getBalance(signers.attestor.publicKey, 'confirmed'),
-  ]);
-  const fundingInstructions = [];
-  if (faucetBalance < FAUCET_BOOTSTRAP_LAMPORTS) fundingInstructions.push(SystemProgram.transfer({
-    fromPubkey: admin.publicKey, toPubkey: signers.faucet.publicKey, lamports: FAUCET_BOOTSTRAP_LAMPORTS - faucetBalance,
-  }));
-  if (attestorBalance < ATTESTOR_BOOTSTRAP_LAMPORTS) fundingInstructions.push(SystemProgram.transfer({
-    fromPubkey: admin.publicKey, toPubkey: signers.attestor.publicKey, lamports: ATTESTOR_BOOTSTRAP_LAMPORTS - attestorBalance,
-  }));
-  if (fundingInstructions.length) await executeResumableStep(context, 'fund_separated_test_authorities', async () =>
-    await persistedStepConfirmed(context, 'fund_separated_test_authorities')
-      || (await connection.getBalance(signers.faucet.publicKey, 'confirmed') >= FAUCET_BOOTSTRAP_LAMPORTS
-      && await connection.getBalance(signers.attestor.publicKey, 'confirmed') >= ATTESTOR_BOOTSTRAP_LAMPORTS),
-  admin, fundingInstructions);
-
-  for (const asset of assets) {
+async function provisionAsset(connection: Connection, context: StepContext, asset: DerivedAsset,
+  signers: BootstrapSigners, admin: Keypair): Promise<void> {
     const mintSpace = getMintLen([ExtensionType.ScaledUiAmountConfig]);
     const rent = await connection.getMinimumBalanceForRentExemption(mintSpace);
     await executeResumableStep(context, `create_mint_${asset.profile.id}`,
@@ -249,22 +210,177 @@ export async function bootstrapDevnet(
           tokenProgram: TOKEN_PROGRAM_ID, collateralTokenProgram: TOKEN_2022_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID, systemProgram: SystemProgram.programId }, SERIES_YEAR),
       ]);
-  }
-  const currentAdmin = BigInt(await connection.getBalance(admin.publicKey, 'confirmed'));
-  invariant(BigInt(stored.state.initialAdminLamports!) - currentAdmin <= MAX_BOOTSTRAP_SPEND_LAMPORTS,
-    'BOOTSTRAP_BUDGET_EXCEEDED');
-  const registryAssets: RegistryAsset[] = assets.map((asset) => ({
+}
+
+function registryAsset(asset: DerivedAsset): RegistryAsset {
+  return {
     id: asset.profile.id, company: asset.profile.company, symbol: asset.profile.symbol,
     issuerLabel: asset.profile.issuerLabel, issuerIdHex: Buffer.from(asset.issuerId).toString('hex'),
     decimals: asset.profile.decimals, collateralMint: asset.mint.publicKey.toBase58(), assetPolicy: asset.policy.toBase58(),
     series: [{ year: SERIES_YEAR, address: asset.series.series.toBase58(), accumulator: asset.series.accumulator.toBase58(),
       ptMint: asset.series.ptMint.toBase58(), drMint: asset.series.drMint.toBase58(), vault: asset.series.vault.toBase58() }],
-  }));
-  const manifest: RegistryManifest = {
+  };
+}
+
+function registryManifest(rpcUrl: string, runtimeId: string, assets: DerivedAsset[]): RegistryManifest {
+  return {
     schemaVersion: 1, kind: 'devnet', rpcUrl, genesisHash: DEVNET_GENESIS_HASH,
     programId: PROGRAM_ID.toBase58(), deploymentDomainHex: DEPLOYMENT_DOMAIN_HEX,
-    runtimeId: stored.state.runtimeId, clockControl: false, faucetEnabled: false, assets: registryAssets,
+    runtimeId, clockControl: false, faucetEnabled: false, assets: assets.map(registryAsset),
   };
+}
+
+export async function bootstrapDevnet(
+  connection: Connection,
+  rpcUrl: string,
+  stateDirectory: string,
+  admin: Keypair,
+): Promise<RegistryManifest> {
+  invariant(admin.publicKey.equals(ADMIN_ID), 'ADMIN_IDENTITY_MISMATCH');
+  await verifyDevnetEnvironment(connection);
+  const signers = await loadBootstrapSigners(stateDirectory);
+  assertSeparatedAuthorities([admin.publicKey, signers.faucet.publicKey, signers.attestor.publicKey,
+    ...signers.mints.map((mint) => mint.publicKey)]);
+  const assets = await deriveAssets(signers, LEGACY_PROFILES);
+  const stored = await loadOrInitializeState(stateDirectory, rpcUrl, signers);
+  if (stored.created) {
+    const known = assets.flatMap((asset) => [asset.mint.publicKey, asset.policy, asset.series.series]);
+    invariant((await connection.getMultipleAccountsInfo(known, 'confirmed')).every((info) => info === null),
+      'STATE_REQUIRED_FOR_EXISTING_ASSETS');
+  }
+  if (stored.state.initialAdminLamports === null) {
+    stored.state.initialAdminLamports = String(await connection.getBalance(admin.publicKey, 'confirmed'));
+    await writePrivateJson(stored.path, stored.state);
+  }
+  const context: StepContext = {
+    connection, state: stored.state, statePath: stored.path, adminAddress: admin.publicKey.toBase58(),
+  };
+  const [faucetBalance, attestorBalance] = await Promise.all([
+    connection.getBalance(signers.faucet.publicKey, 'confirmed'),
+    connection.getBalance(signers.attestor.publicKey, 'confirmed'),
+  ]);
+  const fundingInstructions = [];
+  if (faucetBalance < FAUCET_BOOTSTRAP_LAMPORTS) fundingInstructions.push(SystemProgram.transfer({
+    fromPubkey: admin.publicKey, toPubkey: signers.faucet.publicKey, lamports: FAUCET_BOOTSTRAP_LAMPORTS - faucetBalance,
+  }));
+  if (attestorBalance < ATTESTOR_BOOTSTRAP_LAMPORTS) fundingInstructions.push(SystemProgram.transfer({
+    fromPubkey: admin.publicKey, toPubkey: signers.attestor.publicKey, lamports: ATTESTOR_BOOTSTRAP_LAMPORTS - attestorBalance,
+  }));
+  if (fundingInstructions.length) await executeResumableStep(context, 'fund_separated_test_authorities', async () =>
+    await persistedStepConfirmed(context, 'fund_separated_test_authorities')
+      || (await connection.getBalance(signers.faucet.publicKey, 'confirmed') >= FAUCET_BOOTSTRAP_LAMPORTS
+      && await connection.getBalance(signers.attestor.publicKey, 'confirmed') >= ATTESTOR_BOOTSTRAP_LAMPORTS),
+  admin, fundingInstructions);
+
+  for (const asset of assets) await provisionAsset(connection, context, asset, signers, admin);
+  const currentAdmin = BigInt(await connection.getBalance(admin.publicKey, 'confirmed'));
+  invariant(BigInt(stored.state.initialAdminLamports!) - currentAdmin <= MAX_BOOTSTRAP_SPEND_LAMPORTS,
+    'BOOTSTRAP_BUDGET_EXCEEDED');
+  const manifest = registryManifest(rpcUrl, stored.state.runtimeId, assets);
+  assertProductionManifestRedacted(manifest);
+  await writePrivateJson(join(stateDirectory, 'manifest.json'), manifest);
+  return manifest;
+}
+
+function publicKeysMatch(actual: Record<string, string>, expected: Record<string, string>): boolean {
+  const actualNames = Object.keys(actual).sort();
+  const expectedNames = Object.keys(expected).sort();
+  return JSON.stringify(actualNames) === JSON.stringify(expectedNames)
+    && expectedNames.every((name) => actual[name] === expected[name]);
+}
+
+export function assertCatalogExpansionState(state: PrivateRuntimeState, rpcUrl: string,
+  legacyKeys: Record<string, string>, expandedKeys: Record<string, string>): 'begin' | 'resume' {
+  invariant(state.rpcUrl === rpcUrl && state.genesisHash === DEVNET_GENESIS_HASH
+    && state.programId === PROGRAM_ID.toBase58() && state.deploymentDomainHex === DEPLOYMENT_DOMAIN_HEX
+    && typeof state.runtimeId === 'string' && /^\d+$/.test(state.initialAdminLamports ?? ''),
+  'STATE_IDENTITY_MISMATCH');
+  if (!state.catalogExpansion) {
+    invariant(publicKeysMatch(state.publicKeys, legacyKeys), 'STATE_SIGNERS_MISMATCH');
+    invariant(!Object.keys(state.steps).some((name) => NEW_PROFILES.some((profile) => name.endsWith(profile.id))),
+      'EXPANSION_STATE_INCOMPLETE');
+    return 'begin';
+  }
+  invariant(state.catalogExpansion.maxSpendLamports === String(MAX_CATALOG_EXPANSION_SPEND_LAMPORTS)
+    && /^\d+$/.test(state.catalogExpansion.initialAdminLamports), 'EXPANSION_BUDGET_INVALID');
+  invariant(publicKeysMatch(state.publicKeys, expandedKeys), 'STATE_SIGNERS_MISMATCH');
+  return 'resume';
+}
+
+export async function expandDevnetCatalog(connection: Connection, rpcUrl: string,
+  stateDirectory: string, admin: Keypair): Promise<RegistryManifest> {
+  invariant(admin.publicKey.equals(ADMIN_ID), 'ADMIN_IDENTITY_MISMATCH');
+  await verifyDevnetEnvironment(connection);
+  const statePath = join(stateDirectory, 'state.json');
+  const state = await readPrivateState(statePath);
+  const savedSigner = async (name: string): Promise<Keypair> => {
+    const expected = state.publicKeys[name];
+    invariant(typeof expected === 'string' && expected.length > 0, 'STATE_SIGNERS_MISMATCH');
+    return loadExplicitSigner(join(stateDirectory, `${name}.json`), expected);
+  };
+  const legacySigners: BootstrapSigners = {
+    faucet: await savedSigner('faucet'), attestor: await savedSigner('attestor'),
+    mints: await Promise.all(signerNames.map(savedSigner)),
+  };
+  const legacyKeys = {
+    faucet: legacySigners.faucet.publicKey.toBase58(), attestor: legacySigners.attestor.publicKey.toBase58(),
+    ...Object.fromEntries(signerNames.map((name, index) => [name, legacySigners.mints[index]!.publicKey.toBase58()])),
+  };
+  // Fail before generating new keys when the saved original authorities differ.
+  invariant(Object.entries(legacyKeys).every(([name, address]) => state.publicKeys[name] === address),
+    'STATE_SIGNERS_MISMATCH');
+  const priorManifest = await loadRegistryManifest(join(stateDirectory, 'manifest.json'));
+  invariant(priorManifest.runtimeId === state.runtimeId && priorManifest.rpcUrl === rpcUrl,
+    'STATE_IDENTITY_MISMATCH');
+  const legacyAssets = await deriveAssets(legacySigners, LEGACY_PROFILES);
+  invariant(JSON.stringify(priorManifest.assets.slice(0, LEGACY_PROFILES.length))
+    === JSON.stringify(legacyAssets.map(registryAsset)), 'LEGACY_ASSETS_MISMATCH');
+  await assertManifestCurrent(connection, priorManifest);
+
+  const newMints = await Promise.all(expansionSignerNames.map((name) => state.catalogExpansion
+    ? savedSigner(name) : loadOrCreateStateSigner(stateDirectory, name)));
+  const signers: BootstrapSigners = {
+    faucet: legacySigners.faucet, attestor: legacySigners.attestor,
+    mints: [...legacySigners.mints, ...newMints],
+  };
+  assertSeparatedAuthorities([admin.publicKey, signers.faucet.publicKey, signers.attestor.publicKey,
+    ...signers.mints.map((mint) => mint.publicKey)]);
+  const expandedKeys = {
+    ...legacyKeys, ...Object.fromEntries(expansionSignerNames.map((name, index) => [name, newMints[index]!.publicKey.toBase58()])),
+  };
+  const mode = assertCatalogExpansionState(state, rpcUrl, legacyKeys, expandedKeys);
+  const assets = await deriveAssets(signers, PROFILES);
+  const manifest = registryManifest(rpcUrl, state.runtimeId, assets);
+  if (priorManifest.assets.length === PROFILES.length) {
+    invariant(mode === 'resume' && JSON.stringify(priorManifest) === JSON.stringify(manifest),
+      'EXPANDED_MANIFEST_MISMATCH');
+    return priorManifest;
+  }
+  invariant(priorManifest.assets.length === LEGACY_PROFILES.length, 'MANIFEST_ASSETS_INVALID');
+  if (mode === 'begin') {
+    const newAddresses = assets.slice(LEGACY_PROFILES.length).flatMap((asset) =>
+      [asset.mint.publicKey, asset.policy, asset.series.series]);
+    invariant((await connection.getMultipleAccountsInfo(newAddresses, 'confirmed')).every((info) => info === null),
+      'EXPANSION_STATE_REQUIRED_FOR_EXISTING_ASSETS');
+    const initialAdminLamports = await connection.getBalance(admin.publicKey, 'confirmed');
+    state.catalogExpansion = {
+      initialAdminLamports: String(initialAdminLamports),
+      maxSpendLamports: String(MAX_CATALOG_EXPANSION_SPEND_LAMPORTS) as '300000000',
+    };
+    state.publicKeys = expandedKeys;
+    await writePrivateJson(statePath, state);
+  }
+  const budget = {
+    initialLamports: BigInt(state.catalogExpansion!.initialAdminLamports),
+    maxSpendLamports: MAX_CATALOG_EXPANSION_SPEND_LAMPORTS,
+  };
+  const context: StepContext = { connection, state, statePath, adminAddress: admin.publicKey.toBase58(), budget };
+  for (const asset of assets.slice(LEGACY_PROFILES.length)) {
+    await provisionAsset(connection, context, asset, signers, admin);
+  }
+  assertBootstrapBudget(budget.initialLamports, BigInt(await connection.getBalance(admin.publicKey, 'confirmed')),
+    budget.maxSpendLamports);
+  await assertManifestCurrent(connection, manifest);
   assertProductionManifestRedacted(manifest);
   await writePrivateJson(join(stateDirectory, 'manifest.json'), manifest);
   return manifest;

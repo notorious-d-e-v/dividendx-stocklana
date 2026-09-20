@@ -16,6 +16,7 @@
     "test": "npm run build && node --test dist/test/*.test.js",
     "preflight": "npm run build --silent && node dist/src/cli.js preflight",
     "bootstrap": "npm run build --silent && node dist/src/cli.js bootstrap",
+    "expand-catalog": "npm run build --silent && node dist/src/cli.js expand-catalog",
     "serve": "npm run build --silent && node dist/src/cli.js serve",
     "fund-holder": "npm run build --silent && node dist/src/cli.js fund-holder",
     "refresh-test-observations": "npm run build --silent && node dist/src/cli.js refresh-test-observations",

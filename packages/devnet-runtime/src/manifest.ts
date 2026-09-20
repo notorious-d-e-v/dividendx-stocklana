@@ -7,7 +7,7 @@ import {
   DIVIDENDX_IDL, annualSeriesAddresses, assetPolicyPda, decodeProgramAccount, fetchQuoteSnapshot,
 } from '@dividendx/transaction-sdk';
 import { TOKEN_2022_PROGRAM_ID, unpackMint } from '@solana/spl-token';
-import { DEPLOYMENT_DOMAIN_HEX, DEVNET_GENESIS_HASH, PROGRAM_ID, PROFILES, SERIES_YEAR } from './constants.js';
+import { DEPLOYMENT_DOMAIN_HEX, DEVNET_GENESIS_HASH, LEGACY_PROFILES, PROGRAM_ID, PROFILES, SERIES_YEAR } from './constants.js';
 import { parseDevnetRpcUrl } from './config.js';
 import { invariant } from './errors.js';
 import { verifyDevnetEnvironment } from './environment.js';
@@ -22,10 +22,12 @@ export function parseRegistryManifest(value: unknown): RegistryManifest {
   invariant(manifest.genesisHash === DEVNET_GENESIS_HASH && manifest.programId === PROGRAM_ID.toBase58()
     && manifest.deploymentDomainHex === DEPLOYMENT_DOMAIN_HEX && typeof manifest.runtimeId === 'string'
     && /^[0-9a-f-]{36}$/i.test(manifest.runtimeId), 'MANIFEST_IDENTITY_INVALID');
-  invariant(Array.isArray(manifest.assets) && manifest.assets.length === PROFILES.length, 'MANIFEST_ASSETS_INVALID');
-  for (const profile of PROFILES) {
-    const asset = manifest.assets.find((candidate) => candidate.id === profile.id);
-    invariant(asset && asset.company === profile.company && asset.symbol === profile.symbol
+  const profiles = Array.isArray(manifest.assets) && manifest.assets.length === LEGACY_PROFILES.length
+    ? LEGACY_PROFILES : PROFILES;
+  invariant(Array.isArray(manifest.assets) && manifest.assets.length === profiles.length, 'MANIFEST_ASSETS_INVALID');
+  for (const [index, profile] of profiles.entries()) {
+    const asset = manifest.assets[index];
+    invariant(asset && asset.id === profile.id && asset.company === profile.company && asset.symbol === profile.symbol
       && asset.issuerLabel === profile.issuerLabel && asset.decimals === profile.decimals
       && /^[0-9a-f]{64}$/.test(asset.issuerIdHex), 'MANIFEST_ASSETS_INVALID');
     new PublicKey(asset.collateralMint); new PublicKey(asset.assetPolicy);
@@ -43,10 +45,25 @@ export async function loadRegistryManifest(path: string): Promise<RegistryManife
 }
 
 export async function assertManifestCurrent(connection: Connection, manifest: RegistryManifest): Promise<void> {
+  parseRegistryManifest(manifest);
   const proof = await verifyDevnetEnvironment(connection);
   invariant(proof.genesisHash === manifest.genesisHash && proof.programId === manifest.programId
     && proof.deploymentDomainHex === manifest.deploymentDomainHex, 'STALE_MANIFEST');
-  for (const asset of manifest.assets) {
+  for (const asset of manifest.assets) await assertAssetCurrent(connection, asset);
+}
+
+export async function assertManifestAssetCurrent(connection: Connection, manifest: RegistryManifest,
+  assetId: string): Promise<void> {
+  parseRegistryManifest(manifest);
+  const proof = await verifyDevnetEnvironment(connection);
+  invariant(proof.genesisHash === manifest.genesisHash && proof.programId === manifest.programId
+    && proof.deploymentDomainHex === manifest.deploymentDomainHex, 'STALE_MANIFEST');
+  const asset = manifest.assets.find((candidate) => candidate.id === assetId);
+  invariant(asset, 'ASSET_NOT_FOUND');
+  await assertAssetCurrent(connection, asset);
+}
+
+async function assertAssetCurrent(connection: Connection, asset: RegistryManifest['assets'][number]): Promise<void> {
     const issuerId = Uint8Array.from(Buffer.from(asset.issuerIdHex, 'hex'));
     const mint = new PublicKey(asset.collateralMint);
     const expectedPolicy = assetPolicyPda(issuerId, mint).address;
@@ -81,7 +98,6 @@ export async function assertManifestCurrent(connection: Connection, manifest: Re
       && raw.collateralMint.toBase58() === mint.toBase58(),
       'STALE_MANIFEST');
     invariant(unpackMint(mint, mintInfo, TOKEN_2022_PROGRAM_ID).decimals === asset.decimals, 'STALE_MANIFEST');
-  }
 }
 
 export function assertProductionManifestRedacted(manifest: RegistryManifest): void {

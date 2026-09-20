@@ -75,9 +75,14 @@ function request(manifest: RegistryManifest, assetId = manifest.assets[0]!.id, o
   return { owner, assetId, runtimeId: manifest.runtimeId, genesisHash: manifest.genesisHash };
 }
 
-function fixture(now = Date.UTC(2026, 8, 18, 0, 0, 0)) {
+function fixture(now = Date.UTC(2026, 8, 18, 0, 0, 0), assetCount = 3) {
   const clock = { value: now };
   const store = new MemoryStore(); const chain = new FakeChain(); const manifest = frozenManifest();
+  const sourceAssets = manifest.assets;
+  manifest.assets = Array.from({ length: assetCount }, (_, index) => {
+    const source = sourceAssets[index % sourceAssets.length]!;
+    return index < sourceAssets.length ? source : { ...source, id: `journal-fixture-${index}` };
+  });
   const service = new HostedDevnetService(store, chain, manifest, () => clock.value);
   return { clock, store, chain, manifest, service };
 }
@@ -257,7 +262,7 @@ test('cron duplicate delivery journals one transaction per asset and bucket', as
   assert.ok(second.every((item) => item.status === 'confirmed'));
   assert.equal(chain.prepareCount, manifest.assets.length); assert.equal(chain.sendCount, manifest.assets.length);
   const ledger = await new DurableJournal(store).read();
-  assert.equal(Object.values(ledger.operations).filter((item) => item.kind === 'observation').length, 3);
+  assert.equal(Object.values(ledger.operations).filter((item) => item.kind === 'observation').length, manifest.assets.length);
 });
 
 test('cron preserves earlier results and stops after a later asset failure', async () => {
@@ -276,10 +281,61 @@ test('cron continues across pending submissions and reuses all three durable att
   const pending = fixture(); pending.chain.sendThrows = true;
   const first = await pending.service.refreshObservations();
   const second = await pending.service.refreshObservations();
-  assert.equal(first.length, 3); assert.ok(first.every((item) => item.status === 'pending'));
-  assert.equal(new Set(first.flatMap((item) => item.signatures)).size, 3);
+  assert.equal(first.length, pending.manifest.assets.length); assert.ok(first.every((item) => item.status === 'pending'));
+  assert.equal(new Set(first.flatMap((item) => item.signatures)).size, pending.manifest.assets.length);
   assert.deepEqual(second.map((item) => item.signatures), first.map((item) => item.signatures));
-  assert.equal(pending.chain.prepareCount, 3); assert.equal(pending.chain.sendCount, 6);
+  assert.equal(pending.chain.prepareCount, pending.manifest.assets.length);
+  assert.equal(pending.chain.sendCount, 2 * pending.manifest.assets.length);
+});
+
+test('fifteen-asset cron completes one journaled attempt per asset and bucket', async () => {
+  const { service, chain, store, manifest } = fixture(Date.UTC(2026, 8, 18), 15);
+  const first = await service.refreshObservations();
+  const replay = await service.refreshObservations();
+  assert.equal(first.length, 15);
+  assert.ok(first.every((item) => item.status === 'confirmed' && item.signatures.length === 1));
+  assert.deepEqual(replay.map((item) => item.signatures), first.map((item) => item.signatures));
+  assert.equal(new Set(first.flatMap((item) => item.signatures)).size, 15);
+  assert.equal(chain.prepareCount, 15); assert.equal(chain.sendCount, 15);
+  const ledger = await new DurableJournal(store).read();
+  assert.equal(ledger.observationLifetimeLamports, 15 * OBSERVATION_RESERVATION_LAMPORTS);
+  assert.deepEqual(Object.values(ledger.operations).filter((item) => item.kind === 'observation').map((item) => item.assetId),
+    manifest.assets.map((asset) => asset.id));
+});
+
+test('fifteen-asset cron resumes a preparation failure without replacing earlier attempts', async () => {
+  const { service, chain, store } = fixture(Date.UTC(2026, 8, 18), 15);
+  chain.prepareError = new ServiceError(503, 'simulation failed', 'SIMULATION_FAILED');
+  chain.prepareErrorAt = 8;
+  const partial = await service.refreshObservations();
+  assert.equal(partial.length, 8);
+  assert.ok(partial.slice(0, 7).every((item) => item.status === 'confirmed'));
+  assert.equal(partial[7]!.error, 'SIMULATION_FAILED');
+  const earlierBytes = [...chain.sentBytes];
+  chain.prepareError = null;
+  const resumed = await service.refreshObservations();
+  assert.equal(resumed.length, 15);
+  assert.ok(resumed.every((item) => item.status === 'confirmed'));
+  assert.deepEqual(chain.sentBytes.slice(0, 7), earlierBytes);
+  assert.equal(chain.prepareCount, 16); assert.equal(chain.sendCount, 15);
+  const ledger = await new DurableJournal(store).read();
+  assert.equal(Object.values(ledger.operations).filter((item) => item.kind === 'observation').length, 15);
+  assert.equal(ledger.observationLifetimeLamports, 15 * OBSERVATION_RESERVATION_LAMPORTS);
+});
+
+test('fifteen pending observations resend only their durable signed bytes', async () => {
+  const { service, chain, store } = fixture(Date.UTC(2026, 8, 18), 15);
+  chain.sendThrows = true;
+  const first = await service.refreshObservations();
+  const preparedBytes = [...chain.sentBytes];
+  const retry = await service.refreshObservations();
+  assert.equal(first.length, 15); assert.ok(first.every((item) => item.status === 'pending'));
+  assert.deepEqual(retry.map((item) => item.signatures), first.map((item) => item.signatures));
+  assert.deepEqual(chain.sentBytes.slice(15), preparedBytes);
+  assert.equal(chain.prepareCount, 15); assert.equal(chain.sendCount, 30);
+  const ledger = await new DurableJournal(store).read();
+  assert.equal(Object.values(ledger.operations).filter((item) => item.kind === 'observation').length, 15);
+  assert.equal(ledger.observationLifetimeLamports, 15 * OBSERVATION_RESERVATION_LAMPORTS);
 });
 
 test('cron stops after a durable failed result', async () => {
