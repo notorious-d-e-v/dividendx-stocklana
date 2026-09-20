@@ -242,9 +242,8 @@ export function HostedSessionGate({ kind, children }: {
     {message && <div className="hosted-error" role="alert">{message}</div>}
     <div className="hosted-actions">
       {starting ? <button type="button" disabled={loading} onClick={() => void refresh()}>{loading ? 'Checking…' : 'Check progress'}</button>
-        : <button type="button" disabled={mutating || loading} onClick={() => void startOrReset().catch(() => undefined)}>{mutating ? 'Requesting…' : session?.sessionId ? 'Start a fresh sandbox' : 'Start private sandbox'}</button>}
-      <a href={kind === 'wallet' ? '/app/' : '/sandbox/'}>{kind === 'wallet' ? 'Use public devnet' : 'Open wallet sandbox'}</a>
-      <a href="/">Annual reference</a>
+        : <button type="button" disabled={mutating || loading} onClick={() => void startOrReset().catch(() => undefined)}>{mutating ? 'Requesting…' : session?.sessionId ? kind === 'guided' ? 'Start a fresh guided demo' : 'Start a fresh sandbox' : 'Start private sandbox'}</button>}
+      <nav aria-label="Primary"><a href="/app/">Public Devnet</a><a href="/demos/" aria-current={kind === 'guided' ? 'page' : undefined}>Guided Demos</a></nav>
     </div>
   </main>;
 }

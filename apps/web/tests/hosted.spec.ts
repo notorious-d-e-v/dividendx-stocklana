@@ -97,6 +97,8 @@ test('hosted app route is pinned to the same-origin public devnet service', asyn
   await page.route('http://127.0.0.1:4180/manifest', (route) => { localhostReads += 1; return fulfill(route, {}, 500); });
   await page.goto(`${origin}/app/`);
   await expect(page.getByTestId('runtime-error')).toContainText('devnet service');
+  await expect(page.getByTestId('wallet-trigger')).toHaveCount(0);
+  await expect(page.getByRole('dialog', { name: 'Connect a wallet' })).toHaveCount(0);
   expect(devnetReads).toBeGreaterThan(0);
   expect(localhostReads).toBe(0);
 });
@@ -241,9 +243,46 @@ test('expired session needs an explicit reset', async ({ page }) => {
   await page.goto(`${origin}/demos/`);
   await expect(page.getByRole('heading', { name: 'This sandbox has expired.' })).toBeVisible();
   expect(posts).toBe(0);
-  await page.getByRole('button', { name: 'Start a fresh sandbox' }).click();
+  await page.getByRole('button', { name: 'Start a fresh guided demo' }).click();
   expect(posts).toBe(1);
 });
+
+for (const path of ['/', '/demos/']) {
+  test(`expired guided session at ${path} restarts in place with its visitor cookie`, async ({ page }) => {
+    const visitor = 'a'.repeat(43);
+    // The local HTTP test server cannot set the production broker's Secure __Host cookie.
+    await page.context().addCookies([{ name: 'dxv-fixture', value: visitor, url: origin, httpOnly: true, sameSite: 'Lax' }]);
+    const observedCookies: string[] = [];
+    let resetBody: unknown;
+    let current = session('expired');
+    await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
+      observedCookies.push(route.request().headers().cookie ?? '');
+      if (route.request().method() === 'POST') {
+        resetBody = route.request().postDataJSON();
+        current = session('starting', { sessionId: replacementId, runtimeId: 'replacement-runtime' });
+        return fulfill(route, current, 202);
+      }
+      return fulfill(route, current);
+    });
+    await page.route(`${origin}/api/sandbox/guided/${replacementId}/state`, (route) => fulfill(route, guidedState('idle', 'replacement-runtime')));
+    await page.goto(`${origin}${path}`);
+    await expect(page.getByRole('heading', { name: 'This sandbox has expired.' })).toBeVisible();
+    const nav = page.getByRole('navigation', { name: 'Primary' });
+    await expect(nav.getByRole('link')).toHaveCount(2);
+    await expect(nav.getByRole('link', { name: 'Public Devnet' })).toHaveAttribute('href', '/app/');
+    await expect(nav.getByRole('link', { name: 'Guided Demos' })).toHaveAttribute('href', '/demos/');
+    await page.getByRole('button', { name: 'Start a fresh guided demo' }).click();
+    expect(resetBody).toEqual({ action: 'reset', expectedSessionId: sessionId });
+    await expect(page.getByRole('heading', { name: 'Starting your isolated test network…' })).toBeVisible();
+    current = session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` });
+    await page.getByRole('button', { name: 'Check progress' }).click();
+    await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
+    expect(new URL(page.url()).pathname).toBe(path);
+    expect(observedCookies).not.toHaveLength(0);
+    expect(observedCookies.every((header) => header.includes(`dxv-fixture=${visitor}`))).toBe(true);
+    expect((await page.context().cookies(origin)).find((cookie) => cookie.name === 'dxv-fixture')?.value).toBe(visitor);
+  });
+}
 
 test('410 from a stale tab clears the guided transaction controls', async ({ page }) => {
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => fulfill(route, session('ready')));

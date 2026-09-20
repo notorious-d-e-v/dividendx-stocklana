@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 async function openKox(page: Page) {
-  await page.goto('/');
+  await page.goto('/reference/');
   await page.getByTestId('product-asset-KOx').click();
   await expect(page.getByRole('heading', { name: 'One stock. Two annual tokens.' })).toBeVisible();
 }
@@ -36,7 +36,7 @@ async function endAndFinalize(page: Page) {
 }
 
 test('company hierarchy preserves pending Ondo and identifies historical factors as test-term examples', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/reference/');
   const cocaCola = page.locator('.company-section').filter({ has: page.getByRole('heading', { name: 'Coca-Cola' }) });
   await expect(cocaCola.getByTestId('product-asset-KOx')).toContainText('Historical factors · test term dates');
   await page.getByPlaceholder('Coca-Cola, KO…').fill('Apple');
@@ -196,7 +196,7 @@ test('reset and legacy rehearsal state isolation work', async ({ page }) => {
 for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
   test(`annual product keyboard and overflow at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
-    await page.goto('/');
+    await page.goto('/reference/');
     await page.keyboard.press('Tab');
     await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0);
@@ -210,7 +210,7 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
 
 test('capture annual Market, Split and collecting Redeem at desktop and mobile', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto('/');
+  await page.goto('/reference/');
   await page.screenshot({ path: 'apps/web/qa/product-market-1440.png', fullPage: true });
   await page.getByTestId('product-asset-KOx').click();
   await page.screenshot({ path: 'apps/web/qa/product-split-1440.png', fullPage: true });

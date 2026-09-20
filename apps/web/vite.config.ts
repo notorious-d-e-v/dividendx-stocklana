@@ -21,7 +21,8 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        product: fileURLToPath(new URL('./index.html', import.meta.url)),
+        guidedHome: fileURLToPath(new URL('./index.html', import.meta.url)),
+        productReference: fileURLToPath(new URL('./reference/index.html', import.meta.url)),
         rehearsal: fileURLToPath(new URL('./rehearsal/index.html', import.meta.url)),
         wallet: fileURLToPath(new URL('./app/index.html', import.meta.url)),
         sandbox: fileURLToPath(new URL('./sandbox/index.html', import.meta.url)),

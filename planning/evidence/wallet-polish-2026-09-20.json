@@ -1,0 +1,9 @@
+{
+  "boundary": "Local UI; actual public devnet and bounded existing faucet; temporary in-memory wallet only. No issuer settlement proof.",
+  "status": "failed",
+  "assetId": "ondo-test-ibm",
+  "checks": [],
+  "signatures": [],
+  "error": "locator.selectOption: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Stock token', { exact: true })\u001b[22m\n",
+  "browserErrors": []
+}

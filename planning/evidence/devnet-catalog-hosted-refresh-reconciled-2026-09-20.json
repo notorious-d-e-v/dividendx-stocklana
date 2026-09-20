@@ -1,0 +1,114 @@
+{
+  "boundary": "authorized synthetic public-devnet refresh",
+  "verifiedAt": "2026-09-20T05:25:03.427Z",
+  "durationMs": 5307,
+  "httpStatus": 200,
+  "status": "confirmed",
+  "results": [
+    {
+      "signatures": [
+        "4uwJ9b5EGrmmKEpwyDMb21RQL5YvtibJGHkyk4hXh62ZdecFP4mLVw2SKkYD55eB7pP2ML6WpgGLuTnCy5UNF3iU"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "2wmtWnBmL2f5533tQysGFc746wEyTLLyRHuMMufi5gNLUUdXZZcB4Nz5UY145hSGZuS79YvHvWYP9JCEKdb2dEQD"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "3vRLBzewGB98KCi2WQwMTSCybikpynBwKJ46pZ16d5saqQeJ4Brr4a4z2XGRSNd49RAwayFgV6sPGNu2277n1EMb"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "8gsXv713Zpaq5EZeqexq4R6Tz7unCdczWrk6mgM7wCtEtnc9xwohZdQwukTNBuSykjELj3cULTi2xTYDuYLn8R4"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "e8YbFghkBgC4MYCZ9hSp6sQUSfSLnzBoiJjiR8gYiJKx1BNoQFtSEXrBAZmByzBB4kXTJwGTbmHpvxzoBxHi8yK"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "7YvEkxsjo3fkoySefuiGNWDf5HGXbWjDwttywnHgYKWVkag5itjitto7YXVvATcsxPqp1D2uAKqLqk7rzpDwTqj"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "2voFAS8Y9R7H2rPFRcr7Xm7CbrcBTV3ru9m9bZ1bu2DFN8hxSzun66yJX1FjXKHcK2vEdYgASaoDXPXzVAhTtK8F"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "tSvK7zQaAm9751A3hXUnyVgyq3gFTowy5b8aZFwyaQeZ1r8yY1GsusXCeXTiMzKNXfHUNxT7qSMD431iSz5FkKS"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "64tyGAAGUHgJM2AtLwbHHWCc3NfUCMA7fd4iX8Z6Boig1NEL482ueodnFcJ3nzLbAdRQGPaywM9oN7xwheyPMPrJ"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "4gDyiNjqMzWiu1eFeCcrweQ8EKZhyT4m7x6VK3PuSZuZ3jk7FY99sbmXkR7H7DeV7sjTAPQFLx2cEzZ7JArwb2fq"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "5yTvrGotogeWv8qDibpY7rCkKbQ7g4PY1g67fN2ysyzx3xKJrNR71wQN85XJEQtEDs3VEtHXaLMhSfjxz3Qq6U5f"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "1VLkLKwqbeRuv4JKGBRwBSNMDmzWRrZFQMeyv3mLDSXji3xQhid88Q9gVei9kVUD1qnKTJNVSHzcV55vAhkKTPW"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "EnhB7LT31BJRRkM1G8ucFdHhHCxmfmj4Ys6jJhjzBLGEBWU4ahS52XbbBBpftBWdbKcUNot7bMqah2QZuaALUTm"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "55kHLwakbANyWguzZXD7FJMsyTuxUvh9No6vFeeHYNQg785wkBcN1CWwfdcK64u8WBJVbMvMPb22wQCsq2VZALUH"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    },
+    {
+      "signatures": [
+        "34JzUJeYtmhFfGDZLFbLHFLrwLXLr56bU9fsmoLKL6HneNBBc5UHdUdW5VHC1ZUCdaZHz1JToChCJZeWgCjCVYzx"
+      ],
+      "status": "confirmed",
+      "message": "Synthetic observation refreshed."
+    }
+  ]
+}

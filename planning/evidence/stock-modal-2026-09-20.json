@@ -1,0 +1,17 @@
+{
+  "status": "failed",
+  "boundary": "Local UI + public devnet; existing dedicated QA holder, no new faucet grant; Wallet Standard test harness, not an installed extension.",
+  "wallet": "AzXyVUoCkyahCejBUVEoV4pcc8d5cLCnT62DEyacLaj6",
+  "assetId": "ondo-test-aapl",
+  "initialBalances": [
+    "1000000000",
+    "0",
+    "0"
+  ],
+  "initialSol": 52264200,
+  "signatures": [],
+  "checks": [],
+  "error": "expect(locator).toHaveText(expected) failed\n\nLocator:  getByTestId('asset-stock-balance')\nExpected: \"10\"\nReceived: \"1\"\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveText\" getByTestId('asset-stock-balance') with timeout 5000ms\n  - waiting for getByTestId('asset-stock-balance')\n    9 × locator resolved to <strong data-testid=\"asset-stock-balance\">Checking…</strong>\n      - unexpected value \"Checking…\"\n    5 × locator resolved to <strong data-testid=\"asset-stock-balance\">1</strong>\n      - unexpected value \"1\"\n",
+  "browserErrors": [],
+  "signingCalls": 0
+}

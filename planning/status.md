@@ -1,5 +1,13 @@
 # Current status
 
+20 September Market simplification: [balances-first local review](wallet-market-balances-review-2026-09-20.md) removes the Market picker and selected-series panel. Supported holdings appear beneath the hero; empty wallets go straight to the company catalog. Split/Redeem controls remain intact. Verification is recorded in the linked review; no frontend release is included.
+
+20 September stock-modal follow-up: [local hero, funding modal and split-to-redeem review](wallet-stock-modal-review-2026-09-20.md) adds the brand illustration, company-color dots, balance-aware funding copy and smoother asset switching. An actual two-transaction devnet split/recombine returns the existing QA holder to its starting token balances without a faucet grant. Frontend changes remain local for visual approval.
+
+20 September wallet follow-up: [local wallet and asset-discovery review](wallet-polish-review-2026-09-20.md) moves connection into the header, simplifies Market, and adds supported-balance discovery and a clear devnet faucet flow. This visual pass is not yet published.
+
+20 September local review: [navigation and wallet changes](navigation-wallet-review-2026-09-20.md) make Guided Demos the landing page and separate the wallet action views. All 15 synthetic profiles are [provisioned and transaction-verified on devnet](devnet-catalog-expansion.md), preserving the original three. The [backend-only release](devnet-catalog-release-2026-09-20.md) is live; its refresh job confirms all 15. The visual review remains local.
+
 19 September release: [guided tour v4](guided-tour-v4-review.md) is live at [dividendx.payai.network/demos/](https://dividendx.payai.network/demos/), with 15 actions and 40 confirmed transactions. [PR #1](https://github.com/notorious-d-e-v/dividendx-stocklana/pull/1) shipped the matching schema-4 site and code-only snapshot. The [release review](guided-tour-v4-release.md) records verification and rollback details. Earlier evidence remains preserved.
 
 Updated 18 September 2026 after [public hosting acceptance](hosting-release-review.md) at [dividendx-stocklana.vercel.app](https://dividendx-stocklana.vercel.app). Real-calendar devnet, private accelerated wallet sandboxes and separate guided sandboxes are live. Actual temporary-wallet devnet, full annual sandbox redemption, nine-action guided, simultaneous two-visitor isolation/reset and natural-expiry journeys pass. Live issuer settlement remains incomplete; deposits still close at year-start.

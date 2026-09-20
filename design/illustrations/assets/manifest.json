@@ -66,6 +66,30 @@
       "alt": "Blue stock-exposure certificate and amber dividend coupon each linked to a wallet and a trading app.",
       "review_status": "Astra visual and alpha check passed; user review pending",
       "notes": "Both app-facing claims are composable; locked backing stays in its vault. Four conceptual connections, no transaction arrows or live integration claim. Use a light surface to preserve thin ink connectors."
+    },
+    "stock-dividend-separation-v2": {
+      "path": "design/illustrations/assets/stock-dividend-separation-v2.png",
+      "derivative": "apps/web/public/illustrations/stock-dividend-separation-v2.webp",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "bytes": 1609242,
+      "sha256": "4cf9ee64f6b7410dda53a7dbac3df87135ef4783dd1c2113fdfb23ad88c6f81c",
+      "derivativeBytes": 70994,
+      "derivativeSha256": "2645cfafe6ebfc1244e3041a5703df1ed56f6e07aa92fdc208db92fbc0ff8de3",
+      "method": "built-in image generation; Sharp size/format derivative",
+      "prompts": "../prompts/stock-dividend-separation-v2.md",
+      "intended_tier": "concept",
+      "role": "wallet-hero-review-variant",
+      "background": "transparent",
+      "review_status": "Astra alpha/background and desktop/mobile browser placement review passed; user review pending",
+      "notes": "Native UI labels identify PT and annual DR. No promised payout amount or dividend count; originals preserved."
     }
   }
 }

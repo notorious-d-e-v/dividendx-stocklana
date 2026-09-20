@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "boundary": "read-only actual local runtime UI; no signing or transactions",
+  "checks": [
+    {
+      "width": 1440,
+      "tab": "Market",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "tab": "Split",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "tab": "Redeem",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "dialogFocusReturn": true,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "tab": "Market",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "tab": "Split",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "tab": "Redeem",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "dialogFocusReturn": true,
+      "pageErrors": []
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Repository operating rules
 
+- On 20 September the user approved the full local navigation, illustration, wallet and Market-balances pass for PR review, merge to main and production publication. Publish the matching frontend against the unchanged accepted v4 sandbox snapshot and existing fifteen-profile devnet backend; verify production and record honest hackathon/mainnet-readiness boundaries. This does not authorize mainnet or outreach messages.
+
+- The 20 September navigation/wallet review is local-first: Guided Demos becomes the landing page, visible navigation is Public Devnet/Guided Demos, and Split/Redeem are focused action views. Preserve prior routes as unlinked references. The expanded catalog must distinguish researched issuer identities from actually provisioned devnet profiles; do not insert mainnet mint addresses into devnet transaction configuration.
+
 - The user approved publication of [guided tour v4](spec/guided-tour-v4.md) on 19 September after the restart-scroll fix. Create and merge a reviewed PR, publish the matching code-only sandbox snapshot and site, and verify production. Preserve prior evidence and the known-good deployment for rollback.
 - Astra owns architecture, product decisions, factual review, and final acceptance.
 - When the `astra-sol-delegation` skill is available, use it for bounded implementation in GPT-5.6 Sol with fresh context, explicit effort, disjoint file ownership, and no recursive delegation.

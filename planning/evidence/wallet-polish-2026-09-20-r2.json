@@ -1,0 +1,60 @@
+{
+  "boundary": "Local UI; actual public devnet and bounded existing faucet; temporary in-memory wallet only. No issuer settlement proof.",
+  "status": "passed",
+  "assetId": "ondo-test-ibm",
+  "checks": [
+    "Disconnected modal, official download choices, mobile modal, empty inventory",
+    "Real bounded faucet grant and automatic 10-stock detection",
+    "Split one stock, discover PT/DR, recombine one pair, detect no remaining claims",
+    "Desktop/mobile no overflow; three real receipts verified by RPC; final raw balances independently checked"
+  ],
+  "signatures": [
+    "5BTcXtcgXVyU6Q7YQDaHQAcWQyLkb6QbEzq7htyGYgM1LPETgeABXbwZHxxwsZxJzAReQsS8gdMym4W5jzYFcQps",
+    "649BKAU9gE4MmbVdurUGwsDg3U3cwqtHJNCePrtwKYJtco1h9sGKbSN56kunBrXPsJKmDAY1AxKj1QSvBskuxAaJ",
+    "4FDRzKB3maZ5mJijvnKEcpWPa5YkGKafkkMbNy3WeFeGb6RsM7mskcLLd5R5nwc6QbUvt7z4fzWEb4Eddkku8GzB"
+  ],
+  "faucet": {
+    "httpStatus": 202,
+    "signatures": [
+      "4FDRzKB3maZ5mJijvnKEcpWPa5YkGKafkkMbNy3WeFeGb6RsM7mskcLLd5R5nwc6QbUvt7z4fzWEb4Eddkku8GzB"
+    ],
+    "status": "pending",
+    "message": "The recorded devnet operation is pending confirmation."
+  },
+  "wallet": "5kuuGZTcmCVtwukT31tpCc9QyGVvycQf8Q1F85pGrxn1",
+  "signatureStatuses": [
+    {
+      "confirmationStatus": "confirmed",
+      "confirmations": 25,
+      "err": null,
+      "slot": 501335349,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 501335301,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 501335260,
+      "status": {
+        "Ok": null
+      }
+    }
+  ],
+  "onchainRawBalances": [
+    "10000000000",
+    "0",
+    "0"
+  ],
+  "browserErrors": []
+}

@@ -11,5 +11,6 @@
 .hosted-error { border-color: #d9b3ae; color: #781f18; background: var(--dx-danger-soft); }
 .hosted-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 30px; }
 .hosted-actions button { min-height: 48px; padding: 12px 20px; border: 0; border-radius: var(--dx-radius-sm); color: #fff; background: var(--dx-stock); font: 800 13px var(--dx-font-sans); cursor: pointer; }.hosted-actions button:disabled { opacity: .65; cursor: wait; }
+.hosted-actions nav { display: flex; flex-wrap: wrap; gap: 16px; }
 .hosted-actions a { color: var(--dx-ink); font-size: 12px; font-weight: 750; }
 @media (max-width: 520px) { .hosted-gate { width: min(100% - 28px, 720px); padding: 44px 0; }.hosted-gate h1 { font-size: 43px; }.hosted-actions { align-items: stretch; flex-direction: column; }.hosted-actions button { width: 100%; }.hosted-actions a { padding: 5px 0; } }

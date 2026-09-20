@@ -1,0 +1,34 @@
+{
+  "schema": "dividendx-catalog-hosted-acceptance-v1",
+  "verifiedAt": "2026-09-20T05:27:15.318Z",
+  "boundary": "synthetic-public-devnet",
+  "site": "https://dividendx.payai.network",
+  "releaseCommit": "6e79a76192258af8530cbe874c02d2c14fa6b6b0",
+  "deploymentId": "dpl_4cyXy5Gk3tEUAi1CsZfMgsZiSU6S",
+  "manifestAssetCount": 15,
+  "assetId": "xstocks-test-aapl",
+  "balances": [
+    "10",
+    "0",
+    "0"
+  ],
+  "duplicateGrantReusedSameSignature": true,
+  "transactions": [
+    {
+      "signature": "2XW5SnRf6KzYrSqQxRHALWCPhBqQf9kn2NnmmJ7icc5KapNHxx6gAKzCMyPt5WBDxwokedKQSdTqmizDfnaykd4m",
+      "slot": 501227358,
+      "status": "finalized"
+    },
+    {
+      "signature": "3g7uNUWF78CDWowfWzDRd6SDyd9QKwPZMhuNxzaHKdGSx29pR8QW3zfYpKTAqtQTpd1VedtwXED9YrC598SjZi2F",
+      "slot": 501227421,
+      "status": "finalized"
+    },
+    {
+      "signature": "z7pSNdgYG6LB67wufoS8QvCShKrvLWgxi8SnjX5TE1zL8Ex27F5G5xgLtHWUQKLDeB6h8BVtDrnm1CEGVW7gVXn",
+      "slot": 501227478,
+      "status": "finalized"
+    }
+  ],
+  "browserErrors": []
+}

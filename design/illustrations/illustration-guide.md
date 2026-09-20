@@ -65,6 +65,7 @@ Treat these as semantic contracts.
 
 - **Certificate:** stock exposure. It may suggest a claim, but never a specific issuer unless native copy names one.
 - **Detachable coupon:** one event’s Dividend rights entitlement. It is not guaranteed cash or a recurring income stream.
+- **Annual claim slip:** a separated amber paper instrument can represent a fixed-term DR when nearby native copy explicitly says “annual dividend rights” or names the selected year. Do not draw a fixed number of coupons as a promise of future payments. The [wallet hero study v2](prompts/stock-dividend-separation-v2.md) uses this annual meaning; older event artwork retains its original context.
 - **Disconnected gap:** separable ownership. It must not imply withdrawal, failure, or a broken transaction.
 - **Custody tray:** collateral identity and separation. Multiple issuer or mint trays remain visibly distinct; never merge them into a shared pool.
 - **Fractions:** divisibility or participation at smaller size, not a numerical allocation. Exact proportions belong in a native diagram.

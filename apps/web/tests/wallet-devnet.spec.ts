@@ -13,6 +13,8 @@ import {
   validateManifestShape,
 } from '../src/wallet/runtime';
 import { DEVNET_CHAIN, signLegacyTransaction } from '../src/wallet/wallet-standard';
+import { createInventoryFixture, type InventoryFixture } from './inventory-fixtures';
+import { addOpenSeriesQuotes } from './wallet-quote-fixtures';
 
 const port = 4194;
 const origin = `http://127.0.0.1:${port}`;
@@ -64,17 +66,27 @@ test.beforeAll(async () => {
 
 test.afterAll(() => { server?.kill('SIGTERM'); });
 
-async function mockDevnetRpc(page: Page, overrides: { genesisHash?: string; deploymentDomainHex?: string } = {}) {
+async function mockDevnetRpc(page: Page, overrides: {
+  genesisHash?: string;
+  deploymentDomainHex?: string;
+  accounts?: InventoryFixture['accounts'];
+  getBalance?: (owner: string) => number;
+} = {}) {
   await page.route('https://api.devnet.solana.com/**', async (route) => {
     const request = route.request().postDataJSON() as { id: number; method: string; params?: unknown[] } | { id: number; method: string; params?: unknown[] }[];
     const answer = (entry: { id: number; method: string; params?: unknown[] }) => {
       let result: unknown;
       if (entry.method === 'getGenesisHash') result = overrides.genesisHash ?? DEVNET_GENESIS_HASH;
+      else if (entry.method === 'getBalance') result = { context: { slot: 123 }, value: overrides.getBalance?.((entry.params?.[0] as string) ?? '') ?? 0 };
       else if (entry.method === 'getAccountInfo') result = { context: { slot: 10 }, value: { data: ['', 'base64'], executable: true, lamports: 1, owner: 'BPFLoaderUpgradeab1e11111111111111111111111', rentEpoch: 0, space: 0 } };
       else if (entry.method === 'getMultipleAccounts') {
         const addresses = entry.params?.[0] as string[];
         const isConfig = addresses?.length === 1 && addresses[0] === configPda().address.toBase58();
-        result = { context: { slot: 10 }, value: isConfig ? [{ data: [encodedConfig(overrides.deploymentDomainHex), 'base64'], executable: false, lamports: 1, owner: DIVIDENDX_PROGRAM_ID.toBase58(), rentEpoch: 0, space: 73 }] : addresses.map(() => null) };
+        result = { context: { slot: 123 }, value: isConfig ? [{ data: [encodedConfig(overrides.deploymentDomainHex), 'base64'], executable: false, lamports: 1, owner: DIVIDENDX_PROGRAM_ID.toBase58(), rentEpoch: 0, space: 73 }] : addresses.map((address) => {
+          const info = overrides.accounts?.get(address);
+          return info ? { data: [info.data.toString('base64'), 'base64'], executable: info.executable,
+            lamports: info.lamports, owner: info.owner.toBase58(), rentEpoch: info.rentEpoch, space: info.data.length } : null;
+        }) };
       } else result = null;
       return { jsonrpc: '2.0', id: entry.id, result };
     };
@@ -82,22 +94,22 @@ async function mockDevnetRpc(page: Page, overrides: { genesisHash?: string; depl
   });
 }
 
-function installRetryWallet(page: Page) {
-  return page.addInitScript(() => {
+function installRetryWallet(page: Page, owner = PublicKey.default, rejectFirst = true) {
+  return page.addInitScript(({ address, bytes, rejectFirst }) => {
     window.addEventListener('wallet-standard:app-ready', ((event: Event) => {
-      const account = { address: '11111111111111111111111111111111', publicKey: new Uint8Array(32), chains: ['solana:devnet'], features: ['solana:signTransaction'], label: 'Devnet test account' };
+      const account = { address, publicKey: Uint8Array.from(bytes), chains: ['solana:devnet'], features: ['solana:signTransaction'], label: 'Devnet test account' };
       let attempts = 0;
       const wallet = {
         version: '1.0.0', name: 'Retry Devnet Wallet', icon: 'data:image/svg+xml;base64,PHN2Zy8+', chains: ['solana:devnet'], accounts: [],
         features: {
-          'standard:connect': { version: '1.0.0', connect: async () => { attempts += 1; if (attempts === 1) throw new Error('User rejected devnet connection.'); return { accounts: [account] }; } },
+          'standard:connect': { version: '1.0.0', connect: async () => { attempts += 1; if (rejectFirst && attempts === 1) throw new Error('User rejected devnet connection.'); return { accounts: [account] }; } },
           'standard:events': { version: '1.0.0', on: () => () => undefined },
           'solana:signTransaction': { version: '1.0.0', supportedTransactionVersions: ['legacy'], signTransaction: async () => [] },
         },
       };
       (event as Event & { detail: { register: (registered: unknown) => void } }).detail.register(wallet);
     }) as EventListener);
-  });
+  }, { address: owner.toBase58(), bytes: [...owner.toBytes()], rejectFirst });
 }
 
 test('wrong manifest RPC endpoint is rejected before any wallet prompt', async ({ page }) => {
@@ -138,11 +150,49 @@ test('verified devnet has no clock controls and wallet rejection can be retried'
   await expect(page.getByLabel('Verified runtime')).toContainText('Verified Solana devnet');
   await expect(page.getByText('Annual lifecycle controls')).toHaveCount(0);
   await expect(page.getByText('Network-wide test dates')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: /Request test SOL/ })).toHaveCount(0);
-  await page.getByRole('button', { name: 'Retry Devnet Wallet' }).click();
+  await expect(page.getByTestId('faucet-request')).toHaveCount(0);
+  await page.getByTestId('wallet-trigger').click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Retry Devnet Wallet' }).click();
   await expect(page.getByRole('alert')).toContainText('User rejected devnet connection');
-  await page.getByRole('button', { name: 'Retry Devnet Wallet' }).click();
-  await expect(page.getByRole('status')).toContainText('connected for Solana devnet signing');
+  await page.getByRole('dialog').getByRole('button', { name: 'Retry Devnet Wallet' }).click();
+  await expect(page.locator('.p-success[role="status"]')).toContainText('connected for Solana devnet signing');
+  await page.getByTestId('wallet-trigger').click();
+  await expect(page.getByRole('dialog').getByRole('link', { name: 'View wallet address on Solscan' }))
+    .toHaveAttribute('href', `https://solscan.io/account/${PublicKey.default.toBase58()}?cluster=devnet`);
+});
+
+test('public Devnet stock request adds SOL only below the six-million-lamport target', async ({ page }) => {
+  const fixture = createInventoryFixture();
+  await addOpenSeriesQuotes(fixture);
+  let lamports = 5_999_999;
+  const observedOwners: string[] = [];
+  await installRetryWallet(page, fixture.owner, false);
+  await page.route(`${origin}/api/devnet/manifest`, (route) => route.fulfill({ json: devnetManifest({
+    assets: fixture.manifest.assets, faucetEnabled: true,
+  }) }));
+  await mockDevnetRpc(page, { accounts: fixture.accounts, getBalance: (owner) => {
+    observedOwners.push(owner);
+    return lamports;
+  } });
+  await page.goto(`${origin}/app/`);
+  await expect(page.getByLabel('Verified runtime')).toContainText('Verified Solana devnet');
+  await page.getByTestId('wallet-trigger').click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Retry Devnet Wallet' }).click();
+  const card = page.getByTestId('market-stock-card').filter({ hasText: 'Test0' });
+  await card.click();
+  await expect(page.getByTestId('asset-stock-balance')).toHaveText('0');
+  await expect(page.getByTestId('asset-sol-status')).toContainText('top your wallet up to 0.006 SOL on Devnet');
+  await expect(page.getByTestId('asset-get-tokens')).toContainText('Get 10 Test0 + Devnet SOL');
+  await expect(page.getByTestId('asset-get-tokens')).toBeEnabled();
+  await page.getByRole('button', { name: 'Close stock details' }).click();
+
+  lamports = 6_000_000;
+  await card.click();
+  await expect(page.getByTestId('asset-sol-status')).toContainText('at least 0.006 SOL; no SOL top-up is needed');
+  await expect(page.getByTestId('asset-get-tokens')).toContainText('Get 10 Test0');
+  await expect(page.getByTestId('asset-get-tokens')).not.toContainText('Devnet SOL');
+  await expect(page.locator('.wallet-sol-current')).toContainText('0.006000 SOL');
+  expect(observedOwners).toContain(fixture.owner.toBase58());
 });
 
 test('devnet configuration pins identity, blocks advance, and passes the chain to signing', async () => {
