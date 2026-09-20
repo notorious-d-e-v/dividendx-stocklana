@@ -4,7 +4,13 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 
 ## Start here
 
-- [Guided tour v4](../spec/guided-tour-v4.md) and [local acceptance](../planning/guided-tour-v4-review.md) — three-part learning flow; [actual browser driver](../scripts/hosting/guided-tour-local-review.mjs) and [three-profile execution evidence](../planning/evidence/guided-tour-v4-profiles-2026-09-19.json). Earlier [v3 acceptance](../planning/guided-tour-review.md) is preserved. Publication and a matching hosted snapshot remain pending user review.
+- [Market balances review](../planning/wallet-market-balances-review-2026-09-20.md) — local landing page shows owned stock/PT/DR positions or goes directly to the company catalog; annual claims remain distinct.
+- [Stock modal and wallet-flow review](../planning/wallet-stock-modal-review-2026-09-20.md) — local illustration variant, company-color dots, balance-aware funding modal, stable asset switching and split-to-redeem nudge; faucet capacity audit and actual devnet round trip.
+- [Wallet and asset-discovery review](../planning/wallet-polish-review-2026-09-20.md) — local header wallet modal, concise Market hero, supported balances and devnet faucet access.
+
+- [20 September local navigation review](../planning/navigation-wallet-review-2026-09-20.md) — guided landing page, focused wallet actions and catalog availability. This pass is not yet published.
+
+- [Guided tour v4](../spec/guided-tour-v4.md) and [local acceptance](../planning/guided-tour-v4-review.md) — three-part learning flow; [actual browser driver](../scripts/hosting/guided-tour-local-review.mjs) and [three-profile execution evidence](../planning/evidence/guided-tour-v4-profiles-2026-09-19.json). Earlier [v3 acceptance](../planning/guided-tour-review.md) is preserved. Published with a matching hosted snapshot in the [v4 release](../planning/guided-tour-v4-release.md).
 
 - [README](../README.md) — run the real local wallet application, preserved previews and their checks.
 - [AMM review](../planning/amm-review.md) — finalized public devnet round trip and separate captured-bytecode local proof.

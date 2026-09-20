@@ -35,6 +35,7 @@ function guidedMultiplier(bits) {
 const READ_TIMEOUT_MS = 90_000;
 const DOM_TIMEOUT_MS = 60_000;
 const POLL_MS = 2_000;
+const presentedSymbol = (symbol) => symbol.replace(/^Test(?=[A-Z])/, '');
 
 function usage() {
   return `Usage: node scripts/hosting/hosted-browser-smoke.mjs \\
@@ -358,7 +359,7 @@ async function enterSession(page, context, kind) {
   let session = await readSession(context, kind);
   let startedAt = null;
   if (session.status === 'none' || session.status === 'expired' || session.status === 'failed') {
-    const buttonName = session.sessionId ? 'Start a fresh sandbox' : 'Start private sandbox';
+    const buttonName = session.sessionId ? kind === 'guided' ? 'Start a fresh guided demo' : 'Start a fresh sandbox' : 'Start private sandbox';
     const button = page.getByRole('button', { name: buttonName, exact: true });
     await button.waitFor({ state: 'visible' });
     startedAt = Date.now();
@@ -398,7 +399,7 @@ async function waitForWalletIdle(page, label) {
   const reset = page.getByRole('button', { name: 'Reset sandbox', exact: true });
   const anchor = await reset.count() === 1
     ? reset
-    : page.getByRole('button', { name: /^Request test SOL \+ / }).first();
+    : page.getByTestId('faucet-request');
   const state = await poll(`${label} UI`, async () => ({
     anchorCount: await anchor.count(),
     anchorEnabled: await anchor.count() === 1 && await anchor.isEnabled(),
@@ -522,10 +523,10 @@ async function runSandbox() {
     await page.locator('.wallet-selector select').first().selectOption(asset.id);
     const wallet = await connectTemporaryWallet(page);
     await stage('sandbox: fund temporary wallet once', { sessionId: session.sessionId });
-    actions.push(await clickWalletAction(page, page.getByRole('button', { name: `Request test SOL + ${asset.symbol}`, exact: true }), 'sandbox faucet'));
+    actions.push(await clickWalletAction(page, page.getByTestId('faucet-request'), 'sandbox faucet'));
     await stage('sandbox: split stock into PT and DR');
     await page.getByRole('button', { name: 'Split', exact: true }).click();
-    await page.getByLabel(`Deposit ${asset.symbol}`).fill('100');
+    await page.getByLabel(`Deposit ${presentedSymbol(asset.symbol)}`).fill('100');
     actions.push(await clickWalletAction(page, page.getByRole('button', { name: 'Split into PT + DR', exact: false }), 'sandbox split'));
     await stage('sandbox: advance through four events and finalization');
     await page.getByText('Network-wide test dates', { exact: true }).click();
@@ -842,7 +843,7 @@ async function runDevnet() {
     const faucetBeforeReceipts = await walletReceipts(page);
     const faucetBeforeCaptured = await capturedSignatureSnapshot(page);
     const faucetResponse = page.waitForResponse((response) => response.request().method() === 'POST' && new URL(response.url()).pathname === '/api/devnet/faucet', { timeout: READ_TIMEOUT_MS });
-    await page.getByRole('button', { name: `Request test SOL + ${asset.symbol}`, exact: true }).click();
+    await page.getByTestId('faucet-request').click();
     const faucetPayload = await responseJson(await faucetResponse, 'devnet faucet', [200, 202]);
     const faucetStatuses = await waitForDevnetFaucet(context, manifest, faucetPayload);
     actions.push(await finishWalletAction(page, 'devnet faucet', faucetBeforeReceipts, faucetBeforeCaptured, faucetPayload.signatures));
@@ -859,7 +860,7 @@ async function runDevnet() {
     Object.assign(report.flows.devnet, { wallet, assetId: asset.id, faucet: faucetPayload, duplicateGrant, faucetStatuses: faucetStatuses.value, actions });
     await stage('devnet: split and recombine one TestKOx');
     await page.getByRole('button', { name: 'Split', exact: true }).click();
-    await page.getByLabel(`Deposit ${asset.symbol}`).fill('1');
+    await page.getByLabel(`Deposit ${presentedSymbol(asset.symbol)}`).fill('1');
     actions.push(await clickWalletAction(page, page.getByRole('button', { name: 'Split into PT + DR', exact: false }), 'devnet split'));
     await page.getByRole('button', { name: 'Redeem', exact: true }).click();
     await page.getByLabel('Matching pair amount').fill('1');

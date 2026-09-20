@@ -186,7 +186,7 @@ async function capturePair(phase) {
 }
 async function syncMobile(state, label) {
   await mobile.reload({ waitUntil: 'domcontentloaded' });
-  await mobile.getByRole('heading', { level: 1, name: /One tokenized stock/ }).waitFor();
+  await mobile.getByRole('heading', { level: 1, name: 'One stock. Two separate tokens.' }).waitFor();
   if (state.snapshot) await verifyDisplayedBalances(mobile, state);
   assert.equal((await readState()).sessionId, state.sessionId, `${label} mobile reload changed runtime session`);
 }
@@ -284,8 +284,8 @@ try {
   assert.equal(initial.status, 'idle', 'Use a fresh local guided runtime for this run');
   assert.equal(initial.sessionId, null);
   await Promise.all([desktop.goto(PAGE_URL, { waitUntil: 'domcontentloaded' }), mobile.goto(PAGE_URL, { waitUntil: 'domcontentloaded' })]);
-  await Promise.all([desktop.getByRole('heading', { level: 1, name: /One tokenized stock/ }).waitFor(),
-    mobile.getByRole('heading', { level: 1, name: /One tokenized stock/ }).waitFor()]);
+  await Promise.all([desktop.getByRole('heading', { level: 1, name: 'One stock. Two separate tokens.' }).waitFor(),
+    mobile.getByRole('heading', { level: 1, name: 'One stock. Two separate tokens.' }).waitFor()]);
   assert.equal(await mobile.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches), true);
   await desktop.getByTestId('prepare-guided-profile').waitFor();
   await mobile.getByTestId('prepare-guided-profile').waitFor();

@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "boundary": "Local UI + public devnet; existing dedicated QA holder, no new faucet grant; Wallet Standard test harness, not an installed extension.",
+  "wallet": "AzXyVUoCkyahCejBUVEoV4pcc8d5cLCnT62DEyacLaj6",
+  "assetId": "ondo-test-aapl",
+  "initialBalances": [
+    "1000000000",
+    "0",
+    "0"
+  ],
+  "initialSol": 52264200,
+  "signatures": [
+    "4RyNMsoc3swMxQG89Z4LFVatnkPSHBCRQkkY9UPMibFS1xcqkAzjEmh4GRU19bCGNVCudi7uQuLj8qvPrY1jQBhT",
+    "2Qy2YJrqo2jgbPhfQLxzV2bjsgb6cSMJ5QMk3ZCUBNFExaHxNVTzpgxsBjcMwC2RkkdJ3uSPY1faHamNtmuYBroz"
+  ],
+  "checks": [
+    "Generated hero loads; 15 company dots; held stock dialog at desktop/mobile; stable selection between two owned stocks",
+    "Confirmed deposit exposes Redeem nudge retaining selected mint/year; actual recombination returns initial balances; two signatures independently verified; responsive pages no overflow"
+  ],
+  "finalBalances": [
+    "1000000000",
+    "0",
+    "0"
+  ],
+  "finalSol": 52254200,
+  "statuses": [
+    {
+      "confirmationStatus": "confirmed",
+      "confirmations": 31,
+      "err": null,
+      "slot": 501355921,
+      "status": {
+        "Ok": null
+      }
+    },
+    {
+      "confirmationStatus": "finalized",
+      "confirmations": null,
+      "err": null,
+      "slot": 501355869,
+      "status": {
+        "Ok": null
+      }
+    }
+  ],
+  "browserErrors": [],
+  "signingCalls": 2
+}

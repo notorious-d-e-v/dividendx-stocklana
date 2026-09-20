@@ -391,15 +391,15 @@ export function GuidedDemosApp({ client = localGuidedClient, onHostedReset }: { 
   return <MotionConfig reducedMotion="user"><div className="demo-shell">
     <a className="skip-link" href="#demo-main">Skip to demo</a>
     <header className="demo-header">
-      <a className="demo-brand" href="/app/"><Mark /><span>DividendX</span></a>
-      <nav aria-label="Primary">{client.hosted ? <><a href="/app/">Public devnet</a><a href="/sandbox/">Wallet sandbox</a></> : <a href="/app/">Wallet app</a>}<a href="/demos/" aria-current="page">Guided demos</a></nav>
+      <a className="demo-brand" href="/"><Mark /><span>DividendX</span></a>
+      <nav aria-label="Primary"><a href="/app/">Public Devnet</a><a href="/demos/" aria-current="page">Guided Demos</a></nav>
       <span className={`runtime-status ${runtimeUnavailable ? 'unavailable' : state?.status ?? ''}`}><i />{statusLabel(state, runtimeUnavailable)}</span>
     </header>
     <aside className="boundary-bar"><strong>{client.hosted ? 'Private sandbox' : 'Local tour'} · Demo assets · Fast-forwarded year</strong><details><summary>What this means</summary><ul><li>No real funds are involved in this demo.</li><li>Fast-forward through simulated quarterly dividends to explore a full year.</li></ul></details></aside>
 
     <main id="demo-main">
       <section className="demo-hero">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .45 }}><p className="demo-kicker">The DividendX guided tour</p><h1>One tokenized stock. <span>Two separate tokens.</span></h1><p>Follow this guided demo to understand how DividendX works.</p><button className="demo-primary hero-cta" type="button" onClick={() => scrollTo('tour-core')}>Start guided tour <span aria-hidden="true">↓</span></button></motion.div>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .45 }}><p className="demo-kicker">The DividendX guided tour</p><h1>One stock.<span>Two separate tokens.</span></h1><p>Follow this guided demo to understand how DividendX works.</p><button className="demo-primary hero-cta" type="button" onClick={() => scrollTo('tour-core')}>Start guided tour <span aria-hidden="true">↓</span></button></motion.div>
         <motion.aside className="hero-explainer" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .45, delay: .08 }} aria-label="Tour overview"><p className="demo-kicker">The idea, in one view</p><div className="hero-stock"><span>TOKENIZED STOCK · {state?.asset?.company ?? 'Coca-Cola'} ({state?.asset ? assetLabel(state.asset).symbol : 'KOx'}) EXAMPLE</span><b>100</b></div><div className="hero-branch" aria-hidden="true"><i /><i /></div><div className="hero-claims"><div><span>PT</span><b>Stock exposure</b></div><div><span>DR</span><b>Dividend rights</b></div></div><h2>Learn how DividendX works</h2><p>DividendX separates a tokenized stock into stock exposure and dividend rights. You can put them back together or use the separate tokens in DeFi.</p></motion.aside>
       </section>
 

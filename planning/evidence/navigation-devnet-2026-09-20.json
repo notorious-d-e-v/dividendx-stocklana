@@ -1,0 +1,81 @@
+{
+  "boundary": "read-only local UI against actual public devnet; no browser transactions",
+  "checks": [
+    {
+      "assetId": "xstocks-test-kox",
+      "collateralMint": "8Hfkchm72cGmmJTmkZCHgnkAfVnyitr1XJhhNJXQFs3F",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "backpack-test-mu",
+      "collateralMint": "BrZc7571nweC4YCQrG2reTDyuQFxdctE4xXS5axuHF43",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "ondo-test-ibm",
+      "collateralMint": "AgFBbj61rpJ4uYAzmxJr4yBc7sAZ4hoiwMJim7LSrvm3",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "xstocks-test-aapl",
+      "collateralMint": "7fJuxjt1wUPdHgXxNFvCEQbW5UeBfoRfU7u9r5Xr2UYm",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "xstocks-test-msft",
+      "collateralMint": "H5A3Sa7eNE1NEX3AZTZ6geHHbhCeoXPmU5b1mcf34VTD",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "xstocks-test-mu",
+      "collateralMint": "7YMkbzjZTxaoXgioXd64eNhytdM16nUecJ3GLWvyH1WY",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "xstocks-test-nke",
+      "collateralMint": "9xvpARwY8XB3cSp3J34n8JXWQvwTgdBJRyhwcAjRJb2B",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "xstocks-test-ibm",
+      "collateralMint": "CRAe2SW3NxutkEEq8H3M4mXMmHazZzUCv8sWRVYgqy1",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "backpack-test-nke",
+      "collateralMint": "AmCXDLu7ryFgdkxxMkwzPX5v3WqJ14u52bddeWXP3dpz",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "backpack-test-ibm",
+      "collateralMint": "FG6t1SkLC9C5x3Ttw51dqCV12R6VsGXR5zG9Lpn7eYvh",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "ondo-test-ko",
+      "collateralMint": "EsMcTTvWRPNL7LHsHqVDeDVdVTUwuTwXBwkrCvuhUVbn",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "ondo-test-aapl",
+      "collateralMint": "CHUk56SSC2YiTKR1zzoAF2KMfyd9FzDGdhZg7krdV1m7",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "ondo-test-msft",
+      "collateralMint": "6NzCLuciZES9b2C4wMDCFn1dfEcghMQafXEBfC5ikvKV",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "ondo-test-mu",
+      "collateralMint": "APfJHnR1baHYsFcsyR2GNt5YmsjrE5NTE3RNsXGDMYXE",
+      "quoteLoaded": true
+    },
+    {
+      "assetId": "ondo-test-nke",
+      "collateralMint": "DKhJQkZyH7tMqBAtXMsoCA9QHxYF8QPPSjnbQ873WV6g",
+      "quoteLoaded": true
+    }
+  ],
+  "status": "passed"
+}

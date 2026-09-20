@@ -1,0 +1,316 @@
+{
+  "schema": "dividendx-catalog-proof-finality-v1",
+  "boundary": "synthetic-public-devnet",
+  "verifiedAt": "2026-09-20T05:18:03.869Z",
+  "runtimeId": "56751ad2-edb8-49ec-9c22-22e1bdf508de",
+  "assetCount": 15,
+  "transactionCount": 61,
+  "contextSlot": 501224520,
+  "transactions": [
+    {
+      "signature": "5kxSuS7gseCPrPjgNejsXQzzRABh1xLfkhcXN6Zb1eKoz7vLhFgv1M4yD4A31R2g95A5mSB1rBYZXLk6niRuZbw3",
+      "slot": 501221158,
+      "status": "finalized"
+    },
+    {
+      "signature": "2uobuSeELn3d5tbqf6gnXf2grNDecdwK35vp6s4HYJsVAjfGKJcsY36zLPcq9ovQZo8JNYpSrpgwChoTrbPy9Bcw",
+      "slot": 501221200,
+      "status": "finalized"
+    },
+    {
+      "signature": "2ViuzF8xBf1sapNHDPUohLjLD3g7MVkk9n3wbDFC9XFQ956yzGwTUhwmLEwfj7HmFc2miUhmSfRkR1TsFTCdqKBX",
+      "slot": 501221248,
+      "status": "finalized"
+    },
+    {
+      "signature": "2PSS49SdttTHbALeDofD1i989YLxxHQcFCkGuKQaoGXHATVjswkBLiwTzkQGpFqQ4Xvk4mznFZhfXDYccjRCEZWx",
+      "slot": 501221288,
+      "status": "finalized"
+    },
+    {
+      "signature": "ZHr9zvA7NC1173Fv3cLgVzu57ZawS8uRdyKH5ozwtH7dxGVg8k8vEa8FaKw33Gkv3J36xg8oFygxzr79XxMMjyi",
+      "slot": 501221332,
+      "status": "finalized"
+    },
+    {
+      "signature": "3GvYurLveeP9tarpT1NaX7XPhzocNKQjJRdu93SkvUD9y2acCJXWbqHF5cfSsDPy6toGuojbxXVWyPxnCvDid5qk",
+      "slot": 501221382,
+      "status": "finalized"
+    },
+    {
+      "signature": "4R9ah56SRwXufEPFxWj1kdVBc7ePhygv7aFPY53VKiRVixjA3zScKLt4SNpxDUMcMjHeTKpAWbqyMGKVAvzzJVoJ",
+      "slot": 501221435,
+      "status": "finalized"
+    },
+    {
+      "signature": "2ATvzypzDLKo1Vyg1iWt9HQZ9wyaPiCuGgkQenpR3QXvw38ZMaFjevmtbMSF11HePfFHqnAtcW8Rfub43iNS3HGe",
+      "slot": 501221475,
+      "status": "finalized"
+    },
+    {
+      "signature": "5jrxogirAPZjCn5XehT1o2wxmetze81RSeDCXTWeH9JjnF4MVvshbEPkTVQGc5B5tpQyppdmBRvhDdHxPoGvJ3yy",
+      "slot": 501221519,
+      "status": "finalized"
+    },
+    {
+      "signature": "2ZDnxFrpjNEWVPfYWPug9jTvBYFVJQRtjHiFjvEBam53eabZ5VajpzgEyEv2YpNq3RBK485Ae5iLSopamYe6AiCq",
+      "slot": 501221570,
+      "status": "finalized"
+    },
+    {
+      "signature": "3baPtMUFrn3z6m56Q5sViVtNWX7DkgxhUdgD5p7Lb7ZLYQaE32DxXMjhhqtkChPZ69rDJ3RBD379yKapSgXKdqC8",
+      "slot": 501221618,
+      "status": "finalized"
+    },
+    {
+      "signature": "44Ah8sG3EUWtmWkNrTPHzDRnzc8XEyGuPAgynRYFA9DBYrq4N326rWAu6dmCDFbdVou7pae2AexfdMrs5n1J1djZ",
+      "slot": 501221659,
+      "status": "finalized"
+    },
+    {
+      "signature": "43BQ2j6FzeN8F8HHVvGXGKnv5no3B8Jcdi5V8S4fWgeECvRD4buD1q1TRKk9GpAVRW63xscVv9RtF8DWbogH8qFW",
+      "slot": 501221701,
+      "status": "finalized"
+    },
+    {
+      "signature": "5dyAzzPUUbpfhgNyQ15nAM6Grqq3nfL9mpEZfR3zfGeTA27QoeBhu23E3e6zKC9ZGUBrSreR8XQ6tFud5m929q5G",
+      "slot": 501221752,
+      "status": "finalized"
+    },
+    {
+      "signature": "4vuRxNRmFUKae3Qam8AUo9DTfCUmd8Rwa3PvGFnpfHYBqrBQyMJQoJYtqyq3jdr5Yw63aH9wsuURxNjKRRGu4EAP",
+      "slot": 501221799,
+      "status": "finalized"
+    },
+    {
+      "signature": "3j61FKUm4ENBnXNMLw2TUrVKwJZqtD363FYnsgL5X4rSShLeBV7uBRD844kQHicjQVnfp7XTQyyP4SaSP8UQMJim",
+      "slot": 501221838,
+      "status": "finalized"
+    },
+    {
+      "signature": "3XjzKm9N8WvWhMxjaEBuA8GHwknvMZdowPnqLhKerkJNqKZuCTv5Nee1CjQfwW3wHPeGLMckHwtrjcszHdkYxjjs",
+      "slot": 501221882,
+      "status": "finalized"
+    },
+    {
+      "signature": "2d43poYXqRr4cHLvw4979jTj95LJdhRQbu7Q5K28UUZwXXox8SLGmDQhhCaEaQicRm2iFGC6e35HECjpfg9tJfTs",
+      "slot": 501221931,
+      "status": "finalized"
+    },
+    {
+      "signature": "2puN8z1i14XWaCqAiyoteSbenFagJPQwFrup9Ln5tBYAmqh5qyjLFmQevzW6S7SFCALm2RfGmmeMmbo4yXxaMtk9",
+      "slot": 501221978,
+      "status": "finalized"
+    },
+    {
+      "signature": "33TbKBetSQd1WG6tcvh6JaG1nqdK7f4n2x7TRLP61MXHKaFKKgxrrrggG8daH6dQuc79hJbmorXgxTAox3GhbHaR",
+      "slot": 501222019,
+      "status": "finalized"
+    },
+    {
+      "signature": "54U1axaeH5VrntostrtgLyAGcQSpDMMDhgQsnYE7q5dbRMeGW8mhn5pVJiQ71NHhyERg74UcR5dzWVUGToufaRmd",
+      "slot": 501222062,
+      "status": "finalized"
+    },
+    {
+      "signature": "2Z6PdwX7LmKVTuubUCMGzvJ8c486KLxNMfYT6DpQqyAvqNPonTURKp6vWk6ST1yzXhmy2dS2XqZANF7h1iKrAbFW",
+      "slot": 501222112,
+      "status": "finalized"
+    },
+    {
+      "signature": "3WArrhuCg1Pe6yecMLEe7BGSmqPvicGJXqKYXRAaGWF46UB6GsWprRCbJRVrFHPw7veZk8A5fzo2FCedFX8jdHxs",
+      "slot": 501222158,
+      "status": "finalized"
+    },
+    {
+      "signature": "zyHAHkLg4Ci7D4KwutubAEaDiApuAWEvusgYi4do2SiEYAcJ3F3vW6sTJX85My7cVtGEmf3VTDUU9DKt84K8XGG",
+      "slot": 501222199,
+      "status": "finalized"
+    },
+    {
+      "signature": "2sLjcauW8AyecshUkrzw3rLgJSHdLxQFehY7QN4aZFFfSxcUWwBGzkMKCxkktYn3C6VPmRMRfhgEurCWHWDaj93T",
+      "slot": 501222246,
+      "status": "finalized"
+    },
+    {
+      "signature": "5669m6txZqdUpqgssXf6w7TKtkBhwEM3nS4xB1HCa8A39w3PBKNyFbGFGfsE36jT7D384jSF6TpyDgPv8PTCveCY",
+      "slot": 501222297,
+      "status": "finalized"
+    },
+    {
+      "signature": "4RcpL5i6EBV7YLgfcjzsHPaBgN4T9VmsBjuFcHvpbBhu7vng2DjXBdVWz8jtQTsjayFwGR8biCATp93Hme7qyzrh",
+      "slot": 501222356,
+      "status": "finalized"
+    },
+    {
+      "signature": "5JEvysgiBY21ZWZaeZwxNGd9TnadTcw12JXAs8oSwDfWSPdrWwNP9Qw1WUjXZePGGY7CNAPZ7YFhWa7D8qxZB9a4",
+      "slot": 501222412,
+      "status": "finalized"
+    },
+    {
+      "signature": "3swiFtiD7UGX9rdZKGU3974vk2uCtPHmz7BhLpYwK9FoN5e6t1vw93DWi76QVrQ92NZGVfre4sc1KpjLFaryznVR",
+      "slot": 501222455,
+      "status": "finalized"
+    },
+    {
+      "signature": "2g1Hi9RcDXeyKmofyhAEX4ygqjhYUe9js7YrjuUnsHQztdU6hfHRGM7imL6Xkjc1HjGVeUhL4reD3ZrqGrsGURa6",
+      "slot": 501222507,
+      "status": "finalized"
+    },
+    {
+      "signature": "4L9UUF3DYZUSUYJonTAaKkpfjaqCuTjUQSfxm6KgGeSK3Ssw5wy9maEowQ1tYTtYcjfoRpYqYG3BCY7YiBt3rn5g",
+      "slot": 501222555,
+      "status": "finalized"
+    },
+    {
+      "signature": "5MuyBRHtXDHiFHy6X5ZkfJw22q556MZYomiZ7H2f9dpg7hUNUY9cmzR8CgDap3X8HmPXi92SCBhcGNbiRWZSB1MW",
+      "slot": 501222600,
+      "status": "finalized"
+    },
+    {
+      "signature": "5nHgL8iYLX2ECj2pSVTewDGGrXUJUgTCJ3Y1v7QAxzw5wAicVhqbkhWrRDfr5NKzi9hUoAtGa2DrwJP3Q7Yj1e4b",
+      "slot": 501222647,
+      "status": "finalized"
+    },
+    {
+      "signature": "vXaCbuha8Y2GJz6QRHKKJFbgSw92T9w6YoTbSPWM8M88GsUd5BFe5oW9KgG66pWSRterRwxcixUX9X3sQiYNdLB",
+      "slot": 501222696,
+      "status": "finalized"
+    },
+    {
+      "signature": "3uoZnmX4cY7zZMraeUCiet9XWPyXAcvLCxFZggkVRd9mGahCv9HWYJbbSqhhXn1Q7y5kiXeKwe3xFXrU8k1Eg3CS",
+      "slot": 501222743,
+      "status": "finalized"
+    },
+    {
+      "signature": "tW1KKH5AzPa87ZFrX7WTybrj9iUXmKUa6SBYtcHJLigZE8TqtbCu6gG59MSMZQmvfnHhRTFpXtsSGGxhuBhEwRs",
+      "slot": 501222784,
+      "status": "finalized"
+    },
+    {
+      "signature": "4ESnt6KzRXbWAYCr91MxRUeivXca2tFxmy4bcY5qfxnvNHVSmAJ1AeiuB9hG6B5A44kAynmF18Z8zrNhVfBujifT",
+      "slot": 501222830,
+      "status": "finalized"
+    },
+    {
+      "signature": "5C8aFVujVC6d5RRo35pyGJ8s4H6heoEZmwE3baKaG5br2jNWTd9AnVHZ4mkGNXEcPCEfY3bKdpsimesE2Ex3ZqcX",
+      "slot": 501222878,
+      "status": "finalized"
+    },
+    {
+      "signature": "VwJYr7mhrrhBaxSXL2nJgvEvTVVreKnKjTWdu9WFYuh9rx638oFy4UnMnoYBNA7o9zuZW2kkNMTEXXGG8ECtDrz",
+      "slot": 501222925,
+      "status": "finalized"
+    },
+    {
+      "signature": "4rQnxjhKjc9YBsMyX8B4tf9vDiHSFzXhmp3nwHbpDM4wsiKLkUxieigpGPiniFVmybtp8Wtqxqjd3kwMhmxYr3DH",
+      "slot": 501222965,
+      "status": "finalized"
+    },
+    {
+      "signature": "YzY8VYA3L9R4d3F9cGrf4E5QizpkDxSApKh9Jj9o6qk5NMMqnMKCZPgWEaj3dWJytXDQcPsFqrBzAZALQgTXPzV",
+      "slot": 501223011,
+      "status": "finalized"
+    },
+    {
+      "signature": "3KmdUamAdVAb21QhtRtisb7bNrigBr1gc6JVZgBzsf7b1TWPrAZ33N9UiNzWEJju8iRjijCuxqRfyMf2qSEKnMxy",
+      "slot": 501223062,
+      "status": "finalized"
+    },
+    {
+      "signature": "243gg9mLcMTRMwFEGDby3wqk8xHLddv1hi3RDk7T6m7sb5LwJzBn8LWKeHeKjLtRB51SrP3zwBEHUpZLUSX49uyP",
+      "slot": 501223108,
+      "status": "finalized"
+    },
+    {
+      "signature": "3hsU2XZGdfzmwc7PM7hKK9JFw3NMTh24PMKxTL3k16GhF1SxJFF2Hwq1pYpLvXRzyCKwaGNS44sK9dnMRv3oXtk7",
+      "slot": 501223148,
+      "status": "finalized"
+    },
+    {
+      "signature": "32aH4g64Aek8it6NxofcQAdsYSgAQ8HXofaHDyuKMoJU9cYctsECyEARo8e1hTnNc5iBhgidAL86XRaYBD2pSyWX",
+      "slot": 501223193,
+      "status": "finalized"
+    },
+    {
+      "signature": "4rx6AErdr1ZexAthwBHAnDjT2tntv5PYHnPQvocsfnRyiRpmXzmSrHMjkLmXFdWNACd7tEqkQsjyAhSHUghZN1st",
+      "slot": 501223242,
+      "status": "finalized"
+    },
+    {
+      "signature": "5YsdQQMJLpe8P52ASoqWSzuL8o4CVisRCZKgr89Rz6mNeNw3XUcVhyQnALVr8YMXDg7tYhkTzUL9WPVoYM4CYxBX",
+      "slot": 501223291,
+      "status": "finalized"
+    },
+    {
+      "signature": "31Xi8D28r1s6BvRqb17y4SFPcr8zTKv38rGrFQZGbaGwDpJ8a1XY2cBmz1CNUsdjo79XbzKZ7SaFPuw8JgPyMJcH",
+      "slot": 501223332,
+      "status": "finalized"
+    },
+    {
+      "signature": "fzLpKLXe5CoJHNjdKQiNo3t4QbPunQr3uCw84xfcUwykdhQPt2bLxae8bxXGXaNZS3kCUwesFuQy8EkxjHigcBn",
+      "slot": 501223376,
+      "status": "finalized"
+    },
+    {
+      "signature": "2ZcPapwuHLS2FkSAao39A1dDFXPm46jmAb7c8RSbVyaL23CZQ27TgpbVTYyaxTkREt1wh3XnKt2sEy4qsPiEFjmF",
+      "slot": 501223432,
+      "status": "finalized"
+    },
+    {
+      "signature": "4hww7p69Z51pcAzaSbdtDdujQNTgqSEvp8psNvpoq7sbDWVxyZSKftQQFDenXNy7hZ3gNdQzYh4u6zk5AjQbwZjH",
+      "slot": 501223484,
+      "status": "finalized"
+    },
+    {
+      "signature": "3yAj4ogmwtMzW5pp3hs5dB3CuBUR7p1R8x1R6RpyJ4SWvtn86WFuoSorSwY3LosPW5JigSDd72AXZ4s1pD172k59",
+      "slot": 501223532,
+      "status": "finalized"
+    },
+    {
+      "signature": "5qhKs22pxe93bBArwjUsgc3UMDtRD9joy1CuPvzfbBZ3618hGZy5nj7vGYWnSntrra92c2Dno6fEf5JwvnGt1bqJ",
+      "slot": 501223574,
+      "status": "finalized"
+    },
+    {
+      "signature": "5jMu1Rd7awP8RACfd3NU3QYXZSedUCjYYiWQCUdBYEi8c3Ke5kZ4CajKzYEWkYEBJLGDixYWG9HJdTYgWqJv2Z9Z",
+      "slot": 501223623,
+      "status": "finalized"
+    },
+    {
+      "signature": "44WvE9HnMgxx1sB6k3uhCjWXuMZ17pnbWdiWssPEpV5Wjoc38e5idzygkonGcNeAmeznsQJ1LkVJ2XHUi1TXTBNh",
+      "slot": 501223669,
+      "status": "finalized"
+    },
+    {
+      "signature": "5Pxf3HrGrunsDPc8AfXT8HotdeLmvPiqSYHoKUT8RbFM648vTJDxve6gxF5rtbrYnwRiPDSF3e6axiVMhpN7DUU4",
+      "slot": 501223713,
+      "status": "finalized"
+    },
+    {
+      "signature": "3JTQM6WdDMB4EhQ64TA97VTAQ9t8JMzBGhmNkHhAUKjBxGazKJq5TeVXQ3AN3v34ieuUPec7tfTjfce5poFVc5GX",
+      "slot": 501223759,
+      "status": "finalized"
+    },
+    {
+      "signature": "2Ji52BUoFARLhbw9vr1Cej28Asg7orsjKfrevc7GpVsapzKk4g1jhrJ3udjucEcutHgKzYABp2SB4wMfaxKtkr8c",
+      "slot": 501223809,
+      "status": "finalized"
+    },
+    {
+      "signature": "2w2wTFCDWSRTpudQuxnfNTeBkW1SjFKqMUKkbRgCANg5a77MQCkBHZ6XCz8NdMdf1gtyqFuGBtgoVL4wpfVubai6",
+      "slot": 501223863,
+      "status": "finalized"
+    },
+    {
+      "signature": "trqQNH6rww9ETFgmx21SpCFZWQfk6tKHBoW6GNWSGN3MSwchVmwUwnTGq8smpyoDjCniq7uke9FPhDhr66auh2Z",
+      "slot": 501223911,
+      "status": "finalized"
+    },
+    {
+      "signature": "33ZaQTegMGyoknSDw4ineSSg6e9tcznE4Ek2SoVES1hhEPXJEnXuYuVeTkt1RaowSxwpRsqEAtXMbjwZKCMRVv37",
+      "slot": 501223972,
+      "status": "finalized"
+    }
+  ]
+}

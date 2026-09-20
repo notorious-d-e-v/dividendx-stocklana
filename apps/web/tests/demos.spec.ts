@@ -82,10 +82,22 @@ function advance(step: DemoStep, current: DemoState): DemoState {
 
 const clickStep = async (page: Page, step: DemoStep) => { await page.locator(`[data-demo-step="${step}"]`).click(); await expect(page.locator(`[data-demo-step="${step}"]`)).toHaveCount(0); };
 
+test('root and /demos/ serve the same guided landing and two-link navigation', async ({ page }) => {
+  await mockRuntime(page);
+  for (const path of ['/', '/demos/']) {
+    await page.goto(path);
+    await expect(page.getByRole('heading', { name: 'One stock. Two separate tokens.' })).toBeVisible();
+    await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link')).toHaveCount(2);
+    await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Public Devnet' })).toHaveAttribute('href', '/app/');
+    await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Guided Demos' })).toHaveAttribute('href', '/demos/');
+    await expect(page.getByTestId('prepare-guided-profile')).toBeDisabled();
+  }
+});
+
 test('hero scrolls without mutation; selected company starts funded and completes Part One', async ({ page }) => {
   const calls = await mockRuntime(page);
   await page.goto('/demos/');
-  await expect(page.getByRole('heading', { name: 'One tokenized stock. Two separate tokens.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'One stock. Two separate tokens.' })).toBeVisible();
   await expect(page.locator('#tour-dividends .chapter-preview')).toContainText('Finish Part One');
   await page.getByRole('button', { name: 'Start guided tour' }).click();
   await expect(page.locator('#tour-core')).toBeInViewport();
