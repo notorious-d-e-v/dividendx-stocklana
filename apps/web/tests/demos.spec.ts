@@ -48,7 +48,9 @@ async function mockRuntime(page: Page, initial = state(), onStep?: (step: DemoSt
       calls.starts.push(request);
       const asset = DEMO_ASSETS.find((item) => item.id === request.assetId)!;
       const restarted = current.status === 'complete';
-      current = { ...ready('core-split', [], asset, snapshot(asset, 100)), sessionId: restarted ? 'replacement-browser-session' : sessionId };
+      // The real runtime keeps revisions monotonic across a new inner journey.
+      current = { ...ready('core-split', [], asset, snapshot(asset, 100)), revision: current.revision + 1,
+        sessionId: restarted ? 'replacement-browser-session' : sessionId };
       return fulfillJson(route, { accepted: true }, 202);
     }
     if (path === '/step') {

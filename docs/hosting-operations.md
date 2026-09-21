@@ -6,6 +6,8 @@ The governing boundaries are the [hosting release review](../planning/hosting-re
 
 Production `/` and `/demos/` serve [guided tour v4](../planning/guided-tour-v4-review.md) with its matching schema-4 Sandbox snapshot. The [20 September wallet/navigation release](../planning/wallet-release-2026-09-20.md) records current acceptance and rollback details; the [v4 release review](../planning/guided-tour-v4-release.md) preserves the runtime snapshot's original acceptance. Visible navigation is Public Devnet / Guided Demos; the wallet sandbox and legacy previews remain available by direct link.
 
+The [21 September guided entry change](../planning/guided-lazy-entry-review-2026-09-21.md) shows the hero and company selector before creating a private network. Start guided tour starts it while scrolling to Part One; Get 100 starts it and continues the selected company. Status and recovery appear beneath the hero. Opening the page or selecting a company does not reserve a VM. Existing ready sessions resume; expiry requires an explicit new start.
+
 ## Production surfaces
 
 | Route | Network and lifetime | Operational boundary |
@@ -22,12 +24,16 @@ Installed-wallet-extension acceptance remains unproven. Production browser accep
 
 The session broker durably enforces:
 
-- four active VM reservations globally, with starting sessions counted;
-- 100 starts per UTC day globally, six per visitor, and 30 per observed IP;
+- 16 active VM reservations globally, with starting sessions counted;
+- 500 starts per UTC day globally, six per visitor, and 30 per observed IP;
 - a 30-second visitor creation cooldown and 90-second provisioning deadline;
 - 2,000 forwarded requests per session, 240 per minute, and 120 mutations total.
 
 Capacity errors are honest 429/503 responses. Do not bypass the ledger, automatically repeat a start/reset with an unknown result, or delete reservations to free capacity. A session reservation expires naturally after 15 minutes; tombstones remain for bounded reconciliation.
+
+These caps are shared by the wallet and guided sandboxes, and are separate from static page traffic. The [21 September capacity audit](../planning/research/guided-launch-capacity-2026-09-21.md) records the original four-active/100-daily profile. The user approved 500 daily starts targeting approximately $50/day. The [launch metering contract](../spec/guided-launch-metering.md) separates new sessions' counters into private per-session Blob records, retaining global admission and lifecycle checks. Ordinary GETs no longer rewrite the shared admission ledger. Old sessions retain their original global counters until expiry. The admission ledger has a bounded 3 MiB size allowance for overlapping tombstones.
+
+This is not unlimited access or a hard billing ceiling. Full-ledger reads, Functions, Blob transfer and other team usage still cost money. Meter records do not have automatic storage deletion when their VMs expire; future retention cleanup must be a separate scoped operation. Use the linked release evidence for measured startup/concurrency results rather than treating a provider quota as a tested application capacity.
 
 The public devnet faucet grants exactly ten units for one configured synthetic asset and may top a recipient up to 0.006 test SOL. It allows one grant per wallet/asset/UTC day, three per visitor/day, 12 per IP/day, and 30 globally/day. Reservations are capped at 0.27 SOL/day and 1 SOL for the service lifetime. The allowance and faucet balance are finite. There is no automatic replenishment; any new endowment or budget increase requires a separate reviewed operation. A pending or ambiguous operation reuses its persisted signature and signed bytes.
 
@@ -158,6 +164,8 @@ vercel rollback status dividendx-stocklana --scope payai
 After rollback, repeat the canonical read-only checks and inspect errors. Treat sessions with uncertain provider state as unavailable until normal reconciliation or hard expiry.
 
 Rollback changes the served deployment. It does **not** undo Solana devnet transactions, signatures, faucet spending, observation refreshes, Blob counters, reservations, signed-operation journals, or already running/expired Sandbox state. Do not delete shared Blob objects, snapshots, deployments, or Sandboxes as part of rollback. If durable data or a credential is involved, stop and perform a separate reviewed recovery.
+
+After the 21 September metering release, keep the meter-aware backend when reverting the frontend. A pre-meter backend ignores new per-session counters: drain all v1 sessions for at least 15 minutes and verify none remain before rolling back that backend. Prefer a reviewed frontend revert deployed with the current broker.
 
 ## Incident signals
 

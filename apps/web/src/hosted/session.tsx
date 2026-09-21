@@ -77,7 +77,7 @@ export function readHostedSession(kind: HostedSandboxKind): Promise<HostedSessio
   return requestSession(kind);
 }
 
-function initialHostedSession(kind: HostedSandboxKind): Promise<HostedSession> {
+export function initialHostedSession(kind: HostedSandboxKind): Promise<HostedSession> {
   const current = initialReads.get(kind);
   if (current) return current;
   const request = readHostedSession(kind);

@@ -358,10 +358,15 @@ async function enterSession(page, context, kind) {
   await page.goto(url(route), { waitUntil: 'domcontentloaded' });
   let session = await readSession(context, kind);
   let startedAt = null;
+  if (kind === 'guided') {
+    await page.getByRole('heading', { name: 'One stock. Two separate tokens.', exact: true }).waitFor({ state: 'visible' });
+    assert.equal(await page.getByTestId('hosted-session-gate').count(), 0, 'Guided landing should not be hidden behind the sandbox gate.');
+  }
   if (session.status === 'none' || session.status === 'expired' || session.status === 'failed') {
-    const buttonName = session.sessionId ? kind === 'guided' ? 'Start a fresh guided demo' : 'Start a fresh sandbox' : 'Start private sandbox';
+    const buttonName = kind === 'guided' ? 'Start guided tour' : session.sessionId ? 'Start a fresh sandbox' : 'Start private sandbox';
     const button = page.getByRole('button', { name: buttonName, exact: true });
     await button.waitFor({ state: 'visible' });
+    await poll(`${kind} start control`, () => button.isEnabled(), (value) => value, DOM_TIMEOUT_MS);
     startedAt = Date.now();
     await button.click(); // Exactly one explicit mutation. Unknown completion is reconciled only by GET below.
   } else if (session.status !== 'starting' && session.status !== 'ready') {

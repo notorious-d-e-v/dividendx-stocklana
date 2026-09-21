@@ -2,25 +2,38 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { BlobError, BlobPreconditionFailedError, BlobServiceRateLimited } from '@vercel/blob';
 import { HostedSessionBroker, type BrokerDependencies } from '../src/broker.js';
-import { DEFAULT_LIMITS, MAX_RESPONSE_BYTES, PROGRAM_ID, type SandboxKind } from '../src/contract.js';
+import { DEFAULT_LIMITS, LEDGER_PATH, MAX_LEDGER_BYTES, MAX_RESPONSE_BYTES, PROGRAM_ID,
+  emptyLedger, type SandboxKind, type SessionLedger } from '../src/contract.js';
 import { createHostedSessionHandler } from '../src/http.js';
 import { BlobJsonCasStore, JsonStoreFailure, mutateJson, type JsonCasStore, type VersionedJson } from '../src/json-store.js';
 import { SessionLedgerRepository, type Clock } from '../src/ledger.js';
 import type { CreatedProvider, ProviderView, SandboxProvider } from '../src/provider.js';
 
 class MemoryStore implements JsonCasStore {
-  value: unknown; etag = 0;
-  async read<T>(): Promise<VersionedJson<T> | null> {
+  readonly values = new Map<string, { value: unknown; etag: number }>();
+  readonly writes: string[] = [];
+  readonly failCreatePaths = new Set<string>();
+  readonly failCasPaths = new Set<string>();
+  onCas: ((path: string) => void) | null = null;
+  get value(): unknown { return this.values.get(LEDGER_PATH)?.value; }
+  get etag(): number { return this.values.get(LEDGER_PATH)?.etag ?? 0; }
+  async read<T>(path: string): Promise<VersionedJson<T> | null> {
     await Promise.resolve();
-    return this.etag ? { value: structuredClone(this.value) as T, etag: String(this.etag) } : null;
+    const current = this.values.get(path);
+    return current ? { value: structuredClone(current.value) as T, etag: String(current.etag) } : null;
   }
-  async create<T>(_path: string, value: T): Promise<boolean> {
-    await Promise.resolve(); if (this.etag) return false;
-    this.value = structuredClone(value); this.etag = 1; return true;
+  async create<T>(path: string, value: T): Promise<boolean> {
+    await Promise.resolve(); if (this.failCreatePaths.has(path)) throw new Error('create unavailable');
+    if (this.values.has(path)) return false;
+    this.values.set(path, { value: structuredClone(value), etag: 1 }); this.writes.push(path); return true;
   }
-  async compareAndSwap<T>(_path: string, etag: string, value: T): Promise<boolean> {
-    await Promise.resolve(); if (etag !== String(this.etag)) return false;
-    this.value = structuredClone(value); this.etag += 1; return true;
+  async compareAndSwap<T>(path: string, etag: string, value: T): Promise<boolean> {
+    await Promise.resolve(); if (this.failCasPaths.has(path)) throw new Error('CAS unavailable');
+    const current = this.values.get(path);
+    if (!current || etag !== String(current.etag)) return false;
+    this.values.set(path, { value: structuredClone(value), etag: current.etag + 1 }); this.writes.push(path);
+    this.onCas?.(path);
+    return true;
   }
 }
 
@@ -112,6 +125,275 @@ test('CAS races enforce the global active limit', async () => {
   assert.equal(f.provider.createCount, 2);
 });
 
+test('new session charges on sixteen distinct meters leave the admission ledger unchanged', async () => {
+  const f = fixture();
+  const sessions = [];
+  for (let index = 0; index < 16; index += 1) {
+    sessions.push(await f.broker.start(`visitor-${index}`, `ip-${index}`, 'guided', null));
+  }
+  assert.equal(f.provider.createCount, 16);
+  await assert.rejects(() => f.broker.start('visitor-overflow', 'ip-overflow', 'guided', null),
+    (error: any) => error.code === 'capacity');
+  const ledgerEtag = f.store.etag;
+  const writeStart = f.store.writes.length;
+  await Promise.all(sessions.map((session, index) =>
+    f.broker.deps.ledger.charge(session.sessionId!, `visitor-${index}`, 'guided', 0)));
+  assert.equal(f.store.etag, ledgerEtag);
+  assert.equal(f.store.writes.slice(writeStart).some((path) => path === LEDGER_PATH), false);
+  for (const session of sessions) {
+    const meter = await f.broker.deps.ledger.readMeter(session.sessionId!);
+    assert.equal(meter?.forwardedTotal, 1);
+    assert.equal(meter?.mutationTotal, 0);
+  }
+});
+
+test('same-session meter CAS enforces total, minute, and mutation budgets', async () => {
+  const f = fixture();
+  f.broker.deps.limits.requestsTotal = 20;
+  f.broker.deps.limits.requestsPerMinute = 12;
+  f.broker.deps.limits.mutationsTotal = 5;
+  const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const repo = f.broker.deps.ledger;
+  const results = await Promise.allSettled(Array.from({ length: 10 }, () =>
+    repo.charge(session.sessionId!, 'visitor-a', 'guided', 1)));
+  assert.equal(results.filter((item) => item.status === 'fulfilled').length, 5);
+  assert.equal((await repo.readMeter(session.sessionId!))?.mutationTotal, 5);
+  assert.equal((await repo.readMeter(session.sessionId!))?.forwardedTotal, 5);
+  await Promise.all(Array.from({ length: 7 }, () => repo.charge(session.sessionId!, 'visitor-a', 'guided', 0)));
+  await assert.rejects(() => repo.charge(session.sessionId!, 'visitor-a', 'guided', 0),
+    (error: any) => error.code === 'budget');
+  f.clock.advance(60_000);
+  await Promise.all(Array.from({ length: 8 }, () => repo.charge(session.sessionId!, 'visitor-a', 'guided', 0)));
+  assert.equal((await repo.readMeter(session.sessionId!))?.forwardedTotal, 20);
+  await assert.rejects(() => repo.charge(session.sessionId!, 'visitor-a', 'guided', 0),
+    (error: any) => error.code === 'budget');
+});
+
+test('a missing or malformed new meter fails closed and is never recreated by charge', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const repo = f.broker.deps.ledger; const path = repo.meterPath(session.sessionId!);
+  f.store.values.delete(path);
+  await assert.rejects(() => repo.charge(session.sessionId!, 'visitor-a', 'guided', 0),
+    (error: any) => error.code === 'busy');
+  assert.equal(f.store.values.has(path), false);
+  f.store.values.set(path, { value: { schemaVersion: 1, id: session.sessionId, open: true }, etag: 1 });
+  await assert.rejects(() => repo.charge(session.sessionId!, 'visitor-a', 'guided', 0),
+    (error: any) => error.code === 'busy');
+  assert.equal(f.provider.createCount, 1);
+});
+
+test('matching meter initialization after a charge preserves all counters', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const repo = f.broker.deps.ledger;
+  await repo.charge(session.sessionId!, 'visitor-a', 'guided', 1);
+  const record = (await repo.byId(session.sessionId!))!;
+  await repo.initializeMeter({ ...record, status: 'starting' }, record.runtimeId!);
+  assert.equal((await repo.readMeter(session.sessionId!))?.forwardedTotal, 1);
+  assert.equal((await repo.readMeter(session.sessionId!))?.mutationTotal, 1);
+});
+
+test('failed meter initialization and close do not create replacement VMs', async () => {
+  const f = fixture(); const repo = f.broker.deps.ledger;
+  const pending = await repo.reserve({ id: 'ab'.repeat(16), visitorHash: 'visitor-a', ipHash: 'ip-a',
+    kind: 'guided', providerName: 'dx-pending' });
+  f.store.failCreatePaths.add(repo.meterPath(pending.record.id));
+  await assert.rejects(() => repo.initializeMeter(pending.record, 'runtime-pending'));
+  assert.equal((await repo.byId(pending.record.id))?.status, 'starting');
+  assert.equal(await repo.readMeter(pending.record.id), null);
+  f.clock.advance(DEFAULT_LIMITS.creationCooldownMs);
+  const ready = await f.broker.start('visitor-b', 'ip-b', 'guided', null);
+  const path = repo.meterPath(ready.sessionId!);
+  f.store.failCasPaths.add(path);
+  await assert.rejects(() => f.broker.reset('visitor-b', 'ip-b', 'guided', ready.sessionId));
+  assert.equal(f.provider.stopCount, 0);
+  assert.equal(f.provider.createCount, 1);
+  assert.equal((await repo.byId(ready.sessionId!))?.status, 'ready');
+});
+
+test('reset closes old meter before stopping its VM, and concurrent resets create once', async () => {
+  const f = fixture(); const first = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  f.clock.advance(DEFAULT_LIMITS.creationCooldownMs);
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => { release = resolve; });
+  const originalStop = f.provider.stopAndDelete.bind(f.provider);
+  f.provider.stopAndDelete = async (name) => { await gate; return originalStop(name); };
+  const firstReset = f.broker.reset('visitor-a', 'ip-a', 'guided', first.sessionId);
+  const secondReset = f.broker.reset('visitor-a', 'ip-a', 'guided', first.sessionId);
+  while ((await f.broker.deps.ledger.readMeter(first.sessionId!))?.open) await Promise.resolve();
+  await assert.rejects(() => f.broker.deps.ledger.charge(first.sessionId!, 'visitor-a', 'guided', 0),
+    (error: any) => error.code === 'busy' || error.code === 'conflict');
+  assert.equal(f.provider.createCount, 1);
+  release();
+  const outcomes = await Promise.allSettled([firstReset, secondReset]);
+  assert.equal(f.provider.createCount, 2);
+  assert.equal(outcomes.some((outcome) => outcome.status === 'fulfilled'), true);
+  assert.equal((await f.broker.deps.ledger.readMeter(first.sessionId!))?.open, false);
+});
+
+test('meter charges are fenced by ownership, latest session, and expiry', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const repo = f.broker.deps.ledger;
+  await assert.rejects(() => repo.charge(session.sessionId!, 'visitor-b', 'guided', 0),
+    (error: any) => error.code === 'conflict');
+  const ledger = f.store.value as SessionLedger;
+  ledger.latest['visitor-a:guided'] = 'ff'.repeat(16);
+  await assert.rejects(() => repo.charge(session.sessionId!, 'visitor-a', 'guided', 0),
+    (error: any) => error.code === 'conflict');
+  ledger.latest['visitor-a:guided'] = session.sessionId!;
+  f.clock.advance(DEFAULT_LIMITS.lifetimeMs + 1);
+  await assert.rejects(() => repo.charge(session.sessionId!, 'visitor-a', 'guided', 0),
+    (error: any) => error.code === 'conflict');
+});
+
+test('post-charge meter fence rejects closure without refunding the charge', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const repo = f.broker.deps.ledger;
+  f.store.onCas = (path) => {
+    if (path !== repo.meterPath(session.sessionId!)) return;
+    (f.store.values.get(path)!.value as { open: boolean }).open = false;
+    f.store.onCas = null;
+  };
+  const charged = await repo.charge(session.sessionId!, 'visitor-a', 'guided', 0);
+  await assert.rejects(() => repo.assertMeterForwardable(charged), (error: any) => error.code === 'busy');
+  assert.equal((await repo.readMeter(session.sessionId!))?.forwardedTotal, 1);
+});
+
+test('the final fence prevents forwarding when reset wins during provider lookup', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const oldRecord = (await f.broker.deps.ledger.byId(session.sessionId!))!;
+  f.clock.advance(DEFAULT_LIMITS.creationCooldownMs);
+  const originalGet = f.provider.get.bind(f.provider);
+  const originalFetch = f.broker.deps.fetch;
+  let oldStateForwards = 0; let resetTriggered = false;
+  f.broker.deps.fetch = async (input, init) => {
+    const url = new URL(String(input));
+    if (url.hostname === `${oldRecord.providerName}.vercel.run` && url.pathname === '/state') oldStateForwards += 1;
+    return originalFetch(input, init);
+  };
+  f.provider.get = async (name) => {
+    const view = await originalGet(name);
+    if (name === oldRecord.providerName && !resetTriggered) {
+      resetTriggered = true;
+      await f.broker.reset('visitor-a', 'ip-a', 'guided', session.sessionId);
+    }
+    return view;
+  };
+  await assert.rejects(() => f.broker.proxy('visitor-a', 'guided', session.sessionId!, 'GET', '/state'),
+    (error: any) => error.code === 'conflict' || error.code === 'busy');
+  assert.equal(resetTriggered, true);
+  assert.equal(oldStateForwards, 0);
+  assert.equal((await f.broker.deps.ledger.readMeter(session.sessionId!))?.open, false);
+});
+
+test('the final global mutation fence rejects a changed record even if its meter stays open', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const record = (await f.broker.deps.ledger.byId(session.sessionId!))!;
+  const originalGet = f.provider.get.bind(f.provider);
+  const originalFetch = f.broker.deps.fetch;
+  let oldStarts = 0; let changed = false;
+  f.broker.deps.fetch = async (input, init) => {
+    const url = new URL(String(input));
+    if (url.hostname === `${record.providerName}.vercel.run` && url.pathname === '/start') oldStarts += 1;
+    return originalFetch(input, init);
+  };
+  f.provider.get = async (name) => {
+    const view = await originalGet(name);
+    if (name === record.providerName && !changed) {
+      changed = true;
+      (f.store.value as SessionLedger).latest['visitor-a:guided'] = 'ff'.repeat(16);
+    }
+    return view;
+  };
+  await assert.rejects(() => f.broker.proxy('visitor-a', 'guided', session.sessionId!, 'POST', '/start', Buffer.from('{}')),
+    (error: any) => error.code === 'conflict');
+  assert.equal(oldStarts, 0);
+  assert.equal((await f.broker.deps.ledger.readMeter(session.sessionId!))?.mutationTotal, 1);
+});
+
+test('identity failure still stops and unpublishes VM if meter close fails', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const path = f.broker.deps.ledger.meterPath(session.sessionId!);
+  f.store.onCas = (written) => {
+    if (written === path) { f.store.failCasPaths.add(path); f.store.onCas = null; }
+  };
+  f.setGuidedSchemaVersion(3);
+  await assert.rejects(() => f.broker.proxy('visitor-a', 'guided', session.sessionId!, 'GET', '/state'),
+    (error: any) => error.status === 503);
+  assert.equal(f.provider.stopCount, 1);
+  assert.equal((await f.broker.deps.ledger.byId(session.sessionId!))?.status, 'failed');
+  assert.equal((await f.broker.deps.ledger.readMeter(session.sessionId!))?.open, true);
+  await assert.rejects(() => f.broker.proxy('visitor-a', 'guided', session.sessionId!, 'POST', '/start', Buffer.from('{}')),
+    (error: any) => error.status === 410);
+  assert.equal(f.provider.createCount, 1);
+});
+
+test('current-session reconciliation closes a meter when its provider is terminal', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const record = (await f.broker.deps.ledger.byId(session.sessionId!))!;
+  f.provider.views.set(record.providerName, { name: record.providerName, status: 'stopped', expiresAt: record.expiresAt, domain: null });
+  assert.equal((await f.broker.current('visitor-a', 'guided')).status, 'failed');
+  assert.equal((await f.broker.deps.ledger.readMeter(session.sessionId!))?.open, false);
+  await assert.rejects(() => f.broker.deps.ledger.charge(session.sessionId!, 'visitor-a', 'guided', 0),
+    (error: any) => error.code === 'conflict');
+});
+
+test('proxy-observed provider stop closes its meter before failing global lifecycle', async () => {
+  const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'guided', null);
+  const record = (await f.broker.deps.ledger.byId(session.sessionId!))!;
+  f.provider.views.set(record.providerName, { name: record.providerName, status: 'stopped', expiresAt: record.expiresAt, domain: null });
+  await assert.rejects(() => f.broker.proxy('visitor-a', 'guided', session.sessionId!, 'GET', '/state'),
+    (error: any) => error.status === 410);
+  assert.equal((await f.broker.deps.ledger.readMeter(session.sessionId!))?.open, false);
+  assert.equal((await f.broker.deps.ledger.byId(session.sessionId!))?.status, 'failed');
+});
+
+test('default admission profile is sixteen active and five hundred starts per UTC day', async () => {
+  assert.equal(DEFAULT_LIMITS.active, 16);
+  assert.equal(DEFAULT_LIMITS.dailyGlobal, 500);
+  const f = fixture(); const repo = f.broker.deps.ledger;
+  const date = f.clock.now().toISOString().slice(0, 10);
+  const first = await repo.reserve({ id: 'aa'.repeat(16), visitorHash: 'visitor-a', ipHash: 'ip-a',
+    kind: 'guided', providerName: 'dx-one' });
+  assert.equal(first.created, true);
+  (f.store.value as SessionLedger).daily[date]!.global = 499;
+  await repo.reserve({ id: 'bb'.repeat(16), visitorHash: 'visitor-b', ipHash: 'ip-b',
+    kind: 'guided', providerName: 'dx-two' });
+  await assert.rejects(() => repo.reserve({ id: 'cc'.repeat(16), visitorHash: 'visitor-c', ipHash: 'ip-c',
+    kind: 'guided', providerName: 'dx-three' }), (error: any) => error.code === 'global_quota');
+  f.clock.advance(86_400_000);
+  assert.equal((await repo.reserve({ id: 'dd'.repeat(16), visitorHash: 'visitor-d', ipHash: 'ip-d',
+    kind: 'guided', providerName: 'dx-four' })).created, true);
+});
+
+test('ledger byte ceiling accommodates retained full-identity records across UTC boundaries', () => {
+  const ledger = emptyLedger();
+  const createdDates = ['2026-09-18', '2026-09-19', '2026-09-20'];
+  for (let index = 0; index < 1500; index += 1) {
+    const id = index.toString(16).padStart(32, '0');
+    const visitorHash = index.toString(16).padStart(64, 'a');
+    const ipHash = index.toString(16).padStart(64, 'b');
+    const date = createdDates[Math.floor(index / 500)]!;
+    const createdAt = `${date}T23:50:00.000Z`;
+    const expiresAt = new Date(Date.parse(createdAt) + DEFAULT_LIMITS.lifetimeMs).toISOString();
+    const counter = ledger.daily[date] ??= { global: 0, visitors: {}, ips: {} };
+    counter.global += 1; counter.visitors[visitorHash] = 1; counter.ips[ipHash] = 1;
+    ledger.visitorLastCreatedAt[visitorHash] = createdAt;
+    ledger.latest[`${visitorHash}:guided`] = id;
+    ledger.sessions[id] = {
+      id, meterVersion: 1, visitorHash, ipHash, kind: 'guided', providerName: `dx-${id}`,
+      status: 'expired', createdAt, provisioningDeadline: createdAt, expiresAt,
+      tombstoneUntil: new Date(Date.parse(expiresAt) + DEFAULT_LIMITS.tombstoneMs + 60_000).toISOString(),
+      createAttemptedAt: createdAt, launchAttemptedAt: createdAt, providerStatus: 'stopped',
+      providerExpiresAt: expiresAt, providerDomain: `https://dx-${id}.vercel.run`,
+      runtimeId: `runtime-${id}`.padEnd(128, 'x'), genesisHash: 'g'.repeat(44),
+      deploymentDomainHex: 'd'.repeat(64), forwardedTotal: 0, mutationTotal: 0,
+      minuteWindow: `${date}T23:50`, minuteCount: 0, errorCode: 'expired',
+    };
+  }
+  const bytes = Buffer.byteLength(JSON.stringify(ledger));
+  assert.ok(bytes <= MAX_LEDGER_BYTES, `realistic 1500-record ledger ${bytes} exceeds ${MAX_LEDGER_BYTES}`);
+});
+
 test('cookie binding prevents cross-session access and proxy rewrites manifest', async () => {
   const f = fixture(); const session = await f.broker.start('visitor-a', 'ip-a', 'wallet', null);
   await assert.rejects(() => f.broker.proxy('visitor-b', 'wallet', session.sessionId!, 'GET', '/manifest'), (error: any) => error.status === 404);
@@ -136,8 +418,8 @@ test('unknown mutation completion is charged and never retried or replaced', asy
   f.setFailRpc(true);
   const body = Buffer.from(JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'sendTransaction', params: ['AQ=='] }));
   await assert.rejects(() => f.broker.proxy('visitor-a', 'wallet', session.sessionId!, 'POST', '/rpc', body), (error: any) => error.status === 503);
-  const record = await f.broker.deps.ledger.byId(session.sessionId!);
-  assert.equal(record?.mutationTotal, 1); assert.equal(record?.forwardedTotal, 1); assert.equal(f.provider.createCount, 1);
+  const meter = await f.broker.deps.ledger.readMeter(session.sessionId!);
+  assert.equal(meter?.mutationTotal, 1); assert.equal(meter?.forwardedTotal, 1); assert.equal(f.provider.createCount, 1);
   assert.equal((await f.broker.current('visitor-a', 'wallet')).sessionId, session.sessionId);
 });
 
@@ -353,6 +635,8 @@ test('JSON store safely distinguishes Blob SDK read, create, and CAS failures', 
 test('eight concurrent ledger charges reconcile Blob conditional-operation conflicts exactly once', async () => {
   const f = fixture();
   const session = await f.broker.start('visitor-a', 'ip-a', 'wallet', null);
+  // A record without the metering marker represents a session from the prior deployment.
+  delete (f.store.value as SessionLedger).sessions[session.sessionId!]!.meterVersion;
   let stored = JSON.stringify(f.store.value); let etagNumber = 1; let conflicts = 0;
   const etag = () => `"etag-${etagNumber}"`;
   const sdk = {

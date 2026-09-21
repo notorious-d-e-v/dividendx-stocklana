@@ -15,6 +15,7 @@ export interface PublicSession {
 
 export interface SessionRecord {
   id: string;
+  meterVersion?: 1;
   visitorHash: string;
   ipHash: string;
   kind: SandboxKind;
@@ -69,8 +70,8 @@ export interface Limits {
 }
 
 export const DEFAULT_LIMITS: Limits = {
-  active: 4,
-  dailyGlobal: 100,
+  active: 16,
+  dailyGlobal: 500,
   dailyVisitor: 6,
   dailyIp: 30,
   creationCooldownMs: 30_000,
@@ -84,7 +85,8 @@ export const DEFAULT_LIMITS: Limits = {
 
 export const SESSION_ID = /^[0-9a-f]{32}$/;
 export const LEDGER_PATH = 'private/dividendx/hosted-sessions-v1.json';
-export const MAX_LEDGER_BYTES = 1_048_576;
+export const METER_PREFIX = 'private/dividendx/hosted-session-meters-v1';
+export const MAX_LEDGER_BYTES = 3 * 1_048_576;
 export const MAX_REQUEST_BYTES = 262_144;
 export const MAX_RESPONSE_BYTES = 2 * 1_048_576;
 export const PROVIDER_PORT = 3000;

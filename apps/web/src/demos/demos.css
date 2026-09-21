@@ -40,6 +40,10 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 32px 80px; }
 .hero-proof strong { display: block; color: var(--dx-warning); font-size: 14px; line-height: 1.4; }
 .hero-proof small { display: block; max-width: 100%; margin-top: 10px; overflow-wrap: anywhere; color: var(--dx-ink-muted); font-family: var(--dx-font-mono); font-size: 9px; }
 .connection-alert { display: flex; gap: 16px; margin-top: 22px; padding: 14px 18px; border: 1px solid #d9b3ae; border-radius: var(--dx-radius-sm); color: #781f18; background: var(--dx-danger-soft); font-size: 12px; line-height: 1.5; }
+.guided-sandbox-status { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 18px; margin: 16px 0 0; padding: 0 0 18px; border-bottom: 1px solid var(--dx-line); color: var(--dx-ink-muted); font-size: 11px; line-height: 1.5; }
+.guided-sandbox-status b { color: var(--dx-ink); }
+.guided-sandbox-status .guided-sandbox-error { width: 100%; color: var(--dx-danger); }
+.guided-sandbox-status button { padding: 0; border: 0; color: var(--dx-stock-ink); background: none; font-size: inherit; font-weight: 760; text-decoration: underline; cursor: pointer; }
 .connection-alert b { flex: none; }
 .sr-status { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); }
 .wallet-section { padding: 64px 0; border-bottom: 1px solid var(--dx-line); }

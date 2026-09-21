@@ -1,0 +1,296 @@
+{
+  "schema": "dividendx-guided-capacity-probe-v1",
+  "at": "2026-09-21T13:33:05.203Z",
+  "mode": "provider",
+  "storeId": "store_HwInrQjHFXMVbBLI",
+  "namespace": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b",
+  "sessionCap": 16,
+  "status": "passed",
+  "phase": "cleanup",
+  "checks": {
+    "ready": 16,
+    "uniqueRuntimeIds": 16,
+    "guidedStateReads": 16,
+    "providerCreationsAtMost": 16
+  },
+  "metrics": {
+    "bootMs": [
+      9652.5,
+      10192.9,
+      11205.6,
+      12489.1,
+      8583.1,
+      9802.6,
+      10638.4,
+      11375.5,
+      8958.8,
+      9785.3,
+      11862.1,
+      13156.3,
+      8495.7,
+      9069.2,
+      11259.9,
+      11743.3
+    ],
+    "providerCreations": 16,
+    "bootP50Ms": 10192.9,
+    "bootP95Ms": 13156.3
+  },
+  "sessions": [
+    {
+      "index": 0,
+      "sessionId": "7361065d35f361b0e8bd84823929879c",
+      "runtimeId": "37689d3a-f67b-40ad-b3e6-b562cf61b52d",
+      "providerName": "dx-7528dafcc7fe367c9ec8f8c023fd4610",
+      "bootMs": 10192.9
+    },
+    {
+      "index": 1,
+      "sessionId": "dd73df9bf3542d206f1345eeb1d3f81e",
+      "runtimeId": "44f54d19-521d-4f08-b33c-1c4f7aef1e07",
+      "providerName": "dx-64b3f457312bea584fd2aa2191bb66e4",
+      "bootMs": 11205.7
+    },
+    {
+      "index": 2,
+      "sessionId": "0a652abbe98440e0dc7a3bad0ef1c79a",
+      "runtimeId": "c8d29aab-752e-4c6c-a671-5e71cf69cfde",
+      "providerName": "dx-649ad85fcb68c100c83c93111d4c0263",
+      "bootMs": 9652.5
+    },
+    {
+      "index": 3,
+      "sessionId": "f2e7c40bf92ec9173e0c2b7910938003",
+      "runtimeId": "68e89862-3195-4dc3-875e-f971c512492d",
+      "providerName": "dx-08e850bf5161aa33d3d24f0c8cdd339d",
+      "bootMs": 12489.2
+    },
+    {
+      "index": 4,
+      "sessionId": "370e5c840bb662da325d670e764b94db",
+      "runtimeId": "fc16d25e-7d4c-47f0-8366-0090bed32669",
+      "providerName": "dx-46d99b13678410fe5e5838e11a15a2f5",
+      "bootMs": 9802.7
+    },
+    {
+      "index": 5,
+      "sessionId": "11bee92cf416edfa68453daffdf6e2e7",
+      "runtimeId": "506cecca-117c-44a9-b2a7-ff00c13fbd4d",
+      "providerName": "dx-073b223413a341081f494c15d163e301",
+      "bootMs": 8583.1
+    },
+    {
+      "index": 6,
+      "sessionId": "0807dc4da064f513a748c77bb2287f77",
+      "runtimeId": "51738c6b-6626-46a7-84b5-f84e85140595",
+      "providerName": "dx-70de33b82aa44fa2a79f733f9b7af072",
+      "bootMs": 11375.5
+    },
+    {
+      "index": 7,
+      "sessionId": "4fc61ab83a39cc8c7bcff9bd5efc8533",
+      "runtimeId": "f40b3ed3-72c6-4e9c-acec-407fdc81081b",
+      "providerName": "dx-997516fe0cc8450667dfc5211758f29e",
+      "bootMs": 10638.4
+    },
+    {
+      "index": 8,
+      "sessionId": "77a6039a05a6605101b685fd12562e4b",
+      "runtimeId": "8eb811d8-a5d0-46e6-87aa-905f66d49b92",
+      "providerName": "dx-630544c4c910ecdfd1b8e1fef90ff6bd",
+      "bootMs": 8958.8
+    },
+    {
+      "index": 9,
+      "sessionId": "053a5b37029cd55898914eeded788a64",
+      "runtimeId": "e4a9792d-9cf6-4d19-a286-7018831fdec7",
+      "providerName": "dx-1e1f7bcf8d9b7f41b53603e69c5904a2",
+      "bootMs": 11862.1
+    },
+    {
+      "index": 10,
+      "sessionId": "88c4178e7eca386952ae4ba6ee83db7f",
+      "runtimeId": "0edf8f57-a243-44de-9057-ee637263b4b9",
+      "providerName": "dx-127c35d0c6b280d9413d71381d703cdc",
+      "bootMs": 13156.3
+    },
+    {
+      "index": 11,
+      "sessionId": "8f0ec01283198e094e40068a73abd780",
+      "runtimeId": "34a556b1-b19f-4772-a186-29c2001d1e90",
+      "providerName": "dx-2d20636d811efba6a3019f46ee9da7d3",
+      "bootMs": 9785.3
+    },
+    {
+      "index": 12,
+      "sessionId": "c6c6b8cfe5c358854d312d31bb66f1f3",
+      "runtimeId": "398c7469-f9f3-4adb-9308-c33000bbe365",
+      "providerName": "dx-e1b6da2a23dd2f5d55cd032d94ec221f",
+      "bootMs": 11743.3
+    },
+    {
+      "index": 13,
+      "sessionId": "80ae4b9cfae9d7a13fc9a8aa8d7d810c",
+      "runtimeId": "f9f2569f-0ebd-468e-927c-b2ddf92679fe",
+      "providerName": "dx-1172353dd6ef4bf0a8a69f70bce61574",
+      "bootMs": 11259.9
+    },
+    {
+      "index": 14,
+      "sessionId": "5363c29c7eb80f651d1ec92a29f1b74a",
+      "runtimeId": "35b458b6-bcbc-4325-8b25-722c4073425c",
+      "providerName": "dx-50d337c1d5b606d1c4b904fb066fa234",
+      "bootMs": 8495.7
+    },
+    {
+      "index": 15,
+      "sessionId": "2ab863a043194eaa06592bc6b4113d78",
+      "runtimeId": "7e8da254-ff92-4a4c-9ea8-c49820e6b7fd",
+      "providerName": "dx-72b5580320bfd8e89132ce1ca52d28ed",
+      "bootMs": 9069.2
+    }
+  ],
+  "failures": [],
+  "cleanup": {
+    "providers": [
+      {
+        "name": "dx-64b3f457312bea584fd2aa2191bb66e4",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-649ad85fcb68c100c83c93111d4c0263",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-7528dafcc7fe367c9ec8f8c023fd4610",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-08e850bf5161aa33d3d24f0c8cdd339d",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-073b223413a341081f494c15d163e301",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-46d99b13678410fe5e5838e11a15a2f5",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-997516fe0cc8450667dfc5211758f29e",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-70de33b82aa44fa2a79f733f9b7af072",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-630544c4c910ecdfd1b8e1fef90ff6bd",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-2d20636d811efba6a3019f46ee9da7d3",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-127c35d0c6b280d9413d71381d703cdc",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-1e1f7bcf8d9b7f41b53603e69c5904a2",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-50d337c1d5b606d1c4b904fb066fa234",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-72b5580320bfd8e89132ce1ca52d28ed",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-1172353dd6ef4bf0a8a69f70bce61574",
+        "status": "stopped_and_deleted"
+      },
+      {
+        "name": "dx-e1b6da2a23dd2f5d55cd032d94ec221f",
+        "status": "stopped_and_deleted"
+      }
+    ],
+    "blobPaths": [
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/0a652abbe98440e0dc7a3bad0ef1c79a.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/7361065d35f361b0e8bd84823929879c.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/dd73df9bf3542d206f1345eeb1d3f81e.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/f2e7c40bf92ec9173e0c2b7910938003.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/11bee92cf416edfa68453daffdf6e2e7.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/370e5c840bb662da325d670e764b94db.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/4fc61ab83a39cc8c7bcff9bd5efc8533.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/0807dc4da064f513a748c77bb2287f77.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/77a6039a05a6605101b685fd12562e4b.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/8f0ec01283198e094e40068a73abd780.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/053a5b37029cd55898914eeded788a64.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/88c4178e7eca386952ae4ba6ee83db7f.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/5363c29c7eb80f651d1ec92a29f1b74a.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/2ab863a043194eaa06592bc6b4113d78.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/80ae4b9cfae9d7a13fc9a8aa8d7d810c.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/meters/c6c6b8cfe5c358854d312d31bb66f1f3.json",
+        "deleted": true
+      },
+      {
+        "path": "private/dividendx/probes/capacity-0027cc99-1f9d-472a-bf3d-526251668e8b/ledger.json",
+        "deleted": true
+      }
+    ],
+    "retainedForReconciliation": false
+  },
+  "snapshotId": "snap_mtdgtBAGmcNu8Ucj1M9kCARBKYvq",
+  "finishedAt": "2026-09-21T13:36:08.462Z",
+  "elapsedMs": 183259
+}
