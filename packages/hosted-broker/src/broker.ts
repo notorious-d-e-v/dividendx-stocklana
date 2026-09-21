@@ -127,6 +127,10 @@ async function providerRequest(deps: BrokerDependencies, record: SessionRecord, 
 }
 
 async function failClosed(deps: BrokerDependencies, record: SessionRecord, code = 'identity_changed'): Promise<never> {
+  // A meter outage must not leave an identity-failed runtime published as ready.
+  if (record.meterVersion === 1 && record.runtimeId) {
+    try { await deps.ledger.closeMeter(record); } catch { /* Global failure and provider stop still fence later mutations. */ }
+  }
   let stopped = false; let observed: ProviderView | null = null;
   try { await deps.provider.stopAndDelete(record.providerName); stopped = true; }
   catch { try { observed = await deps.provider.get(record.providerName); } catch {} }
@@ -145,6 +149,7 @@ export class HostedSessionBroker {
     let record = await this.deps.ledger.current(visitorHash, kind);
     if (!record) return publicSession(undefined, kind);
     if (!future(record.expiresAt, this.deps)) {
+      if (record.meterVersion === 1 && record.runtimeId) await this.deps.ledger.closeMeter(record);
       let stopped = false; let observed: ProviderView | null = null;
       try { await this.deps.provider.stopAndDelete(record.providerName); stopped = true; }
       catch { try { observed = await this.deps.provider.get(record.providerName); } catch {} }
@@ -215,6 +220,7 @@ export class HostedSessionBroker {
       throw new HttpError(503, 'Sandbox creation is still being reconciled. Try again later.', 15);
     }
     if (Date.parse(current.createdAt) + this.deps.limits.creationCooldownMs > nowMs(this.deps)) throw new HttpError(429, 'Wait before resetting this sandbox.', 30);
+    if (current.meterVersion === 1 && current.runtimeId) await this.deps.ledger.closeMeter(current);
     await this.deps.ledger.update(current.id, (item) => { item.status = 'resetting'; item.errorCode = 'stopping'; });
     try { await this.deps.provider.stopAndDelete(current.providerName); }
     catch {
@@ -236,7 +242,10 @@ export class HostedSessionBroker {
     try { view = await this.deps.provider.get(record.providerName); }
     catch { return record; }
     if (view.status === 'missing' && (record.providerStatus === null || record.providerStatus === 'unknown')) return record;
-    if (terminal(view.status)) return this.deps.ledger.update(record.id, (item) => { item.status = 'failed'; item.errorCode = 'provider_stopped'; item.providerStatus = view.status; });
+    if (terminal(view.status)) {
+      if (record.meterVersion === 1 && record.runtimeId) await this.deps.ledger.closeMeter(record);
+      return this.deps.ledger.update(record.id, (item) => { item.status = 'failed'; item.errorCode = 'provider_stopped'; item.providerStatus = view.status; });
+    }
     if (view.status !== 'running' || !future(view.expiresAt, this.deps)) {
       if (!providerViewChanged(record, view)) return record;
       return this.deps.ledger.update(record.id, (item) => {
@@ -274,6 +283,7 @@ export class HostedSessionBroker {
       else identityResponse = await providerRequest(this.deps, record, view, 'GET', '/state');
       if (!identityResponse.ok) return record;
       const identity = await boundedJson(identityResponse);
+      if (record.meterVersion === 1) await this.deps.ledger.initializeMeter(record, health.runtimeId);
       const transition = await this.deps.ledger.updateFenced(record.id, ['starting'], true, (item) => {
         item.runtimeId = health.runtimeId;
         if (item.kind === 'wallet') {
@@ -330,9 +340,15 @@ export class HostedSessionBroker {
       throw new HttpError(503, 'Sandbox is temporarily unavailable.', 5);
     }
     if (view.status !== 'running' || !future(view.expiresAt, this.deps)) {
+      if (charged.meterVersion === 1 && charged.runtimeId) await this.deps.ledger.closeMeter(charged);
       await this.deps.ledger.update(id, (item) => { item.status = terminal(view.status) ? 'failed' : 'expired'; item.errorCode = terminal(view.status) ? 'provider_stopped' : 'expired'; item.providerStatus = view.status; });
       throw new HttpError(410, 'Sandbox session has expired.');
     }
+    if (charged.meterVersion === 1) {
+      await this.deps.ledger.assertMeterForwardable(charged);
+      if (method === 'POST') await this.deps.ledger.assertForwardable(charged);
+    }
+    else await this.deps.ledger.assertForwardable(charged);
     let response: Response;
     try { response = await providerRequest(this.deps, charged, view, method, path, body); }
     catch (error) { if (error instanceof HttpError) throw error; throw new HttpError(503, 'Sandbox is temporarily unavailable.'); }

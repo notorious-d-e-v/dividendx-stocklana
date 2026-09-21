@@ -5,7 +5,7 @@ import { DIVIDENDX_PROGRAM_ID } from '@dividendx/transaction-sdk';
 import { submitAndConfirmOverHttp, validateWalletSignedTransaction } from '../src/wallet/chain';
 import { DEVNET_GENESIS_HASH, hostedRuntimeConfig, validateManifestShape } from '../src/wallet/runtime';
 import { changeHostedSession, SESSION_MUTATION_TIMEOUT_MS, SESSION_READ_TIMEOUT_MS } from '../src/hosted/session';
-import { DEMO_ASSETS } from '../../../packages/guided-runtime/src/contract';
+import { DEMO_ASSETS, type DemoState } from '../../../packages/guided-runtime/src/contract';
 
 // These mocked contracts verify browser enforcement only. They are not custody, provider, or onchain proof.
 
@@ -32,7 +32,7 @@ function session(status: 'none' | 'starting' | 'ready' | 'expired' | 'failed', o
   };
 }
 
-function guidedState(status: 'idle' | 'ready' | 'complete' = 'idle', id = runtimeId) {
+function guidedState(status: 'idle' | 'ready' | 'complete' = 'idle', id = runtimeId): DemoState {
   return {
     schemaVersion: 4,
     runtimeId: id,
@@ -103,203 +103,290 @@ test('hosted app route is pinned to the same-origin public devnet service', asyn
   expect(localhostReads).toBe(0);
 });
 
-test('a read-only empty session does not start compute', async ({ page }) => {
+test('root and demos show the tour and selector without starting compute or reading a runtime', async ({ page }) => {
   let posts = 0;
+  let runtimeReads = 0;
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
     if (route.request().method() === 'POST') posts += 1;
     return fulfill(route, session('none'));
   });
-  await page.goto(`${origin}/demos/`);
-  await expect(page.getByRole('heading', { name: 'Try DividendX in a private sandbox.' })).toBeVisible();
-  await page.waitForTimeout(100);
+  await page.route('**/api/sandbox/guided/*/state', (route) => { runtimeReads += 1; return fulfill(route, guidedState()); });
+  for (const path of ['/', '/demos/']) {
+    await page.goto(`${origin}${path}`);
+    await expect(page.getByRole('heading', { name: 'One stock. Two separate tokens.' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Choose a tokenized stock to follow.' })).toBeVisible();
+    await expect(page.getByTestId('guided-sandbox-status')).toContainText('Private test sandbox');
+    await expect(page.getByTestId('prepare-guided-profile')).toBeDisabled();
+    await page.getByRole('button', { name: /MU Micron Backpack\/Trek/ }).click();
+    await expect(page.getByTestId('prepare-guided-profile')).toHaveText('Get 100 tokenized Micron');
+  }
   expect(posts).toBe(0);
+  expect(runtimeReads).toBe(0);
 });
 
-test('explicit start sends the guarded contract and shows progress', async ({ page }) => {
-  let body: unknown;
-  let header: string | undefined;
+test('hero starts one sandbox in the background and preserves a selected company', async ({ page }) => {
+  let posts = 0;
+  let starts = 0;
+  let selected: unknown;
+  let current = guidedState();
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
-    if (route.request().method() === 'POST') {
-      body = route.request().postDataJSON();
-      header = route.request().headers()['x-dividendx-session'];
-      return fulfill(route, session('starting'), 202);
+    if (route.request().method() === 'POST') { posts += 1; return fulfill(route, session('ready'), 200); }
+    return fulfill(route, posts ? session('ready') : session('none'));
+  });
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/**`, (route) => {
+    const path = new URL(route.request().url()).pathname;
+    if (path.endsWith('/state')) return fulfill(route, current);
+    if (path.endsWith('/start')) {
+      starts += 1;
+      selected = route.request().postDataJSON();
+      current = { ...guidedState('ready'), revision: 2, asset: DEMO_ASSETS[1] };
+      return fulfill(route, { accepted: true }, 202);
     }
-    return fulfill(route, session('none'));
+    return fulfill(route, { error: 'not found' }, 404);
   });
   await page.goto(`${origin}/demos/`);
-  await page.getByRole('button', { name: 'Start private sandbox' }).click();
-  await expect(page.getByRole('heading', { name: 'Starting your isolated test network…' })).toBeVisible();
-  expect(body).toEqual({ action: 'start', expectedSessionId: null });
-  expect(header).toBe('1');
+  await page.getByRole('button', { name: /MU Micron Backpack\/Trek/ }).click();
+  await page.getByRole('button', { name: 'Start guided tour' }).click();
+  await expect(page.locator('#tour-core')).toBeInViewport();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('Sandbox ready.');
+  expect(posts).toBe(1);
+  expect(starts).toBe(0);
+  await page.getByTestId('prepare-guided-profile').click();
+  await expect(page.locator('[data-demo-step="core-split"]')).toBeVisible();
+  expect(posts).toBe(1);
+  expect(starts).toBe(1);
+  expect(selected).toMatchObject({ assetId: 'backpack-test-mu', runtimeId });
 });
 
-test('an unknown start outcome is reconciled by a read without repeating the mutation', async ({ page }) => {
+test('direct Get 100 creates one sandbox and starts the selected IBM profile', async ({ page }) => {
   let posts = 0;
-  let started = false;
+  let starts = 0;
+  let submitted: unknown;
+  let current = guidedState();
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
-    if (route.request().method() === 'POST') {
-      posts += 1;
-      started = true;
-      return route.abort('connectionrefused');
+    if (route.request().method() === 'POST') { posts += 1; return fulfill(route, session('ready')); }
+    return fulfill(route, posts ? session('ready') : session('none'));
+  });
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/**`, (route) => {
+    if (route.request().url().endsWith('/state')) return fulfill(route, current);
+    if (route.request().url().endsWith('/start')) {
+      starts += 1;
+      submitted = route.request().postDataJSON();
+      current = { ...guidedState('ready'), revision: 2, asset: DEMO_ASSETS[2] };
+      return fulfill(route, { accepted: true }, 202);
     }
-    return fulfill(route, started ? session('ready') : session('none'));
+    return fulfill(route, {}, 404);
+  });
+  await page.goto(`${origin}/demos/`);
+  await page.getByRole('button', { name: /IBMon IBM Ondo/ }).click();
+  expect(posts).toBe(0);
+  await page.getByTestId('prepare-guided-profile').click();
+  await expect(page.locator('[data-demo-step="core-split"]')).toBeVisible();
+  expect(posts).toBe(1);
+  expect(starts).toBe(1);
+  expect(submitted).toMatchObject({ assetId: 'ondo-test-ibm', runtimeId });
+});
+
+test('a starting sandbox keeps one poll owner across both CTAs', async ({ page }) => {
+  let posts = 0;
+  let reads = 0;
+  await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
+    if (route.request().method() === 'POST') { posts += 1; return fulfill(route, session('starting'), 202); }
+    reads += 1;
+    return fulfill(route, reads >= 4 ? session('ready') : posts ? session('starting') : session('none'));
   });
   await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState()));
   await page.goto(`${origin}/demos/`);
-  await page.getByRole('button', { name: 'Start private sandbox' }).click();
-  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
+  await page.getByRole('button', { name: 'Start guided tour' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('Starting your sandbox');
+  await page.getByRole('button', { name: 'Start guided tour' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('Sandbox ready.', { timeout: 15_000 });
   expect(posts).toBe(1);
+  expect(reads).toBe(4);
 });
 
-test('a delayed old poll cannot overwrite a reconciled replacement session', async ({ page }) => {
-  let current = session('none');
-  let reads = 0;
-  let releaseOld!: () => void;
-  const oldPollStarted = new Promise<void>((resolve) => { releaseOld = resolve; });
-  let markOldStarted!: () => void;
-  const sawOldPoll = new Promise<void>((resolve) => { markOldStarted = resolve; });
+test('direct Get 100 and rapid hero clicks singleflight sandbox and profile mutations', async ({ page }) => {
+  let posts = 0;
+  let starts = 0;
+  let current = guidedState();
   await page.route(`${origin}/api/sandbox/guided/session`, async (route) => {
     if (route.request().method() === 'POST') {
-      const body = route.request().postDataJSON() as { action: string };
-      current = body.action === 'reset'
-        ? session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` })
-        : session('starting');
-      return fulfill(route, current, current.status === 'starting' ? 202 : 200);
+      posts += 1;
+      await new Promise((resolve) => setTimeout(resolve, 120));
+      return fulfill(route, session('ready'));
     }
-    reads += 1;
-    if (reads === 2) {
-      markOldStarted();
-      await oldPollStarted;
-      return fulfill(route, session('starting'));
-    }
-    return fulfill(route, current);
+    return fulfill(route, posts ? session('ready') : session('none'));
   });
-  await page.route(`${origin}/api/sandbox/guided/${replacementId}/state`, (route) => fulfill(route, { ...guidedState(), runtimeId: 'replacement-runtime' }));
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/**`, (route) => {
+    if (route.request().url().endsWith('/state')) return fulfill(route, current);
+    if (route.request().url().endsWith('/start')) {
+      starts += 1;
+      current = { ...guidedState('ready'), revision: 2 };
+      return fulfill(route, { accepted: true }, 202);
+    }
+    return fulfill(route, {}, 404);
+  });
   await page.goto(`${origin}/demos/`);
-  await page.getByRole('button', { name: 'Start private sandbox' }).click();
-  await sawOldPoll;
-  await page.evaluate(async ({ id }) => {
-    await fetch('/api/sandbox/guided/session', {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'X-DividendX-Session': '1' },
-      body: JSON.stringify({ action: 'reset', expectedSessionId: id }),
-    });
-  }, { id: sessionId });
-  await page.getByRole('button', { name: 'Check progress' }).click();
-  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
-  releaseOld();
-  await page.waitForTimeout(100);
-  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
+  await page.getByRole('button', { name: /KOx Coca-Cola xStocks/ }).click();
+  await page.evaluate(() => {
+    const hero = [...document.querySelectorAll('button')].find((button) => button.textContent?.includes('Start guided tour'));
+    const profile = document.querySelector<HTMLButtonElement>('[data-testid="prepare-guided-profile"]');
+    hero?.click(); hero?.click(); profile?.click(); profile?.click();
+  });
+  await expect(page.locator('[data-demo-step="core-split"]')).toBeVisible();
+  expect(posts).toBe(1);
+  expect(starts).toBe(1);
 });
 
-test('ready session reconnects from its cookie without another broker mutation', async ({ page }) => {
+test('ready cookie resumes without broker POST and reload does not replay profile start', async ({ page }) => {
   let posts = 0;
+  let starts = 0;
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
     if (route.request().method() === 'POST') posts += 1;
     return fulfill(route, session('ready'));
   });
-  await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState()));
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/**`, (route) => {
+    if (route.request().url().endsWith('/state')) return fulfill(route, guidedState('ready'));
+    if (route.request().url().endsWith('/start')) starts += 1;
+    return fulfill(route, {}, 404);
+  });
   await page.goto(`${origin}/demos/`);
-  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
+  await expect(page.locator('[data-demo-step="core-split"]')).toBeVisible();
   await page.reload();
-  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
+  await expect(page.locator('[data-demo-step="core-split"]')).toBeVisible();
   expect(posts).toBe(0);
+  expect(starts).toBe(0);
 });
 
-test('completed hosted journey resets the broker session and remounts on replacement', async ({ page }) => {
-  let resetBody: unknown;
-  let resets = 0;
-  let current = session('ready');
+test('expired session offers inline reset and returns to Part One without profile replay', async ({ page }) => {
+  let posts = 0;
+  let starts = 0;
+  let current = session('expired');
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
     if (route.request().method() === 'POST') {
-      resets += 1;
-      resetBody = route.request().postDataJSON();
-      current = session('starting', { sessionId: replacementId, runtimeId: 'replacement-runtime' });
-      return fulfill(route, current, 202);
+      posts += 1;
+      expect(route.request().postDataJSON()).toEqual({ action: 'reset', expectedSessionId: sessionId });
+      current = session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` });
+    }
+    return fulfill(route, current);
+  });
+  await page.route(`${origin}/api/sandbox/guided/${replacementId}/**`, (route) => {
+    if (route.request().url().endsWith('/state')) return fulfill(route, guidedState('idle', 'replacement-runtime'));
+    if (route.request().url().endsWith('/start')) starts += 1;
+    return fulfill(route, {}, 404);
+  });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(`${origin}/demos/`);
+  await expect(page.getByRole('heading', { name: 'One stock. Two separate tokens.' })).toBeVisible();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('This sandbox expired.');
+  expect(posts).toBe(0);
+  await page.getByRole('button', { name: 'Start a fresh guided demo' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('Sandbox ready.');
+  await expect(page.locator('#tour-core')).toBeInViewport();
+  await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
+  expect(posts).toBe(1);
+  expect(starts).toBe(0);
+});
+
+test('capacity 429 stays inline and a later explicit click can retry', async ({ page }) => {
+  let posts = 0;
+  await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
+    if (route.request().method() === 'POST') {
+      posts += 1;
+      return posts === 1 ? fulfill(route, { error: 'All private sandboxes are busy.' }, 429) : fulfill(route, session('ready'));
+    }
+    return fulfill(route, posts > 1 ? session('ready') : session('none'));
+  });
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState()));
+  await page.goto(`${origin}/demos/`);
+  await page.getByRole('button', { name: 'Start guided tour' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('All private sandboxes are busy.');
+  await expect(page.getByRole('heading', { name: 'Choose a tokenized stock to follow.' })).toBeVisible();
+  expect(posts).toBe(1);
+  await page.getByRole('button', { name: 'Start guided tour' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('Sandbox ready.');
+  expect(posts).toBe(2);
+});
+
+test('ambiguous start reconciles with GET and never repeats the POST', async ({ page }) => {
+  let posts = 0;
+  await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
+    if (route.request().method() === 'POST') { posts += 1; return route.abort('connectionrefused'); }
+    return fulfill(route, posts ? session('ready') : session('none'));
+  });
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState()));
+  await page.goto(`${origin}/demos/`);
+  await page.getByRole('button', { name: 'Start guided tour' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('Sandbox ready.');
+  expect(posts).toBe(1);
+});
+
+test('unreadable status after an ambiguous POST blocks another mutation until GET succeeds', async ({ page }) => {
+  let posts = 0;
+  let readable = false;
+  await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
+    if (route.request().method() === 'POST') { posts += 1; return route.abort('connectionrefused'); }
+    if (posts && !readable) return route.abort('connectionrefused');
+    return fulfill(route, session('none'));
+  });
+  await page.goto(`${origin}/demos/`);
+  await page.getByRole('button', { name: 'Start guided tour' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('outcome is unknown');
+  await page.getByRole('button', { name: 'Start guided tour' }).click();
+  expect(posts).toBe(1);
+  readable = true;
+  await page.getByRole('button', { name: 'Check sandbox status' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('Choose a company below');
+});
+
+test('stale 410 clears runtime controls but keeps the hero and reset inline', async ({ page }) => {
+  await page.route(`${origin}/api/sandbox/guided/session`, (route) => fulfill(route, session('ready')));
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, { error: 'stale session' }, 410));
+  await page.goto(`${origin}/demos/`);
+  await expect(page.getByRole('heading', { name: 'One stock. Two separate tokens.' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Start a fresh guided demo' })).toBeVisible();
+  await expect(page.locator('[data-demo-step]')).toHaveCount(0);
+});
+
+test('a delayed 410 from an old receipt cannot expire the replacement sandbox', async ({ page }) => {
+  let current = session('ready');
+  let release!: () => void;
+  let sawOldReceipt!: () => void;
+  const oldReceiptStarted = new Promise<void>((resolve) => { sawOldReceipt = resolve; });
+  const oldReceiptReleased = new Promise<void>((resolve) => { release = resolve; });
+  await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
+    if (route.request().method() === 'POST') {
+      current = session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` });
     }
     return fulfill(route, current);
   });
   await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState('complete')));
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/receipt`, async (route) => {
+    sawOldReceipt();
+    await oldReceiptReleased;
+    return fulfill(route, { error: 'old session expired' }, 410);
+  });
   await page.route(`${origin}/api/sandbox/guided/${replacementId}/state`, (route) => fulfill(route, guidedState('idle', 'replacement-runtime')));
-  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(`${origin}/demos/`);
+  await expect(page.getByRole('button', { name: 'Run the journey again' })).toBeVisible();
+  await page.getByText('Evidence & exact accounting').click();
+  await oldReceiptStarted;
   await page.getByRole('button', { name: 'Run the journey again' }).click();
-  await expect(page.getByRole('heading', { name: 'Starting your isolated test network…' })).toBeVisible();
-  expect(resetBody).toEqual({ action: 'reset', expectedSessionId: sessionId });
-  current = session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` });
-  await page.getByRole('button', { name: 'Check progress' }).click();
+  await expect(page.getByTestId('guided-sandbox-status')).toContainText('Sandbox ready.');
+  release();
   await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
-  await expect(page.locator('#core-heading')).toBeFocused();
-  await expect(page.locator('#tour-core')).toBeInViewport();
-  expect(await page.locator('#tour-core').evaluate((element) => element.getBoundingClientRect().top)).toBeLessThan(50);
-  expect(resets).toBe(1);
+  await expect(page.getByTestId('guided-sandbox-status')).not.toContainText('expired');
 });
 
-test('expired session needs an explicit reset', async ({ page }) => {
-  let posts = 0;
-  await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
-    if (route.request().method() === 'POST') { posts += 1; return fulfill(route, session('starting'), 202); }
-    return fulfill(route, session('expired'));
-  });
-  await page.goto(`${origin}/demos/`);
-  await expect(page.getByRole('heading', { name: 'This sandbox has expired.' })).toBeVisible();
-  expect(posts).toBe(0);
-  await page.getByRole('button', { name: 'Start a fresh guided demo' }).click();
-  expect(posts).toBe(1);
-});
-
-for (const path of ['/', '/demos/']) {
-  test(`expired guided session at ${path} restarts in place with its visitor cookie`, async ({ page }) => {
-    const visitor = 'a'.repeat(43);
-    // The local HTTP test server cannot set the production broker's Secure __Host cookie.
-    await page.context().addCookies([{ name: 'dxv-fixture', value: visitor, url: origin, httpOnly: true, sameSite: 'Lax' }]);
-    const observedCookies: string[] = [];
-    let resetBody: unknown;
-    let current = session('expired');
-    await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
-      observedCookies.push(route.request().headers().cookie ?? '');
-      if (route.request().method() === 'POST') {
-        resetBody = route.request().postDataJSON();
-        current = session('starting', { sessionId: replacementId, runtimeId: 'replacement-runtime' });
-        return fulfill(route, current, 202);
-      }
-      return fulfill(route, current);
-    });
-    await page.route(`${origin}/api/sandbox/guided/${replacementId}/state`, (route) => fulfill(route, guidedState('idle', 'replacement-runtime')));
-    await page.goto(`${origin}${path}`);
-    await expect(page.getByRole('heading', { name: 'This sandbox has expired.' })).toBeVisible();
-    const nav = page.getByRole('navigation', { name: 'Primary' });
-    await expect(nav.getByRole('link')).toHaveCount(2);
-    await expect(nav.getByRole('link', { name: 'Public Devnet' })).toHaveAttribute('href', '/app/');
-    await expect(nav.getByRole('link', { name: 'Guided Demos' })).toHaveAttribute('href', '/demos/');
-    await page.getByRole('button', { name: 'Start a fresh guided demo' }).click();
-    expect(resetBody).toEqual({ action: 'reset', expectedSessionId: sessionId });
-    await expect(page.getByRole('heading', { name: 'Starting your isolated test network…' })).toBeVisible();
-    current = session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` });
-    await page.getByRole('button', { name: 'Check progress' }).click();
-    await expect(page.getByTestId('prepare-guided-profile')).toBeVisible();
-    expect(new URL(page.url()).pathname).toBe(path);
-    expect(observedCookies).not.toHaveLength(0);
-    expect(observedCookies.every((header) => header.includes(`dxv-fixture=${visitor}`))).toBe(true);
-    expect((await page.context().cookies(origin)).find((cookie) => cookie.name === 'dxv-fixture')?.value).toBe(visitor);
-  });
-}
-
-test('410 from a stale tab clears the guided transaction controls', async ({ page }) => {
-  await page.route(`${origin}/api/sandbox/guided/session`, (route) => fulfill(route, session('ready')));
-  await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, { error: 'stale session' }, 410));
-  await page.goto(`${origin}/demos/`);
-  await expect(page.getByRole('heading', { name: 'This sandbox has expired.' })).toBeVisible();
-  await expect(page.getByTestId('prepare-guided-profile')).toHaveCount(0);
-});
-
-test('wrong guided runtime identity is rejected', async ({ page }) => {
+test('wrong guided runtime identity is rejected inline', async ({ page }) => {
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => fulfill(route, session('ready')));
   await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, guidedState('idle', 'wrong-runtime')));
   await page.goto(`${origin}/demos/`);
+  await expect(page.getByRole('heading', { name: 'One stock. Two separate tokens.' })).toBeVisible();
   await expect(page.getByRole('alert')).toContainText('runtime ID does not match');
 });
 
-test('hosted session gate has no mobile overflow', async ({ page }) => {
+test('inline sandbox status has no mobile overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => fulfill(route, session('none')));
   await page.goto(`${origin}/demos/`);
