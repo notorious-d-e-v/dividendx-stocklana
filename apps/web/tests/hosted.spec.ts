@@ -187,6 +187,61 @@ test('direct Get 100 creates one sandbox and starts the selected IBM profile', a
   expect(submitted).toMatchObject({ assetId: 'ondo-test-ibm', runtimeId });
 });
 
+test('a poll cannot enable the next step while the profile action still owns its final read', async ({ page }) => {
+  let releaseFinalRead!: () => void;
+  let finalReadStarted!: () => void;
+  const finalReadGate = new Promise<void>((resolve) => { releaseFinalRead = resolve; });
+  const sawFinalRead = new Promise<void>((resolve) => { finalReadStarted = resolve; });
+  let holdFirstPostStartRead = false;
+  let held = false;
+  let starts = 0;
+  let steps = 0;
+  let current = guidedState();
+  await page.route(`${origin}/api/sandbox/guided/session`, (route) => fulfill(route, session('ready')));
+  await page.route(`${origin}/api/sandbox/guided/${sessionId}/**`, async (route) => {
+    const path = new URL(route.request().url()).pathname;
+    if (path.endsWith('/start')) {
+      starts += 1;
+      current = { ...guidedState('ready'), revision: 20 };
+      holdFirstPostStartRead = true;
+      return fulfill(route, { accepted: true }, 202);
+    }
+    if (path.endsWith('/state')) {
+      if (holdFirstPostStartRead && !held) {
+        held = true;
+        finalReadStarted();
+        await finalReadGate;
+      }
+      return fulfill(route, current);
+    }
+    if (path.endsWith('/step')) {
+      steps += 1;
+      current = { ...guidedState('ready'), revision: 21, nextStep: 'core-recombine-partial', completedSteps: ['core-split'] };
+      return fulfill(route, { accepted: true }, 202);
+    }
+    return fulfill(route, {}, 404);
+  });
+
+  await page.goto(`${origin}/demos/`);
+  await page.getByRole('button', { name: /KOx Coca-Cola xStocks/ }).click();
+  await page.getByTestId('prepare-guided-profile').click();
+  await sawFinalRead;
+  const split = page.locator('[data-demo-step="core-split"]');
+  await expect(split).toBeVisible(); // The background poll has already observed ready revision 20.
+  await expect(split).toBeDisabled();
+  await expect(split).toHaveText('Action in progress…');
+  await split.evaluate((button: HTMLButtonElement) => button.click());
+  expect(starts).toBe(1);
+  expect(steps).toBe(0);
+
+  releaseFinalRead();
+  await expect(split).toBeEnabled();
+  await split.click();
+  await expect(page.locator('[data-demo-step="core-recombine-partial"]')).toBeVisible();
+  expect(starts).toBe(1);
+  expect(steps).toBe(1);
+});
+
 test('a starting sandbox keeps one poll owner across both CTAs', async ({ page }) => {
   let posts = 0;
   let reads = 0;

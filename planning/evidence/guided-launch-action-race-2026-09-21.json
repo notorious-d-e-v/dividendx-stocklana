@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "kind": "guided-launch-interrupted-acceptance",
+  "status": "failed",
+  "targetOrigin": "https://dividendx.payai.network",
+  "startedAt": "2026-09-21T13:53:41.494Z",
+  "completedAt": "2026-09-21T13:54:57.278Z",
+  "deploymentId": "dpl_B1xS5ECV6mdeuVeXhL6wtvpLVxV3",
+  "lastCompletedStep": "setup",
+  "interruptedStep": "core-split",
+  "confirmedTransactionsBeforeInterruption": 9,
+  "cause": "Profile setup became ready through polling before its foreground request completed. Next button appeared enabled while actionLockRef still suppressed its click; no step POST was sent.",
+  "followup": "Keep action controls disabled until the foreground action finishes, then rerun full production acceptance."
+}

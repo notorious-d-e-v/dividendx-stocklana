@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import { constants as fsConstants } from 'node:fs';
 import { dirname, extname, isAbsolute, parse as parsePath } from 'node:path';
-import { chromium } from '@playwright/test';
+import { chromium, expect } from '@playwright/test';
 
 const SESSION_RE = /^[0-9a-f]{32}$/;
 const FLOWS = ['sandbox', 'guided', 'devnet', 'isolation'];
@@ -660,7 +660,7 @@ async function runGuided() {
       await stage(`guided: ${stepId}`);
       const button = page.locator(`[data-demo-step="${stepId}"]`);
       await button.waitFor({ state: 'visible' });
-      assert(await button.isEnabled(), `${action} is disabled.`);
+      await expect(button, `${action} should become available after the previous request completes.`).toBeEnabled({ timeout: DOM_TIMEOUT_MS });
       const mutationCountBefore = mutationRequests.length;
       await button.click(); // One mutation only; subsequent requests are reads.
       state = await poll(`guided ${stepId}`, () => guidedState(context, session.runtimeUrl),
