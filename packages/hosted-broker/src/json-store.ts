@@ -40,6 +40,12 @@ function isConditionalOperationConflict(error: unknown): boolean {
     && error.message === CONDITIONAL_OPERATION_CONFLICT;
 }
 
+function isTransientReadFailure(error: unknown): boolean {
+  if (error instanceof BlobServiceNotAvailable) return true;
+  return error instanceof BlobError
+    && /^Vercel Blob: Failed to fetch blob: 5\d{2}(?:\s|$)/.test(error.message);
+}
+
 function classifySdkFailure(operation: BlobOperation, error: unknown): never {
   if (operation === 'READ' && error instanceof BlobError) {
     // @vercel/blob 2.8.0 uses this exact prefix for private GET HTTP failures,
@@ -93,10 +99,21 @@ export class BlobJsonCasStore implements JsonCasStore {
 
   async read<T>(pathname: string, maxBytes = MAX_LEDGER_BYTES): Promise<VersionedJson<T> | null> {
     let result;
-    try {
-      result = await this.sdk.get(pathname, { access: 'private', useCache: false,
-        headers: { 'Accept-Encoding': 'identity' }, abortSignal: AbortSignal.timeout(10_000) });
-    } catch (error) { classifySdkFailure('READ', error); }
+    // Keep one deadline across both GETs; a slow first request cannot double the function's read time.
+    const abortSignal = AbortSignal.timeout(10_000);
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      try {
+        result = await this.sdk.get(pathname, { access: 'private', useCache: false,
+          headers: { 'Accept-Encoding': 'identity' }, abortSignal });
+        break;
+      } catch (error) {
+        if (attempt === 0 && isTransientReadFailure(error) && !abortSignal.aborted) {
+          await new Promise((resolve) => setTimeout(resolve, 30 + Math.floor(Math.random() * 40)));
+          if (!abortSignal.aborted) continue;
+        }
+        classifySdkFailure('READ', error);
+      }
+    }
     if (!result) return null;
     if (result.statusCode !== 200 || !result.stream) throw new JsonStoreFailure('BLOB_READ_STATUS');
     const text = await readBounded(result.stream, maxBytes);

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { BlobError, BlobPreconditionFailedError, BlobServiceRateLimited } from '@vercel/blob';
+import { BlobError, BlobPreconditionFailedError, BlobServiceNotAvailable, BlobServiceRateLimited } from '@vercel/blob';
 import { HostedSessionBroker, type BrokerDependencies } from '../src/broker.js';
 import { DEFAULT_LIMITS, LEDGER_PATH, MAX_LEDGER_BYTES, MAX_RESPONSE_BYTES, PROGRAM_ID,
   emptyLedger, type SandboxKind, type SessionLedger } from '../src/contract.js';
@@ -674,12 +674,36 @@ test('JSON store classifies private GET HTTP failures without retaining status t
     [503, 'BLOB_READ_HTTP_5XX'], [302, 'BLOB_READ_HTTP_OTHER'],
   ] as const) {
     const privateText = 'private-token-and-upstream-detail';
+    let reads = 0;
     const store = new BlobJsonCasStore({
-      get: async () => { throw new BlobError(`Failed to fetch blob: ${status} ${privateText}`); },
+      get: async () => { reads += 1; throw new BlobError(`Failed to fetch blob: ${status} ${privateText}`); },
       put: async () => { throw new Error('not used'); },
     } as any);
     await assert.rejects(() => store.read('probe.json'), (error: any) =>
       error instanceof JsonStoreFailure && error.code === code
         && error.message === code && !error.message.includes(privateText));
+    assert.equal(reads, status === 503 ? 2 : 1);
+  }
+});
+
+test('transient Blob GET retries once within the original deadline without repeating a write', async () => {
+  for (const transient of [new BlobError('Failed to fetch blob: 503 upstream'), new BlobServiceNotAvailable()]) {
+    let reads = 0; let writes = 0; const signals: AbortSignal[] = [];
+    const store = new BlobJsonCasStore({
+      get: async (_pathname: string, options: any) => {
+        reads += 1; signals.push(options.abortSignal);
+        if (reads === 1) throw transient;
+        const response = new Response('{"revision":1}');
+        return { statusCode: 200, stream: response.body!, blob: { etag: '"one"' } };
+      },
+      put: async () => { writes += 1; throw new BlobError('private provider detail'); },
+    } as any);
+    assert.deepEqual(await store.read<{ revision: number }>('probe.json'),
+      { value: { revision: 1 }, etag: '"one"' });
+    assert.equal(reads, 2);
+    assert.equal(signals[0], signals[1]);
+    await assert.rejects(() => store.compareAndSwap('probe.json', '"one"', { revision: 2 }), (error: any) =>
+      error instanceof JsonStoreFailure && error.code === 'BLOB_CAS_REJECTED');
+    assert.equal(writes, 1);
   }
 });

@@ -19,7 +19,9 @@ Source fixture/reference/issuer checks, type checking and hosted production buil
 - [Real Blob probe](evidence/guided-capacity-meter-2026-09-21.json): 16 ready synthetic sessions, 484 retained records, 617,029-byte ledger, five rounds of 16 concurrent charges. All 80 charges succeeded with exact counters, no global ETag/revision changes and zero CAS conflicts. Charge latency from the local operator machine was p50 1.80s / p95 3.67s. All 17 probe blobs were deleted.
 - [Provider startup probe](evidence/guided-capacity-provider-2026-09-21.json): 16 genuine isolated Vercel VMs from the accepted v4 snapshot, created in batches of four. All 16 became ready with distinct runtime IDs and correct idle guided state. Startup p50 10.19s / p95 13.16s. All 16 VMs were stopped and deleted; all 17 probe blobs were deleted. This is readiness and isolation evidence, not sixteen concurrent completed transaction journeys or an unlimited-traffic guarantee.
 
-Production publication and full-journey acceptance remain pending.
+PR #7 deployed main `b57e3f153d25b6e84a1ac2d1f8a7e14a46574f75` to production deployment `dpl_GajR2cJtL8HseEHvoRHNcVLryaSY`. Immediate root rendering and direct IBM preparation were observed on the canonical domain. Full-journey acceptance remains pending: the first Chrome run reached LP withdrawal, then a transient private Blob GET HTTP 5xx interrupted recombination. No failed mutation was automatically replayed. An earlier driver attempt could not launch its missing bundled browser; the actual run used installed Chrome.
+
+The follow-up fixes retry only transient Blob reads once within the existing ten-second deadline, leaving writes untouched. They also expose “Check sandbox status” for uncertain starts even when the previous session is failed/expired, before offering another reset. All 38 hosted/guided browser checks, 34 broker checks, root tests, type checking and hosted build pass. These fixes require production publication and a fresh full-journey acceptance before the launch is marked verified.
 
 ## Rollback reference
 
