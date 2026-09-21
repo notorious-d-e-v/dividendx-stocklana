@@ -113,10 +113,11 @@ function Progress({ state, chapter }: { state: DemoState | null; chapter: 1 | 2 
   </ol>;
 }
 
-function CurrentAction({ state, unavailable, pending, hosted, awaitingSandbox, selectedAssetId, onSelectAsset, onAction, onReconnect, lastResult, onSeeWallet, wiggleStep, reduceMotion }: {
+function CurrentAction({ state, unavailable, pending, actionInFlight, hosted, awaitingSandbox, selectedAssetId, onSelectAsset, onAction, onReconnect, lastResult, onSeeWallet, wiggleStep, reduceMotion }: {
   state: DemoState | null;
   unavailable: boolean;
   pending: boolean;
+  actionInFlight: boolean;
   hosted: boolean;
   awaitingSandbox?: boolean;
   selectedAssetId: DemoAsset['id'] | null;
@@ -128,11 +129,12 @@ function CurrentAction({ state, unavailable, pending, hosted, awaitingSandbox, s
   wiggleStep?: string | null;
   reduceMotion: boolean | null;
 }) {
+  const busy = pending || actionInFlight;
   const selectedAsset = Object.values(DEMO_ASSETS).find((asset) => asset.id === selectedAssetId);
   if (unavailable && !awaitingSandbox) return <section className="current-action unavailable" aria-labelledby="current-action-title">
     <p className="demo-kicker">{hosted ? 'Private sandbox' : 'Local runtime'}</p><h2 id="current-action-title">The guided demo is unavailable.</h2>
     <p>{hosted ? 'This session-bound sandbox could not be reached. Check the same sandbox again; no action is repeated.' : <>In a terminal, run <code className="startup-command">npm run demo:guided</code>, then check again.</>} {state ? 'The last received balances may be out of date.' : 'No wallet extension is needed.'}</p>
-    <button className="demo-primary" onClick={onReconnect}>Check {hosted ? 'sandbox' : 'runtime'} again</button>
+    <button className="demo-primary" disabled={busy} onClick={onReconnect}>Check {hosted ? 'sandbox' : 'runtime'} again</button>
   </section>;
 
   if (!state && !awaitingSandbox) return <section className="current-action" aria-busy="true"><p className="demo-kicker">{hosted ? 'Private sandbox' : 'Local runtime'}</p><h2>Connecting to the guided demo…</h2></section>;
@@ -141,28 +143,28 @@ function CurrentAction({ state, unavailable, pending, hosted, awaitingSandbox, s
     <p className="demo-kicker">Part one · choose a company</p><h2 id="current-action-title">Choose a tokenized stock to follow.</h2>
     <p>Choose a company for this demo. The 100 tokenized stocks appear in your test wallet when you start.</p>
     <div className="asset-choices" role="group" aria-label="Choose a stock">
-      {Object.values(DEMO_ASSETS).map((asset) => <button key={asset.id} type="button" className={selectedAssetId === asset.id ? 'asset-choice selected' : 'asset-choice'} aria-pressed={selectedAssetId === asset.id} onClick={() => onSelectAsset(asset.id)} disabled={pending}>
+      {Object.values(DEMO_ASSETS).map((asset) => <button key={asset.id} type="button" className={selectedAssetId === asset.id ? 'asset-choice selected' : 'asset-choice'} aria-pressed={selectedAssetId === asset.id} onClick={() => onSelectAsset(asset.id)} disabled={busy}>
             <span className="asset-choice-symbol">{assetLabel(asset).symbol}</span><span><strong>{asset.company}</strong><small>{assetLabel(asset).issuer}</small></span><span className="asset-choice-check" aria-hidden="true">{selectedAssetId === asset.id ? '✓' : '○'}</span>
       </button>)}
     </div>
-    <button className="demo-primary" data-testid="prepare-guided-profile" disabled={pending || !selectedAssetId} onClick={onAction}>{pending ? 'Preparing…' : selectedAsset ? `Get 100 tokenized ${selectedAsset.company}` : 'Choose a company to start'}</button>
+    <button className="demo-primary" data-testid="prepare-guided-profile" disabled={busy || !selectedAssetId} onClick={onAction}>{busy ? 'Preparing…' : selectedAsset ? `Get 100 tokenized ${selectedAsset.company}` : 'Choose a company to start'}</button>
     <small className="action-note">The sandbox supplies sample stock and USDC balances. No real funds or wallet extension are needed.</small>
   </section>;
 
   if (state.status === 'failed') return <section className="current-action failed" aria-labelledby="current-action-title">
     <p className="demo-kicker">Run stopped safely</p><h2 id="current-action-title">Keep the partial receipt, then start fresh.</h2>
     <p>{state.error || 'The runtime stopped before the journey completed.'} Submitted signatures remain below as evidence and this failed step will not be replayed.</p>
-    <button className="demo-primary" disabled={pending} onClick={onAction}>{pending ? 'Preparing…' : 'Start a fresh demo'}</button>
+    <button className="demo-primary" disabled={busy} onClick={onAction}>{busy ? 'Preparing…' : 'Start a fresh demo'}</button>
   </section>;
 
   if (state.status === 'complete') return <section className="current-action complete" aria-labelledby="current-action-title">
     <p className="demo-kicker">All three parts complete</p><h2 id="current-action-title">The claims remained backed through trading and redemption.</h2>
     <p>The two demo wallets finished their separate exits. Raydium’s locked residual claims remain in the pool and stay backed.</p>
-    <button className="demo-primary" disabled={pending} onClick={onAction}>{pending ? 'Preparing…' : 'Run the journey again'}</button>
+    <button className="demo-primary" disabled={busy} onClick={onAction}>{busy ? 'Preparing…' : 'Run the journey again'}</button>
   </section>;
 
   const step = stepCopy(state.activeStep === 'setup' ? null : state.activeStep ?? state.nextStep);
-  const working = pending || state.status === 'preparing' || state.status === 'running';
+  const working = busy || state.status === 'preparing' || state.status === 'running';
   return <section id="current-tour-action" className="current-action" aria-labelledby="current-action-title" aria-busy={working}>
     <p className="demo-kicker">{state.activeStep === 'setup' ? 'Preparing the wallets' : step?.eyebrow ?? 'Current action'}</p>
     <h2 id="current-action-title">{state.activeStep === 'setup' ? 'Creating wallets and assets.' : step?.id === 'core-split' && state.asset ? `Split 100 ${state.asset.company} stocks.` : step?.id === 'dividend-split' && state.asset ? `Split the returned 100 ${state.asset.company} stocks.` : step?.title ?? 'Waiting for the next step.'}</h2>
@@ -241,6 +243,7 @@ export function GuidedDemosApp({ client = localGuidedClient, hostedLifecycle }: 
   const [connectionError, setConnectionError] = useState('');
   const [notice, setNotice] = useState(hostedLifecycle ? 'Choose a company or start the guided tour.' : 'Connecting to the guided runtime.');
   const [pending, setPending] = useState(false);
+  const [actionInFlight, setActionInFlight] = useState(false);
   const [changes, setChanges] = useState<ChangeSet | null>(null);
   const [receipt, setReceipt] = useState<unknown>(null);
   const [receiptError, setReceiptError] = useState('');
@@ -346,6 +349,7 @@ export function GuidedDemosApp({ client = localGuidedClient, hostedLifecycle }: 
   const action = useCallback(async () => {
     if (actionLockRef.current || pending) return;
     actionLockRef.current = true;
+    setActionInFlight(true);
     let current = stateRef.current;
     let actionClient = client;
     try {
@@ -396,7 +400,7 @@ export function GuidedDemosApp({ client = localGuidedClient, hostedLifecycle }: 
     } catch (error) {
       setNotice(error instanceof Error ? error.message : 'The guided sandbox is unavailable.');
       setPending(false);
-    } finally { actionLockRef.current = false; }
+    } finally { actionLockRef.current = false; setActionInFlight(false); }
   }, [acceptState, client, hostedLifecycle, pending, selectedAssetId]);
 
   const reconnect = useCallback(async () => {
@@ -471,7 +475,7 @@ export function GuidedDemosApp({ client = localGuidedClient, hostedLifecycle }: 
       <section id="tour-core" className="tour-chapter" aria-labelledby="core-heading">
         <div className="chapter-heading"><p className="demo-kicker">Part one · Split and recombine</p><h2 id="core-heading" tabIndex={-1}>From one stock to two rights. <span className="chapter-blue">And back.</span></h2></div>
         <div className="chapter-layout"><div className="chapter-story"><div className="chapter-number">01 <span>/ 03</span></div><h3>First, see the core move.</h3><ul className="core-points"><li>PT tracks the stock price side.</li><li>DR represents the dividend rights for the sample year.</li></ul><div className="claim-cards"><div className="claim-card pt"><span>PT</span><b>Principal token</b><small>Stock exposure</small></div><div className="claim-card dr"><span>DR</span><b>Dividend token</b><small>Dividend rights</small></div></div><p className="chapter-hint">A matching PT + DR pair can return stock before final settlement.</p></div>
-        <div>{coreDone ? <div className="core-recap"><p className="demo-kicker">Part one result · {viewState?.asset ? assetLabel(viewState.asset).symbol : ''}</p><h3>100 stocks restored.</h3><p>The holder split the 100 stocks, then recombined 40 pairs and the remaining 60.</p><ol><li><span>01</span> Split 100 stocks <b>✓</b></li><li><span>02</span> Recombined 40 pairs <b>✓</b></li><li><span>03</span> Recombined 60 pairs <b>✓</b></li></ol></div> : <><CurrentAction state={viewState} awaitingSandbox={awaitingSandbox} unavailable={runtimeUnavailable} pending={pending} hosted={hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 1 ? lastResult : null} onSeeWallet={() => scrollTo('core-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={viewState} chapter={1} /></>}{snapshot && !coreDone && <div id="core-wallet" className="chapter-balances"><p className="demo-kicker">Stock holder wallet · {assetLabel(snapshot.asset).symbol}</p><WalletPanel role="provider" wallet={snapshot.provider} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} coreOnly /><button type="button" className="return-to-action" onClick={() => scrollTo('current-tour-action')}>Return to next action ↑</button></div>}</div></div>
+        <div>{coreDone ? <div className="core-recap"><p className="demo-kicker">Part one result · {viewState?.asset ? assetLabel(viewState.asset).symbol : ''}</p><h3>100 stocks restored.</h3><p>The holder split the 100 stocks, then recombined 40 pairs and the remaining 60.</p><ol><li><span>01</span> Split 100 stocks <b>✓</b></li><li><span>02</span> Recombined 40 pairs <b>✓</b></li><li><span>03</span> Recombined 60 pairs <b>✓</b></li></ol></div> : <><CurrentAction state={viewState} awaitingSandbox={awaitingSandbox} unavailable={runtimeUnavailable} pending={pending} actionInFlight={actionInFlight} hosted={hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 1 ? lastResult : null} onSeeWallet={() => scrollTo('core-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={viewState} chapter={1} /></>}{snapshot && !coreDone && <div id="core-wallet" className="chapter-balances"><p className="demo-kicker">Stock holder wallet · {assetLabel(snapshot.asset).symbol}</p><WalletPanel role="provider" wallet={snapshot.provider} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} coreOnly /><button type="button" className="return-to-action" onClick={() => scrollTo('current-tour-action')}>Return to next action ↑</button></div>}</div></div>
         {coreDone && <div className="chapter-complete"><span aria-hidden="true">✓</span><div><b>Part one complete.</b><p>Part One returned all 100 stocks to the holder wallet.</p></div><button type="button" data-testid="continue-to-dividends" onClick={() => scrollTo('tour-dividends')}>Continue to Part Two <span aria-hidden="true">→</span></button></div>}
       </section>
 
@@ -479,7 +483,7 @@ export function GuidedDemosApp({ client = localGuidedClient, hostedLifecycle }: 
         <div className="chapter-heading"><p className="demo-kicker">Part two · See dividends grow</p><h2 id="dividend-heading">Watch the dividend effect.</h2><p>Split the returned 100 stocks, advance two sample quarters, then recombine 40 pairs to see the allocation change.</p></div>
         {!coreDone ? <div className="chapter-preview"><span aria-hidden="true">↗</span><div><h3>Finish Part One to start the sample year.</h3><p>First return all 100 stocks to the holder wallet.</p></div></div> : <>
           <div className="chapter-layout"><div className="chapter-story"><div className="chapter-number">02 <span>/ 03</span></div><h3>Same number of rights. More stock per pair.</h3><p>Two sample quarterly dividends increase the stock allocation from 1 to 1.02 per matching PT + DR pair. The 100 DR do not become 102 DR. Recombining 40 pairs returns 40.8 stocks and leaves 60 PT plus 60 DR.</p><p className="chapter-hint">These are sample dividend amounts, not forecasts or actual issuer payments.</p></div>
-          <div>{dividendDone ? <div className="core-recap"><p className="demo-kicker">Part two result · {viewState?.asset ? assetLabel(viewState.asset).symbol : ''}</p><h3>40 pairs became <span data-testid="dividend-result-stock">{viewState?.completedSteps.includes('create-pool') || !snapshot ? '40.8' : displayBalance(snapshot.provider.stockRaw, 'stockRaw', amountContext(snapshot))}</span> stocks.</h3><p>Two sample quarterly dividends changed the stock allocation. The remaining 60 PT and 60 DR carry into Part Three.</p><ol><li><span>01</span> Split 100 returned stocks <b>✓</b></li><li><span>02</span> Record two sample quarters <b>✓</b></li><li><span>03</span> Recombine 40 pairs <b>✓</b></li></ol></div> : <><CurrentAction state={viewState} awaitingSandbox={awaitingSandbox} unavailable={runtimeUnavailable} pending={pending} hosted={hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 2 ? lastResult : null} onSeeWallet={() => scrollTo('dividend-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={viewState} chapter={2} /></>}{snapshot && !dividendDone && <div id="dividend-wallet" className="chapter-balances"><p className="demo-kicker">Stock holder wallet · {assetLabel(snapshot.asset).symbol}</p><WalletPanel role="provider" wallet={snapshot.provider} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} coreOnly /><button type="button" className="return-to-action" onClick={() => scrollTo('current-tour-action')}>Return to next action ↑</button></div>}</div></div>
+          <div>{dividendDone ? <div className="core-recap"><p className="demo-kicker">Part two result · {viewState?.asset ? assetLabel(viewState.asset).symbol : ''}</p><h3>40 pairs became <span data-testid="dividend-result-stock">{viewState?.completedSteps.includes('create-pool') || !snapshot ? '40.8' : displayBalance(snapshot.provider.stockRaw, 'stockRaw', amountContext(snapshot))}</span> stocks.</h3><p>Two sample quarterly dividends changed the stock allocation. The remaining 60 PT and 60 DR carry into Part Three.</p><ol><li><span>01</span> Split 100 returned stocks <b>✓</b></li><li><span>02</span> Record two sample quarters <b>✓</b></li><li><span>03</span> Recombine 40 pairs <b>✓</b></li></ol></div> : <><CurrentAction state={viewState} awaitingSandbox={awaitingSandbox} unavailable={runtimeUnavailable} pending={pending} actionInFlight={actionInFlight} hosted={hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 2 ? lastResult : null} onSeeWallet={() => scrollTo('dividend-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={viewState} chapter={2} /></>}{snapshot && !dividendDone && <div id="dividend-wallet" className="chapter-balances"><p className="demo-kicker">Stock holder wallet · {assetLabel(snapshot.asset).symbol}</p><WalletPanel role="provider" wallet={snapshot.provider} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} coreOnly /><button type="button" className="return-to-action" onClick={() => scrollTo('current-tour-action')}>Return to next action ↑</button></div>}</div></div>
           {dividendDone && <div className="chapter-complete"><span aria-hidden="true">✓</span><div><b>Part two complete.</b><p>Part Two left 60 DR for the pool chapter.</p></div><button type="button" data-testid="continue-to-defi" onClick={() => scrollTo('tour-defi')}>Continue to Part Three <span aria-hidden="true">→</span></button></div>}
         </>}
       </section>
@@ -487,7 +491,7 @@ export function GuidedDemosApp({ client = localGuidedClient, hostedLifecycle }: 
       <section id="tour-defi" className={`tour-chapter defi-chapter ${dividendDone ? '' : 'chapter-locked'}`} aria-labelledby="defi-heading">
         <div className="chapter-heading"><p className="demo-kicker">Part three · Dividend rights in a pool</p><h2 id="defi-heading">Put the remaining rights to work.</h2><p>Use the 60 DR left from Part Two in a DR / USDC pool. Watch a buyer acquire DR, then follow both wallets through year end.</p></div>
         {!dividendDone ? <div className="chapter-preview"><span aria-hidden="true">↗</span><div><h3>Finish Part Two to unlock the pool.</h3><p>Recombine 40 pairs after two sample dividends, leaving 60 DR for this chapter.</p></div></div> : <>
-          <div className="chapter-layout"><div className="chapter-story"><div className="chapter-number">03 <span>/ 03</span></div><h3>Two owners, different choices.</h3><p>The holder supplies 24 DR and 4 USDC, then up to 36 DR with 6 USDC. A buyer swaps USDC for DR. LP tokens represent the holder’s pool share; DR are the dividend rights. The buyer’s DR covers this year’s accrued and remaining dividends.</p><p className="chapter-hint">The annual deposit cutoff has passed. This chapter uses the 60 DR already created in Part Two.</p><div className="defi-stages"><span>Pool & trade</span><span>Withdraw & recombine</span><span>Fast-forward & redeem</span></div></div><div><CurrentAction state={viewState} awaitingSandbox={awaitingSandbox} unavailable={runtimeUnavailable} pending={pending} hosted={hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 3 ? lastResult : null} onSeeWallet={() => scrollTo('defi-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={viewState} chapter={3} /></div></div>
+          <div className="chapter-layout"><div className="chapter-story"><div className="chapter-number">03 <span>/ 03</span></div><h3>Two owners, different choices.</h3><p>The holder supplies 24 DR and 4 USDC, then up to 36 DR with 6 USDC. A buyer swaps USDC for DR. LP tokens represent the holder’s pool share; DR are the dividend rights. The buyer’s DR covers this year’s accrued and remaining dividends.</p><p className="chapter-hint">The annual deposit cutoff has passed. This chapter uses the 60 DR already created in Part Two.</p><div className="defi-stages"><span>Pool & trade</span><span>Withdraw & recombine</span><span>Fast-forward & redeem</span></div></div><div><CurrentAction state={viewState} awaitingSandbox={awaitingSandbox} unavailable={runtimeUnavailable} pending={pending} actionInFlight={actionInFlight} hosted={hosted} selectedAssetId={selectedAssetId} onSelectAsset={setSelectedAssetId} onAction={() => void action()} onReconnect={() => void reconnect()} lastResult={activeChapter === 3 ? lastResult : null} onSeeWallet={() => scrollTo('defi-wallet')} wiggleStep={wiggleStep} reduceMotion={reduceMotion} /><Progress state={viewState} chapter={3} /></div></div>
           <section id="defi-wallet" className="wallet-section" aria-labelledby="wallet-heading"><header><div><p className="demo-kicker">Two wallets</p><h2 id="wallet-heading">Two wallets, two owners.</h2></div><p>The demo manages both wallets. Their balances are separate from yours.</p></header><div className="wallet-grid"><WalletPanel role="provider" wallet={snapshot?.provider ?? null} snapshot={snapshot} active={activeActor === 'provider'} changes={changes} /><WalletPanel role="buyer" wallet={snapshot?.buyer ?? null} snapshot={snapshot} active={activeActor === 'buyer'} changes={changes} /></div><button type="button" className="return-to-action" onClick={() => scrollTo('current-tour-action')}>Return to next action ↑</button></section>
         </>}
       </section>
