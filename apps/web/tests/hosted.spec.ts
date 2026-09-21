@@ -339,6 +339,62 @@ test('unreadable status after an ambiguous POST blocks another mutation until GE
   await expect(page.getByTestId('guided-sandbox-status')).toContainText('Choose a company below');
 });
 
+for (const previousStatus of ['expired', 'failed'] as const) {
+  test(`${previousStatus} session reconciles an unknown reset before selected Get 100 can continue`, async ({ page }) => {
+    let posts = 0;
+    let starts = 0;
+    let statusReadable = false;
+    let replacementReady = false;
+    let submitted: unknown;
+    let runtimeState = guidedState('idle', 'replacement-runtime');
+    await page.route(`${origin}/api/sandbox/guided/session`, (route) => {
+      if (route.request().method() === 'POST') {
+        posts += 1;
+        expect(route.request().postDataJSON()).toEqual({ action: 'reset', expectedSessionId: sessionId });
+        if (posts === 1) return route.abort('connectionrefused');
+        replacementReady = true;
+        return fulfill(route, session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` }));
+      }
+      if (posts > 0 && !statusReadable) return route.abort('connectionrefused');
+      return fulfill(route, replacementReady
+        ? session('ready', { sessionId: replacementId, runtimeId: 'replacement-runtime', runtimeUrl: `/api/sandbox/guided/${replacementId}` })
+        : session(previousStatus));
+    });
+    await page.route(`${origin}/api/sandbox/guided/${replacementId}/**`, (route) => {
+      if (route.request().url().endsWith('/state')) return fulfill(route, runtimeState);
+      if (route.request().url().endsWith('/start')) {
+        starts += 1;
+        submitted = route.request().postDataJSON();
+        runtimeState = { ...guidedState('ready', 'replacement-runtime'), revision: 2, asset: DEMO_ASSETS[1] };
+        return fulfill(route, { accepted: true }, 202);
+      }
+      return fulfill(route, {}, 404);
+    });
+
+    await page.goto(`${origin}/demos/`);
+    await page.getByRole('button', { name: /MU Micron Backpack\/Trek/ }).click();
+    await page.getByTestId('prepare-guided-profile').click();
+    await expect(page.getByRole('button', { name: 'Check sandbox status' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Start a fresh guided demo' })).toHaveCount(0);
+    expect(posts).toBe(1);
+    expect(starts).toBe(0);
+    await page.getByTestId('prepare-guided-profile').click();
+    expect(posts).toBe(1);
+
+    statusReadable = true;
+    await page.getByRole('button', { name: 'Check sandbox status' }).click();
+    await expect(page.getByRole('button', { name: 'Start a fresh guided demo' })).toBeVisible();
+    expect(posts).toBe(1);
+    expect(starts).toBe(0);
+    await expect(page.getByTestId('prepare-guided-profile')).toHaveText('Get 100 tokenized Micron');
+    await page.getByTestId('prepare-guided-profile').click();
+    await expect(page.locator('[data-demo-step="core-split"]')).toBeVisible();
+    expect(posts).toBe(2);
+    expect(starts).toBe(1);
+    expect(submitted).toMatchObject({ assetId: 'backpack-test-mu', runtimeId: 'replacement-runtime' });
+  });
+}
+
 test('stale 410 clears runtime controls but keeps the hero and reset inline', async ({ page }) => {
   await page.route(`${origin}/api/sandbox/guided/session`, (route) => fulfill(route, session('ready')));
   await page.route(`${origin}/api/sandbox/guided/${sessionId}/state`, (route) => fulfill(route, { error: 'stale session' }, 410));

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "kind": "guided-launch-interrupted-acceptance",
+  "status": "failed",
+  "targetOrigin": "https://dividendx.payai.network",
+  "startedAt": "2026-09-21T13:43:18.860Z",
+  "completedAt": "2026-09-21T13:45:13.997Z",
+  "deploymentId": "dpl_GajR2cJtL8HseEHvoRHNcVLryaSY",
+  "lastCompletedStep": "remove-liquidity",
+  "interruptedStep": "recombine",
+  "confirmedTransactionsBeforeInterruption": 24,
+  "cause": "Private Blob GET HTTP 5xx in production request logs; broker returned 503 without replaying mutation.",
+  "followup": "Bounded GET-only retry and explicit uncertain-session status recovery; rerun full acceptance after deployment."
+}
