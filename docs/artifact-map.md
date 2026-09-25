@@ -4,6 +4,8 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 
 ## Start here
 
+- [DivX repository and hosting names](../planning/divx-service-names-2026-09-25.md) — GitHub and Vercel rename, current fallback URL and retained legacy redirects.
+
 - [Canonical DivX domain](../planning/divx-canonical-domain-2026-09-25.md) — new public URL, compatibility period, domain configuration and live verification.
 
 - [DivX rebrand and release](../planning/divx-rebrand-2026-09-25.md) — updated branding, assets, decks, validation and deployment record.
