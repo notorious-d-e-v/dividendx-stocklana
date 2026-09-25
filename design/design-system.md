@@ -6,6 +6,8 @@ Phase-one visual system, 16 September 2026. It describes a design prototype rath
 
 The identity comes from one stock position separating into two legible entitlements. Stock exposure is blue and dividend rights are amber; both are always named, so color is reinforcement rather than the only cue. The paired diamond mark uses the same split without borrowing an issuer or competitor logo.
 
+The [approved logo set](brand/divx-v1/README.md), added 25 September 2026, uses the second generated design: two full, solid shapes separated by a diagonal gap, with no chipped rectangle or detached shard. Use the supplied PNG assets for the website and project profile; preserve their proportions and clear space.
+
 The interface is editorial and amount-led. Large type establishes the asset and scenario; fine rules align facts; a single vertical divider separates source evidence from the calculation. Avoid nested dashboard cards, ornamental gradients, excessive pills, generic hero metrics, and equal-weight diagrams that imply the two allocations have equal economic size.
 
 ## Foundation

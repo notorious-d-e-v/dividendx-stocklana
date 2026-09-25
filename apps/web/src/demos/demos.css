@@ -10,11 +10,8 @@ code, pre { font-family: var(--dx-font-mono); }
 .skip-link:focus { transform: translateY(0); }
 .demo-shell { min-height: 100vh; overflow: clip; }
 .demo-header { min-height: 76px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; padding: 14px 32px; border-bottom: 1px solid var(--dx-line); background: rgba(255,254,251,.96); }
-.demo-brand { display: inline-flex; width: max-content; align-items: center; gap: 10px; color: var(--dx-ink); text-decoration: none; font-size: 20px; font-weight: 820; letter-spacing: -.04em; }
-.demo-mark { display: inline-flex; width: 30px; height: 30px; align-items: center; justify-content: center; }
-.demo-mark i { width: 15px; height: 21px; border-radius: 3px; transform: rotate(45deg); }
-.demo-mark i:first-child { margin-right: -5px; background: var(--dx-stock); }
-.demo-mark i:last-child { background: var(--dx-dividend); }
+.demo-brand { display: inline-flex; width: max-content; align-items: center; color: var(--dx-ink); text-decoration: none; }
+.demo-brand .brand-logo { display: block; width: 116px; height: auto; }
 .demo-header nav { display: flex; align-items: center; gap: 4px; padding: 4px; border: 1px solid var(--dx-line); border-radius: var(--dx-radius-pill); background: var(--dx-canvas); }
 .demo-header nav a { padding: 8px 14px; border-radius: var(--dx-radius-pill); color: var(--dx-ink-muted); text-decoration: none; font-size: 12px; font-weight: 720; }
 .demo-header nav a[aria-current="page"] { color: var(--dx-ink); background: var(--dx-surface); box-shadow: 0 1px 5px rgba(16,24,32,.1); }
@@ -132,7 +129,7 @@ main { max-width: 1440px; margin: 0 auto; padding: 0 32px 80px; }
 .future-demos article h3 { margin: 0; font-size: 15px; }
 .future-demos article p { margin: 0; color: var(--dx-ink-muted); font-size: 11px; line-height: 1.5; }
 footer { min-height: 84px; display: flex; align-items: center; gap: 10px; padding: 20px 32px; border-top: 1px solid var(--dx-line); color: var(--dx-ink-muted); background: var(--dx-surface); font-size: 10px; }
-footer .demo-mark { width: 19px; height: 19px; } footer .demo-mark i { width: 9px; height: 14px; } footer .demo-mark i:first-child { margin-right: -3px; }
+footer .brand-logo { display: block; width: 28px; height: 28px; }
 footer a { margin-left: auto; color: var(--dx-ink); font-weight: 760; }
 
 @media (max-width: 900px) {
@@ -160,7 +157,7 @@ footer a { margin-left: auto; color: var(--dx-ink); font-weight: 760; }
   .demo-header { padding-inline: 14px; }
   .demo-header nav { left: 14px; right: 14px; }
   .demo-header nav a { padding-inline: 7px; font-size: 10px; }
-  .demo-brand { font-size: 18px; }
+  .demo-brand .brand-logo { width: 108px; }
   .runtime-status { max-width: 110px; text-align: right; font-size: 9px; }
   .boundary-bar { align-items: flex-start; justify-content: space-between; padding-inline: 14px; }
   .boundary-bar strong { max-width: 245px; }

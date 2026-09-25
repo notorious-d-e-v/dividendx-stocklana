@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { BrandLogo } from '../BrandLogo';
 
 export type HostedSandboxKind = 'wallet' | 'guided';
 export type HostedSessionStatus = 'none' | 'starting' | 'ready' | 'expired' | 'failed';
@@ -95,8 +96,6 @@ export function changeHostedSession(kind: HostedSandboxKind, action: 'start' | '
     body: JSON.stringify({ action, expectedSessionId }),
   }, SESSION_MUTATION_TIMEOUT_MS);
 }
-
-function Mark() { return <span className="hosted-mark" aria-hidden="true"><i /><b /></span>; }
 
 export function HostedSessionGate({ kind, children }: {
   kind: HostedSandboxKind;
@@ -233,7 +232,7 @@ export function HostedSessionGate({ kind, children }: {
   const title = kind === 'wallet' ? 'Private wallet sandbox' : 'Private guided sandbox';
   const starting = session?.status === 'starting';
   return <main className="hosted-gate" data-testid="hosted-session-gate">
-    <Mark />
+    <BrandLogo variant="icon" className="hosted-mark" />
     <p className="hosted-eyebrow">{title}</p>
     <h1>{starting ? 'Starting your isolated test network…' : session?.status === 'expired' ? 'This sandbox has expired.' : session?.status === 'failed' ? 'The sandbox stopped.' : 'Try DivX in a private sandbox.'}</h1>
     <p>Each visitor gets a separate synthetic network for up to 15 minutes. It uses test assets only and does not hold your wallet keys.</p>
