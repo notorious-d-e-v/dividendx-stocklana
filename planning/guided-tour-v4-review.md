@@ -1,6 +1,6 @@
 # Guided tour v4 — acceptance, 19 September 2026
 
-Released at [dividendx.payai.network/demos/](https://dividendx.payai.network/demos/), following the [three-chapter specification](../spec/guided-tour-v4.md). The matching [code-only v4 runtime snapshot](evidence/hosted-runtime-snapshot-v4-2026-09-19.json) was published with the site; see the [release review](guided-tour-v4-release.md). Earlier [v3 evidence](guided-tour-review.md) is preserved.
+Released at [divx.payai.network/demos/](https://divx.payai.network/demos/), following the [three-chapter specification](../spec/guided-tour-v4.md). The matching [code-only v4 runtime snapshot](evidence/hosted-runtime-snapshot-v4-2026-09-19.json) was published with the site; see the [release review](guided-tour-v4-release.md). Earlier [v3 evidence](guided-tour-review.md) is preserved.
 
 ## Result
 

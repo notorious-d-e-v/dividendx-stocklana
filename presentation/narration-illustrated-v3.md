@@ -36,4 +36,4 @@ The guided tour lets anyone split a stock token, put it back together, see the d
 
 **9 — From prototype to mainnet**
 
-The annual program, transaction SDK and guided demo are working. Before mainnet, we need complete issuer records, reviewed settlement operations, independent security review and legal and issuer checks. More liquidity, rolling dividend strategies and other networks come later. Try the guided demo at dividendx.payai.network. No wallet or real funds are needed.
+The annual program, transaction SDK and guided demo are working. Before mainnet, we need complete issuer records, reviewed settlement operations, independent security review and legal and issuer checks. More liquidity, rolling dividend strategies and other networks come later. Try the guided demo at divx.payai.network. No wallet or real funds are needed.

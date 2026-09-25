@@ -16,8 +16,8 @@ The Markdown draft contains invisible HTML comments marking the video and two in
 The article includes linked first mentions of `@solana`, `@xStocksFi`, `@Backpack` and `@OndoFinance`. In X's editor, select the intended account if a native mention is desired; pasted Markdown links may need reformatting. The blog can retain the linked handles. Naming an issuer or protocol does not assert a partnership or endorsement.
 
 - Hackathon name: **Stocklana**. [Official event](https://hackathons.solana.com/hackathons/stocklana).
-- [Public devnet app](https://dividendx.payai.network/app/).
-- [Accelerated guided demo](https://dividendx.payai.network/demos/).
+- [Public devnet app](https://divx.payai.network/app/).
+- [Accelerated guided demo](https://divx.payai.network/demos/).
 - [DivX program on Solscan](https://solscan.io/account/2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE?cluster=devnet). The required query is lowercase `cluster=devnet`. Address checked against the repository's accepted devnet evidence.
 - [Repository](https://github.com/notorious-d-e-v/dividendx-stocklana).
 

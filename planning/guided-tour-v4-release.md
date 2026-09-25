@@ -22,7 +22,7 @@ Known-good rollback target before this release: `dpl_rZ5RHu9389Y9G7yms2ZBbxq12kN
 
 ## Production acceptance
 
-[Actual Chrome acceptance](evidence/hosted-guided-v4-production-2026-09-19-r3.json) passes on `https://dividendx.payai.network/demos/`: one setup plus all 15 guided actions, 40 unique confirmed transactions matching state and receipt, the 40.8-stock dividend result, and no horizontal overflow at 1440/390 pixels. Guided RPC remains private; hosted confirmation is checked against runtime receipts, with separate native/Linux execution evidence above.
+[Actual Chrome acceptance](evidence/hosted-guided-v4-production-2026-09-19-r3.json) records the original accepted run (the current tour is [here](https://divx.payai.network/demos/)): one setup plus all 15 guided actions, 40 unique confirmed transactions matching state and receipt, the 40.8-stock dividend result, and no horizontal overflow at 1440/390 pixels. Guided RPC remains private; hosted confirmation is checked against runtime receipts, with separate native/Linux execution evidence above.
 
 “Run the journey again” sends exactly one guarded reset, obtains a different session and runtime, returns to idle stock selection, focuses `core-heading`, and scrolls Part One to 24 pixels from the viewport top. It does not fund or advance the new demo automatically. The old path returns 410; two expected stale-path browser records during replacement are distinguished from unexpected errors. No unexpected browser errors occurred. Test sessions retain their normal 15-minute expiry.
 

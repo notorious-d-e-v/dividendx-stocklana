@@ -33,8 +33,8 @@ Raydium and Meteora offer liquidity markets for compatible tokens. We have demon
 
 **8 — A working guided demo**
 
-The guided tour at https://dividendx.payai.network/demos/ lets anyone split a stock token, put it back together, see the dividend effect and trade dividend rights with a second wallet. It runs real program transactions in a private sandbox with synthetic assets and accelerated time. The public devnet app uses the real calendar. Our test catalog represents selected stocks from Ondo, Backpack and xStocks.
+The guided tour at https://divx.payai.network/demos/ lets anyone split a stock token, put it back together, see the dividend effect and trade dividend rights with a second wallet. It runs real program transactions in a private sandbox with synthetic assets and accelerated time. The public devnet app uses the real calendar. Our test catalog represents selected stocks from Ondo, Backpack and xStocks.
 
 **9 — From prototype to mainnet**
 
-The annual program, transaction SDK and guided demo are working. Before mainnet, we need complete issuer records, reviewed settlement operations, independent security review and legal and issuer checks. More liquidity, rolling dividend strategies and other networks come later. Try the guided demo at dividendx.payai.network. No wallet or real funds are needed.
+The annual program, transaction SDK and guided demo are working. Before mainnet, we need complete issuer records, reviewed settlement operations, independent security review and legal and issuer checks. More liquidity, rolling dividend strategies and other networks come later. Try the guided demo at divx.payai.network. No wallet or real funds are needed.
