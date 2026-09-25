@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-09-25T03:41:13.579Z",
+  "results": [
+    {
+      "origin": "https://divx.payai.network",
+      "pageStatus": 200,
+      "redirect": false,
+      "canonical": "https://divx.payai.network/app/",
+      "manifestWithOriginStatus": 200
+    },
+    {
+      "origin": "https://dividendx.payai.network",
+      "pageStatus": 200,
+      "redirect": false,
+      "canonical": "https://divx.payai.network/app/",
+      "manifestWithOriginStatus": 200
+    },
+    {
+      "origin": "https://dividendx-stocklana.vercel.app",
+      "pageStatus": 200,
+      "redirect": false,
+      "canonical": "https://divx.payai.network/app/",
+      "manifestWithOriginStatus": 200
+    }
+  ],
+  "foreignOriginStatus": 403
+}

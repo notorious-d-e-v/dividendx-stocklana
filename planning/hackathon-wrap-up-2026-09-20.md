@@ -6,7 +6,7 @@ Submitted 20 September 2026 under `@notorious_d_e_v`, following the user's expli
 
 - Project: DivX; sole team lead `@notorious_d_e_v`; no teammates invited and no sponsor bounties selected.
 - Repository: https://github.com/notorious-d-e-v/dividendx-stocklana
-- Demo: https://dividendx.payai.network/
+- Demo: https://divx.payai.network/
 - Short description: 280-character limit; submitted copy below. Full Markdown description: 4,119 of 5,000 characters, adapted from this packet with product flow, dated Galaxy citation, proof boundaries, mainnet gaps and dependency credits.
 - Pitch video and technical video are separate optional URL fields; both left blank pending recording. The form requires at least one review link.
 - Five steps verified: Project Info, Links, Team, Bounty Tracks, Review & Submit. Final review had no additional legal-acceptance checkbox. Clicking Submit Project opened the published project page with an Edit link.
@@ -38,7 +38,7 @@ Register, then use [Submit Project](https://hackathons.solana.com/hackathons/sto
 
 **What is next:** Qualify issuer custody and complete dividend-event data, implement the reviewed evidence-to-settlement pipeline, and complete independent security, operational and legal review before any real-asset/mainnet launch. Current issuer readers and local mint-compatibility tests do not establish live issuer settlement or endorsement.
 
-**Links:** [Live guided demo](https://dividendx.payai.network/), [Public Devnet](https://dividendx.payai.network/app/), [public repository](https://github.com/notorious-d-e-v/dividendx-stocklana), [known gaps](mainnet-readiness-2026-09-20.md), [technical proof index](../docs/artifact-map.md). Add the recorded video URL once available.
+**Links:** [Live guided demo](https://divx.payai.network/), [Public Devnet](https://divx.payai.network/app/), [public repository](https://github.com/notorious-d-e-v/dividendx-stocklana), [known gaps](mainnet-readiness-2026-09-20.md), [technical proof index](../docs/artifact-map.md). Add the recorded video URL once available.
 
 ## Recommended three-minute recording
 

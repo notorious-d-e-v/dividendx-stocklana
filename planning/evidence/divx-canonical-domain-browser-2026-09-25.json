@@ -1,0 +1,70 @@
+{
+  "checkedAt": "2026-09-25T03:40:59.535Z",
+  "origin": "https://divx.payai.network",
+  "results": [
+    {
+      "route": "/",
+      "status": 200,
+      "title": "DivX · Guided demos",
+      "brand": "DivX",
+      "desktopAndMobileNoOverflow": true
+    },
+    {
+      "route": "/app/",
+      "status": 200,
+      "title": "DivX · Split & redeem",
+      "brand": "DivX",
+      "desktopAndMobileNoOverflow": true
+    },
+    {
+      "route": "/demos/",
+      "status": 200,
+      "title": "DivX · Guided demos",
+      "brand": "DivX",
+      "desktopAndMobileNoOverflow": true
+    },
+    {
+      "route": "/sandbox/",
+      "status": 200,
+      "title": "DivX · Private sandbox",
+      "brand": "DivX",
+      "desktopAndMobileNoOverflow": true
+    },
+    {
+      "route": "/reference/",
+      "status": 200,
+      "title": "DivX · Annual reference",
+      "brand": "DivX",
+      "desktopAndMobileNoOverflow": true
+    },
+    {
+      "route": "/rehearsal/",
+      "status": 200,
+      "title": "DivX · Demo rehearsal",
+      "brand": "DivX",
+      "desktopAndMobileNoOverflow": true
+    },
+    {
+      "route": "/social/app-preview-divx-v1.jpg",
+      "status": 200
+    },
+    {
+      "route": "/social/demos-preview-divx-v1.jpg",
+      "status": 200
+    },
+    {
+      "route": "/api/devnet/manifest",
+      "status": 200
+    },
+    {
+      "route": "/api/sandbox/guided/session",
+      "status": 200
+    },
+    {
+      "route": "/api/sandbox/wallet/session",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "readOnly": true
+}

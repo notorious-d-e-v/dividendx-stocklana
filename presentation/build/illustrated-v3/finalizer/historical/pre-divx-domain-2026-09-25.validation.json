@@ -1,7 +1,7 @@
 {
   "schemaVersion": "presentation-finalization.v1",
-  "finalSha256": "ee4f58136ce752127b672e6e13a0e77cbea56de0ef618478910c99ccd2400b68",
-  "byteCount": 4707981,
+  "finalSha256": "43bba545e314e16c416c4abf2865f16bbe30ffdb838c3a52f6a4875acd7e8d41",
+  "byteCount": 2834368,
   "packageIntegrity": {
     "chart_count": 0,
     "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
@@ -19,13 +19,13 @@
     "finding_count": 0,
     "findings": [],
     "font_policy": {
-      "checked_text_script_count": 111,
+      "checked_text_script_count": 110,
       "native_font_rendering_verified": false,
       "observed_font_families": [
         "Helvetica Neue"
       ],
       "observed_font_use_counts": {
-        "Helvetica Neue": 111
+        "Helvetica Neue": 110
       },
       "passed": true,
       "performed": true
@@ -40,13 +40,13 @@
     "exitCode": 0,
     "findingCount": 0,
     "fontPolicy": {
-      "checked_text_script_count": 111,
+      "checked_text_script_count": 110,
       "native_font_rendering_verified": false,
       "observed_font_families": [
         "Helvetica Neue"
       ],
       "observed_font_use_counts": {
-        "Helvetica Neue": 111
+        "Helvetica Neue": 110
       },
       "passed": true,
       "performed": true
@@ -58,15 +58,15 @@
       "Helvetica Neue"
     ],
     "scriptFonts": {},
-    "referenceSha256": "7e6b226552a0162f5f0f527ca806a3abc15af776c18f10c807993dae4474be1c",
+    "referenceSha256": "6a4ec3c801eff0d70929edfeb48ab766d1f8888a71500c7df4ead98fbfdca1e7",
     "referenceFontsVerifiedInEncodedText": true,
-    "checked_text_script_count": 111,
+    "checked_text_script_count": 110,
     "native_font_rendering_verified": false,
     "observed_font_families": [
       "Helvetica Neue"
     ],
     "observed_font_use_counts": {
-      "Helvetica Neue": 111
+      "Helvetica Neue": 110
     },
     "passed": true,
     "performed": true
@@ -75,7 +75,7 @@
     "performed": true,
     "passed": true,
     "slideCount": 9,
-    "sha256": "ee4f58136ce752127b672e6e13a0e77cbea56de0ef618478910c99ccd2400b68",
+    "sha256": "43bba545e314e16c416c4abf2865f16bbe30ffdb838c3a52f6a4875acd7e8d41",
     "runtimeNodeModules": "/Users/node/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
     "nodeExecutable": "/Users/node/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node"
   },
@@ -103,7 +103,7 @@
     "native_chart_count": 0,
     "native_powerpoint_verified": false,
     "passed": true,
-    "presentation_sha256": "ee4f58136ce752127b672e6e13a0e77cbea56de0ef618478910c99ccd2400b68",
+    "presentation_sha256": "43bba545e314e16c416c4abf2865f16bbe30ffdb838c3a52f6a4875acd7e8d41",
     "schema_version": "presentation-native-chart-titles.v1",
     "slide_count": 9,
     "source_text_emitted": false,

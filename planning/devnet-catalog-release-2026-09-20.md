@@ -2,7 +2,7 @@
 
 The public registry expands from three to fifteen synthetic issuer-specific profiles across six companies. The program ELF, original three mints/series, runtime identity, signer authorities and real-calendar 2027 terms are unchanged. No issuer event settlement or mainnet custody is enabled.
 
-[PR #3](https://github.com/notorious-d-e-v/dividendx-stocklana/pull/3) merged as `6e79a76192258af8530cbe874c02d2c14fa6b6b0`. Vercel production `dpl_4cyXy5Gk3tEUAi1CsZfMgsZiSU6S` serves `https://dividendx-stocklana-a0ir4lh27-payai.vercel.app` and the canonical `https://dividendx.payai.network`. The existing frontend and Sandbox snapshot remain unchanged; the separate navigation/wallet redesign stays local.
+[PR #3](https://github.com/notorious-d-e-v/dividendx-stocklana/pull/3) merged as `6e79a76192258af8530cbe874c02d2c14fa6b6b0`. Vercel production `dpl_4cyXy5Gk3tEUAi1CsZfMgsZiSU6S` serves `https://dividendx-stocklana-a0ir4lh27-payai.vercel.app` and the canonical `https://divx.payai.network`. The existing frontend and Sandbox snapshot remain unchanged; the separate navigation/wallet redesign stays local.
 
 Provisioning: 48 finalized transactions, 0.26529408 devnet SOL admin spend under a separate 0.30 SOL migration cap. Verification: all 15 profiles mint, split and recombine exactly; all 61 proof transactions are independently finalized. Its dedicated wallet received 0.12 devnet SOL (admin funding cost 0.120005 SOL), and paid its own account rent and transaction fees. The public faucet signer supplied mint authority only during this proof.
 

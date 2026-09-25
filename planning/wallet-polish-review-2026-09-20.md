@@ -20,7 +20,7 @@ VITE_DIVIDENDX_NETWORK=devnet VITE_DIVIDENDX_RUNTIME_URL=/api/devnet \
   node node_modules/vite/bin/vite.js --config scripts/hosting/devnet-review.vite.mjs
 ```
 
-Open http://127.0.0.1:4184/app/. The development-only bridge forwards exactly the public manifest and faucet routes to our existing `dividendx.payai.network` service. It loads no signer keys or service secrets and shares one upstream visitor across local browser tabs. Existing durable visitor/IP/global/lifetime faucet quotas remain enforced. It accepts only the fixed loopback host/origin, caps request size, rejects foreign origins and arbitrary paths, and never exposes the upstream cookie to the browser. The normal production Vite config does not include this bridge.
+Open http://127.0.0.1:4184/app/. The development-only bridge forwards exactly the public manifest and faucet routes to our existing `divx.payai.network` service. It loads no signer keys or service secrets and shares one upstream visitor across local browser tabs. Existing durable visitor/IP/global/lifetime faucet quotas remain enforced. It accepts only the fixed loopback host/origin, caps request size, rejects foreign origins and arbitrary paths, and never exposes the upstream cookie to the browser. The normal production Vite config does not include this bridge.
 
 Faucet availability depends on the public service and remaining quota. A grant is 10 stock units plus bounded devnet SOL; it is not the accelerated guided tour's 100-stock scenario. Public devnet uses the real calendar. No dividend fast-forward or settlement change is part of this pass.
 

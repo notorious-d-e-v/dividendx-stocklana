@@ -4,6 +4,8 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 
 ## Start here
 
+- [Canonical DivX domain](../planning/divx-canonical-domain-2026-09-25.md) — new public URL, compatibility period, domain configuration and live verification.
+
 - [DivX rebrand and release](../planning/divx-rebrand-2026-09-25.md) — updated branding, assets, decks, validation and deployment record.
 
 - [Hackathon submission packet](../planning/hackathon-wrap-up-2026-09-20.md), [mainnet readiness](../planning/mainnet-readiness-2026-09-20.md), and [ecosystem outreach](../planning/ecosystem-outreach-2026-09-20.md) — current deadline, draft entry, recording outline, known gaps and prioritized partner prospects; no submission or outreach sent.

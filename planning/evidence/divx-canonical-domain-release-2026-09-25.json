@@ -1,0 +1,27 @@
+{
+  "id": "dpl_6DKoSykEBvi8GrsvzR6mMGpZqaaq",
+  "url": "dividendx-stocklana-l70bcpnx0-payai.vercel.app",
+  "readyState": "READY",
+  "aliases": [
+    "divx.payai.network",
+    "dividendx.payai.network",
+    "dividendx-stocklana.vercel.app",
+    "dividendx-stocklana-payai.vercel.app"
+  ],
+  "sourceCommit": "0c4d05c",
+  "canonicalOrigin": "https://divx.payai.network",
+  "allowedOrigins": [
+    "https://divx.payai.network",
+    "https://dividendx.payai.network",
+    "https://dividendx-stocklana.vercel.app"
+  ],
+  "domainConfiguration": "verified; configured-correctly",
+  "legacyRedirectEnabled": false,
+  "programAndRuntimeUnchanged": true,
+  "checks": {
+    "browser": "divx-canonical-domain-browser-2026-09-25.json",
+    "compatibility": "divx-canonical-domain-compatibility-2026-09-25.json",
+    "guided": "divx-canonical-domain-guided-2026-09-25.json"
+  },
+  "productionErrors": "none in bounded post-deploy check"
+}

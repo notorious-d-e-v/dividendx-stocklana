@@ -1,6 +1,6 @@
 # Hosting operations
 
-This runbook covers the production site at [dividendx.payai.network](https://dividendx.payai.network), Vercel project `payai/dividendx-stocklana`. Use the custom domain in public links. The original `https://dividendx-stocklana.vercel.app` address remains supported; both exact HTTPS origins are allowed in production. Visitor cookies and sandbox sessions are hostname-specific, so start a new session when switching domains. Deployment IDs are release evidence, not stable configuration; resolve the current and known-good deployments when operating.
+This runbook covers the canonical production site at [divx.payai.network](https://divx.payai.network), Vercel project `payai/dividendx-stocklana`. Use the custom domain in public links. The legacy `https://dividendx.payai.network` and original `https://dividendx-stocklana.vercel.app` addresses remain supported during migration. All three exact HTTPS origins are allowed in production. New links, canonical metadata and social-card URLs use `https://divx.payai.network`. No redirect or decommission is enabled yet. Visitor cookies and sandbox sessions are hostname-specific, so start a new session when switching domains. Deployment IDs are release evidence, not stable configuration; resolve the current and known-good deployments when operating.
 
 The governing boundaries are the [hosting release review](../planning/hosting-release-review.md), [hosted-session specification](../spec/hosted-sessions-v1.md), and [hosted-devnet specification](../spec/hosted-devnet-services-v1.md).
 
@@ -132,7 +132,7 @@ The existing project is connected to the GitHub repository. Pushes to the produc
    vercel inspect <preview-url> --logs --scope payai
    ```
 
-   Production `DIVIDENDX_SITE_ORIGIN` contains exactly `https://dividendx.payai.network,https://dividendx-stocklana.vercel.app`. A browser on an immutable preview hostname therefore receives 403 for session/faucet mutations, so do not call that a full smoke test or promote it on that basis. Full preview testing requires a separately reviewed preview origin and complete preview configuration; never add a temporary preview hostname to the production origin list.
+   Production `DIVIDENDX_SITE_ORIGIN` contains exactly `https://divx.payai.network,https://dividendx.payai.network,https://dividendx-stocklana.vercel.app`. A browser on an immutable preview hostname therefore receives 403 for session/faucet mutations, so do not call that a full smoke test or promote it on that basis. Full preview testing requires a separately reviewed preview origin and complete preview configuration; never add a temporary preview hostname to the production origin list.
 4. With the production-origin configuration, release to production and save the returned deployment URL:
 
    ```sh
@@ -186,3 +186,7 @@ vercel logs --environment production --no-branch --since 1h --level error --json
 ```
 
 Do not paste unreviewed log output into tickets or evidence. Preserve only sanitized operational facts and public transaction signatures.
+
+## Retiring the legacy domain later
+
+When separately requested, add a permanent host redirect from `dividendx.payai.network` to `divx.payai.network`, preserving path and query. Host-only visitor cookies and active sandbox sessions cannot migrate across the hostname, so communicate that visitors start a fresh session on the new domain. Verify nested routes and social cards before enabling the redirect, and retain the old DNS and TLS configuration while it forwards traffic. Remove the old mutation origin only when it no longer serves sessions. DNS removal/decommission should follow the redirect period, not precede it.

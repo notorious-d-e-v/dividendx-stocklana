@@ -47,4 +47,4 @@ Bringing this onchain means fast settlement, fractional positions and auditable 
 
 Today, DivX has a working Solana program, a public devnet app and an accelerated guided sandbox. The full tour completes 40 confirmed transactions using synthetic assets and dividend events. Before handling real stock tokens, we need complete issuer dividend records, verified custody and payouts for those assets, independent security review, and production monitoring.
 
-[Try the guided demo](https://dividendx.payai.network/) to split a stock token, see how dividends change the allocation, and follow both sides through a market and redemption. No wallet or real funds are needed.
+[Try the guided demo](https://divx.payai.network/) to split a stock token, see how dividends change the allocation, and follow both sides through a market and redemption. No wallet or real funds are needed.

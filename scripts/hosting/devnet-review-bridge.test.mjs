@@ -31,7 +31,7 @@ test('local bridge keeps the public visitor and budgets, never exposes its cooki
   assert.equal(calls[1].options.headers.cookie, '__Host-dxv=opaque');
   assert.equal(calls[1].options.headers.authorization, undefined);
   assert.equal(calls[1].options.redirect, 'error');
-  assert.equal(calls[1].url, 'https://dividendx.payai.network/api/devnet/faucet');
+  assert.equal(calls[1].url, 'https://divx.payai.network/api/devnet/faucet');
 });
 test('only exact loopback origins and the two fixed paths reach upstream', async () => {
   let calls = 0;

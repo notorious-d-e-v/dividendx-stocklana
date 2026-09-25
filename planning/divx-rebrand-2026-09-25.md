@@ -1,6 +1,6 @@
 # DivX rebrand — 25 September 2026
 
-The product name is DivX. This release updates website wordmarks and copy, metadata, social cards, design specimens and social exports, presentation sources/decks/previews, narration/article drafts, and project documentation. Existing public URLs remain supported.
+The product name is DivX. The canonical public URL is now [divx.payai.network](https://divx.payai.network); the release evidence below preserves the hostnames actually tested before the domain migration. This release updates website wordmarks and copy, metadata, social cards, design specimens and social exports, presentation sources/decks/previews, narration/article drafts, and project documentation. Existing public URLs remain supported.
 
 The Solana program, program ID, compiled ELF, generated IDL, SDK API names, persisted schemas, environment variables, HTTP mutation headers, immutable runtime snapshot, server budgets, and runtime configuration are unchanged. Technical identifiers retain their existing spelling for compatibility. Historical captured transaction/evidence records remain evidence of the runs they describe, not fresh rebrand acceptance.
 

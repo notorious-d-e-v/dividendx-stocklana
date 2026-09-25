@@ -1,7 +1,7 @@
 // Development-only bridge to our existing bounded public devnet faucet.
 // No signer or service secret is loaded. All visitors of this local process
 // share one upstream visitor, so public per-visitor/global budgets still apply.
-const PUBLIC_ORIGIN = 'https://dividendx.payai.network';
+const PUBLIC_ORIGIN = 'https://divx.payai.network';
 const LOCAL_ORIGIN = 'http://127.0.0.1:4184';
 const MAX_BODY = 2_048;
 
