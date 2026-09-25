@@ -22,7 +22,7 @@ The official API schema lists `Initial`, `Corrected`, `Cancelled` and `Scheduled
 
 The [issuer's operating description](https://docs.xstocks.fi/docs/how-xstocks-work) separates onboarded primary issuance/redemption from ordinary secondary transfers through wallets and DeFi. Its [FAQ](https://docs.xstocks.fi/docs/frequently-asked-questions) confirms ordinary token transfers and net reinvestment. This supports the intended secondary-custody model; do not invent a requirement for a special issuer-approved vault or expand scope into permissioned onboarding.
 
-Asset admission still needs exact mint/authority/extension review, functioning ordinary PDA custody and the complete event policy. Neither public documentation nor a current mint snapshot proves those execution and policy checks. Direct redemption with the issuer is separate from redeeming PT/DR for tokens already held by DividendX.
+Asset admission still needs exact mint/authority/extension review, functioning ordinary PDA custody and the complete event policy. Neither public documentation nor a current mint snapshot proves those execution and policy checks. Direct redemption with the issuer is separate from redeeming PT/DR for tokens already held by DivX.
 
 The [source provenance record](../evidence/issuer-qualification-doc-sources-2026-09-18.json) contains retrieval times and hashes for four public pages; full HTML stays outside Git. The [fresh three-issuer reader summary](../evidence/issuer-qualification-refresh-2026-09-18.json) again matches MSFTx, Backpack MU.US and Ondo KOon. The latter two still supply no classified historical event ledger through the reviewed endpoints.
 

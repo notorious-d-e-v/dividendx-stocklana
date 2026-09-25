@@ -1,6 +1,6 @@
-# DividendX public-devnet runtime foundation
+# DivX public-devnet runtime foundation
 
-This package prepares and serves the fixed real-calendar DividendX devnet registry. The registry now includes 15 synthetic Token-2022 ScaledUiAmount profiles across six companies and three issuer families. The original `bootstrap` creates the first three; `expand-catalog` adds the remaining twelve without changing existing mints or annual series. It does not deploy a program, change the existing Config, create a Raydium pool, publish issuer events, finalize a series, advance time, or claim live issuer support.
+This package prepares and serves the fixed real-calendar DivX devnet registry. The registry now includes 15 synthetic Token-2022 ScaledUiAmount profiles across six companies and three issuer families. The original `bootstrap` creates the first three; `expand-catalog` adds the remaining twelve without changing existing mints or annual series. It does not deploy a program, change the existing Config, create a Raydium pool, publish issuer events, finalize a series, advance time, or claim live issuer support.
 
 The only HTTP data route is `GET /manifest`. `POST /faucet` returns a disabled response and `/advance` does not exist. Holder funding and observation refreshes are explicit operator commands. The separate `hosted-devnet` package supplies the public faucet with durable quotas; this operator service does not bypass or replace it.
 

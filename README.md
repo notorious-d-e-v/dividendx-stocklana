@@ -1,8 +1,8 @@
-# DividendX
+# DivX
 
-DividendX separates a tokenized-stock position into annual claims: principal tokens (PT) for the remaining stock exposure and dividend-right tokens (DR) for the year's qualified dividend allocation. For example, `PT-KOx-2027` and `DR-KOx-2027` belong to the Coca-Cola KOx 2027 series. Deposits close when the year starts. Matching PT and DR can recombine before finalization; afterward each side redeems independently, without an expiry or forfeiture deadline.
+DivX separates a tokenized-stock position into annual claims: principal tokens (PT) for the remaining stock exposure and dividend-right tokens (DR) for the year's qualified dividend allocation. For example, `PT-KOx-2027` and `DR-KOx-2027` belong to the Coca-Cola KOx 2027 series. Deposits close when the year starts. Matching PT and DR can recombine before finalization; afterward each side redeems independently, without an expiry or forfeiture deadline.
 
-The repository contains the annual Solana program, transaction SDK, wallet application, guided DeFi demo, compiled-program tests, issuer readers, an isolated Raydium integration and preserved accounting previews. The public test site is [dividendx.payai.network](https://dividendx.payai.network): `/app/` uses real-calendar Solana devnet, `/sandbox/` creates a private accelerated 15-minute network, and `/demos/` creates its own hosted guided session. Localhost keeps the existing disposable runtimes and defaults. The accepted DividendX ELF is unchanged across these flows. None of these test flows enables live issuer settlement.
+The repository contains the annual Solana program, transaction SDK, wallet application, guided DeFi demo, compiled-program tests, issuer readers, an isolated Raydium integration and preserved accounting previews. The public test site is [dividendx.payai.network](https://dividendx.payai.network): `/app/` uses real-calendar Solana devnet, `/sandbox/` creates a private accelerated 15-minute network, and `/demos/` creates its own hosted guided session. Localhost keeps the existing disposable runtimes and defaults. The accepted DivX ELF is unchanged across these flows. None of these test flows enables live issuer settlement.
 
 The [three-part guided tour v4](spec/guided-tour-v4.md) is live at [dividendx.payai.network/demos/](https://dividendx.payai.network/demos/) and runs locally at [localhost /demos/](http://127.0.0.1:4174/demos/) with `npm run dev` and `npm run demo:guided`. It combines stock selection and funding, then teaches split/recombine, quarterly dividend accrual, and a Raydium liquidity journey. The [v4 release review](planning/guided-tour-v4-release.md) records the release and verification.
 
@@ -124,7 +124,7 @@ This runs locally with synthetic holder balances, events and term timing. It pre
 
 ## Run the Raydium integration
 
-The isolated [AMM package](packages/amm-integration/README.md) pins Raydium SDK v2, validates the exact devnet program/config/fee receiver and DividendX ELF, simulates every transaction, and records raw-unit conservation. Install its additional dependencies only when running this integration:
+The isolated [AMM package](packages/amm-integration/README.md) pins Raydium SDK v2, validates the exact devnet program/config/fee receiver and DivX ELF, simulates every transaction, and records raw-unit conservation. Install its additional dependencies only when running this integration:
 
 ```sh
 npm ci --prefix packages/amm-integration

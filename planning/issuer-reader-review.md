@@ -35,4 +35,4 @@ The requested year labels the observation report; it does not assign records to 
 
 ## Next
 
-Implement the Raydium test-liquidity path while issuer evidence gaps remain explicit. The [devnet preflight](evidence/amm-devnet-preflight-2026-09-17.json) found Raydium executable and no DividendX deployment. The [annual timing clarification](research/claim-amm-feasibility.md) keeps public paired recombination separate from controlled local post-maturity redemption. The user's guided walkthrough page is deferred in the [roadmap](roadmap.md).
+Implement the Raydium test-liquidity path while issuer evidence gaps remain explicit. The [devnet preflight](evidence/amm-devnet-preflight-2026-09-17.json) found Raydium executable and no DivX deployment. The [annual timing clarification](research/claim-amm-feasibility.md) keeps public paired recombination separate from controlled local post-maturity redemption. The user's guided walkthrough page is deferred in the [roadmap](roadmap.md).

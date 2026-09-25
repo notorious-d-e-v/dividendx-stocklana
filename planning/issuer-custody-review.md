@@ -1,6 +1,6 @@
 # Captured issuer mint custody review
 
-Accepted 18 September 2026 under [custody conformance v1](../spec/issuer-custody-conformance-v1.md). The unchanged DividendX program executes the full local custody lifecycle with the captured configurations of all 15 selected stock mints. No extra onchain issuer adapter was needed for these configurations.
+Accepted 18 September 2026 under [custody conformance v1](../spec/issuer-custody-conformance-v1.md). The unchanged DivX program executes the full local custody lifecycle with the captured configurations of all 15 selected stock mints. No extra onchain issuer adapter was needed for these configurations.
 
 ## What was verified
 

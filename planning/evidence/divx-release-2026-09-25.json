@@ -1,0 +1,21 @@
+{
+  "id": "dpl_Fu4onS1bqESSoWPfyyYj4dsTbea4",
+  "url": "dividendx-stocklana-nrrvpo3ch-payai.vercel.app",
+  "readyState": "READY",
+  "aliases": [
+    "dividendx.payai.network",
+    "dividendx-stocklana.vercel.app",
+    "dividendx-stocklana-payai.vercel.app"
+  ],
+  "sourceCommit": "0cefe885ff2d109a75d386b320f04ef451678c71",
+  "programElfSha256": "a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070",
+  "runtimeSnapshotUnchanged": true,
+  "canonicalChecks": "divx-brand-production-2026-09-25.json",
+  "vercelChecks": "divx-brand-vercel-2026-09-25.json",
+  "guidedChecks": "divx-guided-production-2026-09-25.json",
+  "productionErrorLogs": "No error logs found during bounded post-release check",
+  "cron": {
+    "path": "/api/cron/refresh-observations",
+    "schedule": "0 */6 * * *"
+  }
+}

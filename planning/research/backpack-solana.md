@@ -47,13 +47,13 @@ Common observed controls were:
 - no transfer-fee extension;
 - per-mint mint authority equals that mint's scaled-UI authority; it is not one common address.
 
-Only MU had a non-1 current multiplier: `1.0001068649823912`; the other 47 were `1`. All pending values equaled the active value and used effective timestamp `0`. Solana's [Scaled UI Amount documentation](https://solana.com/docs/tokens/extensions/scaled-ui-amount) confirms that the multiplier changes displayed/economic UI amount while raw token base units remain unchanged. DividendX must conserve raw amounts and use exact decimal/rational arithmetic.
+Only MU had a non-1 current multiplier: `1.0001068649823912`; the other 47 were `1`. All pending values equaled the active value and used effective timestamp `0`. Solana's [Scaled UI Amount documentation](https://solana.com/docs/tokens/extensions/scaled-ui-amount) confirms that the multiplier changes displayed/economic UI amount while raw token base units remain unchanged. DivX must conserve raw amounts and use exact decimal/rational arithmetic.
 
-The current null hook and unpaused state are mutable conditions. Before deposit and redemption, pin and recheck exact mint, Token-2022 program, decimals, extension names, relevant authorities, pause/freeze state, hook program and transfer-fee absence. A non-null hook, new fee extension, changed authority profile or paused/frozen account fails closed. The permanent delegate can exercise issuer-level control over token accounts, so seizure/dilution/control risk remains even when DividendX's program owns its token account.
+The current null hook and unpaused state are mutable conditions. Before deposit and redemption, pin and recheck exact mint, Token-2022 program, decimals, extension names, relevant authorities, pause/freeze state, hook program and transfer-fee absence. A non-null hook, new fee extension, changed authority profile or paused/frozen account fails closed. The permanent delegate can exercise issuer-level control over token accounts, so seizure/dilution/control risk remains even when DivX's program owns its token account.
 
 ## PDA custody and transfers
 
-Program custody is demonstrated, without claiming every program is accepted. MU's Meteora DLMM pool account `13MEx6gjRadJNUdmToaGSzgeWHLH7FzScUQS9Mc5nYF5` is owned by program `LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo`. In successful transaction [`4xzJF…KZDDjXw`](https://explorer.solana.com/tx/4xzJFhQFLHEUXF3vW1vufapDh2HFF4AsnvUSXGCBmVey5CAwUgGzpfV8Hu16ZmX2WKZW7untLBrczrd9jKZDDjXw) at slot 447445689, that program-owned account authorized a Token-2022 CPI transfer of **1.141113 MU** from its pool token account. This proves live non-wallet/program authority custody and transfer compatibility for the current MU extension state. Exact PDA seeds were not decoded, and Backpack redemption into a DividendX-owned account was not tested.
+Program custody is demonstrated, without claiming every program is accepted. MU's Meteora DLMM pool account `13MEx6gjRadJNUdmToaGSzgeWHLH7FzScUQS9Mc5nYF5` is owned by program `LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo`. In successful transaction [`4xzJF…KZDDjXw`](https://explorer.solana.com/tx/4xzJFhQFLHEUXF3vW1vufapDh2HFF4AsnvUSXGCBmVey5CAwUgGzpfV8Hu16ZmX2WKZW7untLBrczrd9jKZDDjXw) at slot 447445689, that program-owned account authorized a Token-2022 CPI transfer of **1.141113 MU** from its pool token account. This proves live non-wallet/program authority custody and transfer compatibility for the current MU extension state. Exact PDA seeds were not decoded, and Backpack redemption into a DivX-owned account was not tested.
 
 ## MU dividend reconstruction
 
@@ -80,8 +80,8 @@ The onchain receipt increase does not establish the cash withholding, costs, rei
 |---|---|---|
 | Documented | Yes | Official mint pages, assets API flags, June 2026 legal terms, dividend-reinvestment policy and Micron's corporate event. |
 | Onchain observed | Yes | All 48 mint accounts/extensions; MU backing transfer, exact scale update and fully bracketed prior multiplier. |
-| Transfer demonstrated | Yes, limited | A live MU Meteora program-owned pool transferred the token by CPI. This does not prove DividendX's exact vault implementation or Backpack detokenization. |
-| Settlement validated | **No** | No DividendX deposit/redeem, PT/DR allocation, Backpack token-to-brokerage detokenization, official revision feed or net settlement reconciliation has been executed and verified. |
+| Transfer demonstrated | Yes, limited | A live MU Meteora program-owned pool transferred the token by CPI. This does not prove DivX's exact vault implementation or Backpack detokenization. |
+| Settlement validated | **No** | No DivX deposit/redeem, PT/DR allocation, Backpack token-to-brokerage detokenization, official revision feed or net settlement reconciliation has been executed and verified. |
 
 ## Required Backpack reader contract
 
@@ -110,6 +110,6 @@ For a bounded prototype, the MU transaction is replayable if labeled `onchain_re
 
 **Day 1:** implement the Backpack asset reader and versioned manifest from the 48-mint evidence. Validate exact mint/program/decimals, extension fingerprint, current flags, authorities, pause/hook/fee policy and raw-vs-scaled conversion. Add the MU finalized transaction fixture and a decoder that reproduces `M0`, `M1`, backing delta and its complete authority-history bracket while excluding supply updates.
 
-**Day 2:** feed that normalized `onchain_reconstruction` event into the shared `ScaledReinvestmentV1` engine. In a local validator/program test, mirror MU's six decimals and extension policy; prove raw deposit, cutoff, PT/DR allocation, rounding conservation, independent claims and redemption. Show the source signature, slot and evidence label in the UI. Keep live settlement disabled until an official event/revision contract and a real DividendX custody/redemption test satisfy the missing evidence level.
+**Day 2:** feed that normalized `onchain_reconstruction` event into the shared `ScaledReinvestmentV1` engine. In a local validator/program test, mirror MU's six decimals and extension policy; prove raw deposit, cutoff, PT/DR allocation, rounding conservation, independent claims and redemption. Show the source signature, slot and evidence label in the UI. Keep live settlement disabled until an official event/revision contract and a real DivX custody/redemption test satisfy the missing evidence level.
 
 This demonstrates code and accounting compatibility in two days. It does not convert the missing issuer ledger or settlement proof into production readiness.

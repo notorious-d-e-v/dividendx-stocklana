@@ -14,13 +14,13 @@ The wider market contains at least four incompatible asset models:
 3. fee-on-transfer economic-exposure tokens that grant no share or dividend rights; and
 4. restricted debt notes or microcap wrappers with bespoke legal payoffs, lockups, fees, and compliance controls.
 
-For a two-day build, DividendX can credibly target only an explicit registry of verified mints whose transfer and dividend mechanics match implemented adapters. It cannot claim support until those adapters and deposit/claim flows are working. Superstate, Securitize, OTCM, Republic, PreStocks, and wound-down Remora assets should fail closed unless a provider-specific adapter and legal/allowlist path has been completed.
+For a two-day build, DivX can credibly target only an explicit registry of verified mints whose transfer and dividend mechanics match implemented adapters. It cannot claim support until those adapters and deposit/claim flows are working. Superstate, Securitize, OTCM, Republic, PreStocks, and wound-down Remora assets should fail closed unless a provider-specific adapter and legal/allowlist path has been completed.
 
-“Unsupported” should mean DividendX refuses deposits and does not calculate a dividend claim. “Restricted” should mean the mechanics may be implementable, but the issuer or transfer agent must first approve and allowlist DividendX's program-derived custody addresses or another compliant custody design. Neither label means the token is defective.
+“Unsupported” should mean DivX refuses deposits and does not calculate a dividend claim. “Restricted” should mean the mechanics may be implementable, but the issuer or transfer agent must first approve and allowlist DivX's program-derived custody addresses or another compliant custody design. Neither label means the token is defective.
 
 ## Status map
 
-| Family | Solana status | Instrument and rights | Mechanics relevant to DividendX | Day-one disposition |
+| Family | Solana status | Instrument and rights | Mechanics relevant to DivX | Day-one disposition |
 |---|---|---|---|---|
 | xStocks / Backed (Kraken-owned) | Live; separate inventory | Collateralized tracker/security, not an entry on the issuer's shareholder register | Token-2022, total-return multiplier | Candidate through separate adapter work |
 | Ondo Global Markets | Live; separate inventory | 1:1-backed total-return trackers | Token-2022, balance scaling; separate event semantics | Candidate through separate adapter work |
@@ -73,7 +73,7 @@ The four Solana equity mints are Token-2022, six decimals, `DefaultAccountState=
 [Investor instructions](https://docs.superstate.com/investors/tokenized-equities.md) require identity onboarding and separately adding each third-party wallet to the equity allowlist. The [issuer guide](https://docs.superstate.com/issuers/opening-bell.md) says supported protocols are selected as part of setup. Therefore:
 
 - Superstate API value `allowlist_type: Public` describes who may apply; it does not make arbitrary addresses permissionless receivers.
-- A wallet owner being eligible does not establish that a DividendX PDA or vault token account is eligible.
+- A wallet owner being eligible does not establish that a DivX PDA or vault token account is eligible.
 - Merely creating an associated token account cannot make it transferable; the issuer-controlled freeze/thaw path matters.
 - Permanent-delegate and freeze powers mean balances can be moved or stopped under the offering's compliance rules.
 
@@ -81,7 +81,7 @@ The four Solana equity mints are Token-2022, six decimals, `DefaultAccountState=
 
 These are actual shares, so their economic rights include any declared dividends. Opening Bell advertises issuer support for splits, distributions, and other corporate actions. The public mint multiplier being present does **not** prove Superstate uses it for dividends; all four observed multipliers were `1`.
 
-[Superstate's public API](https://docs.superstate.com/investors/api.md) exposes assets/equities and fund NAV/yield data. Its [OpenAPI schema](https://api.superstate.com/api-docs/openapi.json) contains internal/authenticated dividend transaction types such as distribution, reinvestment, withdrawal, and tax withholding, but no unauthenticated equity-dividend event feed was found. A DividendX adapter needs a provider-approved source for declaration, record, ex-dividend, payment, tax, and settlement data. It must also know whether a specific issuer pays cash/stablecoins, reinvests into shares, adjusts a multiplier, or uses another corporate-action process.
+[Superstate's public API](https://docs.superstate.com/investors/api.md) exposes assets/equities and fund NAV/yield data. Its [OpenAPI schema](https://api.superstate.com/api-docs/openapi.json) contains internal/authenticated dividend transaction types such as distribution, reinvestment, withdrawal, and tax withholding, but no unauthenticated equity-dividend event feed was found. A DivX adapter needs a provider-approved source for declaration, record, ex-dividend, payment, tax, and settlement data. It must also know whether a specific issuer pays cash/stablecoins, reinvests into shares, adjusts a multiplier, or uses another corporate-action process.
 
 ## Securitize direct shares
 
@@ -96,7 +96,7 @@ Representative Solana observations:
 | SECZ | `5VzwKkvynPJzcgwhBe7ESEyNgqMbo15yBu7Sehssd9ED` | Token-2022 metadata names Securitize Corp./SECZ and points to `metadata.securitize.io/secz.json`; default frozen, permanent delegate, pausable, multiplier 1 |
 | CURR | `Db7QEHL5keqhukiPFXo2zw6LXnkkyvToTBazge4aUZbG` | Token-2022 metadata names Currenc Group Inc./CURR and points to `metadata.securitize.io/currenc.json`; same control pattern, multiplier 1 |
 
-No public Securitize registry page publishing those mint addresses was located. Their issuer-controlled metadata plus the issuer/SEC launch evidence makes them high-confidence candidates, but DividendX should require direct mint confirmation before production use.
+No public Securitize registry page publishing those mint addresses was located. Their issuer-controlled metadata plus the issuer/SEC launch evidence makes them high-confidence candidates, but DivX should require direct mint confirmation before production use.
 
 [Securitize's SEC disclosure](https://www.sec.gov/Archives/edgar/data/2094496/000162828026054866/securitizeholdings-424b3.htm) describes asset servicing that includes distributions and dividend issuances, but no public equity corporate-action/event API was found. As with Opening Bell, the presence of `ScaledUiAmount` at multiplier 1 is not proof of a reinvestment method. Frozen-by-default accounts require an issuer-approved custody/onboarding design.
 
@@ -106,7 +106,7 @@ OTCM's [2026 10-K](https://www.otcmarkets.com/filing/html?guid=5xj-kFHS952tV3h&i
 
 That evolution means the platform name is not enough to infer rights. Each mint needs its offering documents, backing class, holder eligibility, fee schedule, and live extensions checked.
 
-Separately indexed candidate mint MSPC, `mSPC1w6z8shpabFpQFgUkBGTuytsiUtv8h7smruo6A3`, was observed on mainnet as Token-2022 with nine decimals, revoked mint/freeze authorities, no parsed transfer hook, and a mutable 700 bp transfer fee whose maximum is `u64::MAX`. Its metadata URL is under `ipfs.otc.meme`, and [Solflare indexes the same address as an MSPC Series M token](https://www.solflare.com/prices/mspc/mSPC1w6z8shpabFpQFgUkBGTuytsiUtv8h7smruo6A3/). This is public-chain and third-party identity evidence, not an issuer mint registry. DividendX must not accept it until OTCM confirms the address and current offering terms.
+Separately indexed candidate mint MSPC, `mSPC1w6z8shpabFpQFgUkBGTuytsiUtv8h7smruo6A3`, was observed on mainnet as Token-2022 with nine decimals, revoked mint/freeze authorities, no parsed transfer hook, and a mutable 700 bp transfer fee whose maximum is `u64::MAX`. Its metadata URL is under `ipfs.otc.meme`, and [Solflare indexes the same address as an MSPC Series M token](https://www.solflare.com/prices/mspc/mSPC1w6z8shpabFpQFgUkBGTuytsiUtv8h7smruo6A3/). This is public-chain and third-party identity evidence, not an issuer mint registry. DivX must not accept it until OTCM confirms the address and current offering terms.
 
 The fee alone defeats generic vault accounting: depositing an exact input amount does not deliver that amount to the vault, and any later distribution or withdrawal may incur another fee. The platform's documented hook/KYC architecture is an additional mint-specific compatibility question, even though MSPC itself had no parsed hook at the observation slot.
 
@@ -116,7 +116,7 @@ The fee alone defeats generic vault accounting: depositing an exact input amount
 
 Representative official catalog mint ANTHROPIC, `Pren1FvFX6J3E4kXhJuCiAD5aDmGEb7qJRncwA8Lkhw`, is Token-2022 with nine decimals, a permanent delegate, pausability, multiplier 1, and a 50 bp transfer fee with an effectively unbounded maximum. A transfer-hook extension record exists but currently has a null program id. Other product addresses include SpaceX `PreANxuXjsy2pvisWWMNB6YaJNzr7681wJJr2rHsfTh`, OpenAI `PreweJYECqtQwBtpxHL171nL2K6umo692gTm7Q3rpgF`, and xAI `PreC1KtJ1sBPPqaeeqL6Qb15GTLCYVvyYEwxhdfTwfx`.
 
-PreStocks is not a DividendX dividend source: the legal terms disclaim dividends, and its transfer fee breaks exact-input accounting unless the vault explicitly handles net receipts and fee-bearing withdrawals.
+PreStocks is not a DivX dividend source: the legal terms disclaim dividends, and its transfer fee breaks exact-input accounting unless the vault explicitly handles net receipts and fee-bearing withdrawals.
 
 ## Republic Mirror Tokens: reference notes, not stock
 
@@ -132,7 +132,7 @@ Step Labs acquired Remora and launched stock trackers in 2025; its own [year-in-
 
 Historical mints still visible onchain include TSLAr `FJug3z58gssSTDhVNkTse5fP8GRZzuidf9SRtfB2RhDe`, NVDAr `ALTP6gug9wv5mFtx2tSU1YYZ1NrEc2chDdMPoJA8f8pu`, SPYr `AVw2QGVkXJPRPRjLAceXVoLqU5DVtJ53mdgMXp14yGit`, and MSTRr `B8GKqTDGYc7F6udTHjYeazZ4dFCRkrwK2mBQNS4igqTv`. [Solflare's token registry indexes the TSLAr address as Remora's Tesla rStock](https://www.solflare.com/prices/tesla-rstock/FJug3z58gssSTDhVNkTse5fP8GRZzuidf9SRtfB2RhDe/), but no surviving official mint registry was found. These addresses are historical discovery records, not a production allowlist.
 
-TSLAr remains a Token-2022 mint with nine decimals, permanent delegate, pausability, and multiplier 1; no transfer hook appeared. This resembles the low-level multiplier primitive used by current total-return wrappers, but provider operations have ceased and no surviving official dividend/corporate-action API was found. DividendX should reject Remora mints even if they retain supply or DEX quotes.
+TSLAr remains a Token-2022 mint with nine decimals, permanent delegate, pausability, and multiplier 1; no transfer hook appeared. This resembles the low-level multiplier primitive used by current total-return wrappers, but provider operations have ceased and no surviving official dividend/corporate-action API was found. DivX should reject Remora mints even if they retain supply or DEX quotes.
 
 ## Adjacent and other-chain exclusions
 
@@ -160,7 +160,7 @@ TSLAr remains a Token-2022 mint with nine decimals, permanent delegate, pausabil
 
 The registry must be keyed by mint, with issuer-family defaults used only as hints:
 
-| Capability | Required observation | Effect on DividendX |
+| Capability | Required observation | Effect on DivX |
 |---|---|---|
 | Instrument rights | direct registered share, collateralized tracker, SPV exposure, note, fund, or broker entitlement | Determines whether “dividend” exists and who owes it |
 | Lifecycle | live, zero-supply, announced/test, historical/unwind | Only live assets enter custody |
@@ -171,7 +171,7 @@ The registry must be keyed by mint, with issuer-family defaults used only as hin
 | Issuer powers | mint, freeze, permanent delegate, pause, metadata/multiplier update | Determines seizure/freeze/pause and event risks |
 | Corporate-action channel | public event API, authenticated issuer feed, verified filings, or none | Determines whether events can be classified safely |
 | Dividend settlement | cash/stablecoin, reinvestment, multiplier/rebase, NAV accrual, contingent payout, none | Selects distribution algorithm; these are not interchangeable |
-| Eligibility/custody | arbitrary wallet, KYC wallet, allowlisted protocol/PDA, broker-only | Determines whether a DividendX vault can lawfully and technically receive tokens |
+| Eligibility/custody | arbitrary wallet, KYC wallet, allowlisted protocol/PDA, broker-only | Determines whether a DivX vault can lawfully and technically receive tokens |
 
 A non-null `ScaledUiAmount` extension is not enough to infer dividends. A multiplier change can represent a dividend reinvestment, stock split, migration, or correction. Conversely, direct shares may pay cash while the token multiplier stays at one. Event classification needs issuer data, not balance deltas alone.
 
@@ -179,7 +179,7 @@ A non-null `ScaledUiAmount` extension is not enough to infer dividends. A multip
 
 Use this wording while implementation remains incomplete:
 
-> DividendX is building support for an exact, verified registry of live Solana tokenized-stock mints, starting with the validated xStocks, Ondo, and Backpack set. Permissioned direct shares, fee-on-transfer tokens, private-company exposure notes, funds, test deployments, and wound-down issuers remain outside the initial acceptance target.
+> DivX is building support for an exact, verified registry of live Solana tokenized-stock mints, starting with the validated xStocks, Ondo, and Backpack set. Permissioned direct shares, fee-on-transfer tokens, private-company exposure notes, funds, test deployments, and wound-down issuers remain outside the initial acceptance target.
 
 After the named adapters and end-to-end deposit/claim flows pass, “building support” may be changed to “supports,” and the second sentence may say those excluded classes are detected and rejected.
 

@@ -97,7 +97,7 @@ For the planned quote-to-DR purchase, trade/protocol/fund fees accrue on the quo
 
 At the check, rent exemptions were 0.0038862 SOL for the 637-byte pool, 0.02135124 for the 4,075-byte observation account, 0.0010668 for the 82-byte LP mint, and 0.00148844 for each classic 165-byte token account. Pool creation adds two vaults and the creator LP account, for 0.03076956 SOL rent. With the current 0.15 SOL creation fee, the known CPMM minimum is **0.18076956 SOL**, before transaction fees, priority fees, participant accounts, token mints, or seeded assets. A 0.20 SOL CPMM-only ceiling is reasonable when all participant token accounts already exist; use 0.25 SOL when they may not.
 
-The current DividendX ELF is 706,504 bytes. A fresh default-length deployment retains about 3.59075228 SOL of program/program-data rent and temporarily needs another 3.58987852 SOL for the upload buffer, a peak of about **7.1806308 SOL plus deployment transaction fees** before the buffer refund. This explains the separate 8-test-SOL funding request, but mint, vault, series, and user-account costs remain outside that deployment estimate. Rent can change; query it again and enforce an explicit maximum before signing.
+The current DivX ELF is 706,504 bytes. A fresh default-length deployment retains about 3.59075228 SOL of program/program-data rent and temporarily needs another 3.58987852 SOL for the upload buffer, a peak of about **7.1806308 SOL plus deployment transaction fees** before the buffer refund. This explains the separate 8-test-SOL funding request, but mint, vault, series, and user-account costs remain outside that deployment estimate. Rent can change; query it again and enforce an explicit maximum before signing.
 
 ## Genuine local fallback
 

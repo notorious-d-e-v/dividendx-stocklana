@@ -1,10 +1,10 @@
-# DividendX illustration guide
+# DivX illustration guide
 
-Version 1, 16 September 2026. This guide extends the approved DividendX design system. It governs illustrations for product explanation, pitch material, onboarding, and editorial communication; it does not redefine product diagrams or interface components.
+Version 1, 16 September 2026. This guide extends the approved DivX design system. It governs illustrations for product explanation, pitch material, onboarding, and editorial communication; it does not redefine product diagrams or interface components.
 
 ## Brand idea: Paper instruments, digital ownership
 
-DividendX makes an abstract ownership split tangible. Printed financial matter—certificates, detachable coupons, ledger pages, custody trays—gives the viewer something familiar to hold in mind. Restrained wallets and trading-app windows connect that physical metaphor to digital ownership. Stock exposure is blue; dividend rights are amber; ink and warm paper provide quiet structure.
+DivX makes an abstract ownership split tangible. Printed financial matter—certificates, detachable coupons, ledger pages, custody trays—gives the viewer something familiar to hold in mind. Restrained wallets and trading-app windows connect that physical metaphor to digital ownership. Stock exposure is blue; dividend rights are amber; ink and warm paper provide quiet structure.
 
 Four principles keep the system coherent:
 
@@ -74,7 +74,7 @@ Treat these as semantic contracts.
 
 ### Composability rule
 
-Match the subject to the scope of the claim. Before deposit, a compatible app may use the original stock token. After DividendX splits the position, Stock exposure (PT) and Dividend rights (DR) are separate claims that can each be used by compatible wallets and trading apps. Whole-product composability artwork must show both PT and DR independently; narrower DR-only artwork must be named **Dividend-claim composability**.
+Match the subject to the scope of the claim. Before deposit, a compatible app may use the original stock token. After DivX splits the position, Stock exposure (PT) and Dividend rights (DR) are separate claims that can each be used by compatible wallets and trading apps. Whole-product composability artwork must show both PT and DR independently; narrower DR-only artwork must be named **Dividend-claim composability**.
 
 These are conceptual relationships, not claims that a pictured integration is implemented. The underlying stock remains locked as backing in the vault: the claims can move or connect independently, while the backing is not freely reused or double pledged. Do not add partner logos or invent lending support.
 
@@ -118,11 +118,11 @@ Write alt text for the idea the image contributes, not every decorative mark. Ex
 
 Start every generation request with the master style brief:
 
-> Original DividendX financial editorial illustration in the “Paper instruments, digital ownership” system. Tactile printed matter and restrained digital objects; crisp slightly imperfect ink outlines; flat fills; low-contrast paper grain inside objects only; gentle front or three-quarter perspective; ample negative space. Canonical ink, cobalt, amber, warm paper, soft blue and soft amber palette. No readable text, logos, numbers, performance imagery, coins, characters, glossy 3D, gradients, or photorealism. Genuine transparent background.
+> Original DivX financial editorial illustration in the “Paper instruments, digital ownership” system. Tactile printed matter and restrained digital objects; crisp slightly imperfect ink outlines; flat fills; low-contrast paper grain inside objects only; gentle front or three-quarter perspective; ample negative space. Canonical ink, cobalt, amber, warm paper, soft blue and soft amber palette. No readable text, logos, numbers, performance imagery, coins, characters, glossy 3D, gradients, or photorealism. Genuine transparent background.
 
 Then provide: intended audience; one metaphor; concept to communicate; implications the art must avoid; scale tier and display size; background; primary objects; semantic colors; and the exact reference assets attached. State that token colors are targets that raster generation may only approximate.
 
-When the topic is the whole DividendX product, explicitly request both PT and DR as independent app-facing assets after the split. Name any narrower DR-only request accordingly. Keep the locked backing in the vault and prohibit double-pledge, invented lending, partner marks, and claims of live integration.
+When the topic is the whole DivX product, explicitly request both PT and DR as independent app-facing assets after the split. Name any narrower DR-only request accordingly. Keep the locked backing in the vault and prohibit double-pledge, invented lending, partner marks, and claims of live integration.
 
 Use this task block after the master brief:
 

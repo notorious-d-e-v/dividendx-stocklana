@@ -9,7 +9,7 @@ This pass follows the user's review of the 15-asset devnet app. It remains local
 - Issuer choices sort Ondo, Backpack/Trek, then xStocks. Colored ticker and issuer-initial badges identify assets without introducing external image dependencies or claiming endorsement.
 - Discover supported collateral and annual PT/DR balances in canonical associated token accounts. This matches the accounts the transaction SDK spends. Unsupported mints and balances in non-associated token accounts are outside this inventory. Selected transaction quotes still independently validate policy, mint, series and custody.
 - Show real devnet account and transaction links on Solscan with `cluster=devnet`. Local/sandbox receipts have no public explorer links; runtime IDs, domain digests and genesis hashes are not account links.
-- All 15 devnet stock profiles are synthetic mints created by DividendX. The faucet provides these tokens and a small devnet SOL allowance; it does not distribute actual issuer securities.
+- All 15 devnet stock profiles are synthetic mints created by DivX. The faucet provides these tokens and a small devnet SOL allowance; it does not distribute actual issuer securities.
 
 ## Local preview
 

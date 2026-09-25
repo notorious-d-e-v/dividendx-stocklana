@@ -1,6 +1,6 @@
 # Guided tour v3 — local review
 
-The 19 September revision introduces DividendX before its DeFi integrations. Keep the approved brand and the separate `/demos/` route. The user explicitly requested local review before any Git push, production deployment, or hosted snapshot replacement. The public site continues to run the accepted v2 journey until that review is complete.
+The 19 September revision introduces DivX before its DeFi integrations. Keep the approved brand and the separate `/demos/` route. The user explicitly requested local review before any Git push, production deployment, or hosted snapshot replacement. The public site continues to run the accepted v2 journey until that review is complete.
 
 ## Page and actions
 
@@ -21,7 +21,7 @@ Finish with the existing future-demo roadmap. Do not implement additional venues
 
 Guided state and receipts use schema version 3. Start requires an allowlisted `assetId`; selection is immutable for that run. Fixed steps prepend `fund-stock`, `core-split`, `core-recombine-partial`, and `core-recombine-rest` to the existing nine-action sequence. Never repeat a mutation after an uncertain response; reconcile with reads.
 
-Stock and claim decimals match the program's selected profile: 8 for TestKOx, 6 for TestMU, and 9 for TestIBMon. Expose `claimDecimals` explicitly and scale Raydium amounts accordingly. Use exact integers, actual compiled DividendX instructions, and observed token balances. No core program or SDK change is required.
+Stock and claim decimals match the program's selected profile: 8 for TestKOx, 6 for TestMU, and 9 for TestIBMon. Expose `claimDecimals` explicitly and scale Raydium amounts accordingly. Use exact integers, actual compiled DivX instructions, and observed token balances. No core program or SDK change is required.
 
 Subtle Motion transitions support orientation and completion feedback. Respect reduced-motion settings, maintain keyboard navigation, avoid focus loss during polling, and prevent duplicate submissions.
 

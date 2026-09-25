@@ -14,7 +14,7 @@ The authoritative contract is [annual accounting](../spec/annual-series-accounti
 
 Admission remains per asset, using the [selected package](research/initial-asset-package.md). An official mint, Scaled UI Amount extension or catalog listing does not prove usable event data, ordinary vault custody or redemption. The product admits ordinary secondary-transfer/reinvestment profiles; permissioned holder/approved-vault integrations, products without dividend rights and discontinued products remain excluded.
 
-Permissionless describes holder access to admitted series: no DividendX holder allowlist or issuer-specific vault onboarding. It does not remove issuer controls or establish legal eligibility. If ordinary custody needs issuer approval, exclude the asset. Direct issuer issuance/redemption onboarding is outside this flow. Cross-chain custody and bridging remain later work; native Solana Ondo is in the selected scope.
+Permissionless describes holder access to admitted series: no DivX holder allowlist or issuer-specific vault onboarding. It does not remove issuer controls or establish legal eligibility. If ordinary custody needs issuer approval, exclude the asset. Direct issuer issuance/redemption onboarding is outside this flow. Cross-chain custody and bridging remain later work; native Solana Ondo is in the selected scope.
 
 ## Layers
 
@@ -32,7 +32,7 @@ Only readers/attestors classify events; a current mint state cannot explain ever
 
 The [unsigned dossier v1](../spec/issuer-qualification-v1.md) consumes saved observations and candidate source evidence. It validates identities, source revisions, company-date links and current raw mint consistency while preserving unresolved gates. V1 is always blocked and unsigned: no inferred finality, approval override, EventInput builder or settlement writer. This lets operator tooling progress while the issuer contract remains unresolved. An issuer response and a separately reviewed attestation policy are needed before adding an approval-capable path.
 
-Ordinary secondary custody is distinct from direct issuer issuance/redemption. Public xStocks documentation supports permissionless secondary transfers; do not invent a requirement for a special approved-vault agreement. Exact asset controls, PDA custody execution and DividendX admission still require their own review.
+Ordinary secondary custody is distinct from direct issuer issuance/redemption. Public xStocks documentation supports permissionless secondary transfers; do not invent a requirement for a special approved-vault agreement. Exact asset controls, PDA custody execution and DivX admission still require their own review.
 
 ## Core accounting and lifecycle
 

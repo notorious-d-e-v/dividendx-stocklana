@@ -1,18 +1,18 @@
-# DividendX narration
+# DivX narration
 
 Approximate running time: 3 minutes. Word count: 383.
 
-**1 — DividendX**  
-DividendX lets a stock holder keep the stock exposure and sell the dividend rights. We are building a permissionless dividend market for tokenized stocks from Backpack, xStocks, and Ondo on Solana.
+**1 — DivX**<br>
+DivX lets a stock holder keep the stock exposure and sell the dividend rights. We are building a permissionless dividend market for tokenized stocks from Backpack, xStocks, and Ondo on Solana.
 
 **2 — Two sides of one trade**  
-Traditional finance already has both sides: banks sell dividend exposure to manage risk from structured products; asset managers such as Survista buy discounted dividend futures. DividendX brings that choice to tokenized-stock holders: keep the stock exposure and sell the dividend rights.
+Traditional finance already has both sides: banks sell dividend exposure to manage risk from structured products; asset managers such as Survista buy discounted dividend futures. DivX brings that choice to tokenized-stock holders: keep the stock exposure and sell the dividend rights.
 
 **3 — One deposit, two claims**  
 One deposit enters a locked vault. The program issues two paired claims: PT for the stock exposure and DR for the dividend-derived share. Each pair is backed by its own stock-token collateral and redeems in that token. Its dollar value can change.
 
 **4 — Established markets, familiar behavior**  
-This already exists in TradFi. Eurex handled more than 21 million dividend contracts in 2024. Pendle reported 96.4 million dollars of average daily trading volume that year. Investors already trade dividends separately, and crypto users already separate yield. DividendX connects those two ideas.
+This already exists in TradFi. Eurex handled more than 21 million dividend contracts in 2024. Pendle reported 96.4 million dollars of average daily trading volume that year. Investors already trade dividends separately, and crypto users already separate yield. DivX connects those two ideas.
 
 **5 — Tokenized stocks bring the collateral onchain**  
 Global dividends totaled 1.75 trillion dollars in 2024. RWA.xyz reported 2.92 billion dollars of tokenized-stock value on September 16, 2026. Our starting package includes familiar dividend payers such as Apple, Microsoft and Coca-Cola, represented by stock tokens on Solana.

@@ -12,7 +12,7 @@ Local follow-up to [wallet polish](wallet-polish-review-2026-09-20.md). Preserve
 
 ## Faucet source, capacity and policy
 
-The faucet is `C6U91C2a2CxKfiDNTaTHvbQe41CdRwtjsr47ip6zKyVb`. It transfers prefunded devnet SOL; DividendX does not mint native SOL. The [18 September endowment evidence](evidence/devnet-public-faucet-endowment-2026-09-18.json) records a finalized 989,113,040-lamport transfer from the dedicated devnet deployer `DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv`, bringing the faucet to 1 SOL. Earlier admin funding was user-confirmed; the upstream origin of that funding is not established by this record.
+The faucet is `C6U91C2a2CxKfiDNTaTHvbQe41CdRwtjsr47ip6zKyVb`. It transfers prefunded devnet SOL; DivX does not mint native SOL. The [18 September endowment evidence](evidence/devnet-public-faucet-endowment-2026-09-18.json) records a finalized 989,113,040-lamport transfer from the dedicated devnet deployer `DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv`, bringing the faucet to 1 SOL. Earlier admin funding was user-confirmed; the upstream origin of that funding is not established by this record.
 
 A read-only check at confirmed slot 501349135 found **953,368,120 lamports (0.95336812 SOL)**. Dividing by the per-grant maximum debit/reservation of 9,000,000 lamports gives **105 conservative full-cost grants** from that balance, absent other spending. This is not a remaining-quota promise. The private durable ledger can stop the faucet sooner and was not inspected in this UI pass.
 

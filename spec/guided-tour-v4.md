@@ -34,4 +34,4 @@ Keep the same execution contract. Remove the extra Part One introduction and pre
 
 Briefly nudge “See wallet changes” after each completed action, without continuous animation, focus loss or movement under reduced-motion settings. Add a possible dividend buyer example and highlight the observed USDC returned on withdrawal relative to the fixed 10 USDC contribution. Additional USDC includes proceeds from exchanging DR, so it must not all be described as profit or fee income. Remove the lower-priority PT-trading card from this page; no new integration is introduced.
 
-The buyer illustration follows the established uses of dividend derivatives for dividend exposure and hedging, described by [Eurex](https://www.eurex.com/ex-en/markets/did). It is a possible use case, not evidence that a fund uses DividendX or that its share-settled DR perfectly hedge a cash obligation.
+The buyer illustration follows the established uses of dividend derivatives for dividend exposure and hedging, described by [Eurex](https://www.eurex.com/ex-en/markets/did). It is a possible use case, not evidence that a fund uses DivX or that its share-settled DR perfectly hedge a cash obligation.

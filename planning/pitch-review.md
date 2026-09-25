@@ -1,6 +1,6 @@
 # Pitch review
 
-Private production record, 16 September 2026. Current deck: `presentation/output/DividendX-illustrated-v2.pptx`. Earlier version reviews remain below.
+Private production record, 16 September 2026. Current deck: `presentation/output/DivX-illustrated-v2.pptx`. Earlier version reviews remain below.
 
 - Astra inspected all nine final renders individually at 1280 × 720. The original trade diagram ambiguity, reversed arrows, caption fit and divider overlaps were corrected. Approved typography and dark-slide accents are retained.
 - Finalizer reports nine slides, no package/layout findings or warnings, the chosen Helvetica Neue font in encoded text, and successful Artifact Tool import. Astra independently matched the final file's SHA-256 to its validation receipt.
@@ -18,7 +18,7 @@ Astra inspected all nine final v3 renders individually. New participant examples
 
 The actual PPTX's nine notes sections include the revised narration and sources. Astra inspected notes 2, 3, 7, 8 and 9 in full, confirmed exact KOx integer allocations and the implied-price formula, and verified the finalizer hash: `340de315672520b7cfbe5f5e210c669796ee135219eca4b9aded1a73df714714`. Package/import checks pass with no layout findings or warnings. All nine delivered previews match the reviewed v3 renders; the contact-sheet alias matches v3.
 
-The narration is 373 words. Direct present-tense language explains product mechanics; the cover and demo slide still establish the current prototype stage. Traditional institutional participants are not represented as DividendX customers. Dollars use an explicit event-implied reference price, not a live quote or sale price. Expansion is labeled as roadmap. The prior v2 is archived under `presentation/build/archive/v2/`.
+The narration is 373 words. Direct present-tense language explains product mechanics; the cover and demo slide still establish the current prototype stage. Traditional institutional participants are not represented as DivX customers. Dollars use an explicit event-implied reference price, not a live quote or sale price. Expansion is labeled as roadmap. The prior v2 is archived under `presentation/build/archive/v2/`.
 
 ## v4 multi-issuer revision
 

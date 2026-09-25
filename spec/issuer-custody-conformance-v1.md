@@ -6,7 +6,7 @@
 
 Capture the exact 15 selected Solana mint accounts and Clock in one finalized public RPC read, preceded by the pinned mainnet genesis check. No keys, private holder accounts, issuer APIs or network writes. Preserve exact raw mint bytes, identity, owner, decimals, context slot, retrieval time and hashes. The frozen catalog stays unchanged.
 
-Run those bytes through the existing transaction-SDK profile reader and the compiled DividendX program in the isolated Mollusk test harness. Preserve every mint authority, extension, multiplier, supply and metadata byte. Use genuine packaged Token-2022, SPL Token and ATA programs. No native replacement processor or issuer-authority impersonation.
+Run those bytes through the existing transaction-SDK profile reader and the compiled DivX program in the isolated Mollusk test harness. Preserve every mint authority, extension, multiplier, supply and metadata byte. Use genuine packaged Token-2022, SPL Token and ATA programs. No native replacement processor or issuer-authority impersonation.
 
 The holder account is created through Token-2022/ATA instructions with the extensions required by the captured mint. Seed only its raw balance through the offline harness; label that balance synthetic and do not change captured mint supply. This explicit incomplete ledger fixture proves transfer behavior, not issuer-backed issuance or whole-mainnet supply conservation. Issuer authority keys are never supplied as signers.
 

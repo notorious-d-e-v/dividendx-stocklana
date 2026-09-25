@@ -235,7 +235,7 @@ export function HostedSessionGate({ kind, children }: {
   return <main className="hosted-gate" data-testid="hosted-session-gate">
     <Mark />
     <p className="hosted-eyebrow">{title}</p>
-    <h1>{starting ? 'Starting your isolated test network…' : session?.status === 'expired' ? 'This sandbox has expired.' : session?.status === 'failed' ? 'The sandbox stopped.' : 'Try DividendX in a private sandbox.'}</h1>
+    <h1>{starting ? 'Starting your isolated test network…' : session?.status === 'expired' ? 'This sandbox has expired.' : session?.status === 'failed' ? 'The sandbox stopped.' : 'Try DivX in a private sandbox.'}</h1>
     <p>Each visitor gets a separate synthetic network for up to 15 minutes. It uses test assets only and does not hold your wallet keys.</p>
     <p className="hosted-warning">{kind === 'guided' ? 'The tour uses two disposable demo wallets. Reloading reconnects to your progress until this sandbox expires.' : 'Reloading reconnects to the same network, but a temporary wallet key exists only in this tab and is lost on reload.'}</p>
     {starting && <div className="hosted-progress" role="status"><i />Provisioning the runtime and checking its identity. This can take up to 90 seconds.</div>}

@@ -68,7 +68,7 @@ export function createTemporaryWallet(network: WalletNetwork = 'local'): Compati
   const listeners = new Set<(properties: StandardEventsChangeProperties) => void>();
   return Object.freeze({
     version: '1.0.0',
-    name: 'DividendX temporary test wallet',
+    name: 'DivX temporary test wallet',
     icon: TEMP_ICON,
     chains: [chain],
     accounts: [account],

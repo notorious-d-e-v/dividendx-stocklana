@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DivX · Why Solana</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-synthesis: none;
+      }
+
+      * { box-sizing: border-box; }
+
+      body { margin: 0; background: #f6f3ec; }
+
+      .canvas {
+        position: relative;
+        width: 1600px;
+        height: 1200px;
+        overflow: hidden;
+        background: #f6f3ec;
+        color: #101820;
+      }
+
+      .eyebrow,
+      .headline,
+      .brand,
+      .metric,
+      .metric-copy,
+      .capital,
+      .artwork,
+      .claim-label,
+      .builder-headline,
+      .builder-copy,
+      .benefits,
+      .source,
+      .scope-note { position: absolute; }
+
+      .eyebrow {
+        top: 68px;
+        left: 100px;
+        color: #2457f5;
+        font-size: 22px;
+        font-weight: 760;
+        letter-spacing: 0.15em;
+      }
+
+      .headline {
+        top: 113px;
+        left: 100px;
+        margin: 0;
+        font-size: 65px;
+        font-weight: 760;
+        letter-spacing: -0.055em;
+        line-height: 1.08;
+      }
+
+      .brand {
+        top: 71px;
+        right: 100px;
+        font-size: 32px;
+        font-weight: 760;
+        letter-spacing: -0.05em;
+      }
+
+      .metric {
+        top: 256px;
+        left: 86px;
+        color: #2457f5;
+        font-size: 192px;
+        font-weight: 770;
+        letter-spacing: -0.09em;
+        line-height: 1;
+      }
+
+      .metric-copy {
+        top: 486px;
+        left: 100px;
+        width: 675px;
+        margin: 0;
+        font-size: 34px;
+        font-weight: 560;
+        letter-spacing: -0.025em;
+        line-height: 1.28;
+      }
+
+      .capital {
+        top: 694px;
+        left: 100px;
+        margin: 0;
+        font-size: 30px;
+        font-weight: 690;
+        letter-spacing: -0.025em;
+      }
+
+      .artwork {
+        top: 238px;
+        left: 850px;
+        width: 650px;
+        height: 488px;
+        object-fit: contain;
+      }
+
+      .claim-label {
+        top: 742px;
+        font-size: 26px;
+        font-weight: 720;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+      }
+
+      .claim-label.pt { left: 875px; color: #2457f5; }
+      .claim-label.dr { left: 1210px; color: #c46a00; }
+
+      .builder-headline {
+        top: 839px;
+        left: 850px;
+        margin: 0;
+        font-size: 42px;
+        font-weight: 740;
+        letter-spacing: -0.045em;
+      }
+
+      .builder-copy {
+        top: 897px;
+        left: 850px;
+        margin: 0;
+        font-size: 25px;
+        font-weight: 520;
+        line-height: 1.3;
+      }
+
+      .benefits {
+        top: 977px;
+        left: 100px;
+        display: grid;
+        grid-template-columns: repeat(3, 400px);
+        column-gap: 100px;
+        width: 1400px;
+      }
+
+      .benefit {
+        border-top: 2px solid #d7d2c8;
+        padding-top: 23px;
+      }
+
+      .benefit strong {
+        display: block;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        line-height: 1.1;
+      }
+
+      .benefit span {
+        display: block;
+        margin-top: 9px;
+        color: #53606b;
+        font-size: 20px;
+        font-weight: 480;
+        line-height: 1.2;
+      }
+
+      .source {
+        bottom: 56px;
+        left: 100px;
+        color: #53606b;
+        font-size: 19px;
+        font-weight: 520;
+        text-decoration-color: #88929a;
+        text-underline-offset: 3px;
+      }
+
+      .scope-note {
+        bottom: 28px;
+        left: 100px;
+        color: #53606b;
+        font-size: 17px;
+        font-weight: 440;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="canvas">
+      <div class="eyebrow">WHY SOLANA</div>
+      <h1 class="headline">Start where the activity is.</h1>
+      <div class="brand">DivX</div>
+
+      <div class="metric">&gt;95%</div>
+      <p class="metric-copy">Solana’s share of tokenized-equity trading reached this level during Q2 2026.</p>
+      <p class="capital">Give that capital more things to do.</p>
+
+      <img class="artwork" src="../assets/stock-and-dividend-composability-v1.png" width="650" height="488" alt="Conceptual blue stock exposure and amber dividend rights certificates alongside compatible app surfaces." />
+      <div class="claim-label pt">PT · Stock exposure</div>
+      <div class="claim-label dr">DR · Annual<br />dividend rights</div>
+      <h2 class="builder-headline">Two assets for Solana builders.</h2>
+      <p class="builder-copy">Both work with compatible protocols.</p>
+
+      <div class="benefits" aria-label="Why build on Solana">
+        <div class="benefit"><strong>Fast settlement</strong></div>
+        <div class="benefit"><strong>Fractional positions</strong></div>
+        <div class="benefit"><strong>Auditable</strong></div>
+      </div>
+
+      <a class="source" href="https://www.galaxy.com/insights/research/solana-q2-2026-report-tokenized-economy-dex-rwa-stablecoins">Source: Galaxy Research · Q2 2026 report · August 10, 2026.</a>
+      <div class="scope-note">A level reached during the quarter, not a quarterly average.</div>
+    </main>
+  </body>
+</html>

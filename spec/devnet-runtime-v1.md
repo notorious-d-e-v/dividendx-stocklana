@@ -4,7 +4,7 @@ Status: implementation foundation; live bootstrap and receipts require a separat
 
 ## Fixed boundary
 
-The runtime is bound to Solana devnet genesis `EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG`, DividendX program `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE`, accepted ELF SHA-256 `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070`, upgrade/admin identity `DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv`, and deployment domain `ce59db5080fc2c6d3bcf7ca90712d3c2e5e6c28f27f0dfbb9953bdb0894c03ab`.
+The runtime is bound to Solana devnet genesis `EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG`, DivX program `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE`, accepted ELF SHA-256 `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070`, upgrade/admin identity `DpbSCimwNNWMcREiJ7npkWuDVywWgHHekZGx6K9TeRsv`, and deployment domain `ce59db5080fc2c6d3bcf7ca90712d3c2e5e6c28f27f0dfbb9953bdb0894c03ab`.
 
 RPC configuration is an explicit HTTPS origin. Every command checks the live genesis, executable program payload, upgrade authority, Config admin, and deployment domain. Mainnet and testnet are rejected before program reads. The runtime never initializes or updates Config and never deploys the program.
 

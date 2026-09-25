@@ -1,12 +1,12 @@
-# DividendX source ledger
+# DivX source ledger
 
 Revised 16 September 2026. The deck distinguishes established market precedents, current category context, a working historical calculator, product mechanics, and planned execution.
 
 | Slide | Claim or asset | Source and date | Treatment |
 |---|---|---|---|
-| 2 | Traditional dividend-market sellers and buyers | [Eurex 2025 whitepaper](https://www.eurex.com/resource/blob/4418754/f90fd622a278beb08757729864e93925/data/whitepaper-derivatives-forum-frankfurt-2025.pdf), pp. 31–32; [CME market explainer](https://www.cmegroup.com/articles/2024/trading-dividend-uncertainty.html); [CME primer](https://www.cmegroup.com/articles/2024/equity-index-dividend-futures-a-primer.html) | Banks supply, hedge or recycle dividend risk. Asset managers and hedge funds trade it in either direction. Eurex documents Survista buying discounted single-stock dividend futures. None is claimed as a DividendX user. |
+| 2 | Traditional dividend-market sellers and buyers | [Eurex 2025 whitepaper](https://www.eurex.com/resource/blob/4418754/f90fd622a278beb08757729864e93925/data/whitepaper-derivatives-forum-frankfurt-2025.pdf), pp. 31–32; [CME market explainer](https://www.cmegroup.com/articles/2024/trading-dividend-uncertainty.html); [CME primer](https://www.cmegroup.com/articles/2024/equity-index-dividend-futures-a-primer.html) | Banks supply, hedge or recycle dividend risk. Asset managers and hedge funds trade it in either direction. Eurex documents Survista buying discounted single-stock dividend futures. None is claimed as a DivX user. |
 | 3 | xStocks multiplier mechanics | [xStocks multiplier guide](https://docs.xstocks.fi/developers/multipliers), accessed 16 Sep 2026 | DR settles in reinvested xStock units. Present-tense mechanism copy describes the product design, not deployed execution. |
-| 4 | 21M+ dividend contracts in 2024 | [Eurex release](https://www.eurex.com/ex-en/find/news-center/news/Eurex-dividend-options-received-CFTC-approval-for-trading-in-the-U.S.--4248358), 6 Jan 2025 | Contract turnover precedent, not dollars or DividendX demand. |
+| 4 | 21M+ dividend contracts in 2024 | [Eurex release](https://www.eurex.com/ex-en/find/news-center/news/Eurex-dividend-options-received-CFTC-approval-for-trading-in-the-U.S.--4248358), 6 Jan 2025 | Contract turnover precedent, not dollars or DivX demand. |
 | 4 | $96.4M average daily trading volume in 2024 | [Pendle team review](https://medium.com/pendle/pendle-2025-zenith-cf1a91e6e23f), 4 Feb 2025 | Pendle-reported yield-market precedent, not equity-specific demand. |
 | 5 | $1.75T global dividends in 2024 | [Janus Henderson](https://www.janushenderson.com/en-dk/advisor/press-releases/global-dividends-jumped-to-a-record-1-75-trillion-in-2024/), published 2025 | Annual global cash flow, not addressable revenue. |
 | 5 | $2.92B distributed tokenized-stock value | [RWA.xyz Stocks](https://app.rwa.xyz/stocks), observed 16 Sep 2026 | Includes stocks and ETFs, native and synthetic. Eligible dividend-paying xStocks are a subset. |

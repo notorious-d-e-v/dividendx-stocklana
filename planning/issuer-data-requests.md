@@ -1,4 +1,4 @@
-# Issuer data needed for DividendX
+# Issuer data needed for DivX
 
 Updated 18 September 2026. These are drafts and technical requirements, not messages sent. Ondo read-only access is now verified; see [authenticated access review](research/ondo-api-access-2026-09-17.md). The missing work is settlement-grade annual corporate-action data: authoritative civil ex-dates, exact factor joins, complete period coverage, revisions and finality.
 
@@ -16,7 +16,7 @@ Fill values in a local editor; do not paste them into chat. No wallet secrets, t
 
 Two-sentence outreach draft:
 
-> We're building DividendX for Stocklana so holders can separate a calendar year's qualified dividends from stock exposure, and we want Backpack stocks in the first release. Could you connect us with the team for a durable token corporate-actions ledger that supplies official reference-market ex-dates, exact DividendDistribute factors, complete period history, revisions and a finality/completeness signal, including the Micron example?
+> We're building DivX for Stocklana so holders can separate a calendar year's qualified dividends from stock exposure, and we want Backpack stocks in the first release. Could you connect us with the team for a durable token corporate-actions ledger that supplies official reference-market ex-dates, exact DividendDistribute factors, complete period history, revisions and a finality/completeness signal, including the Micron example?
 
 Request the issuer program/IDL and durable action contract: stable event ID, ordered revision/type/status, exact mint binding, official reference exchange and civil ex-date, record/payment/effective times as distinct fields, exact old/new multiplier for each dividend operation, cancellation/correction semantics, complete-period query or coverage proof, and the authoritative post-period finality signal. Ask for gross/net/tax/fees/reinvestment details when available. Clarify multiplier recomputations during mint/redeem so they cannot become dividend yield, and confirm whether an ordinary public PDA vault may hold and transfer the tokens. Do not request another token registry; public asset discovery is already recorded.
 
@@ -50,6 +50,6 @@ A trustworthy source must bind **issuer + exact mint + official civil ex-date + 
 
 The [public-documentation check](research/issuer-public-policy-check-2026-09-18.md) confirms that Ondo multiplier history can omit corporate actions and finds no additional documented historical ledger. Ask for the missing event history and its operating rules, not another key or duplicate registry access.
 
-An issuer need not build a custom signed calendar-year certificate for DividendX. Our trusted attestor can certify coverage from a documented exhaustive ledger, reconciled source evidence and a reviewed cutoff/dispute policy. We still need evidence for that policy; neither a waiting period alone nor an operator checkbox establishes completeness. Post-finalization source corrections require a disclosed dispute procedure, since redeemed pools cannot be rewritten.
+An issuer need not build a custom signed calendar-year certificate for DivX. Our trusted attestor can certify coverage from a documented exhaustive ledger, reconciled source evidence and a reviewed cutoff/dispute policy. We still need evidence for that policy; neither a waiting period alone nor an operator checkbox establishes completeness. Post-finalization source corrections require a disclosed dispute procedure, since redeemed pools cannot be rewritten.
 
 The existing KOx and MU factors may be used locally with explicitly synthetic test ex-dates and a disclosed prototype completeness attestation. Label each as one sourced event, not a complete annual payout. Ondo remains without a fixture. Production additionally requires permitted real custody, continuing event access, late-payment handling, revisions and operational finality.

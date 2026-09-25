@@ -1,6 +1,6 @@
 # Illustration agent brief
 
-Use this file for future DividendX illustration work. It is a scoped production brief, not an installed skill or project-wide policy.
+Use this file for future DivX illustration work. It is a scoped production brief, not an installed skill or project-wide policy.
 
 ## Read first
 

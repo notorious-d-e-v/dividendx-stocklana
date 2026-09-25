@@ -1,6 +1,6 @@
 # Equity-dividend prior art and settlement lessons
 
-> Architecture update: this dated research is extended by [annual dividend conventions](annual-dividend-series.md). The current [annual contract](../../spec/annual-series-accounting.md) supersedes earlier one-event DividendX recommendations; calendar-year dates are our design choice, not an exact copy of every exchange contract.
+> Architecture update: this dated research is extended by [annual dividend conventions](annual-dividend-series.md). The current [annual contract](../../spec/annual-series-accounting.md) supersedes earlier one-event DivX recommendations; calendar-year dates are our design choice, not an exact copy of every exchange contract.
 
 Reviewed by Astra on 16 September 2026. This is a design review, not a legal opinion, deployment audit or claim of competitor adoption. Sources are first-party unless explicitly described otherwise. Existing issuer evidence remains dated; this review does not refresh every mint or enable live deposits.
 
@@ -8,9 +8,9 @@ Reviewed by Astra on 16 September 2026. This is a design review, not a legal opi
 
 Eurex's current Orion single-stock dividend-futures specification describes a cash-settled contract on 1,000 shares, a defined maturity, exchange-determined final settlement and corporate-action adjustments. An earlier official dividend-products presentation explains the reference-period treatment: dividends count by ex-date, while special/extraordinary distributions are excluded and handled through adjustments. These are contract-specific rules, not a universal definition of dividend income. [Current product specification](https://www.eurex.com/ex-en/markets/did/ssdf/Orion-Dividend-Futures-2798848), [historical exchange presentation](https://www.eurex.com/resource/blob/80940/d1c444c8bc08cfe72087156dc9288ebd/data/presentation_dividend-derivatives.pdf).
 
-CME's primer describes standalone dividend exposure used for hedging and relative-value trading. This supports the two-sided market rationale already documented in our [participant research](../pitch-tradfi-participants.md). It does not establish demand, pricing or liquidity for DividendX itself. [CME primer](https://www.cmegroup.com/articles/2024/equity-index-dividend-futures-a-primer.html).
+CME's primer describes standalone dividend exposure used for hedging and relative-value trading. This supports the two-sided market rationale already documented in our [participant research](../pitch-tradfi-participants.md). It does not establish demand, pricing or liquidity for DivX itself. [CME primer](https://www.cmegroup.com/articles/2024/equity-index-dividend-futures-a-primer.html).
 
-| Dimension | Exchange dividend future | DividendX's selected model |
+| Dimension | Exchange dividend future | DivX's selected model |
 |---|---|---|
 | Entitlement | Defined dividend amount over a contract period | One classified reinvestment event for one exact issuer mint |
 | Backing and settlement | Derivative with clearing/margin and cash settlement | Deposited stock tokens allocated into two raw collateral pools |

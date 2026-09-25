@@ -1,4 +1,4 @@
-# DividendX illustrations — v1
+# DivX illustrations — v1
 
 Original artwork generated with the built-in image generation tool for the separate illustrated pitch deck. Both files are transparent 1254 × 1254 PNGs and can be reused in the frontend.
 

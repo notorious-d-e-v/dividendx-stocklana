@@ -7,7 +7,7 @@
 | Later item | Purpose | Conditions before implementation |
 |---|---|---|
 | Fixed-price dividend sale — Streamflow candidate | Agree a price for annual DR and exchange it for USDC | Verify arbitrary sale-mint acceptance, supported test network, payment/delivery, cancellation and redemption; no integration yet |
-| Token locks and vesting — Jupiter Lock candidate | Release PT/DR units to another holder on a schedule | Classic SPL support and devnet executable observed; actual lock/claim round trip still required. Claims keep their whole annual entitlement; no cash-dividend streaming or automatic DividendX redemption |
+| Token locks and vesting — Jupiter Lock candidate | Release PT/DR units to another holder on a schedule | Classic SPL support and devnet executable observed; actual lock/claim round trip still required. Claims keep their whole annual entitlement; no cash-dividend streaming or automatic DivX redemption |
 | Shared treasury — Squads candidate | Shared approvals to hold, transfer and redeem PT/DR | Verify vault signing and actual claim withdrawal/redemption |
 | Limit orders — Meteora candidate | Trade claims at selected prices | Supported and funded DLMM pool, enabled limit orders and exact-series market |
 | Recurring purchases — Jupiter candidate | Accumulate PT/DR on a schedule | Routing, token/pricing support and explicit custody model; not automatic support for a new mint |

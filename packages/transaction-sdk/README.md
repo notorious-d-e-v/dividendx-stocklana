@@ -1,6 +1,6 @@
-# DividendX annual transaction SDK
+# DivX annual transaction SDK
 
-This isolated TypeScript package builds and submits transactions for the annual DividendX Solana program. It does not replace `packages/sdk`, which remains the rehearsal reference model.
+This isolated TypeScript package builds and submits transactions for the annual DivX Solana program. It does not replace `packages/sdk`, which remains the rehearsal reference model.
 
 The default program is `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE`. RPC examples use `http://127.0.0.1:8899`; the SDK never selects mainnet implicitly. A different deployment must supply its program ID explicitly, use an IDL whose `address` matches it, and bind discovery to the cluster genesis hash plus the Config deployment domain.
 

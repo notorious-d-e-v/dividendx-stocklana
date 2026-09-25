@@ -1,12 +1,12 @@
-# DividendX narration
+# DivX narration
 
 Approximate running time: 3 minutes. Word count: 380.
 
-**1 — DividendX**  
-DividendX lets you stay invested in a stock and sell the right to a future dividend. A dividend is a payment a company makes to its shareholders. Sell that claim, and you get paid today. In exchange, the buyer gets the right to that dividend.
+**1 — DivX**<br>
+DivX lets you stay invested in a stock and sell the right to a future dividend. A dividend is a payment a company makes to its shareholders. Sell that claim, and you get paid today. In exchange, the buyer gets the right to that dividend.
 
 **2 — Two sides of one trade**  
-People already trade dividends separately from stocks in traditional finance. Banks sell contracts tied to future dividends to reduce risk. Investment funds such as Survista buy them at a discount. DividendX brings that established market to people who hold tokenized stocks.
+People already trade dividends separately from stocks in traditional finance. Banks sell contracts tied to future dividends to reduce risk. Investment funds such as Survista buy them at a discount. DivX brings that established market to people who hold tokenized stocks.
 
 **3 — One deposit, two claims**  
 Deposit a stock token into our vault. The vault creates two tokens: PT for the stock position and DR for the dividend. Keep the stock side and sell the dividend side. Each can be later exchanged for its share of the stock tokens held in the vault.

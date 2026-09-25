@@ -1,4 +1,4 @@
-# DividendX local SDK
+# DivX local SDK
 
 Dependency-free TypeScript for the deterministic frontend rehearsal. Import the public surface from `src/index.ts` (or the private package export) and pass the normalized catalog and event JSON to `createDemoClient`.
 

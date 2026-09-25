@@ -8,21 +8,21 @@ Astra brief, 16 September 2026. Refines v4 after the user excluded permissioned 
 
 ## Message
 
-**DividendX is a permissionless dividend market for selected stock tokens on Solana.** Initial issuer scope is xStocks, Backpack/Trek and Ondo. The candidate package is six companies: Coca-Cola, Apple, Microsoft, Micron, Nike and IBM. Official registries and mint observations identify 15 candidate tokens: all six from xStocks and Ondo, and Micron/Nike/IBM from Backpack. This is a selected integration package, not 15 completed integrations. Permissioned holder/approved-vault products are excluded from engineering and the product catalog.
+**DivX is a permissionless dividend market for selected stock tokens on Solana.** Initial issuer scope is xStocks, Backpack/Trek and Ondo. The candidate package is six companies: Coca-Cola, Apple, Microsoft, Micron, Nike and IBM. Official registries and mint observations identify 15 candidate tokens: all six from xStocks and Ondo, and Micron/Nike/IBM from Backpack. This is a selected integration package, not 15 completed integrations. Permissioned holder/approved-vault products are excluded from engineering and the product catalog.
 
-A shared engine and three issuer readers remain the design. Permissionless means no DividendX holder allowlist or issuer-specific vault onboarding for admitted assets; underlying issuer controls and product restrictions remain. Put this explanation once in notes, not on every slide. Do not promise unrestricted legal access or removal of issuer risk. The asset package report will contain exact mints and evidence. First execution targets: KOx sourced event, Backpack MU onchain reconstruction, one Ondo event when verified. No Ondo historical dividend is source-complete yet.
+A shared engine and three issuer readers remain the design. Permissionless means no DivX holder allowlist or issuer-specific vault onboarding for admitted assets; underlying issuer controls and product restrictions remain. Put this explanation once in notes, not on every slide. Do not promise unrestricted legal access or removal of issuer risk. The asset package report will contain exact mints and evidence. First execution targets: KOx sourced event, Backpack MU onchain reconstruction, one Ondo event when verified. No Ondo historical dividend is source-complete yet.
 
 Keep direct product language, concrete traditional participants, fractional ownership/auditability and the Coca-Cola dollar example. The cover still says prototype/concept plus working historical calculator. Slide 8 still distinguishes the existing calculator from next-stage vault execution. No production vault, issuer partnership, executed trade or completed multi-issuer settlement is implied.
 
 ## Narration
 
-### 1 — DividendX
+### 1 — DivX
 
-DividendX lets a stock holder keep the stock exposure and sell the dividend rights. We are building a permissionless dividend market for selected stock tokens from xStocks, Backpack and Ondo on Solana.
+DivX lets a stock holder keep the stock exposure and sell the dividend rights. We are building a permissionless dividend market for selected stock tokens from xStocks, Backpack and Ondo on Solana.
 
 ### 2 — Two sides of one trade
 
-Traditional finance already has both sides: banks sell dividend exposure to manage risk from structured products; asset managers such as Survista buy discounted dividend futures. DividendX brings that choice to tokenized-stock holders: keep the stock exposure and sell the dividend rights.
+Traditional finance already has both sides: banks sell dividend exposure to manage risk from structured products; asset managers such as Survista buy discounted dividend futures. DivX brings that choice to tokenized-stock holders: keep the stock exposure and sell the dividend rights.
 
 ### 3 — One deposit, two claims
 
@@ -30,7 +30,7 @@ One deposit enters a locked vault. The program issues two paired claims: PT for 
 
 ### 4 — Established markets, familiar behavior
 
-Eurex handled more than 21 million dividend contracts in 2024. Pendle reported 96.4 million dollars of average daily trading volume that year. Investors already trade dividends separately, and crypto users already separate yield. DividendX connects those two ideas.
+Eurex handled more than 21 million dividend contracts in 2024. Pendle reported 96.4 million dollars of average daily trading volume that year. Investors already trade dividends separately, and crypto users already separate yield. DivX connects those two ideas.
 
 ### 5 — Tokenized stocks bring the collateral onchain
 
@@ -70,7 +70,7 @@ The hackathon target is one complete flow across supported Solana stock tokens: 
 - **Atomic issuance** — Deposit collateral and issue both claims together.
 - **Separate ownership** — Transfer and redeem each claim under common rules.
 
-Footer: **One shared flow. Separate collateral for each issuer.** Notes: all three observed families use Token-2022 Scaled UI Amount; accounting can be shared, but each issuer's event reader and custody requirements differ. Exact mint/decimals and issuer authority controls remain pinned. A shared engine does not pool collateral, make issuer claims fungible or guarantee liquidity. Permissioned holder/approved-vault products and no-dividend/fee-bearing products are outside scope. Permissionless describes DividendX access for admitted tokens, not removal of issuer controls or product restrictions. Exact mint checks, event evidence and execution tests are required before a series opens. Keep technical details in notes rather than add an appendix.
+Footer: **One shared flow. Separate collateral for each issuer.** Notes: all three observed families use Token-2022 Scaled UI Amount; accounting can be shared, but each issuer's event reader and custody requirements differ. Exact mint/decimals and issuer authority controls remain pinned. A shared engine does not pool collateral, make issuer claims fungible or guarantee liquidity. Permissioned holder/approved-vault products and no-dividend/fee-bearing products are outside scope. Permissionless describes DivX access for admitted tokens, not removal of issuer controls or product restrictions. Exact mint checks, event evidence and execution tests are required before a series opens. Keep technical details in notes rather than add an appendix.
 
 **7:** Preserve fractional ownership and auditability composition. Adjust final line to **A common claim interface for other Solana applications.** Onchain auditability concerns held collateral and program records, not proof of issuer reserves or audit certification. Claim transferability remains subject to the eligible series rules.
 
@@ -100,8 +100,8 @@ Use `planning/adapter-decision.md`, `planning/plan.md`, the issuer reports in `p
 - https://github.com/ondoprotocol/gm-solana-simulator/blob/0688add3c64aadc7006712989e9ec0592b5b10f8/constants.rs
 - https://app.rwa.xyz/stocks
 
-Retain existing CME/Eurex/Pendle/Janus Henderson/Solana/Coca-Cola and Coinbase/Robinhood sources from v3. Each source supports its actual claim; do not cite the broad homepage as proof of a particular event or API capability. In notes, xStocks has a public event history; Backpack's event ledger remains missing; Ondo's keyed history needs classified event joins. No live production integration is complete for DividendX.
+Retain existing CME/Eurex/Pendle/Janus Henderson/Solana/Coca-Cola and Coinbase/Robinhood sources from v3. Each source supports its actual claim; do not cite the broad homepage as proof of a particular event or API capability. In notes, xStocks has a public event history; Backpack's event ledger remains missing; Ondo's keyed history needs classified event joins. No live production integration is complete for DivX.
 
 ## Delivery
 
-Archive v4 sources and artifacts, preserving existing output links. Deliver `DividendX-phase-two-v5.pptx`, corresponding v5 contact sheet and current contact-sheet alias, all nine final previews, revised narration/source ledger/submission draft and reproducible authoring source. Use the presentations skill and operation marker, private candidate, distinct final export and finalizer. Inspect every slide; Astra independently reviews the result. Do not alter the design prototype or start later implementation phases.
+Archive v4 sources and artifacts, preserving existing output links. Deliver `DivX-phase-two-v5.pptx`, corresponding v5 contact sheet and current contact-sheet alias, all nine final previews, revised narration/source ledger/submission draft and reproducible authoring source. Use the presentations skill and operation marker, private candidate, distinct final export and finalizer. Inspect every slide; Astra independently reviews the result. Do not alter the design prototype or start later implementation phases.
