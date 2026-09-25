@@ -26,4 +26,10 @@ Pre-release known-good deployment: `dpl_29kjUNj3JKAPrDRphy662PiST1cE`, `https://
 
 Accepted program ELF SHA-256: `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070` (unchanged). Accepted runtime snapshot: `snap_mtdgtBAGmcNu8Ucj1M9kCARBKYvq` (unchanged).
 
-Production publication and live verification are pending final review.
+Production `dpl_Fu4onS1bqESSoWPfyyYj4dsTbea4` (`https://dividendx-stocklana-nrrvpo3ch-payai.vercel.app`) is Ready, published from reviewed commit `0cefe88`. The initial direct upload failed before deployment; the archive upload succeeded.
+
+[Canonical-site verification](evidence/divx-brand-production-2026-09-25.json) and [Vercel-address verification](evidence/divx-brand-vercel-2026-09-25.json) pass all six page routes, metadata/cards, service GETs and 1440/390 layout checks with no browser errors. The [live guided journey](evidence/divx-guided-production-2026-09-25.json) passes all 15 actions, 40 confirmed transactions, both redemptions and explicit restart; no transaction was retried. No production error logs were found in the bounded post-release check. The single existing six-hour cron remains unchanged. The [release identity record](evidence/divx-release-2026-09-25.json) binds this evidence to the deployed source.
+
+Final case-insensitive PPTX audit passes 24/24 after correcting uppercase captions in older editions. Independent Vision OCR of all 53 output PNG/JPG files finds no old display-brand text; only existing hostname URLs remain. The [cover edit prompt and provenance](../design/illustrations/social/deposit-split-counts-v2-cover-5x2.prompt.md) records the built-in ImageGen change; the [final cover](../design/illustrations/social/deposit-split-counts-v2-cover-5x2.jpg) remains 2000×800.
+
+Merging the release PR publishes the same verified application source through the existing Git deployment integration; the additional commit records release evidence only.
