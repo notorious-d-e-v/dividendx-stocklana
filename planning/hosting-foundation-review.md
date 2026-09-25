@@ -15,7 +15,7 @@ Evidence: [wallet measurements](evidence/vercel-linux-wallet-probe-2026-09-18.js
 
 These are isolated synthetic networks running the actual accepted bytecode. They are not public-devnet receipts or live issuer dividends. Cgroup measurements include the probe processes and filesystem/build-cache effects; startup excludes provider provisioning. They do not establish concurrent visitor capacity. The separate [Docker probe](../docs/linux-runtime-probe.md) also passes with outbound networking disabled, but its x64-on-ARM timings are not native capacity measurements.
 
-The DividendX ELF remains `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070`; the transaction IDL remains `d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4`. No program or transaction-SDK source changed.
+The DivX ELF remains `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070`; the transaction IDL remains `d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4`. No program or transaction-SDK source changed.
 
 ## Persistent public devnet
 

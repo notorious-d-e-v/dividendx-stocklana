@@ -1,6 +1,6 @@
-# DividendX local runtime
+# DivX local runtime
 
-This package runs a disposable, offline Surfpool 1.5.0 network for the wallet application. It loads the repository's compiled DividendX ELF, creates three local Token-2022 collateral profiles and their 2027 series with genuine transactions, then exposes discovery and narrow test controls on `127.0.0.1:4180`.
+This package runs a disposable, offline Surfpool 1.5.0 network for the wallet application. It loads the repository's compiled DivX ELF, creates three local Token-2022 collateral profiles and their 2027 series with genuine transactions, then exposes discovery and narrow test controls on `127.0.0.1:4180`.
 
 From the repository root:
 

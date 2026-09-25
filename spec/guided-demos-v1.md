@@ -22,13 +22,13 @@ Prepare demo wallets, then advance one action at a time:
 8. Buyer redeems purchased DR for dividend-derived test stock.
 9. Stock holder independently redeems remaining PT for test stock.
 
-The action labels must distinguish withdrawing LP, recombining paired claims, and redeeming one side. LP tokens cannot redeem against DividendX. The buyer owns the dividends sold to them. Raydium's locked residual DR retains backing after both wallets finish; do not force an empty vault or call its reserve surplus.
+The action labels must distinguish withdrawing LP, recombining paired claims, and redeeming one side. LP tokens cannot redeem against DivX. The buyer owns the dividends sold to them. Raydium's locked residual DR retains backing after both wallets finish; do not force an empty vault or call its reserve surplus.
 
-Show a persistent concise boundary: **Local transactions · Test assets · Accelerated test year**. Details explain genuine captured Raydium devnet bytecode and the accepted DividendX program execute locally. Link separately to the completed public devnet proof. Never link local signatures to a public explorer, show seeded quote units as dollars/USDC, describe synthetic dividends as real company payouts, or imply this is live issuer custody. PT and DR quantities and stock redemption values are different measures; stock display uses its active scaled multiplier, with exact raw units in details.
+Show a persistent concise boundary: **Local transactions · Test assets · Accelerated test year**. Details explain genuine captured Raydium devnet bytecode and the accepted DivX program execute locally. Link separately to the completed public devnet proof. Never link local signatures to a public explorer, show seeded quote units as dollars/USDC, describe synthetic dividends as real company payouts, or imply this is live issuer custody. PT and DR quantities and stock redemption values are different measures; stock display uses its active scaled multiplier, with exact raw units in details.
 
 ## Runtime and contracts
 
-New `packages/guided-runtime` on loopback port **4181**, separate from the running wallet runtime on 4180. It uses an offline Surfpool, accepted exact DividendX ELF, and full captured Raydium ELF hash plus exact public config/fee-account fixtures with provenance. Verify the real Raydium path on Surfpool before claiming it works. Keep existing CLI behavior and accounting checks intact when extracting reusable AMM steps. No program/IDL or transaction-SDK changes are intended.
+New `packages/guided-runtime` on loopback port **4181**, separate from the running wallet runtime on 4180. It uses an offline Surfpool, accepted exact DivX ELF, and full captured Raydium ELF hash plus exact public config/fee-account fixtures with provenance. Verify the real Raydium path on Surfpool before claiming it works. Keep existing CLI behavior and accounting checks intact when extracting reusable AMM steps. No program/IDL or transaction-SDK changes are intended.
 
 The browser consumes the frozen types in `packages/guided-runtime/src/contract.ts`; it imports no Node runtime, Raydium SDK or signer material. Endpoints:
 

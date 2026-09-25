@@ -1,6 +1,6 @@
-# DividendX Raydium CPMM integration
+# DivX Raydium CPMM integration
 
-This isolated test harness executes the real DividendX program and Raydium CPMM. It creates a future 2027 claim series backed by a Token-2022 scaled test-stock mint, deposits 100 test stock units, creates and adds liquidity to a DR/worthless-test-quote pool, buys DR, withdraws every provider-held LP token, and recombines the provider's recovered DR with retained PT.
+This isolated test harness executes the real DivX program and Raydium CPMM. It creates a future 2027 claim series backed by a Token-2022 scaled test-stock mint, deposits 100 test stock units, creates and adds liquidity to a DR/worthless-test-quote pool, buys DR, withdraws every provider-held LP token, and recombines the provider's recovered DR with retained PT.
 
 The seeded ratio is artificial: 40 DR to 80 six-decimal test-quote units, followed by 60 DR and 120 test-quote units. The quote mint is not USDC, has no value, and has no redemption right. The package does not claim Raydium UI/indexer discovery or a public market price.
 
@@ -25,7 +25,7 @@ npm --prefix packages/amm-integration run preflight -- \
   --manifest /absolute/path/to/packages/amm-integration/manifests/devnet.example.json
 ```
 
-Preflight verifies the exact devnet genesis, DividendX and Raydium executable accounts, full loader-payload SHA-256 values, DividendX upgrade authority, enabled Raydium config, live fee bounds, and the initialized native-wSOL fee receiver. It rejects mainnet/testnet and arbitrary RPC URLs.
+Preflight verifies the exact devnet genesis, DivX and Raydium executable accounts, full loader-payload SHA-256 values, DivX upgrade authority, enabled Raydium config, live fee bounds, and the initialized native-wSOL fee receiver. It rejects mainnet/testnet and arbitrary RPC URLs.
 
 ## Public devnet flow
 
@@ -62,7 +62,7 @@ Raydium may set a newly initialized pool's open time one chain second after its 
 
 ## Captured-program local fallback
 
-Use a separate validator on port 18899 or 19999. Load the accepted DividendX ELF as an upgradeable program, load the captured 742,640-byte Raydium devnet payload as the fixed CPMM program, and clone exact config `5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy` plus fee receiver `3oE58BKVt8KuYkGxx8zBojugnymWmBiyafWgMrnb6eYy` from devnet. Do not use ports 4174 or 4180.
+Use a separate validator on port 18899 or 19999. Load the accepted DivX ELF as an upgradeable program, load the captured 742,640-byte Raydium devnet payload as the fixed CPMM program, and clone exact config `5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy` plus fee receiver `3oE58BKVt8KuYkGxx8zBojugnymWmBiyafWgMrnb6eYy` from devnet. Do not use ports 4174 or 4180.
 
 The local manifest must use `mode: "local-clone"`, the actual fresh local genesis hash, its 32-byte public-key encoding as `deploymentDomainHex`, and the same accepted hashes/authority. `run:local` otherwise takes the same arguments. Local preflight rejects known public-cluster genesis hashes and the receipt identifies this as captured devnet bytecode, including source ProgramData, deploy slot, config observation slot, and payload digest. It does not claim public devnet execution or source-to-binary reproducibility.
 
@@ -74,7 +74,7 @@ The receipt preserves distinct collateral, PT, DR, test-quote, and LP quantities
 - exact buyer DR output from the creator-fee-disabled quote and nonzero minimum output encoded in the base-input instruction;
 - protocol/fund fee-counter deltas and zero creator fees;
 - zero provider LP mint balance/supply after withdrawal, with Raydium's internal 100 locked LP units and exact residual reserves;
-- remaining PT supply = DR supply = DividendX vault backing;
+- remaining PT supply = DR supply = DivX vault backing;
 - DR supply = provider + buyer + Raydium DR vault inventory, including fees and locked residuals.
 
 No secret bytes are written to receipts or stdout.

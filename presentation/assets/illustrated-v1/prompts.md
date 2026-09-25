@@ -1,4 +1,4 @@
-# DividendX illustration prompts — v1
+# DivX illustration prompts — v1
 
 Generated using the built-in image generation tool. Original conceptual artwork, not data visualizations. Intended slides: 3 and 7. The approved palette is preserved.
 

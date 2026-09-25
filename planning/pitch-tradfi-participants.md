@@ -14,11 +14,11 @@ Accessed 2026-09-16. Primary exchange sources unless noted.
 
 ## Recommended spoken copy
 
-“Dividend trading is already an established institutional market. Structured-product desks and bank derivatives books supply dividend risk as they hedge products such as autocallables, while asset managers, hedge funds and long-term institutions buy or trade that exposure for income certainty, relative value and the gap between implied and realized dividends. DividendX brings that familiar two-sided market logic on-chain through a physically collateralized xStock dividend strip.”
+“Dividend trading is already an established institutional market. Structured-product desks and bank derivatives books supply dividend risk as they hedge products such as autocallables, while asset managers, hedge funds and long-term institutions buy or trade that exposure for income certainty, relative value and the gap between implied and realized dividends. DivX brings that familiar two-sided market logic on-chain through a physically collateralized xStock dividend strip.”
 
 Safer short version:
 
-“TradFi already separates dividends from stock-price exposure. Banks recycle dividend risk created by structured products, while asset managers and other institutions buy or trade the standalone cash-flow exposure; DividendX applies that established market logic to a physically collateralized xStock strip.”
+“TradFi already separates dividends from stock-price exposure. Banks recycle dividend risk created by structured products, while asset managers and other institutions buy or trade the standalone cash-flow exposure; DivX applies that established market logic to a physically collateralized xStock strip.”
 
 ## Useful proof points
 
@@ -30,12 +30,12 @@ Use one proof point, not all three, in spoken delivery. The 2026 CME figure is t
 
 ## Limits and wording guardrails
 
-- TradFi dividend futures and swaps are generally cash-settled derivatives on index or single-stock dividend amounts. DividendX’s physically collateralized xStock strip is a different instrument and market structure. The precedent supports demand and participant incentives, not product identity.
+- TradFi dividend futures and swaps are generally cash-settled derivatives on index or single-stock dividend amounts. DivX’s physically collateralized xStock strip is a different instrument and market structure. The precedent supports demand and participant incentives, not product identity.
 - Dealer direction varies by product, maturity and hedge book. CME’s 2026 discussion notes structured products can leave banks long near-term dividends and short long-term dividends. Say banks “supply, hedge or recycle dividend risk,” not that every bank is always a seller at every tenor.
 - Hedge funds and relative-value investors can be long, short or spread traders. Only call them buyers when describing a particular undervaluation or long-dividend trade.
-- Survista is documented as an asset manager entering single-stock dividend-futures trades at discounts. This supports a named buyer example; it does not make Survista a DividendX customer.
+- Survista is documented as an asset manager entering single-stock dividend-futures trades at discounts. This supports a named buyer example; it does not make Survista a DivX customer.
 - The long-only monetization example is an exchange-described strategy from 2008. Present it as an established use case, not a current named fund flow.
-- Do not imply these sources validate DividendX custody, settlement, regulatory status, liquidity, customers or traction.
+- Do not imply these sources validate DivX custody, settlement, regulatory status, liquidity, customers or traction.
 
 ## Sources
 

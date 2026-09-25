@@ -1,8 +1,10 @@
-# DividendX artifact map
+# DivX artifact map
 
 Updated 18 September 2026. This map identifies the current review surfaces, source evidence, reproducible outputs and preserved history. The accepted canonical Vercel test site has production-browser devnet, accelerated wallet, guided, simultaneous two-visitor reset/isolation and natural-expiry evidence against the unchanged accepted ELF. This does not establish live issuer integration.
 
 ## Start here
+
+- [DivX rebrand and release](../planning/divx-rebrand-2026-09-25.md) — updated branding, assets, decks, validation and deployment record.
 
 - [Hackathon submission packet](../planning/hackathon-wrap-up-2026-09-20.md), [mainnet readiness](../planning/mainnet-readiness-2026-09-20.md), and [ecosystem outreach](../planning/ecosystem-outreach-2026-09-20.md) — current deadline, draft entry, recording outline, known gaps and prioritized partner prospects; no submission or outreach sent.
 - [20 September wallet release](../planning/wallet-release-2026-09-20.md) — approved navigation and wallet publication, checks and rollback identity.
@@ -39,7 +41,7 @@ Updated 18 September 2026. This map identifies the current review surfaces, sour
 | [`packages/hosted-devnet/`](../packages/hosted-devnet/) | Public devnet wrapper | Durable finite test faucet and six-hour frozen-profile observation refresh; no issuer events, finalization or clock control |
 | [`packages/hosted-broker/`](../packages/hosted-broker/) and [`packages/hosted-gateway/`](../packages/hosted-gateway/) | Hosted session control and restricted VM ingress | Accepted immutable cookie-bound 15-minute wallet/guided sessions, durable quotas, same-origin routes, two-visitor reset isolation and natural expiry |
 | [`deploy/runtime/`](../deploy/runtime/) and [`scripts/hosting/`](../scripts/hosting/) | Allowlisted Linux packaging, execution probes and opt-in production smoke | Exact accepted artifacts pass Docker/native Vercel; actual production runs never mock manifest, broker or RPC |
-| [`packages/guided-runtime/`](../packages/guided-runtime/) | Separate guided runtime on port 4181 | Accepted DividendX ELF, captured genuine Raydium devnet binary/config and an exact local copy of the Circle devnet USDC mint account; synthetic 10 + 1 Test USDC funding and accelerated test year |
+| [`packages/guided-runtime/`](../packages/guided-runtime/) | Separate guided runtime on port 4181 | Accepted DivX ELF, captured genuine Raydium devnet binary/config and an exact local copy of the Circle devnet USDC mint account; synthetic 10 + 1 Test USDC funding and accelerated test year |
 | [`packages/issuer-readers/`](../packages/issuer-readers/) | Server-side issuer observations | Selected registry identities and available source records; explicit gaps, private snapshots, no settlement writer |
 | [`packages/amm-integration/`](../packages/amm-integration/) | Raydium CPMM execution package | Isolated Node CLI; finalized public devnet test flow and captured-bytecode local fallback, not wired into `/app/` |
 | [`apps/web/src/App.tsx`](../apps/web/src/App.tsx) | Detailed rehearsal | Local accounting demonstration and fallback |
@@ -57,8 +59,8 @@ The illustrations show intended concepts such as separated ownership, issuer-iso
 
 ## Pitch and narration
 
-- [Illustrated v2 deck](../presentation/output/DividendX-illustrated-v2.pptx) — preserved approved pitch artifact; annual wording awaits the next versioned export.
-- [Illustrated v2 contact sheet](../presentation/output/DividendX-illustrated-contact-sheet-v2.png) — compact visual review surface.
+- [Illustrated v2 deck](../presentation/output/DivX-illustrated-v2.pptx) — preserved approved pitch artifact; annual wording awaits the next versioned export.
+- [Illustrated v2 contact sheet](../presentation/output/DivX-illustrated-contact-sheet-v2.png) — compact visual review surface.
 - [User narration](../presentation/narration.md) — current nine-slide script used by the illustrated v2 deck.
 - [Source ledger](../presentation/source-ledger.md) — claim-by-claim sources and qualification notes.
 - [Submission description draft](../presentation/submission-description-draft.md) — current long-form submission copy.

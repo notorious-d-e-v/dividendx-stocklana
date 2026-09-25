@@ -1,6 +1,6 @@
 # Annual program toolchain
 
-Audited 17 September 2026 on Apple Silicon. This is a reproducible local-program setup, not evidence of a deployed DividendX program.
+Audited 17 September 2026 on Apple Silicon. This is a reproducible local-program setup, not evidence of a deployed DivX program.
 
 ## Selected stack
 
@@ -82,7 +82,7 @@ The program build wrapper pins platform-tools v1.54 and passes Cargo's `--locked
 
 ## Required real-program tests
 
-The primary conformance suite should use Mollusk 0.14.0 and load `target/deploy/dividendx.so`; do not register a native Rust processor for DividendX. Add the packaged legacy Token and Token-2022 executables, enable inner-instruction tracking, and assert the expected CPI program IDs. This executes the compiled DividendX SBF and actual token programs rather than replacing custody or claims with test-side balance arithmetic.
+The primary conformance suite should use Mollusk 0.14.0 and load `target/deploy/dividendx.so`; do not register a native Rust processor for DivX. Add the packaged legacy Token and Token-2022 executables, enable inner-instruction tracking, and assert the expected CPI program IDs. This executes the compiled DivX SBF and actual token programs rather than replacing custody or claims with test-side balance arithmetic.
 
 At minimum, initialize a Token-2022 collateral mint with `ScaledUiAmount`, create extension-sized token accounts, and exercise these transactions through the program:
 

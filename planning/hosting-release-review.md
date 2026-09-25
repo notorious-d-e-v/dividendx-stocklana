@@ -8,7 +8,7 @@ The serving deployment is `dpl_5W46MCQ7Fq3FngxgNB9GN9ZEwF9o`, built at [its immu
 
 The Vercel project `dividendx-stocklana` hosts static pages and bounded server functions. `/app/` uses the persistent, real-calendar 2027 Solana devnet registry. `/sandbox/` and `/demos/` allocate separate disposable Surfpool networks behind a same-origin broker. Sandbox balances, clocks and transaction history never move onto devnet.
 
-The accepted DividendX program remains `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE`, with ELF SHA-256 `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070`. Public deposits close on 1 January 2027; maturity is 1 January 2028. Independent redemption additionally requires valid finalization. No public clock control, shortened term, program upgrade or qualified live issuer settlement is introduced.
+The accepted DivX program remains `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE`, with ELF SHA-256 `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070`. Public deposits close on 1 January 2027; maturity is 1 January 2028. Independent redemption additionally requires valid finalization. No public clock control, shortened term, program upgrade or qualified live issuer settlement is introduced.
 
 A code-only Vercel Sandbox snapshot contains the allowlisted native runtime, reviewed gateway and pinned program artifacts. Its [immutable source/hash manifest](evidence/hosted-runtime-snapshot-2026-09-18.json) is distinct from later server-function dependency lockfiles. No devnet authority, issuer credential, visitor ledger or running chain is included in the snapshot.
 

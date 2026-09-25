@@ -1,4 +1,4 @@
-# Ondo Stocks on Solana: DividendX integration audit
+# Ondo Stocks on Solana: DivX integration audit
 
 **17 September update:** the user supplied read-only API access, and the registry, status, multiplier-history and dividend-information requests now succeed. The dated keyless findings below remain historical; see the [authenticated access review](ondo-api-access-2026-09-17.md). Historical event joins, ex-dates, revisions and annual finality remain unresolved.
 
@@ -7,7 +7,7 @@
 
 ## Verdict
 
-Ondo Stocks are technically compatible with DividendX's **raw-token allocation** design, but only after adding an Ondo event adapter. On Solana they are native Token-2022 mints using `ScaledUiAmount`: a holder's raw balance stays fixed while an issuer-controlled shares multiplier changes the displayed balance and total-return exposure. For a confirmed, pure cash dividend, the xStocks allocation formula can therefore be reused in raw units.
+Ondo Stocks are technically compatible with DivX's **raw-token allocation** design, but only after adding an Ondo event adapter. On Solana they are native Token-2022 mints using `ScaledUiAmount`: a holder's raw balance stays fixed while an issuer-controlled shares multiplier changes the displayed balance and total-return exposure. For a confirmed, pure cash dividend, the xStocks allocation formula can therefore be reused in raw units.
 
 The unsafe gap is event truth, not arithmetic. Ondo's authenticated API is documented to expose current/upcoming corporate-action classifications and multiplier history, but the keyless endpoints returned HTTP 403. The multiplier history contains only values and timestamps; the status response contains an event type and `eventId`, but appears limited to active/upcoming events and documents neither revision/finality semantics nor a historical event ledger. The dividend endpoint reports headline underlying data, not Ondo's net amount or reinvestment price. **A multiplier change or token-market price must never be used to infer that a cash dividend occurred.**
 
@@ -17,8 +17,8 @@ For a two-day MVP, support one allowlisted mint in observation/demo mode or use 
 
 - **Documented:** a behavior stated by Ondo, Solana, or the underlying issuer.
 - **Observed onchain:** finalized mainnet account or transaction data read during this audit.
-- **Transfer demonstrated:** a finalized third-party production transfer exists; DividendX did not make it.
-- **Settlement observed:** a finalized production redemption exists; retail eligibility and a DividendX-owned flow were not tested.
+- **Transfer demonstrated:** a finalized third-party production transfer exists; DivX did not make it.
+- **Settlement observed:** a finalized production redemption exists; retail eligibility and a DivX-owned flow were not tested.
 
 These labels should remain in the product and pitch. “Transfer demonstrated” does not establish that every PDA vault implementation is compatible, and “settlement observed” does not mean an arbitrary tokenholder can redeem.
 
@@ -62,13 +62,13 @@ The official Solana program is `XzTT4XB8m7sLD2xi6snefSasaswsKCxx5Tifjondogm`; On
 | Exact asset identity | Official authenticated registry documented; pinned official public repo supplies current addresses | Pin `(cluster, mint, token program, rules version)`; refresh only from authenticated Ondo data and review changes. |
 | Token accounting | Documented Scaled UI; exact multipliers observed in mint accounts | Store, transfer, escrow, and allocate **raw base units**. UI amounts are presentation and can change globally. |
 | Ordinary transfer | Public transfers documented; finalized AAPLon `TransferChecked` observed for `9,979,053` raw units ([tx](https://explorer.solana.com/tx/4oPvfGDTuaJkWx4MynmioJpYYzM1aHBLYkDDrtbavYZfPifRzFgXCGiDbieQQ35ehpVfLot7TMXWhCJ7bVUVHNkx)) | Transfer is demonstrated. Use Token-2022 CPI and checked raw amounts. |
-| PDA vault custody | No transfer fee, active hook, non-transferable flag, or permanent delegate observed; mint unpaused | Technically plausible. **Not validated:** no DividendX PDA deposit/withdraw was performed. Create a Token-2022 ATA for the PDA, support required account sizing/extensions, then test on devnet or with an authorized small mainnet flow. Pause/freeze remain blockers. |
+| PDA vault custody | No transfer fee, active hook, non-transferable flag, or permanent delegate observed; mint unpaused | Technically plausible. **Not validated:** no DivX PDA deposit/withdraw was performed. Create a Token-2022 ATA for the PDA, support required account sizing/extensions, then test on devnet or with an authorized small mainnet flow. Pause/freeze remain blockers. |
 | Dividend accrual | Ondo documents net dividends reinvested; Solana display grows through Scaled UI while raw holdings stay fixed | Existing raw-allocation math works for a separately authenticated pure cash dividend. |
 | Corporate-action classification | `/v1/status/assets` documents `cash_dividend`, `stock_dividend`, `stock_split`, `merger`, `acquisition`, `spinoff`, `earnings`, and maintenance, with `eventId`, window, and `updateSharesMultiplier` | Treat status as an input, not yet a final ledger. Reject non-cash, mixed, unknown, revised, or unfinalized events. |
 | Multiplier history | `/v1/assets/{symbol}/shares-multiplier?range=all` documents exact decimal values and earliest timestamps | Required for `M0/M1`, but not sufficient to classify an event. Keyless access was 403 and revision semantics are undocumented. |
 | Dividend facts | [`/v1/assets/{symbol}/dividends`](https://docs.ondo.finance/api-reference/assets/get-dividend-information-for-an-asset) reports ticker, yield, frequency, last cash amount, and payment date | Informational underlying data only. It does not expose Ondo net proceeds, reinvestment price, FX, fees, or the resulting multiplier transition. |
 | Prices/oracles | [Latest price](https://docs.ondo.finance/api-reference/assets/get-current-price-for-an-asset) is documented for display, not as an oracle; quotes govern mint/redeem. Program source uses Pyth for quote sanity checks. | Never derive a dividend from market price. There is no documented public dividend/reinvestment oracle; Ondo says an official oracle is in development. |
-| Redemption | Atomic attested redemption documented. A finalized `RedeemForUsdc` burned `9,979,053` raw AAPLon and transferred `3,319,366` raw USDC, with `Attestation signature verified` ([tx](https://explorer.solana.com/tx/4DCaeeTK5wKFYhbJXGs3GpKwVavWpHTG1g1YzqaYtVqiaEmTAF4tvxizD3FaSFcfbF97BoH3Ug27qDtUt6GXxf5t)) | Production settlement path observed through an official authorized solver. It does not prove retail or vault eligibility. DividendX should always permit claimants to withdraw raw stock tokens rather than depend on issuer redemption. |
+| Redemption | Atomic attested redemption documented. A finalized `RedeemForUsdc` burned `9,979,053` raw AAPLon and transferred `3,319,366` raw USDC, with `Attestation signature verified` ([tx](https://explorer.solana.com/tx/4DCaeeTK5wKFYhbJXGs3GpKwVavWpHTG1g1YzqaYtVqiaEmTAF4tvxizD3FaSFcfbF97BoH3Ug27qDtUt6GXxf5t)) | Production settlement path observed through an official authorized solver. It does not prove retail or vault eligibility. DivX should always permit claimants to withdraw raw stock tokens rather than depend on issuer redemption. |
 | Solana bridge route | Ondo Stocks are native Solana Token-2022 mints. Ondo's stock bridge documents Ethereum, BNB Chain, and HyperEVM, not Solana. | Do not treat Solana supply as OFT-wrapped EVM supply or promise a stock bridge route to Solana. Chain-specific contracts and presentation rules differ. |
 
 ## Dividend accounting
@@ -96,7 +96,7 @@ This is valid only when an independently authenticated record proves a **pure ca
 
 Ondo states that US-company dividends received by its BVI issuer are generally withheld at **30%**; US fixed-income ETF distributions may have exempt components, and ADR treatment varies. It reinvests the amount **net of withholding**. Ondo says it withholds no additional tax at redemption, while holders remain responsible for their own taxes. See [Fees & Taxes](https://docs.ondo.finance/ondo-stocks/fees-and-taxes).
 
-DividendX should allocate the economic increment already embedded in `M1/M0`; it should not apply another assumed tax haircut. For disclosure or reconciliation, it still needs issuer data for gross distribution, withholding, expenses, FX where applicable, net reinvested cash, execution price/time, shares acquired, and rounding. Those fields are not documented in the public dividend endpoint.
+DivX should allocate the economic increment already embedded in `M1/M0`; it should not apply another assumed tax haircut. For disclosure or reconciliation, it still needs issuer data for gross distribution, withholding, expenses, FX where applicable, net reinvested cash, execution price/time, shares acquired, and rounding. Those fields are not documented in the public dividend endpoint.
 
 ## Event data contract
 
@@ -140,7 +140,7 @@ Ondo currently documents a normal dividend trading pause from **7:50 PM to 8:10 
 - **API credentials:** at `2026-09-16T05:37:14Z`, keyless requests to multiplier history, dividend data, and asset status each returned HTTP 403. Runtime access, limits, SLA, and permitted redistribution are untested.
 - **No authoritative historical action ledger was found:** status documents active/upcoming events, while multiplier history carries no action type or event ID. Their durable join and finality/revision rules are undocumented.
 - **No public reinvestment breakdown was found:** gross/net dividend, withholding actually applied, FX, execution price/time, shares purchased, and rounding are absent from the documented response schemas.
-- **PDA custody is not transaction-tested:** ordinary transfer is demonstrated, and mint configuration is compatible in principle, but no deposit into or withdrawal from a DividendX PDA has been executed.
+- **PDA custody is not transaction-tested:** ordinary transfer is demonstrated, and mint configuration is compatible in principle, but no deposit into or withdrawal from a DivX PDA has been executed.
 - **Issuer controls can interrupt custody:** global pause, account freeze, minting, and scaled-UI update authorities remain active.
 - **Direct redemption is permissioned:** issuer KYC, geography, wallet screening, signed attestations, risk limits, and liquidity apply. Holding a transferable token does not guarantee direct redemption access.
 - **Cross-chain equivalence is not established:** EVM uses a price-style total-return presentation while Solana uses Scaled UI. A symbol alone is not a chain-independent accounting identifier.
@@ -155,7 +155,7 @@ This is a useful real-world candidate for a demo fixture, but it is **not a vali
 
 Ondo documents a $1 minimum, direct access after eligibility/KYC, instant atomic redemption to USDon, and USDC redemption when swapper liquidity is available. US persons, persons in prohibited jurisdictions, and other ineligible wallets cannot subscribe or redeem directly; OGM can also restrict activity. See [Investing & Redeeming](https://docs.ondo.finance/ondo-stocks/investing-and-redeeming) and [Eligibility](https://docs.ondo.finance/ondo-stocks/eligibility).
 
-DividendX should separate two promises:
+DivX should separate two promises:
 
 - a claimant can receive its raw Ondo token allocation from the vault, subject to token pause/freeze; and
 - an eligible party may separately redeem with OGM or trade through a third party.
@@ -188,7 +188,7 @@ The audited mints are native Token-2022 assets issued and redeemed through Ondo'
 - complete live coverage of all 443 repository-listed mints;
 - exact gross-to-net tax or reinvestment reconciliation;
 - an issuer-grade price, FX, or dividend oracle;
-- production-tested DividendX PDA custody;
+- production-tested DivX PDA custody;
 - guaranteed stablecoin redemption, retail eligibility, or 24/7 liquidity;
 - support for splits, stock dividends, mergers, spin-offs, mixed actions, corrections, or cross-chain positions.
 

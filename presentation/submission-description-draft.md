@@ -1,12 +1,12 @@
-# DividendX submission description — draft
+# DivX submission description — draft
 
-DividendX lets a stock-token holder keep the stock exposure and sell a year of dividend rights. Traditional markets already trade dividend exposure separately. Tokenized stocks bring the collateral onchain, where these claims can be divided, transferred and used by compatible apps on Solana.
+DivX lets a stock-token holder keep the stock exposure and sell a year of dividend rights. Traditional markets already trade dividend exposure separately. Tokenized stocks bring the collateral onchain, where these claims can be divided, transferred and used by compatible apps on Solana.
 
 A holder deposits a supported stock token before the calendar year begins. A KOx 2027 deposit creates two paired claims: `PT-KOx-2027` for the remaining stock exposure and `DR-KOx-2027` for the year's qualified dividends. Each issuer, mint and year has separate backing. The DR carries its whole accumulated entitlement when sold. It pays in the deposited stock token, so its dollar value can change.
 
 Dividends belong to the year of their official ex-date, even if payment arrives later. At year-end, the eligible date window closes. Once the complete event journal is finalized, PT and DR redeem independently without forfeiture. Before finalization, matching PT and DR can be combined to recover their backing. Annual allocation compounds all accepted dividend factors, replaces corrections and rounds the cumulative result once.
 
-The initial candidate package spans 15 mints across Coca-Cola, Apple, Microsoft, Micron, Nike and IBM from xStocks, Backpack/Trek and Ondo. Observed profiles share Token-2022 Scaled UI Amount, enabling common accounting with separate issuer readers and per-asset checks. These are candidates, not completed integrations. DividendX adds no holder allowlist or approved-vault onboarding for admitted assets; underlying issuer controls and product restrictions remain.
+The initial candidate package spans 15 mints across Coca-Cola, Apple, Microsoft, Micron, Nike and IBM from xStocks, Backpack/Trek and Ondo. Observed profiles share Token-2022 Scaled UI Amount, enabling common accounting with separate issuer readers and per-asset checks. These are candidates, not completed integrations. DivX adds no holder allowlist or approved-vault onboarding for admitted assets; underlying issuer controls and product restrictions remain.
 
 Today the repository contains the approved design and illustrations, an annual Market / Split / Redeem preview, an executable accounting reference and a preserved single-event rehearsal. The annual preview uses real KOx and Backpack MU historical factors with explicitly synthetic term dates because verified ex-dates are absent from those fixtures. One replay is not a full year's payout or a future forecast. Ondo event evidence remains pending. Balances and trades are local simulations; no wallet, deployed vault, actual PT/DR token or AMM pool exists yet.
 

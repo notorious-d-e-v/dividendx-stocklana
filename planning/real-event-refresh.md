@@ -1,4 +1,4 @@
-# Real-event refresh for the DividendX demo
+# Real-event refresh for the DivX demo
 
 > Scope update, 16 September 2026: the current multi-issuer plan is [Solana issuer synthesis](solana-issuer-synthesis.md) and [architecture](adapter-decision.md). This file preserves earlier evidence/review; xStocks-only scope or deferral of native Solana Backpack/Ondo is superseded.
 

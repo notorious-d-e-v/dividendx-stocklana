@@ -6,7 +6,7 @@ Accepted by Astra on 17 September 2026 under [guided demos v1](../spec/guided-de
 
 `/demos/` is separate from core Split/Redeem. Two disposable server-managed wallets execute nine actions: split 100 test stock, create/seed a DR pool, add liquidity, purchase DR with a second wallet, remove provider LP, recombine recovered claims, settle four synthetic annual dividends, redeem the buyer's DR and redeem the provider's remaining PT. The page shows each actor, current action, balances and optional exact evidence. Reload reconnects to the same server session.
 
-Every action executes signed transactions through the accepted DividendX program and captured genuine Raydium devnet CPMM binary on a separate offline Surfpool. The browser does not calculate substitute balances. The persistent label states local transactions, test assets and an accelerated test year. The quote token has no dollar value or redemption right. No issuer event, real stock custody or public-chain maturity is claimed.
+Every action executes signed transactions through the accepted DivX program and captured genuine Raydium devnet CPMM binary on a separate offline Surfpool. The browser does not calculate substitute balances. The persistent label states local transactions, test assets and an accelerated test year. The quote token has no dollar value or redemption right. No issuer event, real stock custody or public-chain maturity is claimed.
 
 The runtime listens only on 4181, keeps keys in memory and preserves the existing 4180 wallet runtime. Requests use fixed actions, exact runtime/session/revision checks and bounded JSON. Host, Origin and a custom mutation header are checked. Snapshots batch required accounts coherently; a missing read fails rather than becoming a zero balance. Failures retain partial evidence. Local receipts have no public explorer links; the earlier devnet proof is linked separately.
 
@@ -37,7 +37,7 @@ Provider stock + buyer stock + vault stock exactly equals original supply. Remai
 
 | Artifact | SHA-256 |
 | --- | --- |
-| DividendX deployed ELF | `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070` |
+| DivX deployed ELF | `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070` |
 | Generated IDL, both copies | `d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4` |
 | Captured Raydium ELF, 742640 bytes | `87ef84634086209fc2c29b4163bbe5209a1e9383aff5c429781f5fff270d75fd` |
 | Captured Raydium config | `3b5ca2f3187261cc048e2353789242067c3aff19cab67168f86dbbd29d99f21c` |

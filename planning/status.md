@@ -23,7 +23,7 @@ Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notoriou
 | Area | Result |
 | --- | --- |
 | Brand | Approved design system, illustration guide and both-sides composability artwork, preserved |
-| Pitch | Approved [illustrated v2](../presentation/output/DividendX-illustrated-v2.pptx) and [user narration](../presentation/narration.md), preserved; annual wording recorded for the next versioned export |
+| Pitch | Approved [illustrated v2](../presentation/output/DivX-illustrated-v2.pptx) and [user narration](../presentation/narration.md), preserved; annual wording recorded for the next versioned export |
 | Annual contract | [Accounting](../spec/annual-series-accounting.md), [SDK](../spec/annual-series-sdk.md), [acceptance matrix](../spec/annual-series-tests.md) and [product copy](../spec/annual-product.md) |
 | Reference | Exact bigint [annual model](../packages/sdk/src/annual-reference.ts): multiple events, revisions/cancellations, cumulative rounding, paired exits and independent final redemption |
 | Program | [Anchor program](../programs/dividendx/README.md) with Token-2022 custody, ordinary SPL PT/DR mints, immutable event revisions, staged exact settlement and independent redemption; the accepted ELF is deployed unchanged on devnet at `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE` |

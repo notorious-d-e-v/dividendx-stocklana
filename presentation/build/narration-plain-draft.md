@@ -1,24 +1,24 @@
-# DividendX narration: plain-language draft
+# DivX narration: plain-language draft
 
 Approximate running time: 3 minutes. Draft for voice review.
 
-**1 — DividendX**  
-A dividend is a payment a company makes to shareholders. DividendX lets a tokenized-stock holder keep the stock price exposure and sell the right to one dividend. We are building it on Solana for selected tokens from Backpack, xStocks, and Ondo.
+**1 — DivX**<br>
+A dividend is a payment a company makes to shareholders. DivX lets a tokenized-stock holder keep the stock price exposure and sell the right to one dividend. We are building it on Solana for selected tokens from Backpack, xStocks, and Ondo.
 
 **2 — Two sides of one trade**  
-This trade already has sellers and buyers. Bank trading desks sell dividend exposure to manage payments linked to products they issued. Asset managers buy dividend futures when they think the price is low. Survista is one documented example. DividendX brings that choice onchain.
+This trade already has sellers and buyers. Bank trading desks sell dividend exposure to manage payments linked to products they issued. Asset managers buy dividend futures when they think the price is low. Survista is one documented example. DivX brings that choice onchain.
 
 **3 — One deposit, two claims**  
 A holder deposits a stock token in a shared smart-contract vault. The vault creates two tradable claims. PT tracks stock exposure after the dividend is separated. DR represents the dividend. The holder keeps PT and can sell DR. Both redeem in the stock token, so their dollar value changes with its price. DR is not guaranteed cash, and a sold dividend cannot be claimed twice.
 
 **4 — Established markets, familiar behavior**  
-This already exists in TradFi. Eurex handled more than 21 million dividend contracts in 2024. Crypto users also trade yield separately. Pendle reported about 96 million dollars in average daily volume that year. DividendX brings both ideas to tokenized stocks.
+This already exists in TradFi. Eurex handled more than 21 million dividend contracts in 2024. Crypto users also trade yield separately. Pendle reported about 96 million dollars in average daily volume that year. DivX brings both ideas to tokenized stocks.
 
 **5 — Tokenized stocks bring the assets onchain**  
 Companies paid 1.75 trillion dollars in global dividends in 2024. Tokenized stocks bring familiar names like Apple, Microsoft, and Coca-Cola onchain. RWA.xyz reported 2.92 billion dollars of tokenized-stock value worldwide on September 16, 2026. Our starting package selects six companies across Backpack, xStocks, and Ondo.
 
 **6 — One workflow across issuers**  
-DividendX uses the same flow across those issuers: deposit, split, trade, and redeem. It is designed so the buyer gets the claim and the seller gets paid in one Solana transaction. That supports fast onchain settlement. Each issuer and stock keeps separate collateral, records, and checks.
+DivX uses the same flow across those issuers: deposit, split, trade, and redeem. It is designed so the buyer gets the claim and the seller gets paid in one Solana transaction. That supports fast onchain settlement. Each issuer and stock keeps separate collateral, records, and checks.
 
 **7 — Small positions, public records**  
 Dividend claims can be divided into small pieces. A holder can sell part of a dividend, and a buyer can take a smaller position. Public records can show the tokens in the vault, open claims, and past redemptions. Other Solana wallets and apps can use the same claims.

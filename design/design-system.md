@@ -1,4 +1,4 @@
-# DividendX design system
+# DivX design system
 
 Phase-one visual system, 16 September 2026. It describes a design prototype rather than a deployed vault or live market.
 
@@ -48,7 +48,7 @@ The narrow blue/amber allocation rail uses the actual isolated-event ratio. Do n
 
 ## Component patterns
 
-- **Product header:** original DividendX mark, three working tabs, snapshot/network status, and an explicitly disabled wallet control.
+- **Product header:** original DivX mark, three working tabs, snapshot/network status, and an explicitly disabled wallet control.
 - **Snapshot ribbon:** states observation date and cached status before any asset data.
 - **Asset/event heading:** asset first, precise action second. Keep event type and activation visible without exposing raw IDs.
 - **Verified facts:** one-dimensional ruled list for activation, dividend per share, payout asset, and separate company payment date.

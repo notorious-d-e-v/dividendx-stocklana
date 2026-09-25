@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DivX · One deposit. Two tokens.</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-synthesis: none;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: #f6f3ec;
+      }
+
+      .canvas {
+        position: relative;
+        isolation: isolate;
+        width: 1600px;
+        height: 1100px;
+        overflow: hidden;
+        background: #f6f3ec;
+        color: #242623;
+      }
+
+      .arrows {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      .artwork {
+        position: absolute;
+        top: 180px;
+        left: 160px;
+        z-index: 2;
+        width: 1280px;
+        height: 853px;
+        object-fit: fill;
+      }
+
+      .label,
+      .heading,
+      .brand,
+      .footer {
+        position: absolute;
+        z-index: 3;
+      }
+
+      .heading {
+        top: 62px;
+        left: 106px;
+        margin: 0;
+        font-size: 64px;
+        font-weight: 750;
+        letter-spacing: -0.055em;
+        line-height: 1.08;
+      }
+
+      .brand {
+        top: 78px;
+        right: 108px;
+        font-size: 31px;
+        font-weight: 750;
+        letter-spacing: -0.05em;
+      }
+
+      .label {
+        transform: translateX(-50%);
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .label strong,
+      .label span { display: block; }
+
+      .input {
+        top: 314px;
+        left: 365px;
+        font-size: 38px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .pt {
+        top: 205px;
+        left: 1225px;
+        color: #2457d8;
+      }
+
+      .dr {
+        top: 916px;
+        left: 1235px;
+        color: #ab6100;
+      }
+
+      .pt strong,
+      .dr strong {
+        font-size: 48px;
+        font-weight: 760;
+        letter-spacing: -0.055em;
+        line-height: 1.08;
+      }
+
+      .pt span,
+      .dr span {
+        margin-top: 6px;
+        font-size: 27px;
+        font-weight: 550;
+        letter-spacing: -0.02em;
+      }
+
+      .vault {
+        top: 796px;
+        left: 810px;
+      }
+
+      .vault strong {
+        font-size: 39px;
+        font-weight: 730;
+        letter-spacing: -0.045em;
+      }
+
+      .vault span {
+        margin-top: 8px;
+        font-size: 27px;
+        font-weight: 500;
+      }
+
+      .footer {
+        bottom: 64px;
+        left: 106px;
+        font-size: 25px;
+        font-weight: 550;
+        letter-spacing: -0.015em;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="canvas" aria-label="DivX deposit and token split illustration">
+      <svg class="arrows" width="1600" height="1100" viewBox="0 0 1600 1100" aria-hidden="true">
+        <defs>
+          <marker id="arrow-ink" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#454943" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          </marker>
+          <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#2457d8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          </marker>
+          <marker id="arrow-amber" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#ab6100" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          </marker>
+        </defs>
+        <path d="M 531 610 C 549 610, 571 610, 598 610" fill="none" stroke="#454943" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-ink)" />
+        <path d="M 1024 590 C 1055 575, 1065 535, 1088 511" fill="none" stroke="#2457d8" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+        <path d="M 1024 668 C 1055 686, 1063 716, 1093 736" fill="none" stroke="#ab6100" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-amber)" />
+      </svg>
+
+      <img class="artwork" src="../assets/deposit-vault-claims-v1.png" width="1280" height="853" alt="A stock token enters a custody tray and separate blue PT and amber DR certificates emerge." />
+
+      <h1 class="heading">One deposit. Two tokens.</h1>
+      <div class="brand">DivX</div>
+      <div class="label input">100 stock tokens</div>
+      <div class="label pt"><strong>100 PT</strong><span>Stock exposure</span></div>
+      <div class="label vault"><strong>DivX vault</strong><span>Stock tokens stay here.</span></div>
+      <div class="label dr"><strong>100 DR</strong><span>The year’s dividend rights</span></div>
+      <div class="footer">Keep, transfer or trade each side.</div>
+    </main>
+  </body>
+</html>

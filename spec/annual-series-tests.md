@@ -1,6 +1,6 @@
 # Annual series acceptance matrix
 
-16 September 2026. Targets [annual accounting](annual-series-accounting.md). These are tests of DividendX with controlled assets, not transactions against third-party protocols.
+16 September 2026. Targets [annual accounting](annual-series-accounting.md). These are tests of DivX with controlled assets, not transactions against third-party protocols.
 
 | Area | Required cases |
 |---|---|

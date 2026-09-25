@@ -28,7 +28,7 @@ The program implements pre-year deposits, actual PT/DR minting, immutable event 
 | `npm run test:program` | **46 passed**: 12 program unit, 3 independent ABI/vector, 15 independent arithmetic/calendar oracle and 16 compiled-SBF integration tests |
 | `npm run test:transactions` | **22 passed**, plus successful package-name import; all 13 instruction encodings match independent Rust vectors |
 | `npm --prefix packages/transaction-sdk run smoke:local` | SDK fetched coherent snapshots and signed successful deposit/recombination transactions against an isolated validator |
-| Signed rollback check | A later failing instruction rolled back successful DividendX burns and collateral-transfer CPIs; all observed balances, supplies and series counters were unchanged |
+| Signed rollback check | A later failing instruction rolled back successful DivX burns and collateral-transfer CPIs; all observed balances, supplies and series counters were unchanged |
 | Preserved application | Fixture verification, **33 reference/legacy SDK tests**, type check and production build passed; no frontend, historical fixture, design, deck or narration changes |
 
 The compiled-SBF suite executes real SPL Token and Token-2022 programs. It covers a multi-event annual journal with four qualified dividends, revisions, cancellations, zero events, unsupported actions, an unresolved late-paid dividend, bearer transfers and complete independent redemption. Additional checks exercise issuer/mint/year isolation, real token extension profiles, authority changes, paused/frozen accounts, external burns, donations, deficits, quote guards and explicit zero-output consent. Historical KOx and MU factors remain separately labeled regressions with synthetic term dates.

@@ -1,4 +1,4 @@
-# DividendX demo fixtures
+# DivX demo fixtures
 
 Frozen rehearsal data for 15 Solana Token-2022 mints across xStocks, Backpack, and Ondo. Every value is a 16 September 2026 evidence snapshot. The catalog is not a permissioned inventory, launch list, custody result, execution result, liquidity claim, or live issuer integration.
 

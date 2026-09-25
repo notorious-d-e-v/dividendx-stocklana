@@ -1,20 +1,20 @@
 # Prior art: yield-tokenization protocols
 
-> Architecture update: preserve this prior-art research as a dated source record. DividendX now uses [annual series](../../spec/annual-series-accounting.md), with the whole accumulated annual entitlement following DR transfers and no forfeiture. Earlier one-event comparisons are superseded; competitor findings remain dated observations.
+> Architecture update: preserve this prior-art research as a dated source record. DivX now uses [annual series](../../spec/annual-series-accounting.md), with the whole accumulated annual entitlement following DR transfers and no forfeiture. Earlier one-event comparisons are superseded; competitor findings remain dated observations.
 
-Checked 16 September 2026. This is bounded design research for DividendX, not evidence that any external market is live or suitable for integration. Primary sources were current protocol documentation, public source at pinned commits, and published audit disclosures. No deployment, balance, liquidity, or transaction was independently verified.
+Checked 16 September 2026. This is bounded design research for DivX, not evidence that any external market is live or suitable for integration. Primary sources were current protocol documentation, public source at pinned commits, and published audit disclosures. No deployment, balance, liquidity, or transaction was independently verified.
 
 ## Decision summary
 
-Pendle and Spectra validate three useful patterns: normalize heterogeneous collateral behind a narrow adapter boundary, mint paired transferable claims, and make pre-expiry recombination require both claims. They do **not** supply DividendX's accounting model. Their core products divide an ongoing yield-bearing position through maturity; DividendX allocates one classified stock-reinvestment event once into two frozen raw stock-token pools.
+Pendle and Spectra validate three useful patterns: normalize heterogeneous collateral behind a narrow adapter boundary, mint paired transferable claims, and make pre-expiry recombination require both claims. They do **not** supply DivX's accounting model. Their core products divide an ongoing yield-bearing position through maturity; DivX allocates one classified stock-reinvestment event once into two frozen raw stock-token pools.
 
-Pendle also documents **discrete-yield markets**, so it is wrong to frame it as limited to smooth yield. Its rule time-weights holdings, requires a balance at payout, distributes retrospectively by Merkle claim, and sends forfeited yield to treasury. DividendX instead makes each DR a bearer claim to a pro-rata share of one isolated event allocation; transfer moves that claim, settlement freezes the pool, and DR remains redeemable afterward.
+Pendle also documents **discrete-yield markets**, so it is wrong to frame it as limited to smooth yield. Its rule time-weights holdings, requires a balance at payout, distributes retrospectively by Merkle claim, and sends forfeited yield to treasury. DivX instead makes each DR a bearer claim to a pro-rata share of one isolated event allocation; transfer moves that claim, settlement freezes the pool, and DR remains redeemable afterward.
 
 Pendle names STRCx as its first discrete-yield listing. [Backed](https://assets.backed.fi/products/strategy-pp-variable-xstock) identifies STRCx as a tokenized Strategy variable-rate preferred stock offered as ERC-20 and SPL, while [Kraken](https://www.kraken.com/xstocks/strcx) describes 1:1 custodial backing. The Pendle page does not identify which mint/network backs its market or establish current liquidity, and this review did not verify a transaction.
 
 ## Factual comparison
 
-| Topic | Pendle V2 | Spectra core / historical APWine V1 | DividendX implication |
+| Topic | Pendle V2 | Spectra core / historical APWine V1 | DivX implication |
 |---|---|---|---|
 | Normalization | A circulating Standardized Yield (SY) adapter wraps heterogeneous yield tokens and exposes deposit, redemption, exchange-rate, and reward methods. PT/YT are built on SY. | Spectra accepts an ERC-4626 interest-bearing token (IBT), or its underlying through the IBT; APWine V1 used per-asset FutureVault/FutureWallet adapters. | Keep internal normalized vault shares and per-issuer readers, but do not add a circulating SY wrapper unless another consumer needs it. Token-2022 mint behavior and event provenance are the adapter boundary. |
 | Issuance | Before expiry, SY is converted into equal quantities of PT and YT, denominated through the PY index. | Spectra deposits mint equal PT/YT shares after any tokenization fee. | Mint `Q` raw PT and `Q` raw DR, but never imply equal redemption pools: settlement fixes `PT_pool = Q - DR_pool`. |
@@ -31,17 +31,17 @@ APWine V1 is historical evidence only. Its [public contracts](https://github.com
 
 The inspected Pendle `PendleYieldToken.sol` declares `GPL-3.0-or-later`; the inspected Spectra `PrincipalToken.sol` and `YieldToken.sol` declare `BUSL-1.1`. APWine is a separate archived repository. Confirm the exact file and commit terms before reusing code.
 
-## What DividendX should carry forward
+## What DivX should carry forward
 
 1. **Normalize internally, admit narrowly.** One shared raw-unit engine is sound only after exact mint, token-program, extension, authority, custody, issuer/event, and factor checks. A generic interface cannot make an unverified event authoritative.
 2. **Make series identity immutable.** Bind issuer, exact stock mint, event ID, factor baseline, cutoff, attestor/rules version, PT mint, DR mint, and vault. Apply an explicit revision policy before settlement, then freeze the accepted revision when settlement succeeds. Never use ticker or “latest event” as identity.
 3. **Keep lifecycle rights explicit.** `open → closed → settled` changes what each token can do. Before settlement, recombination consumes equal paired claims; afterward, independent cumulative redemption consumes each side's fixed pool. Cancellation and failure recovery need separate transitions.
-4. **Use ordinary transferable claim mints first.** DividendX does not need balance-changing claims or a transfer hook merely to preserve event entitlement. If Token-2022 extensions or an AMM require a hook later, prove that it cannot alter supply or bypass settlement accounting.
+4. **Use ordinary transferable claim mints first.** DivX does not need balance-changing claims or a transfer hook merely to preserve event entitlement. If Token-2022 extensions or an AMM require a hook later, prove that it cannot alter supply or bypass settlement accounting.
 5. **Separate custody from markets.** A PT/DR pool creates price discovery and exit liquidity; it does not change vault liabilities. LP tokens are outside the series ledger, and users must recover PT/DR from liquidity before redemption.
 
 ## Do not copy
 
-Do not copy a continuous yield index, maturity-to-zero YT UI, post-expiry treasury sweep, ERC-4626 assumptions, flash loans, points accounting, emissions, permissionless asset enrollment, or a custom time-decay AMM into v1. Do not call PT “fixed yield,” “par,” or dollar-protected, and do not market DR as leveraged APY. DividendX's outputs remain stock-denominated and exposed to the stock token after allocation.
+Do not copy a continuous yield index, maturity-to-zero YT UI, post-expiry treasury sweep, ERC-4626 assumptions, flash loans, points accounting, emissions, permissionless asset enrollment, or a custom time-decay AMM into v1. Do not call PT “fixed yield,” “par,” or dollar-protected, and do not market DR as leveraged APY. DivX's outputs remain stock-denominated and exposed to the stock token after allocation.
 
 ## Questions to resolve before the program phase
 
@@ -52,4 +52,4 @@ Do not copy a continuous yield index, maturity-to-zero YT UI, post-expiry treasu
 - Which claim mint standard and external pool support the required round trip, and how are maturity/settlement status and thin-liquidity risk exposed to routers?
 - Are v1 fees zero? If not, which pool pays each fee, when is it recognized, and how do the conservation and final-burn invariants change?
 
-Confidence is high on the cited protocol mechanics and source behavior, medium on their product-level lessons for Solana, and deliberately absent on current pool activity, deployment safety, or DividendX issuer compatibility. Those require runtime, adapter, and onchain evidence that this desk review did not collect.
+Confidence is high on the cited protocol mechanics and source behavior, medium on their product-level lessons for Solana, and deliberately absent on current pool activity, deployment safety, or DivX issuer compatibility. Those require runtime, adapter, and onchain evidence that this desk review did not collect.

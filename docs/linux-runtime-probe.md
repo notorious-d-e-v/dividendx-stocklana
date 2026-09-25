@@ -1,6 +1,6 @@
 # Linux runtime probe
 
-This slice packages the unchanged accepted DividendX ELF, the transaction SDK, and the guided Raydium/Test USDC captures for Node 24 on Linux x86_64 with glibc. It is a feasibility and resource probe for isolated hosted sandboxes. It does not expose a public port, deploy infrastructure or include credentials.
+This slice packages the unchanged accepted DivX ELF, the transaction SDK, and the guided Raydium/Test USDC captures for Node 24 on Linux x86_64 with glibc. It is a feasibility and resource probe for isolated hosted sandboxes. It does not expose a public port, deploy infrastructure or include credentials.
 
 The repository root is deliberately unusable as a Docker build context. `scripts/hosting/stage-linux-runtime.sh` creates a new allowlisted temporary context, checks the accepted ELF and IDL identities before copying, and includes only the sources and pinned npm lockfiles needed to build the two existing runtime flows. The context never copies `.git`, `.local-tools`, host `node_modules`, environment files or keypair-named JSON. The ignored `target/deploy/dividendx.so` is copied explicitly only after its accepted hash is verified. The final image installs dependencies from the locks and creates empty, writable runtime evidence directories; guided private state is owner-only mode `0700`.
 
@@ -18,7 +18,7 @@ Linux surfaced two portability bugs that macOS did not: Surfpool allocates unrel
 
 | Artifact | SHA-256 |
 | --- | --- |
-| Accepted DividendX ELF, 706,504 bytes | `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070` |
+| Accepted DivX ELF, 706,504 bytes | `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070` |
 | Transaction SDK IDL | `d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4` |
 | Captured Raydium CPMM ELF | `87ef84634086209fc2c29b4163bbe5209a1e9383aff5c429781f5fff270d75fd` |
 | Raydium capture JSON | `1602de476c09c2a96659b0368711ef6a7baca4867325edc5d6237221d90ed11f` |

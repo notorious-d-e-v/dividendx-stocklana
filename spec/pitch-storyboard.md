@@ -1,4 +1,4 @@
-# DividendX pitch storyboard
+# DivX pitch storyboard
 
 > Annual-series addendum: the next versioned pitch should say “Keep the stock exposure. Sell a year of dividends.” Slide 3 uses `PT-KOx-2027` / `DR-KOx-2027`, deposits before the year starts and separate issuer/mint/year backing. Slide 8 remains one historical dividend example, not a complete annual payout or forecast. Year-end stops accrual membership; finalization opens independent redemption without forfeiture. Preserve the current deck and user narration until a coordinated next export. See [annual product copy](annual-product.md).
 
@@ -8,7 +8,7 @@ Preserve exactly nine editable slides and the approved design. The narrative is:
 
 | Slide | Main point |
 |---|---|
-| 1. DividendX | Keep the stock exposure. Sell the dividend rights. A permissionless market for selected Solana stock tokens. |
+| 1. DivX | Keep the stock exposure. Sell the dividend rights. A permissionless market for selected Solana stock tokens. |
 | 2. Two sides of one trade | Concrete traditional bank sellers and fund buyers; holder/buyer flow. |
 | 3. One deposit, two claims | Each issuer/mint/event has separately backed PT/DR. |
 | 4. Established markets, familiar behavior | Eurex dividend trading and Pendle yield separation are precedents. |

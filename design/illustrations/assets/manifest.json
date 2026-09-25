@@ -44,6 +44,8 @@
     },
     "stock-and-dividend-composability-v1": {
       "path": "/Users/node/workspace/dividendx-stocklana/design/illustrations/assets/stock-and-dividend-composability-v1.png",
+      "socialSource": "design/illustrations/social/why-solana-v1.html",
+      "socialExport": "design/illustrations/social/why-solana-v1.jpg",
       "generated_source": "/Users/node/.codex/generated_images/01a0a800-a6b1-7bd0-9726-8b0d12038d7a/exec-3a4b3b6e-a852-4556-9ae3-c4f0c7ae10d2.png",
       "size": [
         1448,
@@ -65,7 +67,17 @@
       "suggested_minimum_image_width_px": 420,
       "alt": "Blue stock-exposure certificate and amber dividend coupon each linked to a wallet and a trading app.",
       "review_status": "Astra visual and alpha check passed; user review pending",
-      "notes": "Both app-facing claims are composable; locked backing stays in its vault. Four conceptual connections, no transaction arrows or live integration claim. Use a light surface to preserve thin ink connectors."
+      "notes": "Both app-facing claims are composable; locked backing stays in its vault. Four conceptual connections, no transaction arrows or live integration claim. Use a light surface to preserve thin ink connectors.",
+      "socialExportMetadata": {
+        "path": "design/illustrations/social/why-solana-v1.jpg",
+        "size": [
+          1600,
+          1200
+        ],
+        "format": "JPEG",
+        "bytes": 179898,
+        "sha256": "b4a6e4f1e70a1414ad6219e5c5f115b7e555699f4fbda600e0b90fb9bc3fa539"
+      }
     },
     "stock-dividend-separation-v2": {
       "path": "design/illustrations/assets/stock-dividend-separation-v2.png",
@@ -90,6 +102,103 @@
       "background": "transparent",
       "review_status": "Astra alpha/background and desktop/mobile placement review passed; user approved for release on 20 September 2026",
       "notes": "Native UI labels identify PT and annual DR. No promised payout amount or dividend count; originals preserved."
+    },
+    "deposit-vault-claims-v1": {
+      "path": "design/illustrations/assets/deposit-vault-claims-v1.png",
+      "socialSource": "design/illustrations/social/deposit-split-v1.html",
+      "socialExport": "design/illustrations/social/deposit-split-v1.jpg",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "bytes": 1760252,
+      "sha256": "b0b169e5d7f4b2d439f3c5ccac968d72a6b481354427cf6a33d889a43653aea3",
+      "method": "built-in image generation; native HTML/SVG labels and connectors in social composition",
+      "prompts": "../prompts/deposit-vault-claims-v1.md",
+      "intended_tier": "scene",
+      "role": "social-deposit-explanation",
+      "background": "transparent",
+      "review_status": "Astra alpha, warm/white/ink background and final 1600\u00d71100 label/arrow composition review passed; user review pending",
+      "notes": "Neutral stock tokens remain in custody tray; blue PT and amber annual DR are separately issued claims. No bank-safe, guaranteed-return or live-integration claim. Source exceeds production scene size budget and is not deployed.",
+      "socialExportMetadata": {
+        "path": "design/illustrations/social/deposit-split-v1.jpg",
+        "size": [
+          1600,
+          1100
+        ],
+        "format": "JPEG",
+        "bytes": 184852,
+        "sha256": "df895b756ea7b8f3c29115e81fb4a9a4238e0e2c7a9dd405ebc07bfeb14b039e"
+      },
+      "additionalSocialExports": [
+        {
+          "source": "design/illustrations/social/deposit-split-counts-v2.html",
+          "path": "design/illustrations/social/deposit-split-counts-v2.jpg",
+          "size": [
+            1600,
+            1100
+          ],
+          "format": "JPEG",
+          "bytes": 251468,
+          "sha256": "7097443b54841df3adcb0e8dd38bd875d5d8545c1334decf21a0a697a6580bca"
+        },
+        {
+          "source": "built-in image edit; see design/illustrations/social/deposit-split-counts-v2-cover-5x2.prompt.md",
+          "path": "design/illustrations/social/deposit-split-counts-v2-cover-5x2.jpg",
+          "size": [
+            2000,
+            800
+          ],
+          "format": "JPEG",
+          "bytes": 438634,
+          "sha256": "7d67ce7b7592a9d5db9378dde7538415874b347c5fc3af5fbb97e89daf8aa045"
+        }
+      ]
+    },
+    "dividend-trade-v2": {
+      "path": "/Users/node/workspace/dividendx-stocklana/design/illustrations/assets/dividend-trade-v2.png",
+      "prompt": "../prompts/slide-refresh-v4.md",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "bytes": 1753018,
+      "sha256": "c07e960ad15ebb1be2bc9803e6352117fdb9eb64218adb984f52c1588d16c8a9",
+      "role": "slide-v4-concept",
+      "format": "raster PNG",
+      "background": "transparent",
+      "review_status": "Astra visual and alpha review passed on rendered v4 slides; user review pending",
+      "notes": "Concept illustration with native labels; no guaranteed payment, capital inflow or integration claim. Canonical source retained; exceeds web derivative budget and is used only in deck."
+    },
+    "solana-capital-access-v1": {
+      "path": "/Users/node/workspace/dividendx-stocklana/design/illustrations/assets/solana-capital-access-v1.png",
+      "prompt": "../prompts/slide-refresh-v4.md",
+      "size": [
+        1535,
+        1025
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bytes": 1114504,
+      "sha256": "7144d3c506a849d9cd29f5fe9bab1c5c8e2d1a4bc18aef7db68ca5cd78321815",
+      "role": "slide-v4-concept",
+      "format": "raster PNG",
+      "background": "transparent",
+      "review_status": "Astra visual and alpha review passed on rendered v4 slides; user review pending",
+      "notes": "Concept illustration with native labels; no guaranteed payment, capital inflow or integration claim. Canonical source retained; exceeds web derivative budget and is used only in deck."
     }
   }
 }

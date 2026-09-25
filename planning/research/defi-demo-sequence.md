@@ -25,13 +25,13 @@ Protocol names identify candidates, not partnerships or delivered integrations. 
 
 Jupiter's [Lock developer documentation](https://developers.jup.ag/docs/lock) describes token vesting, claims, cancellation settings and escrow management. It is a candidate for scheduled token delivery, not evidence of a priced OTC sale. Use [Streamflow's order product](https://docs.streamflow.finance/en/articles/11514590-create-an-order) as the fixed-price sale candidate.
 
-The prior read-only check observed executable devnet program `LocpQgucEQHbqNABEYvBvwoxCPsSbG91A1QaQhQQqjn` at slot 499860125 on 17 September 2026, 14:37:51 UTC. That establishes availability, not verified DividendX compatibility or a match between deployed bytecode and an SDK/IDL. The linked original Jupiter Lock GitHub repository returned 404 during research; resolve implementation provenance before using a replacement SDK. No lock transaction was executed.
+The prior read-only check observed executable devnet program `LocpQgucEQHbqNABEYvBvwoxCPsSbG91A1QaQhQQqjn` at slot 499860125 on 17 September 2026, 14:37:51 UTC. That establishes availability, not verified DivX compatibility or a match between deployed bytecode and an SDK/IDL. The linked original Jupiter Lock GitHub repository returned 404 during research; resolve implementation provenance before using a replacement SDK. No lock transaction was executed.
 
-Locking DR transfers the annual entitlement represented by those tokens. It does not stream underlying dividends as they happen. A recipient first claims unlocked DR, then redeems it through DividendX once that annual series is finalized. A schedule may extend beyond maturity because DR remains redeemable without forfeiture. PT and DR can both be candidates; verify each actual mint and custody path.
+Locking DR transfers the annual entitlement represented by those tokens. It does not stream underlying dividends as they happen. A recipient first claims unlocked DR, then redeems it through DivX once that annual series is finalized. A schedule may extend beyond maturity because DR remains redeemable without forfeiture. PT and DR can both be candidates; verify each actual mint and custody path.
 
 ## Other references and limits
 
-- [Squads transaction accounts](https://docs.squads.so/main/development/typescript/accounts/transactions): treasury candidate; no DividendX custody execution yet.
+- [Squads transaction accounts](https://docs.squads.so/main/development/typescript/accounts/transactions): treasury candidate; no DivX custody execution yet.
 - [Meteora limit orders](https://docs.meteora.ag/core-products/dlmm/limit-order): market-specific integration, not automatic support for every new mint.
 - [Jupiter Trigger documentation](https://developers.jup.ag/docs/trigger): inspect the selected product's current custody and routing requirements; a recurring-purchase row does not promise a specific API implementation.
 - [Kamino asset risk](https://kamino.com/docs/risk/asset-risk): new claim tokens need their own risk assessment. Whole-stock spot price is not a valid substitute for PT or DR value, and a thin AMM alone is not a robust liquidation oracle.

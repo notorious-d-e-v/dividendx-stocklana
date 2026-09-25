@@ -4,7 +4,7 @@ Method: built-in image generation. New scene generated from a text brief informe
 
 ## Final generation prompt
 
-Create a new original DividendX financial editorial illustration on a genuinely transparent background. The subject is BOTH a stock-exposure claim and a dividend-right claim independently connecting to the same reusable digital tools.
+Create a new original DivX financial editorial illustration on a genuinely transparent background. The subject is BOTH a stock-exposure claim and a dividend-right claim independently connecting to the same reusable digital tools.
 
 Composition: exactly four main objects arranged in an open, spacious diamond-like grouping. On the LEFT, a recognizable blue-bordered stock certificate on ivory paper, slightly angled, with two restrained document rules and no seal. On the RIGHT, a separate smaller amber perforated dividend coupon, with one short internal rule. At TOP CENTER, a neutral warm-ivory wallet with ink outlines and a tiny blue and amber card tab. At BOTTOM CENTER, a neutral warm-ivory trading-app window containing two quiet horizontal bars, one blue and one amber. The certificate and coupon are equally important protagonists, despite the coupon being physically smaller. Both sit free and distinct, not inside each other and not inside a shared vault.
 

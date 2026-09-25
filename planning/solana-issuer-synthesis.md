@@ -1,6 +1,6 @@
-# DividendX: a dividend layer across Solana issuers
+# DivX: a dividend layer across Solana issuers
 
-Research and architecture review, **16 September 2026**, refined after the user requested a contained permissionless package. Start here. The approved design is retained; the [v5 pitch](../presentation/output/DividendX-phase-two-v5.pptx) and [narration](../presentation/narration.md) are ready for review. Earlier broad and xStocks-only scope documents are archived.
+Research and architecture review, **16 September 2026**, refined after the user requested a contained permissionless package. Start here. The approved design is retained; the [v5 pitch](../presentation/output/DivX-phase-two-v5.pptx) and [narration](../presentation/narration.md) are ready for review. Earlier broad and xStocks-only scope documents are archived.
 
 ## Recommendation
 
@@ -8,9 +8,9 @@ Build **one permissionless annual dividend market for selected stock tokens on S
 
 The initial package contains **six companies and 15 candidate tokens**, selected for the same reinvested-dividend model and ordinary secondary transfer path. Permissioned holder/approved-vault products are outside the build, as are products without dividend rights, fee-bearing profiles and discontinued offerings. No onboarding UI, adapter or expanded catalog is planned for those families.
 
-Permissionless describes intended access to DividendX for admitted assets: no holder allowlist or issuer-specific vault registration. The mint list selects collateral rather than users. Issuer freeze/pause controls and product restrictions remain; direct issuer minting/redemption onboarding is outside our flow. For example, Ondo documents [secondary transferability outside the US, subject to restrictions](https://docs.ondo.finance/ondo-stocks/transferability), and separately requires [KYC for issuer redemption](https://docs.ondo.finance/ondo-stocks/secondary-market-restrictions). Technical compatibility alone is not a determination of legal eligibility.
+Permissionless describes intended access to DivX for admitted assets: no holder allowlist or issuer-specific vault registration. The mint list selects collateral rather than users. Issuer freeze/pause controls and product restrictions remain; direct issuer minting/redemption onboarding is outside our flow. For example, Ondo documents [secondary transferability outside the US, subject to restrictions](https://docs.ondo.finance/ondo-stocks/transferability), and separately requires [KYC for issuer redemption](https://docs.ondo.finance/ondo-stocks/secondary-market-restrictions). Technical compatibility alone is not a determination of legal eligibility.
 
-This is a material expansion of the intended product, not a declaration that integrations are already built. Current software consists of a local annual reference/product and the preserved historical rehearsal. No DividendX PDA transfer, PT/DR mint, wallet transaction or program finalization has run.
+This is a material expansion of the intended product, not a declaration that integrations are already built. Current software consists of a local annual reference/product and the preserved historical rehearsal. No DivX PDA transfer, PT/DR mint, wallet transaction or program finalization has run.
 
 ## The selected package
 
@@ -23,7 +23,7 @@ This is a material expansion of the intended product, not a declaration that int
 | Nike | NKEx | NKE.US | NKEon |
 | IBM | IBMx | IBM.US | IBMon |
 
-These are integration candidates with verified identity and observed compatible mint profiles, not enabled DividendX series. The [asset package and exact mint evidence](research/initial-asset-package.md) define the catalog. For Backpack, `.US` is the asset API identifier, not an assertion that its onchain metadata uses the same ticker.
+These are integration candidates with verified identity and observed compatible mint profiles, not enabled DivX series. The [asset package and exact mint evidence](research/initial-asset-package.md) define the catalog. For Backpack, `.US` is the asset API identifier, not an assertion that its onchain metadata uses the same ticker.
 
 Prove **one annual-series lifecycle across representative issuer profiles first**. KOx and Backpack Micron MU supply sourced single-event factors, but both lack verified ex-dates and complete-period evidence; map them into test terms only with explicit synthetic dates. Ondo has no qualified event fixture yet. KOon remains the first Ondo data request because it allows a same-company comparison with KOx. More catalog entries do not require more vault engines, but each enabled issuer/mint/year needs its own annual evidence and custody gate.
 
@@ -31,7 +31,7 @@ Prove **one annual-series lifecycle across representative issuer profiles first*
 
 The wider audit below is retained as the reason for the boundary. Only the first three rows are implementation scope.
 
-| Provider/product family | What we verified | DividendX treatment |
+| Provider/product family | What we verified | DivX treatment |
 |---|---|---|
 | **xStocks / Backed** | Public registry: 837 Solana deployments. All 837 mint accounts existed with nonzero supply and the same eight-decimal Token-2022 extension profile at audit time. Classified public corporate-action history and a sourced KOx factor event, but no verified ex-date join or terminal annual completeness signal. | Initial scope. Generalize exact-mint configuration and require official civil ex-date, full-period revisions and finality before annual settlement. Catalog size is not eligible dividend coverage. |
 | **Backpack / Trek receipts** | 48 `.US` Solana token entries with deposits and withdrawals enabled; all 48 have nonzero supply, six decimals and Scaled UI Amount. Real MU dividend-distribution transaction reconstructed. | Initial scope. Separate reader must distinguish dividend operations from ordinary mint/redeem multiplier updates. Official ex-date, complete-period and revision/finality semantics remain missing. |
@@ -88,7 +88,7 @@ Keep Coca-Cola's existing dollar explanation: 100 pre-event share-equivalents pr
 - Shared accounting: test eight-, six- and nine-decimal profiles through the same annual engine, including multiple events and revisions. Unknown transfer conditions or unexplained multiplier changes block safe finalization.
 - Historical regressions: KOx official history and MU's labeled onchain reconstruction supply exact factors only. Their test ex-dates are synthetic until source-qualified. Add Ondo only when its event/ex-date/factor join is obtained.
 - Full flow: deposit before January 1, issue annual PT/DR, process qualified events, allow prefinal paired recombination, reach maturity, attest a complete journal, then redeem each side independently. No xStocks-only logic or hardcoded ticker in the shared engine.
-- Live enablement: a separate gate for permitted real custody, official ex-date sources, complete-period access, corrections/finality and operating controls. No issuer has passed a DividendX live gate today.
+- Live enablement: a separate gate for permitted real custody, official ex-date sources, complete-period access, corrections/finality and operating controls. No issuer has passed a DivX live gate today.
 
 This keeps the multi-issuer ambition concrete while avoiding a false launch claim. If Ondo event data remains unavailable, keep that dependency visible. A token requiring provider approval for ordinary vault custody leaves the package; we do not expand into permissioned integration to accommodate it. Writing an adapter interface does not complete an integration.
 

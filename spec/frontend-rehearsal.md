@@ -6,7 +6,7 @@ Preservation note, 16 September 2026: this document describes the detailed rehea
 
 ## Experience
 
-One concise header: DividendX mark, Market / Split / Positions, and demo-account selector (Seller / Buyer). Keep “Demo rehearsal · test balances” visible. A single short explanation says prices/offers and transactions in the rehearsal use test balances, with sourced historical dividend events. Do not ask to connect a real wallet. Refresh/reset behavior should be explained in demo controls.
+One concise header: DivX mark, Market / Split / Positions, and demo-account selector (Seller / Buyer). Keep “Demo rehearsal · test balances” visible. A single short explanation says prices/offers and transactions in the rehearsal use test balances, with sourced historical dividend events. Do not ask to connect a real wallet. Refresh/reset behavior should be explained in demo controls.
 
 **Market:** editorial stock directory, grouped by six companies with issuer options, not 15 identical large cards. Search company/ticker and filter issuer. Show company before symbol. Clearly distinguish “Replay available” for KOx and Backpack MU from “Dividend data pending” or “Fixture not prepared” for other candidates. Show snapshot timestamp, source links and why an asset cannot run. Select a company/issuer to inspect its event and calculate before entering the flow. Do not show fake APY, liquidity, current prices or completed integrations.
 

@@ -1,6 +1,6 @@
 # Raydium integration acceptance
 
-17 September 2026. Astra accepts the bounded [AMM contract](../spec/amm-integration-v1.md): **the annual DividendX program and Raydium CPMM completed a real public devnet round trip with test assets.** The integration is a Node transaction harness; the running wallet application's UI is unchanged.
+17 September 2026. Astra accepts the bounded [AMM contract](../spec/amm-integration-v1.md): **the annual DivX program and Raydium CPMM completed a real public devnet round trip with test assets.** The integration is a Node transaction harness; the running wallet application's UI is unchanged.
 
 ## Public proof
 
@@ -8,7 +8,7 @@ The [public receipt](evidence/amm-devnet-roundtrip-2026-09-17.json) records 15 t
 
 | Identity | Address |
 |---|---|
-| DividendX program | `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE` |
+| DivX program | `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE` |
 | 2027 series | `3FZAAtHgXRGCG38r21UerVFWAK4tfJLKFE2oexUWxvWf` |
 | Collateral vault | `23y6XRjGt6RgKwJWYZ6r77dpLxdW9Wy8fqcnr2jc3cXw` |
 | DR mint | `yn3W8dngg5nVC6SwfkJ1qDYDFQcFNP3tSfyCejKyfj6` |
@@ -18,7 +18,7 @@ The [public receipt](evidence/amm-devnet-roundtrip-2026-09-17.json) records 15 t
 
 [Inspect the pool on Solana Explorer](https://explorer.solana.com/address/2yhUcyx6jawJo9z5YMqFQgmxmvvE6Qz1g1zmDQjVH5Cm?cluster=devnet). This is an account/transaction proof, not a Raydium website listing or an active liquid market after the provider's withdrawal.
 
-The provider deposited 100 eight-decimal test stock units through DividendX, receiving 100 PT and 100 DR. It seeded 40 DR / 80 six-decimal test quote units, then added 60 DR / 120 quote units. A second wallet spent 20 quote units for **9.07024323 DR**, exactly matching the corrected quote. The quote currency has no value or dollar backing; its initial ratio is an experiment input.
+The provider deposited 100 eight-decimal test stock units through DivX, receiving 100 PT and 100 DR. It seeded 40 DR / 80 six-decimal test quote units, then added 60 DR / 120 quote units. A second wallet spent 20 quote units for **9.07024323 DR**, exactly matching the corrected quote. The quote currency has no value or dollar backing; its initial ratio is an experiment input.
 
 After burning every provider-held LP token, the provider recovered and recombined **90.92975034 DR with matching PT**, receiving the same quantity of test collateral. Finalized reads prove:
 
@@ -44,7 +44,7 @@ Review and actual local execution resolved the SDK's disabled-creator-fee quotin
 - **14 actual local transactions** passed against captured Raydium devnet bytecode before the public run; [local receipt](../packages/amm-integration/evidence/local-captured-raydium-receipt-2026-09-17.json). Earlier local failures were corrected before public pool execution.
 - **15 public transactions** were simulated, confirmed and independently verified finalized; actual balances matched the local proof.
 - The fixture verifier, **71 existing root tests**, root typecheck and production build pass. The build used an isolated output directory, preserving the user's preview. No browser or program source changed, so those previously accepted suites were not repeated.
-- DividendX ELF SHA-256 remains `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070`; both IDL copies remain `d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4`.
+- DivX ELF SHA-256 remains `a05714204ee277ac58cdddb0b2aa9a44371c1aba6d00bab31f33175954bd0070`; both IDL copies remain `d4953c8a234e1b235e07db92f464dfb0033b62ff41bf378657fe1357a3211da4`.
 
 The public faucet first returned 429. The user funded the dedicated devnet wallet; an RPC program upload reached its retry limit, then the standard CLI validator transport successfully resumed the same buffer. The upload buffer closed. These attempts and the final deployment are retained in the funding/deployment evidence. No default wallet, real funds, issuer credentials or mainnet transaction was used.
 

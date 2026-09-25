@@ -1,4 +1,4 @@
-# DividendX mechanics audit
+# DivX mechanics audit
 
 > Historical audit: the isolated-event formulas and two-day scope below describe the earlier rehearsal. New program work follows [annual accounting](../spec/annual-series-accounting.md), which compounds accepted event ratios and rounds the annual allocation once. Preserve this file's source evidence and unsupported-action findings.
 

@@ -1,4 +1,4 @@
-# DividendX illustration library
+# DivX illustration library
 
 The [visual reference page](../index.html) shows all five assets. Follow the [illustration guide](../illustration-guide.md) for meaning, scale, palette, placement and production.
 
