@@ -1,4 +1,11 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="apps/web/public/brand/divx/v1/divx-dark.png">
+  <img src="apps/web/public/brand/divx/v1/divx-primary.png" alt="DivX" width="320">
+</picture>
+
 # DivX
+
+[Logo assets and usage](design/brand/divx-v1/README.md)
 
 DivX separates a tokenized-stock position into annual claims: principal tokens (PT) for the remaining stock exposure and dividend-right tokens (DR) for the year's qualified dividend allocation. For example, `PT-KOx-2027` and `DR-KOx-2027` belong to the Coca-Cola KOx 2027 series. Deposits close when the year starts. Matching PT and DR can recombine before finalization; afterward each side redeems independently, without an expiry or forfeiture deadline.
 

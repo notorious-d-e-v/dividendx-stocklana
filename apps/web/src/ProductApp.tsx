@@ -4,6 +4,7 @@ import type { AnnualClaimSide } from '../../../packages/sdk/src/annual-reference
 import assetData from '@fixtures/catalog.json';
 import eventData from '@fixtures/events.json';
 import { AnnualProductClient, type AnnualProductState, type ProductAccount, type ProductAnnualSeries, type ProductYear } from './annual-product-client';
+import { BrandLogo } from './BrandLogo';
 
 const assets = assetData as AssetDescriptor[];
 const events = eventData as EventDescriptor[];
@@ -16,7 +17,6 @@ const issuerLabel: Record<IssuerId, string> = { xstocks: 'xStocks', backpack: 'B
 type ProductTab = 'market' | 'split' | 'redeem';
 type Filter = 'all' | IssuerId;
 
-function Mark() { return <span className="p-mark" aria-hidden="true"><i /><b /></span>; }
 function min(a: bigint, b: bigint) { return a < b ? a : b; }
 function textError(cause: unknown) { return (cause as Error)?.message || 'That action could not be completed.'; }
 function sourceDate(value: string) { return new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(new Date(value)); }
@@ -33,7 +33,7 @@ function stockRaw(state: AnnualProductState, assetId: string, account: ProductAc
 function ProductHeader({ tab, setTab }: { tab: ProductTab; setTab: (tab: ProductTab) => void }) {
   return <>
     <header className="p-header">
-      <button className="p-brand" onClick={() => setTab('market')} aria-label="DivX home"><Mark />DivX</button>
+      <button className="p-brand" onClick={() => setTab('market')} aria-label="DivX home"><BrandLogo /></button>
       <nav aria-label="Primary">{(['market', 'split', 'redeem'] as ProductTab[]).map((item) => <button key={item} className={tab === item ? 'active' : ''} onClick={() => setTab(item)}>{item[0].toUpperCase() + item.slice(1)}</button>)}</nav>
       <span className="balance-label">Your test balance</span>
     </header>
@@ -184,5 +184,5 @@ export function ProductApp() {
   const choose = (asset: AssetDescriptor) => { setSelected(asset); const id = productClient.seriesId(asset, 2027); setActiveId(state.series[id] ? id : ''); setAccount('seller'); setTab('split'); };
   const goRedeem = (id: string) => { setActiveId(id); setAccount('seller'); setTab('redeem'); };
   const reset = () => { productClient.reset(); refresh(); setActiveId(''); setAccount('seller'); setTab('market'); };
-  return <><a className="p-skip" href="#product-main">Skip to content</a><ProductHeader tab={tab} setTab={setTab} />{tab === 'market' && <ProductMarket choose={choose} />}{tab === 'split' && <ProductSplit key={selected.id} selected={selected} state={state} refresh={refresh} goRedeem={goRedeem} onCreated={setActiveId} />}{tab === 'redeem' && <ProductRedeem state={state} refresh={refresh} activeId={activeId} setActiveId={setActiveId} account={account} />}<footer className="p-footer"><div><Mark /><span>DivX annual reference preview</span></div><SimulationControls state={state} refresh={refresh} activeId={activeId} account={account} setAccount={setAccount} reset={reset} /></footer></>;
+  return <><a className="p-skip" href="#product-main">Skip to content</a><ProductHeader tab={tab} setTab={setTab} />{tab === 'market' && <ProductMarket choose={choose} />}{tab === 'split' && <ProductSplit key={selected.id} selected={selected} state={state} refresh={refresh} goRedeem={goRedeem} onCreated={setActiveId} />}{tab === 'redeem' && <ProductRedeem state={state} refresh={refresh} activeId={activeId} setActiveId={setActiveId} account={account} />}<footer className="p-footer"><div><BrandLogo variant="icon" /><span>DivX annual reference preview</span></div><SimulationControls state={state} refresh={refresh} activeId={activeId} account={account} setAccount={setAccount} reset={reset} /></footer></>;
 }

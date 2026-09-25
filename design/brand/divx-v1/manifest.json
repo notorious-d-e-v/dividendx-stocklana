@@ -1,0 +1,61 @@
+[
+  {
+    "file": "divx-primary.png",
+    "width": 2138,
+    "height": 736,
+    "mode": "RGBA",
+    "bytes": 358951,
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "e57932babdcc584a1ee6d786d4fd329f8e3a85ee8ab923ba5b540baadcac1af4",
+    "path": "apps/web/public/brand/divx/v1/divx-primary.png"
+  },
+  {
+    "file": "divx-icon.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "bytes": 365093,
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "d9cf01e43e430bd9316433a1775d797b0c0d07cb0df8aaa90a97b7cc03cdf89d",
+    "path": "apps/web/public/brand/divx/v1/divx-icon.png"
+  },
+  {
+    "file": "divx-square.png",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGB",
+    "bytes": 925471,
+    "alpha_extrema": null,
+    "sha256": "574ee1ca0941e7371a0cc1af64ca71b816bc6fc6e74120c6dcb3ec9f431f6afe",
+    "path": "apps/web/public/brand/divx/v1/divx-square.png"
+  },
+  {
+    "file": "divx-monochrome.png",
+    "width": 2138,
+    "height": 736,
+    "mode": "RGBA",
+    "bytes": 393987,
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "49514ef4aafe3ee5723f1c8bfb67cf64020cf35a3309685091dccfa4b370f1ad",
+    "path": "apps/web/public/brand/divx/v1/divx-monochrome.png"
+  },
+  {
+    "file": "divx-dark.png",
+    "width": 2138,
+    "height": 736,
+    "mode": "RGB",
+    "bytes": 921106,
+    "alpha_extrema": null,
+    "sha256": "38b60c763c2f48ed6d234b51f8bdfd4ab329d72d6162145467c1af028f849d08",
+    "path": "apps/web/public/brand/divx/v1/divx-dark.png"
+  }
+]

@@ -5,6 +5,7 @@ import { amountContext, displayBalance, displayDelta, type BalanceKey } from './
 import { createGuidedClient, DemoHttpError, type GuidedClient } from './client';
 import { DEMO_STEPS, stepCopy } from './steps';
 import type { HostedSession } from '../hosted/session';
+import { BrandLogo } from '../BrandLogo';
 
 export interface GuidedHostedLifecycle {
   session: HostedSession | null;
@@ -28,10 +29,6 @@ const ASSET_LABELS: Record<DemoAsset['id'], { symbol: string; issuer: string }> 
 };
 
 function assetLabel(asset: DemoAsset) { return ASSET_LABELS[asset.id]; }
-
-function Mark() {
-  return <span className="demo-mark" aria-hidden="true"><i /><i /></span>;
-}
 
 function shortAddress(address: string): string {
   return address.length > 12 ? `${address.slice(0, 5)}…${address.slice(-5)}` : address;
@@ -450,7 +447,7 @@ export function GuidedDemosApp({ client = localGuidedClient, hostedLifecycle }: 
   return <MotionConfig reducedMotion="user"><div className="demo-shell">
     <a className="skip-link" href="#demo-main">Skip to demo</a>
     <header className="demo-header">
-      <a className="demo-brand" href="/"><Mark /><span>DivX</span></a>
+      <a className="demo-brand" href="/" aria-label="DivX"><BrandLogo /></a>
       <nav aria-label="Primary"><a href="/app/">Public Devnet</a><a href="/demos/" aria-current="page">Guided Demos</a></nav>
       <span className={`runtime-status ${runtimeUnavailable ? 'unavailable' : viewState?.status ?? ''}`}><i />{hosted && !viewState ? hostedLifecycle?.session?.status === 'starting' ? 'Sandbox starting' : hostedLifecycle?.session?.status === 'expired' ? 'Sandbox expired' : 'Tour ready' : statusLabel(viewState, runtimeUnavailable)}</span>
     </header>
@@ -517,6 +514,6 @@ export function GuidedDemosApp({ client = localGuidedClient, hostedLifecycle }: 
         </div>
       </section>
     </main>
-    <footer><Mark /><span>DivX guided demo</span><a href="/app/">Return to the wallet app</a></footer>
+    <footer><BrandLogo variant="icon" /><span>DivX guided demo</span><a href="/app/">Return to the wallet app</a></footer>
   </div></MotionConfig>;
 }

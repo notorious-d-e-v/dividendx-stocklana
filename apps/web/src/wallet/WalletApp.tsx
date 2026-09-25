@@ -25,11 +25,11 @@ import type {
   UiReceipt,
   WalletSeriesSnapshot,
 } from './types';
+import { BrandLogo } from '../BrandLogo';
 
 type Tab = 'market' | 'split' | 'redeem';
 type RuntimeState = { kind: 'loading' } | { kind: 'error'; message: string } | { kind: 'ready'; manifest: LocalManifest; connection: Connection };
 
-function Mark() { return <span className="p-mark" aria-hidden="true"><i /><b /></span>; }
 function message(cause: unknown): string { return cause instanceof Error ? cause.message : 'The action failed.'; }
 function presentedSymbol(symbol: string): string { return symbol.replace(/^Test(?=[A-Z])/, ''); }
 function presentedIssuer(label: string): string { return label.replace(/\s+test profile$/i, ''); }
@@ -651,8 +651,8 @@ export function WalletApp({ runtimeConfig = RUNTIME_CONFIG, onReset }: { runtime
     })));
   };
 
-  if (runtime.kind === 'loading') return <main className="wallet-gate"><Mark /><h1>Connecting to the {network === 'devnet' ? 'Solana devnet service' : sandbox ? 'private sandbox' : 'local runtime'}…</h1><p>Verifying genesis, program and deployment identity.</p></main>;
-  if (runtime.kind === 'error') return <main className="wallet-gate" data-testid="runtime-error"><Mark /><p className="eyebrow">Runtime unavailable</p><h1>The {network === 'devnet' ? 'devnet service' : sandbox ? 'private sandbox' : 'local runtime'} could not be verified.</h1><p>{network === 'devnet' ? 'DivX could not reach or verify the required public test service. Retry checks the same configured service again.' : sandbox ? 'DivX could not verify this session-bound sandbox. Retry checks the same session; it never creates another one.' : 'DivX could not reach or verify the required localhost service. Retry checks it again; it does not start the service.'}</p><div className="wallet-runtime-error"><b>Runtime check failed</b><p>{runtime.message}</p></div>{network === 'local' && <><p>From the project root, start the runtime and wait until it reports ready:</p><code className="wallet-runtime-command">npm --prefix packages/local-runtime start</code></>}<div className="wallet-gate-actions"><button className="p-primary" onClick={boot}>Retry {network === 'devnet' ? 'devnet service' : sandbox ? 'private sandbox' : 'localhost runtime'}</button><a href="/demos/">Guided Demos</a><a href="/app/">Public Devnet</a></div></main>;
+  if (runtime.kind === 'loading') return <main className="wallet-gate"><BrandLogo variant="icon" /><h1>Connecting to the {network === 'devnet' ? 'Solana devnet service' : sandbox ? 'private sandbox' : 'local runtime'}…</h1><p>Verifying genesis, program and deployment identity.</p></main>;
+  if (runtime.kind === 'error') return <main className="wallet-gate" data-testid="runtime-error"><BrandLogo variant="icon" /><p className="eyebrow">Runtime unavailable</p><h1>The {network === 'devnet' ? 'devnet service' : sandbox ? 'private sandbox' : 'local runtime'} could not be verified.</h1><p>{network === 'devnet' ? 'DivX could not reach or verify the required public test service. Retry checks the same configured service again.' : sandbox ? 'DivX could not verify this session-bound sandbox. Retry checks the same session; it never creates another one.' : 'DivX could not reach or verify the required localhost service. Retry checks it again; it does not start the service.'}</p><div className="wallet-runtime-error"><b>Runtime check failed</b><p>{runtime.message}</p></div>{network === 'local' && <><p>From the project root, start the runtime and wait until it reports ready:</p><code className="wallet-runtime-command">npm --prefix packages/local-runtime start</code></>}<div className="wallet-gate-actions"><button className="p-primary" onClick={boot}>Retry {network === 'devnet' ? 'devnet service' : sandbox ? 'private sandbox' : 'localhost runtime'}</button><a href="/demos/">Guided Demos</a><a href="/app/">Public Devnet</a></div></main>;
 
   const verifiedManifest = runtime.manifest;
   const activeBits = snapshot?.quote.mintProfile.scale.activeBits;
@@ -673,7 +673,7 @@ export function WalletApp({ runtimeConfig = RUNTIME_CONFIG, onReset }: { runtime
   const needsSolTopUp = solKnown && currentSol < 6_000_000;
 
   return <><a className="p-skip" href="#wallet-main">Skip to content</a>
-    <header className="p-header wallet-header"><a className="p-brand" href="/app/"><Mark />DivX</a>
+    <header className="p-header wallet-header"><a className="p-brand" href="/app/" aria-label="DivX"><BrandLogo /></a>
       <nav aria-label="Wallet actions">{(['market', 'split', 'redeem'] as Tab[]).map((item) => <button type="button" key={item} className={tab === item ? 'active' : ''} aria-current={tab === item ? 'page' : undefined} onClick={() => setTab(item)}>{item[0]!.toUpperCase() + item.slice(1)}</button>)}</nav>
       <div className="wallet-header-tools"><nav className="wallet-surface-links" aria-label="Explore"><a href="/app/" aria-current={devnet ? 'page' : undefined}>Public Devnet</a><a href="/demos/">Guided Demos</a></nav>
         <div className="wallet-header-status"><section className="wallet-network" aria-label="Verified runtime"><span className="online-dot" aria-hidden="true" /><span className="sr-only">{runtimeProofText}</span><span aria-hidden="true">{runtimeLabel}</span></section>
@@ -751,7 +751,7 @@ export function WalletApp({ runtimeConfig = RUNTIME_CONFIG, onReset }: { runtime
       {!devnet && <details className="clock-controls"><summary>Network-wide test dates</summary><div className="clock-layout"><div><p className="eyebrow">Controlled annual lifecycle</p><h2>Annual lifecycle controls</h2>{verifiedManifest.clockControl ? <p>These steps change the shared local network and submit real program transactions.</p> : <p>Faithful clock control is unavailable in this runtime. Finalized claims may be inspected only when already present onchain.</p>}</div><div>{['start-year', 'record-dividends', 'end-year', 'finalize'].map((step) => <button key={step} disabled={!verifiedManifest.clockControl || busy} onClick={() => void advance(step)}>{step.replace('-', ' ')}</button>)}</div></div></details>}
 
       {receipts.length > 0 && <section className="wallet-receipts"><p className="eyebrow">Transaction receipts</p>{receipts.map((receipt) => <article key={`${receipt.signature}-${receipt.label}`}><div><b>{receipt.label}</b><span>{receipt.slot === null ? 'Slot pending' : `Slot ${receipt.slot}`} · {receipt.status}</span></div>{devnet ? <a href={`https://solscan.io/tx/${encodeURIComponent(receipt.signature)}?cluster=devnet`} target="_blank" rel="noopener noreferrer" aria-label="View transaction on Solscan"><code>{receipt.signature}</code><span className="sr-only"> (opens in a new tab)</span></a> : <code>{receipt.signature}</code>}</article>)}</section>}
-    </main><footer className="p-footer wallet-footer"><div><Mark /><span>DivX{tab === 'market' ? '' : ` · ${seriesName}`}</span></div></footer>
+    </main><footer className="p-footer wallet-footer"><div><BrandLogo variant="icon" /><span>DivX{tab === 'market' ? '' : ` · ${seriesName}`}</span></div></footer>
     {marketAsset && <div className="wallet-dialog-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) closeAssetDialog(); }}>
       <div ref={marketDialog} id="asset-dialog" className="wallet-dialog wallet-asset-dialog" role="dialog" aria-modal="true" aria-labelledby="asset-dialog-title" data-testid="asset-dialog">
         <header><div><p className="eyebrow">Stock token · {presentedIssuer(marketAsset.issuerLabel)}</p><h2 id="asset-dialog-title">{marketAsset.company} · {presentedSymbol(marketAsset.symbol)}</h2></div><button ref={marketDialogClose} type="button" aria-label="Close stock details" onClick={closeAssetDialog}>×</button></header>

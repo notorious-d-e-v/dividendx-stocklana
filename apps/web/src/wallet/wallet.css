@@ -2,6 +2,7 @@
 .wallet-header .p-brand { text-decoration: none; }
 .wallet-banner { position: sticky; top: 0; z-index: 20; }
 .wallet-gate { min-height: 100vh; display: grid; place-content: center; justify-items: start; gap: 1rem; padding: 2rem; background: var(--dx-canvas); }
+.wallet-gate > .brand-logo { display: block; width: 54px; height: 54px; }
 .wallet-gate h1 { max-width: 700px; margin: 0; font-size: clamp(2.5rem, 7vw, 5rem); letter-spacing: -.06em; }
 .wallet-gate p { max-width: 620px; margin: 0; }
 .wallet-gate a { color: inherit; }
@@ -99,7 +100,7 @@ body:has(.wallet-dialog-backdrop) { overflow: hidden; }
 }
 @media (max-width: 760px) {
   .wallet-header { height: auto; padding: 16px 20px; gap: 16px 12px; align-items: center; }
-  .wallet-header .p-brand { font-size: 17px; gap: 8px; }
+  .wallet-header .p-brand .brand-logo { width: 108px; }
   .wallet-header-tools { display: contents; }
   .wallet-header .wallet-surface-links { grid-column: 2; grid-row: 1; gap: 12px; justify-self: end; }
   .wallet-surface-links a { font-size: 11px; }
