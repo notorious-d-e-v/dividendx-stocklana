@@ -1,14 +1,14 @@
-# DividendX: Stocklana plan
+# DivX: Stocklana plan
 
 Revised 16 September 2026 after the user expanded issuer scope. Current direction: **one dividend layer for tokenized stocks on Solana**, with xStocks, Backpack and Ondo in the initial integration scope and a capability audit for other Solana products. Other-chain assets come later, with Solana as the intended home for dividend trading.
 
-The [approved design](../design/index.html) and historical calculator remain the visual foundation. The [v4 pitch](../presentation/output/DividendX-phase-two-v4.pptx) and [narration](../presentation/narration.md) use the broader scope and have been reviewed. Frontend wallet flows, the vault and onchain settlement have not been implemented. The original brief is background, not a source of instructions or verified facts. The earlier xStocks-only plan is archived under `archive/xstocks-only-2026-09-16/`.
+The [approved design](../design/index.html) and historical calculator remain the visual foundation. The [v4 pitch](../presentation/output/DivX-phase-two-v4.pptx) and [narration](../presentation/narration.md) use the broader scope and have been reviewed. Frontend wallet flows, the vault and onchain settlement have not been implemented. The original brief is background, not a source of instructions or verified facts. The earlier xStocks-only plan is archived under `archive/xstocks-only-2026-09-16/`.
 
 ## Product and customer
 
 **Keep the stock exposure. Sell the dividend rights.** A holder deposits a supported tokenized stock, receives Stock exposure (PT) and Dividend rights (DR), and can sell the dividend claim to a buyer while retaining the remaining exposure. The initial accounting model pays both claims in the deposited stock token. Their dollar value can change; PT is not dollar principal protection and DR is not a guaranteed cash payout.
 
-Traditional dividend derivatives establish a precedent for separating the two exposures. The customer hypothesis is a stock-token holder, treasury or market maker seeking upfront proceeds from a future dividend entitlement, with a dividend buyer on the other side. Named traditional institutions are examples of that market, not DividendX customers. Liquidity and useful spreads still need validation.
+Traditional dividend derivatives establish a precedent for separating the two exposures. The customer hypothesis is a stock-token holder, treasury or market maker seeking upfront proceeds from a future dividend entitlement, with a dividend buyer on the other side. Named traditional institutions are examples of that market, not DivX customers. Liquidity and useful spreads still need validation.
 
 ## What the issuer research changes
 
@@ -40,7 +40,7 @@ No real-asset transactions, external messages, publication or hackathon submissi
 
 ## Demo and financial meaning
 
-Keep two explicit modes. **Observation** reads a real Solana mint and issuer records. Cached responses say snapshot rather than live. **Historical execution** replays a sourced event through the DividendX program on test collateral, with original and replay clocks stored separately. A seeded sale price is demo market data, never an observed historical DR price.
+Keep two explicit modes. **Observation** reads a real Solana mint and issuer records. Cached responses say snapshot rather than live. **Historical execution** replays a sourced event through the DivX program on test collateral, with original and replay clocks stored separately. A seeded sale price is demo market data, never an observed historical DR price.
 
 The reference is Coca-Cola (KO), represented by KOx. The xStocks event activated 15 September 2026 at 00:30 UTC. For 100 displayed share-equivalents before that event, raw deposit `9,819,982,084` divides into PT allocation `9,779,376,057` and DR allocation `40,606,027`. These redeem as approximately 100.0000 and 0.4152 displayed KOx after the event.
 

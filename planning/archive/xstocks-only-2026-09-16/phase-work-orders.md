@@ -1,6 +1,6 @@
-# DividendX phase work orders
+# DivX phase work orders
 
-Workspace: `/Users/node/workspace/dividendx-stocklana`. Phase one is complete and user-approved: see `design/design-system.md`, `design/index.html` and `design/qa.md`. Phase two is revised after user feedback and ready for review: see `presentation/output/DividendX-phase-two-v3.pptx`, `presentation/narration.md` and `presentation/source-ledger.md`. Astra's review is recorded in `planning/pitch-review.md`. Phases three onward remain production briefs, not completed work.
+Workspace: `/Users/node/workspace/dividendx-stocklana`. Phase one is complete and user-approved: see `design/design-system.md`, `design/index.html` and `design/qa.md`. Phase two is revised after user feedback and ready for review: see `presentation/output/DivX-phase-two-v3.pptx`, `presentation/narration.md` and `presentation/source-ledger.md`. Astra's review is recorded in `planning/pitch-review.md`. Phases three onward remain production briefs, not completed work.
 
 **How to run a phase**
 
@@ -16,7 +16,7 @@ Read `/Users/node/workspace/dividendx-stocklana/planning/plan.md`, `mechanics-au
 
 Also read `adapter-decision.md`, `decision-log.md` and the latest real-event verification in the planning directory. Use the actual KOx dividend event, with pinned provenance, throughout the demo. Implement a simple xStocks vault with a data reader, internal vault shares and separate PT/DR allocation functions. "Adapter" means ordinary code separation only: no generic issuer framework, extra program/account, runtime issuer selection or circulating wrapper token. Backpack and other issuers stay outside the MVP. At handoff, report material contradictory evidence to Astra so the plan, decision log and affected artifacts are updated before the next phase. Verified observations supersede an obsolete assumption in a work order.
 
-DividendX is a proposed Solana vault that separates an xStock into stock exposure (PT) and one event's dividend rights (DR). The initial demo uses KOx metadata read from mainnet plus a historical event replay on a mock Token-2022 mint. Custody and transfers use integer raw base units. The dividend right receives net reinvested xStock accretion, not guaranteed USDC. PT is not dollar principal protection. A pure split must never create DR yield. Competition already exists; make no “first/only” claim. Distinguish live data, historical fixtures and simulated quotes. No invented users, APY, liquidity, partnerships or deployed functionality.
+DivX is a proposed Solana vault that separates an xStock into stock exposure (PT) and one event's dividend rights (DR). The initial demo uses KOx metadata read from mainnet plus a historical event replay on a mock Token-2022 mint. Custody and transfers use integer raw base units. The dividend right receives net reinvested xStock accretion, not guaranteed USDC. PT is not dollar principal protection. A pure split must never create DR yield. Competition already exists; make no “first/only” claim. Distinguish live data, historical fixtures and simulated quotes. No invented users, APY, liquidity, partnerships or deployed functionality.
 
 Do not connect funded wallets, trade real assets, publish externally or submit the hackathon entry under these work orders. Those actions are outside this planning phase. Read-only public sources and local production work are in scope. Deployment/submission decisions will use the user's authorization at execution time.
 

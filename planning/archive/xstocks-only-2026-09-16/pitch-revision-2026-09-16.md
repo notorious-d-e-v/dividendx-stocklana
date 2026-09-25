@@ -10,13 +10,13 @@ This is a product pitch, not a deployment announcement. Present-tense descriptio
 
 ## Approved narration
 
-### 1 — DividendX
+### 1 — DivX
 
-DividendX is a Solana vault we are building to separate one tokenized stock position into stock exposure and the right to its next dividend-derived xStock units.
+DivX is a Solana vault we are building to separate one tokenized stock position into stock exposure and the right to its next dividend-derived xStock units.
 
 ### 2 — Two sides of one trade
 
-Traditional finance already has both sides: banks sell dividend exposure to manage risk from structured products; asset managers such as Survista buy discounted dividend futures. DividendX brings the same choice to xStock holders: keep the stock exposure and sell the dividend rights.
+Traditional finance already has both sides: banks sell dividend exposure to manage risk from structured products; asset managers such as Survista buy discounted dividend futures. DivX brings the same choice to xStock holders: keep the stock exposure and sell the dividend rights.
 
 ### 3 — One deposit, two claims
 
@@ -24,7 +24,7 @@ One deposit enters a locked vault. The program issues two paired claims: PT for 
 
 ### 4 — Established markets, familiar behavior
 
-Eurex handled more than 21 million dividend contracts in 2024. Pendle reported 96.4 million dollars of average daily trading volume that year. Investors already trade dividends separately, and crypto users already separate yield. DividendX connects those two ideas.
+Eurex handled more than 21 million dividend contracts in 2024. Pendle reported 96.4 million dollars of average daily trading volume that year. Investors already trade dividends separately, and crypto users already separate yield. DivX connects those two ideas.
 
 ### 5 — Tokenized stocks bring the collateral onchain
 
@@ -59,7 +59,7 @@ Keep the title and the correct two-way editable transaction diagram. Upper conte
 - Sellers: **Bank trading desks** — manage dividend risk from structured products.
 - Buyers: **Asset managers and hedge funds** — trade expected dividend payouts. Named asset-manager example: **Survista**.
 
-Keep the lower diagram clearly labeled as the **DividendX flow**, with **Stock holder → dividend right → Buyer** and payment in the opposite direction. Stock exposure is retained by the holder. Do not make it look as if the named institutions use DividendX or already own PT/DR. The actual claim/payment arrowheads must point correctly; the Artifact Tool `tail` arrowhead worked in the last version.
+Keep the lower diagram clearly labeled as the **DivX flow**, with **Stock holder → dividend right → Buyer** and payment in the opposite direction. Stock exposure is retained by the holder. Do not make it look as if the named institutions use DivX or already own PT/DR. The actual claim/payment arrowheads must point correctly; the Artifact Tool `tail` arrowhead worked in the last version.
 
 Notes: bank direction varies by book and tenor; hedge funds can buy or sell. Traditional dividend futures/swaps are generally cash-settled, while this product allocates collateral in xStock units. Use `planning/pitch-tradfi-participants.md` and its CME/Eurex sources. The named Survista example is documented in Eurex's 2025 whitepaper, pages 31–32 (zero-based PDF pages 30–31).
 

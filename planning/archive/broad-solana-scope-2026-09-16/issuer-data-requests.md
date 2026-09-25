@@ -1,4 +1,4 @@
-# Issuer data needed for DividendX
+# Issuer data needed for DivX
 
 16 September 2026. These are drafts and technical requirements, not messages sent. Read-only issuer research is complete enough to choose the architecture; the following access and semantics are still needed for verified issuer settlement.
 
@@ -6,7 +6,7 @@
 
 Two-sentence outreach draft:
 
-> We're building DividendX for Stocklana so holders can keep stock exposure and sell the dividend rights, and we want Backpack stocks in the first release. Could you connect us with the team for a token corporate-actions API or documented DividendDistribute events, including exact pre/post multipliers, activation times and corrections, plus a confirmed Micron dividend sample?
+> We're building DivX for Stocklana so holders can keep stock exposure and sell the dividend rights, and we want Backpack stocks in the first release. Could you connect us with the team for a token corporate-actions API or documented DividendDistribute events, including exact pre/post multipliers, activation times and corrections, plus a confirmed Micron dividend sample?
 
 Request the canonical stock-token registry and issuer program/IDL; stable event ID/revision/type; old/new multiplier at the dividend transaction; source-to-mint binding; eligibility, cutoff and timing; correction/finality policy; and gross/net/tax/fees/reinvestment details when available. Clarify multiplier recomputations during mint/redeem, so these do not become dividend yield. Confirm whether a public PDA vault may hold and transfer the tokens and whether any controls are scheduled to change.
 
@@ -16,7 +16,7 @@ Public observations found a real MU `DividendDistribute` transaction, but a tran
 
 Two-sentence outreach draft:
 
-> We're building DividendX for Stocklana, a shared Solana vault that separates stock exposure from dividend rights, and we're integrating Ondo's native Solana stock tokens. Could we get read-only API access and a confirmed KOon dividend example linking the corporate-action event ID/type to multiplier history, activation time and revision/finality rules?
+> We're building DivX for Stocklana, a shared Solana vault that separates stock exposure from dividend rights, and we're integrating Ondo's native Solana stock tokens. Could we get read-only API access and a confirmed KOon dividend example linking the corporate-action event ID/type to multiplier history, activation time and revision/finality rules?
 
 Documented endpoints: [shares-multiplier history](https://docs.ondo.finance/api-reference/assets/get-shares-multiplier-history-for-an-asset), [asset status](https://docs.ondo.finance/api-reference/status/get-asset-statuses), [registry](https://docs.ondo.finance/api-reference/assets/get-all-contract-addresses-across-networks). They require an API key. Do not paste credentials into chat or commit them; supply them through a local secret environment when implementing the server-side reader.
 

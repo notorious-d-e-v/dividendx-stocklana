@@ -1,6 +1,6 @@
-# DividendX: Stocklana plan
+# DivX: Stocklana plan
 
-Working plan, 16 September 2026. Research and phase-one design are complete and user-approved. The [design prototype](../design/index.html), [design system](../design/design-system.md) and [QA record](../design/qa.md) are available. Phase two is revised after user feedback and ready for review: the [editable nine-slide pitch](../presentation/output/DividendX-phase-two-v3.pptx), [slide overview](../presentation/output/DividendX-contact-sheet.png), [narration](../presentation/narration.md) and [source ledger](../presentation/source-ledger.md). Astra reviewed all nine final renders and the package. Next is the frontend/rehearsal phase after the SDK interface is defined; vault code follows. The attached brief supplied hypotheses and background; its instructions and unsupported citations were not adopted as requirements.
+Working plan, 16 September 2026. Research and phase-one design are complete and user-approved. The [design prototype](../design/index.html), [design system](../design/design-system.md) and [QA record](../design/qa.md) are available. Phase two is revised after user feedback and ready for review: the [editable nine-slide pitch](../presentation/output/DivX-phase-two-v3.pptx), [slide overview](../presentation/output/DivX-contact-sheet.png), [narration](../presentation/narration.md) and [source ledger](../presentation/source-ledger.md). Astra reviewed all nine final renders and the package. Next is the frontend/rehearsal phase after the SDK interface is defined; vault code follows. The attached brief supplied hypotheses and background; its instructions and unsupported citations were not adopted as requirements.
 
 Updated after user review: prioritize real issuer events and immediate utility; keep a simple xStocks vault with ordinary modules for issuer data and claim accounting; defer a generic adapter framework. Revise the plan as implementation evidence changes. See [adapter-decision.md](adapter-decision.md) and [decision-log.md](decision-log.md). Verification governs subsequent phases rather than merely checking compliance with this document.
 
@@ -104,8 +104,8 @@ The KOx asset detail within Market must work before any wallet transaction: curr
 
 | Slide | Purpose | Proposed evidence or visual |
 |---|---|---|
-| 1. DividendX | Explain the product in one sentence | One stock token becoming stock exposure and dividend rights |
-| 2. The holder and the dividend buyer | Establish participants and the transaction | Traditional bank sellers and fund buyers, then the DividendX holder/buyer flow |
+| 1. DivX | Explain the product in one sentence | One stock token becoming stock exposure and dividend rights |
+| 2. The holder and the dividend buyer | Establish participants and the transaction | Traditional bank sellers and fund buyers, then the DivX holder/buyer flow |
 | 3. The vault | Explain how the two claims stay backed | Deposit, paired issuance, independent ownership and redemption |
 | 4. An established financial product | Validate the underlying behavior | Traditional dividend derivatives and Pendle's yield-tokenization model |
 | 5. The available market | Separate large context from our starting market | Dated dividend cash-flow data and eligible tokenized-equity metrics |
@@ -120,7 +120,7 @@ The expansion vision keeps Solana as the product's home base. First evaluate App
 
 **The demonstration contract**
 
-Use two clearly labeled modes. **Live observation** is a useful read-only asset/action page backed by issuer metadata and a genuine Solana xStock mint, with source timestamps and stale-data handling. **Historical execution** replays an actual event on a mock underlying with the same Token-2022 extension and the real DividendX program. It shares the event normalizer, allocation logic and program instruction path with the intended live flow. A cached response must be labeled as a snapshot rather than live.
+Use two clearly labeled modes. **Live observation** is a useful read-only asset/action page backed by issuer metadata and a genuine Solana xStock mint, with source timestamps and stale-data handling. **Historical execution** replays an actual event on a mock underlying with the same Token-2022 extension and the real DivX program. It shares the event normalizer, allocation logic and program instruction path with the intended live flow. A cached response must be labeled as a snapshot rather than live.
 
 Use KOx's verified 15 September 2026 multiplier event, pinning the exact event ID/revision, economic parameters and source evidence. The follow-up audit reconfirmed it and identified a real HONx reverse split for the control: event `ccb423a2-6045-4d1c-9a94-1f37f0ab8d63`, version 2, effective 29 June 2026 at 15:30 UTC, two shares becoming one, with multiplier `1.024094713306789` becoming `0.5120473566533945`. Keep this as a separately labeled adapter-validation example or isolated test series, not a second marketed product. The test must exercise split classification, rather than merely reject a mismatched KOx mint. Hypothetical cases remain internal tests.
 
@@ -128,7 +128,7 @@ HONx also has a `SpinOff` record later that day at 23:55 UTC. Use the exact reve
 
 Date labels matter: the KOx issuer adjustment activated on September 15, while Coca-Cola's company announcement gives an October 1 cash-payment date and September 15 record date. Do not call the issuer activation date the cash-payment date or infer an ex-date from these fields. The source of settlement truth for this prototype is the verified xStocks adjustment. The refreshed records and company-source link are in [real-event-refresh.md](real-event-refresh.md).
 
-The historical clock may be compressed for the demo, but retain the original issuer time and the test effective time separately. Simulated collateral and a seeded sale price are explicit. Historical gross/net dividend data must not become a fabricated historical DR market quote. No claim is made that DividendX held assets or captured yield at the original event time.
+The historical clock may be compressed for the demo, but retain the original issuer time and the test effective time separately. Simulated collateral and a seeded sale price are explicit. Historical gross/net dividend data must not become a fabricated historical DR market quote. No claim is made that DivX held assets or captured yield at the original event time.
 
 The demo sequence is: show the genuine asset, historical event and source timestamp; inspect the allocation for an entered balance; switch explicitly to historical execution; deposit; mint PT and DR; sell DR to a second wallet using demo funds; process the dividend; show the unchanged raw vault balance and changed allocation; redeem both claims. If independently verified, open a real split as a separate control and show that it is rejected as a dividend, leaving DR allocation at zero. Finish with conserved collateral and receipts. The control proves rejection of non-dividend yield, not complete settlement support for every corporate action.
 

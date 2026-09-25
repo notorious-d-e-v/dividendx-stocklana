@@ -9,7 +9,7 @@ scripts/protocol/toolchain.sh exec cargo test --locked -p dividendx-protocol-tes
 The suite fails if `target/deploy/dividendx.so` is absent or is not an ELF. It
 loads that file through Mollusk 0.14.0 under the upgradeable BPF loader and
 installs the packaged SPL Token and Token-2022 executables. It never registers
-a native DividendX processor.
+a native DivX processor.
 
 Verified on 2026-09-17 with Rust/Cargo 1.94.0, Agave 4.1.1,
 `cargo-build-sbf` 4.1.0, Mollusk 0.14.0, and Mollusk's packaged Token and
