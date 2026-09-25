@@ -17,5 +17,23 @@
   "cron": {
     "path": "/api/cron/refresh-observations",
     "schedule": "0 */6 * * *"
-  }
+  },
+  "finalGitDeployment": {
+    "id": "dpl_2oYpVJcvgAVNeP4TkDybmwn4gfeG",
+    "url": "dividendx-stocklana-ixw5hmw3s-payai.vercel.app",
+    "readyState": "READY",
+    "aliases": [
+      "dividendx.payai.network",
+      "dividendx-stocklana.vercel.app",
+      "dividendx-stocklana-payai.vercel.app",
+      "dividendx-stocklana-git-main-payai.vercel.app"
+    ]
+  },
+  "mergedCommit": "48cd8173edb381fdd8687d93f5e895dba40db953",
+  "finalPublicAliasesVerified": [
+    "dividendx.payai.network",
+    "dividendx-stocklana.vercel.app"
+  ],
+  "internalAliasesRetainVercelAuthentication": true,
+  "publishedSocialCardsMatchLocalSha256": true
 }

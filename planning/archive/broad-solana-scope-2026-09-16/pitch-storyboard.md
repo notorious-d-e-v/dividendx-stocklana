@@ -1,4 +1,4 @@
-# DividendX pitch storyboard
+# DivX pitch storyboard
 
 Current production brief: [Solana issuer revision](pitch-revision-2026-09-16.md), 16 September 2026. It supersedes the xStocks-only storyboard, archived under `planning/archive/xstocks-only-2026-09-16/`.
 
@@ -6,7 +6,7 @@ Preserve exactly nine editable slides and the approved design. The narrative is:
 
 | Slide | Main point |
 |---|---|
-| 1. DividendX | Keep the stock exposure. Sell the dividend rights. A shared Solana dividend market. |
+| 1. DivX | Keep the stock exposure. Sell the dividend rights. A shared Solana dividend market. |
 | 2. Two sides of one trade | Concrete traditional bank sellers and fund buyers; holder/buyer flow. |
 | 3. One deposit, two claims | Each issuer/mint/event has separately backed PT/DR. |
 | 4. Established markets, familiar behavior | Eurex dividend trading and Pendle yield separation are precedents. |

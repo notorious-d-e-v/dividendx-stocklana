@@ -1,4 +1,4 @@
-# DividendX pitch storyboard
+# DivX pitch storyboard
 
 Astra production brief, 16 September 2026. Phase two: exactly nine editable slides, approximately three minutes of narration. User has approved the design system and requested slightly looser heading line spacing; that change is already in design/index.html and design/design-system.md. Simplify the copy for a judge unfamiliar with token accounting.
 
@@ -12,7 +12,7 @@ The product is currently a concept plus a working historical calculator/design p
 
 ## Slide sequence and copy
 
-### 1 — DividendX
+### 1 — DivX
 
 Headline: **Keep the stock exposure. Sell the dividend rights.**
 
@@ -52,7 +52,7 @@ The diagram is schematic, not a 50/50 allocation chart. No intermediate wrapper 
 
 Connecting line: Investors already trade dividends separately. Crypto users already separate yield.
 
-Use an open editorial layout, not repeated dashboard cards. Label contracts and dollars clearly; do not compare these as equivalent quantities. These are precedents, not evidence of demand for DividendX. Cite Eurex and Pendle in speaker notes; attribute Pendle’s figure on-slide.
+Use an open editorial layout, not repeated dashboard cards. Label contracts and dollars clearly; do not compare these as equivalent quantities. These are precedents, not evidence of demand for DivX. Cite Eurex and Pendle in speaker notes; attribute Pendle’s figure on-slide.
 
 ### 5 — Tokenized stocks bring the collateral onchain
 
@@ -82,7 +82,7 @@ These describe the proposed implementation, not a completed program. Notes disti
 
 Native editable comparison:
 
-| Issuer event | DividendX treatment |
+| Issuer event | DivX treatment |
 |---|---|
 | KOx cash dividend | Allocate the verified dividend-derived KOx to DR |
 | HONx reverse split | Reject as a dividend; allocate no dividend yield |

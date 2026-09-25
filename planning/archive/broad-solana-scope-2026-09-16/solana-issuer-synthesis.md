@@ -1,6 +1,6 @@
-# DividendX: a dividend layer across Solana issuers
+# DivX: a dividend layer across Solana issuers
 
-Research and architecture review, **16 September 2026**. Start here. This supersedes xStocks-only scope in earlier planning. The approved design is retained; the [v4 pitch](../presentation/output/DividendX-phase-two-v4.pptx) and [narration](../presentation/narration.md) now introduce the broader product.
+Research and architecture review, **16 September 2026**. Start here. This supersedes xStocks-only scope in earlier planning. The approved design is retained; the [v4 pitch](../presentation/output/DivX-phase-two-v4.pptx) and [narration](../presentation/narration.md) now introduce the broader product.
 
 ## Recommendation
 
@@ -8,11 +8,11 @@ Build **one shared dividend market for tokenized stocks on Solana**, with **xSto
 
 We cannot honestly promise that **every Solana stock token is automatically compatible from day one**. The audit found actual registered shares with holder restrictions, private-company exposure without dividend rights, fee-bearing tokens and discontinued products. The useful promise is one workflow across qualified Solana issuers, with eligibility checked per mint. A wrapper cannot supply missing dividends, event data or custody permission.
 
-This is a material expansion of the intended product, not a declaration that integrations are already built. Current software remains the approved historical calculator/design prototype. No DividendX PDA transfer, PT/DR issuance or program settlement has run.
+This is a material expansion of the intended product, not a declaration that integrations are already built. Current software remains the approved historical calculator/design prototype. No DivX PDA transfer, PT/DR issuance or program settlement has run.
 
 ## Who is on Solana, and what changes for us
 
-| Provider/product family | What we verified | DividendX treatment |
+| Provider/product family | What we verified | DivX treatment |
 |---|---|---|
 | **xStocks / Backed** | Public registry: 837 Solana deployments. All 837 mint accounts existed with nonzero supply and the same eight-decimal Token-2022 extension profile at audit time. Classified public corporate-action history and a verified KOx event. | Initial scope. Reuse existing allocation math, generalize exact-mint configuration and retain issuer controls/finality checks. Catalog size is not eligible dividend coverage. |
 | **Backpack / Trek receipts** | 48 `.US` Solana token entries with deposits and withdrawals enabled; all 48 have nonzero supply, six decimals and Scaled UI Amount. Real MU dividend-distribution transaction reconstructed. | Initial scope. Separate reader must distinguish dividend operations from ordinary mint/redeem multiplier updates. Official event/revision semantics still needed for live settlement. |
@@ -68,13 +68,13 @@ Keep Coca-Cola's existing dollar explanation: 100 pre-event share-equivalents pr
 - Shared accounting: test eight-, six- and nine-decimal profiles through the same engine. Unknown transfer conditions or unexplained multiplier changes block issuance/settlement.
 - Event replays: KOx official history and MU's labeled onchain reconstruction are the two evidence-backed candidates. Add Ondo when its event/history join is obtained. Synthetic test cases remain visibly separate.
 - Full flow: deposit before cutoff, issue PT/DR, sell DR to a second wallet using test funds, then redeem independently. No xStocks-only logic or hardcoded ticker in the shared engine.
-- Live enablement: a separate gate for permitted real custody, a future event, data access, corrections/finality and operating controls. No issuer has passed a DividendX live gate today.
+- Live enablement: a separate gate for permitted real custody, a future event, data access, corrections/finality and operating controls. No issuer has passed a DivX live gate today.
 
 This keeps the multi-issuer ambition concrete while avoiding a false launch claim. If Ondo data or provider approval remains unavailable, the blocker is external and must stay visible; writing an adapter interface is not a substitute for completing that integration.
 
 ## What changed in our artifacts
 
-The [master plan](plan.md), [architecture](adapter-decision.md), [phase work orders](phase-work-orders.md), pitch storyboard/revision, source ledger and narration now use the broader Solana scope. The [v4 deck](../presentation/output/DividendX-phase-two-v4.pptx) preserves nine slides, the approved visual language and the Coca-Cola example. It puts xStocks, Backpack and Ondo in initial scope and other networks later.
+The [master plan](plan.md), [architecture](adapter-decision.md), [phase work orders](phase-work-orders.md), pitch storyboard/revision, source ledger and narration now use the broader Solana scope. The [v4 deck](../presentation/output/DivX-phase-two-v4.pptx) preserves nine slides, the approved visual language and the Coca-Cola example. It puts xStocks, Backpack and Ondo in initial scope and other networks later.
 
 Earlier scope decisions are archived; historical evidence remains intact with supersession notices. The design system only gains issuer-selection/eligibility guidance. Its visual tokens, HTML prototype and screenshots remain unchanged.
 

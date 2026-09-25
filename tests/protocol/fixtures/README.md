@@ -1,6 +1,6 @@
 # Protocol test fixtures
 
-These fixtures drive only the controlled local DividendX program at
+These fixtures drive only the controlled local DivX program at
 `2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE`. They contain no wallet,
 issuer, deployment, or mainnet private keys.
 
@@ -52,7 +52,7 @@ npm run test:issuer-custody
 ```
 
 The first two commands validate the saved bytes and Node reader; the last runs
-the compiled DividendX program with packaged SPL/Token-2022 executables. See
+the compiled DivX program with packaged SPL/Token-2022 executables. See
 the [conformance contract](../../../spec/issuer-custody-conformance-v1.md).
 Future captures must use a new filename; the capture command refuses to
 overwrite existing evidence.

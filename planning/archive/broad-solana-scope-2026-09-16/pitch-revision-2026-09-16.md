@@ -4,19 +4,19 @@ Astra brief, 16 September 2026. Supersedes the earlier xStocks-only revision, ar
 
 ## Message
 
-**DividendX is a shared dividend market for tokenized stocks on Solana.** xStocks, Backpack and Ondo belong in the initial integration scope. A shared engine and issuer data readers provide the architecture from day one. Do not claim every Solana stock token is automatically usable or already integrated: permissioned shares, tokens without dividend rights and missing event data are real exceptions.
+**DivX is a shared dividend market for tokenized stocks on Solana.** xStocks, Backpack and Ondo belong in the initial integration scope. A shared engine and issuer data readers provide the architecture from day one. Do not claim every Solana stock token is automatically usable or already integrated: permissioned shares, tokens without dividend rights and missing event data are real exceptions.
 
 Keep direct product language, concrete traditional participants, fractional ownership/auditability and the Coca-Cola dollar example. The cover still says prototype/concept plus working historical calculator. Slide 8 still distinguishes the existing calculator from next-stage vault execution. No production vault, issuer partnership, executed trade or completed multi-issuer settlement is implied.
 
 ## Narration
 
-### 1 — DividendX
+### 1 — DivX
 
-DividendX lets a stock holder keep the stock exposure and sell the dividend rights. We are building a shared dividend market for tokenized stocks on Solana, with xStocks, Backpack and Ondo in the initial integration scope.
+DivX lets a stock holder keep the stock exposure and sell the dividend rights. We are building a shared dividend market for tokenized stocks on Solana, with xStocks, Backpack and Ondo in the initial integration scope.
 
 ### 2 — Two sides of one trade
 
-Traditional finance already has both sides: banks sell dividend exposure to manage risk from structured products; asset managers such as Survista buy discounted dividend futures. DividendX brings that choice to tokenized-stock holders: keep the stock exposure and sell the dividend rights.
+Traditional finance already has both sides: banks sell dividend exposure to manage risk from structured products; asset managers such as Survista buy discounted dividend futures. DivX brings that choice to tokenized-stock holders: keep the stock exposure and sell the dividend rights.
 
 ### 3 — One deposit, two claims
 
@@ -24,7 +24,7 @@ One deposit enters a locked vault. The program issues two paired claims: PT for 
 
 ### 4 — Established markets, familiar behavior
 
-Eurex handled more than 21 million dividend contracts in 2024. Pendle reported 96.4 million dollars of average daily trading volume that year. Investors already trade dividends separately, and crypto users already separate yield. DividendX connects those two ideas.
+Eurex handled more than 21 million dividend contracts in 2024. Pendle reported 96.4 million dollars of average daily trading volume that year. Investors already trade dividends separately, and crypto users already separate yield. DivX connects those two ideas.
 
 ### 5 — Tokenized stocks bring the collateral onchain
 
@@ -93,8 +93,8 @@ Use `planning/adapter-decision.md`, `planning/plan.md`, the issuer reports in `p
 - https://investor.galaxy.com/ir-resources/tokenized-glxy-shares
 - https://app.rwa.xyz/stocks
 
-Retain existing CME/Eurex/Pendle/Janus Henderson/Solana/Coca-Cola and Coinbase/Robinhood sources from v3. Each source supports its actual claim; do not cite the broad homepage as proof of a particular event or API capability. In notes, xStocks has a public event history; Backpack's event ledger remains missing; Ondo's keyed history needs classified event joins. No live production integration is complete for DividendX.
+Retain existing CME/Eurex/Pendle/Janus Henderson/Solana/Coca-Cola and Coinbase/Robinhood sources from v3. Each source supports its actual claim; do not cite the broad homepage as proof of a particular event or API capability. In notes, xStocks has a public event history; Backpack's event ledger remains missing; Ondo's keyed history needs classified event joins. No live production integration is complete for DivX.
 
 ## Delivery
 
-Archive v3 sources and artifacts, preserving existing output links. Deliver `DividendX-phase-two-v4.pptx`, corresponding v4 contact sheet and current contact-sheet alias, all nine final previews, revised narration/source ledger/submission draft and reproducible authoring source. Use the presentations skill and operation marker, private candidate, distinct final export and finalizer. Inspect every slide; Astra independently reviews the result. Do not alter the design prototype or start later implementation phases.
+Archive v3 sources and artifacts, preserving existing output links. Deliver `DivX-phase-two-v4.pptx`, corresponding v4 contact sheet and current contact-sheet alias, all nine final previews, revised narration/source ledger/submission draft and reproducible authoring source. Use the presentations skill and operation marker, private candidate, distinct final export and finalizer. Inspect every slide; Astra independently reviews the result. Do not alter the design prototype or start later implementation phases.

@@ -1,4 +1,4 @@
-# DividendX phase work orders
+# DivX phase work orders
 
 Updated 16 September 2026. Workspace `/Users/node/workspace/dividendx-stocklana`. The visual system is approved. The scope now covers Solana issuers from the first architecture, with xStocks, Backpack and Ondo as initial integration targets. Frontend/vault implementation remains future work. This supersedes the archived xStocks-only work orders.
 
@@ -20,7 +20,7 @@ Complete. Preserve `design/**` and `packages/design-tokens/**` as the source of 
 
 Sol **medium**. Own only `presentation/**`. Input: Astra's `spec/pitch-storyboard.md` and `spec/pitch-revision-2026-09-16.md`, current nine-slide deck, approved tokens and latest evidence.
 
-Preserve the design and useful existing narrative. Establish DividendX as a dividend layer across Solana issuers. Put xStocks, Backpack and Ondo in initial integration scope, keep other chains later, and avoid “all tokens automatically supported.” Product descriptions may use direct present tense; prototype/build status stays visible. Exact event and custody dependencies belong in notes and the source ledger. Keep Coca-Cola as a concrete example, not a limitation of the product.
+Preserve the design and useful existing narrative. Establish DivX as a dividend layer across Solana issuers. Put xStocks, Backpack and Ondo in initial integration scope, keep other chains later, and avoid “all tokens automatically supported.” Product descriptions may use direct present tense; prototype/build status stays visible. Exact event and custody dependencies belong in notes and the source ledger. Keep Coca-Cola as a concrete example, not a limitation of the product.
 
 Use the presentations skill, editable native text/evidence diagrams, required operation marker and finalizer. Produce a new versioned nine-slide PPTX, individual previews, contact sheet, narration, notes/source ledger and submission draft. Archive prior presentation sources and deliverables without breaking old links. Inspect all final slides. Do not change the approved design prototype or add fictional receipts.
 

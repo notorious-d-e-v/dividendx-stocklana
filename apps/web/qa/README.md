@@ -2,7 +2,7 @@
 
 ## Public hosted release — 18 September 2026
 
-Canonical test site: [https://dividendx-stocklana.vercel.app](https://dividendx-stocklana.vercel.app). `/app/` uses real-calendar Solana devnet, `/sandbox/` creates a private accelerated 15-minute wallet VM, and `/demos/` creates a separate guided VM. Localhost retains the accepted 4180/4181 runtimes and defaults. Hosted runs use the same accepted DividendX ELF, clearly labeled synthetic assets and fresh temporary wallets; they do not prove issuer qualification, mainnet custody or installed-extension behavior.
+Canonical test site: [https://dividendx-stocklana.vercel.app](https://dividendx-stocklana.vercel.app). `/app/` uses real-calendar Solana devnet, `/sandbox/` creates a private accelerated 15-minute wallet VM, and `/demos/` creates a separate guided VM. Localhost retains the accepted 4180/4181 runtimes and defaults. Hosted runs use the same accepted DivX ELF, clearly labeled synthetic assets and fresh temporary wallets; they do not prove issuer qualification, mainnet custody or installed-extension behavior.
 
 Actual production-browser evidence passes these independent flows:
 
@@ -28,7 +28,7 @@ Actual guided page: [http://127.0.0.1:4174/demos/](http://127.0.0.1:4174/demos/)
 
 The Test USDC v2 journey completes nine user actions and **36 confirmed local transactions**: split 100 test stock into PT/DR, seed 40 DR / 4 Test USDC, add 60 DR / 6 Test USDC, buy DR with 1 Test USDC, withdraw all user-held LP, recombine recovered paired claims, advance an accelerated test year through four synthetic dividend events, redeem buyer DR and independently redeem provider PT. The removed transaction is the old private quote-mint creation.
 
-The runtime executes the accepted DividendX ELF and captured genuine Raydium devnet binary/config on its own offline Surfpool. It loads an exact local copy of Circle's six-decimal devnet USDC mint account, `4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU`, then creates synthetic local balances of 10 Test USDC for the provider and 1 for the buyer. This is not a public faucet transfer or proof of dollar value. The four dividend events are synthetic, and Raydium's locked residual DR remains backed.
+The runtime executes the accepted DivX ELF and captured genuine Raydium devnet binary/config on its own offline Surfpool. It loads an exact local copy of Circle's six-decimal devnet USDC mint account, `4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU`, then creates synthetic local balances of 10 Test USDC for the provider and 1 for the buyer. This is not a public faucet transfer or proof of dollar value. The four dividend events are synthetic, and Raydium's locked residual DR remains backed.
 
 The package runtime checks and 36-transaction smoke pass. The combined browser suite passes **34/34**: seven guided cases plus the preserved 27 cases. Guided coverage includes v1 runtime rejection, pinned Test USDC identity and amounts, guarded actions, stale/partial failure receipts, session reload, unavailable-runtime recovery, keyboard access and mobile overflow. Root fixture/reference checks pass 71/71 with TypeScript and the production build; the AMM package's 15 tests also pass.
 
