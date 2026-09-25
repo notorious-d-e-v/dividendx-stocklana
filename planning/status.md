@@ -2,7 +2,7 @@
 
 21 September launch: [seamless guided entry and capacity acceptance](guided-lazy-entry-review-2026-09-21.md) is live through PRs #7–9. The root and `/demos/` show the tour immediately; either entry button starts a private sandbox inline. Limits are 16 simultaneous reservations and 500 starts per UTC day, retaining 15-minute sessions and visitor/IP quotas. The final production journey passes all 15 actions, 40 confirmed transactions and restart; direct stock-button entry also passes. Real provider readiness was verified for 16 isolated VMs. The approximately $50/day budget is a target, not a billing cutoff; live issuer settlement/mainnet remain out of scope.
 
-20 September release: [PR #4](https://github.com/notorious-d-e-v/dividendx-stocklana/pull/4) publishes the approved navigation, illustrated wallet and balances-first Market on the canonical domain. [Production acceptance](wallet-release-2026-09-20.md) passes the 40-transaction guided tour/restart, real devnet grant/split/recombine, routes and fifteen-profile manifest. The earlier local-review entries below are historical. Wrap-up now follows the [submission packet](hackathon-wrap-up-2026-09-20.md), [mainnet gaps](mainnet-readiness-2026-09-20.md) and [outreach shortlist](ecosystem-outreach-2026-09-20.md); no submission, outreach or mainnet launch has occurred.
+20 September release: [PR #4](https://github.com/notorious-d-e-v/divx/pull/4) publishes the approved navigation, illustrated wallet and balances-first Market on the canonical domain. [Production acceptance](wallet-release-2026-09-20.md) passes the 40-transaction guided tour/restart, real devnet grant/split/recombine, routes and fifteen-profile manifest. The earlier local-review entries below are historical. Wrap-up now follows the [submission packet](hackathon-wrap-up-2026-09-20.md), [mainnet gaps](mainnet-readiness-2026-09-20.md) and [outreach shortlist](ecosystem-outreach-2026-09-20.md); no submission, outreach or mainnet launch has occurred.
 
 20 September Market simplification: [balances-first local review](wallet-market-balances-review-2026-09-20.md) removes the Market picker and selected-series panel. Supported holdings appear beneath the hero; empty wallets go straight to the company catalog. Split/Redeem controls remain intact. Verification is recorded in the linked review; no frontend release is included.
 
@@ -12,11 +12,11 @@
 
 20 September local review: [navigation and wallet changes](navigation-wallet-review-2026-09-20.md) make Guided Demos the landing page and separate the wallet action views. All 15 synthetic profiles are [provisioned and transaction-verified on devnet](devnet-catalog-expansion.md), preserving the original three. The [backend-only release](devnet-catalog-release-2026-09-20.md) is live; its refresh job confirms all 15. The visual review remains local.
 
-19 September release: [guided tour v4](guided-tour-v4-review.md) is live at [divx.payai.network/demos/](https://divx.payai.network/demos/), with 15 actions and 40 confirmed transactions. [PR #1](https://github.com/notorious-d-e-v/dividendx-stocklana/pull/1) shipped the matching schema-4 site and code-only snapshot. The [release review](guided-tour-v4-release.md) records verification and rollback details. Earlier evidence remains preserved.
+19 September release: [guided tour v4](guided-tour-v4-review.md) is live at [divx.payai.network/demos/](https://divx.payai.network/demos/), with 15 actions and 40 confirmed transactions. [PR #1](https://github.com/notorious-d-e-v/divx/pull/1) shipped the matching schema-4 site and code-only snapshot. The [release review](guided-tour-v4-release.md) records verification and rollback details. Earlier evidence remains preserved.
 
 Updated 18 September 2026 after [public hosting acceptance](hosting-release-review.md) at [dividendx-stocklana.vercel.app](https://dividendx-stocklana.vercel.app). Real-calendar devnet, private accelerated wallet sandboxes and separate guided sandboxes are live. Actual temporary-wallet devnet, full annual sandbox redemption, nine-action guided, simultaneous two-visitor isolation/reset and natural-expiry journeys pass. Live issuer settlement remains incomplete; deposits still close at year-start.
 
-Public backup: [notorious-d-e-v/dividendx-stocklana](https://github.com/notorious-d-e-v/dividendx-stocklana).
+Public repository: [notorious-d-e-v/divx](https://github.com/notorious-d-e-v/divx).
 
 ## Current artifacts
 

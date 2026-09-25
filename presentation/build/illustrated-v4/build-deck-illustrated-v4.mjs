@@ -190,7 +190,7 @@ function arrow(slide,from,to,color=C.ink,fromSide="right",toSide="left"){
  text(s,"Try DivX",80,583,460,57,38,C.ink,true);
  text(s,"divx.payai.network",632,585,555,49,33,C.blue,true);
  text(s,"Stocklana hackathon · No wallet or real funds needed for the guided demo.",80,658,1110,30,18,C.muted);
- notes(s,"",["Mainnet requires explicit custody admission, complete qualified event feeds, attestor governance, corrections and incident policy, independent security review, monitoring, issuer-term/legal review, and liquidity. Current software is a tested prototype, not a live issuer settlement service. Named issuer families are selected research/test scope, not endorsements."],["planning/mainnet-readiness-2026-09-20.md","https://divx.payai.network/","https://github.com/notorious-d-e-v/dividendx-stocklana","https://hackathons.solana.com/hackathons/stocklana"]);
+ notes(s,"",["Mainnet requires explicit custody admission, complete qualified event feeds, attestor governance, corrections and incident policy, independent security review, monitoring, issuer-term/legal review, and liquidity. Current software is a tested prototype, not a live issuer settlement service. Named issuer families are selected research/test scope, not endorsements."],["planning/mainnet-readiness-2026-09-20.md","https://divx.payai.network/","https://github.com/notorious-d-e-v/divx","https://hackathons.solana.com/hackathons/stocklana"]);
 }
 
 const stagingDir=path.join(TMP_DIR,"finalizer");

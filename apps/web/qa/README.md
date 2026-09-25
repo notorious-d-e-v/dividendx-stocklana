@@ -2,7 +2,7 @@
 
 ## Public hosted release — 18 September 2026
 
-Canonical test site: [https://dividendx-stocklana.vercel.app](https://dividendx-stocklana.vercel.app). `/app/` uses real-calendar Solana devnet, `/sandbox/` creates a private accelerated 15-minute wallet VM, and `/demos/` creates a separate guided VM. Localhost retains the accepted 4180/4181 runtimes and defaults. Hosted runs use the same accepted DivX ELF, clearly labeled synthetic assets and fresh temporary wallets; they do not prove issuer qualification, mainnet custody or installed-extension behavior.
+Canonical test site: [https://divx.payai.network](https://divx.payai.network), with [https://divx.vercel.app](https://divx.vercel.app) as the provider fallback. `/app/` uses real-calendar Solana devnet, `/sandbox/` creates a private accelerated 15-minute wallet VM, and `/demos/` creates a separate guided VM. Localhost retains the accepted 4180/4181 runtimes and defaults. Hosted runs use the same accepted DivX ELF, clearly labeled synthetic assets and fresh temporary wallets; they do not prove issuer qualification, mainnet custody or installed-extension behavior.
 
 Actual production-browser evidence passes these independent flows:
 

@@ -19,7 +19,7 @@ The article includes linked first mentions of `@solana`, `@xStocksFi`, `@Backpac
 - [Public devnet app](https://divx.payai.network/app/).
 - [Accelerated guided demo](https://divx.payai.network/demos/).
 - [DivX program on Solscan](https://solscan.io/account/2EpQ2iKz921Ce2rremdnFrqG15DQq3Y2rSXbgixceDQE?cluster=devnet). The required query is lowercase `cluster=devnet`. Address checked against the repository's accepted devnet evidence.
-- [Repository](https://github.com/notorious-d-e-v/dividendx-stocklana).
+- [Repository](https://github.com/notorious-d-e-v/divx).
 
 ## Numbers and integration boundaries
 

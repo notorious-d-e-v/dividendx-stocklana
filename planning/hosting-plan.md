@@ -1,6 +1,6 @@
 # Public devnet and hosted sandbox
 
-18 September 2026. The [accepted canonical test site](hosting-release-review.md) is [dividendx-stocklana.vercel.app](https://dividendx-stocklana.vercel.app). It serves real-calendar devnet at `/app/`, a private accelerated wallet VM at `/sandbox/`, and a separate guided VM at `/demos/`. Production-browser devnet, full annual sandbox redemption, the nine-action guided journey, simultaneous two-visitor reset/isolation and natural hard expiry pass against the unchanged accepted ELF.
+The canonical test site is [divx.payai.network](https://divx.payai.network), backed by Vercel project `payai/divx` with [divx.vercel.app](https://divx.vercel.app) as the provider fallback. The [18 September acceptance](hosting-release-review.md) records the original hosted release. The site serves real-calendar devnet at `/app/`, a private accelerated wallet VM at `/sandbox/`, and a separate guided VM at `/demos/`. Production-browser devnet, full annual sandbox redemption, the nine-action guided journey, simultaneous two-visitor reset/isolation and natural hard expiry pass against the unchanged accepted ELF.
 
 ## Two modes
 

@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-09-25T04:41:59.296055+00:00",
+  "baseCommit": "56cfb84f1f4a107186bb9890ea6daa7dc7f8a776",
+  "change": "GitHub repository URL in speaker notes only",
+  "decks": [
+    {
+      "path": "presentation/build/illustrated-v3/finalizer/DivX-illustrated-v3-candidate.pptx",
+      "beforeSha256": "0a6287fd48403679c35ea0ab1a7c20451aa743819091e8c2b2f3c29f9f97ceef",
+      "afterSha256": "fb5da352dfe221c805201ed173f34e34e379d4f010980cdc0899b347f283d4de",
+      "changedEntries": [
+        "ppt/notesSlides/notesSlide9.xml"
+      ],
+      "allOtherEntriesIdentical": true
+    },
+    {
+      "path": "presentation/build/illustrated-v3/first-pass.pptx",
+      "beforeSha256": "0a6287fd48403679c35ea0ab1a7c20451aa743819091e8c2b2f3c29f9f97ceef",
+      "afterSha256": "fb5da352dfe221c805201ed173f34e34e379d4f010980cdc0899b347f283d4de",
+      "changedEntries": [
+        "ppt/notesSlides/notesSlide9.xml"
+      ],
+      "allOtherEntriesIdentical": true
+    },
+    {
+      "path": "presentation/build/illustrated-v4/finalizer/DivX-illustrated-v4-candidate.pptx",
+      "beforeSha256": "ee4f58136ce752127b672e6e13a0e77cbea56de0ef618478910c99ccd2400b68",
+      "afterSha256": "5efd96f77a1b280aed590c40d47446b9724bae4650d24124aa81d13e992198f0",
+      "changedEntries": [
+        "ppt/notesSlides/notesSlide9.xml"
+      ],
+      "allOtherEntriesIdentical": true
+    },
+    {
+      "path": "presentation/output/DivX-Stocklana-2026-v4.pptx",
+      "beforeSha256": "ee4f58136ce752127b672e6e13a0e77cbea56de0ef618478910c99ccd2400b68",
+      "afterSha256": "5efd96f77a1b280aed590c40d47446b9724bae4650d24124aa81d13e992198f0",
+      "changedEntries": [
+        "ppt/notesSlides/notesSlide9.xml"
+      ],
+      "allOtherEntriesIdentical": true
+    },
+    {
+      "path": "presentation/output/DivX-Stocklana-2026.pptx",
+      "beforeSha256": "0a6287fd48403679c35ea0ab1a7c20451aa743819091e8c2b2f3c29f9f97ceef",
+      "afterSha256": "3763154f29d9deb6599561ab42443d4d17b3e7c216481735ca95d696252d9268",
+      "changedEntries": [
+        "ppt/notesSlides/notesSlide9.xml"
+      ],
+      "allOtherEntriesIdentical": true
+    }
+  ]
+}
