@@ -15,6 +15,6 @@ The GitHub repository and Vercel project were renamed separately to `notorious-d
 - Browser suite: 99 passed initially; one Node-side fixture check hit duplicate local `PublicKey` classes after nested dependency installation. Removing the redundant nested SDK dependencies in this disposable checkout made that check pass on its targeted rerun (100 cases covered). No application change was needed.
 - Desktop (1440px) and mobile (390px) logo layouts were visually reviewed; all six entry points declare the new favicon. The built sandbox entry displays the approved icon without overflow.
 - Original tracked QA screenshots were restored after the test suite regenerated them.
-- Production verification is pending.
+- Vercel preview build passed for reviewed source `9c4a8cc`. Production delivery and verification are recorded in [PR #15](https://github.com/notorious-d-e-v/divx/pull/15); merging to `main` publishes through the existing Git integration.
 
 Known-good production before this update: `dpl_2tz3A2BLNXNRXrbr8zkDy9qGxyZ2`, `https://dividendx-stocklana-7po7nj3t7-payai.vercel.app`. The accepted v4 runtime snapshot is unchanged.
