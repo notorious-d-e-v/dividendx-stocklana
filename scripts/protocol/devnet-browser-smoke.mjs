@@ -319,7 +319,7 @@ async function main() {
     await uiExpect(page.getByRole('button', { name: /Request test SOL/ })).toHaveCount(0);
     await page.locator('.wallet-selector select').first().selectOption(ASSET_ID);
     await page.getByTestId('temporary-wallet').click();
-    await uiExpect(page.locator('.wallet-connect h2')).toHaveText('DividendX temporary test wallet');
+    await uiExpect(page.locator('.wallet-connect h2')).toHaveText('DivX temporary test wallet');
     const ownerText = await page.locator('.wallet-connect code').textContent();
     assert.ok(ownerText, 'Temporary wallet owner was not visible.');
     const owner = new PublicKey(ownerText.trim());

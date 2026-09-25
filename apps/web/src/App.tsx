@@ -90,7 +90,7 @@ function catalogDetail(asset: AssetDescriptor): string {
 function Header({ tab, setTab, account, setAccount }: { tab: Tab; setTab: (tab: Tab) => void; account: WalletId; setAccount: (wallet: WalletId) => void }) {
   return (
     <header className="product-header">
-      <button className="brand" onClick={() => setTab('market')} aria-label="DividendX home"><Mark /><span>DividendX</span></button>
+      <button className="brand" onClick={() => setTab('market')} aria-label="DivX home"><Mark /><span>DivX</span></button>
       <nav aria-label="Primary">
         {(['market', 'split', 'positions'] as Tab[]).map((item) => (
           <button key={item} className={tab === item ? 'active' : ''} onClick={() => setTab(item)}>{item[0].toUpperCase() + item.slice(1)}</button>
@@ -383,5 +383,5 @@ export function App() {
   const [account, setAccount] = useState<WalletId>('seller');
   const [selected, setSelected] = useState(defaultAsset);
   const select = (asset: AssetDescriptor) => { setSelected(asset); setTab('split'); };
-  return <><a className="skip-link" href="#main">Skip to content</a><Header tab={tab} setTab={setTab} account={account} setAccount={setAccount} /><DemoRibbon />{tab === 'market' && <Market onSelect={select} />}{tab === 'split' && <Split key={selected.id} selected={selected} setSelected={setSelected} onStarted={() => setTab('positions')} />}{tab === 'positions' && <Positions account={account} selected={selected} onReset={() => setTab('split')} />}<footer><Mark /><span>DividendX · local rehearsal</span><span>Source catalog frozen 16 Sep 2026</span></footer></>;
+  return <><a className="skip-link" href="#main">Skip to content</a><Header tab={tab} setTab={setTab} account={account} setAccount={setAccount} /><DemoRibbon />{tab === 'market' && <Market onSelect={select} />}{tab === 'split' && <Split key={selected.id} selected={selected} setSelected={setSelected} onStarted={() => setTab('positions')} />}{tab === 'positions' && <Positions account={account} selected={selected} onReset={() => setTab('split')} />}<footer><Mark /><span>DivX · local rehearsal</span><span>Source catalog frozen 16 Sep 2026</span></footer></>;
 }

@@ -314,7 +314,7 @@ export function validateManifestShape(value: unknown, config = RUNTIME_CONFIG): 
     const manifestRpc = devnetRpcUrl(manifest.rpcUrl).toString();
     if (manifestRpc !== config.rpcUrl) throw new Error('Devnet manifest RPC endpoint does not match the configured endpoint.');
     if (manifest.genesisHash !== DEVNET_GENESIS_HASH) throw new Error('Devnet manifest genesis does not match the pinned Solana devnet identity.');
-    if (manifest.programId !== DIVIDENDX_PROGRAM_ID.toBase58()) throw new Error('Devnet manifest program identity does not match DividendX.');
+    if (manifest.programId !== DIVIDENDX_PROGRAM_ID.toBase58()) throw new Error('Devnet manifest program identity does not match DivX.');
     if (manifest.deploymentDomainHex.toLowerCase() !== DEVNET_DEPLOYMENT_DOMAIN_HEX) throw new Error('Devnet manifest deployment domain does not match the pinned deployment.');
     if (manifest.clockControl !== false) throw new Error('Public devnet cannot expose clock control.');
   } else {
@@ -339,7 +339,7 @@ export async function loadManifest(config = RUNTIME_CONFIG): Promise<LocalManife
 
 export async function verifyRuntimeIdentity(manifest: LocalManifest, config = RUNTIME_CONFIG): Promise<Connection> {
   validateManifestShape(manifest, config);
-  if (manifest.programId !== DIVIDENDX_PROGRAM_ID.toBase58()) throw new Error('Runtime program identity does not match DividendX.');
+  if (manifest.programId !== DIVIDENDX_PROGRAM_ID.toBase58()) throw new Error('Runtime program identity does not match DivX.');
   const connection = config.network === 'sandbox'
     ? new Connection(new URL(manifest.rpcUrl, globalThis.location?.origin ?? 'http://localhost').toString(), {
       commitment: 'confirmed',
@@ -355,7 +355,7 @@ export async function verifyRuntimeIdentity(manifest: LocalManifest, config = RU
   if (genesisHash !== manifest.genesisHash) throw new Error('RPC genesis does not match the runtime manifest.');
   if (config.network === 'devnet' && genesisHash !== DEVNET_GENESIS_HASH) throw new Error('RPC is not the pinned Solana devnet network.');
   if (config.network === 'sandbox' && genesisHash === DEVNET_GENESIS_HASH) throw new Error('RPC is the public Solana devnet, not this private sandbox.');
-  if (!programInfo?.executable) throw new Error('DividendX program is missing or not executable on this runtime.');
+  if (!programInfo?.executable) throw new Error('DivX program is missing or not executable on this runtime.');
   const configAddress = configPda().address;
   const decoded = await fetchProgramAccountsCoherently(connection, DIVIDENDX_IDL, [{ address: configAddress, accountName: 'config' }]);
   const configState = normalizeConfigAccount(configAddress, decoded.accounts[0]!.value);

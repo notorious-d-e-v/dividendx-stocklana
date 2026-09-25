@@ -33,7 +33,7 @@ function stockRaw(state: AnnualProductState, assetId: string, account: ProductAc
 function ProductHeader({ tab, setTab }: { tab: ProductTab; setTab: (tab: ProductTab) => void }) {
   return <>
     <header className="p-header">
-      <button className="p-brand" onClick={() => setTab('market')} aria-label="DividendX home"><Mark />DividendX</button>
+      <button className="p-brand" onClick={() => setTab('market')} aria-label="DivX home"><Mark />DivX</button>
       <nav aria-label="Primary">{(['market', 'split', 'redeem'] as ProductTab[]).map((item) => <button key={item} className={tab === item ? 'active' : ''} onClick={() => setTab(item)}>{item[0].toUpperCase() + item.slice(1)}</button>)}</nav>
       <span className="balance-label">Your test balance</span>
     </header>
@@ -184,5 +184,5 @@ export function ProductApp() {
   const choose = (asset: AssetDescriptor) => { setSelected(asset); const id = productClient.seriesId(asset, 2027); setActiveId(state.series[id] ? id : ''); setAccount('seller'); setTab('split'); };
   const goRedeem = (id: string) => { setActiveId(id); setAccount('seller'); setTab('redeem'); };
   const reset = () => { productClient.reset(); refresh(); setActiveId(''); setAccount('seller'); setTab('market'); };
-  return <><a className="p-skip" href="#product-main">Skip to content</a><ProductHeader tab={tab} setTab={setTab} />{tab === 'market' && <ProductMarket choose={choose} />}{tab === 'split' && <ProductSplit key={selected.id} selected={selected} state={state} refresh={refresh} goRedeem={goRedeem} onCreated={setActiveId} />}{tab === 'redeem' && <ProductRedeem state={state} refresh={refresh} activeId={activeId} setActiveId={setActiveId} account={account} />}<footer className="p-footer"><div><Mark /><span>DividendX annual reference preview</span></div><SimulationControls state={state} refresh={refresh} activeId={activeId} account={account} setAccount={setAccount} reset={reset} /></footer></>;
+  return <><a className="p-skip" href="#product-main">Skip to content</a><ProductHeader tab={tab} setTab={setTab} />{tab === 'market' && <ProductMarket choose={choose} />}{tab === 'split' && <ProductSplit key={selected.id} selected={selected} state={state} refresh={refresh} goRedeem={goRedeem} onCreated={setActiveId} />}{tab === 'redeem' && <ProductRedeem state={state} refresh={refresh} activeId={activeId} setActiveId={setActiveId} account={account} />}<footer className="p-footer"><div><Mark /><span>DivX annual reference preview</span></div><SimulationControls state={state} refresh={refresh} activeId={activeId} account={account} setAccount={setAccount} reset={reset} /></footer></>;
 }
